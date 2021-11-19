@@ -36,7 +36,7 @@ export function DbProvider(props) {
             listing: {
                 id: listingId
             },
-            notifications: {
+            requests: {
                 recieved: [],
                 sent: []
             },

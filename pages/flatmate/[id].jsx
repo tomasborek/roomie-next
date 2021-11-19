@@ -133,34 +133,32 @@ const FlatmateListing = () => {
     }
 
     const handleRequest = () => {
-        let currentRequests;
-        let currentSent;
         let requestedUser;
+        let requestingUser;
         setLoading(true);
         setReqDialogOpen(false);
 
         getUser(listingInfo.data().userInfo.uid)
         .then(user => {
-            currentRequests = user.data().requests.recieved;
-            requestedUser = user.data();
+            requestedUser = user;
             return getUser(currentUser.uid);
         }).then(user => {
-            currentSent = user.data().requests.sent;
-            return updateUser(listingInfo.data().userInfo.uid, {
-                "requests.recieved": [...currentRequests, {
-                    name: user.data().mainInfo.username,
-                    age: user.data().mainInfo.age,
+            requestingUser = user;
+            return updateUser(requestedUser.id, {
+                "requests.recieved": [...requestedUser.data().requests.recieved, {
+                    name: requestingUser.data().mainInfo.username,
+                    age: requestingUser.data().mainInfo.age,
                     message: requestMessageRef.current.value,
-                    gender: user.data().mainInfo.gender,
-                    uid: user.id,
+                    gender: requestingUser.data().mainInfo.gender,
+                    uid: requestingUser.id,
                     status: "pending"
                 }]
             })
         }).then(res => {
             return updateUser(currentUser.uid, {
-                "requests.sent": [...currentSent, {
-                    name: requestedUser.mainInfo.username,
-                    age: requestedUser.mainInfo.age,
+                "requests.sent": [...requestingUser.data().requests.sent, {
+                    name: requestedUser.data().mainInfo.username,
+                    age: requestedUser.data().mainInfo.age,
                     uid: requestedUser.id,
                     status: "pending"
                 }]

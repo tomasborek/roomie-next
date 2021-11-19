@@ -138,27 +138,42 @@ const FlatListing = () => {
 
     //Handles contact request
     const handleRequest = () => {
+        let requestedUser;
+        let requestingUser;
         setLoading(true);
         setReqDialogOpen(false);
-        let existingRequests;
+
         getUser(listingInfo.data().userInfo.uid)
-        .then(doc => {
-            existingRequests = doc.data().requests.recieved;
+        .then(user => {
+            requestedUser = user;
             return getUser(currentUser.uid);
-        }).then(doc => {
-            return updateUser(currentUser.uid, {
-                "requests.recieved": [...existingRequests, {
-                    name: doc.data().mainInfo.username,
-                    age: doc.data().mainInfo.age,
-                    gender: doc.data().mainInfo.gender,
-                    message: requestMessageRef.current.value
+        }).then(user => {
+            requestingUser = user;
+            return updateUser(requestedUser.id, {
+                "requests.recieved": [...requestedUser.data().requests.recieved, {
+                    name: requestingUser.data().mainInfo.username,
+                    age: requestingUser.data().mainInfo.age,
+                    message: requestMessageRef.current.value,
+                    gender: requestingUser.data().mainInfo.gender,
+                    uid: requestingUser.id,
+                    status: "pending"
                 }]
-            }).then(res => {
-                setLoading(false);
-            }).catch(error => {
-                setLoading(false);
-                setReqDialogOpen(true);
             })
+        }).then(res => {
+            return updateUser(currentUser.uid, {
+                "requests.sent": [...requestingUser.data().requests.sent, {
+                    name: requestedUser.data().mainInfo.username,
+                    age: requestedUser.data().mainInfo.age,
+                    uid: requestedUser.id,
+                    status: "pending"
+                }]
+            })
+        }).then((res) => {
+            setLoading(false);
+        }).catch(error => {
+            console.log(error);
+            setReqDialogOpen(true);
+            setLoading(false);
         })
     }
 
