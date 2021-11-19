@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react'
+//Next
+import Head from "next/head";
 //Contexts
 import {useDb} from "../../contexts/DbContext";
 
@@ -47,6 +49,10 @@ const ExploreFeed = ({variant}) => {
        
     }, [])
     return (
+        <>
+        <Head>
+            <title>Prohlížet {variant === "flatmate" ? "Prohlížet byty" : "Prohlížet spolubydlící"} | Roomie</title>
+        </Head>
         <div className="explore-feed">
             <div className="feed-header">
                 <h3 className="header-title">{variant === "flatmate" ? "Prohlížet spolubydlící" : "Prohlížet byty"}</h3>
@@ -77,6 +83,7 @@ const ExploreFeed = ({variant}) => {
             }
             
         </div>
+        </>
     )
 }
 
