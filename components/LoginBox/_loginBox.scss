@@ -1,0 +1,67 @@
+.login-box{
+    background-color: #EFEFEF;
+    padding: 3rem 1rem;
+    border-radius: 5px;
+    box-shadow: 0 0rem 0.5rem rgba(0, 0, 0, 1);
+    height: auto;
+    width: 700px;
+    margin: auto;
+    @include centerHor;
+    justify-content: space-between;
+
+    h1{
+        margin-bottom: 2rem;
+    }
+
+    h2{
+        font-weight: normal;
+        margin-bottom: 2rem;
+    }
+
+    .input-box{
+        position: relative;
+        margin-bottom: 1rem;
+        i{
+            position: absolute;
+            transform: translate(0, -50%);
+            font-size: 1rem;
+            left: 0.5rem;
+            top: 50%;
+        }
+        input{
+            padding-left: 2rem;
+            
+        }
+    }
+
+    a{
+        text-decoration: underline;
+        color: $mainColor;
+    }
+
+    button{
+        margin-top: 1rem;
+    }
+}
+
+//media
+
+@media screen and (max-width: 900px){
+    .login-box{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 430px){
+    .login-box{
+        h1{
+            text-align: center;
+        }
+
+        .input-box{
+            input{
+                width: 100%;
+            }
+        }
+    }
+}

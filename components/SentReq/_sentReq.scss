@@ -1,0 +1,25 @@
+.sent-req{
+    padding: 1rem;
+    border: 1px solid $mainGray;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    .req-pfp-container{
+        padding-right: 1rem;
+        .container-pfp{
+            width: 60px;
+            height: 60px;
+            background-color: $mainGray;
+            border-radius: 50%;
+        }
+    }
+    .req-content{
+        .content-user{
+            font-weight: bold;
+        }
+        .content-status{
+            font-size: 14px;
+            color: $mainGray;
+        }
+    }
+}

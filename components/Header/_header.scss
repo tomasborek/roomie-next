@@ -1,0 +1,125 @@
+.main-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    color: white;
+    padding: 1rem 2rem;
+    z-index: 2;
+
+    &.white{
+        background-color: white;
+        color: black;
+
+        .brand h2{
+            color: black;
+        }
+
+        .navbar li a{
+            color: black
+        }
+    }
+
+    &.gradient{
+        @include gradientBg;
+        color: white;
+
+        .brand h2{
+            color: white;
+        }
+
+        .navbar a{
+            color: white;
+        }
+    }
+
+    .brand{
+        display: flex;
+        align-items: center;
+        h2{
+            cursor: pointer;
+        }
+        .brand-logo{
+            display: flex;
+            align-items: center;
+            margin-right: 1rem;
+            
+            
+            img{
+                width: 40px;
+                height: 40px;
+            }
+        }
+        
+    }
+
+    .hamburger{
+        display: none;
+    }
+
+    .navbar{
+        position: relative;
+        display: flex;
+        align-items: center;
+        .navbar-login, .navbar-register{
+            margin-left: 1rem;
+        }
+    }
+
+    .navbar-logged{
+        position: relative;
+        .navbar-profile{
+            width: 40px;
+            height: 40px;
+            background-color: $darkWhite;
+            border-radius: 50%;
+            margin-left: 2rem;
+        }
+
+        .navbar-notifications{
+            font-size: 1.25rem;
+            
+        }
+
+        .navbar-dropdown-icon-wrapper{
+            cursor: pointer;
+            margin-left: 2rem;
+        }
+
+        
+    }
+
+    
+
+}
+
+.main-header{
+    .navbar-logged{
+
+  
+        .notifications-dropdown{
+            .dropdown-notification{
+                .notification-message{
+                    white-space: nowrap;
+                    max-width: 100%;
+                    overflow-x:hidden;
+                }
+            }
+        }
+    }
+}
+
+//Media 
+
+@media screen and (max-width: 420px){
+    .main-header{
+        width: 100%;
+        justify-content: space-between;
+        .hamburger{
+            display: block;
+        }
+        .navbar{
+            display: none;
+        }
+    }
+}

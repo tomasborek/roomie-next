@@ -1,0 +1,35 @@
+.Requests{
+    .requests-banner{
+        @include gradientBg;
+        height: 200px;
+        width: 100%;
+    }
+
+    .requests-content{
+        border-radius:5px ;
+        padding: 2rem 1rem;
+        position: relative;
+        bottom: 50px;
+        background-color: white;
+
+        .content-heading{
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .content-nav{
+            display: flex;
+            width: 100%;
+            margin-bottom: 2rem;
+            .nav-link{
+                cursor: pointer;
+                flex: 1;
+                text-align: center;
+                padding: 0.5rem 0;
+                &.active{
+                    border-bottom: 2px $mainColor solid;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,41 @@
+.rec-req{
+    padding: 1rem;
+    border: 1px solid $mainGray;
+    width: 100%;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    .req-pfp-container{
+        padding-right: 1rem;
+        .container-pfp{
+            width: 80px;
+            height: 80px;
+            background-color: $mainGray;
+            border-radius: 50%;
+        }
+    }
+    .req-content{
+        flex: 1;
+        .content-msg{
+            font-size: 14px;
+            color: $mainGray;
+        }
+    }
+    .req-actions{
+        display: flex;
+        align-items: center;
+        i{
+            margin-left: 1rem;
+            cursor: pointer;
+            font-size: 24px;
+            &.fa-eye{
+                color: $mainColor;
+            }
+            &.fa-times{
+                color: $accent;
+            }
+        }
+    }
+}

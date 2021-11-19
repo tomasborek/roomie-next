@@ -1,0 +1,11 @@
+//Dropdown otázka
+.register-box .box-content .content-dropdown{
+    width: 400px;
+    
+}
+
+@media screen and (max-width: 500px){
+    .register-box .box-content .content-dropdown{
+        width: 100%;
+    }
+}

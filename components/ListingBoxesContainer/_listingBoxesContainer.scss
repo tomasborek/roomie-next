@@ -1,0 +1,19 @@
+.profile-boxes-container{
+    margin-top: 1rem;
+}
+.container-heading{
+    color: $mainGray;
+    margin-bottom: 1rem;
+}
+.container-content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+@media screen and (max-width: 600px){
+    .profile-boxes-container{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

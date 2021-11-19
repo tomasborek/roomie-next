@@ -1,0 +1,28 @@
+.register-box .box-content .content-options{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .option{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        padding: 0.5rem 2rem;
+        background:none;
+        border: 1px solid $mainGray;
+        border-radius: 5px;
+        margin-block: 0.5rem;
+        cursor: pointer;
+        width: 200px;
+        transition: all 400ms;
+        i{
+            margin-right: 0.5rem;
+        }
+        &.active-option{
+            background-color: $darkWhite;
+            border: 1px solid $darkerGray;
+            color: black;
+        }
+
+    }
+}

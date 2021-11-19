@@ -1,0 +1,35 @@
+.location-dropdown-container{
+    position: relative;
+    width: 100%;
+    z-index: 3;
+}
+.location-dropdown-container .container-dropdown{
+    width: 100%;
+    cursor: pointer;
+    border: 1px solid $mainGray;
+    background-color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+}
+.location-dropdown-container .dropdown-options{
+    display: flex;
+    flex-direction: column;
+    background-color: $darkWhite;
+    position: absolute;
+    top: 3rem;
+    width: 100%;
+    border: 1px solid $mainGray;
+    .option{
+        color: black;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        transition: all 200ms;
+        &:hover{
+            background-color: rgb(204, 204, 204);
+        }
+    }
+}

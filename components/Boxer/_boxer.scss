@@ -1,0 +1,39 @@
+.boxer{
+    padding: 2rem;
+    width: 95%;
+    max-width: 900px;
+    background-color: white;
+    color: #333;
+    border-radius: 5px;
+    max-height: 90vh;
+    .boxer-header{
+        font-size: 24px;
+        margin-bottom: 1rem;
+    }
+    .boxer-section{
+        margin-bottom: 1rem;
+        .section-header{
+            font-size: 14px;
+            color: $mainGray;
+            margin-bottom: 0.5rem;
+        }
+        .section-boxes{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    }
+    .boxer-button{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+}
+
+@media screen and (max-width: 1000px){
+    .boxer{
+        overflow-y: scroll;
+    }
+}

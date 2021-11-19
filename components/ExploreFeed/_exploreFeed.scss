@@ -1,0 +1,16 @@
+.explore-feed{
+    min-height: 100vh;
+}
+
+.explore-feed .feed-header{
+    padding: 2rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.explore-feed .loading{
+    display: flex;
+    justify-content: center;
+    padding-top: 2rem;
+}

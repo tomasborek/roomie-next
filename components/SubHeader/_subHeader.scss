@@ -1,0 +1,22 @@
+.sub-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $mainGray;
+    .sub-header-link{
+        border: 3px solid transparent;
+        margin: 0 1.5rem;
+        padding: 0.5rem 0.5rem;
+        font-size: 24px;
+        cursor: pointer;
+        transition: all 400ms;
+
+        &.active{
+           border-bottom: 3px solid $accent;
+           svg{
+               transition: all 400ms;
+               color: $accent;
+           }
+        }
+    }
+}

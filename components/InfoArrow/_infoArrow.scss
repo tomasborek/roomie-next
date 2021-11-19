@@ -1,0 +1,15 @@
+.info-arrow{
+    position: relative;
+    background-color: white;
+    color: $darkerGray;
+    padding: 1rem;
+    border-radius: 10px;
+    font-size: 14px;
+    .arrow-arrow{
+        position: absolute;
+        height: 0;
+        width: 0;
+        border-bottom: 20px solid white;
+        top: 20px;
+    }
+}

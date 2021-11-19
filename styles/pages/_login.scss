@@ -1,0 +1,45 @@
+.Login {
+    min-height: 100vh;
+
+    .blue-overlay{
+        @include gradientBg;
+        position: absolute;
+        height: 50vh;
+        width: 100%;
+        z-index: 0;
+    }
+
+    .step-back{
+        display: flex;
+        align-items: center;
+        position: absolute;
+        z-index: 2;
+        font-size: 2rem;
+        color: white;
+        margin: 2rem;
+        cursor: pointer;
+        pointer-events: all;
+    }
+
+    .login-content{
+        position: relative;
+        z-index: 1;
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+
+}
+
+//media
+@media screen and (max-height: 590px){
+    .Login{
+        .step-back{
+            margin-block: 1rem;
+            font-size: 1.5rem;
+        }
+    }
+}

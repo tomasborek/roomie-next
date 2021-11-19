@@ -1,0 +1,70 @@
+.container{
+    width: 900px;
+    margin: auto;
+    padding:0 1rem;
+
+    @media screen and (max-width: 900px){
+        max-width: 900px;
+        width: 100%;
+    }
+}
+
+.mid-container{
+    width: 1200px;
+    margin-inline: auto;
+    padding-inline:1rem ;
+
+    @media screen and (max-width: 1200px){
+        max-width: 1200px;
+        width: 100%;
+    }
+}
+
+button{
+    padding: 1em 2em;
+    outline: none;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 200ms;
+    text-align: center;
+    user-select: none;
+
+    &.disabled{
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    &.main-btn{
+        background-color: $mainColor;
+        color: white;
+
+        &:hover{
+            background-color: $mainColorHover;
+        }
+    }
+
+    &.acc-btn{
+        background-color: $accent;
+        color: white;
+
+        &:hover{
+            background-color: $accentHover;
+        }
+    }
+}
+
+input{
+    padding: 0.5em 1em;
+    font-size: 1rem;
+    outline: none;
+}
+
+textarea{
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    outline: none;
+    font-family: "Roboto";
+}
+

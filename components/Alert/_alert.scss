@@ -1,0 +1,27 @@
+.alert{
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .alert-heading{
+        font-weight:bold;
+        font-size: 1rem;
+    }
+    .alert-x{
+        cursor: pointer;
+    }
+
+    &.success{
+        background-color: rgba(0, 128, 0, 0.3);
+        border: 1px solid green;
+        color: green;
+    }
+    &.error{
+        background-color: rgba(255, 0, 0, 0.3);
+        border: 1px solid red;
+        color: red;
+    }
+}

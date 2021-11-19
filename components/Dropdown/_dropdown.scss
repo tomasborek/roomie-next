@@ -1,0 +1,33 @@
+.dropdown{
+    position: absolute;
+    position: absolute;
+    background-color: white;
+    color: #333;
+    top: 3.75rem;
+    right: 0;
+    width: 250px;
+    border-radius: 2px;
+    box-shadow: 0 0rem 0.25rem rgba(0, 0, 0, 0.26);
+    border: 1px solid $mainGray;
+    overflow: hidden;
+
+    ul{
+        padding: 0;
+        list-style: none;
+        li{
+            display: flex;
+            align-items: center;
+           padding: 1rem 1rem;
+           font-size: 14px;
+           cursor: pointer;
+           transition: all 400ms;
+           svg{
+               margin-right: 0.5rem;
+           }
+           &:hover{
+            background-color: rgb(241, 241, 241);
+           }
+        }
+    }
+
+}
