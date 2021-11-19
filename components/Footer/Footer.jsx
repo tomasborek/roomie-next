@@ -20,7 +20,7 @@ const Footer = () => {
                     <p className="section-description">
                         <ul>
                             <li><Link href="/login">Přihlásit se</Link></li>
-                            <li><Link href="/login">Registrovat</Link></li>
+                            <li><Link href="/register">Registrovat</Link></li>
                             <li><Link href="/login">Smluvní podmínk</Link></li>
                             <li><Link href="/login">Premium</Link></li>
                         </ul>
