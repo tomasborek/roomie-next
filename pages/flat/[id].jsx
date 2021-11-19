@@ -140,33 +140,36 @@ const FlatListing = () => {
     const handleRequest = () => {
         let requestedUser;
         let requestingUser;
+        let requestedUserUid;
+        let requestingUserUid;
         setLoading(true);
         setReqDialogOpen(false);
 
         getUser(listingInfo.data().userInfo.uid)
         .then(user => {
             requestedUser = user;
+            requestedUserUid = requestedUser.id;
             return getUser(currentUser.uid);
         }).then(user => {
             requestingUser = user;
+            requestingUserUid = requestingUser.id;
             return updateUser(requestedUser.id, {
-                "requests.recieved": [...requestedUser.data().requests.recieved, {
+                "requests.recieved": {...requestingUser.data().requests.recieved, [requestingUserUid]: {
                     name: requestingUser.data().mainInfo.username,
                     age: requestingUser.data().mainInfo.age,
                     message: requestMessageRef.current.value,
                     gender: requestingUser.data().mainInfo.gender,
-                    uid: requestingUser.id,
                     status: "pending"
-                }]
+                }}
             })
         }).then(res => {
+            
             return updateUser(currentUser.uid, {
-                "requests.sent": [...requestingUser.data().requests.sent, {
+                "requests.sent": {...requestingUser.data().requests.sent, [requestedUserUid]: {
                     name: requestedUser.data().mainInfo.username,
                     age: requestedUser.data().mainInfo.age,
-                    uid: requestedUser.id,
                     status: "pending"
-                }]
+                }}
             })
         }).then((res) => {
             setLoading(false);
@@ -176,6 +179,7 @@ const FlatListing = () => {
             setLoading(false);
         })
     }
+
 
 //Return---
     return (
