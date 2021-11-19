@@ -49,7 +49,7 @@ const Header = ({variant}) => {
         setLoading(true);
         getUser(currentUser.uid)
         .then(doc =>{
-            router.push(`/${doc.data().mainInfo.type === "offerer" ? "flat" : doc.data().mainInfo.type === "flatmate" ? "Flatmate" : ""}/${doc.data().listing.id}`);
+            router.push(`/${doc.data().mainInfo.type === "offerer" ? "flat" : doc.data().mainInfo.type === "flatmate" ? "flatmate" : ""}/${doc.data().listing.id}`);
             setLoading(false);
         }).catch(error => {
             setLoading(false);
@@ -100,8 +100,8 @@ const Header = ({variant}) => {
                <Dropdown open={notificationDropdown}>
                    <ul className="notifications-dropdown">
                       {notifications ? 
-                      notifications.map(not => (
-                          <li onClick={() => router.push("/requests/recieved")}>{not.name} vás žádá o navázání kontaktu.</li>
+                      Object.keys(notifications).map(not => (
+                          <li onClick={() => router.push("/requests/recieved")}>{notifications[not].name} vás žádá o navázání kontaktu.</li>
                       ))
                       :
                       <li><CircularProgress/></li>

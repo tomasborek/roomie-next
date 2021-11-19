@@ -23,18 +23,15 @@
             color: $mainGray;
         }
     }
-    .req-actions{
+    .req-status{
         display: flex;
         align-items: center;
         i{
             margin-left: 1rem;
             cursor: pointer;
             font-size: 24px;
-            &.fa-eye{
+            &.fa-check{
                 color: $mainColor;
-            }
-            &.fa-times{
-                color: $accent;
             }
         }
     }

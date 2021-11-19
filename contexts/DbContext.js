@@ -37,8 +37,8 @@ export function DbProvider(props) {
                 id: listingId
             },
             requests: {
-                recieved: [],
-                sent: []
+                recieved: {},
+                sent: {}
             },
             visible: true,
         })
@@ -141,6 +141,8 @@ export function DbProvider(props) {
         const q = query(colRef, where("userInfo.uid", "==", uid));
         return getDocs(q);
     }
+
+   
     
 
     //Value
@@ -154,7 +156,7 @@ export function DbProvider(props) {
         getListings,
         getListing,
         getListingByUser,
-        delListing
+        delListing,
     }
     return (
         <DbContext.Provider value={value}>

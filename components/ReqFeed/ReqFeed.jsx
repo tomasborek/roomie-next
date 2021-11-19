@@ -39,8 +39,8 @@ const ReqFeed = ({type}) => {
                 <>
                 {recievedRequests ?
                     <div className="reqs-feed">
-                        {recievedRequests.map((req, id) => (
-                            <RecievedReq name={req.name} age={req.age} message={req.message} gender={req.gender} status={req.status} uid={req.uid} key={id}/>
+                        {Object.keys(recievedRequests).map((req, id) => (
+                            <RecievedReq name={recievedRequests[req].name} age={recievedRequests[req].age} message={recievedRequests[req].message} gender={recievedRequests[req].gender} status={recievedRequests[req].status} id={req} key={id}/>
                         ))}
                     </div>
                     :
@@ -54,8 +54,8 @@ const ReqFeed = ({type}) => {
             <>
                 {sentRequests ?
                     <div className="reqs-feed">
-                        {sentRequests.map((req, id) => (
-                            <SentReq name={req.name} age={req.age} status={req.status} uid={req.uid} key={id} />
+                        {Object.keys(sentRequests).map((req, id) => (
+                            <SentReq name={sentRequests[req].name} age={sentRequests[req].age} status={sentRequests[req].status} id={req} key={id} />
                         ))}
                     </div>
                     :
