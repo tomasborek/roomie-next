@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 //next
 import {useRouter} from "next/router";
+import Link from "next/link";
 //Contexts
 import { useAuth } from '../../contexts/AuthContext'  ;  
 import {useLoading} from "../../contexts/LoadingContext";
@@ -48,9 +49,11 @@ const LoginBox = () => {
                 <input ref={passwordRef} type="password" placeholder="Heslo pro přihlášení" />
             </div>
 
-            <a href="">Zapomenué heslo...</a>
+           
 
             <button onClick={() => handleLogin()} className="acc-btn">Přihlásit</button>
+            <p className="box-register-link">Ještě nemáte účet? <Link href="/register">Registrujte se.</Link></p>
+            <a className="box-forgot-password-link" href="">Zapomenuté heslo...</a>
         </div>
     )
 }

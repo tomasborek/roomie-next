@@ -16,10 +16,7 @@ const Login = () => {
             <Link href="/"><i className="step-back fas fa-chevron-left"></i></Link>
             <div className="blue-overlay"></div>
             <div className="login-content">
-                <div className="mid-container">
-                    <LoginBox />
-                </div>
-                
+                <LoginBox />
             </div>
             
         </div>

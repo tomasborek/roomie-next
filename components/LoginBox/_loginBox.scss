@@ -1,16 +1,16 @@
 .login-box{
     background-color: #EFEFEF;
-    padding: 3rem 1rem;
+    padding: 2rem 1rem;
     border-radius: 5px;
-    box-shadow: 0 0rem 0.5rem rgba(0, 0, 0, 1);
-    height: auto;
-    width: 700px;
+    border: white 5px solid;
+    width: 95%;
+    max-width: 1000px;
     margin: auto;
     @include centerHor;
     justify-content: space-between;
 
     h1{
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
     }
 
     h2{
@@ -21,6 +21,7 @@
     .input-box{
         position: relative;
         margin-bottom: 1rem;
+        width: 300px;
         i{
             position: absolute;
             transform: translate(0, -50%);
@@ -29,28 +30,33 @@
             top: 50%;
         }
         input{
+            padding: 0.5rem 0;
             padding-left: 2rem;
-            
+            width: 100%;
         }
     }
 
-    a{
-        text-decoration: underline;
+    .box-forgot-password-link{
+        font-size: 14px;
         color: $mainColor;
     }
 
     button{
+        // margin-top: 1rem;
+    }
+
+    .box-register-link{
         margin-top: 1rem;
+        font-size: 14px;
+        color: $darkerGray;
+        a{
+            color: $mainColor;
+        }
     }
 }
 
 //media
 
-@media screen and (max-width: 900px){
-    .login-box{
-        width: 100%;
-    }
-}
 
 @media screen and (max-width: 430px){
     .login-box{

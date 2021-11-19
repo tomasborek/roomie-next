@@ -188,8 +188,8 @@ const RegistrationFinal = () => {
             <input ref={passwordRef} type="password" placeholder="Heslo pro přihlášení..." />
             <div className="register-checkbox">
                 <input className="checkbox" type="checkbox" />
-                <p>Souhlasím s Pokračováním potvrzujete, že jste si přečetli a akceptujete 
-                naše Podmínky, Zásady ochrany soukromí a Zásady souborů cookie
+                <p>Potvrzuji, že jsem si přečetl a akceptuji
+                podmínky, zásady ochrany soukromí a zásady souborů cookie.
                 </p>
             </div>
             <div className="register-checkbox">
