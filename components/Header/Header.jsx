@@ -63,8 +63,8 @@ const Header = ({variant}) => {
                 </div>
 
                <h2 onClick={() => {
-                   setNavOverlay(false)
-                   router.push("/")
+                   setNavOverlay(false);
+                   currentUser ? router.push(`/explore/flatmates`) : router.push("/");
                }}>Roomie</h2>
             </div>
 
