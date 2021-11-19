@@ -292,10 +292,10 @@ const FlatListing = () => {
                                         </div>
                                         <div className="contact-state">
                                             <i className="state-icon fas fa-lock"></i>
-                                            <p className="state-description">{listingInfo && listingInfo.data().userInfo.uid === currentUser.uid ? "Vaše kontaktní údaje jsou skryté" : "Požádejte uživatele o přístup ke kontaktním údajům"}.</p>
+                                            <p className="state-description">{listingInfo && currentUser && listingInfo.data().userInfo.uid === currentUser.uid ? "Vaše kontaktní údaje jsou skryté" : "Požádejte uživatele o přístup ke kontaktním údajům"}.</p>
                                         </div>
 
-                                        {listingInfo && listingInfo.data().userInfo.uid === currentUser.uid ? <button onClick={() => router.push("/requests/recieved")} className="contact-button">Zobrazit žádosti</button> : <button onClick={() => !currentUser ? router.push("/login") : setReqDialogOpen(true)} className="contact-button">Požádat o kontaktní údaje</button>}
+                                        {listingInfo && currentUser && listingInfo.data().userInfo.uid === currentUser.uid ? <button onClick={() => router.push("/requests/recieved")} className="contact-button">Zobrazit žádosti</button> : <button onClick={() => !currentUser ? router.push("/login") : setReqDialogOpen(true)} className="contact-button">Požádat o kontaktní údaje</button>}
                                             
                                         </div>
                                     </div>

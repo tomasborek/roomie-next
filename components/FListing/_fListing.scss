@@ -3,7 +3,8 @@
     border: $mainGray 1px solid;
     border-radius: 5px;
     margin-bottom: 2rem;
-    transition: all 400ms;
+    transition: all 200ms;
+    cursor: pointer;
 
     &:hover{
         border-color: $mainColor
