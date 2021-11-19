@@ -37,6 +37,20 @@
         display: flex;
         button{
             margin: 0 0.5rem;
+            font-size: 14px;
+        }
+    }
+    .full-actions-resolved{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        p{
+            font-size: 14px;
+            color: $mainGray;
+            margin-bottom: 1rem;
+        }
+        button{
+            font-size: 14px;
         }
     }
 }

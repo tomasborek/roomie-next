@@ -3,7 +3,7 @@ import { useDb } from '../../contexts/DbContext'
 import { useLoading } from '../../contexts/LoadingContext'
 import { useAuth } from '../../contexts/AuthContext'
 
-const RecievedReqFull = ({name, age, gender, message, setOpen, id}) => {
+const RecievedReqFull = ({name, age, gender, message, setOpen, status, id}) => {
     //Variables---
         //Contexts
         const {updateUser, getUser} = useDb();
@@ -35,8 +35,17 @@ const RecievedReqFull = ({name, age, gender, message, setOpen, id}) => {
             <div className="full-description">{gender === "male" ? "Muž" : gender === "female" ? "Žena" : gender === "other" ? "Jiné" : ""}, {age}</div>
             <div className="full-message">{message}</div>
             <div className="full-actions">
-                <button onClick={() => handleAction("rejected")}     className="acc-btn">Odmítnout</button>
-                <button onClick={() => handleAction("accepted")}    className="main-btn">Přijmout</button>
+                {status === "pending" ?
+                    <>
+                    <button onClick={() => handleAction("rejected")}     className="acc-btn">Odmítnout</button>
+                    <button onClick={() => handleAction("accepted")}    className="main-btn">Přijmout</button>
+                    </>
+                :
+                <div className="full-actions-resolved">
+                    <p>{status === "accepted" ? "Tato žádost byla přijata." : "Tato žádost byla odmítnuta."}</p>
+                    <button onClick={() =>setOpen(false)} className="main-btn">Zavřít</button>
+                </div>
+                }
             </div>
         </div>
     )

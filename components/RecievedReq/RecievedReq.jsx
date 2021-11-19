@@ -11,9 +11,9 @@ const RecievedReq = ({name, age, message, gender,status, id}) => {
     const router = useRouter();
     return (
         <>
-         <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={fullReq}><RecievedReqFull name={name} age={age} gender={gender} message={message} id={id} setOpen={setFullReq}/></Backdrop>
+         <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={fullReq}><RecievedReqFull name={name} age={age} gender={gender} message={message} id={id} status={status} setOpen={setFullReq}/></Backdrop>
             <div  className="rec-req">
-                <div onClick={() =>setFullReq(true)} className="req-pfp-container">
+                <div onClick={() => setFullReq(true)} className="req-pfp-container">
                     <div className="container-pfp"></div>
                 </div>
                 <div onClick={() =>setFullReq(true)} className="req-content">
@@ -21,7 +21,7 @@ const RecievedReq = ({name, age, message, gender,status, id}) => {
                     <div className="content-msg">{status === "pending" ? "Váš žádá o kontaktní údaje." : status === "accepted" ? `Přijali jste žádost uživatele ${name}` : status === "rejected" ? `Odmítli jste žádost uživatele ${name}`:""}</div>
                 </div>
                 <div className="req-status">
-                    {status === "pending" ? "" : <i className={`fas fa-${status === "accepted" ? "check" : "times"}`}></i>}
+                    <i className={`fas fa-${status === "pending" ? "hourglass-half" : status === "rejected" ? "times" : "check"}`}></i>
                 </div>
             </div>
         </>
