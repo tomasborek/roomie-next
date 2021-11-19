@@ -28,6 +28,7 @@ const RecievedReqFull = ({name, age, gender, message, setOpen, status, id}) => {
 
     return (
         <div className="recieved-req-full">
+            <i onClick={() => setOpen(false)} className="fas fa-times full-close-icon"></i>
             <div className="full-pfp-container">
                 <img src="/img/pfps/radek-pfp.png" className="container-pfp"></img>
             </div>
