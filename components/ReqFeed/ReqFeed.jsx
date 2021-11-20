@@ -40,7 +40,7 @@ const ReqFeed = ({type}) => {
                 {recievedRequests ?
                     <div className="reqs-feed">
                         {Object.keys(recievedRequests).map((req, id) => (
-                            <RecievedReq name={recievedRequests[req].name} age={recievedRequests[req].age} message={recievedRequests[req].message} gender={recievedRequests[req].gender} status={recievedRequests[req].status} id={req} key={id}/>
+                            <RecievedReq reqInfo={recievedRequests[req]} id={req} key={id}/>
                         ))}
                     </div>
                     :

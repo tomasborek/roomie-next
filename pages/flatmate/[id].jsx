@@ -67,7 +67,7 @@ const FlatmateListing = () => {
     
     //Gets listing based on url id and sets the listingInfo state
     useEffect(() => {
-        getListing(id, "flatmateListings")
+        getListing(id)
         .then(doc => {
             setListingInfo(doc);
         }).catch(error => {
@@ -109,7 +109,7 @@ const FlatmateListing = () => {
             window.scrollTo(0,0);
             return;
         }
-        updateListing("flatmateListings", id, {
+        updateListing(id, {
             mainInfo: {
                 budget: budget,
                 startTime: startTime,
@@ -124,7 +124,7 @@ const FlatmateListing = () => {
             setEditListing(false);
             snackBar("Inzerát byl úspěšně upraven.", "success");
             window.scrollTo(0,0);
-            getListing(id, "flatmateListings")
+            getListing(id)
             .then(doc => setListingInfo(doc));
         }).catch(error => {
             snackBar("Něco se pokazilo. Zkuste to prosím později.", "error")
@@ -154,6 +154,8 @@ const FlatmateListing = () => {
                     age: requestingUser.data().mainInfo.age,
                     message: requestMessageRef.current.value,
                     gender: requestingUser.data().mainInfo.gender,
+                    listingId: requestingUser.data().listing.id,
+                    type: requestingUser.data().mainInfo.type,
                     status: "pending"
                 }}
             })
@@ -163,6 +165,7 @@ const FlatmateListing = () => {
                 "requests.sent": {...requestingUser.data().requests.sent, [requestedUserUid]: {
                     name: requestedUser.data().mainInfo.username,
                     age: requestedUser.data().mainInfo.age,
+                    listingId: requestedUser.data().listing.id,
                     status: "pending"
                 }}
             })

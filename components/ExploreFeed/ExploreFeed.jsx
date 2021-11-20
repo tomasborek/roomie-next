@@ -23,7 +23,7 @@ const ExploreFeed = ({variant}) => {
             if(flatmateListings.length > 0){
                 return;
             }
-            getListings("fm")
+            getListings("flatmate")
             .then(docs => {
                 docs.forEach(doc => {
                     setFlatmateListings(prevState => [...prevState, doc]);
@@ -37,7 +37,7 @@ const ExploreFeed = ({variant}) => {
             if(flatListings.length > 0){
                 return;
             }
-            getListings("f")
+            getListings("flat")
             .then(docs => {
                 docs.forEach(doc => {
                     setFlatListings(prevState => [...prevState, doc]);

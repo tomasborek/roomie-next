@@ -13,7 +13,7 @@ export function DbProvider(props) {
 
     //Functions
     //User
-    const addUser = (username, gender, type, age, birthday, budget, location, email, phoneNumber, listingId, uid) => {
+    const addUser = (username, gender, type, age, birthday, location, email, phoneNumber, listingId, uid) => {
         return setDoc(doc(db, "users", uid), {
             mainInfo: {
                 username: username,
@@ -21,7 +21,6 @@ export function DbProvider(props) {
                 type: type,
                 age: age,
                 birthday: birthday,
-                budget: budget,
                 location: location
             },
             contact: {
@@ -56,6 +55,9 @@ export function DbProvider(props) {
       return deleteDoc((doc(db, "users", user.uid)))
     }
 
+
+    //Listings
+
     const delListing = (type, id) => {
         if(type === "flatmate"){
             type = "flatmateListings";
@@ -69,7 +71,7 @@ export function DbProvider(props) {
     const createListing = (type, name, uid, gender, age, money, location, id) => {
         let docRef;
         if(type == "flatmate"){
-            docRef= doc(db, "flatmateListings", id);
+            docRef= doc(db, "listings", id);
             return setDoc(docRef, {
                 userInfo: {
                     name: name,
@@ -85,11 +87,13 @@ export function DbProvider(props) {
                 personTags: {},
                 flatTags: {},
                 personBoxes: {},
-                bio: ""
+                bio: "",
+                type: "flatmate",
+                friends: []
 
             })
         }else if(type == "offerer"){
-            docRef = doc(db, "flatListings", id);
+            docRef = doc(db, "listings", id);
             return setDoc(docRef, {
                 userInfo: {
                     name: name,
@@ -106,40 +110,34 @@ export function DbProvider(props) {
                 flatBoxes: {},
                 personBoxes: {},
                 flatBio: "",
-                personBio: ""
+                personBio: "",
+                type: "flat",
+                friends: []
             });
         }
     }
-
-    //Listings
-    const updateListing = (type, id, param) => {
-       const docRef = doc(db, type, id);
-       return updateDoc(docRef, param);       
+    const updateListing = (id, params) => {
+       const docRef = doc(db, "listings", id);
+       return updateDoc(docRef, params);       
     }
 
     const getListings = (type) => {
-        if(type === "fm"){
-            return getDocs(collection(db, "flatmateListings"));
-        }else if(type === "f"){
-            return getDocs(collection(db, "flatListings"));
-        }else{
-            return null;
-        }
-    }
-
-    const getListing = (id,type) => {
-        return getDoc(doc(db, type, id));
-    }
-
-    const getListingByUser = (uid, type) => {
-        if(type === "flatmate"){
-            type = "flatmateListings";
-        }else if(type === "offerer"){
-            type = "flatListings";
-        }
-        const colRef = collection(db, type);
-        const q = query(colRef, where("userInfo.uid", "==", uid));
+        const q = query(collection(db, "listings"), where("type", "==", type));
         return getDocs(q);
+    }
+
+    const getListing = (id) => {
+        return getDoc(doc(db, "listings", id));
+    }
+
+    const getListingByUser = (uid) => {
+        const q = query(collection(db, "listings"), where("userInfo.uid", "==", uid));
+        return getDocs(q);
+    }
+
+    const addFriend = (id, uid, params) => {
+        const docRef = doc(db, "listings", id, "friends",uid);
+        return setDoc(docRef, params);
     }
 
    
@@ -157,6 +155,7 @@ export function DbProvider(props) {
         getListing,
         getListingByUser,
         delListing,
+        addFriend
     }
     return (
         <DbContext.Provider value={value}>

@@ -76,7 +76,7 @@ const CreateFlatmateListing = () => {
     useEffect(() => {
         //Checks if the url is ready
         if(!router.isReady) return;
-        getListing(id, "flatmateListings")
+        getListing(id)
         .then(doc => {
             if(!currentUser || currentUser.uid != doc.data().userInfo.uid || doc.data().mainInfo.startTime != ""){
                 router.push(`/flatmate/${doc.id}`);
@@ -131,7 +131,7 @@ const CreateFlatmateListing = () => {
             window.scrollTo(0,0);
             return;
         }
-        updateListing("flatmateListings", id, {
+        updateListing(id, {
             mainInfo: {
                 budget: budget,
                 startTime: startTime,

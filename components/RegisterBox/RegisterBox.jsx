@@ -71,7 +71,7 @@ const RegisterBox = () => {
             return createListing(type, username, uid, gender, age, price, location, listingIdVar);
         }).then(res => {
             console.log("Succesful - listing");
-            return addUser(username, gender, type, age, birthday, location, price, email, phone, listingIdVar, uid);
+            return addUser(username, gender, type, age, birthday, location, email, phone, listingIdVar, uid);
         }).then(doc => {
             console.log("Successful - db");
             setLoading(false);

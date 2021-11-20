@@ -68,7 +68,7 @@ const FlatListing = () => {
 
     //Fetches the listing data on load
     useEffect(() => {
-        getListing(id, "flatListings")
+        getListing(id)
         .then(doc => {
             setListingInfo(doc);
         }).catch(error => {
@@ -112,7 +112,7 @@ const FlatListing = () => {
             window.scrollTo(0,0);
             return;
         }
-        updateListing("flatListings", id, {
+        updateListing(id, {
             mainInfo: {
                 price: budget,
                 startTime: startTime,
@@ -159,6 +159,8 @@ const FlatListing = () => {
                     age: requestingUser.data().mainInfo.age,
                     message: requestMessageRef.current.value,
                     gender: requestingUser.data().mainInfo.gender,
+                    listingId: requestingUser.data().listing.id, 
+                    type: requestingUser.data().mainInfo.type,
                     status: "pending"
                 }}
             })
@@ -168,6 +170,7 @@ const FlatListing = () => {
                 "requests.sent": {...requestingUser.data().requests.sent, [requestedUserUid]: {
                     name: requestedUser.data().mainInfo.username,
                     age: requestedUser.data().mainInfo.age,
+                    listingId: requestedUser.data().listing.id,
                     status: "pending"
                 }}
             })

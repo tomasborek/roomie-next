@@ -72,7 +72,7 @@ const CreateFlatListing = () => {
     //Fetches the listing data on load
     useEffect(() => {
         if(!router.isReady) return;
-        getListing(id, "flatListings")
+        getListing(id)
         .then(doc => {
             if(currentUser.uid != doc.data().userInfo.uid || doc.data().mainInfo.startTime != ""){
                 router.push(`/flatmate/${doc.id}`);
@@ -129,7 +129,7 @@ const CreateFlatListing = () => {
             window.scrollTo(0,0);
             return;
         }
-        updateListing("flatListings", id, {
+        updateListing(id, {
             mainInfo: {
                 price: budget,
                 startTime: startTime,
