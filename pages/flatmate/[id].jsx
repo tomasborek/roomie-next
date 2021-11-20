@@ -281,6 +281,56 @@ const FlatmateListing = () => {
                                             <div className="item-description">Doba nastěhování</div>
                                         </div>
                                     </div>
+                                    {listingInfo && currentUser && listingInfo.data().friends.includes(currentUser.uid) ? 
+                                    <div className="info-contact unlocked">
+                                         <div className="contact-icons">
+                                            <i className="icons-icon fas fa-envelope"></i>
+                                            <i className="icons-icon fas fa-phone"></i>
+                                            <i className="icons-icon fab fa-instagram"></i>
+                                            <i className="icons-icon fab fa-facebook"></i>
+                                        </div>
+                                        <div className="contact-boxes">
+                                            <div className="boxes-email">
+                                                <i className="fas fa-phone"></i>
+                                               <p>email@email.com</p>
+                                            </div>
+                                            <div className="boxes-phone">
+                                                <i className="fas fa-envelope"></i>
+                                                <p>731011045</p>
+                                            </div>
+                                        </div>
+                                        <div className="contact-state">
+                                            <i className="state-icon fas fa-users"></i>
+                                            <div className="state-description">
+                                                Vy a {listingInfo.data().userInfo.name} jste ve spojení.
+                                            </div>
+                                        </div>
+                                
+                                    </div>
+                                    :
+                                    listingInfo.data().userInfo.uid === currentUser.uid ?
+                                    <div className="info-contact unlocked">
+                                        <div className="contact-icons">
+                                            <i className="icons-icon fab fa-instagram"></i>
+                                            <i className="icons-icon fab fa-facebook"></i>
+                                        </div>
+                                        <div className="contact-boxes">
+                                            <div className="boxes-email">
+                                                <i className="fas fa-phone"></i>
+                                                <p>email@email.com</p>
+                                            </div>
+                                            <div className="boxes-phone">
+                                                <i className="fas fa-envelope"></i>
+                                                <p>731011045</p>
+                                            </div>
+                                        </div>
+                                        <div className="contact-button-wrapper">
+                                            <button onClick={() => router.push("/requests/recieved")} className="contact-button">Zobrazit žádosti</button>
+                                        </div>
+                                       
+                           
+                                    </div>
+                               :
                                     <div className="info-contact">
                                         <div className="contact-icons">
                                             <i className="icons-icon fas fa-envelope"></i>
@@ -292,9 +342,12 @@ const FlatmateListing = () => {
                                             <i className="state-icon fas fa-lock"></i>
                                             <p className="state-description">{listingInfo && currentUser && listingInfo.data().userInfo.uid === currentUser.uid ? "Vaše kontaktní údaje jsou skryté" : "Požádejte uživatele o přístup ke kontaktním údajům"}.</p>
                                         </div>
-
-                                       {listingInfo && currentUser && listingInfo.data().userInfo.uid === currentUser.uid ? <button onClick={() => router.push("/requests/recieved")} className="contact-button">Zobrazit žádosti</button> : <button onClick={() => !currentUser ? router.push("/login") : setReqDialogOpen(true)} className="contact-button">Požádat o kontaktní údaje</button>}
+                                    
+                                        <div className="contact-button-wrapper">
+                                        {listingInfo && currentUser && listingInfo.data().userInfo.uid === currentUser.uid ? <button onClick={() => router.push("/requests/recieved")} className="contact-button">Zobrazit žádosti</button> : <button onClick={() => !currentUser ? router.push("/login") : setReqDialogOpen(true)} className="contact-button">Požádat o kontaktní údaje</button>}
                                         </div>
+                                        </div>
+                                    }
                                     </div>
                                 }
                             </div>
