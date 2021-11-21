@@ -185,6 +185,7 @@
             justify-content: space-between;
             padding-block:1rem ;
             .contact-icons{
+        
                 justify-content: center;
                 display: flex;
                 .icons-icon{
@@ -209,7 +210,6 @@
                 }
             }
             .contact-button-wrapper{
-                flex: 1;
                 display: flex;
                 justify-content:center ;
                 .contact-button{
@@ -256,6 +256,10 @@
                             color: #333;
                         }
                     }
+                }
+
+                .contact-button-wrapper{
+                    flex: 1;
                 }
             }
 
