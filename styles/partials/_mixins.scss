@@ -136,7 +136,8 @@
                 flex: 1;
             }
             .important-item{
-                margin-inline: 0.25rem;
+                padding: 0 0.25rem;
+                min-width: 90px;
                 .item-header{
                     display: flex;
                     align-items: center;
@@ -242,6 +243,8 @@
                 .contact-boxes{
                     flex: 1;
                     display: flex;
+                    align-items: center;
+                    justify-content: center;
                     .boxes-email, .boxes-phone{
                         display: flex;
                         align-items: center;
@@ -305,24 +308,54 @@
                 height: 200px;
             }
         }
-        .Listing .listing-content .content-header .mid-container .header-info .info-important .important-item{
-            .item-header{
-                .header-icon{
-                    font-size: 10px;
-                    margin-right: 0.5rem;
-                }
-                .header-value{
-                    font-size: 1rem;
+        .Listing .listing-content .content-header .mid-container .header-info .info-important {
+            flex-wrap: wrap;
+            &.edit{
+                flex-direction: column-reverse;
+                .important-item{
+                    flex-direction: column-reverse;
+                    margin-bottom: 0.5rem;
+                    .item-header{
+                        .header-value{
+                            font-size: 14px;
+                        }
+                    }
+                    .item-description{
+                        font-size: 12px;
+                    }
+                    
                 }
             }
-            .item-description{
-                font-size: 12px;
-            }
+           .important-item{
+               .item-header{
+                   .header-value{
+                    font-size: 12px;
+                   }
+                   .header-icon{
+                       font-size: 12px;
+                       margin-right: 0.25rem;
+                   }
+               }
+               .item-description{
+                   font-size: 10px;
+               }
+        
+           }
         }
         .Listing .listing-content .content-header .mid-container .header-info .info-contact{
             flex-direction: column;
             .contact-icons,.contact-state, .contact-boxes{
                 margin-bottom: 1rem;
+                width: 100%;
+                .boxes-email, .boxes-phone{
+                    p{
+                        font-size: 14px;
+                    }
+                    i{
+                        font-size: 12px;
+                    }
+                    
+                }
             }
             .contact-icons .icons-icon{
                 font-size: 1rem;

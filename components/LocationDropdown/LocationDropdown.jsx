@@ -50,7 +50,7 @@ const LocationDropdown = ({setLocation, location}) => {
         let results = [];
         setDropdownActive(true);
         setFetching(true);
-            fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&countryIds=cz&minPopulation=10000&namePrefix=${search}`, {
+            fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&countryIds=cz&namePrefix=${search}`, {
 	        "method": "GET",
 	        "headers": {
 		        "x-rapidapi-host": "wft-geo-db.p.rapidapi.com",
