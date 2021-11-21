@@ -155,7 +155,6 @@ const CreateFlatmateListing = () => {
         <>
         <Head>
             <title>Vytvořte svůj inzerát | Roomie</title>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         </Head>
         <div className="Listing FlatMateListing">
             <Header variant="white" />
@@ -229,7 +228,7 @@ const CreateFlatmateListing = () => {
                                         <div className="important-item">
                                             <div className="item-header">
                                             <i className={`header-icon ${editListing && "header-edit-icon"} fas fa-coins`}></i>
-                                               <div className="header-value header-value-edit-slider"><p>{budget} 000 Kč</p><i onClick={() => setSliderDialog(true)} class="fas fa-gear"></i></div>
+                                               <div className="header-value header-value-edit-slider"><p>{budget} 000 Kč</p><i onClick={() => setSliderDialog(true)} className="fas fa-gear"></i></div>
                                             </div>
                                             <div className="item-description">Rozpočet</div>
                                         </div>
@@ -294,7 +293,7 @@ const CreateFlatmateListing = () => {
                                 <Collapse in={boxesInfoAlert}>
                                         <Alert sx={{marginTop: "1rem"}} severity="info">Přidejte o sobě info.</Alert>
                                 </Collapse> 
-                                <div class="info-edit-boxes">
+                                <div className="info-edit-boxes">
                                     <button onClick={() => setPersonBoxerOverlay(true)}> <i className="fas fa-plus"></i> </button>
                                 </div>
                             </div>

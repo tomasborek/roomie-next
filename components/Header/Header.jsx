@@ -100,8 +100,8 @@ const Header = ({variant}) => {
                <Dropdown open={notificationDropdown}>
                    <ul className="notifications-dropdown">
                       {notifications ? 
-                      Object.keys(notifications).map(not => (
-                          <li onClick={() => router.push("/requests/recieved")}>{notifications[not].name} vás žádá o navázání kontaktu.</li>
+                      Object.keys(notifications).map((not,id) => (
+                          <li key={id} onClick={() => router.push("/requests/recieved")}>{notifications[not].name} vás žádá o navázání kontaktu.</li>
                       ))
                       :
                       <li><CircularProgress/></li>

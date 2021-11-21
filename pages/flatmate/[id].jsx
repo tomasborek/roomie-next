@@ -235,7 +235,7 @@ const FlatmateListing = () => {
                                         <div className="important-item">
                                             <div className="item-header">
                                             <i className={`header-icon ${editListing && "header-edit-icon"} fas fa-coins`}></i>
-                                               {editListing ?  <div className="header-value header-value-edit-slider"><p>{budget} 000 Kč</p><i onClick={() => setSliderDialog(true)} class="fas fa-gear"></i></div> : <div class="header-value"> {listingInfo.data().mainInfo.budget} 000 Kč</div>}
+                                               {editListing ?  <div className="header-value header-value-edit-slider"><p>{budget} 000 Kč</p><i onClick={() => setSliderDialog(true)} className="fas fa-gear"></i></div> : <div className="header-value"> {listingInfo.data().mainInfo.budget} 000 Kč</div>}
                                             </div>
                                             <div className="item-description">Rozpočet</div>
                                         </div>
@@ -341,7 +341,7 @@ const FlatmateListing = () => {
                         <div className="body-info">
                             <div className="container">
                                 <ListingBoxesContainer type="flatmate" addedBoxes={addedPersonBoxes} existingBoxes={listingInfo && listingInfo.data().personBoxes} editListing={editListing} />
-                                {editListing && <div class="info-edit-boxes">
+                                {editListing && <div className="info-edit-boxes">
                                     <button onClick={() => setPersonBoxerOverlay(true)}> <i className="fas fa-plus"></i> </button>
                                 </div>}
                             </div>

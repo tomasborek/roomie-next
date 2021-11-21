@@ -357,11 +357,11 @@ const FlatListing = () => {
                                     </div>
                                 </div>
                                  <ListingBoxesContainer existingBoxes={listingInfo && listingInfo.data().flatBoxes} addedBoxes={addedFlatBoxes} editListing={editListing} type="flat" /> 
-                                 {editListing && <div class="info-edit-boxes">
+                                 {editListing && <div className="info-edit-boxes">
                                     <button onClick={() => setFlatBoxerOverlay(true)}> <i className="fas fa-plus"></i> </button>
                                 </div>}
                                 <ListingBoxesContainer existingBoxes={listingInfo &&listingInfo.data().personBoxes} addedBoxes={addedPersonBoxes} editListing={editListing} type="flatmate" />
-                                {editListing && <div class="info-edit-boxes">
+                                {editListing && <div className="info-edit-boxes">
                                     <button onClick={() => setPersonBoxerOverlay(true)}> <i className="fas fa-plus"></i> </button>
                                 </div>}
                             </div>

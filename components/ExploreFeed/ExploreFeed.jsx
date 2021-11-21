@@ -59,8 +59,8 @@ const ExploreFeed = ({variant}) => {
             </div>
             {variant === "flatmate" &&
             <>
-                {flatmateListings.length ? flatmateListings.map((listing) => (
-                    <FmListing name={listing.data().userInfo.name} age={listing.data().userInfo.age} gender={listing.data().userInfo.gender} location={listing.data().flatTags.location} money={listing.data().mainInfo.budget} available={listing.data().mainInfo.startTime} bio={listing.data().bio} id={listing.id}/>
+                {flatmateListings.length ? flatmateListings.map((listing, id) => (
+                    <FmListing name={listing.data().userInfo.name} age={listing.data().userInfo.age} gender={listing.data().userInfo.gender} location={listing.data().flatTags.location} money={listing.data().mainInfo.budget} available={listing.data().mainInfo.startTime} bio={listing.data().bio} id={listing.id} key={id}/>
                 ))
             :
             <div className="loading">
@@ -71,8 +71,8 @@ const ExploreFeed = ({variant}) => {
             }
             {variant === "flat" &&
             <>
-            {flatListings.length ? flatListings.map((listing) => (
-                    <FListing name={`Byt ${listing.data().flatBoxes.layout} ${listing.data().flatBoxes.location}`} bio={listing.data().flatBio} price={listing.data().mainInfo.price} startTime={listing.data().mainInfo.startTime} stayTime={listing.data().mainInfo.stayTime} id={listing.id} />
+            {flatListings.length ? flatListings.map((listing, id) => (
+                    <FListing name={`Byt ${listing.data().flatBoxes.layout} ${listing.data().flatBoxes.location}`} bio={listing.data().flatBio} price={listing.data().mainInfo.price} startTime={listing.data().mainInfo.startTime} stayTime={listing.data().mainInfo.stayTime} id={listing.id} key={id} />
                 )) 
             :
             <div className="loading">

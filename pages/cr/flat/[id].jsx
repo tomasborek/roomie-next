@@ -147,7 +147,6 @@ const CreateFlatListing = () => {
         <>
          <Head>
             <title>Vytvořte svůj inzerát | Roomie</title>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         </Head>
         <div className="Listing FlatListing">
             <Header variant="white" />
@@ -296,7 +295,7 @@ const CreateFlatListing = () => {
                                  <Collapse in={flatBoxesInfoAlert}>
                                         <Alert sx={{marginTop: "1rem"}} severity="info">Přidejte info o svém bydlení.</Alert>
                                 </Collapse> 
-                                <div class="info-edit-boxes">
+                                <div className="info-edit-boxes">
                                     <button onClick={() => {
                                         setFlatBoxerOverlay(true);
                                         setFlatBoxesInfoAlert(false);
@@ -306,7 +305,7 @@ const CreateFlatListing = () => {
                                 <Collapse in={personBoxesInfoAlert}>
                                         <Alert sx={{marginTop: "1rem"}} severity="info">Přidejte info o sobě.</Alert>
                                 </Collapse> 
-                                <div class="info-edit-boxes">
+                                <div className="info-edit-boxes">
                                     <button onClick={() => {
                                         setPersonBoxerOverlay(true);
                                         setPersonBoxesInfoAlert(false);

@@ -95,8 +95,8 @@ const LocationDropdown = ({setLocation, location}) => {
           <motion.div variants={optionsVariants} animate={dropdownActive ? "active" : ""} initial={"disabled"} transition={"transition"} className="location-dropdown-options">
                 {options.length && !fetching &&
                     <ul>
-                        {options.map(option => (
-                            <li onClick={() => {
+                        {options.map((option,id) => (
+                            <li key={id} onClick={() => {
                                 setLocation(option);
                                 setSearch(option);
                                 setDropdownActive(false);
