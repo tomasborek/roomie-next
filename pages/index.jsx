@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 //next
 import Head from 'next/head'
 import Image from 'next/image'
@@ -16,6 +16,7 @@ export default function Home() {
     //Contexts
     const router = useRouter();
     const {currentUser} = useAuth();
+   
   return (
     <>
     <Head>

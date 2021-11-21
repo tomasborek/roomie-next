@@ -33,7 +33,7 @@ const FlatListing = () => {
 //Variables ---
 
     //Contexts
-    const {getListing, updateListing, getUser, updateUser} = useDb();
+    const {getListing, updateListing, getUser, updateUser, createRecievedRequest, createSentRequest} = useDb();
     const {currentUser} = useAuth();
     const router = useRouter();
     const {id} = router.query;
@@ -138,48 +138,34 @@ const FlatListing = () => {
 
     //Handles contact request
     const handleRequest = () => {
-        let requestedUser;
-        let requestingUser;
-        let requestedUserUid;
-        let requestingUserUid;
         setLoading(true);
         setReqDialogOpen(false);
-
-        getUser(listingInfo.data().userInfo.uid)
-        .then(user => {
-            requestedUser = user;
-            requestedUserUid = requestedUser.id;
-            return getUser(currentUser.uid);
-        }).then(user => {
-            requestingUser = user;
-            requestingUserUid = requestingUser.id;
-            return updateUser(requestedUser.id, {
-                "requests.recieved": {...requestingUser.data().requests.recieved, [requestingUserUid]: {
-                    name: requestingUser.data().mainInfo.username,
-                    age: requestingUser.data().mainInfo.age,
-                    message: requestMessageRef.current.value,
-                    gender: requestingUser.data().mainInfo.gender,
-                    listingId: requestingUser.data().listing.id, 
-                    type: requestingUser.data().mainInfo.type,
-                    status: "pending"
-                }}
+        let reciever = listingInfo;
+        let sender;
+        getUser(currentUser.uid)
+        .then(user =>{
+            sender = user;
+            return createRecievedRequest(reciever.data().userInfo.uid, sender.id, {
+                name: sender.data().mainInfo.username,
+                age: sender.data().mainInfo.age,
+                gender: sender.data().mainInfo.gender,
+                 listingId: sender.data().listing.id,
+                 type: sender.data().mainInfo.type,
+                 message: requestMessageRef.current.value,
+                 status: "pending"
             })
         }).then(res => {
-            
-            return updateUser(currentUser.uid, {
-                "requests.sent": {...requestingUser.data().requests.sent, [requestedUserUid]: {
-                    name: requestedUser.data().mainInfo.username,
-                    age: requestedUser.data().mainInfo.age,
-                    listingId: requestedUser.data().listing.id,
-                    status: "pending"
-                }}
+            return createSentRequest(reciever.data().userInfo.uid, sender.id, {
+                name: reciever.data().userInfo.name,
+                age: reciever.data().userInfo.age,
+                listingId: reciever.id,
+                status: "pending"
             })
-        }).then((res) => {
+        }).then(res => {
             setLoading(false);
-        }).catch(error => {
-            console.log(error);
+        }).catch(error =>{
+            setLoading(false);
             setReqDialogOpen(true);
-            setLoading(false);
         })
     }
 
@@ -237,7 +223,7 @@ const FlatListing = () => {
                                       {currentUser && listingInfo.data().userInfo.uid == currentUser.uid ? <button onClick={() => setEditListing(prevState => !prevState)} className="main-edit-profile">{editListing ? "Zpět" : "Upravit inzerát"}</button> : "" }  
                                         <i className="main-more fas fa-ellipsis-h"></i>
                                         <div className="main-description">
-                                            <p>Stodolní, Ostrava, Moravskoslezský kraj</p>
+                                            <p>{listingInfo && listingInfo.data().flatBoxes.location}</p>
                                         </div>
                                     </div>
                                     <div className="info-important">
@@ -313,7 +299,7 @@ const FlatListing = () => {
                                 
                                     </div>
                                     :
-                                    listingInfo.data().userInfo.uid === currentUser.uid ?
+                                   currentUser && listingInfo.data().userInfo.uid === currentUser.uid ?
                                     <div className="info-contact unlocked">
                                         <div className="contact-icons">
                                             <i className="icons-icon fab fa-instagram"></i>

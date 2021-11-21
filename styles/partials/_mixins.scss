@@ -449,7 +449,9 @@
 
 @mixin gradientBg{
     background: rgb(48,158,171);
-    background: linear-gradient(90deg, rgba(48,158,171,1) 8%, rgba(225,73,73,1) 90%);
+background: linear-gradient(90deg, rgba(48,158,171,1) 0%, rgba(21,76,112,1) 87%);
+    // background: rgb(48,158,171);
+    // background: linear-gradient(90deg, rgba(48,158,171,1) 8%, rgba(225,73,73,1) 90%);
 }
 
 @mixin whiteGradient{

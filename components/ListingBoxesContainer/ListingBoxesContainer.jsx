@@ -47,6 +47,7 @@ const ListingBoxesContainer = ({type, existingBoxes, addedBoxes, editListing}) =
                     {existingBoxes.level && existingBoxes.level != "" && <ListingBox icon="fa-door-closed" title="Podlaží">{existingBoxes.level}</ListingBox>}
                     {existingBoxes.petAllowed && existingBoxes.petAllowed != "" && <ListingBox icon="fa-dog" title="Mazlíčci">{existingBoxes.petAllowed}</ListingBox>}
                     {existingBoxes.smokingAllowed && existingBoxes.smokingAllowed != "" && <ListingBox icon="fa-smoking" title="Kouření">{existingBoxes.smokingAllowed}</ListingBox>}
+                    {existingBoxes.location && existingBoxes.location != "" && <ListingBox icon="fa-home" title="Lokace">{existingBoxes.location}</ListingBox>}
                     </>
                 }
                  {!existingBoxes &&
@@ -62,6 +63,7 @@ const ListingBoxesContainer = ({type, existingBoxes, addedBoxes, editListing}) =
                 {addedBoxes.level && addedBoxes.level != "" && <ListingBox icon="fa-door-closed" title="Podlaží">{addedBoxes.level}</ListingBox>}
                 {addedBoxes.petAllowed && addedBoxes.petAllowed != "" && <ListingBox icon="fa-dog" title="Mazlíčci">{addedBoxes.petAllowed}</ListingBox>}
                 {addedBoxes.smokingAllowed && addedBoxes.smokingAllowed != "" && <ListingBox icon="fa-smoking" title="Kouření">{addedBoxes.smokingAllowed}</ListingBox>}
+                {existingBoxes.location && existingBoxes.location != "" && <ListingBox icon="fa-home" title="Lokace">{existingBoxes.location}</ListingBox>}
                 </>
                 }
             </div>

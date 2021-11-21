@@ -7,7 +7,7 @@ import { arrayUnion } from '@firebase/firestore'
 const RecievedReqFull = ({reqInfo, id, setOpen}) => {
     //Variables---
         //Contexts
-        const {updateUser, getUser, updateListing, getListing, addFriend} = useDb();
+        const {updateUser, getUser, updateListing, resolveRequest, addFriend} = useDb();
         const [loading, setLoading] = useLoading();
         const {currentUser} = useAuth();
 
@@ -16,20 +16,19 @@ const RecievedReqFull = ({reqInfo, id, setOpen}) => {
         const handleAction = (action) => {
             setLoading(true);
             setOpen(false);
-           updateUser(currentUser.uid, {
-               [`requests.recieved.${id}.status`]: action
-           }).then(res => {
-               return updateUser(id, {
-                   [`requests.sent.${currentUser.uid}.status`]: action
-               })
-           }) .then(res => {
-               if(action === "accepted") handleFriendship();
-               setLoading(false);
-               setOpen(false);
-           }).catch(error => {
-               setLoading(false);
-               setOpen(true);
-           })
+            if(action === "accepted") handleFriendship();
+            resolveRequest("recieved", currentUser.uid, id, {
+                status: action
+            }).then(res => {
+                return resolveRequest("sent", currentUser.uid, id, {
+                    status: action
+                })
+            }).then(res => {
+                setLoading(false)
+            }).catch(error => {
+                setOpen(true);
+                setLoading(false)
+            })
         }
 
 
@@ -39,8 +38,8 @@ const RecievedReqFull = ({reqInfo, id, setOpen}) => {
            getUser(currentUser.uid)
            .then(user => {
                 requestedUser = user;
-                //Adding a friend to requesting user's listing
-                return addFriend(requestingUser.listingId, id, {
+                //Adding a friend to requesting user's profile
+                return addFriend(id, requestedUser.id, {
                     username: requestedUser.data().mainInfo.username,
                     age: requestedUser.data().mainInfo.age,
                     type: requestedUser.data().mainInfo.type,
@@ -53,7 +52,7 @@ const RecievedReqFull = ({reqInfo, id, setOpen}) => {
                })
            }).then(res => {
                //Adding a firend to requested user's listing
-               return addFriend(requestedUser.data().listing.id, requestedUser.id, {
+               return addFriend(requestedUser.id, requestedUser.id, {
                 username: requestingUser.name,
                 age: requestingUser.age,
                 type: requestingUser.type,

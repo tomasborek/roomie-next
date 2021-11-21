@@ -18,7 +18,7 @@ const RecievedReq = ({reqInfo, id}) => {
                 </div>
                 <div onClick={() =>setFullReq(true)} className="req-content">
                     <div className="content-name">{reqInfo.name}, {reqInfo.age}</div>
-                    <div className="content-msg">{reqInfo.status === "pending" ? "Váš žádá o kontaktní údaje." : reqInfo.status === "accepted" ? `Přijali jste žádost uživatele ${reqInfo.name}` : status === "rejected" ? `Odmítli jste žádost uživatele ${reqInfo.name}`:""}</div>
+                    <div className="content-msg">{reqInfo.status === "pending" ? "Váš žádá o kontaktní údaje." : reqInfo.status === "accepted" ? `Přijali jste žádost uživatele ${reqInfo.name}` : reqInfo.status === "rejected" ? `Odmítli jste žádost uživatele ${reqInfo.name}`:""}</div>
                 </div>
                 <div className="req-status">
                     <i className={`fas fa-${reqInfo.status === "pending" ? "hourglass-half" : reqInfo.status === "rejected" ? "times" : "check"}`}></i>

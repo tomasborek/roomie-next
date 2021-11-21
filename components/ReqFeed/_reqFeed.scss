@@ -2,3 +2,30 @@
     display: flex;
     justify-content: center;
 }
+
+.reqs-feed-pending{
+    padding-top: 1rem;
+    border-top: 1px $accent solid;
+    margin-bottom: 2rem;
+    p{
+        position: relative;
+        color: $accent;
+        font-size: 14px;
+        background-color: white;
+        padding: 0 2rem;
+        bottom: 2rem;
+        width: 200px;
+        margin: 0 auto;
+    }
+}
+
+.reqs-feed-resolved{
+    .resolved-heading{
+        margin-bottom: 1rem;
+        color: $mainGray;
+        font-weight: normal;
+    }
+    .rec-req{
+        opacity: 0.6;
+    }
+}

@@ -84,8 +84,6 @@ const CreateFlatmateListing = () => {
             }
             setListingInfo(doc);
             setWelcomeDialog(true);
-        }).catch(error => {
-            console.log(error.code);
         })
     }, [router.isReady])
 
@@ -163,6 +161,7 @@ const CreateFlatmateListing = () => {
             <Header variant="white" />
           {/*Taggers and boxer */}
             <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personTagOverlay}><Tagger variant="person" addedTags={addedPersonTags} existingTags={listingInfo ? listingInfo.data().personTags : null} setTagOverlay={setPersonTagOverlay} setAddedTags={setAddedPersonTags}/></Backdrop>
+            <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={flatTagOverlay}><Tagger variant="flat" addedTags={addedFlatTags} existingTags={listingInfo ? listingInfo.data().flatTags : null} setTagOverlay={setFlatTagOverlay} setAddedTags={setAddedFlatTags}/></Backdrop>
             <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personBoxerOverlay}><Boxer setBoxerOverlay={setPersonBoxerOverlay} variant="person" existingBoxes={listingInfo && listingInfo.data().personBoxes} setAddedBoxes={setAddedPersonBoxes} addedBoxes={addedPersonBoxes}/></Backdrop>
            
            {/*Dialogs*/}
@@ -339,6 +338,9 @@ const CreateFlatmateListing = () => {
                              <div className="about-preferences">
                                 <div className="preferences-header">Jaké bydlení hledám?</div>
                                 <div className="preferences-content">
+                                {addedFlatTags  && Object.keys(addedFlatTags).map(tag => (
+                                    addedFlatTags[tag] != "" && <Tag>{addedFlatTags[tag]}</Tag>
+                                ))}
                                      <Tag onClick={() => setFlatTagOverlay(true)} plus={true}></Tag>
                                 </div>
                             </div> 

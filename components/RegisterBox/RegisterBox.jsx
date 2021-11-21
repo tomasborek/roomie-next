@@ -36,7 +36,6 @@ const RegisterBox = () => {
     //State
     const [step, setStep] = useState(0);
     const [type, setType] = useState("");
-    const [isDropdownActive, setIsDropdownActive] = useState(false);
     const [error, setError] = useState(null);
     const [gender, setGender] = useState(null);
     const [location, setLocation] = useState(null);
@@ -227,7 +226,7 @@ const RegisterBox = () => {
                         <motion.img initial={{opacity: 0}} animate={{opacity: 1}} transition={{duration: 0.5}} src="/img/registration-steps/slide-img2.png" className="content-img" />
                     </div>
                     <h1 className="content-title">Kde své bydlení hledáte?</h1>
-                    <DropdownStep setIsDropdownActive={setIsDropdownActive} isDropdownActive={isDropdownActive} location={location} setLocation={setLocation} />
+                    <DropdownStep  location={location} setLocation={setLocation} />
                     <button  disabled={!location} className={`acc-btn ${!location && "disabled"}`} onClick={() => setStep(3)}>Hotovo</button>
                 </div>
            }
@@ -238,7 +237,7 @@ const RegisterBox = () => {
                         <motion.img initial={{opacity: 0}} animate={{opacity: 1}} transition={{duration: 0.5}} src="/img/registration-steps/slide-img2.png" className="content-img" />
                     </div>
                     <h1 className="content-title">Kde své bydlení nabízíte?</h1>
-                    <DropdownStep setIsDropdownActive={setIsDropdownActive} isDropdownActive={isDropdownActive} location={location} setLocation={setLocation} />
+                    <DropdownStep location={location} setLocation={setLocation} />
                     <button  disabled={!location} className={`acc-btn ${!location && "disabled"}`} onClick={() => setStep(3)}>Hotovo</button>
              </div>
 

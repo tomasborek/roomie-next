@@ -35,10 +35,6 @@ export function DbProvider(props) {
             listing: {
                 id: listingId
             },
-            requests: {
-                recieved: {},
-                sent: {}
-            },
             visible: true,
         })
     }
@@ -85,7 +81,9 @@ export function DbProvider(props) {
                     stayTime: ""
                 },
                 personTags: {},
-                flatTags: {},
+                flatTags: {
+                    location: location
+                },
                 personBoxes: {},
                 bio: "",
                 type: "flatmate",
@@ -107,7 +105,9 @@ export function DbProvider(props) {
                     stayTime: ""
                 },
                 personTags: {},
-                flatBoxes: {},
+                flatBoxes: {
+                    location: location
+                },
                 personBoxes: {},
                 flatBio: "",
                 personBio: "",
@@ -135,8 +135,36 @@ export function DbProvider(props) {
         return getDocs(q);
     }
 
-    const addFriend = (id, uid, params) => {
-        const docRef = doc(db, "listings", id, "friends",uid);
+    //Requests and friends
+
+    const createRequest = (type, recieverUid, senderUid, params) => {
+        if(type === "recieved"){
+            const docRef = doc(db, "users", recieverUid, "recievedRequests", senderUid);
+            return setDoc(docRef, params);
+        }else if(type === "sent"){
+            const docRef = doc(db, "users", senderUid, "sentRequests", recieverUid);
+            return setDoc(docRef, params);
+        }
+    }
+
+    const getRequests = (type, uid) => {
+        const colRef = collection(db, "users", uid, type);
+        return getDocs(colRef);
+    }
+
+    const resolveRequest = (type, recieverUid, senderUid, params) => {
+        if(type === "recieved"){
+            let docRef = doc(db, "users", recieverUid, "recievedRequests", senderUid);
+            return updateDoc(docRef, params);
+        }else if (type === "sent"){
+            let docRef = doc(db, "users", senderUid, "sentRequests", recieverUid);
+            return updateDoc(docRef, params);
+        }
+        
+    }
+
+    const addFriend = (recieverUid, senderUid, params) => {
+        const docRef = doc(db, "users", recieverUid, "friends",senderUid);
         return setDoc(docRef, params);
     }
 
@@ -155,6 +183,9 @@ export function DbProvider(props) {
         getListing,
         getListingByUser,
         delListing,
+        createRequest,
+        getRequests,
+        resolveRequest,
         addFriend
     }
     return (

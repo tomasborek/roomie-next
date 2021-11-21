@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react'
 
 //Components
 import Tag from '../Tag/Tag';
+import LocationDropdown from "../LocationDropdown/LocationDropdown";
 //Mui components
 
 
@@ -22,12 +23,20 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
 
     //Effect
     useEffect(() => {
-        if(existingTags && !addedTags){
+        if(existingTags && !addedTags && variant === "person"){
             setAddedTags(existingTags);
             existingTags.smoking && setSmokingTag(existingTags.smoking);
             existingTags.job && setJobTag(existingTags.job);
             existingTags.age && setAgeTag(existingTags.age);
             existingTags.gender && setGenderTag(existingTags.gender);
+            existingTags.location && setLocationTag(existingTags.location);
+        }
+    }, [existingTags])
+
+    useEffect(() => {
+        if(existingTags && !addedTags && variant === "flat"){
+            setAddedTags(existingTags);
+            existingTags.location && setLocationTag(existingTags.location);
         }
     }, [existingTags])
 
@@ -35,12 +44,20 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
     
     //Functions
     const handleAdd = () => {
-        setAddedTags({
-            gender: genderTag,
-            age: ageTag,
-            smoking: smokingTag,
-            job: jobTag
-        })
+        if(variant === "person"){
+            setAddedTags({
+                gender: genderTag,
+                age: ageTag,
+                smoking: smokingTag,
+                job: jobTag,
+            })
+        }
+        if(variant === "flat"){
+            setAddedTags({
+                location: locationTag
+            })
+        }
+       
         setTagOverlay(false);
     }
     return (
@@ -51,8 +68,8 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
                 <section className="tagger-section">
                     <p className="section-header">Pohlaví</p>
                     <div className="section-tags">
-                        <Tag active={genderTag === "Muže"} onClick={() => genderTag == "Muže" ? setGenderTag("") : setGenderTag("Muže")}>Muže</Tag>
-                        <Tag active={genderTag === "Ženu"} onClick={() => genderTag == "Ženu" ? setGenderTag("") : setGenderTag("Ženu")}>Ženu</Tag>
+                        <Tag active={genderTag === "Muž"} onClick={() => genderTag == "Muž" ? setGenderTag("") : setGenderTag("Muž")}>Muž</Tag>
+                        <Tag active={genderTag === "Žena"} onClick={() => genderTag == "Žena" ? setGenderTag("") : setGenderTag("Ženu")}>Žena</Tag>
                         <Tag active={genderTag === "Jiné"} onClick={() => genderTag == "Jiné" ? setGenderTag("") : setGenderTag("Jiné")}>Jiné</Tag>
                     </div>
                 </section>
@@ -69,8 +86,8 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
                 <section className="tagger-section">
                     <p className="section-header">Kouření</p>
                     <div className="section-tags">
-                        <Tag  active={smokingTag === "Kuřáka"} onClick={() => smokingTag == "Kuřáka" ? setSmokingTag("") : setSmokingTag("Kuřáka")}>Kuřáka</Tag>
-                        <Tag active={smokingTag === "Nekuřáka"} onClick={() =>  smokingTag == "Nekuřáka" ? setSmokingTag("") : setSmokingTag("Nekuřáka")}>Nekuřáka</Tag>
+                        <Tag  active={smokingTag === "Kuřák"} onClick={() => smokingTag == "Kuřáka" ? setSmokingTag("") : setSmokingTag("Kuřák")}>Kuřák</Tag>
+                        <Tag active={smokingTag === "Nekuřák"} onClick={() =>  smokingTag == "Nekuřáka" ? setSmokingTag("") : setSmokingTag("Nekuřák")}>Nekuřák</Tag>
                     </div>
                 </section>
                 <section className="tagger-section">
@@ -86,6 +103,14 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
 
                 {variant === "flat" && 
                 <>
+                <section className="tagger-section">
+                    <div className="section-header">Lokace</div>
+                    <div className="section-tags">
+                        <LocationDropdown location={locationTag} setLocation={setLocationTag}/>
+                    </div>
+                    
+                </section>
+                    
                 </>
                 
                 }

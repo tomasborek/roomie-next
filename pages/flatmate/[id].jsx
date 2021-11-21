@@ -36,7 +36,7 @@ const FlatmateListing = () => {
     //Contexts
     const router = useRouter();
     const {id} = router.query;
-    const {getListing, updateListing, updateUser, getUser} = useDb();
+    const {getListing, updateListing, updateUser, getUser, createRequest} = useDb();
     const {currentUser} = useAuth();
     const [loading, setLoading] = useLoading();
     const {snackBar} = useSnackBar();
@@ -117,6 +117,7 @@ const FlatmateListing = () => {
             },
             personBoxes: addedPersonBoxes,
             personTags: addedPersonTags,
+            flatTags: addedFlatTags,
             bio: bioRef.current.value
         })
         .then(res => {
@@ -133,48 +134,34 @@ const FlatmateListing = () => {
     }
 
     const handleRequest = () => {
-        let requestedUser;
-        let requestingUser;
-        let requestedUserUid;
-        let requestingUserUid;
         setLoading(true);
         setReqDialogOpen(false);
-
-        getUser(listingInfo.data().userInfo.uid)
-        .then(user => {
-            requestedUser = user;
-            requestedUserUid = requestedUser.id;
-            return getUser(currentUser.uid);
-        }).then(user => {
-            requestingUser = user;
-            requestingUserUid = requestingUser.id;
-            return updateUser(requestedUser.id, {
-                "requests.recieved": {...requestingUser.data().requests.recieved, [requestingUserUid]: {
-                    name: requestingUser.data().mainInfo.username,
-                    age: requestingUser.data().mainInfo.age,
-                    message: requestMessageRef.current.value,
-                    gender: requestingUser.data().mainInfo.gender,
-                    listingId: requestingUser.data().listing.id,
-                    type: requestingUser.data().mainInfo.type,
-                    status: "pending"
-                }}
+        let reciever = listingInfo;
+        let sender;
+        getUser(currentUser.uid)
+        .then(user =>{
+            sender = user;
+            return createRequest("recieved", reciever.data().userInfo.uid, sender.id, {
+                name: sender.data().mainInfo.username,
+                age: sender.data().mainInfo.age,
+                gender: sender.data().mainInfo.gender,
+                 listingId: sender.data().listing.id,
+                 type: sender.data().mainInfo.type,
+                 message: requestMessageRef.current.value,
+                 status: "pending"
             })
         }).then(res => {
-            
-            return updateUser(currentUser.uid, {
-                "requests.sent": {...requestingUser.data().requests.sent, [requestedUserUid]: {
-                    name: requestedUser.data().mainInfo.username,
-                    age: requestedUser.data().mainInfo.age,
-                    listingId: requestedUser.data().listing.id,
-                    status: "pending"
-                }}
+            return createRequest("sent", reciever.data().userInfo.uid, sender.id, {
+                name: reciever.data().userInfo.name,
+                age: reciever.data().userInfo.age,
+                listingId: reciever.id,
+                status: "pending"
             })
-        }).then((res) => {
+        }).then(res => {
             setLoading(false);
-        }).catch(error => {
-            console.log(error);
+        }).catch(error =>{
+            setLoading(false);
             setReqDialogOpen(true);
-            setLoading(false);
         })
     }
 
@@ -184,6 +171,7 @@ const FlatmateListing = () => {
             <Header variant="white" />
     {/*Taggers and boxer */}
             <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personTagOverlay}><Tagger variant="person" addedTags={addedPersonTags} existingTags={listingInfo ? listingInfo.data().personTags : null} setTagOverlay={setPersonTagOverlay} setAddedTags={setAddedPersonTags}/></Backdrop>
+            <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={flatTagOverlay}><Tagger variant="flat" addedTags={addedFlatTags} existingTags={listingInfo ? listingInfo.data().flatTags : null} setTagOverlay={setFlatTagOverlay} setAddedTags={setAddedFlatTags}/></Backdrop>
             <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personBoxerOverlay}><Boxer setBoxerOverlay={setPersonBoxerOverlay} variant="person" existingBoxes={listingInfo && listingInfo.data().personBoxes} setAddedBoxes={setAddedPersonBoxes} addedBoxes={addedPersonBoxes}/></Backdrop>
            
     {/*Dialogs*/}
@@ -405,6 +393,9 @@ const FlatmateListing = () => {
                                 <div className="preferences-content">
                                     {listingInfo && !editListing && Object.keys(listingInfo.data().flatTags).map(tag => (
                                         listingInfo.data().flatTags[tag] != "" && <Tag>{listingInfo.data().flatTags[tag]}</Tag>
+                                    ))}
+                                    {addedFlatTags && editListing && Object.keys(addedFlatTags).map(tag => (
+                                        addedFlatTags[tag] != "" && <Tag>{addedFlatTags[tag]}</Tag>
                                     ))}
                                      {editListing && <Tag onClick={() => setFlatTagOverlay(true)} plus={true}></Tag>}
                                 </div>

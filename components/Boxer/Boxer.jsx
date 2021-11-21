@@ -16,6 +16,7 @@ const Boxer = ({variant, existingBoxes, addedBoxes, setAddedBoxes, setBoxerOverl
     const [levelBox, setLevelBox] = useState("");
     const [petAllowedBox, setPetAllowedBox] = useState("");
     const [smokingAllowedBox, setSmokingAllowedBox] = useState("");
+    const [locationBox, setLocationBox] = useState("");
 
 
     //Functions
@@ -32,7 +33,8 @@ const Boxer = ({variant, existingBoxes, addedBoxes, setAddedBoxes, setBoxerOverl
                 layout: layoutBox,
                 level: levelBox,
                 petAllowed: petAllowedBox,
-                smokingAllowed: smokingAllowedBox
+                smokingAllowed: smokingAllowedBox,
+                location: locationBox
             })
         }
         setBoxerOverlay(false);
@@ -58,6 +60,7 @@ const Boxer = ({variant, existingBoxes, addedBoxes, setAddedBoxes, setBoxerOverl
             existingBoxes.level && setLevelBox(existingBoxes.level);
             existingBoxes.petAllowed && setLayoutBox(existingBoxes.petAllowed);
             existingBoxes.smokingAllowed && setLayoutBox(existingBoxes.smokingAllowed);
+            existingBoxes.location && setLocationBox(existingBoxes.location);
             
         }
     }, [existingBoxes])

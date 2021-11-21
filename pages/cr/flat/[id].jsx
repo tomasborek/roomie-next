@@ -60,8 +60,9 @@ const CreateFlatListing = () => {
     const [addedPersonBoxes, setAddedPersonBoxes] = useState(null);
     const [addedFlatBoxes, setAddedFlatBoxes] = useState(null);
     //Info alerts
-    const [boxesInfoAlert, setBoxesInfoAlert] = useState(true);
+    const [personBoxesInfoAlert, setPersonBoxesInfoAlert] = useState(true);
     const [tagsInfoAlert, setTagsInfoAlert] = useState(true);
+    const [flatBoxesInfoAlert, setFlatBoxesInfoAlert] = useState(true)
     //Refs
     const personBioRef = useRef(null);
     const flatBioRef = useRef(null);
@@ -74,14 +75,12 @@ const CreateFlatListing = () => {
         if(!router.isReady) return;
         getListing(id)
         .then(doc => {
-            if(currentUser.uid != doc.data().userInfo.uid || doc.data().mainInfo.startTime != ""){
+            if(currentUser && currentUser.uid != doc.data().userInfo.uid || doc.data().mainInfo.startTime != ""){
                 router.push(`/flatmate/${doc.id}`);
                 return;
             }
             setListingInfo(doc);
             setWelcomeDialog(true);
-        }).catch(error => {
-            console.log(error.code);
         })
     },[router.isReady])
 
@@ -97,19 +96,6 @@ const CreateFlatListing = () => {
         }
         
     }, [listingInfo])
-
-    useEffect(() =>{
-        if(addedPersonBoxes && Object.keys(addedPersonBoxes).length){
-            setBoxesInfoAlert(false);
-        }
-    }, [addedPersonBoxes])
-
-    useEffect(() =>{
-        if(addedPersonTags && Object.keys(addedPersonTags).length){
-            setTagsInfoAlert(false);
-        }
-    }, [addedPersonTags])
-
 
 
 //Functions ---
@@ -166,6 +152,7 @@ const CreateFlatListing = () => {
         <div className="Listing FlatListing">
             <Header variant="white" />
     {/* Boxers and tags */}
+
             <Backdrop  sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personTagOverlay}><Tagger  variant="person" addedTags={addedPersonTags} existingTags={listingInfo ? listingInfo.data().personTags : null} setTagOverlay={setPersonTagOverlay} setAddedTags={setAddedPersonTags}/></Backdrop>
             <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personBoxerOverlay}><Boxer setBoxerOverlay={setPersonBoxerOverlay} variant="person" existingBoxes={listingInfo && listingInfo.data().personBoxes} setAddedBoxes={setAddedPersonBoxes} addedBoxes={addedPersonBoxes}/></Backdrop>
             <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={flatBoxerOverlay}><Boxer setBoxerOverlay={setFlatBoxerOverlay} variant="flat" existingBoxes={listingInfo && listingInfo.data().flatBoxes} setAddedBoxes={setAddedFlatBoxes} addedBoxes={addedFlatBoxes}/></Backdrop>
@@ -224,7 +211,7 @@ const CreateFlatListing = () => {
                                 
                                 <div className="header-info">
                                     <div className="info-main">
-                                        <h1 className="main-name">Byt {listingInfo && listingInfo.data().flatBoxes.layout && listingInfo.data().flatBoxes.layout}</h1> 
+                                        <h1 className="main-name">Váš byt</h1> 
                                         <i className="main-more fas fa-ellipsis-h"></i>
                                         <div className="main-description">
                                             <p>Stodolní, Ostrava, Moravskoslezský kraj</p>
@@ -306,15 +293,24 @@ const CreateFlatListing = () => {
                                 </div>
 
                                  <ListingBoxesContainer existingBoxes={listingInfo && listingInfo.data().flatBoxes} addedBoxes={addedFlatBoxes} editListing={editListing} type="flat" /> 
-                                 <Collapse in={boxesInfoAlert}>
-                                        <Alert sx={{marginTop: "1rem"}} severity="info">Přidejte o sobě info.</Alert>
+                                 <Collapse in={flatBoxesInfoAlert}>
+                                        <Alert sx={{marginTop: "1rem"}} severity="info">Přidejte info o svém bydlení.</Alert>
                                 </Collapse> 
                                 <div class="info-edit-boxes">
-                                    <button onClick={() => setFlatBoxerOverlay(true)}> <i className="fas fa-plus"></i> </button>
+                                    <button onClick={() => {
+                                        setFlatBoxerOverlay(true);
+                                        setFlatBoxesInfoAlert(false);
+                                    }}> <i className="fas fa-plus"></i> </button>
                                 </div>
                                 <ListingBoxesContainer existingBoxes={listingInfo &&listingInfo.data().personBoxes} addedBoxes={addedPersonBoxes} editListing={editListing} type="flatmate" />
+                                <Collapse in={personBoxesInfoAlert}>
+                                        <Alert sx={{marginTop: "1rem"}} severity="info">Přidejte info o sobě.</Alert>
+                                </Collapse> 
                                 <div class="info-edit-boxes">
-                                    <button onClick={() => setPersonBoxerOverlay(true)}> <i className="fas fa-plus"></i> </button>
+                                    <button onClick={() => {
+                                        setPersonBoxerOverlay(true);
+                                        setPersonBoxesInfoAlert(false);
+                                    }}> <i className="fas fa-plus"></i> </button>
                                 </div>
                             </div>
                             
@@ -366,7 +362,10 @@ const CreateFlatListing = () => {
                                 {addedPersonTags && Object.keys(addedPersonTags).map(tag => (
                                     addedPersonTags[tag] != "" && <Tag>{addedPersonTags[tag]}</Tag>
                                 ))}
-                                   <Tag plus={true} onClick={() => setPersonTagOverlay(true)}/>
+                                   <Tag plus={true} onClick={() => {
+                                       setPersonTagOverlay(true);
+                                       setTagsInfoAlert(false);
+                                   }}/>
                                 </div>
                             </div>
                         </div>
