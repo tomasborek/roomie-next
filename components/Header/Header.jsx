@@ -24,7 +24,7 @@ const Header = ({variant}) => {
     //Variables
     //Contexts
     const {currentUser, logOut, userLoaded} = useAuth();
-    const {getUser} = useDb();
+    const {getUser, getRequests} = useDb();
     const router = useRouter();
     const [loading, setLoading] = useLoading();
     const [navOverlay, setNavOverlay] = useNavOverlay();
@@ -37,10 +37,17 @@ const Header = ({variant}) => {
      //UseEffect
     useEffect(() => {
         if(notificationDropdown && !notifications){
-            getUser(currentUser.uid)
-            .then(doc => {
-                setNotifications(doc.data().requests.recieved);
-            })
+            let newNotifications = [];
+           getRequests("recievedRequests", currentUser.uid)
+           .then(docs => {
+                docs.forEach(doc => {
+                    console.log(doc);
+                    if(doc.data().status === "pending"){
+                        newNotifications = [...newNotifications, doc];
+                    }
+                })
+                setNotifications(newNotifications);
+           })
         }
     }, [notificationDropdown])
 
@@ -101,7 +108,7 @@ const Header = ({variant}) => {
                    <ul className="notifications-dropdown">
                       {notifications ? 
                       Object.keys(notifications).map((not,id) => (
-                          <li key={id} onClick={() => router.push("/requests/recieved")}>{notifications[not].name} vás žádá o navázání kontaktu.</li>
+                          <li key={id} onClick={() => router.push("/requests/recieved")}> {notifications[not].data().name} vás žádá o navázání kontaktu.</li>
                       ))
                       :
                       <li><CircularProgress/></li>

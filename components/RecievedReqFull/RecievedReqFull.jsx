@@ -73,7 +73,7 @@ const RecievedReqFull = ({reqInfo, id, setOpen}) => {
                 <img src="/img/pfps/radek-pfp.png" className="container-pfp"></img>
             </div>
             <div className="full-name">{reqInfo.name}</div>
-            <div className="full-description">{reqInfo.gender === "male" ? "Muž" : reqInfo.gender === "female" ? "Žena" : gender === "other" ? "Jiné" : ""}, {reqInfo.age}</div>
+            <div className="full-description">{reqInfo.gender === "male" ? "Muž" : reqInfo.gender === "female" ? "Žena" : reqInfo.gender === "other" ? "Jiné" : ""}, {reqInfo.age}</div>
             <div className="full-message">{reqInfo.message}</div>
             <div className="full-actions">
                 {reqInfo.status === "pending" ?
