@@ -1,0 +1,46 @@
+.Listing .content-body .body-about{
+    border: 1px solid $mainGray;
+    border-radius: 5px;
+    background-color: white;
+    padding: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    .about-bio{
+        margin-bottom: 1rem;
+        .bio-header{
+            font-size: 18px;
+            color: $mainGray;
+            margin-bottom: 0.25rem;
+        }
+
+        .bio-content{
+            color: $darkerGray;
+            width: 100%;
+        }
+
+        textarea.bio-content{
+            width: 100%;
+            resize: none;
+            border: $mainGray 1px solid
+        }
+    }
+
+    .about-preferences{
+        margin-top: 1rem;
+        .preferences-header{
+            font-size: 18px;
+            color: $mainGray;
+            margin-bottom: 0.5rem;
+        }
+
+        .preferences-content{
+            display: flex;
+            max-width: 100%;
+            flex-wrap: wrap;
+            .tag{
+                margin-right: 1rem;
+                margin-block: 0.5rem;
+            }
+        }
+    }
+}

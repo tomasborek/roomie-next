@@ -1,8 +1,16 @@
 import React from 'react'
+//next
+import {useRouter} from "next/router";
+//Contexts
+import { useAuth } from '../../../contexts/AuthContext'
 
-const ListingContact = () => {
+const ListingContact = ({listingInfo, editListing, state}) => {
+    const {currentUser} = useAuth();
+    const {setReqDialogOpen} = state;
+    const router = useRouter();
     return (
         <>
+        {/*Friends or user's listing */}
         {currentUser && listingInfo.data().friends.includes(currentUser.uid) || currentUser && listingInfo.data().userInfo.uid === currentUser.uid ?
             <div className="info-contact unlocked">
                 <div className="contact-icons">
@@ -44,14 +52,24 @@ const ListingContact = () => {
                 ""
                 }
                 <div className="contact-state">
-                    <i className={`state-icon fas fa-${currentUser && listingInfo.data().requests.includes(currentUser.uid) ? "hourglass-half" : "lock"}`}></i>
+                    <i className={`state-icon fas fa-${!currentUser ? "lock" : listingInfo.data().requests.includes(currentUser.uid) ? "hourglass-half" : listingInfo.data().sentRequests.includes(currentUser.uid) ? "lightbulb" : "lock"}`}></i>
                     <p className="state-description">
-                        {currentUser && listingInfo.data().requests.includes(currentUser.uid) ? "Vaše žádost čeká na vyřízení." : "Pošlete uživateli žádost o přístup ke kontaktním údajům."}
+                        {currentUser ?
+                        listingInfo.data().requests.includes(currentUser.uid) ? "Vaše žádost čeká na vyřízení." : listingInfo.data().sentRequests.includes(currentUser.uid) ? "Uživatel vám poslal žádost o kontaktní údaje." : "Pošlete uživateli žádost o přístup ke kontaktním údajům."
+                        :
+                        "Pošlete uživateli žádost o přístup ke kontaktním údajům."
+                        }
+                       
                     </p>
                 </div>
             
                 <div className="contact-button-wrapper">
-                    {currentUser && listingInfo.data().requests.includes(currentUser.uid) ? "" : <button className="contact-button">Poslat žádost</button>}
+                    {currentUser ?
+                    listingInfo.data().requests.includes(currentUser.uid) ? "" : listingInfo.data().sentRequests.includes(currentUser.uid) ? <button className="contact-button" onClick={() => router.push("/requests/recieved")}>Zobrazit žádost</button> : <button onClick={() => setReqDialogOpen(true)} className="contact-button">Poslat žádost</button>
+                    :
+                    <button onClick={() => router.push("/login")}>Poslat žádost</button>
+                    }
+                    
                 </div>
             </div>
             }

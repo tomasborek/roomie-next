@@ -9,13 +9,12 @@
 
 //Pages
 @import "./pages/home";
-@import "./pages/flatmateListing";
 @import "./pages/register";
 @import "./pages/login";
-@import "./pages/flatListing";
 @import "./pages/editProfile";
 @import "./pages/requests";
 @import "./pages/premium";
+@import "./pages/listing";
 //Components
 @import "../components/HomeHeader/homeHeader";
 @import "../components/Banner/banner";
@@ -49,3 +48,8 @@
 @import "../components/ReqDialog/reqDialog";
 @import "../components/SentReq/sentReq";
 @import "../components/InfoArrow/infoArrow";
+//Listing
+@import "../components/Listing/ListingContact/listingContact";
+@import "../components/Listing/ListingHeader/listingHeader";
+@import "../components/Listing/ListingInfoImportant/listingInfoImportant";
+@import "../components/Listing/ListingAbout/listingAbout";

@@ -21,6 +21,9 @@
            font-size: 14px;
            cursor: pointer;
            transition: all 400ms;
+           i, svg{
+               margin-right: 0.5rem;
+           }
            
            &:hover{
             background-color: rgb(241, 241, 241);

@@ -88,7 +88,8 @@ export function DbProvider(props) {
                 bio: "",
                 type: "flatmate",
                 friends: [],
-                requests: []
+                requests: [],
+                sentRequests: []
 
             })
         }else if(type == "offerer"){
@@ -114,7 +115,8 @@ export function DbProvider(props) {
                 personBio: "",
                 type: "flat",
                 friends: [],
-                requests: []
+                requests: [],
+                sentRequests: []
             });
         }
     }
