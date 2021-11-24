@@ -3,6 +3,7 @@ import { useRouter } from 'next/dist/client/router';
 
 //Components
 import Header from '../../components/Header/Header'
+import Footer from "../../components/Footer/Footer";
 
 const Requests = ({children}) => {
     //Variables---
@@ -24,9 +25,8 @@ const Requests = ({children}) => {
                         {children}
                     </div>
                 </div>
-                
             </div>
-           
+           <Footer />
         </div>
     )
 }

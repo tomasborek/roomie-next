@@ -25,7 +25,39 @@
         color: $mainGray;
         font-weight: normal;
     }
+    .resolved-empty{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 0;
+        color: $mainGray;
+        font-size: 14px;
+        i{
+            margin-bottom: 1rem;
+            font-size: 18px;
+        }
+    }
     .rec-req{
         opacity: 0.6;
+    }
+}
+
+.reqs-feed-sent{
+    .sent-heading{
+        margin-bottom: 1rem;
+        color: $mainGray;
+        font-weight: normal;
+    }
+    .sent-empty{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 0;
+        color: $mainGray;
+        font-size: 14px;
+        i{
+            margin-bottom: 1rem;
+            font-size: 18px;
+        }
     }
 }

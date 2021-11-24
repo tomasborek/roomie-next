@@ -11,10 +11,10 @@ const SubHeader = () => {
     return (
         <div className="sub-header">
             <div className={`sub-header-link ${router.pathname === "/explore/flatmates" && "active"}`}>
-                <Link href="/explore/flatmates"><FontAwesomeIcon icon={faUsers}/></Link>
+                <Link href="/explore/flatmates"><i className="fas fa-users"></i></Link>
             </div>
             <div  className={`sub-header-link ${router.pathname === "/explore/flats" && "active"}`}>
-                <Link href="/explore/flats"><FontAwesomeIcon icon={faHome}/></Link>
+                <Link href="/explore/flats"><i  className="fas fa-home"></i></Link>
             </div>
             
 

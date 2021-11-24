@@ -2,9 +2,6 @@ import React, {useState, useEffect} from 'react'
 //next
 import Link from "next/link";
 import { useRouter } from 'next/dist/client/router';
-//FA
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faPen, faSignOutAlt, faHome, faChevronDown, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 //Framer
 import { motion } from 'framer-motion';
@@ -62,6 +59,19 @@ const Header = ({variant}) => {
             setLoading(false);
         })
     }
+
+    const handleLogOut = () => {
+        setLoading(true);
+        logOut()
+        .then(res => {
+            router.push("/");
+            setLoading(false);
+        })
+        .catch(error => {
+            console.log(error);
+            setLoading(false);
+        })
+    }
     return (
         <header className={`main-header ${variant}`}>
             <div className="brand">
@@ -79,37 +89,33 @@ const Header = ({variant}) => {
             {userLoaded ?
             currentUser ? 
             <div className="navbar navbar-logged">
-                <FontAwesomeIcon onClick={() => setNotificationDropdown(prevState =>!prevState)} icon={faBell} className="navbar-notifications"/>
+               <i onClick={() => setNotificationDropdown(prevState =>!prevState)} className={`fa${notificationDropdown ? "s" : "r"} fa-bell navbar-notifications`}></i> 
                 <div className="navbar-profile"></div>
-                <motion.span animate={isDropdownActive ? {rotate: -180}: ""} initial={{rotate:0}} transition={{duration: 0.4}} onClick={() => setIsDropdownActive(!isDropdownActive)} className="navbar-dropdown-icon-wrapper">
-                    <FontAwesomeIcon onClick={() => setIsDropdownActive(!isDropdownActive)} icon={faChevronDown} className="navbar-dropdown-icon" />
-                </motion.span>
+               
+                  <motion.i onClick={() => setIsDropdownActive(prevState =>!prevState)} animate={isDropdownActive ? {rotate: -180}: ""} initial={{rotate:0}} transition={{duration: 0.4}}  tabIndex={0} className="fas fa-chevron-down navbar-dropdown-icon"></motion.i> 
+ 
                 
                 {/* <motion.i animate={isDropdownActive ? {rotate: -180}: ""} initial={{rotate:0}} transition={{duration: 0.4}} onClick={() => setIsDropdownActive(!isDropdownActive)} className="fas fa-chevron-down navbar-dropdown-icon"></motion.i> */}
-               <Dropdown className="main-header-dropdown" open={isDropdownActive}>
+               <Dropdown  className="main-header-dropdown" open={isDropdownActive} setOpen={setIsDropdownActive}>
                 <ul className="dropdown-list">
-                    <li onClick={() => router.push("/edit-profile")} className="list-item"> <FontAwesomeIcon icon={faPen} className="item-icon"/> Upravit účet</li>
-                    <li onClick={handleMyListing}  className="list-item"><FontAwesomeIcon icon={faHome} className="item-icon"/> Můj inzerát</li>
-                    <li onClick={() => {
-                        setLoading(true);
-                        logOut()
-                        .then(res => {
-                            router.push("/");
-                            setLoading(false);
-                        })
-                        .catch(error => {
-                            console.log(error);
-                            setLoading(false);
-                        })
-                    }} className="list-item"><FontAwesomeIcon icon={faSignOutAlt} className="item-icon"/> Odhlásit</li>
+                    <li onClick={() => router.push("/edit-profile")} className="list-item"> <i className="fas fa-pen item-icon"></i> Upravit účet</li>
+                    <li onClick={handleMyListing}  className="list-item"><i className="fas fa-home item-icon"></i> Můj inzerát</li>
+                    <li> <i className="fas fa-heart"></i> Oblíbené</li>
+                    <li onClick={() => handleLogOut()} className="list-item"><i className="fas fa-sign-out-alt item-icon"></i> Odhlásit</li>
                 </ul>
                </Dropdown>
-               <Dropdown open={notificationDropdown}>
+               <Dropdown open={notificationDropdown} setOpen={setNotificationDropdown}>
                    <ul className="notifications-dropdown">
                       {notifications ? 
+                      <>
+                      {Object.keys(notifications).length > 0 ?
                       Object.keys(notifications).map((not,id) => (
                           <li key={id} onClick={() => router.push("/requests/recieved")}> {notifications[not].data().name} vás žádá o navázání kontaktu.</li>
                       ))
+                      :
+                      <li>Žádná oznámení</li>
+                        }
+                      </>
                       :
                       <li><CircularProgress/></li>
                       
@@ -126,8 +132,7 @@ const Header = ({variant}) => {
            :""
         }
             
-        <FontAwesomeIcon onClick={() => setNavOverlay(!navOverlay)} className={`hamburger `}  icon={navOverlay === true ? faTimes : faBars}/>
-        
+        <i onClick={() => setNavOverlay(!navOverlay)} className={`fas fa-${navOverlay ? "times" : "bars"} hamburger`}></i>
         
           
         </header>

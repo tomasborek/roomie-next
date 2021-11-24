@@ -8,7 +8,7 @@
 
     .home-premium-banner{
         @include gradientBg;
-        margin-block: 3rem;
+        margin: 3rem 0 ;
        
 
         .mid-container{
@@ -66,17 +66,20 @@
     align-items: center;
     justify-content: space-between;
 
-    img{
-        width: 45%;
+    .section-image{
+        position: relative;
+        flex: 1;
+        height: 100% ;
+        padding-right: 1rem;
     }
 
     &.section-right{
-        img{
+        .section-image{
             order: 3;
         }
 
     &.section-left{
-        img{
+        .section-image{
             order: -1;
         }
     }
@@ -84,7 +87,7 @@
 
     .section-content{
         color: $darkerGray;
-        width: 45%;
+        flex: 1.25;
         .content-text{
             h1{
                 color: $accent;

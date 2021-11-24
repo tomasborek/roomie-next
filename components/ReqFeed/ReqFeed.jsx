@@ -62,10 +62,17 @@ const ReqFeed = ({type}) => {
                     }
                     <div className="reqs-feed-resolved">
                         <h3 className="resolved-heading">Vyřešené žádosti</h3>
-                        {Object.keys(recievedRequests).map((req, id) => (
+                        {Object.keys(recievedRequests).length > 0 ? 
+                        Object.keys(recievedRequests).map((req, id) => (
                             recievedRequests[req].status != "pending" &&
                             <RecievedReq reqInfo={recievedRequests[req]} id={req} key={id}/>
-                        ))}
+                        ))
+                        :
+                        <div className="resolved-empty">
+                            <i className="fas fa-search"></i>
+                            <p>Nebyly nalezené žádné žádosti.</p>
+                        </div>
+                    }
                     </div>
                 </>
                     :
@@ -78,15 +85,25 @@ const ReqFeed = ({type}) => {
             {type === "sent" &&
             <>
                 {sentRequests ?
-                    <div className="reqs-feed">
-                        {Object.keys(sentRequests).map((req, id) => (
-                            <SentReq name={sentRequests[req].name} age={sentRequests[req].age} status={sentRequests[req].status} id={req} key={id} />
-                        ))}
-                    </div>
-                    :
-                    <div className="reqs-feed-loading">
-                        <CircularProgress/>
-                    </div>
+                    <>
+                        <div className="reqs-feed-sent">
+                            <h3 className="sent-heading">Odeslané žádosti</h3>
+                            {Object.keys(sentRequests).length > 0 ?
+                            Object.keys(sentRequests).map((req, id) => (
+                                <SentReq name={sentRequests[req].name} age={sentRequests[req].age} status={sentRequests[req].status} id={req} key={id} />
+                            ))
+                            :
+                            <div className="sent-empty">
+                                <i className="fas fa-search"></i>
+                                <p>Nebyly nalezené žádné žádosti.</p>
+                            </div>
+                        }
+                        </div>
+                    </>
+                        :
+                        <div className="reqs-feed-loading">
+                            <CircularProgress/>
+                        </div>
                 }
             </>
             }

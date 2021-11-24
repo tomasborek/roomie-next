@@ -29,7 +29,16 @@ export default function Home() {
            
            <div className="mid-container">
                 <section className="home-section section-left">
-                    <img src="/img/home/home-panels.png" alt="" />
+                    <div className="section-image">
+                        <Image
+                        alt={"Roomie inzeráty"}
+                        src={"/img/home/home-panels.png"}
+                        width={513}
+                        height={415}
+                        priority
+                        />
+                    </div>
+                    
                     <div className="section-content">
                         <div className="content-text">
                             <h1>Hledáte spolubydlící?</h1>
@@ -60,7 +69,16 @@ export default function Home() {
             
             <div className="mid-container">           
                 <section className="home-section section-left">
-                    <img src="/img/home/mailbox.png" alt="" />
+                    <div className="section-image">
+                        <Image
+                            alt={"Roomie inzeráty"}
+                            src={"/img/home/mailbox.png"}
+                            width={400}
+                            height={400}
+                            priority
+                            />
+                    </div>
+                    
                     <div className="section-content">
                         <div className="content-text">
                             <h1>Potřebujete poradit?</h1>

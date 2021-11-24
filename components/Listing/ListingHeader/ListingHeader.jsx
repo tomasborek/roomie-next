@@ -3,6 +3,8 @@ import React from 'react'
 //Components
 import ListingInfoImportant from '../ListingInfoImportant/ListingInfoImportant'
 import ListingContact from '../ListingContact/ListingContact'
+//MUI
+import { CircularProgress } from '@mui/material'
 
 const ListingHeader = ({type, listingInfo}) => {
     if(type === "flatmate"){

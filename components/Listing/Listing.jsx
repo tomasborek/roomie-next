@@ -204,6 +204,9 @@ const Listing = ({type}) => {
                 sentRequests: arrayUnion(listingInfo.data().userInfo.uid)
             })
         }).then(res => {
+            return getListing(id);
+        }).then(doc => {
+            setListingInfo(doc);
             setLoading(false);
             snackBar("Žádost byla odeslána.", "success");
         }).catch(error =>{
