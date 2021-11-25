@@ -91,8 +91,8 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
                 <section className="tagger-section">
                     <p className="section-header">Kouření</p>
                     <div className="section-tags">
-                        <Tag  active={smokingTag === "Kuřák"} onClick={() => smokingTag == "Kuřáka" ? setSmokingTag("") : setSmokingTag("Kuřák")}>Kuřák</Tag>
-                        <Tag active={smokingTag === "Nekuřák"} onClick={() =>  smokingTag == "Nekuřáka" ? setSmokingTag("") : setSmokingTag("Nekuřák")}>Nekuřák</Tag>
+                        <Tag  active={smokingTag === "Kuřák"} onClick={() => smokingTag == "Kuřák" ? setSmokingTag("") : setSmokingTag("Kuřák")}>Kuřák</Tag>
+                        <Tag active={smokingTag === "Nekuřák"} onClick={() =>  smokingTag == "Nekuřák" ? setSmokingTag("") : setSmokingTag("Nekuřák")}>Nekuřák</Tag>
                     </div>
                 </section>
                 <section className="tagger-section">
