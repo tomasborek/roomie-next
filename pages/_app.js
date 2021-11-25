@@ -9,7 +9,7 @@ import { SnackBarProvider } from '../contexts/SnackBarContext';
 import { LoadingProvider } from '../contexts/LoadingContext';
 import { ListingProvider } from '../contexts/ListingContext';
 //Styles
-import '../styles/global.scss'
+import '../styles/global.css'
 
 function MyApp({ Component, pageProps }) {
   

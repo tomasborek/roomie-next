@@ -7,7 +7,9 @@ const Dropdown = ({open, setOpen, children, ...rootDOMAttributes}) => {
     
     useEffect(() => {
         if(open){
-            document.addEventListener("click", handleClick);
+            setTimeout(() => {
+                document.addEventListener("click", handleClick);
+            }, 300)
         }else if(!open){
             document.removeEventListener("click", handleClick);
         }

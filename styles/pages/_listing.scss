@@ -80,11 +80,12 @@
 .Listing .listing-content .content-header{
     background-color: white;
     max-height: auto;
+    padding-bottom: 1rem;
     .mid-container{
         position: relative;
         display: flex;
         .header-pfp-container{
-            width: 280px;
+            min-width: 280px;
             height: 200px;
             position: relative;
             .header-pfp{
@@ -101,7 +102,6 @@
         .header-info{
             flex: 1;
             padding-left: 32px;
-            padding-bottom: 1rem;
             .info-main{
                 width: 100%;
                 display: grid;
@@ -158,18 +158,6 @@
         flex-direction: column;
         .header-info{
             padding: 0;
-            .info-important{
-                .important-item{
-                    .item-header{
-                        .select{
-                            width: 100%;
-                        }
-                        .header-icon.header-edit-icon{
-                            display: none;
-                        }
-                    }
-                }
-            }
         }
     }
 }
@@ -183,68 +171,12 @@
             height: 200px;
         }
     }
-    .Listing .listing-content .content-header .mid-container .header-info .info-important {
-        flex-wrap: wrap;
-        &.edit{
-            flex-direction: column-reverse;
-            .important-item{
-                flex-direction: column-reverse;
-                margin-bottom: 0.5rem;
-                .item-header{
-                    .header-value{
-                        font-size: 14px;
-                    }
-                }
-                .item-description{
-                    font-size: 12px;
-                }
-                
-            }
-        }
-       .important-item{
-           .item-header{
-               .header-value{
-                font-size: 12px;
-               }
-               .header-icon{
-                   font-size: 12px;
-                   margin-right: 0.25rem;
-               }
-           }
-           .item-description{
-               font-size: 10px;
-           }
     
-       }
-    }
-    .Listing .listing-content .content-header .mid-container .header-info .info-contact{
-        flex-direction: column;
-        .contact-icons,.contact-state, .contact-boxes{
-            margin-bottom: 1rem;
-            width: 100%;
-            .boxes-email, .boxes-phone{
-                p{
-                    font-size: 14px;
-                }
-                i{
-                    font-size: 12px;
-                }
-                
-            }
-        }
-        .contact-icons .icons-icon{
-            font-size: 1rem;
-        }
-    }
+   
 
     
 }
 
-@media screen and (max-width: 360px){
-    .Listing .listing-content .content-header .mid-container .header-info .info-important .important-item .item-header .header-value{
-        font-size: 12px;
-    }
-}
 
 
 //Flat listing

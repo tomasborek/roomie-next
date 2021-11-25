@@ -64,7 +64,7 @@ export function DbProvider(props) {
         return deleteDoc(docRef);
     }
 
-    const createListing = (type, name, uid, gender, age, money, location, id) => {
+    const createListing = (type, name, uid, gender, age, money, location, contact, id) => {
         let docRef;
         if(type == "flatmate"){
             docRef= doc(db, "listings", id);
@@ -73,6 +73,7 @@ export function DbProvider(props) {
                     name: name,
                     gender: gender,
                     age: age,
+                    contact: contact,
                     uid: uid
                 },
                 mainInfo: {
@@ -89,7 +90,7 @@ export function DbProvider(props) {
                 type: "flatmate",
                 friends: [],
                 requests: [],
-                sentRequests: []
+                sentRequests: [],
 
             })
         }else if(type == "offerer"){
@@ -99,6 +100,7 @@ export function DbProvider(props) {
                     name: name,
                     gender: gender,
                     age: age,
+                    contact: contact,
                     uid: uid
                 },
                 mainInfo: {

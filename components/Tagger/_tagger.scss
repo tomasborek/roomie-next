@@ -22,6 +22,9 @@
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
+            .location-dropdown{
+                width: 100%;
+            }
         }
     }
 
@@ -29,7 +32,6 @@
         display: flex;
         justify-content: center;
         padding-top: 1rem;
-        border-top: 1px solid $mainGray;
     }
 }
 

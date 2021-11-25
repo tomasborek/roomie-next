@@ -10,32 +10,87 @@ const ListingContact = ({listingInfo, editListing, state}) => {
     const router = useRouter();
     return (
         <>
-        {/*Friends or user's listing */}
-        {currentUser && listingInfo.data().friends.includes(currentUser.uid) || currentUser && listingInfo.data().userInfo.uid === currentUser.uid ?
-            <div className="info-contact unlocked">
-                <div className="contact-boxes">
-                    <div className="boxes-email boxes-box">
+        {/*Unlocked version*/}
+        {(currentUser && listingInfo.data().friends.includes(currentUser.uid) || currentUser && listingInfo.data().userInfo.uid === currentUser.uid) ?
+        <div className="info-contact unlocked">
+            <div className="contact-items">
+                <div className="items-main">
+                    <div className="items-item">
                         <i className="fas fa-phone"></i>
+                        <p>+420 731 011 045</p>
+                    </div>
+                    <div className="items-item">
+                        <i className="fas fa-envelope"></i>
                         <p>email@email.com</p>
                     </div>
-                    <div className="boxes-phone boxes-box">
-                        <i className="fas fa-envelope"></i>
-                        <p>731011045</p>
-                    </div>
-                  
-                    <div className="boxes-ig boxes-box">
-                        <i className="icons-icon fab fa-instagram"></i>
-                        <p>Instagram</p>
-                    </div>
-                    <div className="boxes-fb boxes-box">
-                        <i className="icons-icon fab fa-facebook"></i>
-                        <p>Facebook</p>
-                    </div>
                 </div>
+                <div className="items-socials">
+                        <i className="fab fa-facebook-square"></i>
+                        <i className="fab fa-instagram"></i>
+                </div>
+            </div>
+            {listingInfo.data().friends.includes(currentUser.uid) &&
+                <div className="contact-state">
+                    <i className="state-icon fas fa-users"></i>
+                    <p className="state-description">Vy a {listingInfo.data().userInfo.name} jste ve spojení.</p>
+                </div>
+            }
+            {listingInfo.data().userInfo.uid === currentUser.uid &&
+            <button onClick={() => router.push("/requests/recieved")} className="main-btn contact-button">Zobrazit žádosti</button>
+            }
+            
+        </div>
+        :
+            <div className="info-contact">
+                {(!currentUser || listingInfo.data().requests.includes(currentUser.uid)) &&
+                <div className="contact-icons">
+                    <i className="fas fa-phone"></i>
+                    <i className="fas fa-envelope"></i>
+                    <i className="fab fa-facebook-square"></i>
+                    <i className="fab fa-instagram"></i>
+                </div>
+                }
+                <div className="contact-state">
+                    <i className="state-icon fas fa-lock"></i>
+                    <p className="state-description">
+                        {!currentUser && "Pošlete uživateli žádost o přístup ke kontaktním údajům."}
+                        {(currentUser && listingInfo.data().requests.includes(currentUser.uid)) && "Žádost čeká na vyřízení."}
+                        {(currentUser && listingInfo.data().sentRequests.includes(currentUser.uid)) && "Uživatel vám zaslal žádost."}
+                    </p>
+                </div>
+                {(!currentUser || !listingInfo.data().requests.includes(currentUser.uid))&&
+                   <>
+                    {!currentUser && <button className="main-btn contact-button" onClick={() => router.push("/login")}>Pošlat žádost</button>}
+                    {(currentUser && listingInfo.data().sentRequests.includes(currentUser.uid)) && <button onClick={() => router.push("/requests/recieved")}>Zobrazit žádosti</button>}
+                    </>
+                }
+            </div>
+        }
+        {/* Friends or user's listing
+        {currentUser && listingInfo.data().friends.includes(currentUser.uid) || currentUser && listingInfo.data().userInfo.uid === currentUser.uid ?
+            <div className="info-contact unlocked">
+               
+               <div className="contact-items">
+                   <div className="items-main-items">
+                    <div className="items-item">
+                        <i className="fas fa-phone"></i>
+                        <p>+420 731 011 045</p>
+                    </div>
+                    <div className="items-item">
+                        <i className="fas fa-envelope"></i>
+                        <p>email@email.com</p>
+                    </div>
+                   </div>
+                   <div className="items-social-items">
+                        <i className="fab fa-facebook-square"></i>
+                        <i className="fab fa-instagram"></i>
+                   </div>
+                  
+               </div>
                 
                 {listingInfo.data().userInfo.uid === currentUser.uid ?
                 <div className="contact-button-wrapper">
-                    <button onClick={() => router.push("/requests/recieved")} className="general-btn contact-button">Zobrazit žádosti</button>
+                    <button onClick={() => router.push("/requests/recieved")} className="main-btn contact-button">Zobrazit žádosti</button>
                 </div>  
                 :
                 <div className="contact-state">
@@ -52,7 +107,7 @@ const ListingContact = ({listingInfo, editListing, state}) => {
                     <i className="icons-icon fas fa-envelope"></i>
                     <i className="icons-icon fas fa-phone"></i>
                     <i className="icons-icon fab fa-instagram"></i>
-                    <i className="icons-icon fab fa-facebook"></i>
+                    <i className="icons-icon fab fa-facebook-square"></i>
                 </div>
                 :
                 ""
@@ -78,7 +133,7 @@ const ListingContact = ({listingInfo, editListing, state}) => {
                     
                 </div>
             </div>
-            }
+            } */}
     </>
     )
 }

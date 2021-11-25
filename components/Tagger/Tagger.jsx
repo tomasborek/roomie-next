@@ -5,6 +5,7 @@ import React, {useState, useEffect} from 'react'
 import Tag from '../Tag/Tag';
 import LocationDropdown from "../LocationDropdown/LocationDropdown";
 //Mui components
+import { FormControl, Select, InputLabel, MenuItem } from '@mui/material';
 
 
 const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) => {
@@ -14,11 +15,11 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
     const [smokingTag, setSmokingTag] = useState("");
     const [jobTag, setJobTag] = useState("");
     //Flat state tags
-    const [locationTag, setLocationTag] = useState(null);
-    const [sizeTag, setSizeTag] = useState(null);
-    const [roomTag, setRoomTag] = useState(null);
-    const [mhdTag, setMhdTag] = useState(null);
-    const [parkingTag, setParkingTag] = useState(null);
+    const [layoutTag, setLayoutTag] = useState("");
+    const [levelTag, setLevelTag] = useState("");
+    const [petAllowedTag, setPetAllowedTag] = useState("");
+    const [smokingAllowedTag, setSmokingAllowedTag] = useState("");
+    const [locationTag, setLocationTag] = useState("");
 
 
     //Effect
@@ -54,7 +55,11 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
         }
         if(variant === "flat"){
             setAddedTags({
-                location: locationTag
+                location: locationTag,
+                layout: layoutTag,
+                level: levelTag,
+                petAllowed: petAllowedTag,
+                smokingAllowed: smokingAllowedTag
             })
         }
        
@@ -108,8 +113,61 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
                     <div className="section-tags">
                         <LocationDropdown location={locationTag} setLocation={setLocationTag}/>
                     </div>
-                    
                 </section>
+                
+                <section className="tagger-section">
+                    <div className="section-header">Dispozice</div>
+                    <div className="section-tags">
+                         <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label">Dispozice</InputLabel>
+                                <Select label="Dispozice" onChange={e => setLayoutTag(e.target.value)} defaultValue={existingTags && existingTags.layout != "" && existingTags.layout}>
+                                    <MenuItem value={"2+1"}>2+1</MenuItem>
+                                    <MenuItem value={"2+kk"}>2+kk</MenuItem>
+                                    <MenuItem value={"3+1"}>3+1</MenuItem>
+                                    <MenuItem value={"3+kk"}>3+kk</MenuItem>
+                                    <MenuItem value={"4+1"}>4+1</MenuItem>
+                                    <MenuItem value={"4+kk"}>4+kk</MenuItem>
+                                </Select>
+                        </FormControl>
+                    </div>
+                </section>
+
+                <section className="tagger-section">
+                        <div className="section-header">Podlaží</div>
+                        <div className="section-tags">
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Podlaží</InputLabel>
+                                    <Select label="Podlaží" onChange={e => setLevelTag(e.target.value)} defaultValue={existingTags && existingTags.level != "" && existingTags.level}>
+                                        <MenuItem value={"1. podlaží"}>1</MenuItem>
+                                        <MenuItem value={"2. podlaží"}>2</MenuItem>
+                                        <MenuItem value={"3. podlaží"}>3</MenuItem>
+                                        <MenuItem value={"4. podlaží"}>4</MenuItem>
+                                        <MenuItem value={"5. podlaží"}>5</MenuItem>
+                                        <MenuItem value={"6. podlaží"}>6</MenuItem>
+                                        <MenuItem value={"7. podlaží"}>7</MenuItem>
+                                        <MenuItem value={"8. podlaží"}>8</MenuItem>
+                                        <MenuItem value={"9. podlaží"}>9</MenuItem>
+                                        <MenuItem value={"10+ podlaží"}>10+</MenuItem>
+                                    </Select>
+                                </FormControl>
+                        </div>
+                </section>
+
+            <section className="tagger-section">
+                    <div className="section-header">Mazlíčci</div>
+                    <div className="section-tags">
+                        <Tag active={petAllowedTag == "Mazlíčci povoleno"} onClick={() => setPetAllowedTag(petAllowedTag === "Mazlíčci povoleno" ? "" : "Mazlíčci povoleno")} variant="box" icon="dog">Povoleno</Tag>
+                        <Tag active={petAllowedTag == "Mazlíčci nepovoleno"} onClick={() => setPetAllowedTag(petAllowedTag === "Mazlíčci nepovoleno" ? "" : "Mazlíčci nepovoleno")} variant="box" icon="dog">Nepovoleno</Tag>
+                    </div>
+            </section>
+
+            <section className="tagger-section">
+                    <div className="section-header">Kouření</div>
+                    <div className="section-tags">
+                        <Tag active={smokingAllowedTag == "Kouření povoleno"} onClick={() => setSmokingAllowedTag(smokingAllowedTag === "Kouření povoleno" ? "" : "Kouření povoleno")} variant="box" icon="smoking">Povoleno</Tag>
+                        <Tag active={smokingAllowedTag == "Kouření nepovoleno"} onClick={() => setSmokingAllowedTag(smokingAllowedTag === "Kouření nepovoleno" ? "" : "Kouření nepovoleno")} variant="box" icon="smoking">Nepovoleno</Tag>
+                    </div>
+            </section>
                     
                 </>
                 

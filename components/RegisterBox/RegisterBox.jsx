@@ -67,7 +67,14 @@ const RegisterBox = () => {
         }).then(user => {
             listingIdVar = idGenerator(type);
             setListingId(listingIdVar);
-            return createListing(type, username, uid, gender, age, price, location, listingIdVar);
+            const contact = {
+                email: email,
+                phone: phone,
+                ig: "",
+                fb: "",
+                tt: ""
+            }
+            return createListing(type, username, uid, gender, age, price, location, contact, listingIdVar);
         }).then(res => {
             console.log("Succesful - listing");
             return addUser(username, gender, type, age, birthday, location, email, phone, listingIdVar, uid);
