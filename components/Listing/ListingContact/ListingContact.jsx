@@ -41,8 +41,8 @@ const ListingContact = ({listingInfo, editListing, state}) => {
             
         </div>
         :
-            <div className="info-contact">
-                {(!currentUser || listingInfo.data().requests.includes(currentUser.uid)) &&
+        <div className="info-contact">
+                {(!currentUser || !listingInfo.data().requests.includes(currentUser.uid)) &&
                 <div className="contact-icons">
                     <i className="fas fa-phone"></i>
                     <i className="fas fa-envelope"></i>
@@ -53,18 +53,23 @@ const ListingContact = ({listingInfo, editListing, state}) => {
                 <div className="contact-state">
                     <i className="state-icon fas fa-lock"></i>
                     <p className="state-description">
-                        {!currentUser && "Pošlete uživateli žádost o přístup ke kontaktním údajům."}
-                        {(currentUser && listingInfo.data().requests.includes(currentUser.uid)) && "Žádost čeká na vyřízení."}
-                        {(currentUser && listingInfo.data().sentRequests.includes(currentUser.uid)) && "Uživatel vám zaslal žádost."}
+                        {!currentUser ? "Pošlete uživateli žádost o přístup ke kontaktním údajům." :
+                        (currentUser && listingInfo.data().requests.includes(currentUser.uid)) ? "Žádost čeká na vyřízení." :
+                        (currentUser && listingInfo.data().sentRequests.includes(currentUser.uid)) ? "Uživatel vám zaslal žádost." :
+                        (currentUser) ? "Pošlete uživateli žádost o přístup ke kontaktním údajům." :
+                        ""}
                     </p>
                 </div>
                 {(!currentUser || !listingInfo.data().requests.includes(currentUser.uid))&&
                    <>
-                    {!currentUser && <button className="main-btn contact-button" onClick={() => router.push("/login")}>Pošlat žádost</button>}
-                    {(currentUser && listingInfo.data().sentRequests.includes(currentUser.uid)) && <button onClick={() => router.push("/requests/recieved")}>Zobrazit žádosti</button>}
+                    {!currentUser ? <button className="main-btn contact-button" onClick={() => router.push("/login")}>Pošlat žádost</button> :
+                    (currentUser && listingInfo.data().sentRequests.includes(currentUser.uid)) ? <button onClick={() => router.push("/requests/recieved")}>Zobrazit žádosti</button> :
+                    (currentUser) ? <button className="main-btn contact-button" onClick={() => router.push("/requests/recieved")}>Pošlat žádost</button> :
+                    ""
+                    }
                     </>
                 }
-            </div>
+        </div>
         }
         {/* Friends or user's listing
         {currentUser && listingInfo.data().friends.includes(currentUser.uid) || currentUser && listingInfo.data().userInfo.uid === currentUser.uid ?
