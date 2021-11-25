@@ -10,7 +10,7 @@ const RegistrationFinal = () => {
     const {usernameRef, emailRef, phoneRef, passwordRef, dayRef, monthRef, yearRef} = useRegister();
     return (
         <div className="content-register">
-        <input ref={usernameRef} className="register-input-username" type="text" placeholder="Křestní jméno..." />
+        <input ref={usernameRef} maxLength={15} className="register-input-username" type="text" placeholder="Křestní jméno..." />
         <p className="register-birthday-label">Datum narození</p>
           <div className="register-birthday">
           <select ref={dayRef} >
@@ -183,9 +183,9 @@ const RegistrationFinal = () => {
             </select>
                 
             </div> 
-            <input ref={emailRef} type="email" placeholder="Email..." />
-            <input ref={phoneRef} type="text" placeholder="Telefonní číslo..." />
-            <input ref={passwordRef} type="password" placeholder="Heslo pro přihlášení..." />
+            <input ref={emailRef} maxLength={30} type="email" placeholder="Email..." />
+            <input ref={phoneRef} maxLength={9} type="text" placeholder="Telefonní číslo..." />
+            <input ref={passwordRef} maxLength={30} type="password" placeholder="Heslo pro přihlášení..." />
             <div className="register-checkbox">
                 <input className="checkbox" type="checkbox" />
                 <p>Potvrzuji, že jsem si přečetl a akceptuji

@@ -86,7 +86,7 @@ const LocationDropdown = ({setLocation, location}) => {
     return (
       <div className="location-dropdown">
           <div className="location-dropdown-input">
-              <input ref={inputRef} onChange={e => {
+              <input maxLength={30} ref={inputRef} onChange={e => {
                   typing();
                   setSearch(e.target.value)
               }} type="text" />

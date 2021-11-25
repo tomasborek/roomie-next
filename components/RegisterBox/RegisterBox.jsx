@@ -45,9 +45,9 @@ const RegisterBox = () => {
     const registerHandle = () => {
         
         setError(null);
-        const username = usernameRef.current.value;
-        const email = emailRef.current.value;
-        const phone = phoneRef.current.value;
+        const username = usernameRef.current.value.trim();
+        const email = emailRef.current.value.trim();
+        const phone = phoneRef.current.value.trim();
         const password = passwordRef.current.value;
         //Checks if all inputs are filled, throws an alert if not
        

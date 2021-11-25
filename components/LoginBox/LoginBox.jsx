@@ -23,7 +23,9 @@ const LoginBox = () => {
     //Functions
     const handleLogin = () => {
         setLoading(true);
-        logIn(emailRef.current.value, passwordRef.current.value)
+        const email = emailRef.current.value.trim();
+        const password = passwordRef.current.value;
+        logIn(email, password)
         .then(user => {
             router.push("/explore/flats");
             setLoading(false);
@@ -41,7 +43,7 @@ const LoginBox = () => {
             <h2>Přihlašte se</h2>
             <div className="input-box">
                 <i className="fas fa-envelope"></i>
-                <input ref={emailRef} type="text" placeholder="E-mailová schránka" />
+                <input maxLength={30} ref={emailRef} type="text" placeholder="E-mailová schránka" />
             </div>
 
             <div className="input-box">
