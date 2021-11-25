@@ -76,7 +76,7 @@ const Header = ({variant}) => {
         <header className={`main-header ${variant}`}>
             <div className="brand">
                 <div className="brand-logo">
-                        <img src={variant === "gradient" ? "/img/logos/logo-white-small.png" : "/img/logos/logo-small.png"} alt="" />
+                    <img src={variant === "gradient" ? "/img/logos/logo-white-small.png" : "/img/logos/logo-small.png"} alt="" />
                 </div>
 
                <h2 onClick={() => {

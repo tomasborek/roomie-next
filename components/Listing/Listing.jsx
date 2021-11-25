@@ -90,16 +90,18 @@ const Listing = ({type}) => {
         if(listingInfo && editListing === true){
             if(type === "flatmate"){
                 setBio(listingInfo.data().bio)
+                setBudget(listingInfo.data().mainInfo.budget);
                 // bioRef.current.value = listingInfo.data().bio;
             }
-            if(type === "flatmate"){
+            if(type === "flat"){
                setPersonBio(listingInfo.data().personBio);
                setFlatBio(listingInfo.data().flatBio);
+               setBudget(listingInfo.data().mainInfo.price);
                 //personBioRef.current.value = listingInfo.data().personBio;
                 // flatBioRef.current.value = listingInfo.data().flatBio;
             }
 
-            setBudget(listingInfo.data().mainInfo.budget);
+            
             setStayTime(listingInfo.data().mainInfo.stayTime);
             setStartTime(listingInfo.data().mainInfo.startTime);
         }

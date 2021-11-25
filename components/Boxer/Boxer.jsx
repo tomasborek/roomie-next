@@ -45,7 +45,7 @@ const Boxer = ({variant, existingBoxes, addedBoxes, setAddedBoxes, setBoxerOverl
 
     //Fills added boxes once existingBoxes are fetched
     useEffect(() => {
-        if(existingBoxes && !addedBoxes){
+        if(existingBoxes && !addedBoxes && variant === "person"){
             setAddedBoxes(existingBoxes);
             existingBoxes.smoking && setSmokingBox(existingBoxes.smoking);
             existingBoxes.pet && setPetBox(existingBoxes.pet);
@@ -53,15 +53,15 @@ const Boxer = ({variant, existingBoxes, addedBoxes, setAddedBoxes, setBoxerOverl
             existingBoxes.job && setJobBox(existingBoxes.job);
         }
     }, [existingBoxes])
+
     useEffect(() => {
-        if(existingBoxes && !addedBoxes){
+        if(existingBoxes && !addedBoxes && variant === "flat"){
             setAddedBoxes(existingBoxes);
             existingBoxes.layout && setLayoutBox(existingBoxes.layout);
             existingBoxes.level && setLevelBox(existingBoxes.level);
-            existingBoxes.petAllowed && setLayoutBox(existingBoxes.petAllowed);
-            existingBoxes.smokingAllowed && setLayoutBox(existingBoxes.smokingAllowed);
+            existingBoxes.petAllowed && setPetAllowedBox(existingBoxes.petAllowed);
+            existingBoxes.smokingAllowed && setSmokingAllowedBox(existingBoxes.smokingAllowed);
             existingBoxes.location && setLocationBox(existingBoxes.location);
-            
         }
     }, [existingBoxes])
     //Return
@@ -108,20 +108,11 @@ const Boxer = ({variant, existingBoxes, addedBoxes, setAddedBoxes, setBoxerOverl
             }
             {variant === "flat" && existingBoxes &&
             <>
-             {/* <section className="boxer-section">
-                    <div className="section-header"></div>
-                    <div className="section-tags">
-                        <Tag active={Box == ""} onClick={() => setBox(Box === "" ? "" : "")} variant="box" icon=""></Tag>
-                    </div>
-            </section> */}
+            
             <section className="boxer-section">
                     <div className="section-header">Dispozice</div>
                     <div className="section-boxes">
-                        {/* <Tag active={layoutBox == "2+1"} onClick={() => setLayoutBox(layoutBox === "2+1" ? "" : "2+1")} variant="box" icon="door-closed">2+1</Tag>
-                        <Tag active={layoutBox == "2+kk"} onClick={() => setLayoutBox(layoutBox === "2+kk" ? "" : "2+kk")} variant="box" icon="door-closed">2+kk</Tag>
-                        <Tag active={layoutBox == "3+1"} onClick={() => setLayoutBox(layoutBox === "3+1" ? "" : "3+1")} variant="box" icon="door-closed">3+1</Tag>
-                        <Tag active={layoutBox == "3+kk"} onClick={() => setLayoutBox(layoutBox === "3+kk" ? "" : "3+kk")} variant="box" icon="door-closed">3+kk</Tag>
-                        <Tag active={layoutBox == "4+1"} onClick={() => setLayoutBox(layoutBox === "4+1" ? "" : "4+1")} variant="box" icon="door-closed">4+1</Tag> */}
+                     
                          <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">Dispozice</InputLabel>
                                 <Select label="Dispozice" onChange={e => setLayoutBox(e.target.value)} defaultValue={existingBoxes.layout != "" && existingBoxes.layout}>

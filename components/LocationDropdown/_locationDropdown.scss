@@ -31,6 +31,12 @@
                 &:hover{
                     background: $darkWhite;
                 }
+                &.options-not-found{
+                    color: $mainGray;
+                    &:hover{
+                        background-color: white;
+                    }
+                }
             }
         }
     }

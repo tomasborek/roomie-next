@@ -2,7 +2,7 @@ import React from 'react'
 import { useDb } from '../../contexts/DbContext'
 import { useLoading } from '../../contexts/LoadingContext'
 import { useAuth } from '../../contexts/AuthContext'
-import { arrayUnion } from '@firebase/firestore'
+import { arrayRemove, arrayUnion } from '@firebase/firestore'
 
 const RecievedReqFull = ({reqInfo, id, setOpen}) => {
     //Variables---
@@ -48,7 +48,8 @@ const RecievedReqFull = ({reqInfo, id, setOpen}) => {
                 })
            }).then(res => {
                return updateListing(requestingUser.listingId, {
-                   friends: arrayUnion(requestedUser.id)
+                   friends: arrayUnion(requestedUser.id),
+                   sentRequests: arrayRemove(requestedUser.id)
                })
            }).then(res => {
                //Adding a firend to requested user's listing
@@ -61,7 +62,8 @@ const RecievedReqFull = ({reqInfo, id, setOpen}) => {
                })
            }).then(res => {
                return updateListing(requestedUser.data().listing.id, {
-                   friends: arrayUnion(id)
+                   friends: arrayUnion(id),
+                   requests: arrayRemove(id)
                })
            })
         }

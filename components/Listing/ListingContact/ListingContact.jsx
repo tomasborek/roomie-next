@@ -13,23 +13,29 @@ const ListingContact = ({listingInfo, editListing, state}) => {
         {/*Friends or user's listing */}
         {currentUser && listingInfo.data().friends.includes(currentUser.uid) || currentUser && listingInfo.data().userInfo.uid === currentUser.uid ?
             <div className="info-contact unlocked">
-                <div className="contact-icons">
-                    <i className="icons-icon fab fa-instagram"></i>
-                    <i className="icons-icon fab fa-facebook"></i>
-                </div>
                 <div className="contact-boxes">
-                    <div className="boxes-email">
+                    <div className="boxes-email boxes-box">
                         <i className="fas fa-phone"></i>
                         <p>email@email.com</p>
                     </div>
-                    <div className="boxes-phone">
+                    <div className="boxes-phone boxes-box">
                         <i className="fas fa-envelope"></i>
                         <p>731011045</p>
                     </div>
+                  
+                    <div className="boxes-ig boxes-box">
+                        <i className="icons-icon fab fa-instagram"></i>
+                        <p>Instagram</p>
+                    </div>
+                    <div className="boxes-fb boxes-box">
+                        <i className="icons-icon fab fa-facebook"></i>
+                        <p>Facebook</p>
+                    </div>
                 </div>
+                
                 {listingInfo.data().userInfo.uid === currentUser.uid ?
                 <div className="contact-button-wrapper">
-                    <button onClick={() => router.push("/requests/recieved")} className="contact-button">Zobrazit žádosti</button>
+                    <button onClick={() => router.push("/requests/recieved")} className="general-btn contact-button">Zobrazit žádosti</button>
                 </div>  
                 :
                 <div className="contact-state">
@@ -65,9 +71,9 @@ const ListingContact = ({listingInfo, editListing, state}) => {
             
                 <div className="contact-button-wrapper">
                     {currentUser ?
-                    listingInfo.data().requests.includes(currentUser.uid) ? "" : listingInfo.data().sentRequests.includes(currentUser.uid) ? <button className="contact-button" onClick={() => router.push("/requests/recieved")}>Zobrazit žádost</button> : <button onClick={() => setReqDialogOpen(true)} className="contact-button">Poslat žádost</button>
+                    listingInfo.data().requests.includes(currentUser.uid) ? "" : listingInfo.data().sentRequests.includes(currentUser.uid) ? <button className="main-btn contact-button" onClick={() => router.push("/requests/recieved")}>Zobrazit žádost</button> : <button onClick={() => setReqDialogOpen(true)} className=" main-btn contact-button">Poslat žádost</button>
                     :
-                    <button onClick={() => router.push("/login")}>Poslat žádost</button>
+                    <button className="main-btn contact-button" onClick={() => router.push("/login")}>Poslat žádost</button>
                     }
                     
                 </div>

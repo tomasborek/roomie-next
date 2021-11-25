@@ -64,7 +64,7 @@ const ListingAbout = ({type, listingInfo, editListing, state, refs}) => {
                     <div className="bio-header">Podrobnosti o bydlení</div>
                     <div className="bio-content">
                         {editListing ?
-                        <textarea ref={flatBioRef} type="text" rows="5" className="bio-content" placeholder="Zadejte něco o svém bydlení..."></textarea>
+                        <textarea onChange={(e) => setFlatBio(e.target.value)} value={flatBio} type="text" rows="5" className="bio-content" placeholder="Zadejte něco o svém bydlení..."></textarea>
                         :
                         listingInfo ? 
                         listingInfo.data().flatBio === "" ? "Toto bydlení nemá popis..." : listingInfo.data().flatBio
@@ -81,7 +81,7 @@ const ListingAbout = ({type, listingInfo, editListing, state, refs}) => {
                     <div className="bio-header">Podrobnosti o inzeranotvi</div>
                     <div className="bio-content">
                         {editListing ?
-                        <textarea ref={personBioRef} type="text" rows="5" className="bio-content" placeholder="Zadejte něco o sobě..."></textarea>
+                        <textarea onChange={(e) => setPersonBio(e.target.value)} value={personBio} type="text" rows="5" className="bio-content" placeholder="Zadejte něco o sobě..."></textarea>
                         :
                         listingInfo ? 
                         listingInfo.data().personBio === "" ? "Tento uživatel nemá bio..." : listingInfo.data().personBio

@@ -39,6 +39,7 @@ button{
     &.main-btn{
         background-color: $mainColor;
         color: white;
+        font-weight: bold;
 
         &:hover{
             background-color: $mainColorHover;
@@ -48,10 +49,17 @@ button{
     &.acc-btn{
         background-color: $accent;
         color: white;
+        font-weight: bold;
 
         &:hover{
             background-color: $accentHover;
         }
+    }
+
+    &.general-btn{
+        font-weight: bold;
+        background: rgb(238, 238, 238);
+        color: #333;
     }
 }
 

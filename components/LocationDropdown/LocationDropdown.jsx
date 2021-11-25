@@ -93,15 +93,19 @@ const LocationDropdown = ({setLocation, location}) => {
               <i value={search} className="fas fa-search"></i>
           </div>
           <motion.div variants={optionsVariants} animate={dropdownActive ? "active" : ""} initial={"disabled"} transition={"transition"} className="location-dropdown-options">
-                {options.length && !fetching &&
+                {!fetching &&
                     <ul>
-                        {options.map((option,id) => (
+                        {options.length > 0 ?
+                        options.map((option,id) => (
                             <li key={id} onClick={() => {
                                 setLocation(option);
                                 setSearch(option);
                                 setDropdownActive(false);
                             }}>{option}</li>
-                        ))}
+                        ))
+                        :
+                        <li className="options-not-found">Nic nebylo nalezeno.</li>
+                        }
                     </ul>
                 }
                 {fetching &&
