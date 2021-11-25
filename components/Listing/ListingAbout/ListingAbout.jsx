@@ -14,7 +14,7 @@ const ListingAbout = ({type, listingInfo, editListing, state, refs}) => {
                          O mně
                     </div>
                     {editListing ? 
-                    <textarea value={bio} onChange={e => setBio(e.target.value)} type="text" rows="5" className="bio-content" placeholder="Zadejte něco o sobě..."></textarea>
+                    <textarea maxLength={3000} value={bio} onChange={e => setBio(e.target.value)} type="text" rows="5" className="bio-content" placeholder="Zadejte něco o sobě..."></textarea>
                     :
                     <div className="bio-content">
                         {listingInfo ? listingInfo.data().bio === "" ? "Tento uživatel nemá bio" : listingInfo.data().bio
@@ -64,7 +64,7 @@ const ListingAbout = ({type, listingInfo, editListing, state, refs}) => {
                     <div className="bio-header">Podrobnosti o bydlení</div>
                     <div className="bio-content">
                         {editListing ?
-                        <textarea onChange={(e) => setFlatBio(e.target.value)} value={flatBio} type="text" rows="5" className="bio-content" placeholder="Zadejte něco o svém bydlení..."></textarea>
+                        <textarea maxLength={3000} onChange={(e) => setFlatBio(e.target.value)} value={flatBio} type="text" rows="5" className="bio-content" placeholder="Zadejte něco o svém bydlení..."></textarea>
                         :
                         listingInfo ? 
                         listingInfo.data().flatBio === "" ? "Toto bydlení nemá popis..." : listingInfo.data().flatBio
@@ -81,7 +81,7 @@ const ListingAbout = ({type, listingInfo, editListing, state, refs}) => {
                     <div className="bio-header">Podrobnosti o inzeranotvi</div>
                     <div className="bio-content">
                         {editListing ?
-                        <textarea onChange={(e) => setPersonBio(e.target.value)} value={personBio} type="text" rows="5" className="bio-content" placeholder="Zadejte něco o sobě..."></textarea>
+                        <textarea maxLength={3000} onChange={(e) => setPersonBio(e.target.value)} value={personBio} type="text" rows="5" className="bio-content" placeholder="Zadejte něco o sobě..."></textarea>
                         :
                         listingInfo ? 
                         listingInfo.data().personBio === "" ? "Tento uživatel nemá bio..." : listingInfo.data().personBio
