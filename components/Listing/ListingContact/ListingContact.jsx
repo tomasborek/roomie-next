@@ -35,7 +35,7 @@ const ListingContact = ({listingInfo, editListing, state}) => {
                     <p className="state-description">Vy a {listingInfo.data().userInfo.name} jste ve spojení.</p>
                 </div>
             }
-            {listingInfo.data().userInfo.uid === currentUser.uid &&
+            {(listingInfo.data().userInfo.uid === currentUser.uid && !editListing) &&
             <button onClick={() => router.push("/requests/recieved")} className="main-btn contact-button">Zobrazit žádosti</button>
             }
             
