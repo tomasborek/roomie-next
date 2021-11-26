@@ -72,7 +72,7 @@ const ExploreFeed = ({variant}) => {
             {variant === "flat" &&
             <>
             {flatListings.length ? flatListings.map((listing, id) => (
-                    <FListing name={`Byt ${listing.data().flatBoxes.layout} ${listing.data().flatBoxes.location}`} bio={listing.data().flatBio} price={listing.data().mainInfo.price} startTime={listing.data().mainInfo.startTime} stayTime={listing.data().mainInfo.stayTime} id={listing.id} key={id} />
+                    <FListing name={`Byt ${listing.data().flatBoxes.layout != "" ? listing.data().flatBoxes.layout : ""} ${listing.data().flatBoxes.location}`} bio={listing.data().flatBio} price={listing.data().mainInfo.price} startTime={listing.data().mainInfo.startTime} stayTime={listing.data().mainInfo.stayTime} id={listing.id} key={id} />
                 )) 
             :
             <div className="loading">
