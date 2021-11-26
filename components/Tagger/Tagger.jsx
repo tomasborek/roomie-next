@@ -121,6 +121,7 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
                          <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">Dispozice</InputLabel>
                                 <Select label="Dispozice" onChange={e => setLayoutTag(e.target.value)} defaultValue={existingTags && existingTags.layout != "" && existingTags.layout}>
+                                    <MenuItem value={""}>Libovolné</MenuItem>
                                     <MenuItem value={"2+1"}>2+1</MenuItem>
                                     <MenuItem value={"2+kk"}>2+kk</MenuItem>
                                     <MenuItem value={"3+1"}>3+1</MenuItem>
@@ -138,6 +139,7 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">Podlaží</InputLabel>
                                     <Select label="Podlaží" onChange={e => setLevelTag(e.target.value)} defaultValue={existingTags && existingTags.level != "" && existingTags.level}>
+                                        <MenuItem value={""}>Libovolné</MenuItem>
                                         <MenuItem value={"1. podlaží"}>1</MenuItem>
                                         <MenuItem value={"2. podlaží"}>2</MenuItem>
                                         <MenuItem value={"3. podlaží"}>3</MenuItem>
