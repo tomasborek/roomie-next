@@ -209,12 +209,13 @@ const CrListing = ({type}) => {
                     </div>
                     <h2 className="welcome-dialog-heading">Váš inzerát</h2>
                     <p className="welcome-dialog-body">
-                       <b>Vítejte v Roomie!</b> Jste připraveni vytvořit si váš <b>inzerát</b>? Není na tom nic těžkého.
-                        Váš inzerát uvidí jiní lidé a prezentujete se ním. Červeně svítící infomace jsou povinné,
-                        ale v dalších polích můžete uvézt kolik jen informací o sobě chcete, ale pamatujte, <b> čím více, tím lépe.</b>
+                    Gratulujeme k založení osobního profilu Roomie. Nyní vám nic nebrání k vytvoření vašeho inzerátu.
+                    Tvorba je jednoduchá a intuitivní. Červeně svítící informace jsou povinné, ostatní dle vašeho uvážení.
+                    Nezapomeňte - čím více informací uvedete, tím více podpoříte vaší šanci k oslovení potenciálních uživatelů. 
+                    Váš inzerát je vaší veřejnou prezentací na portále Roomie. Hodně štěstí!
                     </p>
                     <div className="welcome-dialog-action">
-                        <button onClick={() => setWelcomeDialog(false)} className="main-btn">Chápu</button>
+                        <button onClick={() => setWelcomeDialog(false)} className="main-btn">Rozumím</button>
                     </div>
                     
                 </div>
@@ -330,12 +331,13 @@ const CrListing = ({type}) => {
                     </div>
                     <h2 className="welcome-dialog-heading">Váš inzerát</h2>
                     <p className="welcome-dialog-body">
-                       <b>Vítejte v Roomie!</b> Jste připraveni vytvořit si váš <b>inzerát</b>? Není na tom nic těžkého.
-                        Váš inzerát uvidí jiní lidé a prezentujete se s ním. Červeně svítící infomace jsou povinné,
-                        ale v dalších polích můžete uvézt kolik jen informací o sobě chcete, ale pamatujte, <b> čím více, tím lépe.</b>
+                    Gratulujeme k založení osobního profilu Roomie. Nyní vám nic nebrání k vytvoření vašeho inzerátu.
+                    Tvorba je jednoduchá a intuitivní. Červeně svítící informace jsou povinné, ostatní dle vašeho uvážení. 
+                    Nezapomeňte - čím více informací uvedete, tím více podpoříte vaší šanci k oslovení potenciálních uživatelů. 
+                    Váš inzerát je vaší veřejnou prezentací na portále Roomie. Hodně štěstí!
                     </p>
                     <div className="welcome-dialog-action">
-                        <button onClick={() => setWelcomeDialog(false)} className="main-btn">Chápu</button>
+                        <button onClick={() => setWelcomeDialog(false)} className="main-btn">Rozumím</button>
                     </div>
                     
                 </div>

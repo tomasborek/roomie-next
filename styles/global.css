@@ -222,7 +222,7 @@ textarea {
 }
 
 .Home .home-section .section-content {
-  color: #6b717f;
+  color: #333;
   -webkit-box-flex: 1.25;
       -ms-flex: 1.25;
           flex: 1.25;
@@ -231,10 +231,12 @@ textarea {
 .Home .home-section .section-content .content-text h1 {
   color: #E14949;
   margin-bottom: 1rem;
-  font-size: 2rem;
+  font-size: 32px;
 }
 
 .Home .home-section .section-content .content-text h2 {
+  color: #6b717f;
+  font-size: 24px;
   font-weight: normal;
   margin-bottom: 1rem;
 }

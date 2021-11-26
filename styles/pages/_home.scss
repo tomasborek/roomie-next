@@ -86,15 +86,17 @@
     }
 
     .section-content{
-        color: $darkerGray;
+        color: #333;
         flex: 1.25;
         .content-text{
             h1{
                 color: $accent;
                 margin-bottom: 1rem;
-                font-size: 2rem;
+                font-size: 32px;
             }
             h2{
+                color: $darkerGray;
+                font-size: 24px;
                 font-weight: normal;
                 margin-bottom: 1rem;
             }

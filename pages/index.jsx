@@ -42,7 +42,7 @@ export default function Home() {
                     <div className="section-content">
                         <div className="content-text">
                             <h1>Hledáte spolubydlící?</h1>
-                            <h2>Šetřete svůj čas a hledejte s námi. Spolubydlící by neměl být jen člověk, se kterým sdílíte domácnost, ale i někdo, s kým si budete rozumět. Výběr je na vás.</h2>
+                            <h2>Váš čas je drahocenný, hledejte proto spolubydlení s námi. Stačí si založit profil a my se postaráme, abyste našli nejen skvělé spolubydlící, ale i někoho, s kým si zkrátka budete rozumět.</h2>
                         </div>
                         <button className="section-btn main-btn">Jak funguje Roomie?</button>
                     </div>
@@ -51,7 +51,7 @@ export default function Home() {
             <div className="home-premium-banner">
                 <div className="mid-container">
                     <div className="banner-text">
-                        <h1>S prémium profilem jde vše lépe!</h1>
+                        <h1>Premium profil přináší spoustu výhod!</h1>
                         <h2>Pomocí premium profilu všichni poznají legitimitu vašeho profilu. Bude se zobrazovat na prvních příčkách, a to zároveň s odznakem důvěryhodnosti, který výrázně ušetří váš čas.</h2>
                         <button onClick={() =>{ 
                             router.push("/premium");

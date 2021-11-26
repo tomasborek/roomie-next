@@ -10,7 +10,7 @@ const HomeHeader = () => {
             <div className="res-header-view">
                 <div className="brand">
                     <div className="brand-logo">
-                        <img src="/img/logos/logo-small.png" alt="" />
+                        <img src="/img/logos/logo-white-small.png" alt="" />
                     </div>
                     <h2>Roomie</h2>
                 </div>

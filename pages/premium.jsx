@@ -88,7 +88,9 @@ const Premium = () => {
                     <div className="section-text">
                         <h2>Spolubydlení jako cesta z krize?</h2>
                         <p className="text-description">
-                             <b>Krize bydlení</b> je stále větší a koleje stále více zaplněné.  Spoustu lidí tak hledá řešení ve <b>spolubydlení</b>. Jako jediný moderní český portál pro obyvatele vyhledávající spolubydlení věříme, že dokážeme lidem pomoci hledat <b>efektivně.</b>
+                        <b>Krize bydlení</b> je jednou z největších hrozeb současnosti. Nejsou zaplněné pouze koleje, ale i byty
+                        - a to nejen v centru Prahy. Věříme, že jednou ze současných cest, která šetří peníze a zajišťuje důležitou životní potřebu je <b>spolubydlení</b>. 
+                        Roomie je moderní řešení pro všechny, kteří chtějí najít <b>spolubydlení rychle</b>, bezpečně a efektivně.
                         </p>
                     </div>
                     <img src="/img/premium/section-img1.png" alt="" className="section-img" />
@@ -98,7 +100,10 @@ const Premium = () => {
                     <div className="section-text">
                         <h2>Hledání je příliš náročné?</h2>
                         <p className="text-description">
-                           <b>Nedostatek dostupných bytů</b> pro mladé, pracujicí i studující, se výrazně zvyšuje. Pro rok 2022 se odhaduje průměrný <b>růst nájmů až o 20 %</b>. V ostatních velkých městech až o 10%. Prozatimním řešením tedy může být spolubydlení, zejména pro studenty. <b>Roomie usnadňuje hledání spolubydlení</b>  a propojuje uživatele podle jejich preferencí. Každý má právo si vybrat. 
+                        <b>Nedostatek ubytování</b> pro mladé - pracující a studující, se výrazně prohlubuje. Podle odborníků přinese rok 2022 průměrný růst pražských nájmů <b>až o 20 %.</b>
+                        V ostatních městech <b>až o 10 %.</b> A to nepočítáme energie.
+                        Řešením může být spolubydlení. V Roomie se snažíme usnadnit hledání spolubydlení a propojit tak uživatele podle jejich preferencí.
+                        <b>Každý má právo si vybrat</b> kde a s kým chce bydlet.
                         </p>
                     </div>
                     <img src="/img/premium/section-img2.png" alt="" className="section-img" />
