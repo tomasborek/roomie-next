@@ -388,7 +388,7 @@ const CrListing = ({type}) => {
                             <div className="container">
                                 <div className="body-opening-boxes">
                                     <div className="boxes-profile-info">
-                                        <img src="/img/pfps/radim-pfp.png" alt="" className="profile-info-pfp" />
+                                        <img src="/img/pfps/radek-pfp.png" alt="" className="profile-info-pfp" />
                                         <div className="profile-info-text">
                                            {!listingInfo ? <Skeleton variant="text" sx={{width: 50}}/>: <p className="text-name">{listingInfo.data().userInfo.name}</p> } 
                                           {!listingInfo ? <Skeleton variant="text" sx={{width: 30}} />:  <p className="text-description">{listingInfo.data().userInfo.gender === "male" ? "Muž" : listingInfo.data().userInfo.gender === "female" ? "Žena" : listingInfo.data().userInfo.gender === "other" ? "Jiné" : ""}, {listingInfo.data().userInfo.age}</p>}
