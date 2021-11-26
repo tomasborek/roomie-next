@@ -81,6 +81,7 @@ const CrListing = ({type}) => {
                 router.push(`/${doc.data().type}/${doc.id}`);
                 return;
             }
+            setWelcomeDialog(true);
             setListingInfo(doc);
         }).catch(error => {
             console.log(error.code);
@@ -363,7 +364,7 @@ const CrListing = ({type}) => {
                                             <p>{listingInfo.data().flatBoxes.location}</p>
                                         </div>
                                     </div>
-                                    <ListingInfoImportant type="flatmate" listingInfo={listingInfo} editListing={editListing} state={{budget, startTime, stayTime, setBudget, setStayTime, setStartTime, setSliderDialog}}/>
+                                    <ListingInfoImportant type="flat" listingInfo={listingInfo} editListing={editListing} state={{budget, startTime, stayTime, setBudget, setStayTime, setStartTime, setSliderDialog}}/>
                                     <div className="info-contact">
                                         <div className="contact-icons">
                                             <i className="icons-icon fas fa-envelope"></i>
