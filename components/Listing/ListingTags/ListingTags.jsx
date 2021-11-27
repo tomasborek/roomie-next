@@ -14,9 +14,9 @@ const ListingTags = ({type, existingTags, editListing, addedTags, setOverlay}) =
                     {(existingTags.job && existingTags.job.length > 0) &&  existingTags.job.map(tag => <Tag>{tag}</Tag>)}
                 </>
                 }
-                {(existingTags && editListing) &&
+                {(addedTags && editListing) &&
                 <>
-                     {(addedTags.gender && addedTags.gender.length > 0) &&  addedTags.gender.map(tag => <Tag>{tag}</Tag>)}
+                    {(addedTags.gender && addedTags.gender.length > 0) &&  addedTags.gender.map(tag => <Tag>{tag}</Tag>)}
                     {(addedTags.age && addedTags.age.length > 0) &&  addedTags.age.map(tag => <Tag>{tag}</Tag>)}
                     {(addedTags.smoking && addedTags.smoking.length > 0) &&  addedTags.smoking.map(tag => <Tag>{tag}</Tag>)}
                     {(addedTags.job && addedTags.job.length > 0) &&  addedTags.job.map(tag => <Tag>{tag}</Tag>)}
@@ -38,7 +38,7 @@ const ListingTags = ({type, existingTags, editListing, addedTags, setOverlay}) =
                     {(existingTags.smokingAllowed && existingTags.smokingAllowed.length > 0) &&  existingTags.smokingAllowed.map(tag => <Tag>{tag}</Tag>)}
                 </>
                 }
-                {(existingTags && editListing) &&
+                {(addedTags && editListing) &&
                 <>
                     {(addedTags.location && addedTags.location.length > 0) &&  addedTags.location.map(tag => <Tag>{tag}</Tag>)}
                     {(addedTags.layout && addedTags.layout.length > 0) &&  addedTags.layout.map(tag => <Tag>{tag}</Tag>)}

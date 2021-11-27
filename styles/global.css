@@ -1793,6 +1793,7 @@ textarea {
   background-color: #B8B8B8;
   -o-object-fit: cover;
      object-fit: cover;
+  border-radius: 5px 0 0 5px;
 }
 
 .fm-listing .listing-content .content-info {
@@ -1938,6 +1939,7 @@ textarea {
   min-height: 100%;
   width: 25%;
   background-color: #B8B8B8;
+  border-radius: 5px 0 0 5px;
 }
 
 .f-listing .listing-content .content-info {
@@ -2594,6 +2596,8 @@ textarea {
 .location-dropdown .location-dropdown-input input {
   width: 100%;
   padding: 0.5rem 1rem;
+  border: 1px solid #B8B8B8;
+  border-radius: 5px;
 }
 
 .location-dropdown .location-dropdown-options {
@@ -2940,6 +2944,37 @@ textarea {
       -ms-flex-align: center;
           align-items: center;
   gap: 0.5rem;
+}
+
+.boxer .boxer-section .section-boxes .boxes-size-input {
+  position: relative;
+  width: 100%;
+}
+
+.boxer .boxer-section .section-boxes .boxes-size-input input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid #B8B8B8;
+  -moz-appearance: textfield;
+}
+
+.boxer .boxer-section .section-boxes .boxes-size-input input::-webkit-outer-spin-button, .boxer .boxer-section .section-boxes .boxes-size-input input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+          appearance: none;
+}
+
+.boxer .boxer-section .section-boxes .boxes-size-input p {
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+  position: absolute;
+  color: #B8B8B8;
+  top: 50%;
+  right: 0.5rem;
 }
 
 .boxer .boxer-button {

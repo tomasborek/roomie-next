@@ -17,6 +17,7 @@ const Boxer = ({variant, existingBoxes, addedBoxes, setAddedBoxes, setBoxerOverl
     const [petAllowedBox, setPetAllowedBox] = useState("");
     const [smokingAllowedBox, setSmokingAllowedBox] = useState("");
     const [locationBox, setLocationBox] = useState("");
+    const [sizeBox, setSizeBox] = useState("");
 
 
     //Functions
@@ -34,6 +35,7 @@ const Boxer = ({variant, existingBoxes, addedBoxes, setAddedBoxes, setBoxerOverl
                 level: levelBox,
                 petAllowed: petAllowedBox,
                 smokingAllowed: smokingAllowedBox,
+                size: sizeBox,
                 location: locationBox
             })
         }
@@ -62,13 +64,14 @@ const Boxer = ({variant, existingBoxes, addedBoxes, setAddedBoxes, setBoxerOverl
             existingBoxes.petAllowed && setPetAllowedBox(existingBoxes.petAllowed);
             existingBoxes.smokingAllowed && setSmokingAllowedBox(existingBoxes.smokingAllowed);
             existingBoxes.location && setLocationBox(existingBoxes.location);
+            existingBoxes.size && setSizeBox(existingBoxes.size);
         }
     }, [existingBoxes])
     //Return
     return (
         <div className="boxer">
             <div className="boxer-header">{variant === "person" ? "Přidat info o sobě..." : "Přidat info o bydlení..."}</div>
-            {variant === "person" && existingBoxes &&
+            {(variant === "person" && existingBoxes) &&
             <>
             <section className="boxer-section">
                     <div className="section-header">Kouření</div>
@@ -106,7 +109,7 @@ const Boxer = ({variant, existingBoxes, addedBoxes, setAddedBoxes, setBoxerOverl
             </div>
             </>
             }
-            {variant === "flat" && existingBoxes &&
+            {(variant === "flat" && existingBoxes) &&
             <>
             
             <section className="boxer-section">
@@ -147,6 +150,16 @@ const Boxer = ({variant, existingBoxes, addedBoxes, setAddedBoxes, setBoxerOverl
                                 </Select>
                             </FormControl>
                     </div>
+            </section>
+
+            <section className="boxer-section">
+                <div className="section-header">Velikost</div>
+                <div className="section-boxes">
+                <div className="boxes-size-input">
+                            <input type="number" value={sizeBox} onChange={e => setSizeBox(e.target.value)} maxLength={5} />
+                            <p>m<sup>2</sup></p>
+                        </div>
+                </div>
             </section>
 
             <section className="boxer-section">

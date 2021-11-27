@@ -22,6 +22,30 @@
             flex-wrap: wrap;
             align-items: center;
             gap: 0.5rem;
+
+            .boxes-size-input{
+                position: relative;
+                width: 100%;
+                input{
+                    width: 100%;
+                    padding: 0.5rem 1rem;
+                    appearance: none;
+                    outline: none;
+                    border-radius: 5px;
+                    border: 1px solid $mainGray;
+                    &::-webkit-outer-spin-button, &::-webkit-inner-spin-button{
+                        appearance: none;
+                    }
+                    -moz-appearance: textfield;
+                }
+                p{
+                    transform: translate(0, -50%);
+                    position: absolute;
+                    color: $mainGray;
+                    top: 50%;
+                    right: 0.5rem;
+                }
+            }
         }
     }
     .boxer-button{
