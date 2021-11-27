@@ -18,7 +18,7 @@ const ListingAbout = ({type, listingInfo, editListing, state, refs}) => {
                     <textarea maxLength={3000} value={bio} onChange={e => setBio(e.target.value)} type="text" rows="5" className="bio-content" placeholder="Zadejte něco o sobě..."></textarea>
                     :
                     <div className="bio-content">
-                        {listingInfo ? listingInfo.data().bio === "" ? "Tento uživatel nemá bio" : bio
+                        {listingInfo ? listingInfo.data().bio === "" ? "Tento uživatel nemá bio" : listingInfo.data().bio
                         : 
                         <div className="skeletons">
                             <Skeleton variant="text"/>
