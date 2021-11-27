@@ -61,10 +61,18 @@
                 font-size: 18px;
                 margin: 0 0.5rem;
                 &.fa-facebook-square{
-                    color: blue;
+                    opacity: 0.3;
+                    &.active{
+                        opacity: 1;
+                        color: blue;
+                    }
                 }
                 &.fa-instagram{
-                    color: $accent;
+                    opacity: 0.3;
+                    &.active{
+                        opacity: 1;
+                        color: $accent;
+                    }
                 }
             }
         }

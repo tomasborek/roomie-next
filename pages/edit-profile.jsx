@@ -81,30 +81,36 @@ const EditProfile = () => {
     const handleSave = () =>{
         setLoading(true);
         updateUser(currentUser.uid, {
-            username: usernameRef.current.value,
-            email: emailRef.current.value,
-            phoneNumber: phoneRef.current.value,
-            socials: {
-                fb: fbRef.current.value,
-                tt: ttRef.current.value,
-                ig: igRef.current.value
-            }
+            contact: {
+                email: emailRef.current.value,
+                phoneNumber: phoneRef.current.value,
+                socials: {
+                    fb: fbRef.current.value,
+                    tt: ttRef.current.value,
+                    ig: igRef.current.value
+                }
+            },
+            "mainInfo.username": usernameRef.current.value
         })
         .then(res => {
-            return  updateListing("flatmateListings", userData.data().listingId, {
+            return  updateListing(userData.data().listing.id, {
                 userInfo: {
                     name: usernameRef.current.value,
-                    age: userData.data().age,
-                    gender: userData.data().gender,
+                    age: userData.data().mainInfo.age,
+                    gender: userData.data().mainInfo.gender,
+                    contact: {
+                        email: emailRef.current.value,
+                        phone: phoneRef.current.value,
+                        fb: fbRef.current.value,
+                        tt: ttRef.current.value,
+                        ig: igRef.current.value
+                    },
                     uid: currentUser.uid
-                }
+                },
             })
         }).then(res => {
             setLoading(false);
             router.back();
-        }).catch(error => {
-            setLoading(false);
-            console.log(error)
         })
     }
 

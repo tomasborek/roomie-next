@@ -17,16 +17,16 @@ const ListingContact = ({listingInfo, editListing, state}) => {
                 <div className="items-main">
                     <div className="items-item">
                         <i className="fas fa-phone"></i>
-                        <p>+420 731 011 045</p>
+                        <p>+420 {listingInfo.data().userInfo.contact.phone}</p>
                     </div>
                     <div className="items-item">
                         <i className="fas fa-envelope"></i>
-                        <p>email@email.com</p>
+                        <p>{listingInfo.data().userInfo.contact.email}</p>
                     </div>
                 </div>
                 <div className="items-socials">
-                        <i className="fab fa-facebook-square"></i>
-                        <i className="fab fa-instagram"></i>
+                        <i onClick={() => listingInfo.data().userInfo.contact.fb != "" ? window.location.href = listingInfo.data().userInfo.contact.fb : "" } className={`fab fa-facebook-square socials-item ${listingInfo.data().userInfo.contact.fb != "" && "active" }`}></i>
+                        <i onClick={() => listingInfo.data().userInfo.contact.ig != "" ? window.location.href = "https://" + listingInfo.data().userInfo.contact.ig : ""} className={`fab fa-instagram socials-item ${(listingInfo.data().userInfo.contact.ig != "" && "active" )}`}></i>
                 </div>
             </div>
             {listingInfo.data().friends.includes(currentUser.uid) &&

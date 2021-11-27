@@ -73,9 +73,9 @@ export function DbProvider(props) {
                     name: name,
                     gender: gender,
                     age: age,
-                    contact: contact,
                     uid: uid
                 },
+                userContact: contact,
                 mainInfo: {
                     budget: money,
                     startTime: "",

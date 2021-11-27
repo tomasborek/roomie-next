@@ -3561,10 +3561,20 @@ textarea {
 }
 
 .info-contact.unlocked .contact-items .items-socials i.fa-facebook-square {
+  opacity: 0.3;
+}
+
+.info-contact.unlocked .contact-items .items-socials i.fa-facebook-square.active {
+  opacity: 1;
   color: blue;
 }
 
 .info-contact.unlocked .contact-items .items-socials i.fa-instagram {
+  opacity: 0.3;
+}
+
+.info-contact.unlocked .contact-items .items-socials i.fa-instagram.active {
+  opacity: 1;
   color: #E14949;
 }
 
