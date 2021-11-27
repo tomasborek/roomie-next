@@ -3744,6 +3744,7 @@ textarea {
 .Listing .content-body .body-about .about-bio .bio-content {
   color: #6b717f;
   width: 100%;
+  white-space: pre-line;
 }
 
 .Listing .content-body .body-about .about-bio textarea.bio-content {

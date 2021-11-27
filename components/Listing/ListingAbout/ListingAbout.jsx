@@ -1,6 +1,7 @@
 import React from 'react'
 //Components
 import Tag from "../../Tag/Tag";
+import ListingTags from '../ListingTags/ListingTags';
 //MUI
 import { Skeleton } from '@mui/material';
 
@@ -17,7 +18,7 @@ const ListingAbout = ({type, listingInfo, editListing, state, refs}) => {
                     <textarea maxLength={3000} value={bio} onChange={e => setBio(e.target.value)} type="text" rows="5" className="bio-content" placeholder="Zadejte něco o sobě..."></textarea>
                     :
                     <div className="bio-content">
-                        {listingInfo ? listingInfo.data().bio === "" ? "Tento uživatel nemá bio" : listingInfo.data().bio
+                        {listingInfo ? listingInfo.data().bio === "" ? "Tento uživatel nemá bio" : bio
                         : 
                         <div className="skeletons">
                             <Skeleton variant="text"/>
@@ -32,27 +33,13 @@ const ListingAbout = ({type, listingInfo, editListing, state, refs}) => {
                     <div className="preferences-header">
                         Koho hledám?
                     </div>
-                    <div className="preferences-content">
-                        {listingInfo && !editListing && Object.keys(listingInfo.data().personTags).map(tag => (
-                            listingInfo.data().personTags[tag] != "" && <Tag>{listingInfo.data().personTags[tag]}</Tag> 
-                        ))}
-                        {addedPersonTags && editListing && Object.keys(addedPersonTags).map(tag => (
-                            addedPersonTags[tag] != "" && <Tag>{addedPersonTags[tag]}</Tag>
-                        ))}
-                        {editListing && <Tag onClick={() => setPersonTagOverlay(true)} plus={true}></Tag>}    
-                    </div>
+                   
+                    <ListingTags type="person" existingTags={listingInfo && listingInfo.data().personTags} addedTags={addedPersonTags} editListing={editListing} setOverlay={setPersonTagOverlay} />
+                  
                 </div>
                 <div className="about-preferences">
                     <div className="preferences-header">Jaké bydlení hledám?</div>
-                    <div className="preferences-content">
-                        {listingInfo && !editListing && Object.keys(listingInfo.data().flatTags).map(tag => (
-                            listingInfo.data().flatTags[tag] != "" && <Tag>{listingInfo.data().flatTags[tag]}</Tag>
-                        ))}
-                        {addedFlatTags && editListing && Object.keys(addedFlatTags).map(tag => (
-                            addedFlatTags[tag] != "" && <Tag>{addedFlatTags[tag]}</Tag>
-                        ))}
-                        {editListing && <Tag onClick={() => setFlatTagOverlay(true)} plus={true}></Tag>}
-                    </div>
+                        <ListingTags type="flat" existingTags={listingInfo && listingInfo.data().flatTags} addedTags={addedFlatTags} editListing={editListing} setOverlay={setFlatTagOverlay}/>
                 </div> 
             </div>
         )
@@ -98,15 +85,7 @@ const ListingAbout = ({type, listingInfo, editListing, state, refs}) => {
                     <div className="preferences-header">
                         Koho hledám?
                     </div>
-                    <div className="preferences-content">
-                    {listingInfo && !editListing && Object.keys(listingInfo.data().personTags).map(tag => (
-                            listingInfo.data().personTags[tag] != "" && <Tag>{listingInfo.data().personTags[tag]}</Tag> 
-                    ))}
-                    {addedPersonTags && editListing && Object.keys(addedPersonTags).map(tag => (
-                        addedPersonTags[tag] != "" && <Tag>{addedPersonTags[tag]}</Tag>
-                    ))}
-                        {editListing &&<Tag plus={true} onClick={() => setPersonTagOverlay(true)}/>}
-                    </div>
+                    <ListingTags type="person" existingTags={listingInfo && listingInfo.data().personTags} addedTags={addedPersonTags} editListing={editListing} setOverlay={setPersonTagOverlay} />
                 </div>
         </div>
         )

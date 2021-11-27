@@ -108,13 +108,7 @@ const CrListing = ({type}) => {
         
     }, [listingInfo])
 
-    // Handle if user sign outs while editing
-    useEffect(() =>{
-        if(!currentUser){
-            setEditListing(false);
-        }
-    }, [currentUser])
-
+   
     //Functions
     //Handles save in the edit
     const handleSave = () => {

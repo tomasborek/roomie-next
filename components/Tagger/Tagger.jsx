@@ -10,16 +10,16 @@ import { FormControl, Select, InputLabel, MenuItem } from '@mui/material';
 
 const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) => {
     //Person state tags
-    const [genderTag, setGenderTag] = useState("");
-    const [ageTag, setAgeTag] = useState("");
-    const [smokingTag, setSmokingTag] = useState("");
-    const [jobTag, setJobTag] = useState("");
+    const [genderTag, setGenderTag] = useState([]);
+    const [ageTag, setAgeTag] = useState([]);
+    const [smokingTag, setSmokingTag] = useState([]);
+    const [jobTag, setJobTag] = useState([]);
     //Flat state tags
-    const [layoutTag, setLayoutTag] = useState("");
-    const [levelTag, setLevelTag] = useState("");
-    const [petAllowedTag, setPetAllowedTag] = useState("");
-    const [smokingAllowedTag, setSmokingAllowedTag] = useState("");
-    const [locationTag, setLocationTag] = useState("");
+    const [layoutTag, setLayoutTag] = useState([]);
+    const [levelTag, setLevelTag] = useState([]);
+    const [petAllowedTag, setPetAllowedTag] = useState([]);
+    const [smokingAllowedTag, setSmokingAllowedTag] = useState([]);
+    const [locationTag, setLocationTag] = useState([]);
 
 
     //Effect
@@ -38,6 +38,10 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
         if(existingTags && !addedTags && variant === "flat"){
             setAddedTags(existingTags);
             existingTags.location && setLocationTag(existingTags.location);
+            existingTags.layout && setLayoutTag(existingTags.layout);
+            existingTags.level && setLevelTag(existingTags.level);
+            existingTags.petAllowed && setPetAllowedTag(existingTags.petAllowed);
+            existingTags.smokingAllowed && setSmokingAllowedTag(existingTags.smokingAllowed);
         }
     }, [existingTags])
 
@@ -65,6 +69,7 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
        
         setTagOverlay(false);
     }
+
     return (
         <div className="tagger">
             <div className="tagger-header">Přidat tag</div>
@@ -73,34 +78,164 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
                 <section className="tagger-section">
                     <p className="section-header">Pohlaví</p>
                     <div className="section-tags">
-                        <Tag active={genderTag === "Muž"} onClick={() => genderTag == "Muž" ? setGenderTag("") : setGenderTag("Muž")}>Muž</Tag>
-                        <Tag active={genderTag === "Žena"} onClick={() => genderTag == "Žena" ? setGenderTag("") : setGenderTag("Ženu")}>Žena</Tag>
-                        <Tag active={genderTag === "Jiné"} onClick={() => genderTag == "Jiné" ? setGenderTag("") : setGenderTag("Jiné")}>Jiné</Tag>
+                        <Tag active={genderTag.includes("Muž")} onClick={() => {
+                            let value = "Muž";
+                            if(genderTag.includes(value)){
+                                setGenderTag(prevState => prevState.filter(item => item != value));
+                            }else{
+                                if(genderTag.length === 2){
+                                    setGenderTag([]);
+                                    return
+                                }
+                                setGenderTag(prevState => [...prevState, value]);
+                            }
+                        }}>Muž</Tag>
+                        <Tag active={genderTag.includes("Žena")} onClick={() => {
+                            let value = "Žena";
+                            if(genderTag.includes(value)){
+                                setGenderTag(prevState => prevState.filter(item => item != value));
+                            }else{
+                                if(genderTag.length === 2){
+                                    setGenderTag([]);
+                                    return
+                                }
+                                setGenderTag(prevState => [...prevState, value]);
+                            }
+                        }}>Žena</Tag>
+                        <Tag active={genderTag.includes("Jiné")} onClick={() =>{
+                            let value = "Jiné";
+                            
+                            if(genderTag.includes(value)){
+                                setGenderTag(prevState => prevState.filter(item => item != value));
+                            }else{
+                                if(genderTag.length === 2){
+                                    setGenderTag([]);
+                                    return
+                                }
+                                setGenderTag(prevState => [...prevState, value]);
+                            }
+                        
+                        }}>Jiné</Tag>
                     </div>
                 </section>
+
                 <section className="tagger-section">
                     <p className="section-header">Věk</p>
                     <div className="section-tags">
-                        <Tag active={ageTag === "18-25"} onClick={() => ageTag == "18-25" ? setAgeTag("") : setAgeTag("18-25")}>18-25</Tag>
-                        <Tag  active={ageTag === "25-30"} onClick={() => ageTag == "25-30" ? setAgeTag("") : setAgeTag("25-30")}>25-30</Tag>
-                        <Tag  active={ageTag === "30-35"} onClick={() => ageTag == "30-40" ? setAgeTag("") : setAgeTag("30-40")}>30-40</Tag>
-                        <Tag  active={ageTag === "35-40"} onClick={() => ageTag == "40-50" ? setAgeTag("") : setAgeTag("40-50")}>35-45</Tag>
-                        <Tag  active={ageTag === "40+"} onClick={() => ageTag == "50+" ? setAgeTag("") : setAgeTag("50+")}>50+</Tag>
+                        <Tag active={ageTag.includes("18-25")} onClick={() => {
+                            let value = "18-25";
+                            
+                            if(ageTag.includes(value)){
+                                setAgeTag(prevState => prevState.filter(item => item != value));
+                            }else{
+                                if(ageTag.length === 4){
+                                    setAgeTag([]);
+                                    return
+                                }
+                                setAgeTag(prevState => [...prevState, value]);
+                            }
+                        }}>18-25</Tag>
+                        <Tag  active={ageTag.includes("25-30")} onClick={() => {
+                            let value = "25-30";
+                            
+                            if(ageTag.includes(value)){
+                                setAgeTag(prevState => prevState.filter(item => item != value));
+                            }else{
+                                if(ageTag.length === 4){
+                                    setAgeTag([]);
+                                    return
+                                }
+                                setAgeTag(prevState => [...prevState, value]);
+                            }
+                        }}>25-30</Tag>
+                        <Tag  active={ageTag.includes("30-40")} onClick={() =>{
+                             let value = "30-40";
+                            
+                             if(ageTag.includes(value)){
+                                setAgeTag(prevState => prevState.filter(item => item != value));
+                             }else{
+                                 if(ageTag.length === 4){
+                                     setAgeTag([]);
+                                     return
+                                 }
+                                 setAgeTag(prevState => [...prevState, value]);
+                             }
+                        }}>30-40</Tag>
+                        <Tag  active={ageTag.includes("40-50")} onClick={() =>{
+                             let value = "40-50";
+                            
+                             if(ageTag.includes(value)){
+                                setAgeTag(prevState => prevState.filter(item => item != value));
+                             }else{
+                                 if(ageTag.length === 4){
+                                     setAgeTag([]);
+                                     return
+                                 }
+                                 setAgeTag(prevState => [...prevState, value]);
+                             }
+                        }}>40-50</Tag>
+                        <Tag  active={ageTag.includes("50+")} onClick={() => {
+                             let value = "50+";
+                            
+                             if(ageTag.includes(value)){
+                                setAgeTag(prevState => prevState.filter(item => item != value));
+                             }else{
+                                 if(ageTag.length === 4){
+                                     setAgeTag([]);
+                                     return
+                                 }
+                                 setAgeTag(prevState => [...prevState, value]);
+                             }
+                        }}>50+</Tag>
                     </div>
                 </section>
+
                 <section className="tagger-section">
                     <p className="section-header">Kouření</p>
                     <div className="section-tags">
-                        <Tag  active={smokingTag === "Kuřák"} onClick={() => smokingTag == "Kuřák" ? setSmokingTag("") : setSmokingTag("Kuřák")}>Kuřák</Tag>
-                        <Tag active={smokingTag === "Nekuřák"} onClick={() =>  smokingTag == "Nekuřák" ? setSmokingTag("") : setSmokingTag("Nekuřák")}>Nekuřák</Tag>
+                        <Tag  active={smokingTag.includes("Kuřák")} onClick={() => setSmokingTag(smokingTag.includes("Kuřák") ? [] : ["Kuřák"])}>Kuřák</Tag>
+                        <Tag active={smokingTag.includes("Nekuřák")} onClick={() => setSmokingTag(smokingTag.includes("Nekuřák") ? [] : ["Nekuřák"])}>Nekuřák</Tag>
                     </div>
                 </section>
                 <section className="tagger-section">
                     <p className="section-header">Zaměstnání</p>
                     <div className="section-tags">
-                        <Tag active={jobTag === "Zaměstnaný"} onClick={() => setJobTag(jobTag === "Zaměstnaný" ? "" : "Zaměstnaný")}>Zaměstnaný</Tag>
-                        <Tag active={jobTag === "Nezaměstnaný"} onClick={() => setJobTag(jobTag === "Nezaměstnaný" ? "" : "Nezaměstnaný")}>Nezaměstnaný</Tag>
-                        <Tag active={jobTag === "Student"} onClick={() => setJobTag(jobTag === "Student" ? "" : "Student")}>Student</Tag>
+                        <Tag active={jobTag.includes("Zaměstnaný")} onClick={() =>{
+                             let value = "Zaměstnaný";
+                             if(jobTag.includes(value)){
+                                 setJobTag(prevState => prevState.filter(item => item != value));
+                             }else{
+                                 if(jobTag.length === 2){
+                                     setJobTag([]);
+                                     return
+                                 }
+                                 setJobTag(prevState => [...prevState, value]);
+                             }
+                        }}>Zaměstnaný</Tag>
+                        <Tag active={jobTag.includes("Nezaměstnaný")} onClick={() => {
+                            let value = "Nezaměstnaný";
+                            if(jobTag.includes(value)){
+                                setJobTag(prevState => prevState.filter(item => item != value));
+                            }else{
+                                if(jobTag.length === 2){
+                                    setJobTag([]);
+                                    return
+                                }
+                                setJobTag(prevState => [...prevState, value]);
+                            }
+                        }}>Nezaměstnaný</Tag>
+                        <Tag active={jobTag.includes("Student")} onClick={() => {
+                            let value = "Student";
+                            if(jobTag.includes(value)){
+                                setJobTag(prevState => prevState.filter(item => item != value));
+                            }else{
+                                if(jobTag.length === 2){
+                                    setJobTag([]);
+                                    return
+                                }
+                                setJobTag(prevState => [...prevState, value]);
+                            }
+                        }}>Student</Tag>
                     </div>
                 </section>
                 </>
@@ -120,8 +255,8 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
                     <div className="section-tags">
                          <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">Dispozice</InputLabel>
-                                <Select label="Dispozice" onChange={e => setLayoutTag(e.target.value)} defaultValue={existingTags && existingTags.layout != "" && existingTags.layout}>
-                                    <MenuItem value={""}>Libovolné</MenuItem>
+                                <Select label="Dispozice" onChange={e => setLayoutTag(e.target.value === "none" ? [] : [e.target.value])} value={layoutTag}>
+                                    <MenuItem value={"none"}>Libovolné</MenuItem>
                                     <MenuItem value={"2+1"}>2+1</MenuItem>
                                     <MenuItem value={"2+kk"}>2+kk</MenuItem>
                                     <MenuItem value={"3+1"}>3+1</MenuItem>
@@ -138,8 +273,8 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
                         <div className="section-tags">
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">Podlaží</InputLabel>
-                                    <Select label="Podlaží" onChange={e => setLevelTag(e.target.value)} defaultValue={existingTags && existingTags.level != "" && existingTags.level}>
-                                        <MenuItem value={""}>Libovolné</MenuItem>
+                                    <Select label="Podlaží" onChange={(e) => setLevelTag(e.target.value === "none" ? [] : [e.target.value])} value={levelTag}>
+                                        <MenuItem value={"none"}>Libovolné</MenuItem>
                                         <MenuItem value={"1. podlaží"}>1</MenuItem>
                                         <MenuItem value={"2. podlaží"}>2</MenuItem>
                                         <MenuItem value={"3. podlaží"}>3</MenuItem>
@@ -158,16 +293,16 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
             <section className="tagger-section">
                     <div className="section-header">Mazlíčci</div>
                     <div className="section-tags">
-                        <Tag active={petAllowedTag == "Mazlíčci povoleno"} onClick={() => setPetAllowedTag(petAllowedTag === "Mazlíčci povoleno" ? "" : "Mazlíčci povoleno")} variant="box" icon="dog">Povoleno</Tag>
-                        <Tag active={petAllowedTag == "Mazlíčci nepovoleno"} onClick={() => setPetAllowedTag(petAllowedTag === "Mazlíčci nepovoleno" ? "" : "Mazlíčci nepovoleno")} variant="box" icon="dog">Nepovoleno</Tag>
+                        <Tag active={petAllowedTag.includes("Mazlíčci povoleno")} onClick={() => setPetAllowedTag(petAllowedTag.includes("Mazlíčci povoleno") ? [] : ["Mazlíčci povoleno"])} variant="box" icon="dog">Povoleno</Tag>
+                        <Tag active={petAllowedTag.includes("Mazlíčci nepovoleno")} onClick={() => setPetAllowedTag(petAllowedTag.includes("Mazlíčci nepovoleno") ? [] : ["Mazlíčci nepovoleno"])} variant="box" icon="dog">Nepovoleno</Tag>
                     </div>
             </section>
 
             <section className="tagger-section">
                     <div className="section-header">Kouření</div>
                     <div className="section-tags">
-                        <Tag active={smokingAllowedTag == "Kouření povoleno"} onClick={() => setSmokingAllowedTag(smokingAllowedTag === "Kouření povoleno" ? "" : "Kouření povoleno")} variant="box" icon="smoking">Povoleno</Tag>
-                        <Tag active={smokingAllowedTag == "Kouření nepovoleno"} onClick={() => setSmokingAllowedTag(smokingAllowedTag === "Kouření nepovoleno" ? "" : "Kouření nepovoleno")} variant="box" icon="smoking">Nepovoleno</Tag>
+                        <Tag active={smokingAllowedTag.includes("Kouření povoleno")} onClick={() => setSmokingAllowedTag(smokingAllowedTag.includes("Kouření povoleno") ? [] : ["Kouření povoleno"])} variant="box" icon="smoking">Povoleno</Tag>
+                        <Tag active={smokingAllowedTag.includes("Kouření nepovoleno")} onClick={() => setSmokingAllowedTag(smokingAllowedTag.includes("Kouření nepovoleno")? [] : ["Kouření nepovoleno"])} variant="box" icon="smoking">Nepovoleno</Tag>
                     </div>
             </section>
                     
