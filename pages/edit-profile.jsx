@@ -68,7 +68,7 @@ const EditProfile = () => {
         if(userData){
             usernameRef.current.value = userData.data().mainInfo.username;
             emailRef.current.value = userData.data().contact.email;
-            phoneRef.current.value = userData.data().contact.phoneNumber;
+            phoneRef.current.value = userData.data().contact.phone;
             igRef.current.value = userData.data().contact.socials.ig;
             fbRef.current.value = userData.data().contact.socials.fb;
             ttRef.current.value = userData.data().contact.socials.tt;
@@ -79,18 +79,25 @@ const EditProfile = () => {
     //Functions
     //Action handlers
     const handleSave = () =>{
+        const username = usernameRef.current.value.trim();
+        const email = emailRef.current.value.trim();
+        const phone = phoneRef.current.value.trim();
+        if(username === "" || email === "" || phone === "") return;
+        if(username.length <= 2) return;
+        if(phone.length < 9) return;
+        if(phone.length < 3) return;
         setLoading(true);
         updateUser(currentUser.uid, {
             contact: {
-                email: emailRef.current.value,
-                phoneNumber: phoneRef.current.value,
+                email: email,
+                phone: phone,
                 socials: {
                     fb: fbRef.current.value,
                     tt: ttRef.current.value,
                     ig: igRef.current.value
                 }
             },
-            "mainInfo.username": usernameRef.current.value
+            "mainInfo.username": username
         })
         .then(res => {
             return  updateListing(userData.data().listing.id, {
