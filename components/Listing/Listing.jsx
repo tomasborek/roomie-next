@@ -223,13 +223,11 @@ const Listing = ({type}) => {
         }).then(res =>{
             setLoading(false);
             snackBar("Žádost byla odeslána.", "success");
+        }).catch(error =>{
+            setLoading(false);
+            setReqDialogOpen(true);
+            snackBar("Něco se nepovedlo. Zkuste to prosím později.", "error");
         })
-        
-        // .catch(error =>{
-        //     setLoading(false);
-        //     setReqDialogOpen(true);
-        //     snackBar("Něco se nepovedlo. Zkuste to prosím později.", "error");
-        // })
     }
 
     if(type === "flatmate"){
