@@ -65,8 +65,8 @@ const ListingContact = ({listingInfo, editListing, state}) => {
                 {(!currentUser || !listingInfo.data().requests.includes(currentUser.uid))&&
                    <>
                     {!currentUser ? <button className="main-btn contact-button" onClick={() => router.push("/login")}>Pošlat žádost</button> :
-                    (currentUser && listingInfo.data().sentRequests.includes(currentUser.uid)) ? <button onClick={() => router.push("/requests/recieved")}>Zobrazit žádosti</button> :
-                    (currentUser) ? <button className="main-btn contact-button" onClick={() => router.push("/requests/recieved")}>Pošlat žádost</button> :
+                    (currentUser && listingInfo.data().sentRequests.includes(currentUser.uid)) ? <button className="contact-button main-btn" onClick={() => router.push("/requests/recieved")}>Zobrazit žádosti</button> :
+                    (currentUser) ? <button className="main-btn contact-button" onClick={() => setReqDialogOpen(true)}>Pošlat žádost</button> :
                     ""
                     }
                     </>

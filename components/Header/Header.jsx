@@ -21,7 +21,7 @@ const Header = ({variant}) => {
     //Variables
     //Contexts
     const {currentUser, logOut, userLoaded} = useAuth();
-    const {getUser, getRequests} = useDb();
+    const {getUser, getRequests, getNotifications} = useDb();
     const router = useRouter();
     const [loading, setLoading] = useLoading();
     const [navOverlay, setNavOverlay] = useNavOverlay();
@@ -35,13 +35,11 @@ const Header = ({variant}) => {
     useEffect(() => {
         if(notificationDropdown && !notifications){
             let newNotifications = [];
-           getRequests("recievedRequests", currentUser.uid)
+           getNotifications(currentUser.uid)
            .then(docs => {
                 docs.forEach(doc => {
                     console.log(doc);
-                    if(doc.data().status === "pending"){
-                        newNotifications = [...newNotifications, doc];
-                    }
+                    newNotifications = [...newNotifications, doc.data()];
                 })
                 setNotifications(newNotifications);
            })
@@ -110,14 +108,14 @@ const Header = ({variant}) => {
                       <>
                       {Object.keys(notifications).length > 0 ?
                       Object.keys(notifications).map((not,id) => (
-                          <li key={id} onClick={() => router.push("/requests/recieved")}> {notifications[not].data().name} vás žádá o navázání kontaktu.</li>
+                          <li key={id} onClick={() => notifications[not].type === "recievedRequest" ? router.push("/requests/recieved") : router.push("/friends")}> {notifications[not].message}</li>
                       ))
                       :
                       <li>Žádná oznámení</li>
                         }
                       </>
                       :
-                      <li><CircularProgress/></li>
+                      <li  className="dropdown-loading"><CircularProgress/></li>
                       
                     }
                    </ul>

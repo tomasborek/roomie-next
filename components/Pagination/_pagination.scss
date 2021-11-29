@@ -1,0 +1,24 @@
+.pagination{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    .pagination-page{
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        border: 1px solid $mainGray;
+        margin: 0 0.5rem;
+        cursor: pointer;
+        transition: all 200ms;
+        &:hover{
+            background-color: $whiteBg;
+            color: $mainColor;
+            border-color: $mainColor;
+        }
+        .fa-arrow-left{
+            margin-right: 0.5rem;
+        }
+        .fa-arrow-right{
+            margin-left: 0.5rem;
+        }
+    }
+}

@@ -40,7 +40,7 @@ const Listing = ({type}) => {
     //Contexts
     const router = useRouter();
     const {id} = router.query;
-    const {getListing, updateListing, updateUser, getUser, createRequest} = useDb();
+    const {getListing, updateListing, updateUser, getUser, createRequest, addNotification} = useDb();
     const {currentUser} = useAuth();
     const [loading, setLoading] = useLoading();
     const {snackBar} = useSnackBar();
@@ -200,14 +200,12 @@ const Listing = ({type}) => {
                  listingId: sender.data().listing.id,
                  type: sender.data().mainInfo.type,
                  message: requestMessage,
-                 status: "pending"
             })
         }).then(res => {
             return createRequest("sent", reciever.data().userInfo.uid, sender.id, {
                 name: reciever.data().userInfo.name,
                 age: reciever.data().userInfo.age,
                 listingId: reciever.id,
-                status: "pending"
             })
         }).then(res => {
             return updateListing(listingInfo.id, {
@@ -221,13 +219,17 @@ const Listing = ({type}) => {
             return getListing(id);
         }).then(doc => {
             setListingInfo(doc);
+            return addNotification("recievedRequest", reciever.data().userInfo.uid, sender.data().mainInfo.username);
+        }).then(res =>{
             setLoading(false);
             snackBar("Žádost byla odeslána.", "success");
-        }).catch(error =>{
-            setLoading(false);
-            setReqDialogOpen(true);
-            snackBar("Něco se nepovedlo. Zkuste to prosím později.", "error");
         })
+        
+        // .catch(error =>{
+        //     setLoading(false);
+        //     setReqDialogOpen(true);
+        //     snackBar("Něco se nepovedlo. Zkuste to prosím později.", "error");
+        // })
     }
 
     if(type === "flatmate"){

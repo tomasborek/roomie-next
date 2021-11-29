@@ -7,7 +7,7 @@ import { arrayRemove, arrayUnion } from '@firebase/firestore'
 const RecievedReqFull = ({reqInfo, id, setOpen}) => {
     //Variables---
         //Contexts
-        const {updateUser, getUser, updateListing, resolveRequest, addFriend} = useDb();
+        const {updateUser, getUser, updateListing, resolveRequest, addFriend, addNotification} = useDb();
         const [loading, setLoading] = useLoading();
         const {currentUser} = useAuth();
 
@@ -16,24 +16,20 @@ const RecievedReqFull = ({reqInfo, id, setOpen}) => {
         const handleAction = (action) => {
             setLoading(true);
             setOpen(false);
-            if(action === "accepted") handleFriendship();
-            resolveRequest("recieved", currentUser.uid, id, {
-                status: action
+            resolveRequest("recieved", currentUser.uid, id)
+            .then(res => {
+                return resolveRequest("sent", currentUser.uid, id,)
             }).then(res => {
-                return resolveRequest("sent", currentUser.uid, id, {
-                    status: action
-                })
-            }).then(res => {
-                setLoading(false)
-            }).catch(error => {
-                setOpen(true);
-                setLoading(false)
+                if(action === "accepted") handleFriendship();
+                if(action === "rejected") handleReject();
             })
         }
 
 
         const handleFriendship = () => {
+            //Us
             let requestedUser;
+            //The one who sent request
             let requestingUser = reqInfo;
            getUser(currentUser.uid)
            .then(user => {
@@ -53,7 +49,7 @@ const RecievedReqFull = ({reqInfo, id, setOpen}) => {
                })
            }).then(res => {
                //Adding a firend to requested user's listing
-               return addFriend(requestedUser.id, requestedUser.id, {
+               return addFriend(requestedUser.id, id, {
                 username: requestingUser.name,
                 age: requestingUser.age,
                 type: requestingUser.type,
@@ -65,7 +61,29 @@ const RecievedReqFull = ({reqInfo, id, setOpen}) => {
                    friends: arrayUnion(id),
                    requests: arrayRemove(id)
                })
+           }).then(res => {
+               handleNotification(requestedUser);
+               setLoading(false);
            })
+        }
+
+        const handleReject = () =>{
+                updateListing(reqInfo.listingId, {
+                    requests: arrayRemove(id)
+                }).then(res => {
+                return updateListing(requestedUser.data().listing.id, {
+                    requests: arrayRemove(id)
+                })
+            }).then(res => {
+                setLoading(false);
+            }).catch(error => {
+                setOpen(true);
+                setLoading(false)
+            })
+        }
+
+        const handleNotification = (requestedUser) => {
+            addNotification("acceptedRequest", id, requestedUser.data().mainInfo.username);
         }
 
     return (
@@ -78,17 +96,8 @@ const RecievedReqFull = ({reqInfo, id, setOpen}) => {
             <div className="full-description">{reqInfo.gender === "male" ? "Muž" : reqInfo.gender === "female" ? "Žena" : reqInfo.gender === "other" ? "Jiné" : ""}, {reqInfo.age}</div>
             <div className="full-message">{reqInfo.message}</div>
             <div className="full-actions">
-                {reqInfo.status === "pending" ?
-                    <>
                     <button onClick={() => handleAction("rejected")}     className="acc-btn">Odmítnout</button>
                     <button onClick={() => handleAction("accepted")}    className="main-btn">Přijmout</button>
-                    </>
-                :
-                <div className="full-actions-resolved">
-                    <p>{reqInfo.status === "accepted" ? "Tato žádost byla přijata." : "Tato žádost byla odmítnuta."}</p>
-                    <button onClick={() =>setOpen(false)} className="main-btn">Zavřít</button>
-                </div>
-                }
             </div>
         </div>
     )

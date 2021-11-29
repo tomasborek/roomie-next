@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from 'react'
+//next
+import Image from "next/image";
 //Contexts
 import { useAuth } from '../../contexts/AuthContext';
 import { useDb } from '../../contexts/DbContext';
@@ -6,29 +8,27 @@ import { useDb } from '../../contexts/DbContext';
 //Components
 import RecievedReq from "../RecievedReq/RecievedReq";
 import SentReq from '../SentReq/SentReq';
+import Pagination from '../Pagination/Pagination';
 //MUI
 import { CircularProgress } from '@mui/material';
 
 const ReqFeed = ({type}) => {
     const {currentUser} = useAuth();
-    const {getUser, getRequests} = useDb();
+    const {getUser, getRequests, deleteNotifications} = useDb();
     //State
     const [recievedRequests, setRecievedRequests] = useState(null);
     const [sentRequests, setSentRequests] = useState(null);
-    const [pendingRequests, setPendingRequests] = useState(0);
 
-
+    //Getting reqs
     useEffect(() => {
         if(currentUser && type === "recieved" && !recievedRequests){
             let recievedRequestsObject = {};
             getRequests("recievedRequests", currentUser.uid)
             .then(docs =>{
                 docs.forEach(req => {
-                    if(req.data().status === "pending"){
-                        setPendingRequests(prevState => prevState+1);
-                    }
                     recievedRequestsObject = {...recievedRequestsObject, [req.id]: req.data()}
                 })
+                console.log(recievedRequestsObject)
                 setRecievedRequests(recievedRequestsObject);
             })
         }
@@ -45,35 +45,36 @@ const ReqFeed = ({type}) => {
             }
     }, [currentUser, type])
 
+    //Deleting Notifications
+    useEffect(() => {
+        if(type === "recieved" && currentUser){
+            deleteNotifications("recievedRequest", currentUser.uid);
+        }
+        if(type === "sent" && currentUser){
+            deleteNotifications("acceptedRequest", currentUser.uid);
+        }
+    }, [type, currentUser])
+
     return (
         <>
             {type === "recieved" &&
                 <>
                 {recievedRequests ?
                 <>
-                    {pendingRequests > 0 &&
-                    <div className="reqs-feed-pending">
+                    {(Object.keys(recievedRequests).length) ?
+                    <div className="reqs-feed-recieved">
                         <p className="pending-heading">Nevyřešené žádosti</p>
                         {Object.keys(recievedRequests).map((req, id) => (
-                            recievedRequests[req].status === "pending" &&
                             <RecievedReq reqInfo={recievedRequests[req]} id={req} key={id}/>
                         ))}
+                        <Pagination/>
+                    </div>
+                    :
+                    <div className="reqs-feed-empty">
+                        <img src="/img/bad-results/notfound.png" width={184} height={208}/>
+                        <p>Nebyly nalezené žádné nevyřešené žádosti.</p>
                     </div>
                     }
-                    <div className="reqs-feed-resolved">
-                        <h3 className="resolved-heading">Vyřešené žádosti</h3>
-                        {Object.keys(recievedRequests).length > 0 ? 
-                        Object.keys(recievedRequests).map((req, id) => (
-                            recievedRequests[req].status != "pending" &&
-                            <RecievedReq reqInfo={recievedRequests[req]} id={req} key={id}/>
-                        ))
-                        :
-                        <div className="resolved-empty">
-                            <i className="fas fa-search"></i>
-                            <p>Nebyly nalezené žádné žádosti.</p>
-                        </div>
-                    }
-                    </div>
                 </>
                     :
                     <div className="reqs-feed-loading">
@@ -86,27 +87,29 @@ const ReqFeed = ({type}) => {
             <>
                 {sentRequests ?
                     <>
-                        <div className="reqs-feed-sent">
+                    {(Object.keys(sentRequests).length) ?
+                         <div className="reqs-feed-sent">
                             <h3 className="sent-heading">Odeslané žádosti</h3>
-                            {Object.keys(sentRequests).length > 0 ?
-                            Object.keys(sentRequests).map((req, id) => (
+                            {Object.keys(sentRequests).map((req, id) => (
                                 <SentReq name={sentRequests[req].name} age={sentRequests[req].age} status={sentRequests[req].status} id={req} key={id} />
                             ))
-                            :
-                            <div className="sent-empty">
-                                <i className="fas fa-search"></i>
-                                <p>Nebyly nalezené žádné žádosti.</p>
-                            </div>
-                        }
+                            }
                         </div>
-                    </>
                         :
-                        <div className="reqs-feed-loading">
-                            <CircularProgress/>
+                        <div className="reqs-feed-empty">
+                            <img src="/img/bad-results/notfound.png" width={184} height={208}/>
+                            <p>Nebyly nalezené žádné nevyřešené žádosti.</p>
                         </div>
+                        }
+                     </>
+                    :
+                    <div className="reqs-feed-loading">
+                        <CircularProgress/>
+                    </div>
                 }
             </>
             }
+        
         </>
     )
 }
