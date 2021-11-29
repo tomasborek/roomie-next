@@ -25,10 +25,10 @@ const SentReq = ({name, age, status, id}) => {
             </div>
             <div className="req-content">
                 <div className="content-user">{name}, {age}</div>
-                <div className="content-status">{status === "pending" ? `Žádost čeká na vyřízení` : status === "rejected" ? "Žádost byla odmítnuta" : status === "accepted" ? `Žádost byla přijata, můžete vidět kontaktní údaje uživatele ${name}`:""}</div>
+                <div className="content-status">Žádost čeká na vyřízení.</div>
             </div>
             <div className="req-status">
-                <i className={`fas fa-${status === "pending" ? "hourglass-half" : status === "accepted" ? "check" : "times"}`}></i>
+                <i className="fas fa-hourglass-half"></i>
             </div>
         </div>
     )
