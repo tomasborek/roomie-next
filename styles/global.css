@@ -3119,6 +3119,10 @@ textarea {
           flex: 1;
 }
 
+.rec-req .req-content .content-name {
+  font-weight: bold;
+}
+
 .rec-req .req-content .content-msg {
   font-size: 14px;
   color: #6b717f;

@@ -22,6 +22,9 @@
     }
     .req-content{
         flex: 1;
+        .content-name{
+            font-weight: bold;
+        }
         .content-msg{
             font-size: 14px;
             color: $darkerGray;
