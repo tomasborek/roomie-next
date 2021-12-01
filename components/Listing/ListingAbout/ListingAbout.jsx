@@ -65,7 +65,7 @@ const ListingAbout = ({type, listingInfo, editListing, state, refs}) => {
                                 
                 </div>
                 <div className="about-bio">
-                    <div className="bio-header">Podrobnosti o inzeranotvi</div>
+                    <div className="bio-header">Podrobnosti o inzerantovi</div>
                     <div className="bio-content">
                         {editListing ?
                         <textarea maxLength={3000} onChange={(e) => setPersonBio(e.target.value)} value={personBio} type="text" rows="5" className="bio-content" placeholder="Zadejte něco o sobě..."></textarea>
