@@ -85,7 +85,8 @@ const EditProfile = () => {
         if(username === "" || email === "" || phone === "") return;
         if(username.length <= 2) return;
         if(phone.length < 9) return;
-        if(phone.length < 3) return;
+        if(email.length < 3) return;
+        if(!handleSocials()) return;
         setLoading(true);
         updateUser(currentUser.uid, {
             contact: {
@@ -153,6 +154,38 @@ const EditProfile = () => {
             setLoading(false);
         })
     }
+
+    const handleSocials = () => {
+        let fb = false;
+        let ig = false;
+        if(fbRef.current.value.length){
+            if(!fbRef.current.value.includes("facebook.com")){
+                fb =  false;
+            }else if(!fbRef.current.value.includes("https://")){
+                fbRef.current.value = "https://" + fbRef.current.value;
+                fb = true;
+            }else{
+                fb = true;
+            }
+        }
+
+        if(igRef.current.value.length){
+            if(!igRef.current.value.includes("instagram.com")){
+                ig = false;
+            }else if(!igRef.current.value.includes("https://")){
+                igRef.current.value = "https://" + igRef.current.value;
+                ig = true;
+            }else{
+                ig = true;
+            }
+        }
+
+        if(fb && ig){
+            return true;
+        }else{
+            return false;
+        }
+    }
           
     return (
         <div className="EditProfile">
@@ -207,15 +240,15 @@ const EditProfile = () => {
                             </p>
                             <div className="form-item">
                                 <p className="item-description">Jméno</p>
-                                <input ref={usernameRef} type="text" className="item-input" />
+                                <input maxLength={15} ref={usernameRef} type="text" className="item-input" />
                             </div>
                             <div className="form-item">
                                 <p className="item-description">E-mail</p>
-                                <input ref={emailRef} type="text" className="item-input" />
+                                <input maxLength={30} ref={emailRef} type="text" className="item-input" />
                             </div>
                             <div className="form-item">
                                 <p className="item-description"> Tel. číslo</p>
-                                <input ref={phoneRef} type="text" className="item-input" />
+                                <input maxLength={9} ref={phoneRef} type="text" className="item-input" />
                             </div>
                             <p className="form-section-header">
                                 Sociální sítě
@@ -237,7 +270,7 @@ const EditProfile = () => {
                             </p>
                             <div className="form-item">
                                 <p className="item-description">Heslo</p>
-                                <input ref={passwordRef} type="text" className="item-input" />
+                                <input maxLength={30} ref={passwordRef} type="text" className="item-input" />
                             </div>
                         </div>
         
