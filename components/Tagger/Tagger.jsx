@@ -257,6 +257,8 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
                             <InputLabel id="demo-simple-select-label">Dispozice</InputLabel>
                                 <Select label="Dispozice" onChange={e => setLayoutTag(e.target.value === "none" ? [] : [e.target.value])} value={layoutTag}>
                                     <MenuItem value={"none"}>Libovolné</MenuItem>
+                                    <MenuItem value={"1+1"}>1+1</MenuItem>
+                                    <MenuItem value={"1+kk"}>1+kk</MenuItem>
                                     <MenuItem value={"2+1"}>2+1</MenuItem>
                                     <MenuItem value={"2+kk"}>2+kk</MenuItem>
                                     <MenuItem value={"3+1"}>3+1</MenuItem>
