@@ -43,17 +43,17 @@ const ReqFeed = ({type}) => {
             })
           
             }
-    }, [currentUser, type])
+    }, [currentUser])
 
     //Deleting Notifications
-    useEffect(() => {
-        if(type === "recieved" && currentUser){
-            deleteNotifications("recievedRequest", currentUser.uid);
-        }
-        if(type === "sent" && currentUser){
-            deleteNotifications("acceptedRequest", currentUser.uid);
-        }
-    }, [type, currentUser])
+    // useEffect(() => {
+    //     if(type === "recieved" && currentUser){
+    //         deleteNotifications("recievedRequest", currentUser.uid);
+    //     }
+    //     if(type === "sent" && currentUser){
+    //         deleteNotifications("acceptedRequest", currentUser.uid);
+    //     }
+    // }, [type, currentUser])
 
     return (
         <>

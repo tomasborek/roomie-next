@@ -183,7 +183,7 @@ export function DbProvider(props) {
 
     //Notifications
 
-    const addNotification = (type, recieverUid, secondUserName) => {
+    const addNotification = (type, recieverUid, secondUserUid, secondUserName) => {
         let params;
         if(type === "acceptedRequest"){
             params = {
@@ -196,8 +196,8 @@ export function DbProvider(props) {
                 type: type
             }
         }
-        const colRef = collection(db, "users", recieverUid, "notifications");
-        return addDoc(colRef, params)
+        const docRef = doc(db, "users", recieverUid, "notifications", secondUserUid);
+        return setDoc(docRef, params);
     }
 
     const getNotifications = (uid) => {
@@ -205,16 +205,19 @@ export function DbProvider(props) {
         return getDocs(colRef);
     }
 
-    const deleteNotifications = (type, uid) => {
-        const colRef = collection(db, "users", uid, "notifications");
-        const q = query(colRef, where("type", "==", type));
-        getDocs(q)
-        .then(docs => {
-            docs.forEach(document => {
+    const deleteNotification = (uid, secondUserUid) => {
+        return new Promise((resolve, reject) => {
+            const docRef = doc(db, "users", uid, "notifications", secondUserUid);
+            getDoc(docRef)
+            .then(document => {
                 deleteDoc(doc(db, "users", uid, "notifications", document.id));
+                resolve(null);
             })
-            
+            // .catch(error => {
+            //     reject(error);
+            // })
         })
+       
     }
 
    
@@ -238,7 +241,7 @@ export function DbProvider(props) {
         addFriend,
         addNotification,
         getNotifications,
-        deleteNotifications
+        deleteNotification
     }
     return (
         <DbContext.Provider value={value}>

@@ -1,4 +1,7 @@
 import React from 'react'
+//next
+import Link from "next/link";
+//Context
 import { useDb } from '../../contexts/DbContext'
 import { useLoading } from '../../contexts/LoadingContext'
 import { useAuth } from '../../contexts/AuthContext'
@@ -7,7 +10,7 @@ import { arrayRemove, arrayUnion } from '@firebase/firestore'
 const RecievedReqFull = ({reqInfo, id, setOpen}) => {
     //Variables---
         //Contexts
-        const {updateUser, getUser, updateListing, resolveRequest, addFriend, addNotification} = useDb();
+        const {updateUser, getUser, updateListing, resolveRequest, addFriend, addNotification, deleteNotification} = useDb();
         const [loading, setLoading] = useLoading();
         const {currentUser} = useAuth();
 
@@ -83,7 +86,10 @@ const RecievedReqFull = ({reqInfo, id, setOpen}) => {
         }
 
         const handleNotification = (requestedUser) => {
-            addNotification("acceptedRequest", id, requestedUser.data().mainInfo.username);
+            addNotification("acceptedRequest", id, requestedUser.id, requestedUser.data().mainInfo.username)
+            .then(res => {
+                deleteNotification(requestedUser.id, id);
+            })
         }
 
     return (
@@ -99,6 +105,7 @@ const RecievedReqFull = ({reqInfo, id, setOpen}) => {
                     <button onClick={() => handleAction("rejected")}     className="acc-btn">Odmítnout</button>
                     <button onClick={() => handleAction("accepted")}    className="main-btn">Přijmout</button>
             </div>
+            <Link  href={`/${reqInfo.type}/${reqInfo.listingId}`}><a className="full-profile-link">Zobrazit inzerát...</a></Link>
         </div>
     )
 }

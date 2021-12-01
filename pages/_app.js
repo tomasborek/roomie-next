@@ -7,7 +7,7 @@ import Head from 'next/dist/shared/lib/head';
 //Context
 import { SnackBarProvider } from '../contexts/SnackBarContext';
 import { LoadingProvider } from '../contexts/LoadingContext';
-import { ListingProvider } from '../contexts/ListingContext';
+import { NotificationsProvider } from '../contexts/NotificationsContext';
 //Styles
 import '../styles/global.css'
 
@@ -21,11 +21,11 @@ function MyApp({ Component, pageProps }) {
     </Head>
     <LoadingProvider>
       <SnackBarProvider>
-        <ListingProvider>
+        <NotificationsProvider>
           <Layout>
               <Component {...pageProps} />
           </Layout>
-        </ListingProvider>
+        </NotificationsProvider>
       </SnackBarProvider>
     </LoadingProvider>
     </>

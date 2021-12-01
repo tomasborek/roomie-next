@@ -40,7 +40,7 @@ const Listing = ({type}) => {
     //Contexts
     const router = useRouter();
     const {id} = router.query;
-    const {getListing, updateListing, updateUser, getUser, createRequest, addNotification} = useDb();
+    const {getListing, updateListing, updateUser, getUser, createRequest, addNotification, deleteNotification} = useDb();
     const {currentUser} = useAuth();
     const [loading, setLoading] = useLoading();
     const {snackBar} = useSnackBar();
@@ -219,7 +219,7 @@ const Listing = ({type}) => {
             return getListing(id);
         }).then(doc => {
             setListingInfo(doc);
-            return addNotification("recievedRequest", reciever.data().userInfo.uid, sender.data().mainInfo.username);
+            return addNotification("recievedRequest", reciever.data().userInfo.uid, sender.id, sender.data().mainInfo.username);
         }).then(res =>{
             setLoading(false);
             snackBar("Žádost byla odeslána.", "success");

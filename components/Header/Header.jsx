@@ -11,10 +11,11 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useDb } from '../../contexts/DbContext';
 import { useLoading } from '../../contexts/LoadingContext';
 import { useNavOverlay } from '../../contexts/NavOverlayContext';
+import { useNotifications } from '../../contexts/NotificationsContext';
 //Components
 import Dropdown from '../Dropdown/Dropdown';
 //MUI
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, Badge } from '@mui/material';
 
 
 const Header = ({variant}) => {
@@ -29,11 +30,11 @@ const Header = ({variant}) => {
      //State
      const [isDropdownActive, setIsDropdownActive] = useState(false);
      const [notificationDropdown, setNotificationDropdown] = useState(false);
-     const [notifications, setNotifications] = useState(null);
+     const [notifications, setNotifications] = useNotifications();
 
      //UseEffect
     useEffect(() => {
-        if(notificationDropdown && !notifications){
+        if(currentUser && !notifications){
             let newNotifications = [];
            getNotifications(currentUser.uid)
            .then(docs => {
@@ -44,7 +45,7 @@ const Header = ({variant}) => {
                 setNotifications(newNotifications);
            })
         }
-    }, [notificationDropdown])
+    }, [currentUser])
 
     //Functions
     const handleMyListing = () => {
@@ -87,7 +88,16 @@ const Header = ({variant}) => {
             {userLoaded ?
             currentUser ? 
             <div className="navbar navbar-logged">
-               <i onClick={() => setNotificationDropdown(prevState =>!prevState)} className={`fa${notificationDropdown ? "s" : "r"} fa-bell navbar-notifications`}></i> 
+                {(notifications && notifications.length) ?
+                     <Badge badgeContent={notifications.length} color={"secondary"}>
+                        <i onClick={() => setNotificationDropdown(prevState =>!prevState)} className={`fa${notificationDropdown ? "s" : "r"} fa-bell navbar-notifications`}></i> 
+                    </Badge>
+                :
+                (!notifications || !notifications.length) &&
+                     <i onClick={() => setNotificationDropdown(prevState =>!prevState)} className={`fa${notificationDropdown ? "s" : "r"} fa-bell navbar-notifications`}></i> 
+                }
+               
+              
                 <div className="navbar-profile"></div>
                
                   <motion.i onClick={() => setIsDropdownActive(prevState =>!prevState)} animate={isDropdownActive ? {rotate: -180}: ""} initial={{rotate:0}} transition={{duration: 0.4}}  tabIndex={0} className="fas fa-chevron-down navbar-dropdown-icon"></motion.i> 
