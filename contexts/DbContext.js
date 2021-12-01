@@ -25,7 +25,7 @@ export function DbProvider(props) {
             },
             contact: {
                 email: email,
-                phoneNumber: phoneNumber,
+                phone: phoneNumber,
                 socials: {
                     fb: "",
                     tt: "",
