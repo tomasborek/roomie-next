@@ -13,7 +13,7 @@ const ListingBoxesContainer = ({type, existingBoxes, addedBoxes, editListing}) =
                 <>
                     {(existingBoxes.pet && existingBoxes.pet != "") && <ListingBox icon="fa-dog" title="Mazlíček">{existingBoxes.pet}</ListingBox>}
                     {(existingBoxes.smoking && existingBoxes.smoking != "") && <ListingBox icon="fa-smoking" title="Kouření">{existingBoxes.smoking}</ListingBox>}
-                    {(existingBoxes.job && existingBoxes.job  != "") && <ListingBox icon="fa-graduation-cap" title="Vzdělání">{existingBoxes.job}</ListingBox>}
+                    {(existingBoxes.job && existingBoxes.job  != "") && <ListingBox icon="fa-graduation-cap" title="Zaměstnání">{existingBoxes.job}</ListingBox>}
                     {(existingBoxes.children && existingBoxes.children != "") && <ListingBox icon="fa-baby-carriage" title="Děti">{existingBoxes.children}</ListingBox>}
 
                 </>
