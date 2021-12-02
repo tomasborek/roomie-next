@@ -1,9 +1,9 @@
 .Home{
     .home-video{
         width: 100%;
-        height: 500px;
         background-color: $mainGray;
-        margin-bottom: 5rem
+        margin-bottom: 5rem;
+        cursor: pointer;
     }
 
     .home-premium-banner{

@@ -17,6 +17,11 @@ export default function Home() {
     const router = useRouter();
     const {currentUser} = useAuth();
    
+    useEffect(() => {
+        if(currentUser){
+            router.push("/explore/flatmates");
+        }
+    }, [currentUser])
   return (
     <>
     <Head>
@@ -87,7 +92,9 @@ export default function Home() {
                         <button onClick={() => setIsModalActive(true)} className="section-btn main-btn">Kontaktovat Roomie!</button>
                     </div>
                 </section>
-               <div className="home-video"></div>
+                <video className="home-video" poster="/video/thumbnail.png" controls>
+                    <source  src="/video/Sequence 01_1 (1).mp4"/>
+                </video>
             </div>
                
            <Footer />
