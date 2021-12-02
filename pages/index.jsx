@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 //next
 import Head from 'next/head'
 import Image from 'next/image'
@@ -16,6 +16,8 @@ export default function Home() {
     //Contexts
     const router = useRouter();
     const {currentUser} = useAuth();
+    //Refs
+    const videoRef = useRef();
    
     useEffect(() => {
         if(currentUser){
@@ -49,7 +51,7 @@ export default function Home() {
                             <h1>Hledáte spolubydlící?</h1>
                             <h2>Váš čas je drahocenný, hledejte proto spolubydlení s námi. Stačí si založit profil a my se postaráme, abyste našli nejen skvělé spolubydlící, ale i někoho, s kým si zkrátka budete rozumět.</h2>
                         </div>
-                        <button className="section-btn main-btn">Jak funguje Roomie?</button>
+                        <button onClick={() => videoRef.current.scrollIntoView()} className="section-btn main-btn">Jak funguje Roomie?</button>
                     </div>
                 </section>
             </div>
@@ -92,7 +94,7 @@ export default function Home() {
                         <button onClick={() => setIsModalActive(true)} className="section-btn main-btn">Kontaktovat Roomie!</button>
                     </div>
                 </section>
-                <video className="home-video" poster="/video/thumbnail.png" controls>
+                <video ref={videoRef} className="home-video" poster="/video/thumbnail.png" controls>
                     <source  src="/video/Sequence 01_1 (1).mp4"/>
                 </video>
             </div>
