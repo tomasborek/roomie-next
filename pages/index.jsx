@@ -10,12 +10,16 @@ import { useAuth } from '../contexts/AuthContext';
 import HomeHeader from '../components/HomeHeader/HomeHeader';
 import Banner from '../components/Banner/Banner';
 import Footer from '../components/Footer/Footer';
+//MUI
+import {Backdrop, FormControl, Select, MenuItem, InputLabel} from "@mui/material"
 
 
 export default function Home() {
     //Contexts
     const router = useRouter();
     const {currentUser} = useAuth();
+    //State
+    const [contactForm, setContactForm] = useState(false);
     //Refs
     const videoRef = useRef();
    
@@ -33,6 +37,34 @@ export default function Home() {
     <div className="Home">
             <HomeHeader />
             <Banner />
+
+            <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={contactForm}>
+
+                <div className="home-contact-form">
+                    <div className="form-header">
+                        <div className="void-fill"></div>
+                        <i onClick={() => setContactForm(false)} className="fas fa-times"></i>
+                    </div>
+                    <div className="form-content">
+                        <h2 className="content-heading">Kontaktujte nás</h2>
+                        <div className="content-form">
+                            <input maxLength={30} placeholder="Vaše jméno..." className="form-item" type="text" />
+                            <input maxLength={60} placeholder="Váš e-mail..." className="form-item" type="text" />
+                            <FormControl className="form-select form-item" size="small">
+                                <InputLabel>Typ zprávy</InputLabel>
+                                <Select label="Typ zprávy">
+                                    <MenuItem value="Technivký problém">Technický problém</MenuItem>
+                                    <MenuItem value="Ztížnost">Ztížnost</MenuItem>
+                                    <MenuItem value="dotaz">Dotaz</MenuItem>
+                                </Select>
+                            </FormControl>
+                            <textarea maxLength={2000} placeholder="Obsah zprávy..." className="form-item form-textarea"></textarea>
+                            <button className="acc-btn form-button">Odeslat</button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </Backdrop>
            
            <div className="mid-container">
                 <section className="home-section section-left">
@@ -91,7 +123,7 @@ export default function Home() {
                             <h1>Potřebujete poradit?</h1>
                             <h2>Máte potíže s Roomie, nebo nám chcete jen dát tip na případná vylepšení? Neváhejte nás kontaktovat tlačítkem níže.</h2>
                         </div>
-                        <button onClick={() => setIsModalActive(true)} className="section-btn main-btn">Kontaktovat Roomie!</button>
+                        <button onClick={() => setContactForm(true)} className="section-btn main-btn">Kontaktovat Roomie!</button>
                     </div>
                 </section>
                 <video ref={videoRef} className="home-video" poster="/video/thumbnail.png" controls>
