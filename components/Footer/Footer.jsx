@@ -24,8 +24,8 @@ const Footer = () => {
                         <ul>
                             <li><Link href="/login">Přihlásit se</Link></li>
                             <li><Link href="/register">Registrovat</Link></li>
-                            <li><Link href="/login">Smluvní podmínk</Link></li>
-                            <li><Link href="/login">Premium</Link></li>
+                            <li><Link href="/404">Smluvní podmínky</Link></li>
+                            <li><Link href="/premium">Premium</Link></li>
                         </ul>
                     </p>
                 </div>
