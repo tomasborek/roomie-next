@@ -1372,6 +1372,28 @@ textarea {
   }
 }
 
+.Friends .friends-banner {
+  height: 200px;
+  width: 100%;
+  background: #309eab;
+  background: -webkit-gradient(linear, left top, right top, from(#309eab), color-stop(87%, #154c70));
+  background: linear-gradient(90deg, #309eab 0%, #154c70 87%);
+}
+
+.Friends .friends-content {
+  position: relative;
+  bottom: 100px;
+  padding: 2rem 1rem;
+  background-color: white;
+  border-radius: 5px;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.Friends .friends-content .content-heading {
+  text-align: center;
+}
+
 .home-header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3452,6 +3474,7 @@ textarea {
   cursor: pointer;
   -webkit-transition: all 200ms;
   transition: all 200ms;
+  margin-bottom: 1rem;
 }
 
 .sent-req:hover {
@@ -3535,6 +3558,10 @@ textarea {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .pagination .pagination-page {
@@ -3559,6 +3586,14 @@ textarea {
 
 .pagination .pagination-page .fa-arrow-right {
   margin-left: 0.5rem;
+}
+
+.pagination.disabled {
+  pointer-events: none;
+}
+
+.pagination.disabled .pagination-page {
+  opacity: 0.5;
 }
 
 .header-info .info-contact {

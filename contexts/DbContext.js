@@ -1,7 +1,7 @@
 import React, {createContext, useContext, useState, useEffect} from 'react';
 import { db } from '../Firebase';
 //Firestore imports
-import { setDoc, doc, query, where, collection, getDoc, getDocs, deleteDoc, updateDoc, serverTimestamp, orderBy, limit, startAfter, addDoc } from '@firebase/firestore';
+import { setDoc, doc, query, where, collection, getDoc, getDocs, deleteDoc, updateDoc, serverTimestamp, orderBy, limit, startAfter, addDoc, startAt, endBefore, limitToLast } from '@firebase/firestore';
 
 const DbContext = createContext();
 
@@ -91,6 +91,7 @@ export function DbProvider(props) {
                 friends: [],
                 requests: [],
                 sentRequests: [],
+                timeStamp: serverTimestamp()
 
             })
         }else if(type == "offerer"){
@@ -118,7 +119,8 @@ export function DbProvider(props) {
                 type: "flat",
                 friends: [],
                 requests: [],
-                sentRequests: []
+                sentRequests: [],
+                timeStamp: serverTimestamp()
             });
         }
     }
@@ -128,8 +130,20 @@ export function DbProvider(props) {
     }
 
     const getListings = (type) => {
-        const q = query(collection(db, "listings"), where("type", "==", type));
+        const q = query(collection(db, "listings"), where("type", "==", type), orderBy("timeStamp", "desc"), limit(10));
         return getDocs(q);
+    }
+
+    const getListingsPage = (type, page, listings) => {
+        const colRef = collection(db, "listings");
+        if(page === "next"){
+            const q = query(colRef, where("type", "==", type), orderBy("timeStamp", "desc"), limit(10), startAfter(listings[listings.length - 1]))
+            return getDocs(q);
+        }
+        if(page === "prev"){
+            const q = query(colRef, where("type", "==", type), orderBy("timeStamp", "desc"), limitToLast(10), endBefore(listings[0]))
+            return getDocs(q);
+        }
     }
 
     const getListing = (id) => {
@@ -155,8 +169,22 @@ export function DbProvider(props) {
 
     const getRequests = (type, uid) => {
         const colRef = collection(db, "users", uid, type);
-        const q = query(colRef, orderBy("timeStamp", "desc"))
+        const startAfterDoc = doc(db, "users", uid, type, "NdTKcjX8zHZmfeJnktCrB65Ulw03");
+        const q = query(colRef, orderBy("timeStamp", "desc"), limit(5));
         return getDocs(q);
+    }
+
+    const getRequestsPage = (type, uid, page, requests) => {
+        const colRef = collection(db, "users", uid, type);
+        if(page === "next"){
+            const q = query(colRef, orderBy("timeStamp", "desc"), limit(25), startAfter(requests[requests.length - 1]));
+            return getDocs(q);
+        }
+        if(page === "prev"){
+            const q = query(colRef, orderBy("timeStamp", "desc"), endBefore(requests[0]), limitToLast(5))
+            return getDocs(q);
+        }
+        
     }
 
     const getPaginationRequests = (type, uid, page, lastDoc) => {
@@ -220,6 +248,14 @@ export function DbProvider(props) {
        
     }
 
+    //Friends
+
+    const getFriends = (uid) => {
+        const colRef = collection(db, "users", uid, "friends");
+        const q = query(colRef, orderBy("timeStamp", "desc"));
+        return getDocs(q);
+    }
+
    
     
 
@@ -232,16 +268,19 @@ export function DbProvider(props) {
         updateListing,
         createListing,
         getListings,
+        getListingsPage,
         getListing,
         getListingByUser,
         delListing,
         createRequest,
         getRequests,
+        getRequestsPage,
         resolveRequest,
         addFriend,
         addNotification,
         getNotifications,
-        deleteNotification
+        deleteNotification,
+        getFriends
     }
     return (
         <DbContext.Provider value={value}>

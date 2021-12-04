@@ -52,13 +52,7 @@ const RecievedReqFull = ({reqInfo, id, setOpen}) => {
                })
            }).then(res => {
                //Adding a firend to requested user's listing
-               return addFriend(requestedUser.id, id, {
-                username: requestingUser.name,
-                age: requestingUser.age,
-                type: requestingUser.type,
-                listingId: requestingUser.listingId,
-                gender: requestingUser.gender
-               })
+               return addFriend(requestedUser.id, id, requestedUser.data())
            }).then(res => {
                return updateListing(requestedUser.data().listing.id, {
                    friends: arrayUnion(id),

@@ -1,0 +1,19 @@
+.Friends{
+    .friends-banner{
+        height: 200px;
+        width: 100%;
+        @include gradientBg;
+    }
+    .friends-content{
+        position: relative;
+        bottom: 100px;
+        padding: 2rem 1rem;
+        background-color: white;
+        border-radius: 5px;
+        width: 100%;
+        min-height: 100vh;
+    }
+    .friends-content .content-heading{
+        text-align: center;
+    }
+}
