@@ -41,7 +41,7 @@ const Friends = () => {
                         {Object.keys(friends).length > 0 ?
                             <div className="content-list">
                             {Object.keys(friends).map(friend => (
-                                <Friend info={friends[friend]}>{friends[friend].mainInfo.username}</Friend>
+                                <Friend info={friends[friend]}>{friends[friend].username}</Friend>
                             ))}
                             </div>
                         :

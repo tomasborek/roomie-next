@@ -208,6 +208,7 @@ exports.createFriend = functions.https.onCall((data, context) => {
       type: sender.type,
       gender: sender.gender,
       listingId: senderListing,
+      timeStamp: admin.firestore.FieldValue.serverTimestamp(),
     }).then((response) => {
       // Then, add friend (reciever) to sender's subcollection
       return senderFriends.doc(recieverUid).set({
@@ -216,6 +217,7 @@ exports.createFriend = functions.https.onCall((data, context) => {
         type: reciever.mainInfo.type,
         gender: reciever.mainInfo.gender,
         listingId: recieverListing,
+        timeStamp: admin.firestore.FieldValue.serverTimestamp(),
       }).then((response) => {
         // Then, add friend (sender) to reciever's listing
         recieverListingDoc.update({
