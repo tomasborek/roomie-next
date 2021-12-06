@@ -57,16 +57,6 @@ export function DbProvider(props) {
 
     //Requests and friends
 
-    const createRequest = (type, recieverUid, senderUid, params) => {
-        if(type === "recieved"){
-            const docRef = doc(db, "users", recieverUid, "recievedRequests", senderUid);
-            return setDoc(docRef, {...params, timeStamp: serverTimestamp()});
-        }else if(type === "sent"){
-            const docRef = doc(db, "users", senderUid, "sentRequests", recieverUid);
-            return setDoc(docRef, {...params, timeStamp: serverTimestamp()});
-        }
-    }
-
     const getRequests = (type, uid, page) => {
         const colRef = collection(db, "users", uid, type);
         if(page === "first"){
@@ -83,64 +73,14 @@ export function DbProvider(props) {
         }
     }
 
-  
-
-    const resolveRequest = (type, recieverUid, senderUid, params) => {
-        if(type === "recieved"){
-            let docRef = doc(db, "users", recieverUid, "recievedRequests", senderUid);
-            return deleteDoc(docRef);
-        }else if (type === "sent"){
-            let docRef = doc(db, "users", senderUid, "sentRequests", recieverUid);
-            return deleteDoc(docRef);
-        }
-        
-    }
-
     //Notifications
-
-    const addNotification = (type, recieverUid, secondUserUid, secondUserName) => {
-        let params;
-        if(type === "acceptedRequest"){
-            params = {
-                message: `Uživatel ${secondUserName} přijal vaší žádost. Kontaktujte ho.`,
-                type: type
-            }
-        }else if(type === "recievedRequest"){
-            params = {
-                message: `Uživatel ${secondUserName} vás žádá o kontaktní údaje.`,
-                type: type
-            }
-        }
-        const docRef = doc(db, "users", recieverUid, "notifications", secondUserUid);
-        return setDoc(docRef, params);
-    }
 
     const getNotifications = (uid) => {
         const colRef = collection(db, "users", uid, "notifications");
         return getDocs(colRef);
     }
 
-    const deleteNotification = (uid, secondUserUid) => {
-        return new Promise((resolve, reject) => {
-            const docRef = doc(db, "users", uid, "notifications", secondUserUid);
-            getDoc(docRef)
-            .then(document => {
-                deleteDoc(doc(db, "users", uid, "notifications", document.id));
-                resolve(null);
-            })
-            // .catch(error => {
-            //     reject(error);
-            // })
-        })
-       
-    }
-
     //Friends
-
-    const addFriend = (recieverUid, senderUid, params) => {
-        const docRef = doc(db, "users", recieverUid, "friends",senderUid);
-        return setDoc(docRef, {...params, timeStamp: serverTimestamp()});
-    }
     
     const getFriends = (uid) => {
         const colRef = collection(db, "users", uid, "friends");
@@ -160,13 +100,8 @@ export function DbProvider(props) {
         getListingsPage,
         getListing,
         getListingByUser,
-        createRequest,
         getRequests,
-        resolveRequest,
-        addFriend,
-        addNotification,
         getNotifications,
-        deleteNotification,
         getFriends
     }
     return (
