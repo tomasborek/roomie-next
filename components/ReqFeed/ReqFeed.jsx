@@ -14,7 +14,7 @@ import { CircularProgress } from '@mui/material';
 
 const ReqFeed = ({type}) => {
     const {currentUser} = useAuth();
-    const {getUser, getRequests, getRequestsPage, deleteNotifications} = useDb();
+    const {getUser, getRequests, deleteNotifications} = useDb();
     //State
     //Recieved requests
     const [recievedRequests, setRecievedRequests] = useState(null);
@@ -31,12 +31,14 @@ const ReqFeed = ({type}) => {
 
     //Getting reqs initial
     useEffect(() => {
+        console.log("use");
         if(currentUser && type === "recieved"){
             let recievedRequestsObject = {};
-            getRequests("recievedRequests", currentUser.uid)
+            getRequests("recievedRequests", currentUser.uid, "first")
             .then(docs =>{
+                console.log(docs.docs);
                 setRecievedSnaps(docs.docs);
-                docs.forEach(req => {
+                docs.docs.forEach(req => {
                     recievedRequestsObject = {...recievedRequestsObject, [req.id]: req.data()}
                 })
                 setRecievedRequests(recievedRequestsObject);
@@ -44,10 +46,10 @@ const ReqFeed = ({type}) => {
         }
         if(currentUser && type === "sent" && !sentRequests){
             let sentRequestsObject = {};
-            getRequests("sentRequests", currentUser.uid)
+            getRequests("sentRequests", currentUser.uid, "first")
             .then(docs =>{
                 setSentSnaps(docs.docs);
-                docs.forEach(req => {
+                docs.docs.forEach(req => {
                     sentRequestsObject = {...sentRequestsObject, [req.id]: req.data()}
                 })
                 setSentRequests(sentRequestsObject);
@@ -62,7 +64,7 @@ const ReqFeed = ({type}) => {
             if(page === "next"){
                 let recievedRequestsObject = {};
                 setPaginationDisabled(true);
-                getRequestsPage("recievedRequests", currentUser.uid, "next", recievedSnaps)
+                getRequests("recievedRequests", currentUser.uid, "next", recievedSnaps)
                 .then(docs => {
                     if(docs.docs.length > 0){
                         setPage(prevState => prevState + 1);
@@ -78,7 +80,7 @@ const ReqFeed = ({type}) => {
             if(page === "prev"){
                 let recievedRequestsObject = {};
                 setPaginationDisabled(true);
-                getRequestsPage("recievedRequests", currentUser.uid, "prev", recievedSnaps)
+                getRequests("recievedRequests", currentUser.uid, "prev", recievedSnaps)
                 .then(docs => {
                     if(docs.docs.length > 0){
                         setPage(prevState => prevState - 1);

@@ -8,6 +8,7 @@
         border: 1px solid $mainGray;
         margin-bottom: 1rem;
         width: 400px;
+        background-color: white;
 
         &.error{
             border-color: red;
@@ -40,6 +41,7 @@
             border: 1px solid $mainGray;
             margin-bottom: 1rem;
             padding: 0.5rem;
+            background-color: white;
             option{
                 text-indent: 5px;
             }

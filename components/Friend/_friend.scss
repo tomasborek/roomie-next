@@ -1,0 +1,31 @@
+.friend{
+    padding: 1rem;
+    border: 1px solid $mainGray;
+    display: flex;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: all 200ms;
+    &:hover{
+        border-color: $mainColor;
+    }
+    .friend-pfp-container{
+        padding-right: 1rem;
+        .friend-pfp{
+            width: 50px;
+            height: 50px;
+            background-color: $mainGray;
+            border-radius: 50%;
+        }
+    }
+    .friend-content{
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .content-name{
+            font-weight: bold;
+
+        }
+    }
+}

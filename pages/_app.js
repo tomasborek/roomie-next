@@ -8,6 +8,7 @@ import Head from 'next/dist/shared/lib/head';
 import { SnackBarProvider } from '../contexts/SnackBarContext';
 import { LoadingProvider } from '../contexts/LoadingContext';
 import { NotificationsProvider } from '../contexts/NotificationsContext';
+import FunctionsProvider from '../contexts/FunctionsContext';
 //Styles
 import '../styles/global.css'
 
@@ -20,13 +21,15 @@ function MyApp({ Component, pageProps }) {
       <meta name="description" content="Portál Roomie se zaměřuje na zprostředkování moderní platformy pro hledání spolubydlících či bytů ke spolubydlení. Hledejte spolubydlení a spolubydlící jednoduše a podle vašich představ. Jsme sociální sítí pro spolubydlení."></meta>
     </Head>
     <LoadingProvider>
-      <SnackBarProvider>
-        <NotificationsProvider>
-          <Layout>
-              <Component {...pageProps} />
-          </Layout>
-        </NotificationsProvider>
-      </SnackBarProvider>
+        <SnackBarProvider>
+            <NotificationsProvider>
+                <FunctionsProvider>
+                    <Layout>
+                          <Component {...pageProps} />
+                    </Layout>
+                </FunctionsProvider>
+            </NotificationsProvider>
+          </SnackBarProvider>
     </LoadingProvider>
     </>
   )

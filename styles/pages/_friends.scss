@@ -15,5 +15,27 @@
     }
     .friends-content .content-heading{
         text-align: center;
+        padding-bottom: 100px;
     }
+
+    .friends-content .content-loading{
+        display: flex;
+        justify-content: center;
+    }
+
+    .friends-content .content-empty{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        img{
+            width: 184px;
+            height: 208px;
+        }
+        .empty-description{
+            margin-top: 1rem;
+            color: $mainGray;
+            font-size: 14px;
+        }
+    }
+    
 }

@@ -6,6 +6,9 @@ import { useDb } from '../contexts/DbContext';
 //Components
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
+import Friend from '../components/Friend/Friend';
+//MUI
+import { CircularProgress } from '@mui/material';
 
 const Friends = () => {
     //Variables
@@ -15,13 +18,14 @@ const Friends = () => {
 
     useEffect(() => {
         if(currentUser){
-            let friendsArray = [];
+            let friendsObject = {};
             getFriends(currentUser.uid)
             .then(docs => {
                 docs.forEach(doc => {
-                    friendsArray = [...friendsArray, {[doc.id]: doc.data()}];
+                    friendsObject = {...friendsObject, [doc.id]: doc.data()};
                 })
-                setFriends(friendsArray);
+                setFriends(friendsObject);
+    
             })
         }
     }, [currentUser])
@@ -32,6 +36,29 @@ const Friends = () => {
             <div className="container">
                 <div className="friends-content">
                     <h2 className="content-heading">Přátelé</h2>
+                    {friends ?
+                    <>
+                        {Object.keys(friends).length > 0 ?
+                            <div className="content-list">
+                            {Object.keys(friends).map(friend => (
+                                <Friend info={friends[friend]}>{friends[friend].mainInfo.username}</Friend>
+                            ))}
+                            </div>
+                        :
+                        <div className="content-empty">
+                            <img src="/img/bad-results/notfound.png" />
+                            <p className="empty-description">Dosud nemáte žádné přátele.</p>
+                        </div>
+                        
+                        }
+                    </>
+                    
+                :
+                <div className="content-loading">
+                    <CircularProgress/>
+                </div>
+                    }
+                    
                 </div>
             </div>
             <Footer />

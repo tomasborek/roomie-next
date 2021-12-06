@@ -26,7 +26,7 @@ import { Alert } from '@mui/material';
 const EditProfile = () => {
     //Variables
     const {currentUser, delUser, reAuth} = useAuth();
-    const {getUser, updateUser, delUserDb, updateListing, delListing, getListingByUser} = useDb();
+    const {getUser, updateUser, updateListing, getListingByUser} = useDb();
    const router = useRouter();
     const [loading, setLoading] = useLoading();
     //State
@@ -134,12 +134,7 @@ const EditProfile = () => {
         reAuth(currentUser, confirmPasswordRef.current.value)
         .then(res => {
             return delUser(currentUser);
-        }).then(res =>{
-            return delUserDb(currentUser);
         }).then(res => {
-            return delListing(userData.data().mainInfo.type, userData.data().listing.id);
-        }).then(res => {
-            console.log("deleted");
             setLoading(false);
             router.push("/");
             setDeleteDialogOpen(false);

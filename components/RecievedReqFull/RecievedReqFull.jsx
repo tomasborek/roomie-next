@@ -6,86 +6,57 @@ import { useDb } from '../../contexts/DbContext'
 import { useLoading } from '../../contexts/LoadingContext'
 import { useAuth } from '../../contexts/AuthContext'
 import { arrayRemove, arrayUnion } from '@firebase/firestore'
+import {useFunctions} from "../../contexts/FunctionsContext";
+import { useSnackBar } from '../../contexts/SnackBarContext';
 
 const RecievedReqFull = ({reqInfo, id, setOpen}) => {
     //Variables---
         //Contexts
-        const {updateUser, getUser, updateListing, resolveRequest, addFriend, addNotification, deleteNotification} = useDb();
+        const {updateUser, getUser, updateListing, addNotification, deleteNotification} = useDb();
         const [loading, setLoading] = useLoading();
         const {currentUser} = useAuth();
-
+        const {callable} = useFunctions();
+        const {snackBar} = useSnackBar();
 
         //Functions
         const handleAction = (action) => {
+            let reciever;
             setLoading(true);
             setOpen(false);
-            resolveRequest("recieved", currentUser.uid, id)
-            .then(res => {
-                return resolveRequest("sent", currentUser.uid, id,)
-            }).then(res => {
-                if(action === "accepted") handleFriendship();
-                if(action === "rejected") handleReject();
-            })
-        }
-
-
-        const handleFriendship = () => {
-            //Us
-            let requestedUser;
-            //The one who sent request
-            let requestingUser = reqInfo;
-           getUser(currentUser.uid)
-           .then(user => {
-                requestedUser = user;
-                //Adding a friend to requesting user's profile
-                return addFriend(id, requestedUser.id, {
-                    username: requestedUser.data().mainInfo.username,
-                    age: requestedUser.data().mainInfo.age,
-                    type: requestedUser.data().mainInfo.type,
-                    listingId: requestedUser.data().listing.id,
-                    gender: requestedUser.data().mainInfo.gender
-                })
-           }).then(res => {
-               return updateListing(requestingUser.listingId, {
-                   friends: arrayUnion(requestedUser.id),
-                   sentRequests: arrayRemove(requestedUser.id)
-               })
-           }).then(res => {
-               //Adding a firend to requested user's listing
-               return addFriend(requestedUser.id, id, requestedUser.data())
-           }).then(res => {
-               return updateListing(requestedUser.data().listing.id, {
-                   friends: arrayUnion(id),
-                   requests: arrayRemove(id)
-               })
-           }).then(res => {
-               handleNotification(requestedUser);
-               setLoading(false);
-           })
-        }
-
-        const handleReject = () =>{
-                updateListing(reqInfo.listingId, {
-                    requests: arrayRemove(id)
-                }).then(res => {
-                return updateListing(requestedUser.data().listing.id, {
-                    requests: arrayRemove(id)
-                })
-            }).then(res => {
+            const resolveRequest = callable("resolveRequest");
+            getUser(currentUser.uid)
+            .then((user) => {
+                reciever = user;
+                const resolvingInfo = {
+                    senderUid: id,
+                    senderListing: reqInfo.listingId,
+                    recieverUid: currentUser.uid,
+                    recieverListing: reciever.data().listing.id,
+                }
+                return resolveRequest(JSON.stringify(resolvingInfo))
+            }).then((response) => {
                 setLoading(false);
-            }).catch(error => {
+                snackBar(`Žádost byla ${action === "accepted" ? "přijata" : "odmítnuta"}.`, "success");
+                if(action === "accepted") handleFriendship(reciever);
+            }).catch((error) => {
                 setOpen(true);
-                setLoading(false)
+                setLoading(false);
+                snackBar("Něco se nepovedlo. Zkuste to prosím později.", "error");
             })
         }
 
-        const handleNotification = (requestedUser) => {
-            addNotification("acceptedRequest", id, requestedUser.id, requestedUser.data().mainInfo.username)
-            .then(res => {
-                deleteNotification(requestedUser.id, id);
-            })
+        const handleFriendship = (user) => {
+            const createFriend = callable("createFriend");
+            const friendInfo = {
+                reciever: user.data(),
+                recieverUid: user.id,
+                recieverListing: user.data().listing.id,
+                sender: reqInfo,
+                senderUid: id,
+                senderListing: reqInfo.listingId
+            }
+            createFriend(JSON.stringify(friendInfo))
         }
-
     return (
         <div className="recieved-req-full">
             <i onClick={() => setOpen(false)} className="fas fa-times full-close-icon"></i>

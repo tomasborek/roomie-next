@@ -9,7 +9,8 @@ import { useDb } from '../../contexts/DbContext';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLoading } from '../../contexts/LoadingContext';
 import { useSnackBar } from '../../contexts/SnackBarContext';
-import { arrayUnion } from '@firebase/firestore'
+import { useFunctions } from "../../contexts/FunctionsContext";
+import { arrayUnion } from '@firebase/firestore';
 
 //Components
 import Header from '../Header/Header'
@@ -40,10 +41,11 @@ const Listing = ({type}) => {
     //Contexts
     const router = useRouter();
     const {id} = router.query;
-    const {getListing, updateListing, updateUser, getUser, createRequest, addNotification, deleteNotification} = useDb();
+    const {getListing, updateListing, updateUser, getUser, addNotification, deleteNotification} = useDb();
     const {currentUser} = useAuth();
     const [loading, setLoading] = useLoading();
     const {snackBar} = useSnackBar();
+    const {callable} = useFunctions();
     //States
     //Listing data obj
     const [listingInfo, setListingInfo] = useState(null);
@@ -186,48 +188,37 @@ const Listing = ({type}) => {
     }
 
     const handleRequest = () => {
+        //Loading...
         setLoading(true);
         setReqDialogOpen(false);
+        //Two people involved
         let reciever = listingInfo;
         let sender;
+        //Callable functions
+        const createRequest = callable("createRequest");
         getUser(currentUser.uid)
         .then(user =>{
-            sender = user;
-            return createRequest("recieved", reciever.data().userInfo.uid, sender.id, {
-                name: sender.data().mainInfo.username,
-                age: sender.data().mainInfo.age,
-                gender: sender.data().mainInfo.gender,
-                 listingId: sender.data().listing.id,
-                 type: sender.data().mainInfo.type,
-                 message: requestMessage,
-            })
-        }).then(res => {
-            return createRequest("sent", reciever.data().userInfo.uid, sender.id, {
-                name: reciever.data().userInfo.name,
-                age: reciever.data().userInfo.age,
-                listingId: reciever.id,
-            })
-        }).then(res => {
-            return updateListing(listingInfo.id, {
-                requests: arrayUnion(currentUser.uid),
-            })
-        }).then(res => {
-            return updateListing(sender.data().listing.id, {
-                sentRequests: arrayUnion(listingInfo.data().userInfo.uid)
-            })
+            const requestInfo = {
+                sender: user.data(),
+                senderUid: user.id,
+                reciever: reciever.data().userInfo,
+                recieverListingId: reciever.id,
+                recieverUid: reciever.data().userInfo.uid,
+                message: requestMessage
+            }
+            return createRequest(JSON.stringify(requestInfo)); 
         }).then(res => {
             return getListing(id);
         }).then(doc => {
             setListingInfo(doc);
-            return addNotification("recievedRequest", reciever.data().userInfo.uid, sender.id, sender.data().mainInfo.username);
-        }).then(res =>{
             setLoading(false);
             snackBar("Žádost byla odeslána.", "success");
-        }).catch(error =>{
-            setLoading(false);
-            setReqDialogOpen(true);
-            snackBar("Něco se nepovedlo. Zkuste to prosím později.", "error");
         })
+        // .catch(error =>{
+        //     setLoading(false);
+        //     setReqDialogOpen(true);
+        //     snackBar("Něco se nepovedlo. Zkuste to prosím později.", "error");
+        // })
     }
 
     if(type === "flatmate"){

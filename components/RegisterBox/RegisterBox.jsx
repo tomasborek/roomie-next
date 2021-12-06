@@ -8,6 +8,7 @@ import {useAuth} from "../../contexts/AuthContext";
 import { useDb } from '../../contexts/DbContext';
 import { useLoading } from '../../contexts/LoadingContext';
 import { useRegister } from '../../contexts/RegisterContext';
+import { useFunctions } from "../../contexts/FunctionsContext";
 
 
 //Components
@@ -17,7 +18,7 @@ import OptionsStep from '../RegistrationSteps/OptionsStep/OptionsStep';
 //Material components
 import Slider from "@mui/material/Slider";
 import Alert from "@mui/material/Alert";
-import { Button } from '@mui/material';
+import { Button, easing } from '@mui/material';
 import DropdownStep from '../RegistrationSteps/DropdownStep/DropdownStep';
 import RangeStep from '../RegistrationSteps/RangeStep/RangeStep';
 import RegistrationFinal from '../RegistrationSteps/RegistrationFinal/RegistrationFinal';
@@ -28,9 +29,9 @@ const RegisterBox = () => {
     //Variables
     let router = useRouter();
     const {register, currentUser, deleteU} = useAuth();
-    const {addUser, getListingByUser, createListing} = useDb();
     const [loading, setLoading] = useLoading();
     const {usernameRef, emailRef, phoneRef, passwordRef, dayRef, monthRef, yearRef} = useRegister();
+    const {callable} = useFunctions();
     let uid;
     let listingIdVar;
     //State
@@ -41,62 +42,92 @@ const RegisterBox = () => {
     const [location, setLocation] = useState(null);
     const [price, setPrice] = useState(20);
     const [listingId, setListingId] = useState("");
+
     //Action handle functions
     const registerHandle = () => {
-        
+        //Reset error
         setError(null);
-        const username = usernameRef.current.value.trim();
-        const email = emailRef.current.value.trim();
-        const phone = phoneRef.current.value.trim();
-        const password = passwordRef.current.value;
-        //Checks if all inputs are filled, throws an alert if not
-       
-        if(!checkIfFilled()){
-            return;
-        }
+        //Cloud functions
+        const createUser = callable("createUser");
+        const createListing = callable("createListing");
+        //Refs trim
+        usernameRef.current.value = usernameRef.current.value.trim();
+        emailRef.current.value = emailRef.current.value.trim();
+        phoneRef.current.value = phoneRef.current.value.trim();
+        passwordRef.current.value = passwordRef.current.value;
+        if(!checkIfFilled()) return;
+        //Set loading on
         setLoading(true);
-       // setLoading(true);
+        //Variables
+        //Refs variables
+        const username = usernameRef.current.value;
+        const email = emailRef.current.value;
+        const phone = phoneRef.current.value;
+        const password = passwordRef.current.value;
+        //Age & bday
         const birthday = `${dayRef.current.value}/${monthRef.current.value}/${yearRef.current.value}`;
         const age = ageCalc(dayRef.current.value, monthRef.current.value, yearRef.current.value);
-        //Register then chain
+        //Listing Id
+        const listingIdVar = idGenerator(type);
+        setListingId(listingIdVar);
+        //Auth register
         register(email, password)
-        .then(user =>{
-            console.log("Successful - registration");
-            uid = user.user.uid;
-            return user;
-        }).then(user => {
-            listingIdVar = idGenerator(type);
-            setListingId(listingIdVar);
-            const contact = {
+        .then(user => {
+            //Uid
+            const uid = user.user.uid;
+
+            const userInfo = {
+                username: username,
+                age: age,
+                gender: gender,
+                birthday: birthday,
+                location: location,
+                type: type,
                 email: email,
                 phone: phone,
-                ig: "",
-                fb: "",
-                tt: ""
+                listingId: listingIdVar,
+                uid: uid,
             }
-            return createListing(type, username, uid, gender, age, price, location, contact, listingIdVar);
-        }).then(res => {
-            console.log("Succesful - listing");
-            return addUser(username, gender, type, age, birthday, location, email, phone, listingIdVar, uid);
-        }).then(doc => {
-            console.log("Successful - db");
-            setLoading(false);
-            setStep(5);
-        }).catch(error => {
-            setLoading(false);
-            console.log(error);
-            switch(error.code){
-                case "auth/email-already-in-use":
-                    setError("Tento e-mail je nedostupný.");
-                    break;
-                case "auth/invalid-email":
-                    setError("Zadejte prosím platný email.");
-                    break;
-                default:
-                    setError("Registrace selhala. Zkuste to prosím za chvíli.");
+            const listingInfo = {
+                username: username,
+                age: age,
+                gender: gender,
+                type: type,
+                listingId: listingIdVar,
+                contact: {
+                    email: email,
+                    phone: phone,
+                    socials: {
+                        ig: "",
+                        fb: "",
+                        tt: "",
+                    },
+                },
+                uid: uid,
+                money: price,
+                location: location,
             }
-        }) 
-     }
+            createUser(userInfo)
+            .then(response => {
+               return createListing(listingInfo)
+            }).then(response => {
+                setLoading(false);
+                setStep(5);
+            }).catch(error => {
+                setLoading(false);
+                switch(error.code){
+                    case "auth/email-already-in-use":
+                        setError("Tento e-mail je nedostupný.");
+                        break;
+                    case "auth/invalid-email":
+                        setError("Zadejte prosím platný email.");
+                        break;
+                    default:
+                        setError("Registrace selhala. Zkuste to prosím za chvíli.");
+                }
+            }) 
+        })
+    }
 
     const checkIfFilled = () => {
         usernameRef.current.classList.remove("error");
@@ -106,19 +137,19 @@ const RegisterBox = () => {
         dayRef.current.classList.remove("error");
         yearRef.current.classList.remove("error");
 
-        if(usernameRef.current.value === "" ){
+        if(usernameRef.current.value === "" || usernameRef.current.value.length < 2){
             setError("Prosím zadejte své jméno.");
             usernameRef.current.classList.add("error");
             return false;
         }
 
-        if(emailRef.current.value === "" ){
+        if(emailRef.current.value === "" || emailRef.current.value.length < 4){
             setError("Prosím zadejte svůj email.");
             emailRef.current.classList.add("error");
             return false;
         }
 
-        if(phoneRef.current.value === "" ){
+        if(phoneRef.current.value === "" || phoneRef.current.value.match(/^[0-9]+$/) == null){
             setError("Prosím zadejte své číslo.");
             phoneRef.current.classList.add("error");
             return false;
@@ -126,6 +157,10 @@ const RegisterBox = () => {
 
         if(passwordRef.current.value === ""){
             setError("Prosím zadejte své heslo.");
+            passwordRef.current.classList.add("error");
+            return false;
+        }else if(passwordRef.current.value.length < 7){
+            setError("Prosím zadejte heslo dlouhé alespoň 7 znaků.");
             passwordRef.current.classList.add("error");
             return false;
         }
