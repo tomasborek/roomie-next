@@ -240,6 +240,25 @@ exports.createFriend = functions.https.onCall((data, context) => {
     });
   });
 });
+exports.updateProfile = functions.https.onCall((data, context) => {
+  // Parse incoming data
+  data = JSON.parse(data);
+  // Shortcut
+  const db = admin.firestore();
+  const uid = data.uid;
+  const listingId = data.listingId;
+  const userParams = data.userParams;
+  const listingParams = data.listingParams;
+  return new Promise((resolve, reject) => {
+    db.collection("users").doc(uid).update(userParams).then((response) => {
+      return db.collection("listings").doc(listingId).update(listingParams);
+    }).then((response) => {
+      resolve(response);
+    }).catch((error) => {
+      reject(error);
+    });
+  });
+});
 
 // Trigger functions---
 // Delete user's db record when his auth is deleted

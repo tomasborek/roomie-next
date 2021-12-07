@@ -5,6 +5,8 @@ import { useRouter } from 'next/dist/client/router';
 import { useAuth } from '../contexts/AuthContext';
 import {useDb} from "../contexts/DbContext";
 import { useLoading } from '../contexts/LoadingContext';
+import {useFunctions} from "../contexts/FunctionsContext";
+import {useSnackBar} from "../contexts/SnackBarContext";
 
 
 //Components
@@ -27,8 +29,10 @@ const EditProfile = () => {
     //Variables
     const {currentUser, delUser, reAuth} = useAuth();
     const {getUser, updateUser, updateListing, getListingByUser} = useDb();
-   const router = useRouter();
+    const router = useRouter();
     const [loading, setLoading] = useLoading();
+    const {callable} = useFunctions();
+    const {snackBar} = useSnackBar();
     //State
     const [userData, setUserData] = useState();
     const [dDialogOpen, setDDialogOpen] = useState(false);
@@ -82,26 +86,29 @@ const EditProfile = () => {
         const username = usernameRef.current.value.trim();
         const email = emailRef.current.value.trim();
         const phone = phoneRef.current.value.trim();
-        if(username === "" || email === "" || phone === "") return;
+        const updateProfile = callable("updateProfile");
+        if(username == null || email == null || phone == null) return;
         if(username.length <= 2) return;
         if(phone.length < 9) return;
         if(email.length < 3) return;
         if(!handleSocials()) return;
         setLoading(true);
-        updateUser(currentUser.uid, {
-            contact: {
-                email: email,
-                phone: phone,
-                socials: {
-                    fb: fbRef.current.value,
-                    tt: ttRef.current.value,
-                    ig: igRef.current.value
-                }
+        const profileInfo = {
+            uid: currentUser.uid,
+            listingId: userData.data().listing.id,
+            userParams: {
+                contact: {
+                    email: email,
+                    phone: phone,
+                    socials: {
+                        fb: fbRef.current.value,
+                        tt: ttRef.current.value,
+                        ig: igRef.current.value
+                    }
+                },
+                "mainInfo.username": username
             },
-            "mainInfo.username": username
-        })
-        .then(res => {
-            return  updateListing(userData.data().listing.id, {
+            listingParams: {
                 userInfo: {
                     name: usernameRef.current.value,
                     age: userData.data().mainInfo.age,
@@ -115,10 +122,15 @@ const EditProfile = () => {
                     },
                     uid: currentUser.uid
                 },
-            })
-        }).then(res => {
+            }
+        }
+        updateProfile(JSON.stringify(profileInfo)).then((response) => {
             setLoading(false);
             router.back();
+            snackBar("Úprava proběhla úspěšně.", "success");
+        }).catch((error) => {
+            setLoading(false);
+            snackBar("Něco se nepovedlo. Zkuste to prosím později.", "error");
         })
     }
 
@@ -153,7 +165,8 @@ const EditProfile = () => {
     const handleSocials = () => {
         let fb = false;
         let ig = false;
-        if(fbRef.current.value.length){
+        if(!fbRef.current.value == ""){
+            fbRef.current.value =  fbRef.current.value.trim();
             if(!fbRef.current.value.includes("facebook.com")){
                 fb =  false;
             }else if(!fbRef.current.value.includes("https://")){
@@ -162,9 +175,12 @@ const EditProfile = () => {
             }else{
                 fb = true;
             }
+        }else{
+            fb = true;
         }
 
-        if(igRef.current.value.length){
+        if(!igRef.current.value == ""){
+            igRef.current.value =  igRef.current.value.trim();
             if(!igRef.current.value.includes("instagram.com")){
                 ig = false;
             }else if(!igRef.current.value.includes("https://")){
@@ -173,7 +189,12 @@ const EditProfile = () => {
             }else{
                 ig = true;
             }
+        }else{
+            ig = true;
         }
+
+
+        
 
         if(fb && ig){
             return true;
