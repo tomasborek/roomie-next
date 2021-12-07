@@ -1,6 +1,8 @@
 .reqs-feed-loading{
+    padding: 2rem 0;
     display: flex;
     justify-content: center;
+    min-height: 325px;
 }
 
 .reqs-feed-recieved{
@@ -21,14 +23,14 @@
 
 .reqs-feed-empty{
     display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 2rem 0;
-        color: $mainGray;
-        font-size: 16px;
-        img{
-            margin-bottom: 1rem;
-        }
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+    color: $mainGray;
+    font-size: 16px;
+    img{
+        margin-bottom: 1rem;
+    }
 }
 
 

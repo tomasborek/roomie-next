@@ -150,7 +150,7 @@ const ExploreFeed = ({variant}) => {
                 {flatmateListings.length ? 
                 <>
                 {flatmateListings.map((listing, id) => (
-                    <FmListing name={listing.data().userInfo.name} age={listing.data().userInfo.age} gender={listing.data().userInfo.gender} location={listing.data().flatTags.location} money={listing.data().mainInfo.budget} available={listing.data().mainInfo.startTime} bio={listing.data().bio} id={listing.id} key={id}/>
+                    <FmListing name={listing.data().userInfo.username} age={listing.data().userInfo.age} gender={listing.data().userInfo.gender} location={listing.data().flatTags.location} money={listing.data().mainInfo.budget} available={listing.data().mainInfo.startTime} bio={listing.data().bio} id={listing.id} key={id}/>
                 ))}
                 <Pagination page={page} setPage={setPage} handlePagination={handlePagination} isDisabled={isPaginationDisabled} />
                 </>

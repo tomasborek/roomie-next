@@ -701,7 +701,7 @@ textarea {
   position: relative;
   bottom: 115px;
   background-color: white;
-  min-height: 100vh;
+  min-height: calc(100vh - 236px - 72px - 100p);
 }
 
 .Requests .requests-content .content-heading {
@@ -3287,12 +3287,14 @@ textarea {
 }
 
 .reqs-feed-loading {
+  padding: 2rem 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  min-height: 325px;
 }
 
 .reqs-feed-recieved {

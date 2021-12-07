@@ -150,7 +150,11 @@ const ReqFeed = ({type}) => {
                         {Object.keys(recievedRequests).map((req, id) => (
                             <RecievedReq reqInfo={recievedRequests[req]} id={req} key={id}/>
                         ))}
+                        {(Object.keys(recievedRequests).length > 9) ?
                         <Pagination setPage={setPage} page={page} handlePagination={handlePagination} isDisabled={paginationDisabled}/>
+                        :
+                        ""
+                        }
                     </div>
                     :
                     <div className="reqs-feed-empty">
@@ -174,10 +178,14 @@ const ReqFeed = ({type}) => {
                          <div className="reqs-feed-sent">
                             <h3 className="sent-heading">Odeslané žádosti</h3>
                             {Object.keys(sentRequests).map((req, id) => (
-                                <SentReq name={sentRequests[req].name} age={sentRequests[req].age} status={sentRequests[req].status} id={req} key={id} />
+                                <SentReq name={sentRequests[req].username} age={sentRequests[req].age} status={sentRequests[req].status} id={req} key={id} />
                             ))
                             }
+                            {(Object.keys(sentRequests).length > 9) ?
                             <Pagination setPage={setPage} page={page} handlePagination={handlePagination} isDisabled={paginationDisabled}/>
+                            :
+                            ""
+                            }
                         </div>
                         :
                         <div className="reqs-feed-empty">

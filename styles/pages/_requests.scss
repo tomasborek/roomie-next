@@ -11,7 +11,7 @@
         position: relative;
         bottom: 115px;
         background-color: white;
-        min-height: 100vh;
+        min-height: calc(100vh - 236px - 72px - 100p);
 
         .content-heading{
             text-align: center;
