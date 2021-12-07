@@ -59,7 +59,7 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
         }
         if(variant === "flat"){
             setAddedTags({
-                location: locationTag,
+                location: [locationTag],
                 layout: layoutTag,
                 level: levelTag,
                 petAllowed: petAllowedTag,
