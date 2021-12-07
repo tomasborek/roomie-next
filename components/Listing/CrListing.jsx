@@ -411,12 +411,14 @@ const CrListing = ({type}) => {
                                 <Collapse in={personBoxesInfoAlert}>
                                         <Alert sx={{marginTop: "1rem"}} severity="info">Přidejte info o sobě.</Alert>
                                 </Collapse> 
+                               {listingInfo &&
                                 <div className="info-edit-boxes">
                                     <button onClick={() => {
                                         setPersonBoxerOverlay(true);
                                         setPersonBoxesInfoAlert(false);
                                     }}> <i className="fas fa-plus"></i> </button>
                                 </div>
+                                }
                             </div>
                             
                         </div> 
