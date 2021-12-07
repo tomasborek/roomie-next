@@ -57,12 +57,13 @@
         }
         .items-socials{
             i{
-                cursor: pointer;
+                
                 font-size: 18px;
                 margin: 0 0.5rem;
                 &.fa-facebook-square{
                     opacity: 0.3;
                     &.active{
+                        cursor: pointer;
                         opacity: 1;
                         color: blue;
                     }
@@ -70,6 +71,7 @@
                 &.fa-instagram{
                     opacity: 0.3;
                     &.active{
+                        cursor: pointer;
                         opacity: 1;
                         color: $accent;
                     }

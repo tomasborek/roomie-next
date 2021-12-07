@@ -3808,7 +3808,6 @@ textarea {
 }
 
 .info-contact.unlocked .contact-items .items-socials i {
-  cursor: pointer;
   font-size: 18px;
   margin: 0 0.5rem;
 }
@@ -3818,6 +3817,7 @@ textarea {
 }
 
 .info-contact.unlocked .contact-items .items-socials i.fa-facebook-square.active {
+  cursor: pointer;
   opacity: 1;
   color: blue;
 }
@@ -3827,6 +3827,7 @@ textarea {
 }
 
 .info-contact.unlocked .contact-items .items-socials i.fa-instagram.active {
+  cursor: pointer;
   opacity: 1;
   color: #E14949;
 }
