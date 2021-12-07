@@ -213,12 +213,11 @@ const Listing = ({type}) => {
             setListingInfo(doc);
             setLoading(false);
             snackBar("Žádost byla odeslána.", "success");
+        }).catch(error =>{
+            setLoading(false);
+            setReqDialogOpen(true);
+            snackBar("Něco se nepovedlo. Zkuste to prosím později.", "error");
         })
-        // .catch(error =>{
-        //     setLoading(false);
-        //     setReqDialogOpen(true);
-        //     snackBar("Něco se nepovedlo. Zkuste to prosím později.", "error");
-        // })
     }
 
     if(type === "flatmate"){
@@ -274,7 +273,7 @@ const Listing = ({type}) => {
                                     :   
                                     <div className="header-info">
                                         <div className="info-main">
-                                            <h1 className="main-name">{listingInfo.data().userInfo.name}</h1>
+                                            <h1 className="main-name">{listingInfo.data().userInfo.username}</h1>
                                             {currentUser && currentUser.uid == listingInfo.data().userInfo.uid &&<button onClick={() => setEditListing(prevState => !prevState)}className="main-edit-profile">{editListing ? "Zpět" : "Upravit profil"}</button>}
                                             <i className="main-more fas fa-ellipsis-h"></i>
                                             <div className="main-description">
@@ -387,7 +386,7 @@ const Listing = ({type}) => {
                                     <div className="boxes-profile-info">
                                         <img src="/img/pfps/radek-pfp.png" alt="" className="profile-info-pfp" />
                                         <div className="profile-info-text">
-                                           {!listingInfo ? <Skeleton variant="text" sx={{width: 50}}/>: <p className="text-name">{listingInfo.data().userInfo.name}</p> } 
+                                           {!listingInfo ? <Skeleton variant="text" sx={{width: 50}}/>: <p className="text-name">{listingInfo.data().userInfo.username}</p> } 
                                           {!listingInfo ? <Skeleton variant="text" sx={{width: 30}} />:  <p className="text-description">{listingInfo.data().userInfo.gender === "male" ? "Muž" : listingInfo.data().userInfo.gender === "female" ? "Žena" : listingInfo.data().userInfo.gender === "other" ? "Jiné" : ""}, {listingInfo.data().userInfo.age}</p>}
                                         </div>
                                         

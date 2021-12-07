@@ -1,6 +1,7 @@
 import React from 'react'
 //next
 import Link from "next/link";
+import { useRouter } from 'next/router';
 //Context
 import { useDb } from '../../contexts/DbContext'
 import { useLoading } from '../../contexts/LoadingContext'
@@ -17,6 +18,7 @@ const RecievedReqFull = ({reqInfo, id, setOpen}) => {
         const {currentUser} = useAuth();
         const {callable} = useFunctions();
         const {snackBar} = useSnackBar();
+        const router = useRouter();
 
         //Functions
         const handleAction = (action) => {
@@ -38,6 +40,7 @@ const RecievedReqFull = ({reqInfo, id, setOpen}) => {
                 setLoading(false);
                 snackBar(`Žádost byla ${action === "accepted" ? "přijata" : "odmítnuta"}.`, "success");
                 if(action === "accepted") handleFriendship(reciever);
+                router.reload(window.location.pathname);
             }).catch((error) => {
                 setOpen(true);
                 setLoading(false);
@@ -63,7 +66,7 @@ const RecievedReqFull = ({reqInfo, id, setOpen}) => {
             <div className="full-pfp-container">
                 <img src="/img/pfps/radek-pfp.png" className="container-pfp"></img>
             </div>
-            <div className="full-name">{reqInfo.name}</div>
+            <div className="full-name">{reqInfo.username}</div>
             <div className="full-description">{reqInfo.gender === "male" ? "Muž" : reqInfo.gender === "female" ? "Žena" : reqInfo.gender === "other" ? "Jiné" : ""}, {reqInfo.age}</div>
             <div className="full-message">{reqInfo.message}</div>
             <div className="full-actions">

@@ -35,7 +35,7 @@ exports.createListing = functions.https.onCall((data, context) => {
   if (data.type == "flatmate") {
     listingInfo = {
       userInfo: {
-        name: data.username,
+        username: data.username,
         gender: data.gender,
         age: data.age,
         contact: data.contact,
@@ -61,7 +61,7 @@ exports.createListing = functions.https.onCall((data, context) => {
   } else if (data.type == "offerer") {
     listingInfo = {
       userInfo: {
-        name: data.username,
+        username: data.username,
         gender: data.gender,
         age: data.age,
         contact: data.contact,
@@ -94,8 +94,10 @@ exports.createRequest = functions.https.onCall((data, context) => {
   data = JSON.parse(data);
   const db = admin.firestore();
   // Two people involved vars
+  // Sender is user.data()
   const sender = data.sender;
   const senderUid = data.senderUid;
+  // Reciever is userInfo in listing
   const reciever = data.reciever;
   const recieverListingId = data.recieverListingId;
   const recieverUid = data.recieverUid;
@@ -104,7 +106,7 @@ exports.createRequest = functions.https.onCall((data, context) => {
   const listings = db.collection("listings");
   return new Promise((resolve, reject) => {
     users.doc(recieverUid).collection("recievedRequests").doc(senderUid).set({
-      name: sender.mainInfo.username,
+      username: sender.mainInfo.username,
       age: sender.mainInfo.age,
       gender: sender.mainInfo.gender,
       listingId: sender.listing.id,
@@ -114,7 +116,7 @@ exports.createRequest = functions.https.onCall((data, context) => {
     }).then((result) => {
       return users.doc(senderUid).collection("sentRequests").doc(recieverUid)
           .set({
-            name: reciever.name,
+            username: reciever.username,
             age: reciever.age,
             listingId: recieverListingId,
             timeStamp: admin.firestore.FieldValue.serverTimestamp(),
@@ -183,9 +185,11 @@ exports.createFriend = functions.https.onCall((data, context) => {
   // Admin sdk shortcut
   const db = admin.firestore();
   // Variables
+  // Reciever is user.data()
   const reciever = data.reciever;
   const recieverUid = data.recieverUid;
   const recieverListing = data.recieverListing;
+  // Sender is request info
   const sender = data.sender;
   const senderUid = data.senderUid;
   const senderListing = data.senderListing;
@@ -203,7 +207,7 @@ exports.createFriend = functions.https.onCall((data, context) => {
   return new Promise((resolve, reject) => {
     // Add friend (sender) to reciever's subcollection
     recieverFriends.doc(senderUid).set({
-      username: sender.name,
+      username: sender.username,
       age: sender.age,
       type: sender.type,
       gender: sender.gender,
@@ -264,7 +268,7 @@ exports.recievedNotification = functions.firestore
       const colRef = db.collection("users").doc(snap.ref.parent.parent.id)
           .collection("notifications");
       return colRef.doc(snap.id).set({
-        message: `Uživatel ${snap.data().name} vám zaslal žádost o kontakt`,
+        message: `Uživatel ${snap.data().username} vám zaslal žádost o kontakt`,
         type: "recievedRequest",
         timeStamp: admin.firestore.FieldValue.serverTimestamp(),
       });

@@ -17,7 +17,7 @@ const RecievedReq = ({reqInfo, id}) => {
                     <div className="container-pfp"></div>
                 </div>
                 <div onClick={() =>setFullReq(true)} className="req-content">
-                    <div className="content-name">{reqInfo.name}, {reqInfo.age}</div>
+                    <div className="content-name">{reqInfo.username}, {reqInfo.age}</div>
                     <div className="content-msg">Vás žádá o kontaktní údaje.</div>
                 </div>
                 <div className="req-status">

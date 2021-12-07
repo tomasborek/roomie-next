@@ -64,7 +64,7 @@ const ListingContact = ({listingInfo, editListing, state}) => {
                 {isFriend &&
                     <div className="contact-state">
                         <i className="state-icon fas fa-users"></i>
-                        <p className="state-description">Vy a {listingInfo.data().userInfo.name} jste ve spojení.</p>
+                        <p className="state-description">Vy a {listingInfo.data().userInfo.username} jste ve spojení.</p>
                     </div>
                 }
                 {(isOwner && !editListing) &&
