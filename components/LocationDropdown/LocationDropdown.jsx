@@ -45,12 +45,20 @@ const LocationDropdown = ({setLocation, location}) => {
     }
     //Useffect
     useEffect(() => {
+        let searchedTerm = search;
         if(isTyping === true) return;
         if(search === "") return;
         let results = [];
+        if(searchedTerm.includes("Prah")){
+           if(searchedTerm.includes("Praha")){
+               searchedTerm = searchedTerm.replace("Praha", "Prague");
+           }else{
+                searchedTerm = searchedTerm.replace("Prah", "Prag");
+           }
+        }
         setDropdownActive(true);
         setFetching(true);
-            fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&countryIds=cz&namePrefix=${search}`, {
+            fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&countryIds=cz&namePrefix=${searchedTerm}`, {
 	        "method": "GET",
 	        "headers": {
 		        "x-rapidapi-host": "wft-geo-db.p.rapidapi.com",
@@ -60,7 +68,9 @@ const LocationDropdown = ({setLocation, location}) => {
 	           return response.json()
             }).then(res => {
                 res.data.forEach(doc => {
-                    results = [...results, doc.name];
+                    let cityName = doc.name;
+                    if(cityName.includes("Prague")) cityName = cityName.replace("Prague", "Praha");
+                    results = [...results, cityName];
                 })  
                 setFetching(false);
                 setOptions(results);
