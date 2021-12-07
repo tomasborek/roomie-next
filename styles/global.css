@@ -3832,6 +3832,19 @@ textarea {
   color: #E14949;
 }
 
+.listing-contact-loading {
+  padding-top: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 @media screen and (max-width: 700px) {
   .header-info .info-contact {
     -webkit-box-orient: vertical;

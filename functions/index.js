@@ -222,29 +222,32 @@ exports.createFriend = functions.https.onCall((data, context) => {
         gender: reciever.mainInfo.gender,
         listingId: recieverListing,
         timeStamp: admin.firestore.FieldValue.serverTimestamp(),
-      }).then((response) => {
-        // Then, add friend (sender) to reciever's listing
-        recieverListingDoc.update({
-          friends: admin.firestore.FieldValue.arrayUnion(senderUid),
-        });
-      }).then((response) => {
-        // Then, add friend (reciever) to sender's listing
-        senderListingDoc.update({
-          friends: admin.firestore.FieldValue.arrayUnion(recieverUid),
-        });
-      }).then((response) => {
-        resolve(response);
       });
+    }).then((response) => {
+      // Then, add friend (sender) to reciever's listing
+      return recieverListingDoc.update({
+        friends: admin.firestore.FieldValue.arrayUnion(senderUid),
+      });
+    }).then((response) => {
+      // Then, add friend (reciever) to sender's listing
+      return senderListingDoc.update({
+        friends: admin.firestore.FieldValue.arrayUnion(recieverUid),
+      });
+    }).then((response) => {
+      resolve(response);
+    }).catch((error) => {
+      reject(error);
     });
   });
 });
+
 // Trigger functions---
-// Delete user's db record
+// Delete user's db record when his auth is deleted
 exports.deleteUser = functions.auth.user().onDelete((user) => {
   const doc = admin.firestore().collection("users").doc(user.uid);
   return doc.delete();
 });
-// Delte user's listing's db record
+// Delte user's listing's db record when his auth is deleted
 exports.deleteListing = functions.auth.user().onDelete((user) => {
   const collectionRef = admin.firestore().collection("listings");
   const query = collectionRef.where("userInfo.uid", "==", user.uid);
@@ -282,4 +285,18 @@ exports.deleteRecievedNotification = functions.firestore
           .doc(snap.ref.parent.parent.id)
           .collection("notifications")
           .doc(snap.id).delete();
+    });
+// Send notification to sender when request gets accepted
+exports.acceptedNotification = functions.firestore
+    .document("users/{userId}/friends/{friendId}")
+    .onCreate((snap, context) => {
+      const db = admin.firestore();
+      return db.collection("users")
+          .doc(snap.ref.parent.parent.id)
+          .collection("notifications")
+          .doc(snap.id).set({
+            message: `Uživatel ${snap.data().username} přijal vaší žádost.`,
+            type: "acceptedRequest",
+            timeStamp: admin.firestore.FieldValue.serverTimestamp(),
+          });
     });

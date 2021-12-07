@@ -81,6 +81,15 @@
     }
 }
 
+//Loading version
+.listing-contact-loading{
+    padding-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
 //Media for locked version
 @media screen and (max-width: 700px){
     .header-info .info-contact{

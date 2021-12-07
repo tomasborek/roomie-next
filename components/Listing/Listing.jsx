@@ -51,6 +51,8 @@ const Listing = ({type}) => {
     const [listingInfo, setListingInfo] = useState(null);
     //Edit mode
     const [editListing, setEditListing] = useState(false);
+    // Contact loading (after request)
+    const [contactLoading, setContactLoading] = useState(false);
     //Edit mode info storage
     const [stayTime, setStayTime] = useState(null);
     const [startTime, setStartTime] = useState(null);
@@ -189,7 +191,7 @@ const Listing = ({type}) => {
 
     const handleRequest = () => {
         //Loading...
-        setLoading(true);
+        setContactLoading(true);
         setReqDialogOpen(false);
         //Two people involved
         let reciever = listingInfo;
@@ -211,7 +213,7 @@ const Listing = ({type}) => {
             return getListing(id);
         }).then(doc => {
             setListingInfo(doc);
-            setLoading(false);
+            setContactLoading(false);
             snackBar("Žádost byla odeslána.", "success");
         }).catch(error =>{
             setLoading(false);
@@ -281,7 +283,7 @@ const Listing = ({type}) => {
                                             </div>
                                         </div>
                                         <ListingInfoImportant type="flatmate" listingInfo={listingInfo} editListing={editListing} state={{budget, startTime, stayTime, setBudget, setStayTime, setStartTime, setSliderDialog}}/>
-                                        <ListingContact listingInfo={listingInfo} editListing={editListing} state={{setReqDialogOpen}}/>
+                                        <ListingContact listingInfo={listingInfo} editListing={editListing} state={{setReqDialogOpen, contactLoading}}/>
                                     </div>
                                     }
                                 </div>

@@ -4,9 +4,13 @@ import {useRouter} from "next/router";
 //Contexts
 import { useAuth } from '../../../contexts/AuthContext'
 
+//COmponents
+//MUI
+import { CircularProgress } from '@mui/material';
+
 const ListingContact = ({listingInfo, editListing, state}) => {
     const {currentUser} = useAuth();
-    const {setReqDialogOpen} = state;
+    const {setReqDialogOpen, contactLoading} = state;
     const router = useRouter();
     //State
     const [isFriend, setIsFriend] = useState(false);
@@ -37,70 +41,82 @@ const ListingContact = ({listingInfo, editListing, state}) => {
                 setIsRequesting(false);
             }
         }
-    }, [listingInfo, currentUser])
+    }, [listingInfo, currentUser]);
+
+    useEffect(() => {
+        console.log(contactLoading);
+    }, [])
     return (
-        <>
-        {/*Unlocked version*/}
-        {(isFriend || isOwner) ?
-            <div className="info-contact unlocked">
-                <div className="contact-items">
-                    <div className="items-main">
-                        <div className="items-item">
-                            <i className="fas fa-phone"></i>
-                            <p>+420 {
-                                [listingInfo.data().userInfo.contact.phone.slice(0, 3), " ", listingInfo.data().userInfo.contact.phone.slice(3,6), " ", listingInfo.data().userInfo.contact.phone.slice(6)].join('')
-                            }</p>
+    <>
+        {!contactLoading ?
+             <>
+                {/*Unlocked version*/}
+                {(isFriend || isOwner) ?
+                    <div className="info-contact unlocked">
+                        <div className="contact-items">
+                            <div className="items-main">
+                                <div className="items-item">
+                                    <i className="fas fa-phone"></i>
+                                    <p>+420 {
+                                        [listingInfo.data().userInfo.contact.phone.slice(0, 3), " ", listingInfo.data().userInfo.contact.phone.slice(3,6), " ", listingInfo.data().userInfo.contact.phone.slice(6)].join('')
+                                    }</p>
+                                </div>
+                                <div className="items-item">
+                                    <i className="fas fa-envelope"></i>
+                                    <p>{listingInfo.data().userInfo.contact.email}</p>
+                                </div>
+                            </div>
+                            <div className="items-socials">
+                                    <i onClick={() => listingInfo.data().userInfo.contact.fb != null  ? window.location.href = listingInfo.data().userInfo.contact.fb : "" } className={`fab fa-facebook-square socials-item ${listingInfo.data().userInfo.contact.fb != null && "active" }`}></i>
+                                    <i onClick={() => listingInfo.data().userInfo.contact.ig != null ? window.location.href =  listingInfo.data().userInfo.contact.ig : ""} className={`fab fa-instagram socials-item ${(listingInfo.data().userInfo.contact.ig != null && "active" )}`}></i>
+                            </div>
                         </div>
-                        <div className="items-item">
-                            <i className="fas fa-envelope"></i>
-                            <p>{listingInfo.data().userInfo.contact.email}</p>
-                        </div>
+                        {isFriend &&
+                            <div className="contact-state">
+                                <i className="state-icon fas fa-users"></i>
+                                <p className="state-description">Vy a {listingInfo.data().userInfo.username} jste ve spojení.</p>
+                            </div>
+                        }
+                        {(isOwner && !editListing) &&
+                        <button onClick={() => router.push("/requests/recieved")} className="main-btn contact-button">Zobrazit žádosti</button>
+                        }  
                     </div>
-                    <div className="items-socials">
-                            <i onClick={() => listingInfo.data().userInfo.contact.fb != null  ? window.location.href = listingInfo.data().userInfo.contact.fb : "" } className={`fab fa-facebook-square socials-item ${listingInfo.data().userInfo.contact.fb != null && "active" }`}></i>
-                            <i onClick={() => listingInfo.data().userInfo.contact.ig != null ? window.location.href =  listingInfo.data().userInfo.contact.ig : ""} className={`fab fa-instagram socials-item ${(listingInfo.data().userInfo.contact.ig != null && "active" )}`}></i>
-                    </div>
-                </div>
-                {isFriend &&
-                    <div className="contact-state">
-                        <i className="state-icon fas fa-users"></i>
-                        <p className="state-description">Vy a {listingInfo.data().userInfo.username} jste ve spojení.</p>
+                :
+                    <div className="info-contact">
+                            {(!currentUser || !isRequested) &&
+                            <div className="contact-icons">
+                                <i className="fas fa-phone"></i>
+                                <i className="fas fa-envelope"></i>
+                                <i className="fab fa-facebook-square"></i>
+                                <i className="fab fa-instagram"></i>
+                            </div>
+                            }
+                            <div className="contact-state">
+                                <i className={`state-icon fas fa-lock`}></i>
+                                <p className="state-description">
+                                    {!currentUser ? "Pošlete uživateli žádost o přístup ke kontaktním údajům." :
+                                    isRequested ? "Žádost čeká na vyřízení." :
+                                    isRequesting ? "Uživatel vám zaslal žádost." :
+                                    (currentUser) ? "Pošlete uživateli žádost o přístup ke kontaktním údajům." :
+                                    ""}
+                                </p>
+                            </div>
+                            {(!currentUser || !isRequested) &&
+                            <>
+                                {!currentUser ? <button className="main-btn contact-button" onClick={() => router.push("/login")}>Poslat žádost</button> :
+                                (isRequesting) ? <button className="contact-button main-btn" onClick={() => router.push("/requests/recieved")}>Zobrazit žádosti</button> :
+                                (currentUser) ? <button className="main-btn contact-button" onClick={() => setReqDialogOpen(true)}>Pošlat žádost</button> :
+                                ""
+                                }
+                            </>
+                            }
                     </div>
                 }
-                {(isOwner && !editListing) &&
-                <button onClick={() => router.push("/requests/recieved")} className="main-btn contact-button">Zobrazit žádosti</button>
-                }  
-            </div>
-        :
-            <div className="info-contact">
-                    {(!currentUser || !isRequested) &&
-                    <div className="contact-icons">
-                        <i className="fas fa-phone"></i>
-                        <i className="fas fa-envelope"></i>
-                        <i className="fab fa-facebook-square"></i>
-                        <i className="fab fa-instagram"></i>
-                    </div>
-                    }
-                    <div className="contact-state">
-                        <i className={`state-icon fas fa-lock`}></i>
-                        <p className="state-description">
-                            {!currentUser ? "Pošlete uživateli žádost o přístup ke kontaktním údajům." :
-                            isRequested ? "Žádost čeká na vyřízení." :
-                            isRequesting ? "Uživatel vám zaslal žádost." :
-                            (currentUser) ? "Pošlete uživateli žádost o přístup ke kontaktním údajům." :
-                            ""}
-                        </p>
-                    </div>
-                    {(!currentUser || !isRequested) &&
-                    <>
-                        {!currentUser ? <button className="main-btn contact-button" onClick={() => router.push("/login")}>Poslat žádost</button> :
-                        (isRequesting) ? <button className="contact-button main-btn" onClick={() => router.push("/requests/recieved")}>Zobrazit žádosti</button> :
-                        (currentUser) ? <button className="main-btn contact-button" onClick={() => setReqDialogOpen(true)}>Pošlat žádost</button> :
-                        ""
-                        }
-                    </>
-                    }
-            </div>
+         </>
+         :
+         <div className="listing-contact-loading">
+            <CircularProgress sx={{padding: "10px"}}/>
+         </div>
         }
     </>
     )
