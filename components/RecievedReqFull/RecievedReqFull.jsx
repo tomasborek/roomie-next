@@ -10,7 +10,7 @@ import { arrayRemove, arrayUnion } from '@firebase/firestore'
 import {useFunctions} from "../../contexts/FunctionsContext";
 import { useSnackBar } from '../../contexts/SnackBarContext';
 
-const RecievedReqFull = ({reqInfo, id, setOpen}) => {
+const RecievedReqFull = ({reqInfo, id, setOpen, setRequestLoading, setReqResolved}) => {
     //Variables---
         //Contexts
         const {updateUser, getUser, updateListing, addNotification, deleteNotification} = useDb();
@@ -23,7 +23,7 @@ const RecievedReqFull = ({reqInfo, id, setOpen}) => {
         //Functions
         const handleAction = (action) => {
             let reciever;
-            setLoading(true);
+            setRequestLoading(true);
             setOpen(false);
             const resolveRequest = callable("resolveRequest");
             getUser(currentUser.uid)
@@ -37,15 +37,27 @@ const RecievedReqFull = ({reqInfo, id, setOpen}) => {
                 }
                 return resolveRequest(JSON.stringify(resolvingInfo))
             }).then((response) => {
-                setLoading(false);
+                setRequestLoading(false);
                 snackBar(`Žádost byla ${action === "accepted" ? "přijata" : "odmítnuta"}.`, "success");
-                if(action === "accepted") handleFriendship(reciever);
-                router.reload(window.location.pathname);
-            }).catch((error) => {
-                setOpen(true);
-                setLoading(false);
-                snackBar("Něco se nepovedlo. Zkuste to prosím později.", "error");
+                if(action === "accepted"){
+                    handleFriendship(reciever);
+                    setReqResolved({
+                        state: true,
+                        type: "accepted",
+                    })
+                }else{
+                    setReqResolved({
+                        state: true,
+                        type: "rejected",
+                    })
+                }
+                // router.reload(window.location.pathname);
             })
+            // .catch((error) => {
+            //     setOpen(true);
+            //     setRequestLoading(false);
+            //     snackBar("Něco se nepovedlo. Zkuste to prosím později.", "error");
+            // })
         }
 
         const handleFriendship = (user) => {
