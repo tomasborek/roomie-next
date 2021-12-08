@@ -152,7 +152,12 @@ const ExploreFeed = ({variant}) => {
                 {flatmateListings.map((listing, id) => (
                     <FmListing name={listing.data().userInfo.username} age={listing.data().userInfo.age} gender={listing.data().userInfo.gender} location={listing.data().flatTags.location} money={listing.data().mainInfo.budget} available={listing.data().mainInfo.startTime} bio={listing.data().bio} id={listing.id} key={id}/>
                 ))}
-                <Pagination page={page} setPage={setPage} handlePagination={handlePagination} isDisabled={isPaginationDisabled} />
+                {flatmateListings.length > 9 ?
+                    <Pagination page={page} setPage={setPage} handlePagination={handlePagination} isDisabled={isPaginationDisabled} />
+                    :
+                    ""
+                }
+               
                 </>
             :
             <div className="loading">
@@ -168,7 +173,11 @@ const ExploreFeed = ({variant}) => {
             {flatListings.map((listing, id) => (
                     <FListing name={`Byt ${listing.data().flatBoxes.layout != "" ? listing.data().flatBoxes.layout : ""} ${listing.data().flatBoxes.location}`} bio={listing.data().flatBio} price={listing.data().mainInfo.price} startTime={listing.data().mainInfo.startTime} stayTime={listing.data().mainInfo.stayTime} id={listing.id} key={id} />
                 )) }
-            <Pagination page={page} setPage={setPage} handlePagination={handlePagination} isDisabled={isPaginationDisabled} />
+                {flatListings.length > 9 ?
+                    <Pagination page={page} setPage={setPage} handlePagination={handlePagination} isDisabled={isPaginationDisabled} />
+                    :
+                    ""
+                }
             </>
             :
             <div className="loading">
