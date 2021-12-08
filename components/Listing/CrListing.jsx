@@ -239,7 +239,7 @@ const CrListing = ({type}) => {
                                 :   
                                 <div className="header-info">
                                     <div className="info-main">
-                                        <h1 className="main-name">{listingInfo.data().userInfo.name}</h1>
+                                        <h1 className="main-name">{listingInfo.data().userInfo.username}</h1>
                                         <i className="main-more fas fa-ellipsis-h"></i>
                                         <div className="main-description">
                                             <p>{listingInfo.data().userInfo.age}, {listingInfo.data().userInfo.gender === "male" ? "muž" : listingInfo.data().userInfo.gender === "female" ? "žena" : "jiné"}</p>
@@ -393,7 +393,7 @@ const CrListing = ({type}) => {
                                     <div className="boxes-profile-info">
                                         <img src="/img/pfps/radek-pfp.png" alt="" className="profile-info-pfp" />
                                         <div className="profile-info-text">
-                                           {!listingInfo ? <Skeleton variant="text" sx={{width: 50}}/>: <p className="text-name">{listingInfo.data().userInfo.name}</p> } 
+                                           {!listingInfo ? <Skeleton variant="text" sx={{width: 50}}/>: <p className="text-name">{listingInfo.data().userInfo.username}</p> } 
                                           {!listingInfo ? <Skeleton variant="text" sx={{width: 30}} />:  <p className="text-description">{listingInfo.data().userInfo.gender === "male" ? "Muž" : listingInfo.data().userInfo.gender === "female" ? "Žena" : listingInfo.data().userInfo.gender === "other" ? "Jiné" : ""}, {listingInfo.data().userInfo.age}</p>}
                                         </div>
                                         

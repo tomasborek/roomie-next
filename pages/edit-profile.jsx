@@ -110,7 +110,7 @@ const EditProfile = () => {
             },
             listingParams: {
                 userInfo: {
-                    name: usernameRef.current.value,
+                    username: usernameRef.current.value,
                     age: userData.data().mainInfo.age,
                     gender: userData.data().mainInfo.gender,
                     contact: {

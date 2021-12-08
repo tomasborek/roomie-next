@@ -55,7 +55,10 @@ const RegisterBox = () => {
         emailRef.current.value = emailRef.current.value.trim();
         phoneRef.current.value = phoneRef.current.value.trim();
         passwordRef.current.value = passwordRef.current.value;
-        if(!checkIfFilled()) return;
+        // Age and bday
+        const birthday = new Date(yearRef.current.value, monthRef.current.value, dayRef.current.value);
+        const age = ageCalc(birthday);
+        if(!checkIfFilled(age)) return;
         //Set loading on
         setLoading(true);
         //Variables
@@ -64,9 +67,6 @@ const RegisterBox = () => {
         const email = emailRef.current.value;
         const phone = phoneRef.current.value;
         const password = passwordRef.current.value;
-        //Age & bday
-        const birthday = `${dayRef.current.value}/${monthRef.current.value}/${yearRef.current.value}`;
-        const age = ageCalc(dayRef.current.value, monthRef.current.value, yearRef.current.value);
         //Listing Id
         const listingIdVar = idGenerator(type);
         setListingId(listingIdVar);
@@ -129,7 +129,7 @@ const RegisterBox = () => {
         })
     }
 
-    const checkIfFilled = () => {
+    const checkIfFilled = (age) => {
         usernameRef.current.classList.remove("error");
         emailRef.current.classList.remove("error");
         phoneRef.current.classList.remove("error");
@@ -179,42 +179,36 @@ const RegisterBox = () => {
             return false;
         }
 
-        if(new Date().getFullYear() - yearRef.current.value <= 18){
-            if(new Date().getFullYear() - yearRef.current.value == 18){
-                if(new Date().getMonth() + 1 < monthRef.current.value){
-                    setError("Pro přihlášení vám musí být alespoň 18 let.");
-                    return false;
-                }
-            }else{
-                setError("Pro přihlášení vám musí být alespoň 18 let.");
-                return false;
-            }
-
+        if(age < 18){
+            setError("Pro přihlášení vám musí být alespoň 18 let.");
+            return false;
         }
-
         return true;
     };
 
-    const ageCalc = (day, month, year) => {
-        const currentYear = new Date().getFullYear();
-        const currentMonth = new Date().getMonth();
-        const currentDay = new Date().getDay();
-
-    let age = currentYear - year;
-        if(currentMonth + 1 <= month){
-            if(month == currentMonth + 1){
-                if(day => currentDay){
-                    age++;
-                    return age;
-                }
-            }else{
-                age--;
-                return age;
-            }
-            
-        }else{
-            return age;
+    const ageCalc = (birthday) => {
+        let today = new Date();
+        let age = today.getFullYear() - birthday.getFullYear();
+        let m = today.getMonth() - birthday.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthday.getDate())) {
+            age--;
         }
+        return age;
+    // let age = currentYear - userYear;
+    //     if(currentMonth + 1 <= userMonth){
+    //         if(userMonth == currentMonth + 1){
+    //             if(day => currentDay){
+    //                 age++;
+    //                 return age;
+    //             }
+    //         }else{
+    //             age--;
+    //             return age;
+    //         }
+            
+    //     }else{
+    //         return age;
+    //     }
     }
 
     const finishReg = () => {
