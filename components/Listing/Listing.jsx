@@ -126,6 +126,17 @@ const Listing = ({type}) => {
         }
     }, [currentUser])
 
+
+    //Resets changes if user goes back from editing
+    useEffect(() => {
+        if(!editListing){
+            const [addedPersonTags, setAddedPersonTags] = useState(null);
+            const [addedFlatTags, setAddedFlatTags] = useState(null);
+            const [addedPersonBoxes, setAddedPersonBoxes] = useState(null);
+            const [addedFlatBoxes, setAddedFlatBoxes] = useState(null);
+        }
+    }, [editListing])
+
     //Functions
     //Handles save in the edit
     const handleSave = () => {
@@ -183,11 +194,10 @@ const Listing = ({type}) => {
             return getListing(listingInfo.id);
         }).then((doc) => {
             setListingInfo(doc);
+        }).catch((error) => {
+            setLoading(false);
+            snackBar("Něco se pokazilo. Zkuste to prosím později.", "error");
         })
-        // .catch((error) => {
-        //     setLoading(false);
-        //     snackBar("Něco se pokazilo. Zkuste to prosím později.", "error");
-        // })
     }
 
     const handleRequest = () => {
