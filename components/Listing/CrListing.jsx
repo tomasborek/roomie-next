@@ -167,7 +167,7 @@ const CrListing = ({type}) => {
             window.scrollTo(0,0);
             return getListing(listingInfo.id);
         }).then((doc) => {
-            setListingInfo(doc);
+            router.push(`/${listingInfo.data().type}/${listingInfo.id}`);
         }).catch((error) => {
             setLoading(false);
             snackBar("Něco se pokazilo. Zkuste to prosím později.", "error");
