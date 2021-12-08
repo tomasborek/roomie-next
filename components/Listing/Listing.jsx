@@ -41,7 +41,7 @@ const Listing = ({type}) => {
     //Contexts
     const router = useRouter();
     const {id} = router.query;
-    const {getListing, updateListing, updateUser, getUser, addNotification, deleteNotification} = useDb();
+    const {getListing, updateUser, getUser, addNotification, deleteNotification} = useDb();
     const {currentUser} = useAuth();
     const [loading, setLoading] = useLoading();
     const {snackBar} = useSnackBar();
@@ -130,6 +130,7 @@ const Listing = ({type}) => {
     //Handles save in the edit
     const handleSave = () => {
         setLoading(true);
+        const updateListing = callable("updateListing");
         if(!stayTime || stayTime == ""){
             snackBar("Prosíme vyplňte všechny důležité údaje.", "error");
             setLoading(false);
@@ -170,22 +171,21 @@ const Listing = ({type}) => {
                 personBio: personBio
             }
         }
-        updateListing(id, params)
-        .then(res => {
+        const updateListingInfo = {
+            listingId: listingInfo.id,
+            params: params,
+        }
+        updateListing(JSON.stringify(updateListingInfo)).then((response) => {
             setLoading(false);
             setEditListing(false);
             snackBar("Inzerát byl úspěšně upraven.", "success");
             window.scrollTo(0,0);
-            return getListing(id)
-        }).then(doc => {
-            if(type === "flat-cr" || type === "flatmate-cr"){
-                router.push(`/${listingInfo.data().type}/${listingInfo.id}`);
-                return;
-            }
+            return getListing(listingInfo.id);
+        }).then((doc) => {
             setListingInfo(doc);
-        }).catch(error => {
-            snackBar("Něco se pokazilo. Zkuste to prosím později.", "error")
+        }).catch((error) => {
             setLoading(false);
+            snackBar("Něco se pokazilo. Zkuste to prosím později.", "error");
         })
     }
 

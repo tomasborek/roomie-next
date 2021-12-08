@@ -259,6 +259,15 @@ exports.updateProfile = functions.https.onCall((data, context) => {
     });
   });
 });
+exports.updateListing = functions.https.onCall((data, context) => {
+  // Parse incoming data
+  data = JSON.parse(data);
+  // Shortcut
+  const db = admin.firestore();
+  const listingId = data.listingId;
+  const params = data.params;
+  return db.collection("listings").doc(listingId).update(params);
+});
 
 // Trigger functions---
 // Delete user's db record when his auth is deleted
