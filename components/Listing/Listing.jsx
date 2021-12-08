@@ -183,10 +183,11 @@ const Listing = ({type}) => {
             return getListing(listingInfo.id);
         }).then((doc) => {
             setListingInfo(doc);
-        }).catch((error) => {
-            setLoading(false);
-            snackBar("Něco se pokazilo. Zkuste to prosím později.", "error");
         })
+        // .catch((error) => {
+        //     setLoading(false);
+        //     snackBar("Něco se pokazilo. Zkuste to prosím později.", "error");
+        // })
     }
 
     const handleRequest = () => {
