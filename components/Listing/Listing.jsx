@@ -364,7 +364,7 @@ const Listing = ({type}) => {
                         <div className="content-header">
                             <div className="mid-container">
                                 <div className="header-pfp-container">
-                                    <img src="/img/listing/byt.png" className="header-pfp"></img>
+                                    <img src="/img/listing/default-byt.jpg" className="header-pfp"></img>
                                 </div>
 
                                 {!listingInfo ? 

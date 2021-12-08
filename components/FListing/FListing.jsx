@@ -12,7 +12,8 @@ const FListing = ({name, bio, price, startTime,stayTime,id}) => {
     return (
     <Link href={`/flat/${id}`}>
         <div className="f-listing">
-           <div className="listing-pfp"></div>
+            <img src="/img/listing/default-byt.jpg" alt="" className="listing-pfp" />
+           {/* <div className="listing-pfp"></div> */}
            <div className="listing-content">
                <div className="content-header"><span>{name}</span></div>
                <div className="content-bio">{shortBio}...</div>
@@ -24,7 +25,7 @@ const FListing = ({name, bio, price, startTime,stayTime,id}) => {
                  </div>
                     <div className="info-row">
                         <div className="info-gender row-col"><span>Plocha:</span> 71m<sup>2</sup></div>
-                        <div className="info-available row-col"><span>Dostupnost:</span> {startTime}</div>
+                        <div className="info-available row-col"><span>Dostupnost:</span> {startTime.substr(0,5)}.</div>
                     </div>
                 
                      
