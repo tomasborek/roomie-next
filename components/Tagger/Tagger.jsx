@@ -79,7 +79,7 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
 
     return (
         <div className="tagger">
-            <div className="tagger-header">Přidat tag</div>
+            <div className="tagger-header">{variant === "person" ? "Koho hledám?" : "Jaké bydlení hledám?"}</div>
             <div className="tagger-description">
                 Zde můžete zaklikat vaše preference  
                 {variant === "person" ? " ideálního spolubydlícího." : " ideálního bydlení."} Pokud
