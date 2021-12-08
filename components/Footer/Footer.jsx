@@ -1,12 +1,6 @@
 import React from 'react'
 //next
 import Link from "next/link";
-//Font awesome
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram } from '@fortawesome/free-brands-svg-icons';
-import { faFacebook } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-
 const Footer = () => {
     return (
         <footer className="footer">
@@ -34,9 +28,9 @@ const Footer = () => {
                     <p className="section-header">Spojte se s námi:</p>
                     <div className="section-description">
                         <div className="description-icons">
-                            <FontAwesomeIcon className="icons-icon" icon={faInstagram}/> 
-                            <FontAwesomeIcon className="icons-icon" icon={faFacebook}/> 
-                            <FontAwesomeIcon className="icons-icon" icon={faEnvelope}/> 
+                            <i className="fab fa-instagram icons-icon"></i>
+                            <i className="fab fa-facebook icons-icon"></i>
+                            <i className="fas fa-envelope icons-icon"></i>
                         </div>
                         <Link href="/">Kontaktujte nás...</Link>
                     </div>
