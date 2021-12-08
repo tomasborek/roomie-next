@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
 //next
-import Image from "next/image";
 //Contexts
 import { useAuth } from '../../contexts/AuthContext';
 import { useDb } from '../../contexts/DbContext';
