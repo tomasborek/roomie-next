@@ -9,6 +9,11 @@
     margin-inline: 1rem;
     .tagger-header{
         font-size: 24px;
+        margin-bottom: 0.5rem;
+    }
+    .tagger-description{
+        font-size: 14px;
+        color: $darkerGray;
         margin-bottom: 1rem;
     }
     .tagger-section{
