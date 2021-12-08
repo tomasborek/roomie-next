@@ -69,13 +69,7 @@ export default function Home() {
            <div className="mid-container">
                 <section className="home-section section-left">
                     <div className="section-image">
-                        <Image
-                        alt={"Roomie inzeráty"}
-                        src={"/img/home/home-panels.png"}
-                        width={513}
-                        height={415}
-                        priority
-                        />
+                        <img src="/img/home/home-panels.png" alt="" />
                     </div>
                     
                     <div className="section-content">
@@ -109,13 +103,7 @@ export default function Home() {
             <div className="mid-container">           
                 <section className="home-section section-left">
                     <div className="section-image">
-                        <Image
-                            alt={"Roomie inzeráty"}
-                            src={"/img/home/mailbox.png"}
-                            width={400}
-                            height={400}
-                            priority
-                            />
+                        <img src="/img/home/mailbox.png" alt="" />
                     </div>
                     
                     <div className="section-content">
