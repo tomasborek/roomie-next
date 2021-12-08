@@ -384,7 +384,7 @@ const Listing = ({type}) => {
                                     </div>
                                     
                                     <ListingInfoImportant type="flat" listingInfo={listingInfo} editListing={editListing} state={{budget, startTime, stayTime, setBudget, setStayTime, setStartTime, setSliderDialog}}/>
-                                    <ListingContact listingInfo={listingInfo} editListing={editListing} state={{setReqDialogOpen}}/>
+                                    <ListingContact listingInfo={listingInfo} editListing={editListing} state={{setReqDialogOpen, contactLoading}}/>
                             </div>
                         }
                         </div>

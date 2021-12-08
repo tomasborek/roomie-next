@@ -701,7 +701,7 @@ textarea {
   position: relative;
   bottom: 115px;
   background-color: white;
-  min-height: calc(100vh - 236px - 72px - 100p);
+  min-height: calc(100vh - 236px - 72px - 100px);
 }
 
 .Requests .requests-content .content-heading {
@@ -1387,7 +1387,7 @@ textarea {
   background-color: white;
   border-radius: 5px;
   width: 100%;
-  min-height: 100vh;
+  min-height: calc(100vh - 236px - 72px - 100px);
 }
 
 .Friends .friends-content .content-heading {
