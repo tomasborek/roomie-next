@@ -3,6 +3,7 @@
     width: 100%;
     justify-content: center;
     user-select: none;
+    margin: 1rem 0;
     .pagination-page{
         padding: 0.5rem 1rem;
         border-radius: 5px;
@@ -28,5 +29,11 @@
     pointer-events: none;
     .pagination-page{
         opacity: 0.5;
+    }
+}
+
+@media screen and (max-width: 360px){
+    .pagination{
+        font-size: 12px;
     }
 }

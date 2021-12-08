@@ -3642,6 +3642,7 @@ textarea {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+  margin: 1rem 0;
 }
 
 .pagination .pagination-page {
@@ -3674,6 +3675,12 @@ textarea {
 
 .pagination.disabled .pagination-page {
   opacity: 0.5;
+}
+
+@media screen and (max-width: 360px) {
+  .pagination {
+    font-size: 12px;
+  }
 }
 
 .friend {
