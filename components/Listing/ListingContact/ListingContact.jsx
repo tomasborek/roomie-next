@@ -92,7 +92,7 @@ const ListingContact = ({listingInfo, editListing, state}) => {
                             </div>
                             }
                             <div className="contact-state">
-                                <i className={`state-icon fas fa-lock`}></i>
+                                <i className={`state-icon fas fa-${isRequested ? "hourglass-half" : "lock"}`}></i>
                                 <p className="state-description">
                                     {!currentUser ? "Pošlete uživateli žádost o přístup ke kontaktním údajům." :
                                     isRequested ? "Žádost čeká na vyřízení." :
