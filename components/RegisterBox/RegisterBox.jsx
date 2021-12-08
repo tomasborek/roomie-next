@@ -149,7 +149,7 @@ const RegisterBox = () => {
             return false;
         }
 
-        if(phoneRef.current.value === "" || phoneRef.current.value.match(/^[0-9]+$/) == null){
+        if(phoneRef.current.value === "" || phoneRef.current.value.match(/^[0-9]+$/) == null || phoneRef.current.value.length < 9){
             setError("Prosím zadejte své číslo.");
             phoneRef.current.classList.add("error");
             return false;
