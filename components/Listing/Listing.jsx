@@ -130,10 +130,10 @@ const Listing = ({type}) => {
     //Resets changes if user goes back from editing
     useEffect(() => {
         if(!editListing){
-            const [addedPersonTags, setAddedPersonTags] = useState(null);
-            const [addedFlatTags, setAddedFlatTags] = useState(null);
-            const [addedPersonBoxes, setAddedPersonBoxes] = useState(null);
-            const [addedFlatBoxes, setAddedFlatBoxes] = useState(null);
+            setAddedPersonTags(null);
+            setAddedFlatTags(null);
+            setAddedPersonBoxes(null);
+            setAddedFlatBoxes(null);
         }
     }, [editListing])
 
