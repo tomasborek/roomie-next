@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 //Next
 import Link from "next/link";
 import { useRouter } from 'next/dist/client/router';
@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 
 //Contexts
 import { useAuth } from '../../contexts/AuthContext';
+import { useDb } from '../../contexts/DbContext';
 import { useNavOverlay } from '../../contexts/NavOverlayContext';
 import { useLoading } from '../../contexts/LoadingContext';
 const NavOverlay = () => {
@@ -14,7 +15,42 @@ const NavOverlay = () => {
     const  router = useRouter();
     const {currentUser, logOut} = useAuth();
     const [navOverlay, setNavOverlay] = useNavOverlay();
+    const {getUser} = useDb();
     const [loading, setLoading] = useLoading();
+    //Functions
+    const handleMyListing = () => {
+        setLoading(true);
+        getUser(currentUser.uid)
+        .then(doc =>{
+            router.push(`/${doc.data().mainInfo.type === "offerer" ? "flat" : doc.data().mainInfo.type === "flatmate" ? "flatmate" : ""}/${doc.data().listing.id}`);
+            setLoading(false);
+        }).catch(error => {
+            setLoading(false);
+        })
+    }
+
+    const handleLogOut = () => {
+        setLoading(true);
+        logOut()
+        .then(res => {
+            router.push("/");
+            setLoading(false);
+        })
+        .catch(error => {
+            console.log(error);
+            setLoading(false);
+        })
+    }
+
+    useEffect(() => {
+        if(navOverlay){
+            window.scrollTo(0,0);
+            document.body.classList.add("lock-scroll");
+        }else{
+            document.body.classList.remove("lock-scroll");
+        }
+    }, [navOverlay])
+
     return (
        
         <motion.div
@@ -54,20 +90,15 @@ const NavOverlay = () => {
                          router.push("/edit-profile");
                          setNavOverlay(false);
                      }}> <i className="item-icon fas fa-pen"></i> Upravit účet</li>
-                    <li className="nav-logged-item"><i className="item-icon fas fa-home"></i>Můj inzerát</li>
                     <li onClick={() => {
-                        setLoading(true);
-                        logOut()
-                        .then(res => {
-                            router.push("/");
-                            setLoading(false);
-                            setNavOverlay(false);
-                        })
-                        .catch(error => {
-                            console.log(error.code);
-                            setLoading(false);
-                            setNavOverlay(false);
-                        })
+                        handleMyListing();
+                        setNavOverlay(false);
+                    }} className="nav-logged-item"><i className="item-icon fas fa-home"></i>Můj inzerát</li>
+                    <li onClick={() => router.push("/friends")}  className="nav-logged-item"><i className="fas fa-users item-icon"></i> Přátelé</li>
+                    <li onClick={() => router.push("/requests/recieved")}  className="nav-logged-item"><i className="fas fa-envelope item-icon"></i> Žádosti</li>
+                    <li className="nav-logged-item"><i className="fas fa-heart"></i> Oblíbené</li>
+                    <li onClick={() => {
+                       handleLogOut();
                     }} className="nav-logged-item"><i className="item-icon fas fa-sign-out-alt"></i>Odhlásit</li>
                 </ul>
             }

@@ -90,11 +90,17 @@ const Header = ({variant}) => {
             <div className="navbar navbar-logged">
                 {(notifications && notifications.length) ?
                      <Badge badgeContent={notifications.length} color={"secondary"}>
-                        <i onClick={() => setNotificationDropdown(prevState =>!prevState)} className={`fa${notificationDropdown ? "s" : "r"} fa-bell navbar-notifications`}></i> 
+                        <i onClick={() => {
+                            setNotificationDropdown(prevState =>!prevState);
+                            setNavOverlay(false);
+                        }} className={`fa${notificationDropdown ? "s" : "r"} fa-bell navbar-notifications`}></i> 
                     </Badge>
                 :
                 (!notifications || !notifications.length) &&
-                     <i onClick={() => setNotificationDropdown(prevState =>!prevState)} className={`fa${notificationDropdown ? "s" : "r"} fa-bell navbar-notifications`}></i> 
+                     <i onClick={() => {
+                         setNotificationDropdown(prevState =>!prevState);
+                         setNavOverlay(false);
+                    }} className={`fa${notificationDropdown ? "s" : "r"} fa-bell navbar-notifications`}></i> 
                 }
                
               
