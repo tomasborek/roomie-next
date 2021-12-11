@@ -5,8 +5,8 @@ import Head from "next/head";
 import {useDb} from "../../contexts/DbContext";
 
 //Components
-import FmListing from '../FmListing/FmListing';
-import FListing from '../FListing/FListing';
+import ExploreFlatmate from '../ExploreListings/ExploreFlatmate/ExploreFlatmate';
+import ExploreFlat from "../ExploreListings/ExploreFlat/ExploreFlat";
 import Pagination from "../Pagination/Pagination";
 //MUI
 import { CircularProgress } from '@mui/material';
@@ -150,7 +150,7 @@ const ExploreFeed = ({variant}) => {
                 {flatmateListings.length ? 
                 <>
                 {flatmateListings.map((listing, id) => (
-                    <FmListing name={listing.data().userInfo.username} age={listing.data().userInfo.age} gender={listing.data().userInfo.gender} location={listing.data().flatTags.location} money={listing.data().mainInfo.budget} available={listing.data().mainInfo.startTime} bio={listing.data().bio} id={listing.id} key={id}/>
+                    <ExploreFlatmate name={listing.data().userInfo.username} age={listing.data().userInfo.age} gender={listing.data().userInfo.gender} location={listing.data().flatTags.location} money={listing.data().mainInfo.budget} available={listing.data().mainInfo.startTime} bio={listing.data().bio} id={listing.id} key={id}/>
                 ))}
                 {flatmateListings.length > 9 ?
                     <Pagination page={page} setPage={setPage} handlePagination={handlePagination} isDisabled={isPaginationDisabled} />
@@ -171,7 +171,7 @@ const ExploreFeed = ({variant}) => {
             {flatListings.length ? 
             <>
             {flatListings.map((listing, id) => (
-                    <FListing name={`Byt ${listing.data().flatBoxes.layout != "" ? listing.data().flatBoxes.layout : ""} ${listing.data().flatBoxes.location}`} bio={listing.data().flatBio} price={listing.data().mainInfo.price} startTime={listing.data().mainInfo.startTime} stayTime={listing.data().mainInfo.stayTime} id={listing.id} key={id} />
+                    <ExploreFlat name={`Byt ${listing.data().flatBoxes.layout != "" ? listing.data().flatBoxes.layout : ""} ${listing.data().flatBoxes.location}`} bio={listing.data().flatBio} price={listing.data().mainInfo.price} startTime={listing.data().mainInfo.startTime} stayTime={listing.data().mainInfo.stayTime} id={listing.id} key={id} />
                 )) }
                 {flatListings.length > 9 ?
                     <Pagination page={page} setPage={setPage} handlePagination={handlePagination} isDisabled={isPaginationDisabled} />

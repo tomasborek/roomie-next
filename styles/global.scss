@@ -21,8 +21,8 @@
 @import "../components/Banner/banner";
 @import "../components/Header/header";
 @import "../components/SubHeader/subHeader";
-@import "../components/FmListing/fmListing";
-@import "../components/FListing/fListing";
+// @import "../components/FmListing/fmListing";
+// @import "../components/FListing/fListing";
 @import "../components/ListingBox/listingBox";
 @import "../components/ListingBoxesContainer/listingBoxesContainer";
 @import "../components/RegisterBox/registerBox";
@@ -56,3 +56,5 @@
 @import "../components/Listing/ListingHeader/listingHeader";
 @import "../components/Listing/ListingInfoImportant/listingInfoImportant";
 @import "../components/Listing/ListingAbout/listingAbout";
+//Explore listings
+@import "../components/ExploreListings/exploreListings";

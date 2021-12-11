@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 //next
 import Link from 'next/link'
 
-const FListing = ({name, bio, price, startTime,stayTime,id}) => {
+const ExploreFlat = ({name, bio, price, startTime,stayTime,id}) => {
     const [shortBio, setShortBio] = useState("");
     useEffect(() => {
         if(bio){
@@ -11,7 +11,7 @@ const FListing = ({name, bio, price, startTime,stayTime,id}) => {
     }, [bio])
     return (
     <Link href={`/flat/${id}`}>
-        <div className="f-listing">
+        <div className="explore-flat">
             <img src="/img/listing/default-byt.jpg" alt="" className="listing-pfp" />
            {/* <div className="listing-pfp"></div> */}
            <div className="listing-content">
@@ -38,4 +38,4 @@ const FListing = ({name, bio, price, startTime,stayTime,id}) => {
     )
 }
 
-export default FListing
+export default ExploreFlat
