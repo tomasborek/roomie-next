@@ -171,7 +171,7 @@ const ExploreFeed = ({variant}) => {
             {flatListings.length ? 
             <>
             {flatListings.map((listing, id) => (
-                    <ExploreFlat name={`Byt ${listing.data().flatBoxes.layout != "" ? listing.data().flatBoxes.layout : ""} ${listing.data().flatBoxes.location}`} bio={listing.data().flatBio} price={listing.data().mainInfo.price} startTime={listing.data().mainInfo.startTime} stayTime={listing.data().mainInfo.stayTime} id={listing.id} key={id} />
+                    <ExploreFlat name={`Byt ${listing.data().flatBoxes.layout != null ? listing.data().flatBoxes.layout : ""} ${listing.data().flatBoxes.location}`} bio={listing.data().flatBio} price={listing.data().mainInfo.price} startTime={listing.data().mainInfo.startTime} stayTime={listing.data().mainInfo.stayTime} id={listing.id} key={id} />
                 )) }
                 {flatListings.length > 9 ?
                     <Pagination page={page} setPage={setPage} handlePagination={handlePagination} isDisabled={isPaginationDisabled} />
