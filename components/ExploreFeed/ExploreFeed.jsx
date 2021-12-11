@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 //Next
 import Head from "next/head";
+import { useRouter } from 'next/dist/client/router';
 //Contexts
 import {useDb} from "../../contexts/DbContext";
 
@@ -10,18 +11,22 @@ import ExploreFlat from "../ExploreListings/ExploreFlat/ExploreFlat";
 import Pagination from "../Pagination/Pagination";
 //MUI
 import { CircularProgress } from '@mui/material';
+//Img
 
 const ExploreFeed = ({variant}) => {
     //Variables
     //Contexts
     const {getListings, getListingsPage} = useDb();
+    const router = useRouter();
     //State
+    // Is user connected to internet
+    const [connectionDown, setConnectionDown] = useState(false);
     //Flatmate listings
-    const [flatmateListings, setFlatmateListings] = useState([]);
+    const [flatmateListings, setFlatmateListings] = useState(null);
     //Flatmate listing snapshots (for pagination)
     const [flatmateSnaps, setFlatmateSnaps] = useState(null);
     //Flat listings
-    const [flatListings, setFlatListings] = useState([]);
+    const [flatListings, setFlatListings] = useState(null);
     //Flat listing snapshots (for pagination)
     const [flatSnaps, setFlatSnaps] = useState(null);
     //Current page
@@ -31,34 +36,59 @@ const ExploreFeed = ({variant}) => {
 
     useEffect(() => {
         if(variant === "flatmate"){
-            if(flatmateListings.length > 0){
+        // Empty array that we can insert all the data in and then insert it into flatmateListings state
+        let flatmateListingsArray = [];
+        //Check if we already have listings
+            if(flatmateListings && flatmateListings.length > 0){
                 return;
             }
-            getListings("flatmate")
-            .then(docs => {
+            //Gettem
+            getListings("flatmate").then(docs => {
+                //Checks if we are connected to internet
+                if (docs.empty && docs.metadata.fromCache) {
+                    throw new Error('network-failed');
+                 }
+                 //Set snapshots for paginations
                 setFlatmateSnaps(docs.docs);
                 docs.forEach(doc => {
-                    setFlatmateListings(prevState => [...prevState, doc]);
+                    //Insert all the listings into empty array
+                    flatmateListingsArray = [...flatmateListingsArray, doc];
                 })
-            }).catch(error =>{
-                console.log("Error: " + error.code);
+                // Insert the array into state
+                setFlatmateListings(flatmateListingsArray);
+            }).catch(error => {
+                if(error.message === "network-failed"){
+                    setConnectionDown(true);
+                }
             })
         }
 
         if(variant === "flat"){
-            if(flatListings.length > 0){
+            // Empty array that we can insert all the data in and then insert it into flatmateListings state
+            let flatListingsArray = [];
+            //Check if we already have listings
+            if(flatListings && flatListings.length > 0){
                 return;
             }
-            getListings("flat")
-            .then(docs => {
+            //Getttttttem
+            getListings("flat").then(docs => {
+                //Checks if we are connected to internet
+                if (docs.empty && docs.metadata.fromCache) {
+                    throw new Error('network-failed');
+                 }
+                 //Set snapshots for pagination
                 setFlatSnaps(docs.docs);
                 docs.forEach(doc => {
-                    setFlatListings(prevState => [...prevState, doc]);
+                     //Insert all the listings into empty array
+                     flatListingsArray = [...flatListingsArray, doc];
                 })
+                // Insert the array into state
+                setFlatListings(flatListingsArray);
+            }).catch(error => {
+                if(error.message === "network-failed"){
+                    setConnectionDown(true);
+                }
             })
-            // .catch(error =>{
-            //     console.log("Error: " + error.code);
-            // })
         }
        
     }, [])
@@ -145,49 +175,75 @@ const ExploreFeed = ({variant}) => {
             <div className="feed-header">
                 <h3 className="header-title">{variant === "flatmate" ? "Prohlížet spolubydlící" : "Prohlížet byty"}</h3>
             </div>
-            {variant === "flatmate" &&
+            {(variant === "flatmate" && !connectionDown) &&
             <>
-                {flatmateListings.length ? 
+                {flatmateListings ? 
+                    <>
+                        {(flatmateListings && flatmateListings.length) ?
+                        <>
+                            {flatmateListings.map((listing, id) => (
+                                <ExploreFlatmate name={listing.data().userInfo.username} age={listing.data().userInfo.age} gender={listing.data().userInfo.gender} location={listing.data().flatTags.location} money={listing.data().mainInfo.budget} available={listing.data().mainInfo.startTime} bio={listing.data().bio} id={listing.id} key={id}/>
+                            ))}
+                            {flatmateListings.length > 9 ?
+                                <Pagination page={page} setPage={setPage} handlePagination={handlePagination} isDisabled={isPaginationDisabled} />
+                                :
+                                ""
+                            }
+                        </>
+                        :
+                        <div className="feed-not-found">
+                            <img src="/img/bad-results/notfound.png" width={184} height={208} />
+                            <div className="not-found-description">Omlouváme se, ale vaším požadavkům neodpovídají žádné inzeráty. Zkuste upravit své filtry.</div>
+                        </div>
+                     
+                        }
+                        
+                    </>
+                :
+                <div className="loading">
+                    <CircularProgress/>
+                </div>
+                }
+            </>
+            }
+            {(variant === "flat" && !connectionDown) &&
+            <>
+            {flatListings ? 
                 <>
-                {flatmateListings.map((listing, id) => (
-                    <ExploreFlatmate name={listing.data().userInfo.username} age={listing.data().userInfo.age} gender={listing.data().userInfo.gender} location={listing.data().flatTags.location} money={listing.data().mainInfo.budget} available={listing.data().mainInfo.startTime} bio={listing.data().bio} id={listing.id} key={id}/>
-                ))}
-                {flatmateListings.length > 9 ?
-                    <Pagination page={page} setPage={setPage} handlePagination={handlePagination} isDisabled={isPaginationDisabled} />
-                    :
-                    ""
-                }
-               
+                    {flatListings.length ?
+                        <>
+                            {flatListings.map((listing, id) => (
+                                <ExploreFlat name={`Byt ${listing.data().flatBoxes.layout != null ? listing.data().flatBoxes.layout : ""} ${listing.data().flatBoxes.location}`} bio={listing.data().flatBio} price={listing.data().mainInfo.price} startTime={listing.data().mainInfo.startTime} stayTime={listing.data().mainInfo.stayTime} id={listing.id} key={id} />
+                            )) }
+                            {flatListings.length > 9 &&
+                                <Pagination page={page} setPage={setPage} handlePagination={handlePagination} isDisabled={isPaginationDisabled} />
+                            }
+                        </>
+                        :
+                        <div className="feed-not-found">
+                            <img src="/img/bad-results/notfound.png" width={184} height={208} />
+                            <div className="not-found-description">Omlouváme se, ale vaším požadavkům neodpovídají žádné inzeráty. Zkuste upravit své filtry.</div>
+                        </div>
+                    
+                    }
                 </>
-            :
-            <div className="loading">
-                <CircularProgress/>
-            </div>
+                :
+                <div className="loading">
+                    <CircularProgress/>
+                </div>
             }
             </>
             }
-            {variant === "flat" &&
-            <>
-            {flatListings.length ? 
-            <>
-            {flatListings.map((listing, id) => (
-                    <ExploreFlat name={`Byt ${listing.data().flatBoxes.layout != null ? listing.data().flatBoxes.layout : ""} ${listing.data().flatBoxes.location}`} bio={listing.data().flatBio} price={listing.data().mainInfo.price} startTime={listing.data().mainInfo.startTime} stayTime={listing.data().mainInfo.stayTime} id={listing.id} key={id} />
-                )) }
-                {flatListings.length > 9 ?
-                    <Pagination page={page} setPage={setPage} handlePagination={handlePagination} isDisabled={isPaginationDisabled} />
-                    :
-                    ""
-                }
-            </>
-            :
-            <div className="loading">
-                <CircularProgress/>
-            </div>
+            {connectionDown &&
+                <div className="feed-connection-lost">
+                    {/* <img src={require("/img/bad-results/crash.png")} width={361} height={189}/> */}
+                    <p className="lost-description">Vaše připojení bylo ztraceno.</p>
+                    <button onClick={() => router.reload(`explore/${variant}`)} className="acc-btn">Opakovat</button>
+                </div>
             }
-            </>
-            }
-            
         </div>
+
+        
         </>
     )
 }

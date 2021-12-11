@@ -2950,6 +2950,56 @@ textarea {
   padding-top: 2rem;
 }
 
+.explore-feed .feed-connection-lost {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.explore-feed .feed-connection-lost img {
+  margin-bottom: 1rem;
+}
+
+.explore-feed .feed-connection-lost .lost-description {
+  text-align: center;
+  font-size: 14px;
+  color: #B8B8B8;
+  margin-bottom: 1rem;
+}
+
+.explore-feed .feed-not-found {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.explore-feed .feed-not-found img {
+  margin-bottom: 1rem;
+}
+
+.explore-feed .feed-not-found .not-found-description {
+  text-align: center;
+  font-size: 14px;
+  color: #B8B8B8;
+  margin-bottom: 1rem;
+}
+
 .rec-req {
   padding: 1rem;
   border: 1px solid #B8B8B8;

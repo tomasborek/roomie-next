@@ -14,3 +14,35 @@
     justify-content: center;
     padding-top: 2rem;
 }
+
+.explore-feed .feed-connection-lost{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img{
+        margin-bottom: 1rem;
+    }
+    .lost-description{
+        text-align: center;
+        font-size: 14px;
+        color: $mainGray;
+        margin-bottom: 1rem;
+    }
+}
+
+.explore-feed .feed-not-found{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img{
+        margin-bottom: 1rem;
+    }
+    .not-found-description{
+        text-align: center;
+        font-size: 14px;
+        color: $mainGray;
+        margin-bottom: 1rem;
+    }
+}
