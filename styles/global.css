@@ -1804,6 +1804,9 @@ textarea {
   .main-header .navbar .navbar-dropdown-icon {
     display: none;
   }
+  .main-header .navbar .navbar-login {
+    display: none;
+  }
   .main-header .navbar .dropdown {
     width: 100%;
     position: absolute;
