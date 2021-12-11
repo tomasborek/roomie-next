@@ -61,6 +61,7 @@ const Header = ({variant}) => {
 
     const handleLogOut = () => {
         setLoading(true);
+        setNavOverlay(false);
         logOut()
         .then(res => {
             router.push("/");
