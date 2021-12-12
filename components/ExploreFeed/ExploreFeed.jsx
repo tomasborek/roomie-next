@@ -16,7 +16,7 @@ import { CircularProgress } from '@mui/material';
 const ExploreFeed = ({variant}) => {
     //Variables
     //Contexts
-    const {getListings, getListingsPage} = useDb();
+    const {getListings} = useDb();
     const router = useRouter();
     //State
     // Is user connected to internet
@@ -34,6 +34,7 @@ const ExploreFeed = ({variant}) => {
     //Pagination disabled?
     const [isPaginationDisabled, setIsPaginationDisabled] = useState(false);
 
+    // Initial first page fetch
     useEffect(() => {
         if(variant === "flatmate"){
         // Empty array that we can insert all the data in and then insert it into flatmateListings state
@@ -43,7 +44,7 @@ const ExploreFeed = ({variant}) => {
                 return;
             }
             //Gettem
-            getListings("flatmate").then(docs => {
+            getListings("flatmate", "first").then(docs => {
                 //Checks if we are connected to internet
                 if (docs.empty && docs.metadata.fromCache) {
                     throw new Error('network-failed');
@@ -71,7 +72,7 @@ const ExploreFeed = ({variant}) => {
                 return;
             }
             //Getttttttem
-            getListings("flat").then(docs => {
+            getListings("flat", "first").then(docs => {
                 //Checks if we are connected to internet
                 if (docs.empty && docs.metadata.fromCache) {
                     throw new Error('network-failed');
@@ -94,12 +95,13 @@ const ExploreFeed = ({variant}) => {
     }, [])
 
     //Functions
+    // Hadnles pagination (next or prev)
     const handlePagination = (page) => {
         if(variant === "flatmate"){
             if(page === "next"){
                 let flatmateListingsArray = [];
                 setIsPaginationDisabled(true);
-                getListingsPage("flatmate", "next", flatmateSnaps)
+                getListings("flatmate", "next", flatmateSnaps)
                 .then(docs => {
                     if(docs.docs.length > 0){
                         setPage(prevState => prevState + 1);
@@ -115,7 +117,7 @@ const ExploreFeed = ({variant}) => {
             if(page === "prev"){
                 let flatmateListingsArray = [];
                 setIsPaginationDisabled(true);
-                getListingsPage("flatmate", "prev", flatmateSnaps)
+                getListings("flatmate", "prev", flatmateSnaps)
                 .then(docs => {
                     if(docs.docs.length > 0){
                         setPage(prevState => prevState - 1);
@@ -133,7 +135,7 @@ const ExploreFeed = ({variant}) => {
             if(page === "next"){
                 let flatListingsArray = [];
                 setIsPaginationDisabled(true);
-                getListingsPage("flat", "next", flatSnaps)
+                getListings("flat", "next", flatSnaps)
                 .then(docs => {
                     if(docs.docs.length > 0){
                         setFlatSnaps(docs.docs);
@@ -150,7 +152,7 @@ const ExploreFeed = ({variant}) => {
             if(page === "prev"){
                 let flatListingsArray = [];
                 setIsPaginationDisabled(true);
-                getListingsPage("flat", "prev", flatSnaps)
+                getListings("flat", "prev", flatSnaps)
                 .then(docs => {
                     if(docs.docs.length > 0){
                         setFlatSnaps(docs.docs);

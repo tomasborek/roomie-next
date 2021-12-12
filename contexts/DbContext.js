@@ -29,13 +29,12 @@ export function DbProvider(props) {
        return updateDoc(docRef, params);       
     }
 
-    const getListings = (type) => {
-        const q = query(collection(db, "listings"), where("type", "==", type), orderBy("timeStamp", "desc"), limit(10));
-        return getDocs(q);
-    }
-
-    const getListingsPage = (type, page, listings) => {
+    const getListings = (type, page, listings) => {
         const colRef = collection(db, "listings");
+        if(page === "first"){
+            const q = query(colRef, where("type", "==", type), orderBy("timeStamp", "desc"), limit(10));
+            return getDocs(q);
+        }
         if(page === "next"){
             const q = query(colRef, where("type", "==", type), orderBy("timeStamp", "desc"), limit(10), startAfter(listings[listings.length - 1]))
             return getDocs(q);
@@ -45,6 +44,7 @@ export function DbProvider(props) {
             return getDocs(q);
         }
     }
+
 
     const getListing = (id) => {
         return getDoc(doc(db, "listings", id));
@@ -97,7 +97,6 @@ export function DbProvider(props) {
         updateUser,
         updateListing,
         getListings,
-        getListingsPage,
         getListing,
         getListingByUser,
         getRequests,
