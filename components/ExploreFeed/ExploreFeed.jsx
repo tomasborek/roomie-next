@@ -19,8 +19,6 @@ const ExploreFeed = ({variant}) => {
     const {getListings} = useDb();
     const router = useRouter();
     //State
-     // Bool are we on the initial page of the explore? Checks because of pagination
-     const [firstPage, setFirstPage] = useState(true);
     // Is user connected to internet
     const [connectionDown, setConnectionDown] = useState(false);
     //Flatmate listings
@@ -99,7 +97,6 @@ const ExploreFeed = ({variant}) => {
     //Functions
     // Hadnles pagination (next or prev)
     const handlePagination = (page) => {
-        setFirstPage(false);
         if(variant === "flatmate"){
             if(page === "next"){
                 let flatmateListingsArray = [];
@@ -189,7 +186,7 @@ const ExploreFeed = ({variant}) => {
                             {flatmateListings.map((listing, id) => (
                                 <ExploreFlatmate name={listing.data().userInfo.username} age={listing.data().userInfo.age} gender={listing.data().userInfo.gender} location={listing.data().flatTags.location} money={listing.data().mainInfo.budget} available={listing.data().mainInfo.startTime} bio={listing.data().bio} id={listing.id} key={id}/>
                             ))}
-                            {(flatmateListings.length > 9 || !firstPage) ?
+                            {(flatmateListings.length > 9 || page != 1) ?
                                 <Pagination page={page} setPage={setPage} handlePagination={handlePagination} isDisabled={isPaginationDisabled} />
                                 :
                                 ""
@@ -220,7 +217,7 @@ const ExploreFeed = ({variant}) => {
                             {flatListings.map((listing, id) => (
                                 <ExploreFlat name={`Byt ${listing.data().flatBoxes.layout != null ? listing.data().flatBoxes.layout : ""} ${listing.data().flatBoxes.location}`} bio={listing.data().flatBio} price={listing.data().mainInfo.price} startTime={listing.data().mainInfo.startTime} stayTime={listing.data().mainInfo.stayTime} id={listing.id} key={id} />
                             )) }
-                            {(flatListings.length > 9 || !firstPage) &&
+                            {(flatListings.length > 9 || page != 1) &&
                                 <Pagination page={page} setPage={setPage} handlePagination={handlePagination} isDisabled={isPaginationDisabled} />
                             }
                         </>

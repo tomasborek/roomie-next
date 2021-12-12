@@ -149,7 +149,7 @@ const ReqFeed = ({type}) => {
                         {Object.keys(recievedRequests).map((req, id) => (
                             <RecievedReq reqInfo={recievedRequests[req]} id={req} key={id}/>
                         ))}
-                        {(Object.keys(recievedRequests).length > 4) ?
+                        {(Object.keys(recievedRequests).length > 4 || page != 1) ?
                         <Pagination setPage={setPage} page={page} handlePagination={handlePagination} isDisabled={paginationDisabled}/>
                         :
                         ""
@@ -180,7 +180,7 @@ const ReqFeed = ({type}) => {
                                 <SentReq name={sentRequests[req].username} age={sentRequests[req].age} status={sentRequests[req].status} id={req} key={id} />
                             ))
                             }
-                            {(Object.keys(sentRequests).length > 9) ?
+                            {(Object.keys(sentRequests).length > 4 || page != 1) ?
                             <Pagination setPage={setPage} page={page} handlePagination={handlePagination} isDisabled={paginationDisabled}/>
                             :
                             ""
