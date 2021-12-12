@@ -2,14 +2,8 @@ import React from 'react'
 //next
 import  Link  from 'next/link';
 import Head from "next/head";
-//FA
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-
-
 //Components
 import RegisterBox from '../components/RegisterBox/RegisterBox';
-
 
 const Register = () => {
     return (

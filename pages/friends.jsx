@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from 'react'
+//next
+import { useRouter } from 'next/router';
 //COntexts
 import { useAuth } from '../contexts/AuthContext';
 import { useDb } from '../contexts/DbContext';
@@ -15,6 +17,7 @@ const Friends = () => {
     const {currentUser} = useAuth();
     const {getUser, getFriends} = useDb();
     const [friends, setFriends] = useState(null);
+    const router = useRouter();
 
     useEffect(() => {
         if(currentUser){
@@ -27,6 +30,12 @@ const Friends = () => {
                 setFriends(friendsObject);
     
             })
+        }
+    }, [currentUser])
+
+    useEffect(() => {
+        if(!currentUser){
+            router.back();
         }
     }, [currentUser])
     return (

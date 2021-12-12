@@ -62,7 +62,7 @@ const EditProfile = () => {
             console.log(error.message);
             })
         }else{
-            setUserData(null);
+            router.back();
         }
         
     }, [currentUser])
@@ -79,6 +79,7 @@ const EditProfile = () => {
         }
         
     }, [userData])
+
 
     //Functions
     //Action handlers

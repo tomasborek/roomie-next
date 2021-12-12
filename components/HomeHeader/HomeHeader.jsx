@@ -1,10 +1,13 @@
 import React, {useState} from 'react'
 //next
 import Link from "next/link";
+//Contexts
+import {useAuth} from "../../contexts/AuthContext";
 
 const HomeHeader = () => {
     //State
     const [isNavActive, setIsNavActive] = useState(false);
+    const {currentUser} = useAuth();
     return (
         <header className="home-header"> 
             <div className="res-header-view">
@@ -19,8 +22,8 @@ const HomeHeader = () => {
         
 
             <ul className={`navbar ${isNavActive ? "active" : ""}`}>
-               <Link href="/login"><li>Přihlásit se</li></Link>
-               <Link href="/register"><li>Registrovat</li></Link>
+               <Link href={currentUser ? "/explore/flatmates" : "/login"}><li>Přihlásit se</li></Link>
+               <Link href={currentUser ? "/explore/flatmates" : "/register"}><li>Registrovat</li></Link>
             </ul>
         </header>
     )

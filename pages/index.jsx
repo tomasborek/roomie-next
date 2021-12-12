@@ -22,11 +22,6 @@ export default function Home() {
     //Refs
     const videoRef = useRef();
    
-    useEffect(() => {
-        if(currentUser){
-            router.push("/explore/flatmates");
-        }
-    }, [currentUser])
   return (
     <>
     <Head>

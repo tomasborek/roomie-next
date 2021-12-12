@@ -1,12 +1,24 @@
-import React from 'react'
+import React, {useEffect} from 'react';
 //next
 import Link from "next/link"
 import Head from "next/head";
+import { useRouter } from 'next/router';
 
 //Components
-import LoginBox from '../components/LoginBox/LoginBox'
+import LoginBox from '../components/LoginBox/LoginBox';
+//Context
+import { useAuth } from '../contexts/AuthContext';
+import { useLoading } from '../contexts/LoadingContext';
 
 const Login = () => {
+    const {currentUser} = useAuth();
+    const router = useRouter();
+    const [loading, setLoading] = useLoading();
+    useEffect(() => {
+        if(currentUser && !loading){
+            router.push("/explore/flatmates");
+        }
+    }, [currentUser])
     return (
         <>
         <Head>
