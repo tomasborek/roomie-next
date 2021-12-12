@@ -57,14 +57,14 @@ export function DbProvider(props) {
 
     //Requests and friends
 
-    const getRequests = (type, uid, page) => {
+    const getRequests = (type, uid, page, requests) => {
         const colRef = collection(db, "users", uid, type);
         if(page === "first"){
             const q = query(colRef, orderBy("timeStamp", "desc"), limit(5));
             return getDocs(q);
         }
         if(page === "next"){
-            const q = query(colRef, orderBy("timeStamp", "desc"), limit(25), startAfter(requests[requests.length - 1]));
+            const q = query(colRef, orderBy("timeStamp", "desc"), limit(5), startAfter(requests[requests.length - 1]));
             return getDocs(q);
         }
         if(page === "prev"){

@@ -100,7 +100,7 @@ const ReqFeed = ({type}) => {
             if(page === "next"){
                 setPaginationDisabled(true);
                 let sentRequestsObject = {};
-                getRequestsPage("sentRequests", currentUser.uid, "next", sentSnaps)
+                getRequests("sentRequests", currentUser.uid, "next", sentSnaps)
                 .then(docs => {
                     if(docs.docs.length > 0){
                         setPaginationDisabled(false);
@@ -117,7 +117,7 @@ const ReqFeed = ({type}) => {
             if(page === "prev"){
                 setPaginationDisabled(true);
                 let sentRequestsObject = {};
-                getRequestsPage("sentRequests", currentUser.uid, "prev", sentSnaps)
+                getRequests("sentRequests", currentUser.uid, "prev", sentSnaps)
                 .then(docs => {
                     if(docs.docs.length > 0){
                         setPaginationDisabled(false);
@@ -149,7 +149,7 @@ const ReqFeed = ({type}) => {
                         {Object.keys(recievedRequests).map((req, id) => (
                             <RecievedReq reqInfo={recievedRequests[req]} id={req} key={id}/>
                         ))}
-                        {(Object.keys(recievedRequests).length > 9) ?
+                        {(Object.keys(recievedRequests).length > 4) ?
                         <Pagination setPage={setPage} page={page} handlePagination={handlePagination} isDisabled={paginationDisabled}/>
                         :
                         ""
