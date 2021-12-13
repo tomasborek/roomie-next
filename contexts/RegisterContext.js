@@ -8,17 +8,20 @@ export const useRegister = () => {
 
 export  function RegisterProvider(props) {
     const usernameRef = useRef();
+    const [username, setUsername] = useState();
     const emailRef = useRef();
     const phoneRef = useRef();
     const passwordRef = useRef();
+    const passwordCheckRef = useRef();
     const monthRef = useRef();
     const dayRef = useRef();
     const yearRef = useRef();
     const value = {
-        usernameRef: usernameRef,
+        usernameState: {username, setUsername},
         emailRef: emailRef,
         phoneRef: phoneRef,
         passwordRef: passwordRef,
+        passwordCheckRef: passwordCheckRef,
         dayRef: dayRef,
         monthRef: monthRef,
         yearRef: yearRef

@@ -2620,6 +2620,14 @@ textarea {
   }
 }
 
+.register-box .box-content .content-name {
+  width: 70%;
+}
+
+.register-box .box-content .content-name input {
+  width: 100%;
+}
+
 .register-box .box-content .content-register {
   display: -webkit-box;
   display: -ms-flexbox;

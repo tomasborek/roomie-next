@@ -22,6 +22,7 @@ import { Button, easing } from '@mui/material';
 import DropdownStep from '../RegistrationSteps/DropdownStep/DropdownStep';
 import RangeStep from '../RegistrationSteps/RangeStep/RangeStep';
 import RegistrationFinal from '../RegistrationSteps/RegistrationFinal/RegistrationFinal';
+import NameStep from '../RegistrationSteps/NameStep/NameStep';
 
 
 
@@ -30,7 +31,7 @@ const RegisterBox = () => {
     let router = useRouter();
     const {register, currentUser, deleteU} = useAuth();
     const [loading, setLoading] = useLoading();
-    const {usernameRef, emailRef, phoneRef, passwordRef, dayRef, monthRef, yearRef} = useRegister();
+    const {usernameState, emailRef, phoneRef, passwordRef, passwordCheckRef, dayRef, monthRef, yearRef} = useRegister();
     const {callable} = useFunctions();
     let uid;
     let listingIdVar;
@@ -51,10 +52,8 @@ const RegisterBox = () => {
         const createUser = callable("createUser");
         const createListing = callable("createListing");
         //Refs trim
-        usernameRef.current.value = usernameRef.current.value.trim();
         emailRef.current.value = emailRef.current.value.trim();
         phoneRef.current.value = phoneRef.current.value.trim();
-        passwordRef.current.value = passwordRef.current.value;
         // Age and bday
         const birthday = new Date(yearRef.current.value, monthRef.current.value, dayRef.current.value);
         const age = ageCalc(birthday);
@@ -63,7 +62,7 @@ const RegisterBox = () => {
         setLoading(true);
         //Variables
         //Refs variables
-        const username = usernameRef.current.value;
+        const username = usernameState.username.trim();
         const email = emailRef.current.value;
         const phone = phoneRef.current.value;
         const password = passwordRef.current.value;
@@ -112,7 +111,7 @@ const RegisterBox = () => {
                return createListing(listingInfo)
             }).then(response => {
                 setLoading(false);
-                setStep(5);
+                setStep(6);
             }).catch(error => {
                 setLoading(false);
                 switch(error.code){
@@ -130,38 +129,42 @@ const RegisterBox = () => {
     }
 
     const checkIfFilled = (age) => {
-        usernameRef.current.classList.remove("error");
         emailRef.current.classList.remove("error");
         phoneRef.current.classList.remove("error");
         passwordRef.current.classList.remove("error");
+        passwordCheckRef.current.classList.remove("error");
         dayRef.current.classList.remove("error");
         yearRef.current.classList.remove("error");
 
-        if(usernameRef.current.value === "" || usernameRef.current.value.length < 2){
-            setError("Prosím zadejte své jméno.");
-            usernameRef.current.classList.add("error");
-            return false;
-        }
 
-        if(emailRef.current.value === "" || emailRef.current.value.length < 4){
+        if(emailRef.current.value == null || emailRef.current.value.length < 4){
             setError("Prosím zadejte svůj email.");
             emailRef.current.classList.add("error");
             return false;
         }
 
-        if(phoneRef.current.value === "" || phoneRef.current.value.match(/^[0-9]+$/) == null || phoneRef.current.value.length < 9){
+        if(phoneRef.current.value == null || phoneRef.current.value.match(/^[0-9]+$/) == null || phoneRef.current.value.length < 9){
             setError("Prosím zadejte své číslo.");
             phoneRef.current.classList.add("error");
             return false;
         }
 
-        if(passwordRef.current.value === ""){
+        if(passwordRef.current.value == null){
             setError("Prosím zadejte své heslo.");
             passwordRef.current.classList.add("error");
             return false;
         }else if(passwordRef.current.value.length < 7){
             setError("Prosím zadejte heslo dlouhé alespoň 7 znaků.");
             passwordRef.current.classList.add("error");
+            return false;
+        }
+
+        if(passwordRef.current.value != passwordCheckRef.current.value){
+            setError("Hesla se neshodují.");
+            passwordRef.current.classList.add("error");
+            passwordCheckRef.current.classList.add("error");
+            passwordRef.current.value = "";
+            passwordCheckRef.current.value = "";
             return false;
         }
 
@@ -194,21 +197,6 @@ const RegisterBox = () => {
             age--;
         }
         return age;
-    // let age = currentYear - userYear;
-    //     if(currentMonth + 1 <= userMonth){
-    //         if(userMonth == currentMonth + 1){
-    //             if(day => currentDay){
-    //                 age++;
-    //                 return age;
-    //             }
-    //         }else{
-    //             age--;
-    //             return age;
-    //         }
-            
-    //     }else{
-    //         return age;
-    //     }
     }
 
     const finishReg = () => {
@@ -233,7 +221,6 @@ const RegisterBox = () => {
     return (
         <div className="register-box">
 
-            
            {step === 0 && 
             <div className="box-content">
                 <div className="content-img-container">
@@ -276,8 +263,6 @@ const RegisterBox = () => {
                     <DropdownStep location={location} setLocation={setLocation} />
                     <button  disabled={!location} className={`acc-btn ${!location && "disabled"}`} onClick={() => setStep(3)}>Hotovo</button>
              </div>
-
-
            }
 
            {step === 3 && type === "flatmate" &&
@@ -301,9 +286,20 @@ const RegisterBox = () => {
                         <button disabled={!price} onClick={() => setStep(4)} className={`acc-btn ${!price && "disabled"}`}>Hotovo</button>
                 </div>
            }
+        
+        {step === 4 &&
+            <div className="box-content">
+                <div className="content-img-container">
+                <motion.img initial={{opacity: 0}} animate={{opacity: 1}} transition={{duration: 0.5}}   src="/img/registration-steps/slide-img3.png" className="content-img" />    
+                </div>
+                <h1>Jak vám máme říkat?</h1>
+                <NameStep setName={usernameState.setUsername} name={usernameState.username} />
+                <button onClick={() => setStep(5)} disabled={(!usernameState.username || usernameState.username.length < 3)} className={`acc-btn ${(!usernameState.username || usernameState.username.length < 3) && "disabled"}`}>Hotovo</button>
+            </div>
+        }
             
 
-        {step === 4 && 
+        {step === 5 && 
             <div className="box-content">
                 <div className="void-fil"></div>
                 {error && <Alert variant="filled" severity="error" sx={{width: "100%"}}>{error}</Alert>}
@@ -313,7 +309,7 @@ const RegisterBox = () => {
             </div>
         }
 
-        {step === 5 && 
+        {step === 6 && 
             <div className="box-content">
                 <div className="content-img-container">
                     <motion.img initial={{opacity: 0}} animate={{opacity: 1}} transition={{duration: 0.5}} src="/img/registration-steps/slide-img5.png" className="content-img" />
@@ -345,7 +341,11 @@ const RegisterBox = () => {
                 <div onClick={() => {
                     setStep(4)
                 }} className={`dot ${step === 4 ? "active-dot" : ""}`}></div>
+                 <div onClick={() => {
+                    setStep(5)
+                }} className={`dot ${step === 5 ? "active-dot" : ""}`}></div>
                 </div>
+                
                
                 
 
