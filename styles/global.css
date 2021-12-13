@@ -1042,6 +1042,17 @@ textarea {
   width: 100%;
 }
 
+.Listing .listing-content .content-error {
+  padding-top: 1rem;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 .Listing .listing-content .content-body .body-info .info-edit-boxes {
   display: -webkit-box;
   display: -ms-flexbox;

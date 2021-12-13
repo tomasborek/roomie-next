@@ -32,15 +32,15 @@ export function DbProvider(props) {
     const getListings = (type, page, listings) => {
         const colRef = collection(db, "listings");
         if(page === "first"){
-            const q = query(colRef, where("type", "==", type), orderBy("timeStamp", "desc"), limit(10));
+            const q = query(colRef, where("type", "==", type), where("visible", "==", true), orderBy("timeStamp", "desc"), limit(10));
             return getDocs(q);
         }
         if(page === "next"){
-            const q = query(colRef, where("type", "==", type), orderBy("timeStamp", "desc"), limit(10), startAfter(listings[listings.length - 1]))
+            const q = query(colRef, where("type", "==", type), where("visible", "==", true), orderBy("timeStamp", "desc"), limit(10), startAfter(listings[listings.length - 1]))
             return getDocs(q);
         }
         if(page === "prev"){
-            const q = query(colRef, where("type", "==", type), orderBy("timeStamp", "desc"), limitToLast(10), endBefore(listings[0]))
+            const q = query(colRef, where("type", "==", type), where("visible", "==", true), orderBy("timeStamp", "desc"), limitToLast(10), endBefore(listings[0]))
             return getDocs(q);
         }
     }

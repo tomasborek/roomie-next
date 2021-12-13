@@ -56,6 +56,7 @@ exports.createListing = functions.https.onCall((data, context) => {
       friends: [],
       requests: [],
       sentRequests: [],
+      visible: false,
       timeStamp: admin.firestore.FieldValue.serverTimestamp(),
     };
   } else if (data.type == "offerer") {
@@ -83,6 +84,7 @@ exports.createListing = functions.https.onCall((data, context) => {
       friends: [],
       requests: [],
       sentRequests: [],
+      visible: false,
       timeStamp: admin.firestore.FieldValue.serverTimestamp(),
     };
   }

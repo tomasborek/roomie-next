@@ -139,7 +139,8 @@ const CrListing = ({type}) => {
                 personBoxes: addedPersonBoxes,
                 personTags: addedPersonTags,
                 flatTags: addedFlatTags,
-                bio: bio
+                bio: bio,
+                visible: true,
             }
         }
         if(type === "flat" || type === "flat-cr"){
@@ -153,7 +154,8 @@ const CrListing = ({type}) => {
                 personBoxes: addedPersonBoxes,
                 flatBoxes: addedFlatBoxes,
                 flatBio: flatBio,
-                personBio: personBio
+                personBio: personBio,
+                visible: true,
             }
         }
         const updateListingInfo = {

@@ -61,6 +61,7 @@ const ExploreFeed = ({variant}) => {
                 if(error.message === "network-failed"){
                     setConnectionDown(true);
                 }
+                console.log(error);
             })
         }
 

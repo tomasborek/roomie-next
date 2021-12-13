@@ -1,7 +1,8 @@
 import React, {useEffect, useState, useRef} from 'react'
 //next
 import { useRouter } from 'next/dist/client/router';
-import Head from "next/head"
+import Head from "next/head";
+import Link from "next/link";
 
 
 //Contexts
@@ -165,7 +166,8 @@ const Listing = ({type}) => {
                 personBoxes: addedPersonBoxes,
                 personTags: addedPersonTags,
                 flatTags: addedFlatTags,
-                bio: bio
+                bio: bio,
+                visible: true,
             }
         }
         if(type === "flat" || type === "flat-cr"){
@@ -179,7 +181,8 @@ const Listing = ({type}) => {
                 personBoxes: addedPersonBoxes,
                 flatBoxes: addedFlatBoxes,
                 flatBio: flatBio,
-                personBio: personBio
+                personBio: personBio,
+                visible: true,
             }
         }
         const updateListingInfo = {
@@ -299,6 +302,14 @@ const Listing = ({type}) => {
                                     }
                                 </div>
                             </div>
+                            {(listingInfo && !listingInfo.data().visible )&&
+                                <div className="content-error">
+                                    <Alert severity="error">
+                                        Váš inzerát je nedokončený, prosím dokončete ho 
+                                        <Link href={`/cr/${listingInfo.data().type}/${listingInfo.id}`}> zde</Link>
+                                    </Alert>
+                                </div>
+                            }
                         
         {/*About*/}
                     
@@ -389,6 +400,14 @@ const Listing = ({type}) => {
                         }
                         </div>
                     </div>
+                    {(listingInfo && !listingInfo.data().visible )&&
+                        <div className="content-error">
+                            <Alert severity="error">
+                                Váš inzerát je nedokončený, prosím dokončete ho 
+                                <Link href={`/cr/${listingInfo.data().type}/${listingInfo.id}`}> zde</Link>
+                            </Alert>
+                        </div>
+                    }
                
      {/*Content about  */}                  
                 <div className="mid-container">
