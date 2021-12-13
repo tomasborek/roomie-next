@@ -13,7 +13,7 @@ import { CircularProgress } from '@mui/material';
 
 const ReqFeed = ({type}) => {
     const {currentUser} = useAuth();
-    const {getUser, getRequests, deleteNotifications} = useDb();
+    const {getRequests} = useDb();
     //State
     //Recieved requests
     const [recievedRequests, setRecievedRequests] = useState(null);

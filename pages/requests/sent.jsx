@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 //Layout
 import Requests from '../../components/Requests/Requests';
 //next
