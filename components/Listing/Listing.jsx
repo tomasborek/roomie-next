@@ -175,6 +175,12 @@ const Listing = ({type}) => {
             window.scrollTo(0,0);
             return;
         }
+        if(!budget || budget < 1000 || budget > 60000){
+            snackBar(`Prosím zadejte správnou hodnotu do ${listingInfo.data().type === "flatmate" ? "rozpočtu." : "nájemného."}`)
+            setLoading(false);
+            window.scrollTo(0,0);
+            return;
+        }
         let params;
         if(type === "flatmate" || type === "flatmate-cr"){
             params = {
@@ -303,15 +309,26 @@ const Listing = ({type}) => {
                 >
                     <DialogTitle>Upravit rozpočet</DialogTitle>
                     <DialogContent sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-                        <Slider sx={{width: 250, marginTop: "1rem"}} min={1} max={60} onChange={(e) => setBudget(e.target.value)} defaultValue={listingInfo && listingInfo.data().mainInfo.budget}/>
+                        <Slider sx={{width: 250, marginTop: "1rem"}} min={1000} max={60000} onChange={(e) => setBudget(e.target.value)} step={1000} value={budget ? budget : 0}/>
                         <div style={{display: "flex", alignItems: "center", marginTop: "1rem"}}>
                             <i style={{marginRight: "0.5rem"}}className="fas fa-coins"></i>
-                            <p>{budget} 000{budget == 60 &&"+"} Kč</p>
+                            <p> 
+                                <input 
+                                    maxLength={5} 
+                                    type="text" 
+                                    onChange={(e) => (e.target.value.match(/^[0-9]+$/) || e.target.value === "") ? setBudget(e.target.value) : ""} 
+                                    value={budget} 
+                                    className='range-input' /> 
+                                {budget == 60000 ? " +" : ""} Kč</p>
                         </div>
                         
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={() => setSliderDialog(false)}>Uložit</Button>
+                        <Button 
+                            sx={(!budget || budget < 1000 || budget > 60000) ? {opacity: 0.2, pointerEvents: "none"} : {opacity: 1, pointerEvents: "all"}} 
+                            onClick={() => setSliderDialog(false)}>
+                                Uložit
+                            </Button>
                     </DialogActions>
                 </Dialog>
             {/* Contatc request dialog */}
@@ -433,23 +450,34 @@ const Listing = ({type}) => {
             <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={flatBoxerOverlay}><Boxer setBoxerOverlay={setFlatBoxerOverlay} variant="flat" existingBoxes={listingInfo && listingInfo.data().flatBoxes} setAddedBoxes={setAddedFlatBoxes} addedBoxes={addedFlatBoxes}/></Backdrop>
     {/* Dialogs */}
             <Dialog
-            open={sliderDialog}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-            >
-                <DialogTitle>Upravit rozpočet</DialogTitle>
-                <DialogContent sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-                    <Slider sx={{width: 250, marginTop: "1rem"}} min={1} max={60} onChange={(e) => setBudget(e.target.value)} defaultValue={listingInfo && listingInfo.data().mainInfo.price}/>
-                    <div style={{display: "flex", alignItems: "center", marginTop: "1rem"}}>
-                        <i style={{marginRight: "0.5rem"}}className="fas fa-coins"></i>
-                        <p>{budget} 000{budget == 60 &&"+"} Kč</p>
-                    </div>
-                    
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={() => setSliderDialog(false)}>Uložit</Button>
-                </DialogActions>
-            </Dialog>
+                open={sliderDialog}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle>Upravit rozpočet</DialogTitle>
+                    <DialogContent sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+                        <Slider sx={{width: 250, marginTop: "1rem"}} min={1000} max={60000} onChange={(e) => setBudget(e.target.value)} step={1000} value={budget ? budget : 0}/>
+                        <div style={{display: "flex", alignItems: "center", marginTop: "1rem"}}>
+                            <i style={{marginRight: "0.5rem"}}className="fas fa-coins"></i>
+                            <p> 
+                                <input 
+                                    maxLength={5} 
+                                    type="text" 
+                                    onChange={(e) => (e.target.value.match(/^[0-9]+$/) || e.target.value === "") ? setBudget(e.target.value) : ""} 
+                                    value={budget} 
+                                    className='range-input' /> 
+                                {budget == 6000 && "+"} Kč</p>
+                        </div>
+                        
+                    </DialogContent>
+                    <DialogActions>
+                        <Button 
+                            sx={(!budget || budget < 1000 || budget > 60000) ? {opacity: 0.2, pointerEvents: "none"} : {opacity: 1, pointerEvents: "all"}} 
+                            onClick={() => setSliderDialog(false)}>
+                                Uložit
+                            </Button>
+                    </DialogActions>
+                </Dialog>
             <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={reqDialogOpen}>
                 <ReqDialog setMessage={setRequestMessage} message={requestMessage} setOpen={setReqDialogOpen} handleSend={handleRequest}/>
             </Backdrop>

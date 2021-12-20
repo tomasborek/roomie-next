@@ -41,7 +41,7 @@ const RegisterBox = () => {
     const [error, setError] = useState(null);
     const [gender, setGender] = useState(null);
     const [location, setLocation] = useState(null);
-    const [price, setPrice] = useState(20);
+    const [price, setPrice] = useState(20000);
     const [listingId, setListingId] = useState("");
 
     //Action handle functions
@@ -283,7 +283,7 @@ const RegisterBox = () => {
                         </div>
                         <h1 className="content-title">Kolik činí měsíční nájem pro případné zájemce?</h1>
                         <RangeStep price={price} setPrice={setPrice} />
-                        <button disabled={!price} onClick={() => setStep(4)} className={`acc-btn ${!price && "disabled"}`}>Hotovo</button>
+                        <button disabled={!price || price < 1000 || price > 60000} onClick={() => setStep(4)} className={`acc-btn ${(!price || price < 1000 || price > 60000) && "disabled"}`}>Hotovo</button>
                 </div>
            }
         

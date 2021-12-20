@@ -13,7 +13,24 @@ const ListingInfoImportant = ({type, listingInfo, editListing, state}) => {
                 <div className="important-item">
                     <div className="item-header">
                         <i className={`header-icon ${editListing && "header-edit-icon"} fas fa-coins`}></i>
-                         {editListing ?  <div className="header-value header-value-edit-slider"><p>{state.budget} 000 Kč</p><i onClick={() => state.setSliderDialog(true)} className="fas fa-gear"></i></div> : <div className="header-value"> {listingInfo.data().mainInfo.budget} 000 Kč</div>}
+                         {editListing ?  
+                            <div className="header-value header-value-edit-slider">
+                                <p>
+                                    {state.budget && (state.budget >= 10000 ? 
+                                        (state.budget.toString().substr(0,2) + " " + state.budget.toString().substr(2,6)) 
+                                    : 
+                                        (state.budget.toString().substr(0,1) + " " + state.budget.toString().substr(1,5)))} 
+                                     {state.budget == 60000 && "+"} Kč
+                                </p>
+                                <i onClick={() => state.setSliderDialog(true)} className="fas fa-gear"></i></div> 
+                        : 
+                            <div className="header-value">
+                                {listingInfo.data().mainInfo.budget >= 10000 ? 
+                                    (listingInfo.data().mainInfo.budget.toString().substr(0,2) + " " +  listingInfo.data().mainInfo.budget.toString().substr(2,6))
+                                :  
+                                    (listingInfo.data().mainInfo.budget.toString().substr(0,1) + " " + listingInfo.data().mainInfo.budget.toString().substr(1,5))}
+                                    {listingInfo.data().mainInfo.budget == 60000 && "+"} Kč
+                            </div>}
                     </div>
                     <div className="item-description">Rozpočet</div>
                 </div>
@@ -63,7 +80,26 @@ const ListingInfoImportant = ({type, listingInfo, editListing, state}) => {
                 <div className="important-item">
                     <div className="item-header">
                         <i className="header-icon fas fa-coins"></i>
-                        {editListing ? <div className="header-value header-value-edit-slider"><p>{state.budget} 000 Kč</p><i onClick={() => state.setSliderDialog(true)} className="fas fa-gear"></i></div>  : <div className="header-value">{listingInfo.data().mainInfo.price} 000 Kč</div>}
+                        {editListing ? 
+                            <div className="header-value header-value-edit-slider">
+                                <p>
+                                    {state.budget && (state.budget >= 10000 ? 
+                                        (state.budget.toString().substr(0,2) + " " + state.budget.toString().substr(2,6)) 
+                                    : 
+                                        (state.budget.toString().substr(0,1) + " " + state.budget.toString().substr(1,5)))} 
+                                        {state.budget == 60000 && "+"} Kč
+                                </p>
+                                <i onClick={() => state.setSliderDialog(true)} className="fas fa-gear"></i>
+                            </div>  
+                        : 
+                        <div className="header-value">
+                            {listingInfo.data().mainInfo.budget >= 10000 ? 
+                                (listingInfo.data().mainInfo.budget.toString().substr(0,2) + " " +  listingInfo.data().mainInfo.budget.toString().substr(2,6))
+                            :  
+                                (listingInfo.data().mainInfo.budget.toString().substr(0,1) + " " + listingInfo.data().mainInfo.budget.toString().substr(1,5))}
+                                 {listingInfo.data().mainInfo.budget == 60000 && "+"} Kč Kč
+                        </div>
+                        }
                     </div>
                     <div className="item-description">Měsíční nájemné</div>
                 </div>

@@ -2721,8 +2721,10 @@ textarea {
 
 .register-box .box-content .content-range input {
   width: 100%;
-  background-color: #309EAB;
-  color: #309EAB;
+}
+
+.register-box .box-content .content-range .range-input {
+  width: 80px;
 }
 
 @media screen and (max-width: 500px) {
