@@ -273,6 +273,7 @@ const CrListing = ({type}) => {
                         <div className="content-header">
                             <div className="mid-container">
                                 <div className="header-pfp-container">
+                                    {editListing &&
                                         <div onClick={() => {
                                             setGalleryInput({
                                                 open: true,
@@ -281,22 +282,30 @@ const CrListing = ({type}) => {
                                         }} className={`container-edit-icon ${editListing && "active"}`}>
                                             <i className="fas fa-pen"></i>
                                         </div>
-                                        <div className="pfp-container-edit">
-                                        </div>
-                                     {listingInfo ?
+                                    }
+                                    
+                                    <div className="pfp-container-edit">
+                                    </div>
+                                    {listingInfo ?
                                         <>
-                                        {listingInfo.data().userInfo.images.pfp ?
-                                            <img className='header-pfp' src={listingInfo.data().userInfo.images.pfp} alt="" />
-                                        :
-                                            <img 
-                                            src={listingInfo.data().userInfo.gender === "male" ? "/img/pfps/radek-pfp.png" : "/img/pfps/radka-pfp.png"} 
-                                            className="header-pfp"></img> 
+                                        {addedPfp ?
+                                            <img src={URL.createObjectURL(addedPfp)}/>
+                                            :
+                                            <>
+                                                {listingInfo.data().userInfo.images.pfp ?
+                                                    <img className='header-pfp' src={listingInfo.data().userInfo.images.pfp} alt="" />
+                                                :
+                                                    <img 
+                                                    src={listingInfo.data().userInfo.gender === "male" ? "/img/pfps/radek-pfp.png" : "/img/pfps/radka-pfp.png"} 
+                                                    className="header-pfp"></img> 
+                                        }
+                                            </>
                                         }
                                         </> 
                                     : 
                                         <div className="header-pfp"></div> 
                                     }   
-                                    </div>
+                                </div>
 
                                 {!listingInfo ? 
 
@@ -438,7 +447,7 @@ const CrListing = ({type}) => {
                                                 open: true,
                                                 index: 0,
                                             })
-                                        }} className={`container-edit-icon ${editListing && "active"}`}>
+                                        }} className={`container-edit-icon`}>
                                             <i className="fas fa-pen"></i>
                                         </div>
                                         {listingInfo ?

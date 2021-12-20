@@ -339,19 +339,25 @@ const Listing = ({type}) => {
                                         
                                         <div className="pfp-container-edit">
                                         </div>
-                                     {listingInfo ?
-                                        <>
-                                        {listingInfo.data().userInfo.images.pfp ?
-                                            <img className='header-pfp' src={listingInfo.data().userInfo.images.pfp} alt="" />
-                                        :
-                                            <img 
-                                            src={listingInfo.data().userInfo.gender === "male" ? "/img/pfps/radek-pfp.png" : "/img/pfps/radka-pfp.png"} 
-                                            className="header-pfp"></img> 
-                                        }
-                                        </> 
-                                    : 
-                                        <div className="header-pfp"></div> 
-                                    }   
+                                        {listingInfo ?
+                                            <>
+                                            {adddedPfp ?
+                                                <img src={URL.createObjectURL(addedPfp)}/>
+                                                :
+                                                <>
+                                                    {listingInfo.data().userInfo.images.pfp ?
+                                                        <img className='header-pfp' src={listingInfo.data().userInfo.images.pfp} alt="" />
+                                                    :
+                                                        <img 
+                                                        src={listingInfo.data().userInfo.gender === "male" ? "/img/pfps/radek-pfp.png" : "/img/pfps/radka-pfp.png"} 
+                                                        className="header-pfp"></img> 
+                                            }
+                                                </>
+                                            }
+                                            </> 
+                                        : 
+                                            <div className="header-pfp"></div> 
+                                        }   
                                     </div>
     
                                     {!listingInfo ? 
@@ -471,7 +477,7 @@ const Listing = ({type}) => {
                                                 open: true,
                                                 index: 0,
                                             })
-                                        }} className={`container-edit-icon ${editListing && "active"}`}>
+                                        }} className={`container-edit-icon`}>
                                             <i className="fas fa-pen"></i>
                                         </div>
                                     }
