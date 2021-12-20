@@ -8,8 +8,8 @@ const Footer = () => {
                 <div className="footer-section about-section">
                     <p className="section-header">Roomie</p>
                     <p className="section-description">     
-                    Portál Roomie se zaměřuje na zprostředkování moderní platformy pro hledání <b>spolubydlících</b> či <b>bytů ke spolubydlení.</b>
-                    Hledejte <b>spolubydlení a spolubydlící</b> jednoduše a podle vašich představ. Jsme sociální sítí pro spolubydlení.
+                        Portál Roomie se zaměřuje na zprostředkování moderní platformy pro hledání spolubydlících či bytů ke spolubydlení. Hledejte 
+                        spolubydlení a spolubydlící jednoduše a podle vašich představ. Jsme sociální sítí pro spolubydlení.
                     </p>
                 </div>
                 <div className="footer-section links-section">
