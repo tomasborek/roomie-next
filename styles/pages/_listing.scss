@@ -95,27 +95,24 @@
             min-width: 280px;
             height: 200px;
             .container-edit-icon{
-                display: none;
-                pointer-events: none;
-                &.active{
-                    pointer-events: all;
-                    cursor: pointer;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    position: absolute;
-                    background-color: rgba(0, 0, 0, 0.3);
-                    border: white 3px solid;
-                    top: -80px;
-                    bottom: 0;
-                    width: 100%;
-                    i{
-                        font-size: 24px;
-                        color: white;
-                    }
-                    border-radius: 50%;
-                    z-index: 10;
+                pointer-events: all;
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                background-color: rgba(0, 0, 0, 0.3);
+                border: white 3px solid;
+                top: -80px;
+                bottom: 0;
+                width: 280px;
+                i{
+                    font-size: 24px;
+                    color: white;
                 }
+                border-radius: 50%;
+                z-index: 10;
+                
             }
             .header-pfp{
                 width: 280px;
@@ -198,6 +195,9 @@
         .header-pfp{
             width: 200px;
             height: 200px;
+        }
+        .container-edit-icon{
+            width: 200px;
         }
     }
     

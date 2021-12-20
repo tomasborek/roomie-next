@@ -326,14 +326,17 @@ const Listing = ({type}) => {
                             <div className="content-header">
                                 <div className="mid-container">
                                     <div className="header-pfp-container">
-                                        <div onClick={() => {
-                                            setGalleryInput({
-                                                open: true,
-                                                index: -1,
-                                            })
-                                        }} className={`container-edit-icon ${editListing && "active"}`}>
-                                            <i className="fas fa-pen"></i>
-                                        </div>
+                                        {editListing &&
+                                            <div onClick={() => {
+                                                setGalleryInput({
+                                                    open: true,
+                                                    index: -1,
+                                                })
+                                            }} className={`container-edit-icon ${editListing && "active"}`}>
+                                                <i className="fas fa-pen"></i>
+                                            </div>
+                                        }
+                                        
                                         <div className="pfp-container-edit">
                                         </div>
                                      {listingInfo ?
@@ -462,6 +465,7 @@ const Listing = ({type}) => {
                         <div className="content-header">
                             <div className="mid-container">
                                 <div className="header-pfp-container">
+                                    {editListing && 
                                         <div onClick={() => {
                                             setGalleryInput({
                                                 open: true,
@@ -470,6 +474,8 @@ const Listing = ({type}) => {
                                         }} className={`container-edit-icon ${editListing && "active"}`}>
                                             <i className="fas fa-pen"></i>
                                         </div>
+                                    }
+                                       
                                         {listingInfo ?
                                             <>
                                                 {addedListingImgs && addedListingImgs[0] ?

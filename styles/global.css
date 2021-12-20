@@ -1179,11 +1179,6 @@ textarea {
 }
 
 .Listing .listing-content .content-header .mid-container .header-pfp-container .container-edit-icon {
-  display: none;
-  pointer-events: none;
-}
-
-.Listing .listing-content .content-header .mid-container .header-pfp-container .container-edit-icon.active {
   pointer-events: all;
   cursor: pointer;
   display: -webkit-box;
@@ -1200,12 +1195,12 @@ textarea {
   border: white 3px solid;
   top: -80px;
   bottom: 0;
-  width: 100%;
+  width: 280px;
   border-radius: 50%;
   z-index: 10;
 }
 
-.Listing .listing-content .content-header .mid-container .header-pfp-container .container-edit-icon.active i {
+.Listing .listing-content .content-header .mid-container .header-pfp-container .container-edit-icon i {
   font-size: 24px;
   color: white;
 }
@@ -1329,6 +1324,9 @@ textarea {
   .Listing .listing-content .content-header .mid-container .header-pfp-container .header-pfp {
     width: 200px;
     height: 200px;
+  }
+  .Listing .listing-content .content-header .mid-container .header-pfp-container .container-edit-icon {
+    width: 200px;
   }
 }
 
