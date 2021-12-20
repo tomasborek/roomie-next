@@ -49,9 +49,11 @@ const Gallery = ({type, listingImgs, addedListingImgs, pfp, addedPfp, state}) =>
                     <img className='gallery-current-img' src={currentImg} alt="" />
                 </Backdrop>
                 <div onClick={() => handleClick(-1, pfp)} className="main-img gallery-img-container">
-                    <div className={`container-edit-icon ${state.editListing && "active"}`}>
-                        <i className="fas fa-pen"></i>
-                    </div>
+                    {state.editListing &&
+                        <div className={`container-edit-icon`}>
+                            <i className="fas fa-pen"></i>
+                        </div>
+                    }
                     {addedPfp ?
                         <img src={URL.createObjectURL(addedPfp)} alt="" />
                         :
@@ -67,9 +69,11 @@ const Gallery = ({type, listingImgs, addedListingImgs, pfp, addedPfp, state}) =>
                     }
                 </div>
                 <div onClick={() => handleClick(0, listingImgs[0])} className="gallery-img-container secondary-img">
-                    <div className={`container-edit-icon ${state.editListing && "active"}`}>
-                        <i className="fas fa-pen"></i>
-                    </div>
+                    {state.editListing &&
+                        <div className={`container-edit-icon`}>
+                            <i className="fas fa-pen"></i>
+                        </div>
+                    }
                     {(addedListingImgs && addedListingImgs[0]) ?
                         <img src={URL.createObjectURL(addedListingImgs[0])} alt="" />
                         :
@@ -81,9 +85,11 @@ const Gallery = ({type, listingImgs, addedListingImgs, pfp, addedPfp, state}) =>
                     
                 </div>
                 <div onClick={() => handleClick(1, listingImgs[1])} className="gallery-img-container secondary-img">
-                    <div className={`container-edit-icon ${state.editListing && "active"}`}>
-                        <i className="fas fa-pen"></i>
-                    </div>
+                    {state.editListing &&
+                        <div className={`container-edit-icon`}>
+                            <i className="fas fa-pen"></i>
+                        </div>
+                    }
                     {(addedListingImgs && addedListingImgs[1]) ?
                         <img src={URL.createObjectURL(addedListingImgs[1])} alt="" />
                         :
@@ -103,9 +109,11 @@ const Gallery = ({type, listingImgs, addedListingImgs, pfp, addedPfp, state}) =>
                     <img className='gallery-current-img' src={currentImg} />
                 </Backdrop>
                 <div onClick={() => handleClick(0, listingImgs[0])} className="main-img gallery-img-container">
-                    <div className={`container-edit-icon ${state.editListing && "active"}`}>
-                        <i className="fas fa-pen"></i>
-                    </div>
+                    {state.editListing &&
+                        <div className={`container-edit-icon`}>
+                            <i className="fas fa-pen"></i>
+                        </div>
+                    }
                     {addedListingImgs[0] ?
                         <img src={URL.createObjectURL(addedListingImgs[0])} alt="" />
                         :
@@ -121,9 +129,11 @@ const Gallery = ({type, listingImgs, addedListingImgs, pfp, addedPfp, state}) =>
                     }
                 </div>
                 <div onClick={() => handleClick(1, listingImgs[1])} className="gallery-img-container secondary-img">
-                    <div className={`container-edit-icon ${state.editListing && "active"}`}>
-                        <i className="fas fa-pen"></i>
-                    </div>
+                    {state.editListing &&
+                        <div className={`container-edit-icon`}>
+                            <i className="fas fa-pen"></i>
+                        </div>
+                    }
                     {(addedListingImgs && addedListingImgs[1]) ?
                         <img src={URL.createObjectURL(addedListingImgs[1])} alt="" />
                         :
@@ -135,9 +145,11 @@ const Gallery = ({type, listingImgs, addedListingImgs, pfp, addedPfp, state}) =>
                     
                 </div>
                 <div onClick={() => handleClick(2, listingImgs[2])} className="gallery-img-container secondary-img">
-                    <div className={`container-edit-icon ${state.editListing && "active"}`}>
-                        <i className="fas fa-pen"></i>
-                    </div>
+                    {state.editListing &&
+                        <div className={`container-edit-icon`}>
+                            <i className="fas fa-pen"></i>
+                        </div>
+                    }
                     {(addedListingImgs && addedListingImgs[2]) ?
                         <img src={URL.createObjectURL(addedListingImgs[2])} alt="" />
                         :
@@ -147,9 +159,11 @@ const Gallery = ({type, listingImgs, addedListingImgs, pfp, addedPfp, state}) =>
                     }
                 </div>
                 <div onClick={() => handleClick(3, listingImgs[3])} className="gallery-img-container secondary-img">
-                    <div className={`container-edit-icon ${state.editListing && "active"}`}>
-                        <i className="fas fa-pen"></i>
-                    </div>
+                    {state.editListing &&
+                        <div className={`container-edit-icon`}>
+                            <i className="fas fa-pen"></i>
+                        </div>
+                    }
                     {(addedListingImgs && addedListingImgs[3]) ?
                         <img src={URL.createObjectURL(addedListingImgs[2])} alt="" />
                         :
@@ -159,9 +173,11 @@ const Gallery = ({type, listingImgs, addedListingImgs, pfp, addedPfp, state}) =>
                     }
                 </div>
                 <div onClick={() => handleClick(4, listingImgs[4])} className="gallery-img-container secondary-img">
-                    <div className={`container-edit-icon ${state.editListing && "active"}`}>
-                        <i className="fas fa-pen"></i>
-                    </div>
+                    {state.editListing &&
+                        <div className={`container-edit-icon`}>
+                            <i className="fas fa-pen"></i>
+                        </div>
+                    }
                     {(addedListingImgs && addedListingImgs[4]) ?
                         <img src={URL.createObjectURL(addedListingImgs[4])} alt="" />
                         :
@@ -171,9 +187,11 @@ const Gallery = ({type, listingImgs, addedListingImgs, pfp, addedPfp, state}) =>
                     }
                 </div>
                 <div onClick={() => handleClick(5, listingImgs[5])} className="gallery-img-container secondary-img">
-                    <div className={`container-edit-icon ${state.editListing && "active"}`}>
-                        <i className="fas fa-pen"></i>
-                    </div>
+                    {state.editListing &&
+                        <div className={`container-edit-icon`}>
+                            <i className="fas fa-pen"></i>
+                        </div>
+                    }
                     {(addedListingImgs && addedListingImgs[5]) ?
                         <img src={URL.createObjectURL(addedListingImgs[5])} alt="" />
                         :

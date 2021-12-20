@@ -29,24 +29,21 @@
         }
        
         .container-edit-icon{
-            display: none;
             pointer-events: none;
             z-index: 10;
-            &.active{
-                border-radius: 5px;
-                pointer-events: none;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                position: absolute;
-                background-color: rgba(0, 0, 0, 0.3);
-                top: 0;
-                bottom: 0;
-                width: 100%;
-                i{
-                    font-size: 24px;
-                    color: white;
-                }
+            border-radius: 5px;
+            pointer-events: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.3);
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            i{
+                font-size: 24px;
+                color: white;
             }
         }
     }

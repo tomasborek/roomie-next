@@ -98,7 +98,7 @@ const CrListing = ({type}) => {
                 return;
             }
             setWelcomeDialog(true);
-            setListingInfo(doc);
+            router.push(`/${listingInfo.data().type}/${listingInfo.id}`)
         }).catch(error => {
             console.log(error.code);
         })
@@ -500,14 +500,30 @@ const CrListing = ({type}) => {
                             <div className="container">
                                 <div className="body-opening-boxes">
                                     <div className="boxes-profile-info">
-                                            {(listingInfo && pfp) ? 
-                                                <img src={pfp} className='profile-info-pfp' /> 
-                                                : 
-                                                listingInfo ? 
-                                                <img src={`/img/pfps/${(listingInfo && listingInfo.data().userInfo.gender === "male") ? "radek" : "radka"}-pfp.png"`} className="profile-info-pfp" /> 
-                                                : 
-                                                <div className="profile-info-pfp"></div>
+                                    <div className="profile-info-pfp-container">
+                                            {editListing && 
+                                                <div onClick={() => setGalleryInput({
+                                                    open: true,
+                                                    index: -1,
+                                                })} className="pfp-container-edit-icon">
+                                                    <i className="fas fa-pen"></i>
+                                                </div>
                                             }
+                                            {addedPfp ?
+                                                <img src={URL.createObjectURL(addedPfp)} className='profile-info-pfp' />
+                                                :
+                                                <>
+                                                    {(listingInfo && pfp) ? 
+                                                        <img src={pfp} className='profile-info-pfp' /> 
+                                                        : 
+                                                        listingInfo ? 
+                                                        <img src={`/img/pfps/${(listingInfo && listingInfo.data().userInfo.gender === "male") ? "radek" : "radka"}-pfp.png`} className="profile-info-pfp" /> 
+                                                        : 
+                                                        <div className="profile-info-pfp"></div>
+                                                    }
+                                                </>
+                                            }
+                                        </div>
                                         <div className="profile-info-text">
                                            {!listingInfo ? <Skeleton variant="text" sx={{width: 50}}/>: <p className="text-name">{listingInfo.data().userInfo.username}</p> } 
                                           {!listingInfo ? <Skeleton variant="text" sx={{width: 30}} />:  <p className="text-description">{listingInfo.data().userInfo.gender === "male" ? "Muž" : listingInfo.data().userInfo.gender === "female" ? "Žena" : listingInfo.data().userInfo.gender === "other" ? "Jiné" : ""}, {listingInfo.data().userInfo.age}</p>}

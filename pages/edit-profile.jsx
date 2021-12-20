@@ -129,16 +129,24 @@ const EditProfile = () => {
 
             }
         }
+
         updateProfile(JSON.stringify(profileInfo)).then((response) => {
-            return uploadImg(currentUser.uid, pfpImage, "pfp");
+            if(pfpImage){
+                return uploadImg(currentUser.uid, pfpImage, "pfp", userData.data().mainInfo.pfp);
+            }else{
+                return new Promise((resolve, reject) => {
+                    resolve("completed");
+                })
+            }
         }).then((snapshot) =>{
             setLoading(false);
             router.back();
             snackBar("Úprava proběhla úspěšně.", "success");
-        }).catch((error) => {
-            setLoading(false);
-            snackBar("Něco se nepovedlo. Zkuste to prosím později.", "error");
         })
+        // .catch((error) => {
+        //     setLoading(false);
+        //     snackBar("Něco se nepovedlo. Zkuste to prosím později.", "error");
+        // })
     }
 
     const handleDiscard = () => {

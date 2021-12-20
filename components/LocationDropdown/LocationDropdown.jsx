@@ -87,7 +87,6 @@ const LocationDropdown = ({setLocation, location}) => {
 
     
     const typing = () => {
-        console.log(isTyping);
         setIsTyping(true);
         setTimeout(() => {
             setIsTyping(false);
