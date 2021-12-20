@@ -16,8 +16,7 @@
     }
     .input-img{
         height: 400px;
-        min-width: 400px;
-        max-width: 100%;
+        max-width: 700px;
         object-fit: cover;
         margin-bottom: 1rem;
         background-color: $mainGray;
@@ -42,5 +41,18 @@
         padding: 0.5rem 1rem;
         background-color: rgba(0, 0, 0, 0.678);
         cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 700px){
+    .gallery-input{
+        input{
+            width: 100%;
+        }
+        .input-img{
+            width: 100%;
+            height: auto;
+        }
+
     }
 }

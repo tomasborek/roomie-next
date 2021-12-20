@@ -3808,8 +3808,7 @@ textarea {
 
 .gallery-input .input-img {
   height: 400px;
-  min-width: 400px;
-  max-width: 100%;
+  max-width: 700px;
   -o-object-fit: cover;
      object-fit: cover;
   margin-bottom: 1rem;
@@ -3838,6 +3837,16 @@ textarea {
   padding: 0.5rem 1rem;
   background-color: rgba(0, 0, 0, 0.678);
   cursor: pointer;
+}
+
+@media screen and (max-width: 700px) {
+  .gallery-input input {
+    width: 100%;
+  }
+  .gallery-input .input-img {
+    width: 100%;
+    height: auto;
+  }
 }
 
 .header-info .info-contact {
