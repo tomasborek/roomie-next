@@ -47,8 +47,8 @@ export default function Home() {
                             <FormControl className="form-select form-item" size="small">
                                 <InputLabel>Typ zprávy</InputLabel>
                                 <Select label="Typ zprávy">
-                                    <MenuItem value="Technivký problém">Technický problém</MenuItem>
-                                    <MenuItem value="Ztížnost">Ztížnost</MenuItem>
+                                    <MenuItem value="Technický problém">Technický problém</MenuItem>
+                                    <MenuItem value="Stížnost">Stížnost</MenuItem>
                                     <MenuItem value="dotaz">Dotaz</MenuItem>
                                 </Select>
                             </FormControl>
