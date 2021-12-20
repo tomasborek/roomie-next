@@ -341,7 +341,7 @@ const Listing = ({type}) => {
                                         </div>
                                         {listingInfo ?
                                             <>
-                                            {adddedPfp ?
+                                            {addedPfp ?
                                                 <img src={URL.createObjectURL(addedPfp)}/>
                                                 :
                                                 <>
