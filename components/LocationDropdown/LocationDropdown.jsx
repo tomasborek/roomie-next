@@ -45,15 +45,15 @@ const LocationDropdown = ({setLocation, location}) => {
     }
     //Useffect
     useEffect(() => {
-        let searchedTerm = search;
+        let searchedTerm = search.toLowerCase();
         if(isTyping === true) return;
         if(search === "") return;
         let results = [];
-        if(searchedTerm.includes("Prah")){
-           if(searchedTerm.includes("Praha")){
-               searchedTerm = searchedTerm.replace("Praha", "Prague");
+        if(searchedTerm.includes("prah")){
+           if(searchedTerm.includes("praha")){
+               searchedTerm = searchedTerm.replace("praha", "Prague");
            }else{
-                searchedTerm = searchedTerm.replace("Prah", "Prag");
+                searchedTerm = searchedTerm.replace("prah", "Prag");
            }
         }
         setDropdownActive(true);
@@ -68,8 +68,8 @@ const LocationDropdown = ({setLocation, location}) => {
 	           return response.json()
             }).then(res => {
                 res.data.forEach(doc => {
-                    let cityName = doc.name;
-                    if(cityName.includes("Prague")) cityName = cityName.replace("Prague", "Praha");
+                    let cityName = doc.name.toLowerCase();
+                    if(cityName.includes("prague")) cityName = cityName.replace("prague", "Praha");
                     results = [...results, cityName];
                 })  
                 setFetching(false);
