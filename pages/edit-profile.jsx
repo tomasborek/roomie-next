@@ -91,11 +91,26 @@ const EditProfile = () => {
         const email = emailRef.current.value.trim();
         const phone = phoneRef.current.value.trim();
         const updateProfile = callable("updateProfile");
-        if(username == null || email == null || phone == null) return;
-        if(username.length <= 2) return;
-        if(phone.length < 9) return;
-        if(email.length < 3) return;
-        if(!handleSocials()) return;
+        if(username == null || email == null || phone == null){
+            snackBar("Některá důležitá pole chybí. Vyplňte je prosím.", "error");
+            return;
+        };
+        if(username.length <= 2) {
+            snackBar("Prosím, zadejte své opravdové jméno.", "error");
+            return;
+        };
+        if(phone.length < 9){
+            snackBar("Prosím, zadejte své opravdové telefonní číslo.", "error");
+            return;
+        };
+        if(email.length < 3){
+            snackBar("Prosím, zadejte svůj opravdový email.", "error");
+            return;
+        };
+        if(!handleSocials()) {
+            snackBar("Prosím, zadejte opravdové odkazy na sociální sitě.", "error");
+            return;
+        };
         setLoading(true);
         const profileInfo = {
             uid: currentUser.uid,
