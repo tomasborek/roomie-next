@@ -43,7 +43,7 @@ const Gallery = ({type, listingImgs, addedListingImgs, pfp, addedPfp, state}) =>
 
     if(type === "flatmate"){
         return (
-            <div className='gallery'>
+            <div className='gallery flatmate'>
                 <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={viewOpen}>
                     <i className="gallery-close fas fa-times" onClick={() => setViewOpen(false)}></i>
                     <img className='gallery-current-img' src={currentImg} alt="" />
@@ -103,7 +103,7 @@ const Gallery = ({type, listingImgs, addedListingImgs, pfp, addedPfp, state}) =>
     }
     if(type === "flat"){
         return (
-            <div className={`gallery ${type}`}>
+            <div className={`gallery flat`}>
                 <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={viewOpen}>
                     <i className="gallery-close fas fa-times" onClick={() => setViewOpen(false)}></i>
                     <img className='gallery-current-img' src={currentImg} />
