@@ -3757,7 +3757,7 @@ textarea {
 }
 
 @media screen and (max-width: 900px) {
-  .gallery {
+  .gallery.flatmate {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
@@ -3766,13 +3766,32 @@ textarea {
         -ms-flex-align: center;
             align-items: center;
   }
-  .gallery .gallery-img-container {
+  .gallery.flatmate .gallery-img-container {
     width: 100%;
     margin: 1rem 0;
     min-height: 200px;
     max-height: 200px;
   }
-  .gallery .gallery-img-container img {
+  .gallery.flatmate .gallery-img-container img {
+    width: 100%;
+    height: 200px;
+  }
+  .gallery.flat {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .gallery.flat .gallery-img-container {
+    width: 100%;
+    margin: 1rem 0;
+    min-height: 200px;
+    max-height: 200px;
+  }
+  .gallery.flat .gallery-img-container img {
     width: 100%;
     height: 200px;
   }
