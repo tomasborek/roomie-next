@@ -326,7 +326,7 @@ const RegisterBox = () => {
 
          
 
-            <div className="box-steps" style={{display: step === 5 ? "none" : "flex"}}>
+            <div className="box-steps" style={{display: step === 6 ? "none" : "flex"}}>
                 <div
                  className={`dot ${step === 0 ? "active-dot" : ""}`}></div>
                 <div onClick={() =>{
