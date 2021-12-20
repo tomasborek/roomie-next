@@ -185,7 +185,16 @@ const ExploreFeed = ({variant}) => {
                         {(flatmateListings && flatmateListings.length) ?
                         <>
                             {flatmateListings.map((listing, id) => (
-                                <ExploreFlatmate name={listing.data().userInfo.username} age={listing.data().userInfo.age} gender={listing.data().userInfo.gender} location={listing.data().flatTags.location} money={listing.data().mainInfo.budget} available={listing.data().mainInfo.startTime} bio={listing.data().bio} id={listing.id} key={id}/>
+                                <ExploreFlatmate 
+                                        name={listing.data().userInfo.username} 
+                                        age={listing.data().userInfo.age} 
+                                        gender={listing.data().userInfo.gender} 
+                                        location={listing.data().flatTags.location}
+                                        money={listing.data().mainInfo.budget} 
+                                        available={listing.data().mainInfo.startTime} 
+                                        bio={listing.data().bio} id={listing.id} 
+                                        pfp={listing.data().userInfo.images.pfp} 
+                                        key={id}/>
                             ))}
                             {(flatmateListings.length > 9 || page != 1) ?
                                 <Pagination page={page} setPage={setPage} handlePagination={handlePagination} isDisabled={isPaginationDisabled} />
@@ -216,7 +225,13 @@ const ExploreFeed = ({variant}) => {
                     {flatListings.length ?
                         <>
                             {flatListings.map((listing, id) => (
-                                <ExploreFlat name={`Byt ${listing.data().flatBoxes.layout != null ? listing.data().flatBoxes.layout : ""} ${listing.data().flatBoxes.location}`} bio={listing.data().flatBio} price={listing.data().mainInfo.price} startTime={listing.data().mainInfo.startTime} stayTime={listing.data().mainInfo.stayTime} id={listing.id} key={id} />
+                                <ExploreFlat 
+                                        name={`Byt ${listing.data().flatBoxes.layout != null ? listing.data().flatBoxes.layout : ""} ${listing.data().flatBoxes.location}`} 
+                                        bio={listing.data().flatBio} price={listing.data().mainInfo.price} startTime={listing.data().mainInfo.startTime} 
+                                        stayTime={listing.data().mainInfo.stayTime} 
+                                        mainImg={listing.data().userInfo.images.listingImgs[0]} 
+                                        id={listing.id} 
+                                        key={id} />
                             )) }
                             {(flatListings.length > 9 || page != 1) &&
                                 <Pagination page={page} setPage={setPage} handlePagination={handlePagination} isDisabled={isPaginationDisabled} />

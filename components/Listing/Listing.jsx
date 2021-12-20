@@ -12,6 +12,7 @@ import { useLoading } from '../../contexts/LoadingContext';
 import { useSnackBar } from '../../contexts/SnackBarContext';
 import { useFunctions } from "../../contexts/FunctionsContext";
 import { arrayUnion } from '@firebase/firestore';
+import { useStorage } from '../../contexts/StorageContext';
 
 //Components
 import Header from '../Header/Header'
@@ -24,6 +25,8 @@ import ReqDialog from '../ReqDialog/ReqDialog';
 import ListingInfoImportant from '../../components/Listing/ListingInfoImportant/ListingInfoImportant';
 import ListingContact from '../../components/Listing/ListingContact/ListingContact';
 import ListingAbout from "../../components/Listing/ListingAbout/ListingAbout";
+import Gallery from "../../components/Gallery/Gallery";
+import GalleryInput from '../GalleryInput/GalleryInput';
 //Mui components
 import { CircularProgress, Skeleton, Backdrop, Slider, Button, Collapse, Alert } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
@@ -47,11 +50,16 @@ const Listing = ({type}) => {
     const [loading, setLoading] = useLoading();
     const {snackBar} = useSnackBar();
     const {callable} = useFunctions();
+    const {uploadImg} = useStorage();
     //States
     //Listing data obj
     const [listingInfo, setListingInfo] = useState(null);
+    const [listingImgs, setListingImgs] = useState([]);
+    const [pfp, setPfp] = useState(null);
     //Edit mode
     const [editListing, setEditListing] = useState(false);
+    const [addedListingImgs, setAddedListingImgs] = useState(["", "", "", "", "", ""]);
+    const [addedPfp, setAddedPfp] = useState(null);
     // Contact loading (after request)
     const [contactLoading, setContactLoading] = useState(false);
     //Edit mode info storage
@@ -65,6 +73,12 @@ const Listing = ({type}) => {
     const [flatTagOverlay, setFlatTagOverlay] = useState(false);
     const [flatBoxerOverlay, setFlatBoxerOverlay] = useState(false);
     const [personBoxerOverlay, setPersonBoxerOverlay] = useState(false);
+    const [galleryInput, setGalleryInput] = useState({
+        open: false,
+        type: "none",
+        img: null,
+        index: 0
+    });
     //Added boxes
     const [addedPersonTags, setAddedPersonTags] = useState(null);
     const [addedFlatTags, setAddedFlatTags] = useState(null);
@@ -95,12 +109,16 @@ const Listing = ({type}) => {
         getListing(id)
         .then(doc => {
             setListingInfo(doc);
+            setListingImgs(doc.data().userInfo.images.listingImgs);
+            if(doc.data().userInfo.images.pfp){
+                setPfp(doc.data().userInfo.images.pfp);
+            }
         }).catch(error => {
             console.log(error.code);
         })
     }, [router.isReady])
 
-    //Fills edit inputs with default values
+    //Fills edit inputs and pictures with default values
     useEffect(() => {
         if(listingInfo && editListing === true){
             if(type === "flatmate" || type === "flatmate-cr"){
@@ -135,6 +153,8 @@ const Listing = ({type}) => {
             setAddedFlatTags(null);
             setAddedPersonBoxes(null);
             setAddedFlatBoxes(null);
+            setAddedListingImgs(["", "", "", "", "", ""]);
+            setAddedPfp(null);
         }
     }, [editListing])
 
@@ -166,7 +186,7 @@ const Listing = ({type}) => {
                 personBoxes: addedPersonBoxes,
                 personTags: addedPersonTags,
                 flatTags: addedFlatTags,
-                bio: bio,
+                bio: bio ? bio.trim() : "",
                 visible: true,
             }
         }
@@ -180,8 +200,8 @@ const Listing = ({type}) => {
                 personTags: addedPersonTags,
                 personBoxes: addedPersonBoxes,
                 flatBoxes: addedFlatBoxes,
-                flatBio: flatBio,
-                personBio: personBio,
+                flatBio: flatBio ? flatBio.trim() : "",
+                personBio: personBio ? personBio.trim() : "",
                 visible: true,
             }
         }
@@ -190,6 +210,24 @@ const Listing = ({type}) => {
             params: params,
         }
         updateListing(JSON.stringify(updateListingInfo)).then((response) => {
+
+            if(addedPfp){
+               return uploadImg(currentUser.uid, addedPfp, "pfp", pfp);
+            }else{
+                return new Promise((resolve, reject) => {
+                    resolve("done");
+                })
+            }
+        }).then((response) => {
+            if(addedListingImgs.length){
+                return uploadImg(currentUser.uid, addedListingImgs, "listingImgs", listingImgs);
+            }else{
+                return new Promise((resolve, reject) => {
+                    resolve("done");
+                })
+            }
+           
+        }).then((response) => {
             setLoading(false);
             setEditListing(false);
             snackBar("Inzerát byl úspěšně upraven.", "success");
@@ -197,10 +235,11 @@ const Listing = ({type}) => {
             return getListing(listingInfo.id);
         }).then((doc) => {
             setListingInfo(doc);
-        }).catch((error) => {
-            setLoading(false);
-            snackBar("Něco se pokazilo. Zkuste to prosím později.", "error");
         })
+        // .catch((error) => {
+        //     setLoading(false);
+        //     snackBar("Něco se pokazilo. Zkuste to prosím později.", "error");
+        // })
     }
 
     const handleRequest = () => {
@@ -245,7 +284,16 @@ const Listing = ({type}) => {
                 <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personTagOverlay}><Tagger variant="person" addedTags={addedPersonTags} existingTags={listingInfo && listingInfo.data().personTags} setTagOverlay={setPersonTagOverlay} setAddedTags={setAddedPersonTags}/></Backdrop>
                 <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={flatTagOverlay}><Tagger variant="flat" addedTags={addedFlatTags} existingTags={listingInfo && listingInfo.data().flatTags } setTagOverlay={setFlatTagOverlay} setAddedTags={setAddedFlatTags}/></Backdrop>
                 <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personBoxerOverlay}><Boxer setBoxerOverlay={setPersonBoxerOverlay} variant="person" existingBoxes={listingInfo && listingInfo.data().personBoxes} setAddedBoxes={setAddedPersonBoxes} addedBoxes={addedPersonBoxes}/></Backdrop>
-               
+                <GalleryInput 
+                        object={galleryInput} 
+                        setObject={setGalleryInput} 
+                        pfp={pfp && pfp}
+                        listingImgs={listingImgs} 
+                        addedListingImgs={addedListingImgs} 
+                        setAddedListingImgs={setAddedListingImgs} 
+                        addedPfp={addedPfp} 
+                        setAddedPfp={setAddedPfp} 
+                        />
         {/*Dialogs*/}
             {/*Budget edit Dialog*/}
                 <Dialog
@@ -278,7 +326,29 @@ const Listing = ({type}) => {
                             <div className="content-header">
                                 <div className="mid-container">
                                     <div className="header-pfp-container">
-                                     {listingInfo ? <img src={listingInfo.data().userInfo.gender === "male" ? "/img/pfps/radek-pfp.png" : "/img/pfps/radka-pfp.png"} className="header-pfp"></img> : <div className="header-pfp"></div> }   
+                                        <div onClick={() => {
+                                            setGalleryInput({
+                                                open: true,
+                                                index: -1,
+                                            })
+                                        }} className={`container-edit-icon ${editListing && "active"}`}>
+                                            <i className="fas fa-pen"></i>
+                                        </div>
+                                        <div className="pfp-container-edit">
+                                        </div>
+                                     {listingInfo ?
+                                        <>
+                                        {listingInfo.data().userInfo.images.pfp ?
+                                            <img className='header-pfp' src={listingInfo.data().userInfo.images.pfp} alt="" />
+                                        :
+                                            <img 
+                                            src={listingInfo.data().userInfo.gender === "male" ? "/img/pfps/radek-pfp.png" : "/img/pfps/radka-pfp.png"} 
+                                            className="header-pfp"></img> 
+                                        }
+                                        </> 
+                                    : 
+                                        <div className="header-pfp"></div> 
+                                    }   
                                     </div>
     
                                     {!listingInfo ? 
@@ -324,6 +394,13 @@ const Listing = ({type}) => {
                                 </div>
                             </div> 
                             <ListingAbout type="flatmate" listingInfo={listingInfo} editListing={editListing} state={{addedFlatTags, addedPersonTags, bio, setBio, personBio, setPersonBio, flatBio, setFlatBio, setPersonTagOverlay, setFlatTagOverlay, setPersonBoxerOverlay, setFlatBoxerOverlay}}/>
+                            <Gallery 
+                                    type={"flatmate"}
+                                    listingImgs={listingImgs} 
+                                    addedListingImgs={addedListingImgs}
+                                    pfp={pfp && pfp}
+                                    addedPfp={addedPfp} 
+                                    state={{setGalleryInput, editListing, listingInfo}} />
                         </div>
                     </div>
                     {editListing &&
@@ -367,6 +444,16 @@ const Listing = ({type}) => {
             <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={reqDialogOpen}>
                 <ReqDialog setMessage={setRequestMessage} message={requestMessage} setOpen={setReqDialogOpen} handleSend={handleRequest}/>
             </Backdrop>
+            <GalleryInput 
+                        object={galleryInput} 
+                        setObject={setGalleryInput} 
+                        pfp={pfp && pfp}
+                        listingImgs={listingImgs} 
+                        addedListingImgs={addedListingImgs} 
+                        setAddedListingImgs={setAddedListingImgs} 
+                        addedPfp={addedPfp} 
+                        setAddedPfp={setAddedPfp} 
+                        />
 
             <div className="listing-banner"></div>
     {/*Listing content */}
@@ -375,8 +462,34 @@ const Listing = ({type}) => {
                         <div className="content-header">
                             <div className="mid-container">
                                 <div className="header-pfp-container">
-                                    <img src="/img/listing/default-byt.jpg" className="header-pfp"></img>
-                                </div>
+                                        <div onClick={() => {
+                                            setGalleryInput({
+                                                open: true,
+                                                index: 0,
+                                            })
+                                        }} className={`container-edit-icon ${editListing && "active"}`}>
+                                            <i className="fas fa-pen"></i>
+                                        </div>
+                                        {listingInfo ?
+                                            <>
+                                                {addedListingImgs && addedListingImgs[0] ?
+                                                    <img src={URL.createObjectURL(addedListingImgs[0])} className='header-pfp' alt="" />
+                                                :
+                                                    <>
+                                                    {listingImgs && listingImgs[0] ?
+                                                        <img className='header-pfp' src={listingImgs[0]} alt="" />
+                                                    :
+                                                        <img 
+                                                        src={"/img/listing/default-byt.jpg"} 
+                                                        className="header-pfp"></img> 
+                                                    }
+                                                    </> 
+                                                }
+                                            </>
+                                        : 
+                                            <div className="header-pfp"></div> 
+                                        }   
+                                    </div>
 
                                 {!listingInfo ? 
                                     <div className="header-info-loading">
@@ -416,7 +529,14 @@ const Listing = ({type}) => {
                             <div className="container">
                                 <div className="body-opening-boxes">
                                     <div className="boxes-profile-info">
-                                        <img src="/img/pfps/radek-pfp.png" alt="" className="profile-info-pfp" />
+                                        {(listingInfo && pfp) ? 
+                                            <img src={pfp} className='profile-info-pfp' /> 
+                                            : 
+                                            listingInfo ? 
+                                            <img src={`/img/pfps/${(listingInfo && listingInfo.data().userInfo.gender === "male") ? "radek" : "radka"}-pfp.png"`} className="profile-info-pfp" /> 
+                                            : 
+                                            <div className="profile-info-pfp"></div>
+                                            }
                                         <div className="profile-info-text">
                                            {!listingInfo ? <Skeleton variant="text" sx={{width: 50}}/>: <p className="text-name">{listingInfo.data().userInfo.username}</p> } 
                                           {!listingInfo ? <Skeleton variant="text" sx={{width: 30}} />:  <p className="text-description">{listingInfo.data().userInfo.gender === "male" ? "Muž" : listingInfo.data().userInfo.gender === "female" ? "Žena" : listingInfo.data().userInfo.gender === "other" ? "Jiné" : ""}, {listingInfo.data().userInfo.age}</p>}
@@ -439,7 +559,13 @@ const Listing = ({type}) => {
                             
                         </div> 
                         <ListingAbout type="flat" listingInfo={listingInfo} editListing={editListing} state={{addedFlatTags, addedPersonTags, bio, setBio, personBio, setPersonBio, flatBio, setFlatBio, setPersonTagOverlay, setFlatTagOverlay, setPersonBoxerOverlay, setFlatBoxerOverlay}} />
-                        
+                        <Gallery 
+                            type={"flat"}
+                            listingImgs={listingImgs} 
+                            addedListingImgs={addedListingImgs}
+                            pfp={pfp && pfp}
+                            addedPfp={addedPfp} 
+                            state={{setGalleryInput, editListing, listingInfo}} />
                         {editListing &&
                             <div className="content-edit-buttons">
                                 <button onClick={handleSave} className="main-btn">Uložit změny</button>

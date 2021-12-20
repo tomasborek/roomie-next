@@ -2,12 +2,25 @@ import React, {useEffect, useState} from 'react'
 //next
 import Link from "next/link";
 
-const ExploreFlatmate= ({name, age, gender, location, money, available, bio, id}) => {
+const ExploreFlatmate= ({name, age, gender, location, money, available, bio, pfp, id}) => {
 
     return (
         <Link href={`/flatmate/${id}`}>
         <div className="explore-flatmate">
-        {gender ? <img src={gender === "male" ? "/img/pfps/radek-pfp.png" : "/img/pfps/radka-pfp.png"} className="listing-pfp" alt="" /> : <div className="listing-pfp"></div>} 
+        <div className="listing-pfp-container">
+            {gender ?
+                <>
+                {pfp ?
+                    <img className='listing-pfp' src={pfp} alt="" />
+                    :
+                    <img src={gender === "male" ? "/img/pfps/radek-pfp.png" : "/img/pfps/radka-pfp.png"} className="listing-pfp" alt="" />
+                }
+                </>
+                
+            :   
+                <div className="listing-pfp"></div>
+            } 
+        </div>
         <div className="listing-content">
             <div className="content-header"><span>{name}</span>, {age}</div>
             <div className="content-bio">{bio.substr(0,80)}...</div>

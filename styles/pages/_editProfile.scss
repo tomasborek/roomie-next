@@ -34,7 +34,6 @@
             cursor: pointer;
         }
     }
-
    
     .content-form{
         width: 345px;
@@ -104,6 +103,23 @@
     justify-content: center;
     margin-top: 5rem;
 }
+
+.EditProfile .edit-file-uploaded{
+    background-color: rgba(172, 255, 47, 0.411);
+    color: rgb(104, 153, 31);
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 700Px;
+    margin: 0 auto;
+    margin-top: 1rem;
+    i{
+        margin-right: 1rem;
+    }
+}
+
 
 
 

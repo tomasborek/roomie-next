@@ -13,6 +13,7 @@ exports.createUser = functions.https.onCall((data, context) => {
       birthday: data.birthday,
       location: data.location,
       type: data.type,
+      pfp: "",
     },
     contact: {
       email: data.email,
@@ -40,6 +41,10 @@ exports.createListing = functions.https.onCall((data, context) => {
         age: data.age,
         contact: data.contact,
         uid: data.uid,
+        images: {
+          pfp: "",
+          listingImgs: [],
+        },
       },
       mainInfo: {
         budget: data.money,
@@ -67,6 +72,10 @@ exports.createListing = functions.https.onCall((data, context) => {
         age: data.age,
         contact: data.contact,
         uid: data.uid,
+        images: {
+          pfp: "",
+          listingImgs: [],
+        },
       },
       mainInfo: {
         price: data.money,
@@ -270,7 +279,6 @@ exports.updateListing = functions.https.onCall((data, context) => {
   const params = data.params;
   return db.collection("listings").doc(listingId).update(params);
 });
-
 // Trigger functions---
 // Delete user's db record when his auth is deleted
 exports.deleteUser = functions.auth.user().onDelete((user) => {
@@ -330,3 +338,86 @@ exports.acceptedNotification = functions.firestore
             timeStamp: admin.firestore.FieldValue.serverTimestamp(),
           });
     });
+// Writes new pfp to a user's db
+exports.addImgs = functions.storage.bucket().object().onFinalize((object) => {
+  const filePath = object.name;
+  const imageType = filePath.split("/")[2];
+  const uid = filePath.split("/")[1];
+  const url = `https://storage.googleapis.com/${object.bucket}/${object.name}`;
+  const db = admin.firestore();
+  if (imageType == "pfps") {
+    return new Promise((resolve, reject) => {
+      db.collection("users").doc(uid).update({
+        "mainInfo.pfp": url,
+      }).then((response) => {
+        return db.collection("listings").where("userInfo.uid", "==", uid).get();
+      }).then((docs) => {
+        return db.collection("listings").doc(docs.docs[0].id).update({
+          "userInfo.images.pfp": url,
+        });
+      }).then((response) => {
+        resolve(response);
+      }).catch((error) => {
+        reject(error);
+      });
+    });
+  } else if (imageType == "listingImgs") {
+    return new Promise((resolve, reject) => {
+      const index = filePath.split("/")[3].split(".")[0];
+      db.collection("listings").where("userInfo.uid", "==", uid).get()
+          .then((docs) => {
+            const listingImgs = docs.docs[0].data().userInfo.images.listingImgs;
+            listingImgs[index] = url;
+            return db.collection("listings").doc(docs.docs[0].id).update({
+              "userInfo.images.listingImgs": listingImgs,
+            });
+          }).then((response) => {
+            resolve(response);
+          }).catch((error) => {
+            reject(error);
+          });
+    });
+  }
+});
+// When pfp is deleted from storage, it gets deleted from user's db
+exports.deleteImgs = functions.storage.bucket().object().onDelete((object) => {
+  const filePath = object.name;
+  const imageType = filePath.split("/")[2];
+  const uid = filePath.split("/")[1];
+  "users/uid/pfp/pfp.png";
+  const db = admin.firestore();
+  // const url = `https://storage.googleapis.com/${object.bucket}/${object.name}`;
+  if (imageType === "pfps") {
+    return new Promise((resolve, reject) => {
+      db.collection("users").doc(uid).update({
+        "mainInfo.pfp": "",
+      }).then((response) => {
+        return db.collection("listings").where("userInfo.uid", "==", uid).get();
+      }).then((docs) => {
+        return db.collection("listings").doc(docs.docs[0].id).update({
+          "userInfo.images.pfp": "",
+        });
+      }).then((response) => {
+        resolve(response);
+      }).catch((error) => {
+        reject(error);
+      });
+    });
+  } else if (imageType === "listingImgs") {
+    return new Promise((resolve, reject) => {
+      const index = filePath.split("/")[3].split(".")[0];
+      db.collection("listings").where("userInfo.uid", "==", uid).get()
+          .then((docs) => {
+            const listingImgs = docs.docs[0].data().userInfo.images.listingImgs;
+            listingImgs[index] = "";
+            return db.collection("listings").doc(docs.docs[0].id).update({
+              "userInfo.images.listingImgs": listingImgs,
+            });
+          }).then((response) => {
+            resolve(response);
+          }).catch((error) => {
+            reject(error);
+          });
+    });
+  }
+});

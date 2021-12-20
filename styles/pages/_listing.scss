@@ -91,9 +91,32 @@
         position: relative;
         display: flex;
         .header-pfp-container{
+            position: relative;
             min-width: 280px;
             height: 200px;
-            position: relative;
+            .container-edit-icon{
+                display: none;
+                pointer-events: none;
+                &.active{
+                    pointer-events: all;
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: absolute;
+                    background-color: rgba(0, 0, 0, 0.3);
+                    border: white 3px solid;
+                    top: -80px;
+                    bottom: 0;
+                    width: 100%;
+                    i{
+                        font-size: 24px;
+                        color: white;
+                    }
+                    border-radius: 50%;
+                    z-index: 10;
+                }
+            }
             .header-pfp{
                 width: 280px;
                 height: 280px;
@@ -186,9 +209,16 @@
 
 
 //Flat listing
-.FlatListing .listing-content .content-header .mid-container .header-pfp-container .header-pfp{
-    border-radius: 5px !important;
+.FlatListing .listing-content .content-header .mid-container .header-pfp-container{
+    .container-edit-icon{
+        border-radius: 5px !important;
+    }
+    .header-pfp{
+        border-radius: 5px !important;
+    }
 }
+
+
 
 .FlatListing .listing-content .content-body .body-info{
     margin-top: 2rem;

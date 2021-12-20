@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 //next
 import Link from 'next/link'
 
-const ExploreFlat = ({name, bio, price, startTime,stayTime,id}) => {
+const ExploreFlat = ({name, bio, price, startTime,stayTime, mainImg, id}) => {
     const [shortBio, setShortBio] = useState("");
     useEffect(() => {
         if(bio){
@@ -12,8 +12,13 @@ const ExploreFlat = ({name, bio, price, startTime,stayTime,id}) => {
     return (
     <Link href={`/flat/${id}`}>
         <div className="explore-flat">
-            <img src="/img/listing/default-byt.jpg" alt="" className="listing-pfp" />
-           {/* <div className="listing-pfp"></div> */}
+            <div className="listing-pfp-container">
+                {mainImg ? 
+                    <img src={mainImg} className='listing-pfp'/>
+                :
+                    <img src="/img/listing/default-byt.jpg" className="listing-pfp" />
+                }
+            </div>
            <div className="listing-content">
                <div className="content-header"><span>{name}</span></div>
                <div className="content-bio">{shortBio}...</div>

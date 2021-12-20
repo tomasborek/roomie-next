@@ -7,7 +7,7 @@ import {useDb} from "../contexts/DbContext";
 import { useLoading } from '../contexts/LoadingContext';
 import {useFunctions} from "../contexts/FunctionsContext";
 import {useSnackBar} from "../contexts/SnackBarContext";
-
+import { useStorage } from '../contexts/StorageContext';
 
 //Components
 import Header from "../components/Header/Header";
@@ -33,11 +33,14 @@ const EditProfile = () => {
     const [loading, setLoading] = useLoading();
     const {callable} = useFunctions();
     const {snackBar} = useSnackBar();
+    const {uploadImg} = useStorage();
     //State
     const [userData, setUserData] = useState();
     const [dDialogOpen, setDDialogOpen] = useState(false);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
     const [error, setError] = useState(null);
+    const [pfpImage, setPfpImage] = useState(null);
+    const [uploadPfpDialog, setUploadPfpDialog] = useState(false);
     //refs
     const usernameRef = useRef();   
     const emailRef = useRef();   
@@ -110,22 +113,25 @@ const EditProfile = () => {
                 "mainInfo.username": username
             },
             listingParams: {
-                userInfo: {
-                    username: usernameRef.current.value,
-                    age: userData.data().mainInfo.age,
-                    gender: userData.data().mainInfo.gender,
-                    contact: {
-                        email: emailRef.current.value,
-                        phone: phoneRef.current.value,
-                        fb: fbRef.current.value,
-                        tt: ttRef.current.value,
-                        ig: igRef.current.value
-                    },
-                    uid: currentUser.uid
+              
+                "userInfo.username": usernameRef.current.value,
+                "userInfo.age": userData.data().mainInfo.age,
+                "userInfo.gender": userData.data().mainInfo.gender,
+                "userInfo.contact": {
+                    email: emailRef.current.value,
+                    phone: phoneRef.current.value,
+                    fb: fbRef.current.value,
+                    tt: ttRef.current.value,
+                    ig: igRef.current.value
                 },
+                "userInfo.uid": currentUser.uid,
+                "userInfo.images.pfp": pfpImage,
+
             }
         }
         updateProfile(JSON.stringify(profileInfo)).then((response) => {
+            return uploadImg(currentUser.uid, pfpImage, "pfp");
+        }).then((snapshot) =>{
             setLoading(false);
             router.back();
             snackBar("Úprava proběhla úspěšně.", "success");
@@ -203,6 +209,12 @@ const EditProfile = () => {
             return false;
         }
     }
+
+    const handlePfpChange = (e) => {
+        if(e.target.files[0]){
+            setPfpImage(e.target.files[0]);
+        }
+    }
           
     return (
         <div className="EditProfile">
@@ -238,20 +250,56 @@ const EditProfile = () => {
                     <Button onClick={() => setDeleteDialogOpen(false)}>Ne</Button>
                 </DialogActions>
             </Dialog>
+            <Dialog
+            open={uploadPfpDialog}
+            >
+                 <DialogTitle>Nahrát novou profilovou fotku</DialogTitle>
+                <DialogContent >
+                    <div className="upload-pfp-dialog">
+                        <input accept='.jpg, .png' type="file" onChange={(e) => handlePfpChange(e)} />
+                    </div>
+                </DialogContent>
+                <DialogActions>
+                    <button onClick={() => setUploadPfpDialog(false)} className="acc-btn">Zavřít</button>
+                </DialogActions>
+            </Dialog>
             <div className="container">
                 {userData ? 
                     <div className="edit-content">
                         <div className="content-header">
-                            <div className="header-pfp"></div> 
+                            {userData ? 
+                                <>
+                                    {pfpImage ?
+                                        <img className='header-pfp' src={URL.createObjectURL(pfpImage)} alt="" />
+                                    :
+                                    <>
+                                        {(userData.data().mainInfo.pfp != "") ?
+                                            <img className="header-pfp" src={userData.data().mainInfo.pfp} alt="" />
+                                            :
+                                            <div className="header-pfp"></div> 
+                                        }
+                                    </>
+                                    }
+                                </>
+                                :
+                                <div className="header-pfp"></div> 
+                            }
                             <h2 className="header-name">{userData.data().mainInfo.username}</h2>
-                            <a className="header-link">Změnit profilovou fotku</a>
+                            <a onClick={() => setUploadPfpDialog(true)} className="header-link">Změnit profilovou fotku</a>
                         </div>
+                        {pfpImage != null &&
+                            <div className="edit-file-uploaded">
+                                    <i className="fas fa-check"></i>
+                                    <p className="file-uploaded-description">Soubor nahrán! ({pfpImage.name})</p>
+                            </div> 
+                        }
 
                         <div className="content-form">
                             <div className="form-item">
                                 <p className="item-description">Viditelnost profilu</p>
                             <Switcher/>
                             </div>
+                    
                             <p className="form-section-header">
                                 Osobní a přihlašovací údaje
                             </p>

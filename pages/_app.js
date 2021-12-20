@@ -9,6 +9,7 @@ import { SnackBarProvider } from '../contexts/SnackBarContext';
 import { LoadingProvider } from '../contexts/LoadingContext';
 import { NotificationsProvider } from '../contexts/NotificationsContext';
 import FunctionsProvider from '../contexts/FunctionsContext';
+import { StorageProvider } from '../contexts/StorageContext';
 //Styles
 import '../styles/global.css'
 
@@ -24,9 +25,11 @@ function MyApp({ Component, pageProps }) {
         <SnackBarProvider>
             <NotificationsProvider>
                 <FunctionsProvider>
-                    <Layout>
-                          <Component {...pageProps} />
-                    </Layout>
+                  <StorageProvider>
+                      <Layout>
+                            <Component {...pageProps} />
+                      </Layout>
+                    </StorageProvider>
                 </FunctionsProvider>
             </NotificationsProvider>
           </SnackBarProvider>

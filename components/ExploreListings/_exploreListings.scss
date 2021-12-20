@@ -66,12 +66,18 @@
 
 //Pfp
 .explore-flatmate, .explore-flat{
-    .listing-pfp{
+    .listing-pfp-container{
+        width: 155px;
         height: 155px;
-        width: 25%;
         background-color: $mainGray;
-        object-fit: cover;
-        border-radius: 5px 5px 0 0;
+        border-radius: 5px 0 0 5px;
+        .listing-pfp{
+            height: 155px;
+            width: 155px;
+            object-fit: cover;
+            border-radius: 5px 0 0 5px;
+        }
+
     }
 }
 
@@ -125,10 +131,16 @@
 @media screen and (max-width: 600px){
     .explore-flatmate, .explore-flat{
         flex-direction: column;
-        .listing-pfp{
-            max-height: auto;
+        .listing-pfp-container{
             width: 100%;
             height: 200px;
+            border-radius: 5px 5px 0 0;
+            .listing-pfp{
+                max-height: none;
+                max-width: none;
+                width: 100%;
+                height: 200px;
+            }
         }
     }
 }
