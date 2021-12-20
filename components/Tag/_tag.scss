@@ -26,3 +26,9 @@
 .tag.active{
     background-color: #309fab2d;
 }
+
+@media screen and (max-width: 900px){
+    .tag{
+        font-size: 12px;
+    }
+}

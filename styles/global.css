@@ -2000,6 +2000,12 @@ textarea {
   .profile-box {
     min-width: 40%;
   }
+  .profile-box i {
+    font-size: 18px;
+  }
+  .profile-box .result {
+    font-size: 16px;
+  }
 }
 
 .profile-boxes-container {
@@ -2497,6 +2503,12 @@ textarea {
 
 .tag.active {
   background-color: #309fab2d;
+}
+
+@media screen and (max-width: 900px) {
+  .tag {
+    font-size: 12px;
+  }
 }
 
 .alert {
@@ -4202,7 +4214,7 @@ textarea {
 }
 
 .Listing .content-body .body-about .about-bio .bio-header {
-  font-size: 18px;
+  font-size: 14px;
   color: #B8B8B8;
   margin-bottom: 0.25rem;
 }
@@ -4224,7 +4236,7 @@ textarea {
 }
 
 .Listing .content-body .body-about .about-preferences .preferences-header {
-  font-size: 18px;
+  font-size: 14px;
   color: #B8B8B8;
   margin-bottom: 0.5rem;
 }
@@ -4241,6 +4253,24 @@ textarea {
 .Listing .content-body .body-about .about-preferences .preferences-content .tag {
   margin-right: 1rem;
   margin-block: 0.5rem;
+}
+
+@media screen and (max-width: 900px) {
+  .Listing .content-body .body-about .about-bio {
+    margin-bottom: 0.5rem;
+  }
+  .Listing .content-body .body-about .about-bio .bio-header {
+    font-size: 12px;
+  }
+  .Listing .content-body .body-about .about-bio .bio-content {
+    font-size: 14px;
+  }
+  .Listing .content-body .body-about .about-preferences {
+    margin-top: 0.5rem;
+  }
+  .Listing .content-body .body-about .about-preferences .preferences-header {
+    font-size: 12px;
+  }
 }
 
 .explore-flatmate, .explore-flat {
