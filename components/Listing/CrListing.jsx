@@ -304,7 +304,7 @@ const CrListing = ({type}) => {
                                     {listingInfo ?
                                         <>
                                         {addedPfp ?
-                                            <img src={URL.createObjectURL(addedPfp)}/>
+                                            <img src={URL.createObjectURL(addedPfp)} className='header-pfp'/>
                                             :
                                             <>
                                                 {listingInfo.data().userInfo.images.pfp ?

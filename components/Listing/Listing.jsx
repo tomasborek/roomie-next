@@ -359,7 +359,7 @@ const Listing = ({type}) => {
                                         {listingInfo ?
                                             <>
                                             {addedPfp ?
-                                                <img src={URL.createObjectURL(addedPfp)}/>
+                                                <img className='header-pfp' src={URL.createObjectURL(addedPfp)}/>
                                                 :
                                                 <>
                                                     {listingInfo.data().userInfo.images.pfp ?
@@ -513,7 +513,7 @@ const Listing = ({type}) => {
                                         {listingInfo ?
                                             <>
                                                 {addedListingImgs && addedListingImgs[0] ?
-                                                    <img src={URL.createObjectURL(addedListingImgs[0])} className='header-pfp' alt="" />
+                                                    <img src={URL.createObjectURL(addedListingImgs[0])} className='header-pfp' />
                                                 :
                                                     <>
                                                     {listingImgs && listingImgs[0] ?
