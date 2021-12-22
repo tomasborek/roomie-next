@@ -330,19 +330,19 @@ const RegisterBox = () => {
                 <div
                  className={`dot ${step === 0 ? "active-dot" : ""}`}></div>
                 <div onClick={() =>{
-                    setStep(1);
+                    if(step > 1) setStep(1);
                 }} className={`dot ${step === 1 ? "active-dot" : ""}`}></div>
                 <div onClick={() =>{
-                    setStep(2);
+                    if(step > 2) setStep(2);
                 }} className={`dot ${step === 2 ? "active-dot" : ""}`}></div>
                 <div onClick={() => {
-                    setStep(3)
+                    if(step > 3) setStep(3);
                 }} className={`dot ${step === 3 ? "active-dot" : ""}`}></div>
                 <div onClick={() => {
-                    setStep(4)
+                    if(step > 4) setStep(4);
                 }} className={`dot ${step === 4 ? "active-dot" : ""}`}></div>
                  <div onClick={() => {
-                    setStep(5)
+                   if(step > 5) setStep(5);
                 }} className={`dot ${step === 5 ? "active-dot" : ""}`}></div>
                 </div>
                 
