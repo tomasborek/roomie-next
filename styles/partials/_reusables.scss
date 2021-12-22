@@ -81,3 +81,49 @@ textarea{
     font-family: "Roboto";
 }
 
+.explore-dialog{
+    position: relative;
+    background-color: white;
+    color: #333;
+    width: 95%;
+    max-width: 625px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    padding: 0 1rem;
+    padding-bottom: 1rem;
+    .dialog-image-container{
+        width: 100%;
+        height: 200px;
+        background-color: $mainGray;
+        border-radius: 5px;
+        margin-bottom: 0.5rem;
+    }
+    .dialog-heading{
+        font-weight: bold;
+        font-size: 18px;
+    }
+    .dialog-content{
+        color: $darkerGray;
+        margin-bottom: 1rem;
+    }
+    .dialog-buttons{
+        button{
+            margin: 0 0.5rem;
+        }
+    }
+    .dialog-close{
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 0.5rem 0;
+        i{
+            font-size: 14px;
+            color: $mainGray;
+            cursor: pointer;
+        }
+    }
+}
+

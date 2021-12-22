@@ -125,6 +125,69 @@ textarea {
   font-family: "Roboto";
 }
 
+.explore-dialog {
+  position: relative;
+  background-color: white;
+  color: #333;
+  width: 95%;
+  max-width: 625px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 5px;
+  padding: 0 1rem;
+  padding-bottom: 1rem;
+}
+
+.explore-dialog .dialog-image-container {
+  width: 100%;
+  height: 200px;
+  background-color: #B8B8B8;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+}
+
+.explore-dialog .dialog-heading {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.explore-dialog .dialog-content {
+  color: #6b717f;
+  margin-bottom: 1rem;
+}
+
+.explore-dialog .dialog-buttons button {
+  margin: 0 0.5rem;
+}
+
+.explore-dialog .dialog-close {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0.5rem 0;
+}
+
+.explore-dialog .dialog-close i {
+  font-size: 14px;
+  color: #B8B8B8;
+  cursor: pointer;
+}
+
 .Home .home-video {
   width: 100%;
   background-color: #B8B8B8;
@@ -360,7 +423,7 @@ textarea {
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 850px) {
   .Home .home-section {
     -webkit-box-orient: vertical;
     -webkit-box-direction: reverse;
@@ -1331,6 +1394,15 @@ textarea {
   }
 }
 
+@media screen and (max-width: 430px) {
+  .Listing .listing-content .content-header .mid-container .header-info .info-main .main-name {
+    font-size: 24px;
+  }
+  .Listing .listing-content .content-header .mid-container .header-info .info-main .main-description {
+    font-size: 14px;
+  }
+}
+
 .FlatListing .listing-content .content-header .mid-container .header-pfp-container .container-edit-icon {
   border-radius: 5px !important;
 }
@@ -1472,7 +1544,7 @@ textarea {
         -ms-flex-align: center;
             align-items: center;
   }
-  .FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-profile-info .profile-info-pfp {
+  .FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-profile-info .profile-info-pfp-container {
     margin: 0;
   }
   .FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-profile-info .profile-info-text .text-name {
@@ -4021,6 +4093,72 @@ textarea {
   .filter {
     overflow-y: scroll;
   }
+}
+
+.custom-dialog {
+  overflow-y: auto;
+  max-width: 550px;
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+  max-height: 90vh;
+  padding: 1rem;
+  margin: 0 1rem;
+  color: #333;
+}
+
+.custom-dialog .dialog-image {
+  position: relative;
+  width: 100%;
+  border-radius: 5px;
+  background-color: #e9e9e9;
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  padding: 0 1rem;
+  padding-top: 2rem;
+}
+
+.custom-dialog .dialog-image img {
+  margin: 0 auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.custom-dialog .dialog-heading {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.custom-dialog .dialog-body {
+  margin-bottom: 1.5rem;
+  color: #6b717f;
+  text-align: center;
+}
+
+.custom-dialog .dialog-body a {
+  color: #309EAB;
+}
+
+.custom-dialog .dialog-action {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.custom-dialog .dialog-action button {
+  margin: 0 0.5rem;
+  font-size: 14px;
 }
 
 .header-info .info-contact {
