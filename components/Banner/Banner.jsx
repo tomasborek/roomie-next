@@ -1,8 +1,22 @@
 import React from 'react'
 //next
 import Link from "next/link"
+import { useRouter } from 'next/router'
+//COntexts
+import { useExploreDialog } from '../../contexts/ExploreDialogContext'
+import { useAuth } from '../../contexts/AuthContext'
 
 const Banner = () => {
+    const {currentUser} = useAuth();
+    const [exploreDialog, setExploreDialog] = useExploreDialog();
+    const router = useRouter();
+    const handleExploreDialog = () => {
+        if(!currentUser){
+            setTimeout(() => {
+                setExploreDialog(true);
+            }, 1500)
+        }
+    }
     return (
         <div className="banner">
             <img src="/img/banner/banner-bg.png" alt="" className="banner-bg" />
@@ -12,8 +26,14 @@ const Banner = () => {
                 <h2>Hledáte nebo nabízíte?</h2>
             </div>
             <div className="banner-buttons container">
-                <Link href="/explore/flatmates"><button className="main-btn">Hledám spolubydlícího</button></Link>
-                <Link href="/explore/flats"><button className="acc-btn">Hledám domov</button></Link>
+                <button onClick={() => {
+                    router.push("explore/flatmates");
+                    handleExploreDialog();
+                }} className="main-btn">Hledám spolubydlícího</button>
+                <button onClick={() => {
+                    router.push("explore/flatmates");
+                    handleExploreDialog();
+                }} className="acc-btn">Hledám domov</button>
             </div>
         </div>
     )

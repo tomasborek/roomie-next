@@ -10,6 +10,7 @@ import { LoadingProvider } from '../contexts/LoadingContext';
 import { NotificationsProvider } from '../contexts/NotificationsContext';
 import FunctionsProvider from '../contexts/FunctionsContext';
 import { StorageProvider } from '../contexts/StorageContext';
+import {ExploreDialogProvider} from '../contexts/ExploreDialogContext';
 //Styles
 import '../styles/global.css'
 
@@ -26,9 +27,11 @@ function MyApp({ Component, pageProps }) {
             <NotificationsProvider>
                 <FunctionsProvider>
                   <StorageProvider>
-                      <Layout>
-                            <Component {...pageProps} />
-                      </Layout>
+                    <ExploreDialogProvider>
+                        <Layout>
+                              <Component {...pageProps} />
+                        </Layout>
+                      </ExploreDialogProvider>
                     </StorageProvider>
                 </FunctionsProvider>
             </NotificationsProvider>
