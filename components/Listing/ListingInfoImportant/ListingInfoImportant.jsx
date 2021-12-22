@@ -109,7 +109,7 @@ const ListingInfoImportant = ({type, listingInfo, editListing, state}) => {
                         {editListing ? 
                         <FormControl className="select" size="small" error={!state.stayTime || state.stayTime == ""}>
                             <InputLabel className="input-label" >Doba bydlení</InputLabel>
-                                <Select onChange={(e) => state.setStartTime(e.target.value)} label="Doba bydlení" defaultValue={listingInfo.data().mainInfo.startTime}>
+                                <Select onChange={(e) => state.setStayTime(e.target.value)} label="Doba bydlení" defaultValue={listingInfo.data().mainInfo.startTime}>
                                     <MenuItem value="Krátkodobá">Krátkodobá</MenuItem>
                                         <MenuItem value="1 rok">1 rok</MenuItem>
                                         <MenuItem value="Dlouhodobá">Dlouhodobá</MenuItem>
@@ -117,7 +117,7 @@ const ListingInfoImportant = ({type, listingInfo, editListing, state}) => {
                                 </Select>
                         </FormControl>
                         :
-                        <div className="header-value">{listingInfo.data().mainInfo.startTime}</div>
+                        <div className="header-value">{listingInfo.data().mainInfo.stayTime}</div>
                         }
                     </div>
                     <div className="item-description">Doba bydlení</div>
@@ -128,7 +128,7 @@ const ListingInfoImportant = ({type, listingInfo, editListing, state}) => {
                         {editListing ? 
                         <FormControl className="select" size="small" error={!state.startTime || state.startTime == ""}>
                             <InputLabel className="input-label" >Doba nas.</InputLabel>
-                            <Select onChange={(e) => state.setStayTime(e.target.value)} label="Doba bydlení" defaultValue={listingInfo.data().mainInfo.stayTime}>
+                            <Select onChange={(e) => state.setStartTime(e.target.value)} label="Doba nastěhování" defaultValue={listingInfo.data().mainInfo.stayTime}>
                                 <MenuItem value="Okamžitě">Okamžitě</MenuItem>
                                 <MenuItem value="Příští měsíc">Příští měsíc</MenuItem>
                                 <MenuItem value="Příští rok">Příští rok</MenuItem>
