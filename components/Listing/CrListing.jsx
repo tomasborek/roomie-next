@@ -98,9 +98,9 @@ const CrListing = ({type}) => {
                 return;
             }
             setWelcomeDialog(true);
-            router.push(`/${listingInfo.data().type}/${listingInfo.id}`)
+            setListingInfo(doc);
         }).catch(error => {
-            console.log(error.code);
+            console.log(error);
         })
     }, [router.isReady])
 
