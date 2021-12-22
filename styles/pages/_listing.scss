@@ -200,11 +200,20 @@
         .container-edit-icon{
             width: 200px;
         }
-    }
-    
-   
+    }    
+}
 
-    
+@media screen and (max-width: 430px){
+    .Listing .listing-content .content-header .mid-container{
+        .header-info .info-main{ 
+            .main-name{
+                font-size: 24px;
+            }
+            .main-description{
+                font-size: 14px;
+            }
+        }
+    }
 }
 
 
