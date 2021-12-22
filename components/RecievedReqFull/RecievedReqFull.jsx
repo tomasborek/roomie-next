@@ -76,7 +76,11 @@ const RecievedReqFull = ({reqInfo, id, setOpen, setRequestLoading, setReqResolve
         <div className="recieved-req-full">
             <i onClick={() => setOpen(false)} className="fas fa-times full-close-icon"></i>
             <div className="full-pfp-container">
-                <img src="/img/pfps/radek-pfp.png" className="container-pfp"></img>
+                {reqInfo.pfp ?
+                 <img src={reqInfo.pfp} className="container-pfp"></img>
+                 :
+                 <img src="/img/pfps/radek-pfp.png" className="container-pfp"></img>
+                }
             </div>
             <div className="full-name">{reqInfo.username}</div>
             <div className="full-description">{reqInfo.gender === "male" ? "Muž" : reqInfo.gender === "female" ? "Žena" : reqInfo.gender === "other" ? "Jiné" : ""}, {reqInfo.age}</div>

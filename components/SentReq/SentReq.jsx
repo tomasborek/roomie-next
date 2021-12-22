@@ -5,7 +5,7 @@ import {useRouter} from "next/router";
 import {useDb} from "../../contexts/DbContext";
 import {useLoading} from "../../contexts/LoadingContext";
 
-const SentReq = ({name, age, status, id}) => {
+const SentReq = ({name, age, pfp, id}) => {
     const router = useRouter();
     const {getUser} = useDb();
     const [loading, setLoading] = useLoading();
@@ -21,7 +21,11 @@ const SentReq = ({name, age, status, id}) => {
     return (
         <div onClick={handleShowListing} className="sent-req">
             <div className="req-pfp-container">
-                <div className="container-pfp"></div>
+                {pfp ?
+                    <img src={pfp} className='container-pfp' />
+                    :
+                    <div className="container-pfp"></div>
+                }
             </div>
             <div className="req-content">
                 <div className="content-user">{name}, {age}</div>

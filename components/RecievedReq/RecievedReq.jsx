@@ -24,7 +24,11 @@ const RecievedReq = ({reqInfo, id}) => {
                 :
                 <div  className="rec-req">
                     <div onClick={() => setFullReq(true)} className="req-pfp-container">
-                        <div className="container-pfp"></div>
+                        {reqInfo.pfp ?
+                        <img src={reqInfo.pfp} className='container-pfp' />
+                        :
+                        <img src={`/img/pfps/${reqInfo.gender === "male" ? "radek" : "radka"}-pfp.png`} className='container-pfp' />
+                        }
                     </div>
                     <div onClick={() =>setFullReq(true)} className="req-content">
                         <div className="content-name">{reqInfo.username}, {reqInfo.age}</div>

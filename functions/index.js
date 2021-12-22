@@ -122,6 +122,7 @@ exports.createRequest = functions.https.onCall((data, context) => {
       gender: sender.mainInfo.gender,
       listingId: sender.listing.id,
       type: sender.mainInfo.type,
+      pfp: sender.mainInfo.pfp,
       message: data.message,
       timeStamp: admin.firestore.FieldValue.serverTimestamp(),
     }).then((result) => {
@@ -130,6 +131,7 @@ exports.createRequest = functions.https.onCall((data, context) => {
             username: reciever.username,
             age: reciever.age,
             listingId: recieverListingId,
+            pfp: reciever.images.pfp,
             timeStamp: admin.firestore.FieldValue.serverTimestamp(),
           });
     }).then((response) => {
@@ -282,8 +284,17 @@ exports.updateListing = functions.https.onCall((data, context) => {
 // Trigger functions---
 // Delete user's db record when his auth is deleted
 exports.deleteUser = functions.auth.user().onDelete((user) => {
-  const doc = admin.firestore().collection("users").doc(user.uid);
-  return doc.delete();
+  return new Promise((resolve, reject) => {
+    const doc = admin.firestore().collection("users").doc(user.uid);
+    doc.delete().then((response) => {
+      const storage = admin.storage().bucket();
+      storage.deleteFiles({prefix: `users/${user.uid}`}).then((response) => {
+        resolve(response);
+      }).catch((error) => {
+        reject(error);
+      });
+    });
+  });
 });
 // Delte user's listing's db record when his auth is deleted
 exports.deleteListing = functions.auth.user().onDelete((user) => {

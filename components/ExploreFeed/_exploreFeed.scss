@@ -7,6 +7,48 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    .header-filters{
+        display: flex;
+        align-items: center;
+        .filters-filter{
+            display: flex;
+            align-items: center;
+            border: 1px solid $mainGray;
+            padding: 0 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            i{
+                margin-left: 0.5rem;
+            }
+            &.active{
+                background-color: $mainColorTra;
+                border-color:$mainColor ;
+                opacity: 1;
+            }
+            &.disabled{
+                opacity: 0.5;
+            }
+        }
+        .filters-match{
+            padding: 0 0.5rem;
+            margin-left: 1rem;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            i{
+                margin-left: 0.5rem;
+                color: $accent;
+            }
+            &.active{
+                border-radius: 5px;
+                background-color: $mainColor;
+                color: white;
+                i{
+                    color: white;
+                }
+            }
+        }
+    }
 }
 
 .explore-feed .loading{

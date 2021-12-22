@@ -9,16 +9,22 @@ import {useDb} from "../../contexts/DbContext";
 import ExploreFlatmate from '../ExploreListings/ExploreFlatmate/ExploreFlatmate';
 import ExploreFlat from "../ExploreListings/ExploreFlat/ExploreFlat";
 import Pagination from "../Pagination/Pagination";
+import Filter from '../Filter/Filter';
 //MUI
 import { CircularProgress } from '@mui/material';
+import { Backdrop } from '@mui/material';
 //Img
 
 const ExploreFeed = ({variant}) => {
     //Variables
     //Contexts
-    const {getListings} = useDb();
+    const {getListings, getListingsFilter} = useDb();
     const router = useRouter();
     //State
+    const [filterOpen, setFilterOpen] = useState(false);
+    const [activeFilters, setActiveFilters] = useState({});
+    const [matching, setMatching] = useState(false);
+    const [filtering, setFiltering] = useState(false);
     // Is user connected to internet
     const [connectionDown, setConnectionDown] = useState(false);
     //Flatmate listings
@@ -40,11 +46,10 @@ const ExploreFeed = ({variant}) => {
         // Empty array that we can insert all the data in and then insert it into flatmateListings state
         let flatmateListingsArray = [];
         //Check if we already have listings
-            if(flatmateListings && flatmateListings.length > 0){
-                return;
-            }
             //Gettem
-            getListings("flatmate", "first").then(docs => {
+            console.log("get them like");
+            console.log(activeFilters);
+            getListings("flatmate", "first", null, activeFilters).then(docs => {
                 //Checks if we are connected to internet
                 if (docs.empty && docs.metadata.fromCache) {
                     throw new Error('network-failed');
@@ -93,7 +98,11 @@ const ExploreFeed = ({variant}) => {
             })
         }
        
-    }, [])
+    }, [activeFilters])
+    useEffect(() => {
+        if(filtering) setMatching(false);
+        if(matching) setFiltering(false);
+    }, [filtering, matching])
 
     //Functions
     // Hadnles pagination (next or prev)
@@ -175,8 +184,26 @@ const ExploreFeed = ({variant}) => {
             <title>Prohlížet {variant === "flatmate" ? "Prohlížet byty" : "Prohlížet spolubydlící"} | Roomie</title>
         </Head>
         <div className="explore-feed">
+            <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={filterOpen}>
+                <Filter variant="flatmate" setOpen={setFilterOpen} activeFilters={activeFilters} setActiveFilters={setActiveFilters}/>
+            </Backdrop>
             <div className="feed-header">
                 <h3 className="header-title">{variant === "flatmate" ? "Prohlížet spolubydlící" : "Prohlížet byty"}</h3>
+                <div className="header-filters">
+                    <div 
+                        className={`filters-filter ${(Object.keys(activeFilters).length && !matching) && "active"} ${matching && "disabled"}`} 
+                        onClick={() => {
+                            setFilterOpen(true);
+                            setFiltering(true);
+                        }}>
+                        <p>Filtry</p>
+                        <i className="fas fa-chevron-down"></i>
+                    </div>
+                    <div className={`filters-match ${matching && "active"}`} onClick={() => setMatching(prevState => !prevState)}>
+                        <p>Match</p>
+                        <i className="fas fa-puzzle-piece"></i>
+                    </div>
+                </div>
             </div>
             {(variant === "flatmate" && !connectionDown) &&
             <>
