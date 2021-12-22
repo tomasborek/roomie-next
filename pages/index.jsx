@@ -79,7 +79,7 @@ export default function Home() {
                 <div className="mid-container">
                     <div className="banner-text">
                         <h1>Premium profil přináší spoustu výhod!</h1>
-                        <h2>Pomocí premium profilu všichni poznají legitimitu vašeho profilu. Bude se zobrazovat na prvních příčkách, a to zároveň s odznakem důvěryhodnosti, který výrázně ušetří váš čas.</h2>
+                        <h2>Pomocí premium profilu všichni poznají legitimitu vašeho profilu. Bude se zobrazovat na prvních příčkách, a to zároveň s odznakem důvěryhodnosti, který výrazně ušetří váš čas.</h2>
                         <button onClick={() =>{ 
                             router.push("/premium");
                             window.scrollTo(0,0);
