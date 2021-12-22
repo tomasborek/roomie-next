@@ -105,7 +105,7 @@ const ListingContact = ({listingInfo, editListing, state}) => {
                             <>
                                 {!currentUser ? <button className="main-btn contact-button" onClick={() => router.push("/login")}>Poslat žádost</button> :
                                 (isRequesting) ? <button className="contact-button main-btn" onClick={() => router.push("/requests/recieved")}>Zobrazit žádosti</button> :
-                                (currentUser) ? <button className="main-btn contact-button" onClick={() => setReqDialogOpen(true)}>Pošlat žádost</button> :
+                                (currentUser) ? <button className="main-btn contact-button" onClick={() => setReqDialogOpen(true)}>Poslat žádost</button> :
                                 ""
                                 }
                             </>
