@@ -68,8 +68,8 @@ const LocationDropdown = ({setLocation, location}) => {
 	           return response.json()
             }).then(res => {
                 res.data.forEach(doc => {
-                    let cityName = doc.name.toLowerCase();
-                    if(cityName.includes("prague")) cityName = cityName.replace("prague", "Praha");
+                    let cityName = doc.name;
+                    if(cityName.includes("Prague")) cityName = cityName.replace("Prague", "Praha");
                     results = [...results, cityName];
                 })  
                 setFetching(false);
