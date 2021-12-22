@@ -93,11 +93,11 @@ const ListingInfoImportant = ({type, listingInfo, editListing, state}) => {
                             </div>  
                         : 
                         <div className="header-value">
-                            {listingInfo.data().mainInfo.budget >= 10000 ? 
-                                (listingInfo.data().mainInfo.budget.toString().substr(0,2) + " " +  listingInfo.data().mainInfo.budget.toString().substr(2,6))
+                            {listingInfo.data().mainInfo.price >= 10000 ? 
+                                (listingInfo.data().mainInfo.price.toString().substr(0,2) + " " +  listingInfo.data().mainInfo.price.toString().substr(2,6))
                             :  
-                                (listingInfo.data().mainInfo.budget.toString().substr(0,1) + " " + listingInfo.data().mainInfo.budget.toString().substr(1,5))}
-                                 {listingInfo.data().mainInfo.budget == 60000 && "+"} Kč Kč
+                                (listingInfo.data().mainInfo.price.toString().substr(0,1) + " " + listingInfo.data().mainInfo.price.toString().substr(1,5))}
+                                 {listingInfo.data().mainInfo.price == 60000 && "+"} Kč 
                         </div>
                         }
                     </div>
