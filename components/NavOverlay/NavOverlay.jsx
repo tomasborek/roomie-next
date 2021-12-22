@@ -31,6 +31,7 @@ const NavOverlay = () => {
 
     const handleLogOut = () => {
         setLoading(true);
+        setNavOverlay(false);
         logOut()
         .then(res => {
             router.push("/");
@@ -94,8 +95,14 @@ const NavOverlay = () => {
                         handleMyListing();
                         setNavOverlay(false);
                     }} className="nav-logged-item"><i className="item-icon fas fa-home"></i>Můj inzerát</li>
-                    <li onClick={() => router.push("/friends")}  className="nav-logged-item"><i className="fas fa-users item-icon"></i> Přátelé</li>
-                    <li onClick={() => router.push("/requests/recieved")}  className="nav-logged-item"><i className="fas fa-envelope item-icon"></i> Žádosti</li>
+                    <li onClick={() => {
+                        setNavOverlay(false);
+                        router.push("/friends");
+                    }}  className="nav-logged-item"><i className="fas fa-users item-icon"></i> Přátelé</li>
+                    <li onClick={() => {
+                        setNavOverlay(false);
+                        router.push("/requests/recieved");  
+                    }}  className="nav-logged-item"><i className="fas fa-envelope item-icon"></i> Žádosti</li>
                     <li className="nav-logged-item"><i className="fas fa-heart"></i> Oblíbené</li>
                     <li onClick={() => {
                        handleLogOut();
