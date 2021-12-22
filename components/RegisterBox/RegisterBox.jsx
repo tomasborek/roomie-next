@@ -281,7 +281,7 @@ const RegisterBox = () => {
                         <div className="content-img-container">
                             <motion.img initial={{opacity: 0}} animate={{opacity: 1}} transition={{duration: 0.5}}   src="/img/registration-steps/slide-img3.png" className="content-img" />
                         </div>
-                        <h1 className="content-title">Kolik činí měsíční nájem pro případné zájemce?</h1>
+                        <h1 className="content-title">Kolik činní měsíční nájem pro případné zájemce?</h1>
                         <RangeStep price={price} setPrice={setPrice} />
                         <button disabled={!price || price < 1000 || price > 60000} onClick={() => setStep(4)} className={`acc-btn ${(!price || price < 1000 || price > 60000) && "disabled"}`}>Hotovo</button>
                 </div>

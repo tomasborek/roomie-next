@@ -83,7 +83,7 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
             <div className="tagger-description">
                 Zde můžete zaklikat vaše preference  
                 {variant === "person" ? " ideálního spolubydlícího." : " ideálního bydlení."} Pokud
-                je pro vás danná hodnota irelevantní, jednodušše jí vynechte a zaklikejte vše,
+                je pro vás daná hodnota irelevantní, jednoduše jí vynechte a zaklikejte vše,
                 co je pro vás důležité.
             </div>
             {variant === "person" &&

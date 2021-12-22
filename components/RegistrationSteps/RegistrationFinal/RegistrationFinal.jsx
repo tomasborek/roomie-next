@@ -195,7 +195,7 @@ const RegistrationFinal = () => {
             </div>
             <div className="register-checkbox">
                 <input className="checkbox" type="checkbox" />
-                <p>Nechci aby mi přicházely na e-mail nabídky a užitečné informace.</p>
+                <p>Nechci, aby mi přicházely na e-mail nabídky a užitečné informace.</p>
             </div>
     </div>
     )
