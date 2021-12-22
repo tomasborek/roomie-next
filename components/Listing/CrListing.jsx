@@ -33,6 +33,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import CustomDialog from '../CustomDiaog/CustomDialog';
 
 const CrListing = ({type}) => {
     const router = useRouter();
@@ -94,8 +95,11 @@ const CrListing = ({type}) => {
         getListing(id)
         .then(doc => {
             if(doc.data().mainInfo.startTime != ""){
-                router.push(`/${doc.data().type}/${doc.id}`);
+                router.back();
                 return;
+            }
+            if(!currentUser || (doc.data().userInfo.uid != currentUser.uid)){
+                router.back();
             }
             setWelcomeDialog(true);
             setListingInfo(doc);
@@ -205,7 +209,7 @@ const CrListing = ({type}) => {
             setEditListing(false);
             snackBar("Inzerát byl úspěšně upraven.", "success");
             window.scrollTo(0,0);
-            router.push(`${listingInfo.data().type}/${listingInfo.id}`);
+            router.push(`/${listingInfo.data().type}/${listingInfo.id}`);
         })
         // .catch((error) => {
         //     setLoading(false);
@@ -253,22 +257,21 @@ const CrListing = ({type}) => {
                     </DialogActions>
                 </Dialog>
             <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={welcomeDialog}>
-                <div className="listing-welcome-dialog">
-                    <div className="welcome-dialog-image">
-                        <img src="/img/listing/welcome-dialog.png" alt="" />
-                    </div>
-                    <h2 className="welcome-dialog-heading">Váš inzerát</h2>
-                    <p className="welcome-dialog-body">
+                <CustomDialog 
+                    image={"/img/listing/welcome-dialog.png"}
+                    heading={"Váš inzerát"}
+                    >
+                    <div className="dialog-body">
                     Gratulujeme k založení osobního profilu Roomie. Nyní vám nic nebrání k vytvoření vašeho inzerátu.
                     Tvorba je jednoduchá a intuitivní. Červeně svítící informace jsou povinné, ostatní dle vašeho uvážení.
                     Nezapomeňte - čím více informací uvedete, tím více podpoříte vaší šanci k oslovení potenciálních uživatelů. 
                     Váš inzerát je vaší veřejnou prezentací na portále Roomie. Hodně štěstí!
-                    </p>
-                    <div className="welcome-dialog-action">
+                    </div>  
+                    <div className="dialog-action">
                         <button onClick={() => setWelcomeDialog(false)} className="main-btn">Rozumím</button>
                     </div>
-                    
-                </div>
+
+                </CustomDialog>
             </Backdrop>
             <GalleryInput 
                     object={galleryInput} 
