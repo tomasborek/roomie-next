@@ -90,7 +90,8 @@
 
 @media screen and (max-height: 630px){
     .register-box{
-        min-height: 95vh;
+        height: 95vh;
+        min-height: 500px;
         .box-content{
             .content-img-container{
                 height: 150px;
