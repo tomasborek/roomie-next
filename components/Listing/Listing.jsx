@@ -108,6 +108,12 @@ const Listing = ({type}) => {
         if(!router.isReady) return;
         getListing(id)
         .then(doc => {
+            if(!doc.data().visible){
+                if(currentUser.uid != doc.data().userInfo.id){
+                    router.back();
+                    return
+                }
+            }
             setListingInfo(doc);
             setListingImgs(doc.data().userInfo.images.listingImgs);
             if(doc.data().userInfo.images.pfp){
