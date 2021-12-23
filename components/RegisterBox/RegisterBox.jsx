@@ -290,7 +290,7 @@ const RegisterBox = () => {
         {step === 4 &&
             <div className="box-content">
                 <div className="content-img-container">
-                <motion.img initial={{opacity: 0}} animate={{opacity: 1}} transition={{duration: 0.5}}   src="/img/registration-steps/slide-img3.png" className="content-img" />    
+                <motion.img initial={{opacity: 0}} animate={{opacity: 1}} transition={{duration: 0.5}}   src="/img/registration-steps/slide-img4.png" className="content-img" />    
                 </div>
                 <h1 className='content-title'>Jak vám máme říkat?</h1>
                 <NameStep setName={usernameState.setUsername} name={usernameState.username} />
@@ -312,7 +312,7 @@ const RegisterBox = () => {
         {step === 6 && 
             <div className="box-content">
                 <div className="content-img-container">
-                    <motion.img initial={{opacity: 0}} animate={{opacity: 1}} transition={{duration: 0.5}} src="/img/registration-steps/slide-img5.png" className="content-img" />
+                    <motion.img initial={{opacity: 0}} animate={{opacity: 1}} transition={{duration: 0.5}} src="/img/registration-steps/slide-img6.png" className="content-img" />
                 </div>
                 <h1 className="content-title">Gratulujeme!</h1>
                 <h1 className="content-welcome">Vítejte v roomie!</h1>
