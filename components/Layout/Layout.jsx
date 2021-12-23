@@ -36,7 +36,7 @@ const Layout = ({children}) => {
                         <RegisterProvider>
                             <NavOverlay></NavOverlay>
                             <LoadingOverlay/>
-                            <Snackbar open={isSnackBarOpen}><Alert sx={{width: "100%"}} severity={snackBarSeverity}>{snackBarMsg}</Alert></Snackbar>
+                            <Snackbar open={isSnackBarOpen}><Alert sx={{width: "100%"}} severity={snackBarSeverity ? snackBarSeverity  : "error"}>{snackBarMsg}</Alert></Snackbar>
                             <Backdrop  sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={exploreDialog}>
                                 <CustomDialog 
                                     image={"/img/listing/welcome-dialog.png"}
