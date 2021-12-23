@@ -14,14 +14,14 @@ const Footer = () => {
                 </div>
                 <div className="footer-section links-section">
                     <p className="section-header">Důležité odkazy</p>
-                    <p className="section-description">
+                    <div className="section-description">
                         <ul>
                             <li><Link href="/login">Přihlásit se</Link></li>
                             <li><Link href="/register">Registrovat</Link></li>
                             <li><Link href="/404">Smluvní podmínky</Link></li>
                             <li><Link href="/premium">Premium</Link></li>
                         </ul>
-                    </p>
+                    </div>
                 </div>
 
                 <div className="footer-section connect-section">
