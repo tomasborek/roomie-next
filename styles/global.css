@@ -3859,6 +3859,15 @@ textarea {
 }
 
 .gallery .gallery-img-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   background-color: #B8B8B8;
   border-radius: 5px;
   margin: 1rem;
@@ -3880,6 +3889,11 @@ textarea {
   border-radius: 5px;
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.gallery .gallery-img-container p {
+  font-size: 14px;
+  color: #6b717f;
 }
 
 .gallery .gallery-img-container .container-edit-icon {

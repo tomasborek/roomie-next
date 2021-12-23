@@ -78,7 +78,13 @@ const Gallery = ({type, listingImgs, addedListingImgs, pfp, addedPfp, state}) =>
                         <img src={URL.createObjectURL(addedListingImgs[0])} alt="" />
                         :
                         <>
-                            {(listingImgs && listingImgs[0]) && <img src={listingImgs[0]} alt="" />}
+                            {(listingImgs && listingImgs[0]) ?
+                                <img src={listingImgs[0]} />
+                                :
+                                <>
+                                    {(state.listingInfo) && <p>Žádný obrázek</p>}
+                                </>
+                            }
                         </>
                     }
                     
@@ -94,7 +100,13 @@ const Gallery = ({type, listingImgs, addedListingImgs, pfp, addedPfp, state}) =>
                         <img src={URL.createObjectURL(addedListingImgs[1])} alt="" />
                         :
                         <>
-                            {(listingImgs && listingImgs[1]) && <img src={listingImgs[1]} alt="" />}
+                            {(listingImgs && listingImgs[1]) ?
+                                <img src={listingImgs[1]} />
+                                :
+                                <>
+                                    {(state.listingInfo) && <p>Žádný obrázek</p>}
+                                </>
+                            }
                         </>
                     }
                 </div>
@@ -138,7 +150,13 @@ const Gallery = ({type, listingImgs, addedListingImgs, pfp, addedPfp, state}) =>
                         <img src={URL.createObjectURL(addedListingImgs[1])} alt="" />
                         :
                         <>
-                            {(listingImgs && listingImgs[1]) && <img src={listingImgs[1]} alt="" />}
+                             {(listingImgs && listingImgs[1]) ?
+                                <img src={listingImgs[1]} />
+                                :
+                                <>
+                                    {(state.listingInfo) && <p>Žádný obrázek</p>}
+                                </>
+                            }
                         </>
                     }
                     
@@ -154,7 +172,13 @@ const Gallery = ({type, listingImgs, addedListingImgs, pfp, addedPfp, state}) =>
                         <img src={URL.createObjectURL(addedListingImgs[2])} alt="" />
                         :
                         <>
-                            {(listingImgs && listingImgs[2]) && <img src={listingImgs[2]} alt="" />}
+                             {(listingImgs && listingImgs[2]) ?
+                                <img src={listingImgs[2]} />
+                                :
+                                <>
+                                    {(state.listingInfo) && <p>Žádný obrázek</p>}
+                                </>
+                            }
                         </>
                     }
                 </div>
@@ -165,10 +189,16 @@ const Gallery = ({type, listingImgs, addedListingImgs, pfp, addedPfp, state}) =>
                         </div>
                     }
                     {(addedListingImgs && addedListingImgs[3]) ?
-                        <img src={URL.createObjectURL(addedListingImgs[2])} alt="" />
+                        <img src={URL.createObjectURL(addedListingImgs[3])} alt="" />
                         :
                         <>
-                            {(listingImgs && listingImgs[3]) && <img src={listingImgs[3]} alt="" />}
+                             {(listingImgs && listingImgs[3]) ?
+                                <img src={listingImgs[3]} />
+                                :
+                                <>
+                                    {(state.listingInfo) && <p>Žádný obrázek</p>}
+                                </>
+                            }
                         </>
                     }
                 </div>
@@ -182,7 +212,13 @@ const Gallery = ({type, listingImgs, addedListingImgs, pfp, addedPfp, state}) =>
                         <img src={URL.createObjectURL(addedListingImgs[4])} alt="" />
                         :
                         <>
-                            {(listingImgs && listingImgs[4]) && <img src={listingImgs[4]} alt="" />}
+                             {(listingImgs && listingImgs[4]) ?
+                                <img src={listingImgs[4]} />
+                                :
+                                <>
+                                    {(state.listingInfo) && <p>Žádný obrázek</p>}
+                                </>
+                            }
                         </>
                     }
                 </div>
@@ -196,7 +232,14 @@ const Gallery = ({type, listingImgs, addedListingImgs, pfp, addedPfp, state}) =>
                         <img src={URL.createObjectURL(addedListingImgs[5])} alt="" />
                         :
                         <>
-                            {(listingImgs && listingImgs[5]) && <img src={listingImgs[5]} alt="" />}
+                             {(listingImgs && listingImgs[5]) ?
+                                <img src={listingImgs[5]} />
+                                :
+                                <>
+                                    {(state.listingInfo) && <p>Žádný obrázek</p>}
+                                </>
+                                
+                            }
                         </>
                     }
                 </div>
