@@ -19,6 +19,7 @@ export default function Home() {
     const {currentUser} = useAuth();
     //State
     const [contactForm, setContactForm] = useState(false);
+    const [contactFormSubject, setContactFormSubject] = useState("");
     //Refs
     const videoRef = useRef();
    
@@ -46,10 +47,10 @@ export default function Home() {
                             <input maxLength={60} placeholder="Váš e-mail..." className="form-item" type="text" />
                             <FormControl className="form-select form-item" size="small">
                                 <InputLabel>Typ zprávy</InputLabel>
-                                <Select label="Typ zprávy">
+                                <Select defaultValue="" value={contactFormSubject ? contactFormSubject : ""} onChange={(e) => setContactFormSubject(e.target.value)} label="Typ zprávy">
                                     <MenuItem value="Technický problém">Technický problém</MenuItem>
                                     <MenuItem value="Stížnost">Stížnost</MenuItem>
-                                    <MenuItem value="dotaz">Dotaz</MenuItem>
+                                    <MenuItem value="Dotaz">Dotaz</MenuItem>
                                 </Select>
                             </FormControl>
                             <textarea maxLength={2000} placeholder="Obsah zprávy..." className="form-item form-textarea"></textarea>
