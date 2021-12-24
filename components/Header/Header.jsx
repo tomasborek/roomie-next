@@ -34,7 +34,7 @@ const Header = ({variant}) => {
 
      //UseEffect
     useEffect(() => {
-        if(currentUser && !notifications){
+        if(currentUser){
             let newNotifications = [];
            getNotifications(currentUser.uid)
            .then(docs => {
