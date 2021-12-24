@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 //COntexts
 import { useAuth } from '../contexts/AuthContext';
 import { useDb } from '../contexts/DbContext';
+import {useFunctions} from "../contexts/FunctionsContext";
 
 //Components
 import Header from "../components/Header/Header";
@@ -18,9 +19,11 @@ const Friends = () => {
     const {getUser, getFriends} = useDb();
     const [friends, setFriends] = useState(null);
     const router = useRouter();
+    const {callable} = useFunctions();
 
     useEffect(() => {
         if(currentUser){
+            const deleteAcceptedNotifications = callable("deleteAcceptedNotifications");
             let friendsObject = {};
             getFriends(currentUser.uid)
             .then(docs => {
@@ -28,16 +31,12 @@ const Friends = () => {
                     friendsObject = {...friendsObject, [doc.id]: doc.data()};
                 })
                 setFriends(friendsObject);
-    
+                deleteAcceptedNotifications(JSON.stringify({uid: currentUser.uid}));
             })
         }
     }, [currentUser])
 
-    useEffect(() => {
-        if(!currentUser){
-            router.back();
-        }
-    }, [currentUser])
+
     return (
         <div className="Friends">
             <Header variant="white"/>
