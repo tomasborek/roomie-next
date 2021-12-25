@@ -47,7 +47,11 @@ const LocationDropdown = ({setLocation, location}) => {
     useEffect(() => {
         let searchedTerm = search.toLowerCase();
         if(isTyping === true) return;
-        if(search === "") return;
+        if(search === ""){
+            setLocation("");
+            setDropdownActive(false);
+            return;
+        };
         let results = [];
         if(searchedTerm.includes("prah")){
            if(searchedTerm.includes("praha")){
@@ -99,7 +103,7 @@ const LocationDropdown = ({setLocation, location}) => {
                   typing();
                   setSearch(e.target.value)
               }} type="text" />
-              <i value={search} className="fas fa-search"></i>
+              <i value={search} style={{color: search && search == location ? "green" : search && search != location ? "red" : !search ? "#333" : ""}} className={`fas fa-${search && search == location ? "check" : search && search != location ? "times" : !search ? "search" : ""}`}></i>
           </div>
           <motion.div variants={optionsVariants} animate={dropdownActive ? "active" : ""} initial={"disabled"} transition={"transition"} className="location-dropdown-options">
                 {!fetching &&
@@ -110,7 +114,10 @@ const LocationDropdown = ({setLocation, location}) => {
                                 setLocation(option);
                                 setSearch(option);
                                 setDropdownActive(false);
-                            }}>{option}</li>
+                            }}>
+                                <p>{option}</p> 
+                                <i className='fas fa-plus'></i>
+                            </li>
                         ))
                         :
                         <li className="options-not-found">Nic nebylo nalezeno.</li>
