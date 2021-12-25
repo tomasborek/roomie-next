@@ -56,6 +56,18 @@ exports.createListing = functions.https.onCall((data, context) => {
         location: [data.location],
       },
       personBoxes: {},
+      queryInfo: {
+        gender: {
+          male: data.gender === "male",
+          female: data.gender === "female",
+          other: data.gender === "other",
+        },
+        age: {
+          firstRange: data.age <= 25,
+          secondRange: data.age > 25 && data.age < 35,
+          thirdRange: data.age >= 35,
+        },
+      },
       bio: "",
       type: "flatmate",
       friends: [],
@@ -87,6 +99,18 @@ exports.createListing = functions.https.onCall((data, context) => {
         location: data.location,
       },
       personBoxes: {},
+      queryInfo: {
+        gender: {
+          male: data.gender === "male",
+          female: data.gender === "female",
+          other: data.gender === "other",
+        },
+        age: {
+          firstRange: data.age <= 25,
+          secondRange: data.age > 25 && data.age < 35,
+          thirdRange: data.age >= 35,
+        },
+      },
       flatBio: "",
       personBio: "",
       type: "flat",
@@ -281,20 +305,35 @@ exports.updateListing = functions.https.onCall((data, context) => {
   const params = data.params;
   return db.collection("listings").doc(listingId).update(params);
 });
+exports.deleteAcceptedNotifications = functions
+    .https.onCall((data, context) => {
+      data = JSON.parse(data);
+      const db = admin.firestore();
+      const uid = data.uid;
+      return new Promise((resolve, reject) => {
+        db.collection("users").doc(uid).collection("notifications")
+            .where("type", "==", "acceptedRequest").get().then((docs) => {
+              Promise.all(
+                  docs.docs.map((doc) => {
+                    return db.collection("users")
+                        .doc(uid)
+                        .collection("notifications")
+                        .doc(doc.id)
+                        .delete();
+                  })
+              ).then((response) => {
+                resolve(response);
+              }).catch((error) => {
+                reject(error);
+              });
+            });
+      });
+    });
 // Trigger functions---
 // Delete user's db record when his auth is deleted
 exports.deleteUser = functions.auth.user().onDelete((user) => {
-  return new Promise((resolve, reject) => {
-    const doc = admin.firestore().collection("users").doc(user.uid);
-    doc.delete().then((response) => {
-      const storage = admin.storage().bucket();
-      storage.deleteFiles({prefix: `users/${user.uid}`}).then((response) => {
-        resolve(response);
-      }).catch((error) => {
-        reject(error);
-      });
-    });
-  });
+  const doc = admin.firestore().collection("users").doc(user.uid);
+  return doc.delete();
 });
 // Delte user's listing's db record when his auth is deleted
 exports.deleteListing = functions.auth.user().onDelete((user) => {
@@ -309,6 +348,11 @@ exports.deleteListing = functions.auth.user().onDelete((user) => {
       reject(error);
     });
   });
+});
+// Delete storage record of a user
+exports.deleteStorage = functions.auth.user().onDelete((user) => {
+  const storage = admin.storage().bucket();
+  return storage.deleteFiles({prefix: `users/${user.uid}`});
 });
 // Notifications
 // Recieved Requests
@@ -431,4 +475,31 @@ exports.deleteImgs = functions.storage.bucket().object().onDelete((object) => {
           });
     });
   }
+});
+
+
+// One time functions
+
+exports.addQueryInfo = functions.https.onCall((data, context) => {
+  const db = admin.firestore();
+  return new Promise((resolve, reject) => {
+    db.collection("listings").get().then((docs) => {
+      return Promise.all(
+          docs.docs.map((listing) => {
+            const age = listing.data().userInfo.age;
+            const ageQuery = {
+              firstRange: age <= 25,
+              secondRange: age > 25 && age < 35,
+              thirdRange: age >= 35,
+            };
+            return db.collection("listings").doc(listing.id)
+                .update({"queryInfo.age": ageQuery});
+          })
+      );
+    }).then((response) => {
+      resolve(response);
+    }).catch((error) => {
+      reject(error);
+    });
+  });
 });
