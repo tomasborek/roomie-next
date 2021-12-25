@@ -201,6 +201,13 @@ const Listing = ({type}) => {
                 bio: bio ? bio.trim() : "",
                 visible: true,
             }
+            if(addedPersonBoxes.job){
+                params = {...params, "queryInfo.job": {
+                    employed: addedPersonBoxes.job === "Zaměstnaný",
+                    unemployed: addedPersonBoxes.job === "Nezaměstnaný",
+                    student: addedPersonBoxes.job === "Student",
+                }}
+            }
         }
         if(type === "flat" || type === "flat-cr"){
             params = {
@@ -216,7 +223,15 @@ const Listing = ({type}) => {
                 personBio: personBio ? personBio.trim() : "",
                 visible: true,
             }
+            if(addedPersonBoxes.job){
+                params = {...params, "queryInfo.job": {
+                    employed: addedPersonBoxes.job === "Zaměstnaný",
+                    unemployed: addedPersonBoxes.job === "Nezaměstnaný",
+                    student: addedPersonBoxes.job === "Student",
+                }}
+            }
         }
+            
         const updateListingInfo = {
             listingId: listingInfo.id,
             params: params,
