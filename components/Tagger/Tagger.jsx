@@ -137,69 +137,41 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
                     <div className="section-tags">
                         <Tag active={ageTag.includes("18-25")} onClick={() => {
                             let value = "18-25";
-                            
                             if(ageTag.includes(value)){
                                 setAgeTag(prevState => prevState.filter(item => item != value));
                             }else{
-                                if(ageTag.length === 4){
+                                if(ageTag.length === 2){
                                     setAgeTag([]);
                                     return
                                 }
                                 setAgeTag(prevState => [...prevState, value]);
                             }
                         }}>18-25</Tag>
-                        <Tag  active={ageTag.includes("25-30")} onClick={() => {
-                            let value = "25-30";
-                            
+                        <Tag  active={ageTag.includes("26-34")} onClick={() => {
+                            let value = "26-34";
                             if(ageTag.includes(value)){
                                 setAgeTag(prevState => prevState.filter(item => item != value));
                             }else{
-                                if(ageTag.length === 4){
+                                if(ageTag.length === 2){
                                     setAgeTag([]);
                                     return
                                 }
                                 setAgeTag(prevState => [...prevState, value]);
                             }
-                        }}>25-30</Tag>
-                        <Tag  active={ageTag.includes("30-40")} onClick={() =>{
-                             let value = "30-40";
-                            
+                        }}>26-34</Tag>
+                        <Tag  active={ageTag.includes("35+")} onClick={() =>{
+                             let value = "35+";
                              if(ageTag.includes(value)){
                                 setAgeTag(prevState => prevState.filter(item => item != value));
                              }else{
-                                 if(ageTag.length === 4){
+                                 if(ageTag.length === 2){
                                      setAgeTag([]);
                                      return
                                  }
                                  setAgeTag(prevState => [...prevState, value]);
                              }
-                        }}>30-40</Tag>
-                        <Tag  active={ageTag.includes("40-50")} onClick={() =>{
-                             let value = "40-50";
-                            
-                             if(ageTag.includes(value)){
-                                setAgeTag(prevState => prevState.filter(item => item != value));
-                             }else{
-                                 if(ageTag.length === 4){
-                                     setAgeTag([]);
-                                     return
-                                 }
-                                 setAgeTag(prevState => [...prevState, value]);
-                             }
-                        }}>40-50</Tag>
-                        <Tag  active={ageTag.includes("50+")} onClick={() => {
-                             let value = "50+";
-                            
-                             if(ageTag.includes(value)){
-                                setAgeTag(prevState => prevState.filter(item => item != value));
-                             }else{
-                                 if(ageTag.length === 4){
-                                     setAgeTag([]);
-                                     return
-                                 }
-                                 setAgeTag(prevState => [...prevState, value]);
-                             }
-                        }}>50+</Tag>
+                        }}>35+</Tag>
+                       
                     </div>
                 </section>
 
