@@ -1,0 +1,48 @@
+.filter{
+    background-color: white;
+    border-radius: 5px;
+    color: #333;
+    padding: 2rem;
+    width: 95%;
+    max-width: 900px;
+    max-height: 90vh;
+    margin-inline: 1rem;
+    .filter-header{
+        font-size: 24px;
+        margin-bottom: 0.5rem;
+    }
+    .filter-description{
+        font-size: 14px;
+        color: $darkerGray;
+        margin-bottom: 1rem;
+    }
+    .filter-section{
+        margin-bottom: 1rem;
+        .section-header{
+            font-size: 14px;
+            color: $mainGray;
+            margin-bottom: 0.5rem;
+        }
+        .section-tags{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            .location-dropdown{
+                width: 100%;
+            }
+            
+        }
+    }
+
+    .filter-button{
+        display: flex;
+        justify-content: center;
+        padding-top: 1rem;
+    }
+}
+
+@media screen and (max-width: 1000px){
+    .filter{
+        overflow-y:scroll ;
+    }
+}
