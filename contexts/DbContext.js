@@ -23,28 +23,218 @@ export function DbProvider(props) {
     }
 
     //Listings
-
-    const updateListing = (id, params) => {
-       const docRef = doc(db, "listings", id);
-       return updateDoc(docRef, params);       
-    }
-
-    const getListings = (type, page, listings) => {
+    const getListings = (type, page, listings, filter) => {
         const colRef = collection(db, "listings");
-        if(page === "first"){
-            const q = query(colRef, where("type", "==", type), where("visible", "==", true), orderBy("timeStamp", "desc"), limit(10));
-            return getDocs(q);
-        }
-        if(page === "next"){
-            const q = query(colRef, where("type", "==", type), where("visible", "==", true), orderBy("timeStamp", "desc"), limit(10), startAfter(listings[listings.length - 1]))
-            return getDocs(q);
-        }
-        if(page === "prev"){
-            const q = query(colRef, where("type", "==", type), where("visible", "==", true), orderBy("timeStamp", "desc"), limitToLast(10), endBefore(listings[0]))
-            return getDocs(q);
+        if(!filter || !Object.keys(filter).length){
+            if(page === "first"){
+                const q = query(colRef, where("type", "==", type), where("visible", "==", true), orderBy("timeStamp", "desc"), limit(10));
+                return getDocs(q);
+            }
+            if(page === "next"){
+                const q = query(colRef, where("type", "==", type), where("visible", "==", true), orderBy("timeStamp", "desc"), limit(10), startAfter(listings[listings.length - 1]));
+                return getDocs(q);
+            }
+            if(page === "prev"){
+                const q = query(colRef, where("type", "==", type), where("visible", "==", true), orderBy("timeStamp", "desc"), limitToLast(10), endBefore(listings[0]));
+                return getDocs(q);
+            }
+        }else{
+            // Array of parameters that is then gonna get spread to query
+            let parameters = [];
+            if(type === "flatmate"){
+                if(filter.location){
+                    parameters.push(where("flatTags.location", "==", filter.location));
+                }
+                if(filter.gender){
+                    let originalItems = ["Muž", "Žena", "Jiné"];
+                    if(filter.gender.length === 2){
+                        // The max length of a filter is 3, that means if 2 are selected one is not selecred, this variable stores it
+                        let notSelectedItem;
+                        // We get the not selected item by removing the two selected ones from the original items
+                        filter.gender.forEach(item => {
+                            originalItems.splice(originalItems.indexOf(item), 1);
+                            notSelectedItem = originalItems[0];
+                        })
+                        // The filter names are in format that can be showed to user's, but in database it's not like that, so we have to convert it first
+                        switch(notSelectedItem){
+                            case "Muž":
+                                notSelectedItem = "male";
+                                break;
+                            case "Žena":
+                                notSelectedItem = "female";
+                                break;
+                            case "Jiné":
+                                notSelectedItem = "other";
+                                break;
+                            default:
+                                break;
+                        }
+                        parameters.push(where(`queryInfo.gender.${notSelectedItem}`, "==", false));
+                    }else{
+                        const selectedItem = filter.gender[0];
+                        switch(selectedItem){
+                            case "Muž":
+                                selectedItem = "male";
+                                break;
+                            case "Žena":
+                                selectedItem = "female";
+                                break;
+                            case "Jiné":
+                                selectedItem = "other";
+                                break;
+                            default:
+                                break;
+                        }
+                        parameters.push(where(`queryInfo.gender.${selectedItem}`, "==", true));
+                    }
+                }
+                if(filter.age){
+                    let originalItems = ["18-25", "26-34", "35+"];
+                        if(filter.age.length === 2){
+                            // The max length of a filter is 3, that means if 2 are selected one is not selecred, this variable stores it
+                            let notSelectedItem;
+                            // We get the not selected item by removing the two selected ones from the original items
+                            filter.age.forEach(item => {
+                                originalItems.splice(originalItems.indexOf(item), 1);
+                                notSelectedItem = originalItems[0];
+                            })
+                            switch(notSelectedItem){
+                                case "18-25":
+                                    notSelectedItem = "firstRange";
+                                    break;
+                                case "26-34":
+                                    notSelectedItem = "secondRange";
+                                    break;
+                                case "35+":
+                                    notSelectedItem = "thirdRange";
+                                    break;
+                                default:
+                                    break;
+                            }
+                            parameters.push(where(`queryInfo.age.${notSelectedItem}`, "==", false));
+                        }else{
+                            const selectedItem = filter.age[0];
+                            switch(selectedItem){
+                                case "18-25":
+                                    selectedItem = "firstRange";
+                                    break;
+                                case "26-34":
+                                    selectedItem = "secondRange";
+                                    break;
+                                case "35+":
+                                    selectedItem = "thirdRange";
+                                    break;
+                                default:
+                                    break;
+                            }
+                            parameters.push(where(`queryInfo.age.${selectedItem}`, "==", true));
+                        }
+                }
+                if(filter.smoking){
+                    parameters.push(where("personBoxes.smoking", "==", filter.smoking[0]));
+                }
+                if(filter.job){
+                    let originalItems = ["Zaměstnaný", "Nezaměstnaný", "Student"];
+                        if(filter.job.length === 2){
+                            // The max length of a filter is 3, that means if 2 are selected one is not selecred, this variable stores it
+                            let notSelectedItem;
+                            // We get the not selected item by removing the two selected ones from the original items
+                            filter.job.forEach(item => {
+                                originalItems.splice(originalItems.indexOf(item), 1);
+                                notSelectedItem = originalItems[0];
+                            })
+                            switch(notSelectedItem){
+                                case "Zaměstnaný":
+                                    notSelectedItem = "employed";
+                                    break;
+                                case "Nezaměstnaný":
+                                    notSelectedItem = "unemployed";
+                                    break;
+                                case "Student":
+                                    notSelectedItem = "student";
+                                    break;
+                                default:
+                                    break;
+                            }
+                            parameters.push(where(`queryInfo.job.${notSelectedItem}`, "==", false));
+                        }else{
+                            const selectedItem = filter.job[0];
+                            switch(selectedItem){
+                                case "Zaměstnaný":
+                                    selectedItem = "employed";
+                                    break;
+                                case "Nezaměstnaný":
+                                    selectedItem = "unemployed";
+                                    break;
+                                case "Student":
+                                    selectedItem = "student";
+                                    break;
+                                default:
+                                    break;
+                            }
+                            parameters.push(where(`queryInfo.job.${selectedItem}`, "==", true));
+                        }
+                }
+
+                if(page === "first"){
+                    const q = query(colRef, ...parameters, where("type", "==", type), where("visible", "==", true), orderBy("timeStamp", "desc"), limit(10));
+                    return getDocs(q);
+                }
+                if(page === "next"){
+                    const q = query(colRef, ...parameters, where("type", "==", type), where("visible", "==", true),  orderBy("timeStamp", "desc"), limit(10), startAfter(listings[listings.length - 1]));
+                    return getDocs(q);
+                }
+                if(page === "prev"){
+                    const q = query(colRef, ...parameters, where("type", "==", type), where("visible", "==", true), orderBy("timeStamp", "desc"), limitToLast(10), endBefore(listings[0]));
+                    return getDocs(q);
+                }
+            }
         }
     }
 
+    const getListingsFilter = (type, page, listings, filter) => {
+        const colRef = collection(db, "listings");
+        let parameters = [];
+        if(type === "flatmate"){
+            if(filter.gender){
+                let genderFilters = [];
+                filter.gender.forEach((item, index) => {
+                    switch(item){
+                        case "Muž":
+                            item = "male"
+                            break;
+                        case "Žena":
+                            item = "female";
+                            break;
+                        case "Jiné":
+                            item = "other";
+                            break;
+                        default:
+                            break;
+                    }
+                    genderFilters = [...genderFilters, item];
+                })
+                parameters = [...parameters, where("userInfo.gender", "in", genderFilters)];
+            }
+            if(page === "first"){
+                console.log(parameters.length);
+                if(parameters.length){
+                    const q = query(colRef, ...parameters, where("type", "==", type), where("visible", "==", true), orderBy("timeStamp", "desc"), limit(10));
+                }else{
+                    const q = query(colRef, where("type", "==", type), where("visible", "==", true), orderBy("timeStamp", "desc"), limit(10));  
+                }
+                return getDocs(q);
+            }
+            if(page === "next"){
+                const q = query(colRef, where("type", "==", type), where("visible", "==", true), orderBy("timeStamp", "desc"), limit(10), startAfter(listings[listings.length - 1]))
+                return getDocs(q);
+            }
+            if(page === "prev"){
+                const q = query(colRef, where("type", "==", type), where("visible", "==", true), orderBy("timeStamp", "desc"), limitToLast(10), endBefore(listings[0]))
+                return getDocs(q);
+            }
+        }
+    }
 
     const getListing = (id) => {
         return getDoc(doc(db, "listings", id));
@@ -95,8 +285,8 @@ export function DbProvider(props) {
     const value = {
         getUser,
         updateUser,
-        updateListing,
         getListings,
+        getListingsFilter,
         getListing,
         getListingByUser,
         getRequests,
