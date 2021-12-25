@@ -4,6 +4,7 @@ import Head from "next/head";
 import { useRouter } from 'next/dist/client/router';
 //Contexts
 import {useDb} from "../../contexts/DbContext";
+import { useExplore } from '../../contexts/ExploreContext';
 
 //Components
 import ExploreFlatmate from '../ExploreListings/ExploreFlatmate/ExploreFlatmate';
@@ -20,101 +21,72 @@ const ExploreFeed = ({variant}) => {
     //Contexts
     const {getListings, getListingsFilter} = useDb();
     const router = useRouter();
+    const {flatListingsValue, flatmateListingsValue, flatSnapsValue, flatmateSnapsValue, activeFiltersValue, flatmatePageValue, flatPageValue} = useExplore();
+    const [flatListings, setFlatListings] = flatListingsValue;
+    const [flatmateListings, setFlatmateListings] = flatmateListingsValue;
+    const [flatSnaps, setFlatSnaps] = flatSnapsValue;
+    const [flatmateSnaps, setFlatmateSnaps] = flatmateSnapsValue;
+    const [activeFilters, setActiveFilters] = activeFiltersValue;
+    const [flatmatePage, setFlatmatePage] = flatmatePageValue;
+    const [flatPage, setFlatPage] = flatPageValue;
     //State
     const [filterOpen, setFilterOpen] = useState(false);
-    const [activeFilters, setActiveFilters] = useState({});
+    // const [activeFilters, setActiveFilters] = useState({});
     const [matching, setMatching] = useState(false);
     const [filtering, setFiltering] = useState(false);
     // Is user connected to internet
     const [connectionDown, setConnectionDown] = useState(false);
-    //Flatmate listings
-    const [flatmateListings, setFlatmateListings] = useState(null);
-    //Flatmate listing snapshots (for pagination)
-    const [flatmateSnaps, setFlatmateSnaps] = useState(null);
-    //Flat listings
-    const [flatListings, setFlatListings] = useState(null);
-    //Flat listing snapshots (for pagination)
-    const [flatSnaps, setFlatSnaps] = useState(null);
-    //Current page
-    const [page, setPage] = useState(1);
     //Pagination disabled?
     const [isPaginationDisabled, setIsPaginationDisabled] = useState(false);
 
     // Initial first page fetch
     useEffect(() => {
         if(variant === "flatmate"){
-        // Empty array that we can insert all the data in and then insert it into flatmateListings state
-        let flatmateListingsArray = [];
-        //Check if we already have listings
-            //Gettem
-            console.log("get them like");
-            console.log(activeFilters);
-            getListings("flatmate", "first", null, activeFilters).then(docs => {
-                //Checks if we are connected to internet
-                if (docs.empty && docs.metadata.fromCache) {
-                    throw new Error('network-failed');
-                 }
-                 //Set snapshots for paginations
-                setFlatmateSnaps(docs.docs);
-                docs.forEach(doc => {
-                    //Insert all the listings into empty array
-                    flatmateListingsArray = [...flatmateListingsArray, doc];
-                })
-                // Insert the array into state
-                setFlatmateListings(flatmateListingsArray);
-            }).catch(error => {
-                if(error.message === "network-failed"){
-                    setConnectionDown(true);
-                }
-                console.log(error);
-            })
+            if(flatmateListings) return;
+            fetchListings("flatmate", "first", null, activeFilters);
         }
-
         if(variant === "flat"){
-            // Empty array that we can insert all the data in and then insert it into flatmateListings state
-            let flatListingsArray = [];
-            //Check if we already have listings
-            if(flatListings && flatListings.length > 0){
-                return;
-            }
-            //Getttttttem
-            getListings("flat", "first").then(docs => {
-                //Checks if we are connected to internet
-                if (docs.empty && docs.metadata.fromCache) {
-                    throw new Error('network-failed');
-                 }
-                 //Set snapshots for pagination
-                setFlatSnaps(docs.docs);
-                docs.forEach(doc => {
-                     //Insert all the listings into empty array
-                     flatListingsArray = [...flatListingsArray, doc];
-                })
-                // Insert the array into state
-                setFlatListings(flatListingsArray);
-            }).catch(error => {
-                if(error.message === "network-failed"){
-                    setConnectionDown(true);
-                }
-            })
+            if(flatListings) return;
+            fetchListings("flat", "first", null, activeFilters);
         }
-       
-    }, [activeFilters])
+    }, [])
+
     useEffect(() => {
         if(filtering) setMatching(false);
         if(matching) setFiltering(false);
     }, [filtering, matching])
 
-    //Functions
-    // Hadnles pagination (next or prev)
-    const handlePagination = (page) => {
-        if(variant === "flatmate"){
-            if(page === "next"){
+    const fetchListings = (type, page, listings, filter) => {
+        if(type === "flatmate"){
+            if(page === "first"){
+                let flatmateListingsArray = [];
+                getListings("flatmate", "first", null, filter).then(docs => {
+                    //Checks if we are connected to internet
+                    if (docs.empty && docs.metadata.fromCache) {
+                        throw new Error('network-failed');
+                     }
+                     //Set snapshots for paginations
+                    setFlatmateSnaps(docs.docs);
+                    docs.forEach(doc => {
+                        //Insert all the listings into empty array
+                        flatmateListingsArray = [...flatmateListingsArray, doc];
+                    })
+                    // Insert the array into state
+                    setFlatmateListings(flatmateListingsArray);
+                    setIsPaginationDisabled(false);
+                }).catch(error => {
+                    if(error.message === "network-failed"){
+                        setConnectionDown(true);
+                    }
+                    console.log(error);
+                })
+            }else if(page === "next"){
                 let flatmateListingsArray = [];
                 setIsPaginationDisabled(true);
-                getListings("flatmate", "next", flatmateSnaps)
+                getListings("flatmate", "next", listings, filter)
                 .then(docs => {
                     if(docs.docs.length > 0){
-                        setPage(prevState => prevState + 1);
+                        setFlatmatePage(prevState => prevState + 1);
                         setFlatmateSnaps(docs.docs);
                         docs.forEach(req => {
                             flatmateListingsArray = [...flatmateListingsArray, req];
@@ -123,14 +95,13 @@ const ExploreFeed = ({variant}) => {
                     }
                     setIsPaginationDisabled(false);
                 })
-            }
-            if(page === "prev"){
+            }else if(page === "prev"){
                 let flatmateListingsArray = [];
                 setIsPaginationDisabled(true);
-                getListings("flatmate", "prev", flatmateSnaps)
+                getListings("flatmate", "prev", listings, filter)
                 .then(docs => {
                     if(docs.docs.length > 0){
-                        setPage(prevState => prevState - 1);
+                        setFlatmatePage(prevState => prevState - 1);
                         setFlatmateSnaps(docs.docs);
                         docs.forEach(req => {
                             flatmateListingsArray = [...flatmateListingsArray, req];
@@ -141,15 +112,37 @@ const ExploreFeed = ({variant}) => {
                 })
             }
         }
-        if(variant === "flat"){
-            if(page === "next"){
+        if(type === "flat"){
+            if(page === "first"){
+                let flatListingsArray = [];
+                //Check if we already have listings
+                getListings("flat", page, listings, filter).then(docs => {
+                    //Checks if we are connected to internet
+                    if (docs.empty && docs.metadata.fromCache) {
+                        throw new Error('network-failed');
+                    }
+                    //Set snapshots for pagination
+                    setFlatSnaps(docs.docs);
+                    docs.forEach(doc => {
+                        //Insert all the listings into empty array
+                        flatListingsArray = [...flatListingsArray, doc];
+                    })
+                    // Insert the array into state
+                    setFlatListings(flatListingsArray);
+                    setIsPaginationDisabled(false);
+                }).catch(error => {
+                    if(error.message === "network-failed"){
+                        setConnectionDown(true);
+                    }
+                })
+            }else if(page === "next"){
                 let flatListingsArray = [];
                 setIsPaginationDisabled(true);
-                getListings("flat", "next", flatSnaps)
+                getListings("flat", "next", listings, filter)
                 .then(docs => {
                     if(docs.docs.length > 0){
                         setFlatSnaps(docs.docs);
-                        setPage(prevState => prevState + 1);
+                        setFlatPage(prevState => prevState + 1);
                         setFlatSnaps(docs.docs);
                         docs.forEach(req => {
                            flatListingsArray =  [...flatListingsArray, req];
@@ -158,15 +151,14 @@ const ExploreFeed = ({variant}) => {
                     }
                     setIsPaginationDisabled(false);
                 })
-            }
-            if(page === "prev"){
+            }else if(page === "prev"){
                 let flatListingsArray = [];
                 setIsPaginationDisabled(true);
-                getListings("flat", "prev", flatSnaps)
+                getListings("flat", "prev", listings, filter)
                 .then(docs => {
                     if(docs.docs.length > 0){
                         setFlatSnaps(docs.docs);
-                        setPage(prevState => prevState - 1);
+                        setFlatPage(prevState => prevState - 1);
                         setFlatSnaps(docs.docs);
                         docs.forEach(req => {
                             flatListingsArray =  [...flatListingsArray, req];
@@ -178,6 +170,39 @@ const ExploreFeed = ({variant}) => {
             }
         }
     }
+
+    const applyFilters = (filter) => {
+        if(variant === "flatmate"){
+            setFlatmateListings(null);
+            setFlatmatePage(1);
+            fetchListings("flatmate", "first", null, filter);
+        }
+        if(variant === "flat"){
+            setFlatListings(null);
+            setFlatPage(1);
+            fetchListings("flat", "first", null, filter);
+        }
+    }
+
+    // Hadnles pagination (next or prev)
+    const handlePagination = (page) => {
+        if(variant === "flatmate"){
+            if(page === "next"){
+                fetchListings("flatmate", "next", flatmateSnaps, activeFilters); 
+            }
+            if(page === "prev"){
+                fetchListings("flatmate", "prev", flatmateSnaps, activeFilters);
+            }
+        }
+        if(variant === "flat"){
+            if(page === "next"){
+                fetchListings("flat", "next", flatSnaps, activeFilters);
+            }
+            if(page === "prev"){
+                fetchListings("flat", "prev", flatSnaps, activeFilters);
+            }
+        }
+    }
     return (
         <>
         <Head>
@@ -185,7 +210,7 @@ const ExploreFeed = ({variant}) => {
         </Head>
         <div className="explore-feed">
             <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={filterOpen}>
-                <Filter variant="flatmate" setOpen={setFilterOpen} activeFilters={activeFilters} setActiveFilters={setActiveFilters}/>
+                <Filter variant="flatmate" setOpen={setFilterOpen} activeFilters={activeFilters} setActiveFilters={setActiveFilters} applyFilters={applyFilters}/>
             </Backdrop>
             <div className="feed-header">
                 <h3 className="header-title">{variant === "flatmate" ? "Prohlížet spolubydlící" : "Prohlížet byty"}</h3>
@@ -223,8 +248,8 @@ const ExploreFeed = ({variant}) => {
                                         pfp={listing.data().userInfo.images.pfp} 
                                         key={id}/>
                             ))}
-                            {(flatmateListings.length > 9 || page != 1) ?
-                                <Pagination page={page} setPage={setPage} handlePagination={handlePagination} isDisabled={isPaginationDisabled} />
+                            {(flatmateListings.length > 9 || flatmatePage != 1) ?
+                                <Pagination page={flatmatePage} setPage={setFlatmatePage} handlePagination={handlePagination} isDisabled={isPaginationDisabled} />
                                 :
                                 ""
                             }
@@ -247,21 +272,21 @@ const ExploreFeed = ({variant}) => {
             }
             {(variant === "flat" && !connectionDown) &&
             <>
-            {flatListings ? 
+            {flatListings ?
                 <>
                     {flatListings.length ?
                         <>
                             {flatListings.map((listing, id) => (
                                 <ExploreFlat 
-                                        name={`Byt ${listing.data().flatBoxes.layout != null ? listing.data().flatBoxes.layout : ""} ${listing.data().flatBoxes.location}`} 
+                                        name={`Byt ${listing.data().flatBoxes.layout ? listing.data().flatBoxes.layout : ""} ${listing.data().flatBoxes.location}`} 
                                         bio={listing.data().flatBio} price={listing.data().mainInfo.price} startTime={listing.data().mainInfo.startTime} 
                                         stayTime={listing.data().mainInfo.stayTime} 
                                         mainImg={listing.data().userInfo.images.listingImgs[0]} 
                                         id={listing.id} 
                                         key={id} />
                             )) }
-                            {(flatListings.length > 9 || page != 1) &&
-                                <Pagination page={page} setPage={setPage} handlePagination={handlePagination} isDisabled={isPaginationDisabled} />
+                            {(flatListings.length > 9 || flatPage != 1) &&
+                                <Pagination page={flatPage} setPage={setFlatPage} handlePagination={handlePagination} isDisabled={isPaginationDisabled} />
                             }
                         </>
                         :

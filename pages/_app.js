@@ -11,6 +11,7 @@ import { NotificationsProvider } from '../contexts/NotificationsContext';
 import FunctionsProvider from '../contexts/FunctionsContext';
 import { StorageProvider } from '../contexts/StorageContext';
 import {ExploreDialogProvider} from '../contexts/ExploreDialogContext';
+import { ExploreProvider } from '../contexts/ExploreContext';
 //Styles
 import '../styles/global.css'
 
@@ -28,9 +29,11 @@ function MyApp({ Component, pageProps }) {
                 <FunctionsProvider>
                   <StorageProvider>
                     <ExploreDialogProvider>
-                        <Layout>
-                              <Component {...pageProps} />
-                        </Layout>
+                      <ExploreProvider>
+                          <Layout>
+                                <Component {...pageProps} />
+                          </Layout>
+                        </ExploreProvider>
                       </ExploreDialogProvider>
                     </StorageProvider>
                 </FunctionsProvider>
