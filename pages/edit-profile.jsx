@@ -328,7 +328,7 @@ const EditProfile = () => {
                             </p>
                             <div className="form-item">
                                 <p className="item-description">Jméno</p>
-                                <input maxLength={15} ref={usernameRef} type="text" className="item-input" />
+                                <input disabled maxLength={15} ref={usernameRef} type="text" className="item-input" />
                             </div>
                             <div className="form-item">
                                 <p className="item-description">E-mail</p>
