@@ -26,7 +26,7 @@ const ExploreFlat = ({name, bio, price, startTime,stayTime, mainImg, id}) => {
                <div className="content-info">
                  <div className="info-row">
                         <div className="info-budget row-col"><span>Cena: </span>
-                            {price > 10000 ? price.toString().substr(0,2) + " " + price.toString().substr(2, 6) : price.toString().substr(0,1) + " " + price.toString().substr(1, 5)},-
+                            {price >= 10000 ? price.toString().substr(0,2) + " " + price.toString().substr(2, 6) : price.toString().substr(0,1) + " " + price.toString().substr(1, 5)},-
                         </div>
                         <div className="info-locations row-col"><span>Smlouva:</span> {stayTime}</div>
                  </div>
