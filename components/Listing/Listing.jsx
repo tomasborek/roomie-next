@@ -109,7 +109,7 @@ const Listing = ({type}) => {
         getListing(id)
         .then(doc => {
             if(!doc.data().visible){
-                if(currentUser.uid != doc.data().userInfo.uid){
+                if(!currentUser || (currentUser.uid != doc.data().userInfo.uid)){
                     router.back();
                     return
                 }
