@@ -3,7 +3,7 @@ import React, {createContext, useContext, useState, useEffect} from 'react';
 import {auth} from "../Firebase";
 import { db } from '../Firebase';
 //Auth imports
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateCurrentUser, onAuthStateChanged, signOut, deleteUser, reauthenticateWithCredential, EmailAuthProvider } from '@firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateCurrentUser, onAuthStateChanged, signOut, deleteUser, reauthenticateWithCredential, EmailAuthProvider, updatePassword } from '@firebase/auth';
 
 const AuthContext = createContext();
 //UseAuth()
@@ -42,6 +42,10 @@ export  function AuthProvider(props) {
         return deleteUser(user);
     }
 
+    const changePassword = (user, newPassword) => {
+        return updatePassword(user, newPassword);
+    }
+
     const reAuth = (user, password) => {
         const credentials = EmailAuthProvider.credential(
             user.email,
@@ -64,6 +68,7 @@ export  function AuthProvider(props) {
         logOut,
         logIn,
         delUser,
+        changePassword,
         currentUser,
         userLoaded,
         reAuth

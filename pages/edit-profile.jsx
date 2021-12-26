@@ -27,7 +27,7 @@ import { Alert } from '@mui/material';
 
 const EditProfile = () => {
     //Variables
-    const {currentUser, delUser, reAuth} = useAuth();
+    const {currentUser, delUser, reAuth, changePassword} = useAuth();
     const {getUser, updateUser, updateListing, getListingByUser} = useDb();
     const router = useRouter();
     const [loading, setLoading] = useLoading();
@@ -38,6 +38,7 @@ const EditProfile = () => {
     const [userData, setUserData] = useState();
     const [dDialogOpen, setDDialogOpen] = useState(false);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+    const [passwordDialogOpen, setPasswordDialogOpen] = useState(false);
     const [error, setError] = useState(null);
     const [pfpImage, setPfpImage] = useState(null);
     const [uploadPfpDialog, setUploadPfpDialog] = useState(false);
@@ -50,7 +51,8 @@ const EditProfile = () => {
     const passwordRef = useRef();   
 
     const confirmEmailRef = useRef();
-    const confirmPasswordRef = useRef();
+    const confirmPasswordForDeleteRef = useRef();
+    const confirmPasswordForChangeRef = useRef();
     //Side effects
 
     //When current user is loaded, it sets userData state by getting the user's document from db
@@ -166,10 +168,10 @@ const EditProfile = () => {
     }
 
     const handleDelete = () => {
-        
+        console.log("DELETE");
         setLoading(true);
         setDeleteDialogOpen(false);
-        reAuth(currentUser, confirmPasswordRef.current.value)
+        reAuth(currentUser, confirmPasswordForDeleteRef.current.value)
         .then(res => {
             return delUser(currentUser);
         }).then(res => {
@@ -182,8 +184,11 @@ const EditProfile = () => {
             switch(error.code){
                 case "auth/wrong-password":
                     setError("Zadané heslo není správné");
+                    break;
+                default:
+                    setError("Něco se nepovedlo.");
+                    break;
             }
-            console.log(error);
             setLoading(false);
         })
     }
@@ -234,6 +239,32 @@ const EditProfile = () => {
             setPfpImage(e.target.files[0]);
         }
     }
+
+    const handlePasswordChange = () => {
+        setLoading(true);
+        setPasswordDialogOpen(false);
+        reAuth(currentUser, confirmPasswordForChangeRef.current.value).then((res) => {
+            return changePassword(currentUser, passwordRef.current.value);
+        }).then((response) => {
+            setLoading(false);
+            handleSave();
+        }).catch((error) => {
+            setPasswordDialogOpen(true);
+            switch(error.code){
+                case "auth/wrong-password":
+                    setError("Zadané heslo není správné");
+                    break;
+                case "auth/weak-password":
+                    setError("Vaše nové heslo by mělo mít alespoň 6 znaků.");
+                    break;
+                default:
+                    setError("Něco se nepovedlo.");
+                    break;
+            }
+            setLoading(false);
+            console.log(error);
+        })
+    }
           
     return (
         <div className="EditProfile">
@@ -262,11 +293,29 @@ const EditProfile = () => {
                 <DialogTitle>Přejete si smazat svůj účet?</DialogTitle>
                 <DialogContent>
                     <DialogContentText sx={{marginBottom: "16px"}}>Potvrďte prosím své přihlašovací údaje</DialogContentText>
-                    <input ref={confirmPasswordRef} style={{width: "100%"}} type="password" placeholder="Heslo..." />
+                    <input ref={confirmPasswordForDeleteRef} style={{width: "100%"}} type="password" placeholder="Heslo..." />
                 </DialogContent>
                 <DialogActions>
                     <Button  onClick={handleDelete}>Smazat</Button>
                     <Button onClick={() => setDeleteDialogOpen(false)}>Ne</Button>
+                </DialogActions>
+            </Dialog>
+
+
+            <Dialog
+            open={passwordDialogOpen}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            >
+                {error && <Alert severity="error">{error}</Alert>}
+                <DialogTitle>Pro změnu hesla prosím zadejte své stávající heslo.</DialogTitle>
+                <DialogContent>
+                    <DialogContentText sx={{marginBottom: "16px"}}>Potvrďte prosím své přihlašovací údaje</DialogContentText>
+                    <input ref={confirmPasswordForChangeRef} style={{width: "100%"}} type="password" placeholder="Heslo..." />
+                </DialogContent>
+                <DialogActions>
+                    <Button  onClick={handlePasswordChange}>Změnit</Button>
+                    <Button onClick={() => setPasswordDialogOpen(false)}>Ne</Button>
                 </DialogActions>
             </Dialog>
             <Dialog
@@ -349,8 +398,8 @@ const EditProfile = () => {
                             Účet a zabezpečení
                             </p>
                             <div className="form-item">
-                                <p className="item-description">Heslo</p>
-                                <input maxLength={30} ref={passwordRef} type="text" className="item-input" />
+                                <p className="item-description">Změnit heslo</p>
+                                <input maxLength={30} ref={passwordRef} type="password" placeholder='Zadejte nové heslo...' className="item-input" />
                             </div>
                         </div>
         
@@ -360,7 +409,7 @@ const EditProfile = () => {
                         </div>
                         
                         <div className="content-btns">
-                            <button onClick={handleSave} className="main-btn">Uložit změny</button>
+                            <button onClick={() => passwordRef.current.value ? setPasswordDialogOpen(true) : handleSave()} className="main-btn">Uložit změny</button>
                             <button onClick={() => setDDialogOpen(true)} className="acc-btn">Zahodit změny</button>
                         </div>
                     
