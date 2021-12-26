@@ -434,7 +434,7 @@ const Listing = ({type}) => {
                         <div className="content-body">
                             <div className="body-info">
                                 <div className="container">
-                                    <ListingBoxesContainer type="flatmate" addedBoxes={addedPersonBoxes} existingBoxes={listingInfo && listingInfo.data().personBoxes} editListing={editListing} />
+                                    <ListingBoxesContainer type="flatmate" addedBoxes={addedPersonBoxes} existingBoxes={listingInfo ? listingInfo.data().personBoxes : null} editListing={editListing} />
                                     {editListing && <div className="info-edit-boxes">
                                         <button onClick={() => setPersonBoxerOverlay(true)}> <i className="fas fa-plus"></i> </button>
                                     </div>}
