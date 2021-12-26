@@ -10,6 +10,7 @@ import {useFunctions} from "../contexts/FunctionsContext";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import Friend from '../components/Friend/Friend';
+import Pagination from "../components/Pagination/Pagination";
 //MUI
 import { CircularProgress } from '@mui/material';
 
@@ -18,6 +19,9 @@ const Friends = () => {
     const {currentUser} = useAuth();
     const {getUser, getFriends} = useDb();
     const [friends, setFriends] = useState(null);
+    const [friendsSnaps, setFriendsSnaps] = useState(null);
+    const [isPaginationDisabled, setIsPaginationDisabled] = useState(false);
+    const [page, setPage] = useState(1);
     const router = useRouter();
     const {callable} = useFunctions();
 
@@ -25,9 +29,10 @@ const Friends = () => {
         if(currentUser){
             const deleteAcceptedNotifications = callable("deleteAcceptedNotifications");
             let friendsObject = {};
-            getFriends(currentUser.uid)
+            getFriends(currentUser.uid, "first", friendsSnaps)
             .then(docs => {
-                docs.forEach(doc => {
+                setFriendsSnaps(docs.docs);
+                docs.docs.forEach(doc => {
                     friendsObject = {...friendsObject, [doc.id]: doc.data()};
                 })
                 setFriends(friendsObject);
@@ -35,6 +40,40 @@ const Friends = () => {
             })
         }
     }, [currentUser])
+
+
+    const handlePagination = (page) => {
+        if(page === "next"){
+            setIsPaginationDisabled(true);
+            getFriends(currentUser.uid, "next", friendsSnaps).then((docs) => {
+                if(docs.docs.length > 0){
+                    let friendsObject = {};
+                    setPage(prevState => prevState + 1);
+                    setFriendsSnaps(docs.docs);
+                    docs.docs.forEach((doc) => {
+                        friendsObject = {...friendsObject, [doc.id]: doc.data()};
+                    })
+                    setFriends(friendsObject);
+                }
+                setIsPaginationDisabled(true);
+            })
+        }
+        if(page === "prev"){
+            setIsPaginationDisabled(true);
+            getFriends(currentUser.uid, "prev", friendsSnaps).then((docs) => {
+                if(docs.docs.length > 0){
+                    let friendsObject = {};
+                    setPage(prevState => prevState - 1);
+                    setFriendsSnaps(docs.docs);
+                    docs.docs.forEach((doc) => {
+                        friendsObject = {...friendsObject, [doc.id]: doc.data()};
+                    })
+                    setFriends(friendsObject);
+                }
+                setIsPaginationDisabled(true);
+            })
+        }
+    }
 
 
     return (
@@ -59,6 +98,7 @@ const Friends = () => {
                         </div>
                         
                         }
+                        {(friends > 9 || page != 1) && <Pagination handlePagination={handlePagination} isDisabled={isPaginationDisabled} page={page} setPage={setPage}/>}
                     </>
                     
                 :

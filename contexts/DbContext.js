@@ -244,49 +244,6 @@ export function DbProvider(props) {
         }
     }
 
-    const getListingsFilter = (type, page, listings, filter) => {
-        const colRef = collection(db, "listings");
-        let parameters = [];
-        if(type === "flatmate"){
-            if(filter.gender){
-                let genderFilters = [];
-                filter.gender.forEach((item, index) => {
-                    switch(item){
-                        case "Muž":
-                            item = "male"
-                            break;
-                        case "Žena":
-                            item = "female";
-                            break;
-                        case "Jiné":
-                            item = "other";
-                            break;
-                        default:
-                            break;
-                    }
-                    genderFilters = [...genderFilters, item];
-                })
-                parameters = [...parameters, where("userInfo.gender", "in", genderFilters)];
-            }
-            if(page === "first"){
-                console.log(parameters.length);
-                if(parameters.length){
-                    const q = query(colRef, ...parameters, where("type", "==", type), where("visible", "==", true), orderBy("timeStamp", "desc"), limit(10));
-                }else{
-                    const q = query(colRef, where("type", "==", type), where("visible", "==", true), orderBy("timeStamp", "desc"), limit(10));  
-                }
-                return getDocs(q);
-            }
-            if(page === "next"){
-                const q = query(colRef, where("type", "==", type), where("visible", "==", true), orderBy("timeStamp", "desc"), limit(10), startAfter(listings[listings.length - 1]))
-                return getDocs(q);
-            }
-            if(page === "prev"){
-                const q = query(colRef, where("type", "==", type), where("visible", "==", true), orderBy("timeStamp", "desc"), limitToLast(10), endBefore(listings[0]))
-                return getDocs(q);
-            }
-        }
-    }
 
     const getListing = (id) => {
         return getDoc(doc(db, "listings", id));
@@ -324,10 +281,20 @@ export function DbProvider(props) {
 
     //Friends
     
-    const getFriends = (uid) => {
+    const getFriends = (uid, page, friends) => {
         const colRef = collection(db, "users", uid, "friends");
-        const q = query(colRef, orderBy("timeStamp", "desc"));
-        return getDocs(q);
+        if(page === "first"){
+            const q = query(colRef, orderBy("timeStamp", "desc"), limit(10));
+            return getDocs(q);
+        }
+        if(page === "next"){
+            const q = query(colRef, orderBy("timeStamp", "desc"), limit(10), startAfter(friends[friends.length - 1]));
+            return getDocs(q);
+        }
+        if(page === "prev"){
+            const q = query(colRef, orderBy("timeStamp", "desc"), endBefore(friends[0]), limitToLast(10));
+            return getDocs(q);
+        }
     }
 
    
@@ -338,7 +305,6 @@ export function DbProvider(props) {
         getUser,
         updateUser,
         getListings,
-        getListingsFilter,
         getListing,
         getListingByUser,
         getRequests,
