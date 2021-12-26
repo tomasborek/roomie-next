@@ -99,7 +99,6 @@ const RegisterBox = () => {
                     socials: {
                         ig: "",
                         fb: "",
-                        tt: "",
                     },
                 },
                 uid: uid,

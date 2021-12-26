@@ -46,8 +46,7 @@ const EditProfile = () => {
     const emailRef = useRef();   
     const phoneRef = useRef();   
     const igRef = useRef();   
-    const fbRef = useRef();   
-    const ttRef = useRef();   
+    const fbRef = useRef();    
     const passwordRef = useRef();   
 
     const confirmEmailRef = useRef();
@@ -78,7 +77,6 @@ const EditProfile = () => {
             phoneRef.current.value = userData.data().contact.phone;
             igRef.current.value = userData.data().contact.socials.ig;
             fbRef.current.value = userData.data().contact.socials.fb;
-            ttRef.current.value = userData.data().contact.socials.tt;
         }
         
     }, [userData])
@@ -121,7 +119,6 @@ const EditProfile = () => {
                     phone: phone,
                     socials: {
                         fb: fbRef.current.value,
-                        tt: ttRef.current.value,
                         ig: igRef.current.value
                     }
                 },
@@ -136,7 +133,6 @@ const EditProfile = () => {
                     email: emailRef.current.value,
                     phone: phoneRef.current.value,
                     fb: fbRef.current.value,
-                    tt: ttRef.current.value,
                     ig: igRef.current.value
                 },
                 "userInfo.uid": currentUser.uid,
@@ -348,10 +344,6 @@ const EditProfile = () => {
                             <div className="form-item">
                                 <p className="item-description">Facebook</p>
                                 <input ref={fbRef} type="text" className="item-input" />
-                            </div>
-                            <div className="form-item">
-                                <p className="item-description">Twitter</p>
-                                <input ref={ttRef} type="text" className="item-input" />
                             </div>
                             <p className="form-section-header">
                             Účet a zabezpečení
