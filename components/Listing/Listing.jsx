@@ -109,7 +109,7 @@ const Listing = ({type}) => {
         getListing(id)
         .then(doc => {
             if(!doc.data().visible){
-                if(currentUser.uid != doc.data().userInfo.id){
+                if(currentUser.uid != doc.data().userInfo.uid){
                     router.back();
                     return
                 }
@@ -423,7 +423,7 @@ const Listing = ({type}) => {
                                 <div className="content-error">
                                     <Alert severity="error">
                                         Váš inzerát je nedokončený, prosím dokončete ho 
-                                        <Link href={`/cr/${listingInfo.data().type}/${listingInfo.id}`}> zde</Link>
+                                        <Link href={`/cr/${listingInfo.data().type}/${listingInfo.id}`}><a style={{textDecoration: "underline"}}> zde</a></Link>
                                     </Alert>
                                 </div>
                             }
