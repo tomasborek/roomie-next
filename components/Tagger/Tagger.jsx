@@ -16,7 +16,7 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
     const [jobTag, setJobTag] = useState([]);
     //Flat state tags
     const [layoutTag, setLayoutTag] = useState([]);
-    const [levelTag, setLevelTag] = useState([]);
+    // const [levelTag, setLevelTag] = useState([]);
     const [petAllowedTag, setPetAllowedTag] = useState([]);
     const [smokingAllowedTag, setSmokingAllowedTag] = useState([]);
     const [locationTag, setLocationTag] = useState([]);
@@ -39,7 +39,7 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
             setAddedTags(existingTags);
             existingTags.location && setLocationTag(existingTags.location);
             existingTags.layout && setLayoutTag(existingTags.layout);
-            existingTags.level && setLevelTag(existingTags.level);
+            // existingTags.level && setLevelTag(existingTags.level);
             existingTags.petAllowed && setPetAllowedTag(existingTags.petAllowed);
             existingTags.smokingAllowed && setSmokingAllowedTag(existingTags.smokingAllowed);
         }
@@ -68,7 +68,6 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
             setAddedTags({
                 location: locationTag,
                 layout: layoutTag,
-                level: levelTag,
                 petAllowed: petAllowedTag,
                 smokingAllowed: smokingAllowedTag
             })
@@ -255,27 +254,21 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
                     </div>
                 </section>
 
-                <section className="tagger-section">
+                {/* <section className="tagger-section">
                         <div className="section-header">Podlaží</div>
                         <div className="section-tags">
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">Podlaží</InputLabel>
                                     <Select label="Podlaží" onChange={(e) => setLevelTag(e.target.value === "none" ? [] : [e.target.value])} value={levelTag}>
                                         <MenuItem value={"none"}>Libovolné</MenuItem>
-                                        <MenuItem value={"1. podlaží"}>1</MenuItem>
-                                        <MenuItem value={"2. podlaží"}>2</MenuItem>
-                                        <MenuItem value={"3. podlaží"}>3</MenuItem>
-                                        <MenuItem value={"4. podlaží"}>4</MenuItem>
-                                        <MenuItem value={"5. podlaží"}>5</MenuItem>
-                                        <MenuItem value={"6. podlaží"}>6</MenuItem>
-                                        <MenuItem value={"7. podlaží"}>7</MenuItem>
-                                        <MenuItem value={"8. podlaží"}>8</MenuItem>
-                                        <MenuItem value={"9. podlaží"}>9</MenuItem>
+                                        <MenuItem value={"1-3. podlaží"}>1-3</MenuItem>
+                                        <MenuItem value={"4-6. podlaží"}>4-6</MenuItem>
+                                        <MenuItem value={"6-10. podlaží"}>6-10</MenuItem>
                                         <MenuItem value={"10+ podlaží"}>10+</MenuItem>
                                     </Select>
                                 </FormControl>
                         </div>
-                </section>
+                </section> */}
 
             <section className="tagger-section">
                     <div className="section-header">Mazlíčci</div>
