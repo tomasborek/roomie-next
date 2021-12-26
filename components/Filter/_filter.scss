@@ -34,10 +34,13 @@
         }
     }
 
-    .filter-button{
+    .filter-buttons{
         display: flex;
         justify-content: center;
         padding-top: 1rem;
+        button{
+            margin: 0 0.5rem;
+        }
     }
 }
 

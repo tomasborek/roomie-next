@@ -63,6 +63,16 @@ const Filter = ({variant, setOpen, activeFilters, setActiveFilters, applyFilters
          }
          setOpen(false);
      }
+
+     const handleRemove = () => {
+        setGenderTag([]);
+        setAgeTag([]);
+        setSmokingTag([]);
+        setJobTag([]);
+        setActiveFilters({});
+        setOpen(false);
+        applyFilters({})
+     }
  
     return (
         <div className="filter">
@@ -294,8 +304,9 @@ const Filter = ({variant, setOpen, activeFilters, setActiveFilters, applyFilters
                 </>
                 
                 }
-            <div className="filter-button">
+            <div className="filter-buttons">
                 <button onClick={() => handleAdd()} className="main-btn">Přidat filtry</button>
+                <button onClick={() => handleRemove()} className="general-btn">Odebrat filtry</button>
             </div>
         </div>
     )
