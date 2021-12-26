@@ -52,6 +52,11 @@ const ExploreFeed = ({variant}) => {
     }, [])
 
     useEffect(() => {
+        setActiveFilters({});
+        applyFilters({});
+    }, [variant])
+
+    useEffect(() => {
         if(filtering) setMatching(false);
         if(matching) setFiltering(false);
     }, [filtering, matching])
