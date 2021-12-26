@@ -15,7 +15,7 @@ const Filter = ({variant, setOpen, activeFilters, setActiveFilters, applyFilters
      const [jobTag, setJobTag] = useState([]);
      //Flat state tags
      const [layoutTag, setLayoutTag] = useState([]);
-     const [levelTag, setLevelTag] = useState([]);
+    //  const [levelTag, setLevelTag] = useState([]);
      const [petAllowedTag, setPetAllowedTag] = useState([]);
      const [smokingAllowedTag, setSmokingAllowedTag] = useState([]);
      const [locationTag, setLocationTag] = useState([]);
@@ -53,13 +53,12 @@ const Filter = ({variant, setOpen, activeFilters, setActiveFilters, applyFilters
             applyFilters(addObject);
          }
          if(variant === "flat"){
-            setActiveFilters({
-                location: locationTag,
-                layout: layoutTag,
-                level: levelTag,
-                petAllowed: petAllowedTag,
-                smokingAllowed: smokingAllowedTag,
-            })
+            let addObject = {};
+            (locationTag.length && locationTag[0]) ? addObject.location = locationTag : "";
+            petAllowedTag.length ? addObject.petAllowed = setPetAllowedTag : "";
+            smokingAllowedTag.length ? addObject.smokingAllowed = setSmokingAllowedTag : "";
+            setActiveFilters(addObject);
+            applyFilters(addObject);
          }
          setOpen(false);
      }
@@ -263,27 +262,21 @@ const Filter = ({variant, setOpen, activeFilters, setActiveFilters, applyFilters
                     </div>
                 </section>
 
-                <section className="filter-section">
+                {/* <section className="filter-section">
                         <div className="section-header">Podlaží</div>
                         <div className="section-tags">
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">Podlaží</InputLabel>
                                     <Select label="Podlaží" onChange={(e) => setLevelTag(e.target.value === "none" ? [] : [e.target.value])} value={levelTag}>
-                                        <MenuItem value={"none"}>Libovolné</MenuItem>
-                                        <MenuItem value={"1. podlaží"}>1</MenuItem>
-                                        <MenuItem value={"2. podlaží"}>2</MenuItem>
-                                        <MenuItem value={"3. podlaží"}>3</MenuItem>
-                                        <MenuItem value={"4. podlaží"}>4</MenuItem>
-                                        <MenuItem value={"5. podlaží"}>5</MenuItem>
-                                        <MenuItem value={"6. podlaží"}>6</MenuItem>
-                                        <MenuItem value={"7. podlaží"}>7</MenuItem>
-                                        <MenuItem value={"8. podlaží"}>8</MenuItem>
-                                        <MenuItem value={"9. podlaží"}>9</MenuItem>
+                                    <MenuItem value={"none"}>Libovolné</MenuItem>
+                                        <MenuItem value={"1-3. podlaží"}>1-3</MenuItem>
+                                        <MenuItem value={"4-6. podlaží"}>4-6</MenuItem>
+                                        <MenuItem value={"6-10. podlaží"}>6-10</MenuItem>
                                         <MenuItem value={"10+ podlaží"}>10+</MenuItem>
                                     </Select>
                                 </FormControl>
                         </div>
-                </section>
+                </section> */}
 
             <section className="filter-section">
                     <div className="section-header">Mazlíčci</div>
