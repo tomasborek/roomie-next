@@ -210,7 +210,7 @@ const ExploreFeed = ({variant}) => {
         </Head>
         <div className="explore-feed">
             <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={filterOpen}>
-                <Filter variant="flatmate" setOpen={setFilterOpen} activeFilters={activeFilters} setActiveFilters={setActiveFilters} applyFilters={applyFilters}/>
+                <Filter variant={variant} setOpen={setFilterOpen} activeFilters={activeFilters} setActiveFilters={setActiveFilters} applyFilters={applyFilters}/>
             </Backdrop>
             <div className="feed-header">
                 <h3 className="header-title">{variant === "flatmate" ? "Prohlížet spolubydlící" : "Prohlížet byty"}</h3>
