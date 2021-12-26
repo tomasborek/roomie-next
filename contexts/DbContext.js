@@ -189,6 +189,58 @@ export function DbProvider(props) {
                     return getDocs(q);
                 }
             }
+            if(type === "flat"){
+                if(filter.location){
+                    parameters.push(where("flatBoxes.location", "==", filter.location[0]));
+                }
+                if(filter.layout){
+                    parameters.push(where("flatBoxes.layout", "==", filter.layout[0]));
+                }
+                if(filter.petAllowed){
+                    let petAllowed = filter.petAllowed[0];
+                    switch(petAllowed){
+                        case "Mazlíčci povoleno":
+                            petAllowed = "Povoleno";
+                            break;
+                        case "Mazlíčci nepovoleno":
+                            petAllowed = "Nepovoleno";
+                            break;
+                        default:
+                            break;
+                    }
+                    console.log(`where ${petAllowed}`);
+                    parameters.push(where("flatBoxes.petAllowed", "==", petAllowed));
+                }
+                if(filter.smokingAllowed){
+                    let smokingAllowed = filter.smokingAllowed[0];
+                    switch(smokingAllowed){
+                        case "Kouření povoleno":
+                            smokingAllowed = "Povoleno";
+                            break;
+                        case "Kouření nepovoleno":
+                            smokingAllowed = "Nepovoleno";
+                            break;
+                        default:
+                            break;
+                    }
+                    parameters.push(where("flatBoxes.smokingAllowed", "==", smokingAllowed));
+                }
+
+
+
+                if(page === "first"){
+                    const q = query(colRef, ...parameters, where("type", "==", type), where("visible", "==", true), orderBy("timeStamp", "desc"), limit(10));
+                    return getDocs(q);
+                }
+                if(page === "next"){
+                    const q = query(colRef, ...parameters, where("type", "==", type), where("visible", "==", true),  orderBy("timeStamp", "desc"), limit(10), startAfter(listings[listings.length - 1]));
+                    return getDocs(q);
+                }
+                if(page === "prev"){
+                    const q = query(colRef, ...parameters, where("type", "==", type), where("visible", "==", true), orderBy("timeStamp", "desc"), limitToLast(10), endBefore(listings[0]));
+                    return getDocs(q);
+                }
+            }
         }
     }
 

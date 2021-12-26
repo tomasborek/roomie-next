@@ -26,7 +26,13 @@ const Filter = ({variant, setOpen, activeFilters, setActiveFilters, applyFilters
             activeFilters.age ? setAgeTag(activeFilters.age) : "";
             activeFilters.smoking ? setSmokingTag(activeFilters.smoking) : "";
             activeFilters.job ? setJobTag(activeFilters.job) : "";  
-            activeFilters.location && activeFilters.location[0] ? setLocationTag(activeFilters.location) : "";
+            (activeFilters.location && activeFilters.location[0]) ? setLocationTag(activeFilters.location) : "";
+         }
+         if(variant === "flat"){
+            (activeFilters.location && activeFilters.location[0]) ? setLocationTag(activeFilters.location) : "";
+            activeFilters.layout ? setLayoutTag(activeFilters.layout) : "";
+            activeFilters.petAllowed ? setPetAllowedTag(activeFilters.petAllowed) : "";
+            activeFilters.smokingAllowed ? setSmokingAllowedTag(activeFilters.smokingAllowed) : "";
          }
      }, [activeFilters])
  
@@ -55,8 +61,9 @@ const Filter = ({variant, setOpen, activeFilters, setActiveFilters, applyFilters
          if(variant === "flat"){
             let addObject = {};
             (locationTag.length && locationTag[0]) ? addObject.location = locationTag : "";
-            petAllowedTag.length ? addObject.petAllowed = setPetAllowedTag : "";
-            smokingAllowedTag.length ? addObject.smokingAllowed = setSmokingAllowedTag : "";
+            layoutTag.length ? addObject.layout = layoutTag : "";
+            petAllowedTag.length ? addObject.petAllowed = petAllowedTag : "";
+            smokingAllowedTag.length ? addObject.smokingAllowed = smokingAllowedTag : "";
             setActiveFilters(addObject);
             applyFilters(addObject);
          }
@@ -68,9 +75,11 @@ const Filter = ({variant, setOpen, activeFilters, setActiveFilters, applyFilters
         setAgeTag([]);
         setSmokingTag([]);
         setJobTag([]);
-        setActiveFilters({});
+        setLayoutTag([]);
+        setPetAllowedTag([]);
+        setSmokingAllowedTag([]);
+        applyFilters({});
         setOpen(false);
-        applyFilters({})
      }
  
     return (
