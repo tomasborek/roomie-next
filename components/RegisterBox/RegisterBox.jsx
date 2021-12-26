@@ -271,7 +271,7 @@ const RegisterBox = () => {
                     </div>
                      <h1 className="content-title">Jaký je váš maximální měsíční rozpočet na bydlení?</h1>
                         <RangeStep price={price} setPrice={setPrice} />
-                        <button disabled={!price} onClick={() => setStep(4)} className={`acc-btn ${!price && "disabled"}`}>Hotovo</button>
+                        <button disabled={!price || price < 1000 || price > 60000} onClick={() => setStep(4)} className={`acc-btn ${(!price || price < 1000 || price > 60000) && "disabled"}`}>Hotovo</button>
                 </div>
            }
 
