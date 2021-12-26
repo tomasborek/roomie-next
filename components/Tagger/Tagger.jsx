@@ -239,7 +239,7 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
                     <div className="section-tags">
                          <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">Dispozice</InputLabel>
-                                <Select label="Dispozice" onChange={e => setLayoutTag(e.target.value === "none" ? [] : [e.target.value])} value={layoutTag}>
+                                <Select label="Dispozice" onChange={e => setLayoutTag(e.target.value === "none" ? [] : [e.target.value])} value={layoutTag ? layoutTag : "none"}>
                                     <MenuItem value={"none"}>Libovolné</MenuItem>
                                     <MenuItem value={"1+1"}>1+1</MenuItem>
                                     <MenuItem value={"1+kk"}>1+kk</MenuItem>
