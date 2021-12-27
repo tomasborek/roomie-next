@@ -2,5 +2,13 @@
     width: 70%;
     input{
         width: 100%;
+        border: 1px solid $mainGray;
+        border-radius: 5px;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .register-box .box-content .content-name{
+        width: 100%;
     }
 }

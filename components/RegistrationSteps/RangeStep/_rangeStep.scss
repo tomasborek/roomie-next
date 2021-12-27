@@ -12,6 +12,9 @@
 
     input{
         width: 100%; 
+        border: 1px solid $mainGray;
+        border-radius: 5px;
+        margin-right: 0.25rem;
     }
     .range-input{
         width: 80px;

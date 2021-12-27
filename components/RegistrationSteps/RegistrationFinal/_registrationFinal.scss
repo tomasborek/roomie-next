@@ -31,6 +31,7 @@
         width: 100%;
         display: flex;
         justify-content: space-between;
+        align-items: center;
 
         select{
             width: 30%;
@@ -39,7 +40,6 @@
             border-radius: 5px;
             border-radius: 5px;
             border: 1px solid $mainGray;
-            margin-bottom: 1rem;
             padding: 0.5rem;
             background-color: white;
             option{
@@ -52,23 +52,27 @@
     }
     .register-phone{
         display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
         select{
-            width: 98px;
+            padding: 0.5rem;
+            width: 30%;
             height: 40px;
             border-radius: 5px;
             border-radius: 5px;
             border: 1px solid $mainGray;
-            margin-bottom: 1rem;
             padding: 0.5rem;
             background-color: white;
-            margin-right: 0.5rem;
+            margin-bottom: 1rem;
             option{
                 text-indent: 5px;
             }
         }
 
         input{
-            width: 298px;
+            width: 66%;
+            height: 40px;
         }
     }
 
@@ -99,15 +103,19 @@
         width: 100%;
         input{
             width: 100%;
+            margin-bottom: 0.5rem;
+        }
+        .register-birthday{
+            select{
+                margin-bottom: 0.5rem;
+            }
         }
         .register-phone{
             width: 100%;
            select{
                width: 30%;
+               margin-bottom: 0.5rem;
            }
-           input{
-            width: 70%;
-        }
         }
     }
 }
