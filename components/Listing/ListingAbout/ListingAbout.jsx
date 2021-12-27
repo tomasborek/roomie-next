@@ -25,7 +25,7 @@ const ListingAbout = ({type, listingInfo, editListing, state, refs}) => {
                     <textarea maxLength={3000} value={bio} onChange={e => textAreaChange(e, "flatmate")} type="text" rows="5" className="bio-content" placeholder="Zadejte něco o sobě..."></textarea>
                     :
                     <div className="bio-content">
-                        {listingInfo ? listingInfo.data().bio === "" ? "Tento uživatel nemá bio" : listingInfo.data().bio
+                        {listingInfo ? listingInfo.data().bio === "" ? "Tento uživatel nemá popis..." : listingInfo.data().bio
                         : 
                         <div className="skeletons">
                             <Skeleton variant="text"/>
@@ -78,7 +78,7 @@ const ListingAbout = ({type, listingInfo, editListing, state, refs}) => {
                         <textarea maxLength={3000} onChange={(e) => textAreaChange(e, "flatPerson")} value={personBio} type="text" rows="5" className="bio-content" placeholder="Zadejte něco o sobě..."></textarea>
                         :
                         listingInfo ? 
-                        listingInfo.data().personBio === "" ? "Tento uživatel nemá bio..." : listingInfo.data().personBio
+                        listingInfo.data().personBio === "" ? "Tento uživatel nemá popis..." : listingInfo.data().personBio
                         :
                         <div className="skeletons">
                             <Skeleton variant="text" sx={{width: "100%"}}/>
