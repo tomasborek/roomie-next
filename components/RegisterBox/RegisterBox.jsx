@@ -31,7 +31,7 @@ const RegisterBox = () => {
     let router = useRouter();
     const {register, currentUser, deleteU} = useAuth();
     const [loading, setLoading] = useLoading();
-    const {usernameState, emailRef, phoneRef, passwordRef, passwordCheckRef, dayRef, monthRef, yearRef} = useRegister();
+    const {usernameState, emailRef, phoneRef, phoneCodeRef, passwordRef, passwordCheckRef, dayRef, monthRef, yearRef} = useRegister();
     const {callable} = useFunctions();
     let uid;
     let listingIdVar;
@@ -64,15 +64,16 @@ const RegisterBox = () => {
         //Refs variables
         const username = usernameState.username.trim();
         const email = emailRef.current.value;
-        const phone = phoneRef.current.value;
+        const phoneNumber = phoneRef.current.value;
+        const phoneCode = phoneCodeRef.current.value;
+        const phone = `${phoneCode}${phoneNumber}`;
         const password = passwordRef.current.value;
-        //Listing Id
+
         const listingIdVar = idGenerator(type);
         setListingId(listingIdVar);
         //Auth register
         register(email, password)
         .then(user => {
-            //Uid
             const uid = user.user.uid;
 
             const userInfo = {
