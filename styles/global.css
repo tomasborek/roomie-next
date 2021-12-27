@@ -2734,6 +2734,8 @@ textarea {
     width: 100%;
   }
   .register-box .box-content .content-buttons button {
+    font-size: 14px;
+    font-weight: bold;
     width: 100%;
   }
 }
@@ -2783,6 +2785,12 @@ textarea {
   color: black;
 }
 
+@media screen and (max-width: 500px) {
+  .register-box .box-content .content-options .option {
+    font-size: 14px;
+  }
+}
+
 .register-box .box-content .content-dropdown {
   width: 400px;
 }
@@ -2814,6 +2822,9 @@ textarea {
 
 .register-box .box-content .content-range input {
   width: 100%;
+  border: 1px solid #B8B8B8;
+  border-radius: 5px;
+  margin-right: 0.25rem;
 }
 
 .register-box .box-content .content-range .range-input {
@@ -2832,6 +2843,14 @@ textarea {
 
 .register-box .box-content .content-name input {
   width: 100%;
+  border: 1px solid #B8B8B8;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 500px) {
+  .register-box .box-content .content-name {
+    width: 100%;
+  }
 }
 
 .register-box .box-content .content-register {
@@ -2883,6 +2902,9 @@ textarea {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .register-box .box-content .content-register .register-birthday select {
@@ -2892,13 +2914,46 @@ textarea {
   border-radius: 5px;
   border-radius: 5px;
   border: 1px solid #B8B8B8;
-  margin-bottom: 1rem;
   padding: 0.5rem;
   background-color: white;
 }
 
 .register-box .box-content .content-register .register-birthday select option {
   text-indent: 5px;
+}
+
+.register-box .box-content .content-register .register-phone {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+}
+
+.register-box .box-content .content-register .register-phone select {
+  padding: 0.5rem;
+  width: 30%;
+  height: 40px;
+  border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid #B8B8B8;
+  padding: 0.5rem;
+  background-color: white;
+  margin-bottom: 1rem;
+}
+
+.register-box .box-content .content-register .register-phone select option {
+  text-indent: 5px;
+}
+
+.register-box .box-content .content-register .register-phone input {
+  width: 66%;
+  height: 40px;
 }
 
 .register-box .box-content .content-register .register-checkbox {
@@ -2929,6 +2984,17 @@ textarea {
   }
   .register-box .box-content .content-register input {
     width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  .register-box .box-content .content-register .register-birthday select {
+    margin-bottom: 0.5rem;
+  }
+  .register-box .box-content .content-register .register-phone {
+    width: 100%;
+  }
+  .register-box .box-content .content-register .register-phone select {
+    width: 30%;
+    margin-bottom: 0.5rem;
   }
 }
 
