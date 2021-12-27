@@ -57,8 +57,8 @@ const ListingContact = ({listingInfo, editListing, state}) => {
                             <div className="items-main">
                                 <div className="items-item">
                                     <i className="fas fa-phone"></i>
-                                    <p>+420 {
-                                        [listingInfo.data().userInfo.contact.phone.slice(0, 3), " ", listingInfo.data().userInfo.contact.phone.slice(3,6), " ", listingInfo.data().userInfo.contact.phone.slice(6)].join('')
+                                    <p>{
+                                        [listingInfo.data().userInfo.contact.phone.slice(0, 4), " ", listingInfo.data().userInfo.contact.phone.slice(4, 7), " ", listingInfo.data().userInfo.contact.phone.slice(7,10), " ", listingInfo.data().userInfo.contact.phone.slice(10)].join('')
                                     }</p>
                                 </div>
                                 <div className="items-item">
