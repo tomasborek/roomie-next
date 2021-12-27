@@ -26,31 +26,11 @@ export const StorageProvider = ({children}) => {
             const metadata = {
                 cacheControl: 'public,max-age=0',
             }
-            if(existingPfp){
-                let existingFormat = existingPfp.split(".");
-                if(existingFormat[existingFormat.length - 1] != format){
-                    const forDeleteRef = ref(storage, `users/${uid}/pfps/pfp.${existingFormat[existingFormat.length - 1]}`);
-                    deleteImgs([forDeleteRef]).then((response) => {
-                        return uploadBytes(pfpRef, file, metadata);
-                    }).then((response) => {
-                        resolve(response);
-                    }).catch((error) => {
-                        reject(error);
-                    })
-                }else{
-                    uploadBytes(pfpRef, file, metadata).then((response) => {
-                        resolve(response);
-                    }).catch((error) => {
-                        reject(error);
-                    })
-                }
-            }else{
-                uploadBytes(pfpRef, file, metadata).then((response) => {
-                    resolve(response);
-                }).catch((error) => {
-                    reject(error);
-                })
-            }
+            uploadBytes(pfpRef, file, metadata).then((response) => {
+                resolve(response);
+            }).catch((error) => {
+                reject(error);
+            })
         })
     }
 
@@ -92,109 +72,21 @@ export const StorageProvider = ({children}) => {
                 }
             })
 
-            if (filesForDelete) {
-                deleteImgs(filesForDelete)
-                .then((response) => {
-                    uploadImgsToStorage(storageRefs, validFiles, metadata).then((response) => {
-                        resolve(response);
-                    }).catch((error) => {
-                        reject(error);
-                    })
-                }).catch((error) =>{
-                    reject(error);
-                })
-            } else {
-                uploadImgsToStorage(storageRefs, validFiles, metadata).then((response) => {
-                    resolve(response);
-                }).catch((error) => {
-                   reject(error);
-                })
-            }
+            uploadImgsToStorage(storageRefs, validFiles, metadata).then((response) => {
+                resolve(response);
+            }).catch((error) => {
+                reject(error);
+            })
         })
     }
 
-    const deleteImgs = (refs) => {
-        return new Promise((resolve, reject) => {
-            if(refs[0]){
-                deleteObject(refs[0]).then((response) => {
-                    if(refs[1]){
-                        return deleteObject(refs[1]);
-                    }else{
-                        resolve("completed");
-                    }
-                }).then((response) => {
-                    if(refs[2]){
-                        return deleteObject(refs[2]);
-                    }else{
-                        resolve("completed");
-                    }
-                }).then((response) => {
-                    if(refs[3]){
-                        return deleteObject(refs[3]);
-                    }else{
-                        resolve("completed");
-                    }
-                }).then((response) => {
-                    if(refs[4]){
-                        return deleteObject(refs[4]);
-                    }else{
-                        resolve("completed");
-                    }
-                }).then((response) => {
-                    if(refs[5]){
-                        return deleteObject(refs[5]);
-                    }else{
-                        resolve("completed");
-                    }
-                }).catch((error) => {
-                    reject(error);
-                })
-            }else{
-                resolve("No files found.")
-            }
-        })
-    }
 
     const uploadImgsToStorage = (storageRefs, validFiles, metadata) => {
-        return new Promise((resolve, reject) => {
-            if(validFiles[0]){
-                uploadBytes(storageRefs[0], validFiles[0], metadata).then((response) => {
-                    if(validFiles[1]){
-                        return uploadBytes(storageRefs[1], validFiles[1], metadata);
-                    }else{
-                        resolve("completed");
-                    }
-                }).then((response) => {
-                    if(validFiles[2]){
-                        return uploadBytes(storageRefs[2], validFiles[2], metadata);
-                    }else{
-                        resolve("completed");
-                    }
-                }).then((response) => {
-                    if(validFiles[3]){
-                        return uploadBytes(storageRefs[3], validFiles[3], metadata);
-                    }else{
-                        resolve("completed");
-                    }
-                }).then((response) => {
-                    if(validFiles[4]){
-                        return uploadBytes(storageRefs[4], validFiles[4], metadata);
-                    }else{
-                        resolve("completed");
-                    }
-                }).then((response) => {
-                    if(validFiles[5]){
-                        return uploadBytes(storageRefs[5], validFiles[5], metadata);
-                    }else{
-                        resolve("completed");
-                    }
-                }).catch((error) => {
-                    reject(error);
-                })
-            }else{
-                resolve("No files found.")
-            }
-        })
+        return Promise.all(
+            validFiles.map((file,index) => {
+                return uploadBytes(storageRefs[index], validFiles[index], metadata);
+            })
+        )
     }
     const value = {
         uploadImg
