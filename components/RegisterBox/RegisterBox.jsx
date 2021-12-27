@@ -302,8 +302,9 @@ const RegisterBox = () => {
         {step === 5 && 
             <div className="box-content">
                 <div className="void-fil"></div>
-                {error && <Alert variant="filled" severity="error" sx={{width: "100%"}}>{error}</Alert>}
-                <h1 className="content-title">Tohle je poslední, slibujeme!</h1>
+                {error && <Alert variant="filled" severity="error" sx={{width: "100%", fontSize: "14px"}}>{error}</Alert>}
+                {!error ? <h1 className="content-title">Tohle je poslední, slibujeme!</h1> : window.innerWidth > 500 ? <h1 className="content-title">Tohle je poslední, slibujeme!</h1> : ""}
+                
                 <RegistrationFinal />
                 <button onClick={() => registerHandle()} disabled={loading} className={`acc-btn ${loading && "disabled"}`}>Registrovat</button>
             </div>
