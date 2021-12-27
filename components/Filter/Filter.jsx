@@ -15,10 +15,11 @@ const Filter = ({variant, setOpen, activeFilters, setActiveFilters, applyFilters
      const [jobTag, setJobTag] = useState([]);
      //Flat state tags
      const [layoutTag, setLayoutTag] = useState([]);
-    //  const [levelTag, setLevelTag] = useState([]);
      const [petAllowedTag, setPetAllowedTag] = useState([]);
      const [smokingAllowedTag, setSmokingAllowedTag] = useState([]);
      const [locationTag, setLocationTag] = useState([]);
+     const [elevatorTag, setElevatorTag] = useState([]);
+     const [internetTag, setInternetTag] = useState([]);
 
      useEffect(() => {
          if(variant === "flatmate"){
@@ -62,6 +63,8 @@ const Filter = ({variant, setOpen, activeFilters, setActiveFilters, applyFilters
             let addObject = {};
             (locationTag.length && locationTag[0]) ? addObject.location = locationTag : "";
             layoutTag.length ? addObject.layout = layoutTag : "";
+            elevatorTag.length ? addObject.elevator = elevatorTag : "";
+            internetTag.length ? addObject.internet = internetTag : "";
             petAllowedTag.length ? addObject.petAllowed = petAllowedTag : "";
             smokingAllowedTag.length ? addObject.smokingAllowed = smokingAllowedTag : "";
             setActiveFilters(addObject);
@@ -271,21 +274,21 @@ const Filter = ({variant, setOpen, activeFilters, setActiveFilters, applyFilters
                     </div>
                 </section>
 
-                {/* <section className="filter-section">
-                        <div className="section-header">Podlaží</div>
-                        <div className="section-tags">
-                            <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Podlaží</InputLabel>
-                                    <Select label="Podlaží" onChange={(e) => setLevelTag(e.target.value === "none" ? [] : [e.target.value])} value={levelTag}>
-                                    <MenuItem value={"none"}>Libovolné</MenuItem>
-                                        <MenuItem value={"1-3. podlaží"}>1-3</MenuItem>
-                                        <MenuItem value={"4-6. podlaží"}>4-6</MenuItem>
-                                        <MenuItem value={"6-10. podlaží"}>6-10</MenuItem>
-                                        <MenuItem value={"10+ podlaží"}>10+</MenuItem>
-                                    </Select>
-                                </FormControl>
-                        </div>
-                </section> */}
+                <section className="filter-section">
+                    <div className="section-header">Výtah</div>
+                    <div className="section-tags">
+                        <Tag active={elevatorTag.includes("Výtah")} onClick={() => setElevatorTag(elevatorTag.includes("Výtah") ? [] : ["Výtah"])} variant="box" icon="caret-square-up">Ano</Tag>
+                        <Tag active={elevatorTag.includes("Bez výtahu")} onClick={() => setElevatorTag(elevatorTag.includes("Bez výtahu") ? [] : ["Bez výtahu"])} variant="box" icon="caret-square-up">Ne</Tag>
+                    </div>
+                </section>
+
+                <section className="filter-section">
+                    <div className="section-header">Internet</div>
+                    <div className="section-tags">
+                        <Tag active={internetTag.includes("Internet")} onClick={() => setInternetTag(internetTag.includes("Internet") ? [] : ["Internet"])} variant="box" icon="wifi">Ano</Tag>
+                        <Tag active={internetTag.includes("Bez internetu")} onClick={() => setInternetTag(internetTag.includes("Bez internetu") ? [] : ["Bez internetu"])} variant="box" icon="wifi">Ne</Tag>
+                    </div>
+                </section>
 
             <section className="filter-section">
                     <div className="section-header">Mazlíčci</div>

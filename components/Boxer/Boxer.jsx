@@ -18,6 +18,8 @@ const Boxer = ({variant, existingBoxes, addedBoxes, setAddedBoxes, setBoxerOverl
     const [smokingAllowedBox, setSmokingAllowedBox] = useState("");
     const [locationBox, setLocationBox] = useState("");
     const [sizeBox, setSizeBox] = useState("");
+    const [elevatorBox, setElevatorBox] = useState("");
+    const [internetBox, setInternetBox] = useState("");
 
 
     //Functions
@@ -36,7 +38,9 @@ const Boxer = ({variant, existingBoxes, addedBoxes, setAddedBoxes, setBoxerOverl
                 petAllowed: petAllowedBox,
                 smokingAllowed: smokingAllowedBox,
                 size: sizeBox,
-                location: locationBox
+                location: locationBox,
+                elevator: elevatorBox,
+                internet: internetBox,
             })
         }
         setBoxerOverlay(false);
@@ -161,6 +165,22 @@ const Boxer = ({variant, existingBoxes, addedBoxes, setAddedBoxes, setBoxerOverl
                             <input type="number" value={sizeBox} onChange={e => setSizeBox(e.target.value)} maxLength={5} />
                             <p>m<sup>2</sup></p>
                         </div>
+                </div>
+            </section>
+
+            <section className="boxer-section">
+                <div className="section-header">Výtah</div>
+                <div className="section-boxes">
+                    <Tag active={elevatorBox == "Ano"} onClick={() => setElevatorBox(elevatorBox === "Ano" ? "" : "Ano")} variant="box" icon="caret-square-up">Ano</Tag>
+                    <Tag active={elevatorBox == "Ne"} onClick={() => setElevatorBox(elevatorBox === "Ne" ? "" : "Ne")} variant="box" icon="caret-square-up">Ne</Tag>
+                </div>
+            </section>
+
+            <section className="boxer-section">
+                <div className="section-header">Internet</div>
+                <div className="section-boxes">
+                    <Tag active={internetBox == "Ano"} onClick={() => setInternetBox(internetBox === "Ano" ? "" : "Ano")} variant="box" icon="wifi">Ano</Tag>
+                    <Tag active={internetBox == "Ne"} onClick={() => setInternetBox(internetBox === "Ne" ? "" : "Ne")} variant="box" icon="wifi">Ne</Tag>
                 </div>
             </section>
 

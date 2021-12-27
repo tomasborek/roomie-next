@@ -225,6 +225,34 @@ export function DbProvider(props) {
                     }
                     parameters.push(where("flatBoxes.smokingAllowed", "==", smokingAllowed));
                 }
+                if(filter.internet){
+                    let internet = filter.internet[0];
+                    switch(internet){
+                        case "Internet":
+                            internet = "Ano";
+                            break;
+                        case "Bez internetu":
+                            internet = "Ne";
+                            break;
+                        default: 
+                            break;
+                    }
+                    parameters.push(where("flatBoxes.internet", "==", internet));
+                }
+                if(filter.elevator){
+                    let elevator = filter.elevator[0];
+                    switch(elevator){
+                        case "Výtah":
+                            elevator = "Ano";
+                            break;
+                        case "Bez výtahu":
+                            elevator = "Ne";
+                            break;
+                        default: 
+                            break;
+                    }
+                    parameters.push(where("flatBoxes.elevator", "==", elevator));
+                }
 
 
 

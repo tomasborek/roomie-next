@@ -16,10 +16,11 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
     const [jobTag, setJobTag] = useState([]);
     //Flat state tags
     const [layoutTag, setLayoutTag] = useState([]);
-    // const [levelTag, setLevelTag] = useState([]);
     const [petAllowedTag, setPetAllowedTag] = useState([]);
     const [smokingAllowedTag, setSmokingAllowedTag] = useState([]);
     const [locationTag, setLocationTag] = useState([]);
+    const [elevatorTag, setElevatorTag] = useState([]);
+    const [internetTag, setInternetTag] = useState([]);
 
 
     //Effect
@@ -39,7 +40,8 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
             setAddedTags(existingTags);
             existingTags.location && setLocationTag(existingTags.location);
             existingTags.layout && setLayoutTag(existingTags.layout);
-            // existingTags.level && setLevelTag(existingTags.level);
+            existingTags.internet && setInternetTag(existingTags.internet);
+            existingTags.elevator && setElevatorTag(existingTags.elevator);
             existingTags.petAllowed && setPetAllowedTag(existingTags.petAllowed);
             existingTags.smokingAllowed && setSmokingAllowedTag(existingTags.smokingAllowed);
         }
@@ -68,6 +70,8 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
             setAddedTags({
                 location: locationTag,
                 layout: layoutTag,
+                internet: internetTag,
+                elevator: elevatorTag,
                 petAllowed: petAllowedTag,
                 smokingAllowed: smokingAllowedTag
             })
@@ -254,21 +258,21 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
                     </div>
                 </section>
 
-                {/* <section className="tagger-section">
-                        <div className="section-header">Podlaží</div>
-                        <div className="section-tags">
-                            <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Podlaží</InputLabel>
-                                    <Select label="Podlaží" onChange={(e) => setLevelTag(e.target.value === "none" ? [] : [e.target.value])} value={levelTag}>
-                                        <MenuItem value={"none"}>Libovolné</MenuItem>
-                                        <MenuItem value={"1-3. podlaží"}>1-3</MenuItem>
-                                        <MenuItem value={"4-6. podlaží"}>4-6</MenuItem>
-                                        <MenuItem value={"6-10. podlaží"}>6-10</MenuItem>
-                                        <MenuItem value={"10+ podlaží"}>10+</MenuItem>
-                                    </Select>
-                                </FormControl>
-                        </div>
-                </section> */}
+                <section className="tagger-section">
+                    <div className="section-header">Výtah</div>
+                    <div className="section-tags">
+                        <Tag active={elevatorTag.includes("Výtah")} onClick={() => setElevatorTag(elevatorTag.includes("Výtah") ? [] : ["Výtah"])} variant="box" icon="caret-square-up">Ano</Tag>
+                        <Tag active={elevatorTag.includes("Bez výtahu")} onClick={() => setElevatorTag(elevatorTag.includes("Bez výtahu") ? [] : ["Bez výtahu"])} variant="box" icon="caret-square-up">Ne</Tag>
+                    </div>
+                </section>
+
+                <section className="tagger-section">
+                    <div className="section-header">Internet</div>
+                    <div className="section-tags">
+                        <Tag active={internetTag.includes("Internet")} onClick={() => setInternetTag(internetTag.includes("Internet") ? [] : ["Internet"])} variant="box" icon="wifi">Ano</Tag>
+                        <Tag active={internetTag.includes("Bez internetu")} onClick={() => setInternetTag(internetTag.includes("Bez internetu") ? [] : ["Bez internetu"])} variant="box" icon="wifi">Ne</Tag>
+                    </div>
+                </section>
 
             <section className="tagger-section">
                     <div className="section-header">Mazlíčci</div>

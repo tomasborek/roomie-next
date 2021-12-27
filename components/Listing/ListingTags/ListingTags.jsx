@@ -33,7 +33,8 @@ const ListingTags = ({type, existingTags, editListing, addedTags, setOverlay}) =
                 <>
                     {(existingTags.location && existingTags.location.length > 0) &&  existingTags.location.map((tag, id) => <Tag key={id}>{tag}</Tag>)}
                     {(existingTags.layout && existingTags.layout.length > 0) &&  existingTags.layout.map((tag, id) => <Tag key={id}>{tag}</Tag>)}
-                    {(existingTags.level && existingTags.level.length > 0) &&  existingTags.level.map((tag, id) => <Tag key={id}>{tag}</Tag>)}
+                    {(existingTags.internet && existingTags.internet.length > 0) && existingTags.internet.map((tag, id) => <Tag key={id}>{tag}</Tag>)}
+                    {(existingTags.elevator && existingTags.elevator.length > 0) && existingTags.elevator.map((tag, id) => <Tag key={id}>{tag}</Tag>)}
                     {(existingTags.petAllowed && existingTags.petAllowed.length > 0) &&  existingTags.petAllowed.map((tag, id) => <Tag key={id}>{tag}</Tag>)}
                     {(existingTags.smokingAllowed && existingTags.smokingAllowed.length > 0) &&  existingTags.smokingAllowed.map((tag, id) => <Tag key={id}>{tag}</Tag>)}
                 </>
@@ -42,7 +43,8 @@ const ListingTags = ({type, existingTags, editListing, addedTags, setOverlay}) =
                 <>
                     {(addedTags.location && addedTags.location.length > 0) &&  addedTags.location.map((tag, id) => <Tag key={id}>{tag}</Tag>)}
                     {(addedTags.layout && addedTags.layout.length > 0) &&  addedTags.layout.map((tag, id) => <Tag key={id}>{tag}</Tag>)}
-                    {(addedTags.level && addedTags.level.length > 0) &&  addedTags.level.map((tag, id) => <Tag key={id}>{tag}</Tag>)}
+                    {(addedTags.internet && addedTags.internet.length > 0) && addedTags.internet.map((tag, id) => <Tag key={id}>{tag}</Tag>)}
+                    {(addedTags.elevator && addedTags.elevator.length > 0 )&& addedTags.elevator.map((tag, id) => <Tag key={id}>{tag}</Tag>)}
                     {(addedTags.petAllowed && addedTags.petAllowed.length > 0) &&  addedTags.petAllowed.map((tag, id) => <Tag key={id}>{tag}</Tag>)}
                     {(addedTags.smokingAllowed && addedTags.smokingAllowed.length > 0) &&  addedTags.smokingAllowed.map((tag, id) => <Tag key={id}>{tag}</Tag>)}
                 </>
