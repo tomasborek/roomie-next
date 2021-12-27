@@ -166,6 +166,13 @@ const CrListing = ({type}) => {
                 bio: bio ? bio.trim() : "",
                 visible: true,
             }
+            if(addedPersonBoxes.job){
+                params = {...params, "queryInfo.job": {
+                    employed: addedPersonBoxes.job === "Zaměstnaný",
+                    unemployed: addedPersonBoxes.job === "Nezaměstnaný",
+                    student: addedPersonBoxes.job === "Student",
+                }}
+            }
         }
         if(type === "flat" || type === "flat-cr"){
             params = {
@@ -181,40 +188,40 @@ const CrListing = ({type}) => {
                 personBio: personBio ? personBio.trim() : "",
                 visible: true,
             }
+            if(addedPersonBoxes.job){
+                params = {...params, "queryInfo.job": {
+                    employed: addedPersonBoxes.job === "Zaměstnaný",
+                    unemployed: addedPersonBoxes.job === "Nezaměstnaný",
+                    student: addedPersonBoxes.job === "Student",
+                }}
+            }
         }
         const updateListingInfo = {
             listingId: listingInfo.id,
             params: params,
         }
         updateListing(JSON.stringify(updateListingInfo)).then((response) => {
-
             if(addedPfp){
                return uploadImg(currentUser.uid, addedPfp, "pfp", pfp);
             }else{
-                return new Promise((resolve, reject) => {
-                    resolve("done");
-                })
+                return Promise.resolve("No new pfp");
             }
         }).then((response) => {
             if(addedListingImgs.length){
                 return uploadImg(currentUser.uid, addedListingImgs, "listingImgs", listingImgs);
             }else{
-                return new Promise((resolve, reject) => {
-                    resolve("done");
-                })
-            }
-           
+                return Promise.resolve("No new imgs");
+            } 
         }).then((response) => {
             setLoading(false);
             setEditListing(false);
             snackBar("Inzerát byl úspěšně upraven.", "success");
             window.scrollTo(0,0);
             router.push(`/${listingInfo.data().type}/${listingInfo.id}`);
+        }).catch((error) => {
+            setLoading(false);
+            snackBar("Něco se pokazilo. Zkuste to prosím později.", "error");
         })
-        // .catch((error) => {
-        //     setLoading(false);
-        //     snackBar("Něco se pokazilo. Zkuste to prosím později.", "error");
-        // })
     }
   
     if(type === "flatmate"){
