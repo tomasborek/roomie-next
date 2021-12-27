@@ -50,6 +50,27 @@
         }
         
     }
+    .register-phone{
+        display: flex;
+        select{
+            width: 98px;
+            height: 40px;
+            border-radius: 5px;
+            border-radius: 5px;
+            border: 1px solid $mainGray;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            background-color: white;
+            margin-right: 0.5rem;
+            option{
+                text-indent: 5px;
+            }
+        }
+
+        input{
+            width: 298px;
+        }
+    }
 
     .register-checkbox{
         display: flex;
@@ -78,6 +99,15 @@
         width: 100%;
         input{
             width: 100%;
+        }
+        .register-phone{
+            width: 100%;
+           select{
+               width: 30%;
+           }
+           input{
+            width: 70%;
+        }
         }
     }
 }
