@@ -46,6 +46,8 @@ const ListingBoxesContainer = ({type, existingBoxes, addedBoxes, editListing}) =
                     {(existingBoxes.location && existingBoxes.location != "" )&& <ListingBox icon="fa-home" title="Lokace">{existingBoxes.location}</ListingBox>}
                     {(existingBoxes.layout && existingBoxes.layout != "") && <ListingBox icon="fa-door-closed" title="Dispozice">{existingBoxes.layout}</ListingBox>}
                     {(existingBoxes.size && existingBoxes.size != "") && <ListingBox icon="fa-arrows-alt-h" title="Velikost">{existingBoxes.size}m<sup>2</sup></ListingBox>}
+                    {(existingBoxes.elevator && existingBoxes.elevator != "") && <ListingBox icon="fa-caret-square-up" title="Výtah">{existingBoxes.elevator}</ListingBox>}
+                    {(existingBoxes.internet && existingBoxes.internet != "") && <ListingBox icon="fa-wifi" title="Internet">{existingBoxes.internet}</ListingBox>}
                     {(existingBoxes.level && existingBoxes.level != "") && <ListingBox icon="fa-door-closed" title="Podlaží">{existingBoxes.level}</ListingBox>}
                     {(existingBoxes.petAllowed && existingBoxes.petAllowed != "") && <ListingBox icon="fa-dog" title="Mazlíčci">{existingBoxes.petAllowed}</ListingBox>}
                     {(existingBoxes.smokingAllowed && existingBoxes.smokingAllowed != "") && <ListingBox icon="fa-smoking" title="Kouření">{existingBoxes.smokingAllowed}</ListingBox>}
@@ -63,6 +65,8 @@ const ListingBoxesContainer = ({type, existingBoxes, addedBoxes, editListing}) =
                 {(existingBoxes.location && existingBoxes.location != "") && <ListingBox icon="fa-home" title="Lokace">{existingBoxes.location}</ListingBox>}
                 {(addedBoxes.layout && addedBoxes.layout != "") && <ListingBox icon="fa-door-closed" title="Dispozice">{addedBoxes.layout}</ListingBox>}
                 {(addedBoxes.size && addedBoxes.size != "") && <ListingBox icon="fa-arrows-alt-h" title="Velikost">{addedBoxes.size}m<sup>2</sup></ListingBox>}
+                {(addedBoxes.elevator && addedBoxes.elevator != "") && <ListingBox icon="fa-caret-square-up" title="Výtah">{addedBoxes.elevator}</ListingBox>}
+                {(addedBoxes.internet && addedBoxes.internet != "") && <ListingBox icon="fa-wifi" title="Internet">{addedBoxes.internet}</ListingBox>}
                 {(addedBoxes.level && addedBoxes.level != "") && <ListingBox icon="fa-door-closed" title="Podlaží">{addedBoxes.level}</ListingBox>}
                 {(addedBoxes.petAllowed && addedBoxes.petAllowed != "") && <ListingBox icon="fa-dog" title="Mazlíčci">{addedBoxes.petAllowed}</ListingBox>}
                 {(addedBoxes.smokingAllowed && addedBoxes.smokingAllowed != "") && <ListingBox icon="fa-smoking" title="Kouření">{addedBoxes.smokingAllowed}</ListingBox>}
