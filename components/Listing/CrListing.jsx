@@ -202,13 +202,13 @@ const CrListing = ({type}) => {
         }
         updateListing(JSON.stringify(updateListingInfo)).then((response) => {
             if(addedPfp){
-               return uploadImg(currentUser.uid, addedPfp, "pfp", pfp);
+               return uploadImg(currentUser.uid, addedPfp, "pfp");
             }else{
                 return Promise.resolve("No new pfp");
             }
         }).then((response) => {
             if(addedListingImgs.length){
-                return uploadImg(currentUser.uid, addedListingImgs, "listingImgs", listingImgs);
+                return uploadImg(currentUser.uid, addedListingImgs, "listingImgs");
             }else{
                 return Promise.resolve("No new imgs");
             } 
@@ -388,10 +388,14 @@ const CrListing = ({type}) => {
                         <ListingAbout type="flatmate" listingInfo={listingInfo} editListing={editListing} state={{addedFlatTags, addedPersonTags, bio, setBio, personBio, setPersonBio, flatBio, setFlatBio, setPersonTagOverlay, setFlatTagOverlay, setPersonBoxerOverlay, setFlatBoxerOverlay}}/>
                         <Gallery 
                             type={"flatmate"}
-                            listingImgs={listingImgs} 
+                            listingImgs={listingImgs}
+                            setListingImgs={setListingImgs}
                             addedListingImgs={addedListingImgs}
+                            setAddedListingImgs={setAddedListingImgs}
                             pfp={pfp && pfp}
+                            setPfp={setPfp}
                             addedPfp={addedPfp} 
+                            setAddedPfp={setAddedPfp}
                             state={{setGalleryInput, editListing, listingInfo}} />
                     </div>
                 </div>
@@ -610,9 +614,13 @@ const CrListing = ({type}) => {
                         <ListingAbout type="flat" listingInfo={listingInfo} editListing={editListing} state={{addedFlatTags, addedPersonTags, bio, setBio, personBio, setPersonBio, flatBio, setFlatBio, setPersonTagOverlay, setFlatTagOverlay, setPersonBoxerOverlay, setFlatBoxerOverlay}}/>
                         <Gallery 
                             type={"flat"}
-                            listingImgs={listingImgs} 
+                            listingImgs={listingImgs}
+                            setListingImgs={setListingImgs}
                             addedListingImgs={addedListingImgs}
+                            setAddedListingImgs={setAddedListingImgs}
                             pfp={pfp && pfp}
+                            setPfp={setPfp}
+                            setAddedPfp={setAddedPfp}
                             addedPfp={addedPfp} 
                             state={{setGalleryInput, editListing, listingInfo}} />
                         <div className="content-edit-buttons">

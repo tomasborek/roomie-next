@@ -237,13 +237,13 @@ const Listing = ({type}) => {
         }
         updateListing(JSON.stringify(updateListingInfo)).then((response) => {
             if(addedPfp){
-               return uploadImg(currentUser.uid, addedPfp, "pfp", pfp);
+               return uploadImg(currentUser.uid, addedPfp, "pfp");
             }else{
                 return Promise.resolve("No new pfp");
             }
         }).then((response) => {
             if(addedListingImgs.length){
-                return uploadImg(currentUser.uid, addedListingImgs, "listingImgs", listingImgs);
+                return uploadImg(currentUser.uid, addedListingImgs, "listingImgs");
             }else{
                 return Promise.resolve("No new imgs");
             } 
@@ -436,8 +436,12 @@ const Listing = ({type}) => {
                             <Gallery 
                                     type={"flatmate"}
                                     listingImgs={listingImgs} 
+                                    setListingImgs={setListingImgs}
                                     addedListingImgs={addedListingImgs}
+                                    setAddedListingImgs={setAddedListingImgs}
                                     pfp={pfp && pfp}
+                                    setPfp={setPfp}
+                                    setAddedPfp={setAddedPfp}
                                     addedPfp={addedPfp} 
                                     state={{setGalleryInput, editListing, listingInfo}} />
                         </div>
@@ -631,9 +635,13 @@ const Listing = ({type}) => {
                         <Gallery 
                             type={"flat"}
                             listingImgs={listingImgs} 
+                            setListingImgs={setListingImgs}
                             addedListingImgs={addedListingImgs}
+                            setAddedListingImgs={setAddedListingImgs}
                             pfp={pfp && pfp}
-                            addedPfp={addedPfp} 
+                            setPfp={setPfp}
+                            addedPfp={addedPfp}
+                            setAddedPfp={setAddedPfp} 
                             state={{setGalleryInput, editListing, listingInfo}} />
                         {editListing &&
                             <div className="content-edit-buttons">
