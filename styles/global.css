@@ -3982,10 +3982,9 @@ textarea {
 }
 
 .gallery .gallery-img-container .container-edit-icon {
-  pointer-events: none;
+  pointer-events: all;
   z-index: 10;
   border-radius: 5px;
-  pointer-events: none;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4003,13 +4002,22 @@ textarea {
 }
 
 .gallery .gallery-img-container .container-edit-icon i {
+  margin: 0 0.5rem;
+  padding: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.507);
+  border-radius: 50%;
   font-size: 24px;
   color: white;
 }
 
+.gallery .gallery-img-container .container-edit-icon i.fa-trash {
+  color: red;
+}
+
 .gallery .gallery-current-img {
-  max-width: 98vw;
-  max-height: 98vh;
+  height: 700px;
+  width: auto;
+  max-width: 95vw;
 }
 
 .gallery .gallery-close {
