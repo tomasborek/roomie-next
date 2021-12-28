@@ -4015,9 +4015,9 @@ textarea {
 }
 
 .gallery .gallery-current-img {
-  height: 700px;
-  width: auto;
-  max-width: 95vw;
+  width: 95vw;
+  max-width: 700px;
+  height: auto;
 }
 
 .gallery .gallery-close {
