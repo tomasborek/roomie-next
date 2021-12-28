@@ -7,16 +7,16 @@ export const useStorage = () => {
 }
 
 export const StorageProvider = ({children}) => {
-    const uploadImg = (uid, file, type, existingImgs) => {
+    const uploadImg = (uid, file, type) => {
         if(type === "pfp"){
-            return uploadPfp(file, uid, existingImgs);
+            return uploadPfp(file, uid);
         }
         if(type === "listingImgs"){
-           return uploadListingImgs(file, uid, existingImgs);
+           return uploadListingImgs(file, uid);
         }
     }
 
-    const uploadPfp = (file, uid, existingPfp) => {
+    const uploadPfp = (file, uid) => {
         return new Promise((resolve, reject) => {
             let format;
             if(file.type === "image/jpeg") format = ".jpg";
@@ -34,7 +34,7 @@ export const StorageProvider = ({children}) => {
         })
     }
 
-    const uploadListingImgs = (files, uid, existingImgs) => {
+    const uploadListingImgs = (files, uid) => {
             // Describes the format of an uploaded image (jpg or png)
             let format;
             let storageRefs = [];
