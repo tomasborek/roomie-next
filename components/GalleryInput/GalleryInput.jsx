@@ -17,7 +17,7 @@ const GalleryInput = ({object, setObject, listingImgs, addedListingImgs, setAdde
             setAddedPfp(image);
        }
        if(object.index > -1){
-            let addedImgs = addedListingImgs;
+            let addedImgs = [...addedListingImgs];
             addedImgs[object.index] = image;
             setAddedListingImgs(addedImgs);
        }
