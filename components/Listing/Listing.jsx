@@ -424,7 +424,7 @@ const Listing = ({type}) => {
                         <div className="content-body">
                             <div className="body-messages">
                                 {(listingInfo && !listingInfo.data().visible )&&
-                                        <div class="messages-message">
+                                        <div className="messages-message">
                                             <i className="fas fa-info"></i>
                                             <p>
                                                 Váš inzerát je nedokončený, prosím dokončete jej 
@@ -433,7 +433,7 @@ const Listing = ({type}) => {
                                         </div>
                                 }
                                 {(listingInfo && !listingInfo.data().userInfo.emailVerified) &&
-                                    <div class="messages-message">
+                                    <div className="messages-message">
                                     <i className="fas fa-info"></i>
                                     <p>
                                         Váš účet není ověřený - pro používání Roomie si jej prosím ověřte pomocí odkazu zaslaného na váš e-mail.
@@ -595,7 +595,7 @@ const Listing = ({type}) => {
                     <div className="content-body">
                         <div className="body-messages">
                             {(listingInfo && !listingInfo.data().visible )&&
-                                    <div class="messages-message">
+                                    <div className="messages-message">
                                         <i className="fas fa-info"></i>
                                         <p>
                                             Váš inzerát je nedokončený, prosím dokončete jej  
@@ -604,7 +604,7 @@ const Listing = ({type}) => {
                                     </div>
                             }
                             {(listingInfo && !listingInfo.data().userInfo.emailVerified) &&
-                                <div class="messages-message">
+                                <div className="messages-message">
                                     <i className="fas fa-info"></i>
                                     <p>
                                         Váš účet není ověřený - pro používání Roomie si jej prosím ověřte pomocí odkazu zaslaného na váš e-mail.
