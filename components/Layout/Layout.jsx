@@ -15,10 +15,11 @@ import { useExploreDialog } from '../../contexts/ExploreDialogContext';
 //Components
 import NavOverlay from '../NavOverlay/NavOverlay';
 import LoadingOverlay from "../LoadingOverlay/LoadingOverlay";
-import {Snackbar, Alert} from "@mui/material"
+import CustomDialog from '../CustomDialog/CustomDialog';
 //MUI
 import { Backdrop } from '@mui/material';
-import CustomDialog from '../CustomDiaog/CustomDialog';
+import {Snackbar, Alert} from "@mui/material"
+
 
 
 
