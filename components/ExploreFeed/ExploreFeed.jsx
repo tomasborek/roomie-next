@@ -4,6 +4,7 @@ import Head from "next/head";
 import { useRouter } from 'next/dist/client/router';
 //Contexts
 import {useDb} from "../../contexts/DbContext";
+import { useAuth } from '../../contexts/AuthContext';
 import { useExplore } from '../../contexts/ExploreContext';
 
 //Components
@@ -11,6 +12,7 @@ import ExploreFlatmate from '../ExploreListings/ExploreFlatmate/ExploreFlatmate'
 import ExploreFlat from "../ExploreListings/ExploreFlat/ExploreFlat";
 import Pagination from "../Pagination/Pagination";
 import Filter from '../Filter/Filter';
+import CustomDialog from "../CustomDialog/CustomDialog";
 //MUI
 import { CircularProgress } from '@mui/material';
 import { Backdrop } from '@mui/material';
@@ -21,6 +23,7 @@ const ExploreFeed = ({variant}) => {
     //Contexts
     const {getListings, getListingsFilter} = useDb();
     const router = useRouter();
+    const {currentUser} = useAuth();
     const {flatListingsValue, flatmateListingsValue, flatSnapsValue, flatmateSnapsValue, activeFiltersValue, flatmatePageValue, flatPageValue} = useExplore();
     const [flatListings, setFlatListings] = flatListingsValue;
     const [flatmateListings, setFlatmateListings] = flatmateListingsValue;
@@ -31,6 +34,8 @@ const ExploreFeed = ({variant}) => {
     const [flatPage, setFlatPage] = flatPageValue;
     //State
     const [filterOpen, setFilterOpen] = useState(false);
+    const [limitedPaginationDialog, setLimitedPaginationDialog] = useState(false);
+    const [premiumPaginationDialog, setPremiumPaginationDialog] = useState(false);
     // const [activeFilters, setActiveFilters] = useState({});
     const [matching, setMatching] = useState(false);
     const [filtering, setFiltering] = useState(false);
@@ -49,7 +54,7 @@ const ExploreFeed = ({variant}) => {
             if(flatListings) return;
             fetchListings("flat", "first", null, activeFilters);
         }
-    }, [])
+    }, []);
 
     useEffect(() => {
         setActiveFilters({});
@@ -191,6 +196,14 @@ const ExploreFeed = ({variant}) => {
 
     // Hadnles pagination (next or prev)
     const handlePagination = (page) => {
+        if(!currentUser){
+            setLimitedPaginationDialog(true);
+            return;
+        }
+        if(currentUser && (flatmatePage == 3 || flatPage == 3)){
+            setPremiumPaginationDialog(true);
+            return;
+        }
         if(variant === "flatmate"){
             if(page === "next"){
                 fetchListings("flatmate", "next", flatmateSnaps, activeFilters); 
@@ -213,6 +226,28 @@ const ExploreFeed = ({variant}) => {
         <Head>
             <title>Prohlížet {variant === "flatmate" ? "Prohlížet byty" : "Prohlížet spolubydlící"} | Roomie</title>
         </Head>
+        <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={limitedPaginationDialog}>
+            <CustomDialog image="/img/registration-steps/slide-img0.png" heading={"Pro pokračování je nutné se přihlásit."}>
+                <div className="dialog-body">
+                    Pro pokračování a zobrazení dalších inzerátů je nutné se zaregistrovat nebo přihlásit do účtu Roomie.
+                </div>
+                <div className="dialog-action">
+                    <button onClick={() => router.push("/register")} className="acc-btn">Registrovat</button>
+                    <button onClick={() => router.push("/login")} className="main-btn">Přihlásit</button>
+                </div>
+            </CustomDialog>
+        </Backdrop>
+
+        <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={premiumPaginationDialog}>
+            <CustomDialog image="/img/registration-steps/slide-img0.png" heading={"Pro pokračování je nutné mít premium"}>
+                <div className="dialog-body">
+                    Pro pokračování a zobrazení dalších inzerátů je nutné mí premium účet Roomie.
+                </div>
+                <div className="dialog-action">
+                    <button onClick={() => router.push("/premium")} className="main-btn">Získat premium</button>
+                </div>
+            </CustomDialog>
+        </Backdrop>
         <div className="explore-feed">
             <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={filterOpen}>
                 <Filter variant={variant} setOpen={setFilterOpen} activeFilters={activeFilters} setActiveFilters={setActiveFilters} applyFilters={applyFilters}/>
@@ -253,7 +288,7 @@ const ExploreFeed = ({variant}) => {
                                         pfp={listing.data().userInfo.images.pfp} 
                                         key={id}/>
                             ))}
-                            {(flatmateListings.length > 9 || flatmatePage != 1) ?
+                            {(flatmateListings.length > 7 || flatmatePage != 1) ?
                                 <Pagination page={flatmatePage} setPage={setFlatmatePage} handlePagination={handlePagination} isDisabled={isPaginationDisabled} />
                                 :
                                 ""
@@ -290,7 +325,7 @@ const ExploreFeed = ({variant}) => {
                                         id={listing.id} 
                                         key={id} />
                             )) }
-                            {(flatListings.length > 9 || flatPage != 1) &&
+                            {(flatListings.length > 7 || flatPage != 1) &&
                                 <Pagination page={flatPage} setPage={setFlatPage} handlePagination={handlePagination} isDisabled={isPaginationDisabled} />
                             }
                         </>
