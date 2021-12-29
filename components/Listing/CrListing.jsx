@@ -94,12 +94,9 @@ const CrListing = ({type}) => {
         if(!router.isReady) return;
         getListing(id)
         .then(doc => {
-            if(doc.data().mainInfo.startTime != ""){
+            if(!checkAccess(doc.data().userInfo.uid, doc.data().visible)) {
                 router.back();
                 return;
-            }
-            if(!currentUser || (doc.data().userInfo.uid != currentUser.uid)){
-                router.back();
             }
             setWelcomeDialog(true);
             setListingInfo(doc);
@@ -130,10 +127,17 @@ const CrListing = ({type}) => {
 
    
     //Functions
+    const checkAccess = (uid, visible) => {
+        if((currentUser && currentUser.uid === uid) && !visible){
+            return true;
+        }else{
+            return false;
+        }
+    }
     //Handles save in the edit
     const handleSave = () => {
         setLoading(true);
-        const updateListing = callable("updateListing");
+        const updateListing = callable("userUpdates-updateListing");
         if(!stayTime || stayTime == ""){
             snackBar("Prosíme vyplňte všechny důležité údaje.", "error");
             setLoading(false);
