@@ -105,6 +105,7 @@ const Listing = ({type}) => {
     
     //Gets listing based on url id and sets the listingInfo state
     useEffect(() => {
+        setListingInfo(null);
         if(!router.isReady) return;
         getListing(id)
         .then(doc => {
@@ -117,7 +118,7 @@ const Listing = ({type}) => {
         }).catch(error => {
             console.log(error.code);
         })
-    }, [router.isReady])
+    }, [router.isReady, id])
 
     //Fills edit inputs and pictures with default values
     useEffect(() => {
