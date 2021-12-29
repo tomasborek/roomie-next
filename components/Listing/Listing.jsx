@@ -168,7 +168,7 @@ const Listing = ({type}) => {
     //Handles save in the edit
     const handleSave = () => {
         setLoading(true);
-        const updateListing = callable("updateListing");
+        const updateListing = callable("userUpdates-updateListing");
         if(!stayTime || stayTime == ""){
             snackBar("Prosíme vyplňte všechny důležité údaje.", "error");
             setLoading(false);
@@ -269,7 +269,7 @@ const Listing = ({type}) => {
         let reciever = listingInfo;
         let sender;
         //Callable functions
-        const createRequest = callable("createRequest");
+        const createRequest = callable("requests-createRequest");
         getUser(currentUser.uid)
         .then(user =>{
             const requestInfo = {
@@ -399,7 +399,9 @@ const Listing = ({type}) => {
                                     <div className="header-info">
                                         <div className="info-main">
                                             <h1 className="main-name">{listingInfo.data().userInfo.username}</h1>
-                                            {currentUser && currentUser.uid == listingInfo.data().userInfo.uid &&<button onClick={() => setEditListing(prevState => !prevState)}className="main-edit-profile">{editListing ? "Zpět" : "Upravit profil"}</button>}
+                                            {((currentUser && currentUser.uid == listingInfo.data().userInfo.uid) && (listingInfo && listingInfo.data().visible)) && 
+                                                <button onClick={() => setEditListing(prevState => !prevState)}className="main-edit-profile">{editListing ? "Zpět" : "Upravit inzerát"}</button>
+                                            }
                                             <i className="main-more fas fa-ellipsis-h"></i>
                                             <div className="main-description">
                                                 <p>{listingInfo.data().userInfo.age}, {listingInfo.data().userInfo.gender === "male" ? "muž" : listingInfo.data().userInfo.gender === "female" ? "žena" : "jiné"}</p>
@@ -411,19 +413,30 @@ const Listing = ({type}) => {
                                     }
                                 </div>
                             </div>
-                            {(listingInfo && !listingInfo.data().visible )&&
-                                <div className="content-error">
-                                    <Alert severity="error">
-                                        Váš inzerát je nedokončený, prosím dokončete ho 
-                                        <Link href={`/cr/${listingInfo.data().type}/${listingInfo.id}`}><a style={{textDecoration: "underline"}}> zde</a></Link>
-                                    </Alert>
-                                </div>
-                            }
                         
         {/*About*/}
                     
                     <div className="mid-container">
                         <div className="content-body">
+                            <div className="body-messages">
+                                {(listingInfo && !listingInfo.data().visible )&&
+                                        <div class="messages-message">
+                                            <i className="fas fa-info"></i>
+                                            <p>
+                                                Váš inzerát je nedokončený, prosím dokončete jej 
+                                                <Link href={`/cr/${listingInfo.data().type}/${listingInfo.id}`}><a style={{textDecoration: "underline"}}> zde</a></Link>
+                                            </p> 
+                                        </div>
+                                }
+                                {(listingInfo && !listingInfo.data().userInfo.emailVerified) &&
+                                    <div class="messages-message">
+                                    <i className="fas fa-info"></i>
+                                    <p>
+                                        Váš účet není ověřený - pro používání Roomie si jej prosím ověřte pomocí odkazu zaslaného na váš e-mail.
+                                    </p> 
+                                </div>
+                                }
+                            </div>
                             <div className="body-info">
                                 <div className="container">
                                     <ListingBoxesContainer type="flatmate" addedBoxes={addedPersonBoxes} existingBoxes={listingInfo ? listingInfo.data().personBoxes : null} editListing={editListing} />
@@ -557,7 +570,9 @@ const Listing = ({type}) => {
                                 <div className="header-info">
                                     <div className="info-main">
                                         <h1 className="main-name">Byt {listingInfo && listingInfo.data().flatBoxes.layout && listingInfo.data().flatBoxes.layout}</h1>
-                                      {currentUser && listingInfo.data().userInfo.uid == currentUser.uid ? <button onClick={() => setEditListing(prevState => !prevState)} className="main-edit-profile">{editListing ? "Zpět" : "Upravit inzerát"}</button> : "" }  
+                                      {((currentUser && currentUser.uid == listingInfo.data().userInfo.uid) && (listingInfo && listingInfo.data().visible)) && 
+                                        <button onClick={() => setEditListing(prevState => !prevState)} className="main-edit-profile">{editListing ? "Zpět" : "Upravit inzerát"}</button>
+                                    }  
                                         <i className="main-more fas fa-ellipsis-h"></i>
                                         <div className="main-description">
                                             <p>{listingInfo && listingInfo.data().flatBoxes.location}</p>
@@ -570,18 +585,29 @@ const Listing = ({type}) => {
                         }
                         </div>
                     </div>
-                    {(listingInfo && !listingInfo.data().visible )&&
-                        <div className="content-error">
-                            <Alert severity="error">
-                                Váš inzerát je nedokončený, prosím dokončete ho 
-                                <Link href={`/cr/${listingInfo.data().type}/${listingInfo.id}`}> zde</Link>
-                            </Alert>
-                        </div>
-                    }
                
      {/*Content about  */}                  
                 <div className="mid-container">
                     <div className="content-body">
+                        <div className="body-messages">
+                            {(listingInfo && !listingInfo.data().visible )&&
+                                    <div class="messages-message">
+                                        <i className="fas fa-info"></i>
+                                        <p>
+                                            Váš inzerát je nedokončený, prosím dokončete jej  
+                                            <Link href={`/cr/${listingInfo.data().type}/${listingInfo.id}`}><a style={{textDecoration: "underline"}}> zde</a></Link>
+                                        </p> 
+                                    </div>
+                            }
+                            {(listingInfo && !listingInfo.data().userInfo.emailVerified) &&
+                                <div class="messages-message">
+                                    <i className="fas fa-info"></i>
+                                    <p>
+                                        Váš účet není ověřený - pro používání Roomie si jej prosím ověřte pomocí odkazu zaslaného na váš e-mail.
+                                    </p> 
+                                </div>
+                            }
+                        </div>
                         <div className="body-info">
                             <div className="container">
                                 <div className="body-opening-boxes">
