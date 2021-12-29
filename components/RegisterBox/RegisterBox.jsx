@@ -49,8 +49,8 @@ const RegisterBox = () => {
         //Reset error
         setError(null);
         //Cloud functions
-        const createUser = callable("createUser");
-        const createListing = callable("createListing");
+        const createUser = callable("onCreatedUser-createUser");
+        const createListing = callable("onCreatedUser-createListing");
         //Refs trim
         emailRef.current.value = emailRef.current.value.trim();
         phoneRef.current.value = phoneRef.current.value.trim();
@@ -123,7 +123,9 @@ const RegisterBox = () => {
                         break;
                     default:
                         setError("Registrace selhala. Zkuste to prosím za chvíli.");
+                        break;
                 }
+                console.log(error);
             }) 
         })
     }
