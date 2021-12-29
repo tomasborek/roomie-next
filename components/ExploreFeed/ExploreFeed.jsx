@@ -226,6 +226,7 @@ const ExploreFeed = ({variant}) => {
         <Head>
             <title>Prohlížet {variant === "flatmate" ? "Prohlížet byty" : "Prohlížet spolubydlící"} | Roomie</title>
         </Head>
+
         <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={limitedPaginationDialog}>
             <CustomDialog image="/img/registration-steps/slide-img0.png" heading={"Pro pokračování je nutné se přihlásit."}>
                 <div className="dialog-body">
@@ -248,8 +249,10 @@ const ExploreFeed = ({variant}) => {
                 </div>
             </CustomDialog>
         </Backdrop>
+
+
         <div className="explore-feed">
-            <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={filterOpen}>
+            <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={filterOpen}>
                 <Filter variant={variant} setOpen={setFilterOpen} activeFilters={activeFilters} setActiveFilters={setActiveFilters} applyFilters={applyFilters}/>
             </Backdrop>
             <div className="feed-header">
@@ -258,8 +261,12 @@ const ExploreFeed = ({variant}) => {
                     <div 
                         className={`filters-filter ${(Object.keys(activeFilters).length && !matching) && "active"} ${matching && "disabled"}`} 
                         onClick={() => {
-                            setFilterOpen(true);
-                            setFiltering(true);
+                            if(currentUser){
+                                setFilterOpen(true);
+                                setFiltering(true);
+                            }else{
+                                setLimitedPaginationDialog(true);
+                            }
                         }}>
                         <p>Filtry</p>
                         <i className="fas fa-chevron-down"></i>
