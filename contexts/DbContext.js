@@ -1,7 +1,26 @@
 import React, {createContext, useContext, useState, useEffect} from 'react';
 import { db } from '../Firebase';
 //Firestore imports
-import { setDoc, doc, query, where, collection, getDoc, getDocs, deleteDoc, updateDoc, serverTimestamp, orderBy, limit, startAfter, addDoc, startAt, endBefore, limitToLast } from '@firebase/firestore';
+import { setDoc,
+    doc,
+    query,
+    where,
+    collection,
+    getDoc,
+    getDocs,
+    deleteDoc,
+    updateDoc,
+    serverTimestamp,
+    orderBy,
+    limit,
+    startAfter,
+    addDoc,
+    startAt,
+    endBefore,
+    limitToLast,
+    onSnapshot
+
+ } from '@firebase/firestore';
 
 const DbContext = createContext();
 
@@ -304,7 +323,8 @@ export function DbProvider(props) {
 
     const getNotifications = (uid) => {
         const colRef = collection(db, "users", uid, "notifications");
-        return getDocs(colRef);
+        const q = query(colRef, orderBy("timeStamp"), limit(9));
+        return getDocs(q);
     }
 
     //Friends
