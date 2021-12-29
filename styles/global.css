@@ -2013,6 +2013,8 @@ textarea {
   background-color: #e4e4e4;
   border-radius: 50%;
   margin-left: 2rem;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .main-header .navbar-logged .navbar-notifications {
