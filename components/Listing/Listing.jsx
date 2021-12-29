@@ -108,12 +108,7 @@ const Listing = ({type}) => {
         if(!router.isReady) return;
         getListing(id)
         .then(doc => {
-            if(!doc.data().visible){
-                if(!currentUser || (currentUser.uid != doc.data().userInfo.uid)){
-                    router.back();
-                    return
-                }
-            }
+            if(!checkAccess(doc.data().userInfo.uid, doc.data().visible, doc.data().userInfo.emailVerified)) return;
             setListingInfo(doc);
             setListingImgs(doc.data().userInfo.images.listingImgs);
             if(doc.data().userInfo.images.pfp){
@@ -165,6 +160,15 @@ const Listing = ({type}) => {
     }, [editListing])
 
     //Functions
+    const checkAccess = (uid, visible, emailVerified) => {
+        if(currentUser && currentUser.uid === uid){
+            return true;
+        }else if(visible && emailVerified){
+            return true;
+        }else{
+            return false;
+        }
+    }
     //Handles save in the edit
     const handleSave = () => {
         setLoading(true);
