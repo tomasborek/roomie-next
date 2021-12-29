@@ -21,7 +21,7 @@ import { CircularProgress, Badge } from '@mui/material';
 const Header = ({variant}) => {
     //Variables
     //Contexts
-    const {currentUser, logOut, userLoaded} = useAuth();
+    const {currentUser, currentUserInfo, logOut, userLoaded} = useAuth();
     const {getUser, getRequests, getNotifications} = useDb();
     const router = useRouter();
     const [loading, setLoading] = useLoading();
@@ -32,31 +32,11 @@ const Header = ({variant}) => {
      const [notificationDropdown, setNotificationDropdown] = useState(false);
      const [notifications, setNotifications] = useNotifications();
 
-     //UseEffect
-    useEffect(() => {
-        if(currentUser){
-            let newNotifications = [];
-           getNotifications(currentUser.uid)
-           .then(docs => {
-                docs.forEach(doc => {
-                    console.log(doc);
-                    newNotifications = [...newNotifications, doc.data()];
-                })
-                setNotifications(newNotifications);
-           })
-        }
-    }, [currentUser])
 
     //Functions
     const handleMyListing = () => {
-        setLoading(true);
-        getUser(currentUser.uid)
-        .then(doc =>{
-            router.push(`/${doc.data().mainInfo.type === "offerer" ? "flat" : doc.data().mainInfo.type === "flatmate" ? "flatmate" : ""}/${doc.data().listing.id}`);
-            setLoading(false);
-        }).catch(error => {
-            setLoading(false);
-        })
+        router.push(`/${currentUserInfo.mainInfo.type === "offerer" ? "flat" : currentUserInfo.mainInfo.type === "flatmate" ? "flatmate" : ""}/${currentUserInfo.listing.id}`);
+        setLoading(false);
     }
 
     const handleLogOut = () => {
@@ -90,7 +70,7 @@ const Header = ({variant}) => {
             currentUser ? 
             <div className="navbar navbar-logged">
                 {(notifications && notifications.length) ?
-                     <Badge badgeContent={notifications.length} color={"secondary"}>
+                     <Badge badgeContent={notifications.length == 9 ? "9+" : notifications.length} color={"secondary"}>
                         <i onClick={() => {
                             setNotificationDropdown(prevState =>!prevState);
                             setNavOverlay(false);
@@ -104,8 +84,7 @@ const Header = ({variant}) => {
                     }} className={`fa${notificationDropdown ? "s" : "r"} fa-bell navbar-notifications`}></i> 
                 }
                
-              
-                <div className="navbar-profile"></div>
+                {currentUserInfo && currentUserInfo.mainInfo.pfp ? <img className="navbar-profile" src={currentUserInfo.mainInfo.pfp} alt=""></img> :  <div className="navbar-profile"></div>}
                
                   <motion.i onClick={() => setIsDropdownActive(prevState =>!prevState)} animate={isDropdownActive ? {rotate: -180}: ""} initial={{rotate:0}} transition={{duration: 0.4}}  tabIndex={0} className="fas fa-chevron-down navbar-dropdown-icon"></motion.i> 
  

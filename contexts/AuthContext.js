@@ -2,6 +2,8 @@ import React, {createContext, useContext, useState, useEffect} from 'react';
 //Firebase
 import {auth} from "../Firebase";
 import { db } from '../Firebase';
+//Context
+import { useDb } from './DbContext';
 //Auth imports
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateCurrentUser, onAuthStateChanged, signOut, deleteUser, reauthenticateWithCredential, EmailAuthProvider, updatePassword } from '@firebase/auth';
 
@@ -19,6 +21,22 @@ export  function AuthProvider(props) {
     //Auth states
         const [currentUser, setCurrentUser] = useState(null);
         const [userLoaded, setUserLoaded] = useState(false);
+        const [currentUserInfo, setCurrentUserInfo] = useState(null);
+        const {getUser} = useDb();
+
+        useEffect(() => {
+            if(currentUser){
+                if(!currentUserInfo){
+                    getUser(currentUser.uid).then((doc) => {
+                        setCurrentUserInfo(doc.data());
+                    }).catch(() => {
+                        //
+                    })
+                }
+            }else{
+                setCurrentUserInfo(null);
+            }
+        }, [currentUser])
 
     //Auth function
     //Create new user
@@ -70,6 +88,7 @@ export  function AuthProvider(props) {
         delUser,
         changePassword,
         currentUser,
+        currentUserInfo,
         userLoaded,
         reAuth
     }
