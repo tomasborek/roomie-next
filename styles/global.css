@@ -1142,6 +1142,28 @@ textarea {
           justify-content: center;
 }
 
+.Listing .listing-content .content-body .body-messages .messages-message {
+  padding: 0.5rem 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #309EAB;
+  margin-top: 0.5rem;
+  border-radius: 5px;
+  color: white;
+}
+
+.Listing .listing-content .content-body .body-messages .messages-message i {
+  margin-right: 1rem;
+}
+
+.Listing .listing-content .content-body .body-messages .messages-message a {
+  color: white;
+}
+
 .Listing .listing-content .content-body .body-info .info-edit-boxes {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1618,6 +1640,39 @@ textarea {
   margin-top: 1rem;
   color: #B8B8B8;
   font-size: 14px;
+}
+
+.VerifyEmail {
+  padding: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: #309eab;
+  background: -webkit-gradient(linear, left top, right top, from(#309eab), color-stop(87%, #154c70));
+  background: linear-gradient(90deg, #309eab 0%, #154c70 87%);
+  color: white;
+}
+
+.VerifyEmail img {
+  width: 75px;
+  height: auto;
+  margin-bottom: 0.5rem;
+}
+
+.VerifyEmail h2 {
+  margin-bottom: 2rem;
+}
+
+.VerifyEmail h3 {
+  font-weight: normal;
+  margin-bottom: 1rem;
 }
 
 .home-header {

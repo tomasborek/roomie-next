@@ -1,0 +1,21 @@
+.VerifyEmail{
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include gradientBg;
+    color: white;
+    img{
+        width: 75px;
+        height: auto;
+        margin-bottom: 0.5rem;
+    }
+    h2{
+        margin-bottom: 2rem;
+    }
+
+    h3{
+        font-weight: normal;
+        margin-bottom: 1rem;
+    }
+}
