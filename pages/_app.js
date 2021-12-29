@@ -7,7 +7,6 @@ import Head from 'next/dist/shared/lib/head';
 //Context
 import { SnackBarProvider } from '../contexts/SnackBarContext';
 import { LoadingProvider } from '../contexts/LoadingContext';
-import { NotificationsProvider } from '../contexts/NotificationsContext';
 import FunctionsProvider from '../contexts/FunctionsContext';
 import { StorageProvider } from '../contexts/StorageContext';
 import {ExploreDialogProvider} from '../contexts/ExploreDialogContext';
@@ -25,7 +24,6 @@ function MyApp({ Component, pageProps }) {
     </Head>
     <LoadingProvider>
         <SnackBarProvider>
-            <NotificationsProvider>
                 <FunctionsProvider>
                   <StorageProvider>
                     <ExploreDialogProvider>
@@ -37,7 +35,6 @@ function MyApp({ Component, pageProps }) {
                       </ExploreDialogProvider>
                     </StorageProvider>
                 </FunctionsProvider>
-            </NotificationsProvider>
           </SnackBarProvider>
     </LoadingProvider>
     </>
