@@ -73,6 +73,7 @@ exports.resolveRequest = functions.https.onCall((data, context) => {
         .collection("sentRequests");
     const senderListingDoc = db.collection("listings")
         .doc(senderListing);
+  
     // Returning promise
     return new Promise((resolve, reject) => {
       // Delete recieved request from reciever's subcollection
@@ -165,7 +166,6 @@ exports.recievedNotification = functions.firestore
     .document("users/{userUid}/recievedRequests/{senderUid}")
     .onCreate((snap, context) => {
       const db = admin.firestore();
-      console.log(snap.ref.parent.parent.id);
       const colRef = db.collection("users").doc(snap.ref.parent.parent.id)
           .collection("notifications");
       return colRef.doc(snap.id).set({
