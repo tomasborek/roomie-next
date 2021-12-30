@@ -22,19 +22,7 @@ const Filter = ({variant, setOpen, activeFilters, setActiveFilters, applyFilters
      const [internetTag, setInternetTag] = useState([]);
 
      useEffect(() => {
-         if(variant === "flatmate"){
-            activeFilters.gender ? setGenderTag(activeFilters.gender) : "";
-            activeFilters.age ? setAgeTag(activeFilters.age) : "";
-            activeFilters.smoking ? setSmokingTag(activeFilters.smoking) : "";
-            activeFilters.job ? setJobTag(activeFilters.job) : "";  
-            (activeFilters.location && activeFilters.location[0]) ? setLocationTag(activeFilters.location) : "";
-         }
-         if(variant === "flat"){
-            (activeFilters.location && activeFilters.location[0]) ? setLocationTag(activeFilters.location) : "";
-            activeFilters.layout ? setLayoutTag(activeFilters.layout) : "";
-            activeFilters.petAllowed ? setPetAllowedTag(activeFilters.petAllowed) : "";
-            activeFilters.smokingAllowed ? setSmokingAllowedTag(activeFilters.smokingAllowed) : "";
-         }
+        fillExistingFilters();
      }, [activeFilters])
  
  
@@ -48,6 +36,22 @@ const Filter = ({variant, setOpen, activeFilters, setActiveFilters, applyFilters
  
      
      //Functions
+     const fillExistingFilters = () => {
+        if(variant === "flatmate"){
+            activeFilters.gender ? setGenderTag(activeFilters.gender) : "";
+            activeFilters.age ? setAgeTag(activeFilters.age) : "";
+            activeFilters.smoking ? setSmokingTag(activeFilters.smoking) : "";
+            activeFilters.job ? setJobTag(activeFilters.job) : "";  
+            (activeFilters.location && activeFilters.location[0]) ? setLocationTag(activeFilters.location) : "";
+         }
+         if(variant === "flat"){
+            (activeFilters.location && activeFilters.location[0]) ? setLocationTag(activeFilters.location) : "";
+            activeFilters.layout ? setLayoutTag(activeFilters.layout) : "";
+            activeFilters.petAllowed ? setPetAllowedTag(activeFilters.petAllowed) : "";
+            activeFilters.smokingAllowed ? setSmokingAllowedTag(activeFilters.smokingAllowed) : "";
+         }
+     }
+
      const handleAdd = () => {
          if(variant === "flatmate"){
              let addObject = {};
@@ -87,6 +91,7 @@ const Filter = ({variant, setOpen, activeFilters, setActiveFilters, applyFilters
  
     return (
         <div className="filter">
+            <i onClick={() => setOpen(false)} className="filter-close fas fa-times"></i>
             <div className="filter-header">{variant === "flatmate" ? "Filtrovat lidi" : "Filtrovat byty"}</div>
             <div className="filter-description">
                 Zde můžete zadat vaše preference  
