@@ -1,6 +1,7 @@
 .boxer{
     padding: 2rem;
     width: 95%;
+    position: relative;
     max-width: 900px;
     background-color: white;
     color: #333;
@@ -9,6 +10,14 @@
     .boxer-header{
         font-size: 24px;
         margin-bottom: 1rem;
+    }
+    .boxer-close{
+        font-size: 14px;
+        color: $mainGray;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        cursor: pointer;
     }
     .boxer-section{
         margin-bottom: 1rem;

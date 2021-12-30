@@ -47,21 +47,15 @@ const Boxer = ({variant, existingBoxes, addedBoxes, setAddedBoxes, setBoxerOverl
     }
        
         
-    
-
-    //Fills added boxes once existingBoxes are fetched
-    useEffect(() => {
-        if(existingBoxes && !addedBoxes && variant === "person"){
+    const fillAddedBoxes = () => {
+        if(variant === "person"){
             setAddedBoxes(existingBoxes);
             existingBoxes.smoking && setSmokingBox(existingBoxes.smoking);
             existingBoxes.pet && setPetBox(existingBoxes.pet);
             existingBoxes.children && setChildrenBox(existingBoxes.children);
             existingBoxes.job && setJobBox(existingBoxes.job);
         }
-    }, [existingBoxes])
-
-    useEffect(() => {
-        if(existingBoxes && !addedBoxes && variant === "flat"){
+        if(variant === "flat"){
             setAddedBoxes(existingBoxes);
             existingBoxes.layout && setLayoutBox(existingBoxes.layout);
             existingBoxes.level && setLevelBox(existingBoxes.level);
@@ -69,11 +63,22 @@ const Boxer = ({variant, existingBoxes, addedBoxes, setAddedBoxes, setBoxerOverl
             existingBoxes.smokingAllowed && setSmokingAllowedBox(existingBoxes.smokingAllowed);
             existingBoxes.location && setLocationBox(existingBoxes.location);
             existingBoxes.size && setSizeBox(existingBoxes.size);
+            existingBoxes.internet && setInternetBox(existingBoxes.internet);
+            existingBoxes.elevator && setElevatorBox(existingBoxes.elevator);
+        }
+    }
+
+    //Fills added boxes once existingBoxes are fetched
+    useEffect(() => {
+        if(existingBoxes && !addedBoxes){
+           fillAddedBoxes();
         }
     }, [existingBoxes])
+
     //Return
     return (
         <div className="boxer">
+            <i onClick={() => setBoxerOverlay(false)} className="boxer-close fas fa-times"></i>
             <div className="boxer-header">{variant === "person" ? "Přidat info o sobě..." : "Přidat info o bydlení..."}</div>
             {(variant === "person" && existingBoxes) &&
             <>
