@@ -256,7 +256,7 @@ const Listing = ({type}) => {
             setLoading(false);
             setEditListing(false);
             snackBar("Inzerát byl úspěšně upraven.", "success");
-            window.scrollTo(0,0);
+            window.scrollTo({top: 0, behavior: "smooth"});
             return getListing(listingInfo.id);
         }).then((doc) => {
             setListingInfo(doc);
