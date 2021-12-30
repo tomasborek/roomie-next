@@ -1,4 +1,5 @@
 import React from 'react'
+import Head from "next/head";
 //Layout
 import Explore from '../../components/Explore/Explore'
 //Components
