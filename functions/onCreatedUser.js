@@ -6,12 +6,13 @@ const admin = require("firebase-admin");
 
 // Create users databse after he logs in
 exports.createUser = functions.https.onCall((data, context) => {
+  const birthday = new Date(data.birthday);
     const userInfo = {
       mainInfo: {
         username: data.username,
         age: data.age,
         gender: data.gender,
-        birthday: data.birthday,
+        birthday: admin.firestore.Timestamp.fromDate(birthday),
         location: data.location,
         type: data.type,
         pfp: "",
