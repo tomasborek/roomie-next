@@ -3057,6 +3057,7 @@ textarea {
 
 .tagger {
   background-color: white;
+  position: relative;
   border-radius: 5px;
   color: #333;
   padding: 2rem;
@@ -3075,6 +3076,15 @@ textarea {
   font-size: 14px;
   color: #6b717f;
   margin-bottom: 1rem;
+}
+
+.tagger .tagger-close {
+  font-size: 14px;
+  color: #B8B8B8;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
 }
 
 .tagger .tagger-section {
@@ -3119,6 +3129,7 @@ textarea {
 .boxer {
   padding: 2rem;
   width: 95%;
+  position: relative;
   max-width: 900px;
   background-color: white;
   color: #333;
@@ -3129,6 +3140,15 @@ textarea {
 .boxer .boxer-header {
   font-size: 24px;
   margin-bottom: 1rem;
+}
+
+.boxer .boxer-close {
+  font-size: 14px;
+  color: #B8B8B8;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
 }
 
 .boxer .boxer-section {
@@ -4201,6 +4221,7 @@ textarea {
 }
 
 .filter {
+  position: relative;
   background-color: white;
   border-radius: 5px;
   color: #333;
@@ -4214,6 +4235,15 @@ textarea {
 .filter .filter-header {
   font-size: 24px;
   margin-bottom: 0.5rem;
+}
+
+.filter .filter-close {
+  font-size: 14px;
+  color: #B8B8B8;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
 }
 
 .filter .filter-description {
