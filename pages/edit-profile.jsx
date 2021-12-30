@@ -153,11 +153,10 @@ const EditProfile = () => {
             setLoading(false);
             router.back();
             snackBar("Úprava proběhla úspěšně.", "success");
+        }).catch((error) => {
+            setLoading(false);
+            snackBar("Něco se nepovedlo. Zkuste to prosím později.", "error");
         })
-        // .catch((error) => {
-        //     setLoading(false);
-        //     snackBar("Něco se nepovedlo. Zkuste to prosím později.", "error");
-        // })
     }
 
     const handleDiscard = () => {
