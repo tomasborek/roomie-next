@@ -41,10 +41,12 @@ const Layout = ({children}) => {
                                 <NavOverlay></NavOverlay>
                                 <LoadingOverlay/>
                                 <Snackbar open={isSnackBarOpen}><Alert sx={{width: "100%"}} severity={snackBarSeverity ? snackBarSeverity  : "error"}>{snackBarMsg}</Alert></Snackbar>
-                                <Backdrop  sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={exploreDialog}>
+                                <Backdrop  sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={exploreDialog}>
                                     <CustomDialog 
                                         image={"/img/listing/welcome-dialog.png"}
-                                        heading={"Co vám roomie může nabídnout?"}>
+                                        heading={"Co vám roomie může nabídnout?"}
+                                        setOpen={setExploreDialog}
+                                        >
                                             <div className="dialog-body">
                                             Zde si můžete prohlédnout existující inzeráty, pokud však chcete uživatele
                                                 kontaktovat a založit si vlastní inzerát, je nutné se <Link href="/register">zaregistrovat</Link> nebo <Link href="/login">přihlásit.</Link>

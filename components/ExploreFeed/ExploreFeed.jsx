@@ -228,7 +228,11 @@ const ExploreFeed = ({variant}) => {
         </Head>
 
         <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={limitedPaginationDialog}>
-            <CustomDialog image="/img/registration-steps/slide-img0.png" heading={"Pro pokračování je nutné se přihlásit."}>
+            <CustomDialog 
+                image="/img/registration-steps/slide-img0.png" 
+                heading={"Pro pokračování je nutné se přihlásit."}
+                setOpen={setLimitedPaginationDialog}
+                >
                 <div className="dialog-body">
                     Pro pokračování a zobrazení dalších inzerátů je nutné se zaregistrovat nebo přihlásit do účtu Roomie.
                 </div>
@@ -240,7 +244,11 @@ const ExploreFeed = ({variant}) => {
         </Backdrop>
 
         <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={premiumPaginationDialog}>
-            <CustomDialog image="/img/registration-steps/slide-img0.png" heading={"Pro pokračování je nutné mít premium"}>
+            <CustomDialog 
+                image="/img/registration-steps/slide-img0.png" 
+                heading={"Pro pokračování je nutné mít premium"}
+                setOpen={setPremiumPaginationDialog}
+                >
                 <div className="dialog-body">
                     Pro pokračování a zobrazení dalších inzerátů je nutné mí premium účet Roomie.
                 </div>

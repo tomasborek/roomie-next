@@ -267,10 +267,11 @@ const CrListing = ({type}) => {
                             </Button>
                     </DialogActions>
                 </Dialog>
-            <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={welcomeDialog}>
+            <Backdrop sx={{zIndex: (theme) => theme.zIndex.drawer + 1 }} open={welcomeDialog}>
                 <CustomDialog 
                     image={"/img/listing/welcome-dialog.png"}
                     heading={"Váš inzerát"}
+                    setOpen={setWelcomeDialog}
                     >
                     <div className="dialog-body">
                     Gratulujeme k založení osobního profilu Roomie. Nyní vám nic nebrání k vytvoření vašeho inzerátu.
