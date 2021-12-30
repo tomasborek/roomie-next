@@ -8,6 +8,7 @@
     align-items: center;
     width: 95%;
     max-width: 700px;
+    max-height: 98vh;
     .input-heading{
         font-size: 18px;
         font-weight: bold;
@@ -15,8 +16,8 @@
         margin-bottom: 1rem;
     }
     .input-img{
-        height: 400px;
-        max-width: 700px;
+        height: 500px;
+        width: 500px;
         object-fit: cover;
         margin-bottom: 1rem;
         background-color: $mainGray;
