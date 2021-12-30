@@ -200,7 +200,7 @@ const ExploreFeed = ({variant}) => {
             setLimitedPaginationDialog(true);
             return;
         }
-        if(currentUser && (flatmatePage == 3 || flatPage == 3)){
+        if(currentUser && (flatmatePage == 3 || flatPage == 3) && page === "next"){
             setPremiumPaginationDialog(true);
             return;
         }
