@@ -52,3 +52,23 @@ exports.emailVerifiedField = functions.https.onRequest((req, res) => {
     res.status(500).send(error);
   })
 })
+
+exports.dateIntoTimeStamp = functions.https.onRequest((req, res) => {
+  const db = admin.firestore();
+  db.collection("users").get().then((docs) => {
+    return Promise.all(
+      docs.docs.map((user) => {
+        const birthdayString = user.data().mainInfo.birthday;
+        const birthday = new Date(birthdayString);
+        const bDayTimeStamp = admin.firestore.Timestamp.fromDate(birthday);
+        return db.collection("users").doc(user.id).update({
+          "mainInfo.birthday": bDayTimeStamp,
+        });
+      })
+    );
+  }).then((response) => {
+    res.status(200).send("We've been succesful");
+  }).catch((error) => {
+    res.status(500).send(error);
+  })
+})
