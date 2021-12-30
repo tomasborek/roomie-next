@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ReqDialog = ({setMessage, message, setOpen, handleSend}) => {
+const InputDialog = ({setMessage, message, setOpen, handleSend}) => {
     return (
         <div className="req-dialog">
             <i onClick={() => setOpen(false)} className="dialog-close fas fa-times"></i>
@@ -13,4 +13,4 @@ const ReqDialog = ({setMessage, message, setOpen, handleSend}) => {
     )
 }
 
-export default ReqDialog
+export default InputDialog

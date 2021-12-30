@@ -21,7 +21,7 @@ import Tag from '../Tag/Tag';
 import Footer from "../Footer/Footer";
 import Tagger from '../Tagger/Tagger';
 import Boxer from '../Boxer/Boxer';
-import ReqDialog from '../ReqDialog/ReqDialog';
+import InputDialog from '../InputDialog/InputDialog';
 import ListingInfoImportant from '../../components/Listing/ListingInfoImportant/ListingInfoImportant';
 import ListingContact from '../../components/Listing/ListingContact/ListingContact';
 import ListingAbout from "../../components/Listing/ListingAbout/ListingAbout";
@@ -354,7 +354,7 @@ const Listing = ({type}) => {
                 </Dialog>
             {/* Contatc request dialog */}
                 <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={reqDialogOpen}>
-                    <ReqDialog setMessage={setRequestMessage} message={requestMessage} setOpen={setReqDialogOpen} handleSend={handleRequest}/>
+                    <InputDialog setMessage={setRequestMessage} message={requestMessage} setOpen={setReqDialogOpen} handleSend={handleRequest}/>
                 </Backdrop>
             
                 {/*main*/}

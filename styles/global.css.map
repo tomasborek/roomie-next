@@ -45,7 +45,7 @@
         "../components/RecievedReq/_recievedReq.scss",
         "../components/ReqFeed/_reqFeed.scss",
         "../components/RecievedReqFull/_recievedReqFull.scss",
-        "../components/ReqDialog/_reqDialog.scss",
+        "../components/InputDialog/_inputDialog.scss",
         "../components/SentReq/_sentReq.scss",
         "../components/InfoArrow/_infoArrow.scss",
         "../components/Pagination/_pagination.scss",

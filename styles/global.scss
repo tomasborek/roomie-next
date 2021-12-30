@@ -17,6 +17,7 @@
 @import "./pages/listing";
 @import "./pages/friends";
 @import "./pages/verifyEmail";
+
 //Components
 @import "../components/HomeHeader/homeHeader";
 @import "../components/Banner/banner";
@@ -48,7 +49,7 @@
 @import "../components/RecievedReq/recievedReq";
 @import "../components/ReqFeed/reqFeed";
 @import "../components/RecievedReqFull/recievedReqFull";
-@import "../components/ReqDialog/reqDialog";
+@import "../components/InputDialog/inputDialog";
 @import "../components/SentReq/sentReq";
 @import "../components/InfoArrow/infoArrow";
 @import "../components/Pagination/pagination";
