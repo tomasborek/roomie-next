@@ -1,8 +1,11 @@
 import React from 'react'
 
-const CustomDialog = ({image, heading, children}) => {
+const CustomDialog = ({image, heading, setOpen, children}) => {
     return (
         <div className="custom-dialog">
+            <div className="dialog-close">
+                <i onClick={() => setOpen(false)} className="fas fa-times"></i>
+            </div>
             <div className="dialog-image">
                 <img src={image} alt="" />
             </div>

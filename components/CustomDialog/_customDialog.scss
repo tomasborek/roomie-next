@@ -1,11 +1,13 @@
 .custom-dialog{
+    position: relative;
     overflow-y: auto;
     max-width: 550px;
     width: 100%;
     background-color: white;
     border-radius: 5px;
     max-height:90vh;
-    padding: 1rem;
+    padding: 0rem 1rem;
+    padding-bottom: 1rem;
     margin: 0 1rem;
     color: #333;
     .dialog-image{
@@ -24,6 +26,19 @@
             max-width: 100%;
         }
     }
+    .dialog-close{
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-bottom: 0.25rem;
+        padding-top: 0.5rem;
+        i{
+            font-size: 14px;
+            color: $mainGray;
+            cursor: pointer;
+        }
+}
     .dialog-heading{
         margin-bottom: 1rem;
         text-align: center;
