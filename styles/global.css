@@ -4391,6 +4391,18 @@ textarea {
   font-size: 14px;
 }
 
+@media screen and (max-width: 430px) {
+  .custom-dialog .dialog-action {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .custom-dialog .dialog-action button {
+    margin: 0.5rem 0;
+  }
+}
+
 .header-info .info-contact {
   display: -webkit-box;
   display: -ms-flexbox;

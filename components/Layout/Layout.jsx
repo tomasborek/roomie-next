@@ -43,7 +43,7 @@ const Layout = ({children}) => {
                                 <Snackbar open={isSnackBarOpen}><Alert sx={{width: "100%"}} severity={snackBarSeverity ? snackBarSeverity  : "error"}>{snackBarMsg}</Alert></Snackbar>
                                 <Backdrop  sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={exploreDialog}>
                                     <CustomDialog 
-                                        image={"/img/listing/welcome-dialog.png"}
+                                        image={"/img/dialogs/welcome-dialog.png"}
                                         heading={"Co vám roomie může nabídnout?"}
                                         setOpen={setExploreDialog}
                                         >

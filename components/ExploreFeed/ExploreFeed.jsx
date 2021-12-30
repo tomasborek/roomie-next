@@ -229,7 +229,7 @@ const ExploreFeed = ({variant}) => {
         <>
         <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={limitedPaginationDialog}>
             <CustomDialog 
-                image="/img/registration-steps/slide-img0.png" 
+                image="/img/dialogs/login-dialog.png" 
                 heading={"Pro pokračování je nutné se přihlásit."}
                 setOpen={setLimitedPaginationDialog}
                 >
