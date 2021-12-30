@@ -1,5 +1,6 @@
 .tagger{
     background-color: white;
+    position: relative;
     border-radius: 5px;
     color: #333;
     padding: 2rem;
@@ -15,6 +16,14 @@
         font-size: 14px;
         color: $darkerGray;
         margin-bottom: 1rem;
+    }
+    .tagger-close{
+        font-size: 14px;
+        color: $mainGray;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        cursor: pointer;
     }
     .tagger-section{
         margin-bottom: 1rem;

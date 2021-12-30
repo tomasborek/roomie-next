@@ -82,6 +82,7 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
 
     return (
         <div className="tagger">
+            <i onClick={() => setTagOverlay(false)} className="tagger-close fas fa-times"></i>
             <div className="tagger-header">{variant === "person" ? "Koho hledám?" : "Jaké bydlení hledám?"}</div>
             <div className="tagger-description">
                 Zde můžete zaklikat vaše preference  
