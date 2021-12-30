@@ -179,6 +179,10 @@ const ExploreFeed = ({variant}) => {
                 })
             }
         }
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
     }
 
     const applyFilters = (filter) => {
