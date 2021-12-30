@@ -25,25 +25,8 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
 
     //Effect
     useEffect(() => {
-        if(existingTags && !addedTags && variant === "person"){
-            setAddedTags(existingTags);
-            existingTags.smoking && setSmokingTag(existingTags.smoking);
-            existingTags.job && setJobTag(existingTags.job);
-            existingTags.age && setAgeTag(existingTags.age);
-            existingTags.gender && setGenderTag(existingTags.gender);
-            existingTags.location && setLocationTag(existingTags.location);
-        }
-    }, [existingTags])
-
-    useEffect(() => {
-        if(existingTags && !addedTags && variant === "flat"){
-            setAddedTags(existingTags);
-            existingTags.location && setLocationTag(existingTags.location);
-            existingTags.layout && setLayoutTag(existingTags.layout);
-            existingTags.internet && setInternetTag(existingTags.internet);
-            existingTags.elevator && setElevatorTag(existingTags.elevator);
-            existingTags.petAllowed && setPetAllowedTag(existingTags.petAllowed);
-            existingTags.smokingAllowed && setSmokingAllowedTag(existingTags.smokingAllowed);
+        if(existingTags && !addedTags){
+            fillExistingTags();
         }
     }, [existingTags])
 
@@ -57,6 +40,26 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
 
     
     //Functions
+    const fillExistingTags = () => {
+        if(variant === "person"){
+            setAddedTags(existingTags);
+            existingTags.smoking && setSmokingTag(existingTags.smoking);
+            existingTags.job && setJobTag(existingTags.job);
+            existingTags.age && setAgeTag(existingTags.age);
+            existingTags.gender && setGenderTag(existingTags.gender);
+            existingTags.location && setLocationTag(existingTags.location);
+        }
+        if(variant === "flat"){
+            setAddedTags(existingTags);
+            existingTags.location && setLocationTag(existingTags.location);
+            existingTags.layout && setLayoutTag(existingTags.layout);
+            existingTags.internet && setInternetTag(existingTags.internet);
+            existingTags.elevator && setElevatorTag(existingTags.elevator);
+            existingTags.petAllowed && setPetAllowedTag(existingTags.petAllowed);
+            existingTags.smokingAllowed && setSmokingAllowedTag(existingTags.smokingAllowed);
+        }
+    }
+
     const handleAdd = () => {
         if(variant === "person"){
             setAddedTags({
