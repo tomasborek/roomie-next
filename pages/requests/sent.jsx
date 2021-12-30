@@ -3,6 +3,7 @@ import React, {useEffect} from 'react';
 import Requests from '../../components/Requests/Requests';
 //next
 import { useRouter } from 'next/router';
+import Head from "next/head";
 //COmponents
 import ReqFeed from '../../components/ReqFeed/ReqFeed';
 // Context
@@ -17,9 +18,14 @@ const SentRequests = () => {
         }
     }, [currentUser])
     return (
-        <Requests>
-            <ReqFeed type="sent"/>
-        </Requests>
+        <>
+            <Head>
+                <title>Odeslané žádosti | Roomie</title>
+            </Head>
+            <Requests>
+                <ReqFeed type="sent"/>
+            </Requests>
+        </>
     )
 }
 

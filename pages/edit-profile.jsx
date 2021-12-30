@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react'
 //Router
 import { useRouter } from 'next/dist/client/router';
+import Head from 'next/head';
 //Contexts
 import { useAuth } from '../contexts/AuthContext';
 import {useDb} from "../contexts/DbContext";
@@ -267,162 +268,167 @@ const EditProfile = () => {
     }
           
     return (
-        <div className="EditProfile">
-            <Header variant="gradient" />
-            <Dialog
-            open={dDialogOpen}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-            >
-                <DialogTitle>Neuložené změny</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>Máte neuložené změny. Přejete si pokračovat?</DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button  onClick={handleDiscard}>Ano</Button>
-                    <Button onClick={() => setDDialogOpen(false)}>Ne</Button>
-                </DialogActions>
-            </Dialog>
+        <>
+            <Head>
+                <title>Upravit profil | Roomie</title>
+            </Head>
+            <div className="EditProfile">
+                <Header variant="gradient" />
+                <Dialog
+                open={dDialogOpen}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle>Neuložené změny</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>Máte neuložené změny. Přejete si pokračovat?</DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button  onClick={handleDiscard}>Ano</Button>
+                        <Button onClick={() => setDDialogOpen(false)}>Ne</Button>
+                    </DialogActions>
+                </Dialog>
 
-            <Dialog
-            open={deleteDialogOpen}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-            >
-                {error && <Alert severity="error">{error}</Alert>}
-                <DialogTitle>Přejete si smazat svůj účet?</DialogTitle>
-                <DialogContent>
-                    <DialogContentText sx={{marginBottom: "16px"}}>Potvrďte prosím své přihlašovací údaje</DialogContentText>
-                    <input ref={confirmPasswordForDeleteRef} style={{width: "100%"}} type="password" placeholder="Heslo..." />
-                </DialogContent>
-                <DialogActions>
-                    <Button  onClick={handleDelete}>Smazat</Button>
-                    <Button onClick={() => setDeleteDialogOpen(false)}>Ne</Button>
-                </DialogActions>
-            </Dialog>
+                <Dialog
+                open={deleteDialogOpen}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+                >
+                    {error && <Alert severity="error">{error}</Alert>}
+                    <DialogTitle>Přejete si smazat svůj účet?</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText sx={{marginBottom: "16px"}}>Potvrďte prosím své přihlašovací údaje</DialogContentText>
+                        <input ref={confirmPasswordForDeleteRef} style={{width: "100%"}} type="password" placeholder="Heslo..." />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button  onClick={handleDelete}>Smazat</Button>
+                        <Button onClick={() => setDeleteDialogOpen(false)}>Ne</Button>
+                    </DialogActions>
+                </Dialog>
 
 
-            <Dialog
-            open={passwordDialogOpen}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-            >
-                {error && <Alert severity="error">{error}</Alert>}
-                <DialogTitle>Pro změnu hesla prosím zadejte své stávající heslo.</DialogTitle>
-                <DialogContent>
-                    <DialogContentText sx={{marginBottom: "16px"}}>Potvrďte prosím své přihlašovací údaje</DialogContentText>
-                    <input ref={confirmPasswordForChangeRef} style={{width: "100%"}} type="password" placeholder="Heslo..." />
-                </DialogContent>
-                <DialogActions>
-                    <Button  onClick={handlePasswordChange}>Změnit</Button>
-                    <Button onClick={() => setPasswordDialogOpen(false)}>Ne</Button>
-                </DialogActions>
-            </Dialog>
-            <Dialog
-            open={uploadPfpDialog}
-            >
-                 <DialogTitle>Nahrát novou profilovou fotku</DialogTitle>
-                <DialogContent >
-                    <div className="upload-pfp-dialog">
-                        <input accept='.jpg, .png' type="file" onChange={(e) => handlePfpChange(e)} />
-                    </div>
-                </DialogContent>
-                <DialogActions>
-                    <button onClick={() => setUploadPfpDialog(false)} className="acc-btn">Zavřít</button>
-                </DialogActions>
-            </Dialog>
-            <div className="container">
-                {userData ? 
-                    <div className="edit-content">
-                        <div className="content-header">
-                            {userData ? 
-                                <>
-                                    {pfpImage ?
-                                        <img className='header-pfp' src={URL.createObjectURL(pfpImage)} alt="" />
-                                    :
+                <Dialog
+                open={passwordDialogOpen}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+                >
+                    {error && <Alert severity="error">{error}</Alert>}
+                    <DialogTitle>Pro změnu hesla prosím zadejte své stávající heslo.</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText sx={{marginBottom: "16px"}}>Potvrďte prosím své přihlašovací údaje</DialogContentText>
+                        <input ref={confirmPasswordForChangeRef} style={{width: "100%"}} type="password" placeholder="Heslo..." />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button  onClick={handlePasswordChange}>Změnit</Button>
+                        <Button onClick={() => setPasswordDialogOpen(false)}>Ne</Button>
+                    </DialogActions>
+                </Dialog>
+                <Dialog
+                open={uploadPfpDialog}
+                >
+                    <DialogTitle>Nahrát novou profilovou fotku</DialogTitle>
+                    <DialogContent >
+                        <div className="upload-pfp-dialog">
+                            <input accept='.jpg, .png' type="file" onChange={(e) => handlePfpChange(e)} />
+                        </div>
+                    </DialogContent>
+                    <DialogActions>
+                        <button onClick={() => setUploadPfpDialog(false)} className="acc-btn">Zavřít</button>
+                    </DialogActions>
+                </Dialog>
+                <div className="container">
+                    {userData ? 
+                        <div className="edit-content">
+                            <div className="content-header">
+                                {userData ? 
                                     <>
-                                        {(userData.data().mainInfo.pfp != "") ?
-                                            <img className="header-pfp" src={userData.data().mainInfo.pfp} alt="" />
-                                            :
-                                            <div className="header-pfp"></div> 
+                                        {pfpImage ?
+                                            <img className='header-pfp' src={URL.createObjectURL(pfpImage)} alt="" />
+                                        :
+                                        <>
+                                            {(userData.data().mainInfo.pfp != "") ?
+                                                <img className="header-pfp" src={userData.data().mainInfo.pfp} alt="" />
+                                                :
+                                                <div className="header-pfp"></div> 
+                                            }
+                                        </>
                                         }
                                     </>
-                                    }
-                                </>
-                                :
-                                <div className="header-pfp"></div> 
+                                    :
+                                    <div className="header-pfp"></div> 
+                                }
+                                <h2 className="header-name">{userData.data().mainInfo.username}</h2>
+                                <a onClick={() => setUploadPfpDialog(true)} className="header-link">Změnit profilovou fotku</a>
+                            </div>
+                            {pfpImage != null &&
+                                <div className="edit-file-uploaded">
+                                        <i className="fas fa-check"></i>
+                                        <p className="file-uploaded-description">Soubor nahrán! ({pfpImage.name})</p>
+                                </div> 
                             }
-                            <h2 className="header-name">{userData.data().mainInfo.username}</h2>
-                            <a onClick={() => setUploadPfpDialog(true)} className="header-link">Změnit profilovou fotku</a>
-                        </div>
-                        {pfpImage != null &&
-                            <div className="edit-file-uploaded">
-                                    <i className="fas fa-check"></i>
-                                    <p className="file-uploaded-description">Soubor nahrán! ({pfpImage.name})</p>
-                            </div> 
-                        }
 
-                        <div className="content-form">
-                            <div className="form-item">
-                                <p className="item-description">Viditelnost profilu</p>
-                            <Switcher/>
-                            </div>
-                    
-                            <p className="form-section-header">
-                                Osobní a přihlašovací údaje
-                            </p>
-                            <div className="form-item">
-                                <p className="item-description">Jméno</p>
-                                <input disabled maxLength={15} ref={usernameRef} type="text" className="item-input" />
-                            </div>
-                            <div className="form-item">
-                                <p className="item-description">E-mail</p>
-                                <input maxLength={30} ref={emailRef} type="text" className="item-input" />
-                            </div>
-                            <div className="form-item">
-                                <p className="item-description"> Tel. číslo</p>
-                                <input maxLength={9} ref={phoneRef} type="text" className="item-input" />
-                            </div>
-                            <p className="form-section-header">
-                                Sociální sítě
-                            </p>
-                            <div className="form-item">
-                                <p className="item-description">Instagram</p>
-                                <input ref={igRef} type="text" className="item-input" />
-                            </div>
-                            <div className="form-item">
-                                <p className="item-description">Facebook</p>
-                                <input ref={fbRef} type="text" className="item-input" />
-                            </div>
-                            <p className="form-section-header">
-                            Účet a zabezpečení
-                            </p>
-                            <div className="form-item">
-                                <p className="item-description">Změnit heslo</p>
-                                <input maxLength={30} ref={passwordRef} type="password" placeholder='Zadejte nové heslo...' className="item-input" />
-                            </div>
-                        </div>
-        
-                        <div className="content-account-links">
-                            <a className="links-deactivate">dočasně deaktivovat účet</a>
-                            <a onClick={() => setDeleteDialogOpen(true)} className="links-delete">smazat účet</a>
-                        </div>
+                            <div className="content-form">
+                                <div className="form-item">
+                                    <p className="item-description">Viditelnost profilu</p>
+                                <Switcher/>
+                                </div>
                         
-                        <div className="content-btns">
-                            <button onClick={() => passwordRef.current.value ? setPasswordDialogOpen(true) : handleSave()} className="main-btn">Uložit změny</button>
-                            <button onClick={() => setDDialogOpen(true)} className="acc-btn">Zahodit změny</button>
-                        </div>
-                    
-                </div>
-                :
-                <div className="edit-loading">
-                    <CircularProgress/>
-                </div>
-            }
-        
+                                <p className="form-section-header">
+                                    Osobní a přihlašovací údaje
+                                </p>
+                                <div className="form-item">
+                                    <p className="item-description">Jméno</p>
+                                    <input disabled maxLength={15} ref={usernameRef} type="text" className="item-input" />
+                                </div>
+                                <div className="form-item">
+                                    <p className="item-description">E-mail</p>
+                                    <input maxLength={30} ref={emailRef} type="text" className="item-input" />
+                                </div>
+                                <div className="form-item">
+                                    <p className="item-description"> Tel. číslo</p>
+                                    <input maxLength={9} ref={phoneRef} type="text" className="item-input" />
+                                </div>
+                                <p className="form-section-header">
+                                    Sociální sítě
+                                </p>
+                                <div className="form-item">
+                                    <p className="item-description">Instagram</p>
+                                    <input ref={igRef} type="text" className="item-input" />
+                                </div>
+                                <div className="form-item">
+                                    <p className="item-description">Facebook</p>
+                                    <input ref={fbRef} type="text" className="item-input" />
+                                </div>
+                                <p className="form-section-header">
+                                Účet a zabezpečení
+                                </p>
+                                <div className="form-item">
+                                    <p className="item-description">Změnit heslo</p>
+                                    <input maxLength={30} ref={passwordRef} type="password" placeholder='Zadejte nové heslo...' className="item-input" />
+                                </div>
+                            </div>
+            
+                            <div className="content-account-links">
+                                <a className="links-deactivate">dočasně deaktivovat účet</a>
+                                <a onClick={() => setDeleteDialogOpen(true)} className="links-delete">smazat účet</a>
+                            </div>
+                            
+                            <div className="content-btns">
+                                <button onClick={() => passwordRef.current.value ? setPasswordDialogOpen(true) : handleSave()} className="main-btn">Uložit změny</button>
+                                <button onClick={() => setDDialogOpen(true)} className="acc-btn">Zahodit změny</button>
+                            </div>
+                        
+                    </div>
+                    :
+                    <div className="edit-loading">
+                        <CircularProgress/>
+                    </div>
+                }
+            
+            </div>
+            {userData &&<Footer/>}
         </div>
-        {userData &&<Footer/>}
-    </div>
+    </>
     )
 }
 

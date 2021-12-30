@@ -26,7 +26,7 @@ export default function Home() {
   return (
     <>
     <Head>
-      <title>Roomie</title>
+      <title>Roomie - portál pro hledání spolubydlení</title>
     </Head>
 
     <div className="Home">

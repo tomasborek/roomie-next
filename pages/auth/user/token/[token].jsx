@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from 'react'
 //Next
 import { useRouter } from 'next/router'
+import Head from 'next/head';
 //Contexts
 import { useFunctions } from '../../../../contexts/FunctionsContext';
 //Components
@@ -27,11 +28,16 @@ const VerifyEmail = () => {
         }
     }, [router.isReady])
     return (
-        <div className='VerifyEmail'>
-            <img src="/img/logos/logo-small.png"/>
-            <h2>Roomie.cz</h2>
-            {(!isVerified && !failed) ? <> <h3>Prosím vyčkete...</h3> <CircularProgress/> </> : isVerified ? <h3>Váš e-mail byl ověřen</h3> : failed ? <h3>Něco se nepodařilo.</h3> : ""}
-        </div>
+        <>
+            <Head>
+                <title>Ověřit e-mail | Roomie</title>
+            </Head>
+            <div className='VerifyEmail'>
+                <img src="/img/logos/logo-small.png"/>
+                <h2>Roomie.cz</h2>
+                {(!isVerified && !failed) ? <> <h3>Prosím vyčkete...</h3> <CircularProgress/> </> : isVerified ? <h3>Váš e-mail byl ověřen</h3> : failed ? <h3>Něco se nepodařilo.</h3> : ""}
+            </div>
+        </>
     )
 }
 

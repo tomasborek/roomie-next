@@ -223,10 +223,6 @@ const ExploreFeed = ({variant}) => {
     }
     return (
         <>
-        <Head>
-            <title>Prohlížet {variant === "flatmate" ? "Prohlížet byty" : "Prohlížet spolubydlící"} | Roomie</title>
-        </Head>
-
         <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={limitedPaginationDialog}>
             <CustomDialog 
                 image="/img/registration-steps/slide-img0.png" 
