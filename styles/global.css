@@ -3610,6 +3610,10 @@ textarea {
   margin-bottom: 1rem;
 }
 
+.reqs-feed-empty p {
+  text-align: center;
+}
+
 .reqs-feed-sent .sent-heading {
   margin-bottom: 1rem;
   color: #B8B8B8;
@@ -3635,6 +3639,10 @@ textarea {
 .reqs-feed-sent .sent-empty i {
   margin-bottom: 1rem;
   font-size: 18px;
+}
+
+.reqs-feed-sent .sent-empty p {
+  text-align: center;
 }
 
 .recieved-req-full {
