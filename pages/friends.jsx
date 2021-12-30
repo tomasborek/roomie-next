@@ -28,7 +28,7 @@ const Friends = () => {
 
     useEffect(() => {
         if(currentUser){
-            const deleteAcceptedNotifications = callable("deleteAcceptedNotifications");
+            const deleteAcceptedNotifications = callable("requests-deleteAcceptedNotifications");
             let friendsObject = {};
             getFriends(currentUser.uid, "first", friendsSnaps)
             .then(docs => {
