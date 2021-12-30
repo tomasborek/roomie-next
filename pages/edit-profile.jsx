@@ -66,10 +66,7 @@ const EditProfile = () => {
             .catch(error =>{
             console.log(error.message);
             })
-        }else{
-            router.back();
         }
-        
     }, [currentUser])
 
     //Fills input with user's data after userData has been fetched
