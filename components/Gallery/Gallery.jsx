@@ -43,7 +43,7 @@ const Gallery = ({type, listingImgs, setListingImgs, addedListingImgs, setAddedL
         }
         if(type === "normalPfp" || type === "normalListingImg"){
             setLoading(true);
-            const deleteImgs = callable("deleteImgs");
+            const deleteImgs = callable("images-deleteImgs");
             const imageInfo = {
                 url: image,
                 uid: currentUser.uid,
@@ -88,7 +88,7 @@ const Gallery = ({type, listingImgs, setListingImgs, addedListingImgs, setAddedL
                 <div onClick={() => !state.editListing ? handleView(pfp) : ""} className="main-img gallery-img-container">
                     {state.editListing &&
                         <div className={`container-edit-icon`}>
-                            <i onClick={() => handleSelect(-1)} className="fas fa-pen"></i>
+                            <i onClick={() => handleSelect(-1)} className="fas fa-camera"></i>
                             {(addedPfp) ? <i onClick={() => handleDelete("addedPfp")} className="fas fa-trash container-delete"></i> :
                             (pfp) ?  <i onClick={() => handleDelete("normalPfp", pfp)} className="fas fa-trash container-delete"></i> : ""}
                         </div>
@@ -111,7 +111,7 @@ const Gallery = ({type, listingImgs, setListingImgs, addedListingImgs, setAddedL
                 <div onClick={() => !state.editListing ? handleView(listingImgs[0]) : ""} className="gallery-img-container secondary-img">
                     {state.editListing &&
                         <div className={`container-edit-icon`}>
-                            <i onClick={() => handleSelect(0)} className="fas fa-pen"></i>
+                            <i onClick={() => handleSelect(0)} className="fas fa-camera"></i>
                             {(addedListingImgs[0]) ? <i onClick={() => handleDelete("addedListingImg", 0)} className="fas fa-trash container-delete"></i> :
                             (listingImgs[0]) ? <i onClick={() => handleDelete("normalListingImg", listingImgs[0], 0)} className="fas fa-trash container-delete"></i> : ""}
                         </div>
@@ -134,7 +134,7 @@ const Gallery = ({type, listingImgs, setListingImgs, addedListingImgs, setAddedL
                 <div onClick={() => !state.editListing ? handleView(listingImgs[1]) : ""} className="gallery-img-container secondary-img">
                     {state.editListing &&
                         <div className={`container-edit-icon`}>
-                            <i onClick={() => handleSelect(1)} className="fas fa-pen"></i>
+                            <i onClick={() => handleSelect(1)} className="fas fa-camera"></i>
                             {(addedListingImgs[1]) ? <i onClick={() => handleDelete("addedListingImg", 1)} className="fas fa-trash container-delete"></i> :
                             (listingImgs[1]) ? <i onClick={() => handleDelete("normalListingImg", listingImgs[1], 1)} className="fas fa-trash container-delete"></i> : ""}
                         </div>
@@ -167,7 +167,7 @@ const Gallery = ({type, listingImgs, setListingImgs, addedListingImgs, setAddedL
                 <div onClick={() => !state.editListing ? handleView(listingImgs[0]) : ""} className="gallery-img-container secondary-img">
                     {state.editListing &&
                         <div className={`container-edit-icon`}>
-                            <i onClick={() => handleSelect(0)} className="fas fa-pen"></i>
+                            <i onClick={() => handleSelect(0)} className="fas fa-camera"></i>
                             {(addedListingImgs[0]) ? <i onClick={() => handleDelete("addedListingImg", 0)} className="fas fa-trash container-delete"></i> :
                             (listingImgs[0]) ? <i onClick={() => handleDelete("normalListingImg", listingImgs[0], 0)} className="fas fa-trash container-delete"></i> : ""}
                         </div>
@@ -190,7 +190,7 @@ const Gallery = ({type, listingImgs, setListingImgs, addedListingImgs, setAddedL
                <div onClick={() => !state.editListing ? handleView(listingImgs[1]) : ""} className="gallery-img-container secondary-img">
                     {state.editListing &&
                         <div className={`container-edit-icon`}>
-                            <i onClick={() => handleSelect(1)} className="fas fa-pen"></i>
+                            <i onClick={() => handleSelect(1)} className="fas fa-camera"></i>
                             {(addedListingImgs[1]) ? <i onClick={() => handleDelete("addedListingImg", 1)} className="fas fa-trash container-delete"></i> :
                             (listingImgs[1]) ? <i onClick={() => handleDelete("normalListingImg", listingImgs[1], 1)} className="fas fa-trash container-delete"></i> : ""}
                         </div>
@@ -213,7 +213,7 @@ const Gallery = ({type, listingImgs, setListingImgs, addedListingImgs, setAddedL
                 <div onClick={() => !state.editListing ? handleView(listingImgs[2]) : ""} className="gallery-img-container secondary-img">
                     {state.editListing &&
                         <div className={`container-edit-icon`}>
-                            <i onClick={() => handleSelect(2)} className="fas fa-pen"></i>
+                            <i onClick={() => handleSelect(2)} className="fas fa-camera"></i>
                             {(addedListingImgs[2]) ? <i onClick={() => handleDelete("addedListingImg", 2)} className="fas fa-trash container-delete"></i> :
                             (listingImgs[2]) ? <i onClick={() => handleDelete("normalListingImg", listingImgs[2], 2)} className="fas fa-trash container-delete"></i> : ""}
                         </div>
@@ -236,7 +236,7 @@ const Gallery = ({type, listingImgs, setListingImgs, addedListingImgs, setAddedL
                 <div onClick={() => !state.editListing ? handleView(listingImgs[3]) : ""} className="gallery-img-container secondary-img">
                     {state.editListing &&
                         <div className={`container-edit-icon`}>
-                            <i onClick={() => handleSelect(3)} className="fas fa-pen"></i>
+                            <i onClick={() => handleSelect(3)} className="fas fa-camera"></i>
                             {(addedListingImgs[3]) ? <i onClick={() => handleDelete("addedListingImg", 3)} className="fas fa-trash container-delete"></i> :
                             (listingImgs[3]) ? <i onClick={() => handleDelete("normalListingImg", listingImgs[3], 3)} className="fas fa-trash container-delete"></i> : ""}
                         </div>
@@ -259,7 +259,7 @@ const Gallery = ({type, listingImgs, setListingImgs, addedListingImgs, setAddedL
                 <div onClick={() => !state.editListing ? handleView(listingImgs[4]) : ""} className="gallery-img-container secondary-img">
                     {state.editListing &&
                         <div className={`container-edit-icon`}>
-                            <i onClick={() => handleSelect(4)} className="fas fa-pen"></i>
+                            <i onClick={() => handleSelect(4)} className="fas fa-camera"></i>
                             {(addedListingImgs[4]) ? <i onClick={() => handleDelete("addedListingImg", 4)} className="fas fa-trash container-delete"></i> :
                             (listingImgs[4]) ? <i onClick={() => handleDelete("normalListingImg", listingImgs[4], 4)} className="fas fa-trash container-delete"></i> : ""}
                         </div>
@@ -282,7 +282,7 @@ const Gallery = ({type, listingImgs, setListingImgs, addedListingImgs, setAddedL
                 <div onClick={() => !state.editListing ? handleView(listingImgs[5]) : ""} className="gallery-img-container secondary-img">
                     {state.editListing &&
                         <div className={`container-edit-icon`}>
-                            <i onClick={() => handleSelect(5)} className="fas fa-pen"></i>
+                            <i onClick={() => handleSelect(5)} className="fas fa-camera"></i>
                             {(addedListingImgs[5]) ? <i onClick={() => handleDelete("addedListingImg", 5)} className="fas fa-trash container-delete"></i> :
                             (listingImgs[5]) ? <i onClick={() => handleDelete("normalListingImg", listingImgs[5], 5)} className="fas fa-trash container-delete"></i> : ""}
                         </div>
