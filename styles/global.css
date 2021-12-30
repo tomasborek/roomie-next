@@ -4073,8 +4073,9 @@ textarea {
 
 .gallery .gallery-current-img {
   width: 95vw;
-  max-width: 700px;
+  max-width: 600px;
   height: auto;
+  max-height: 95vh;
 }
 
 .gallery .gallery-close {
@@ -4146,6 +4147,7 @@ textarea {
           align-items: center;
   width: 95%;
   max-width: 700px;
+  max-height: 98vh;
 }
 
 .gallery-input .input-heading {
@@ -4156,8 +4158,8 @@ textarea {
 }
 
 .gallery-input .input-img {
-  height: 400px;
-  max-width: 700px;
+  height: 500px;
+  width: 500px;
   -o-object-fit: cover;
      object-fit: cover;
   margin-bottom: 1rem;
@@ -4264,13 +4266,15 @@ textarea {
 }
 
 .custom-dialog {
+  position: relative;
   overflow-y: auto;
   max-width: 550px;
   width: 100%;
   background-color: white;
   border-radius: 5px;
   max-height: 90vh;
-  padding: 1rem;
+  padding: 0rem 1rem;
+  padding-bottom: 1rem;
   margin: 0 1rem;
   color: #333;
 }
@@ -4297,6 +4301,27 @@ textarea {
 .custom-dialog .dialog-image img {
   margin: 0 auto;
   max-width: 100%;
+}
+
+.custom-dialog .dialog-close {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-bottom: 0.25rem;
+  padding-top: 0.5rem;
+}
+
+.custom-dialog .dialog-close i {
+  font-size: 14px;
+  color: #B8B8B8;
+  cursor: pointer;
 }
 
 .custom-dialog .dialog-heading {
