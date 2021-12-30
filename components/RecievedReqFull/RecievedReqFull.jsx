@@ -25,7 +25,7 @@ const RecievedReqFull = ({reqInfo, id, setOpen, setRequestLoading, setReqResolve
             let reciever;
             setRequestLoading(true);
             setOpen(false);
-            const resolveRequest = callable("resolveRequest");
+            const resolveRequest = callable("requests-resolveRequest");
             getUser(currentUser.uid)
             .then((user) => {
                 reciever = user;
@@ -61,7 +61,7 @@ const RecievedReqFull = ({reqInfo, id, setOpen, setRequestLoading, setReqResolve
         }
 
         const handleFriendship = (user) => {
-            const createFriend = callable("createFriend");
+            const createFriend = callable("requests-createFriend");
             const friendInfo = {
                 reciever: user.data(),
                 recieverUid: user.id,
