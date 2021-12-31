@@ -4604,7 +4604,7 @@ textarea {
   }
 }
 
-@media screen and (max-width: 340px) {
+@media screen and (max-width: 400px) {
   .header-info .info-contact.unlocked .contact-items .items-main {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
