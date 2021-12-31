@@ -30,7 +30,7 @@ const ExploreFlatmate= ({name, age, gender, location, money, available, bio, pfp
                      <div className="info-budget row-col"><span>Rozpočet: </span> 
                         {money >= 10000 ? money.toString().substr(0,2) + " " + money.toString().substr(2,6) : money.toString().substr(0,1) + " " + money.toString().substr(1,5)},-
                     </div>
-                     <div className="info-locations row-col"><span>Lokace:</span> {location[0].substr(0,7)}{location[0].length > 7 && "..."}</div>
+                     <div className="info-locations row-col"><span>Lokace:</span> {location.substr(0,7)}{location.length > 7 && "..."}</div>
               </div>
               <div className="info-row">
                      <div className="info-gender row-col"><span>Pohlaví:</span> {gender == "female" ? "Žena" : gender == "male" ? "Muž" : "Jiné"}</div>
