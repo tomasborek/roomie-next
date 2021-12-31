@@ -126,6 +126,10 @@ const ExploreFeed = ({variant}) => {
                             flatmateListingsArray = [...flatmateListingsArray, req];
                         })
                         setFlatmateListings(flatmateListingsArray);
+                        window.scrollTo({
+                            top: 0,
+                            behavior: "smooth",
+                        });
                     }
                     setIsPaginationDisabled(false);
                 })
@@ -141,6 +145,10 @@ const ExploreFeed = ({variant}) => {
                             flatmateListingsArray = [...flatmateListingsArray, req];
                         })
                         setFlatmateListings(flatmateListingsArray);
+                        window.scrollTo({
+                            top: 0,
+                            behavior: "smooth",
+                        });
                     }
                     setIsPaginationDisabled(false);
                 })
@@ -203,10 +211,6 @@ const ExploreFeed = ({variant}) => {
                 })
             }
         }
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-        });
     }
 
     const applyFilters = (filter) => {
