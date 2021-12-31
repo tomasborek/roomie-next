@@ -72,3 +72,21 @@ exports.dateIntoTimeStamp = functions.https.onRequest((req, res) => {
     res.status(500).send(error);
   })
 })
+
+
+exports.resetFriends = functions.https.onRequest((req, res) => {
+  const db = admin.firestore();
+  db.collection("listings").get().then((docs) => {
+    return Promise.all(
+      docs.docs.map((listing) => {
+        return db.collection("listings").doc(listing.id).update({
+          friends: [],
+        })
+      })
+    )
+  }).then((response) => {
+    res.status(200).send("Success");
+  }).catch((error) => {
+    res.status(500).send(error);
+  })
+})
