@@ -197,6 +197,32 @@
     }
 }
 
+.Listing .listing-content .content-header .header-info .info-main{
+    .main-more{
+        cursor: pointer;
+    }
+    .main-more-list{
+        height: 0;
+        position: absolute;
+        right: 0;
+        top: 3rem;
+        background-color: white;
+        border-radius: 5px;
+        border: 1px solid $mainGray;
+        transition: all 200ms;
+        overflow: hidden;
+        opacity: 0;
+        li {
+            padding: 0.5rem;
+            cursor: pointer;
+        }
+        &.active{
+            height: auto;
+            opacity: 1;
+        }
+    }
+}
+
 @media screen and (max-width: 900px){
     .Listing .listing-content .content-header .mid-container{
         flex-direction: column;

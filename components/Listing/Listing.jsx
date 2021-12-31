@@ -73,6 +73,8 @@ const Listing = ({type}) => {
     const [flatTagOverlay, setFlatTagOverlay] = useState(false);
     const [flatBoxerOverlay, setFlatBoxerOverlay] = useState(false);
     const [personBoxerOverlay, setPersonBoxerOverlay] = useState(false);
+    const [moreInfoOpen, setMoreInfoOpen] = useState(false);
+    const [reportDialog, setReportDialog] = useState(false);
     const [galleryInput, setGalleryInput] = useState({
         open: false,
         type: "none",
@@ -89,6 +91,7 @@ const Listing = ({type}) => {
     const [flatBio, setFlatBio] = useState(null);
     const [personBio, setPersonBio] = useState(null);
     const [requestMessage, setRequestMessage] = useState(null);
+    const [reportMessage, setReportMessage] = useState(null);
 
     //CR---
   
@@ -299,6 +302,11 @@ const Listing = ({type}) => {
         })
     }
 
+    const handleReport = () => {
+        const message = reportMessage;
+
+    }
+
     if(type === "flatmate"){
         return (
             <>
@@ -308,9 +316,9 @@ const Listing = ({type}) => {
             <div className="Listing FlatMateListing">
                 <Header variant="white" />
         {/*Taggers and boxer */}
-                <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personTagOverlay}><Tagger variant="person" addedTags={addedPersonTags} existingTags={listingInfo && listingInfo.data().personTags} setTagOverlay={setPersonTagOverlay} setAddedTags={setAddedPersonTags}/></Backdrop>
-                <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={flatTagOverlay}><Tagger variant="flat" addedTags={addedFlatTags} existingTags={listingInfo && listingInfo.data().flatTags } setTagOverlay={setFlatTagOverlay} setAddedTags={setAddedFlatTags}/></Backdrop>
-                <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personBoxerOverlay}><Boxer setBoxerOverlay={setPersonBoxerOverlay} variant="person" existingBoxes={listingInfo && listingInfo.data().personBoxes} setAddedBoxes={setAddedPersonBoxes} addedBoxes={addedPersonBoxes}/></Backdrop>
+                <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personTagOverlay}><Tagger variant="person" addedTags={addedPersonTags} existingTags={listingInfo && listingInfo.data().personTags} setTagOverlay={setPersonTagOverlay} setAddedTags={setAddedPersonTags}/></Backdrop>
+                <Backdrop sx={{zIndex: (theme) => theme.zIndex.drawer + 1 }} open={flatTagOverlay}><Tagger variant="flat" addedTags={addedFlatTags} existingTags={listingInfo && listingInfo.data().flatTags } setTagOverlay={setFlatTagOverlay} setAddedTags={setAddedFlatTags}/></Backdrop>
+                <Backdrop sx={{zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personBoxerOverlay}><Boxer setBoxerOverlay={setPersonBoxerOverlay} variant="person" existingBoxes={listingInfo && listingInfo.data().personBoxes} setAddedBoxes={setAddedPersonBoxes} addedBoxes={addedPersonBoxes}/></Backdrop>
                 <GalleryInput 
                         object={galleryInput} 
                         setObject={setGalleryInput} 
@@ -353,8 +361,23 @@ const Listing = ({type}) => {
                     </DialogActions>
                 </Dialog>
             {/* Contatc request dialog */}
-                <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={reqDialogOpen}>
-                    <InputDialog setMessage={setRequestMessage} message={requestMessage} setOpen={setReqDialogOpen} handleSend={handleRequest}/>
+                <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={reqDialogOpen}>
+                    <InputDialog
+                        heading="Odelsat žádost o kontakt"
+                        description="Inzerant uvidí vaší žádost s vaší zprávou a může se rozhodnout zda vaší žádost přijme a poskytne vám své kontaktní údaje."
+                        setMessage={setRequestMessage} 
+                        message={requestMessage} 
+                        setOpen={setReqDialogOpen} 
+                        handleSend={handleRequest}/>
+                </Backdrop>
+                <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={reportDialog}>
+                    <InputDialog
+                        heading={`Nahlásit uživatele ${listingInfo && listingInfo.data().userInfo.username}`}
+                        description="Prosím popište důvody nahlášení."
+                        setMessage={setReportMessage} 
+                        message={reportMessage} 
+                        setOpen={setReportDialog} 
+                        handleSend={handleReport}/>
                 </Backdrop>
             
                 {/*main*/}
@@ -410,7 +433,10 @@ const Listing = ({type}) => {
                                             {((currentUser && currentUser.uid == listingInfo.data().userInfo.uid) && (listingInfo && listingInfo.data().visible)) && 
                                                 <button onClick={() => setEditListing(prevState => !prevState)}className="main-edit-profile">{editListing ? "Zpět" : "Upravit inzerát"}</button>
                                             }
-                                            <i className="main-more fas fa-ellipsis-h"></i>
+                                            <i onClick={() => setMoreInfoOpen(prevState => !prevState)} className="main-more fas fa-ellipsis-h"></i>
+                                            <ul className={`main-more-list ${moreInfoOpen && "active"}`}>
+                                                <li onClick={() => setReportDialog(true)}>Nahlásit uživatele</li>
+                                            </ul>
                                             <div className="main-description">
                                                 <p>{listingInfo.data().userInfo.age}, {listingInfo.data().userInfo.gender === "male" ? "muž" : listingInfo.data().userInfo.gender === "female" ? "žena" : "jiné"}</p>
                                             </div>
@@ -521,19 +547,37 @@ const Listing = ({type}) => {
                                 </Button>
                         </DialogActions>
                     </Dialog>
-                <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={reqDialogOpen}>
-                    <ReqDialog setMessage={setRequestMessage} message={requestMessage} setOpen={setReqDialogOpen} handleSend={handleRequest}/>
-                </Backdrop>
-                <GalleryInput 
-                            object={galleryInput} 
-                            setObject={setGalleryInput} 
-                            pfp={pfp && pfp}
-                            listingImgs={listingImgs} 
-                            addedListingImgs={addedListingImgs} 
-                            setAddedListingImgs={setAddedListingImgs} 
-                            addedPfp={addedPfp} 
-                            setAddedPfp={setAddedPfp} 
-                            />
+
+                    <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={reqDialogOpen}>
+                        <InputDialog
+                            heading="Odelsat žádost o kontakt"
+                            description="Inzerant uvidí vaší žádost s vaší zprávou a může se rozhodnout zda vaší žádost přijme a poskytne vám své kontaktní údaje."
+                            setMessage={setRequestMessage} 
+                            message={requestMessage} 
+                            setOpen={setReqDialogOpen} 
+                            handleSend={handleRequest}/>
+                    </Backdrop>
+
+                    <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={reportDialog}>
+                        <InputDialog
+                            heading={`Nahlásit uživatele ${listingInfo && listingInfo.data().userInfo.username}`}
+                            description="Prosím popište důvody nahlášení."
+                            setMessage={setReportMessage} 
+                            message={reportMessage} 
+                            setOpen={setReportDialog} 
+                            handleSend={handleReport}/>
+                    </Backdrop>
+
+                    <GalleryInput 
+                                object={galleryInput} 
+                                setObject={setGalleryInput} 
+                                pfp={pfp && pfp}
+                                listingImgs={listingImgs} 
+                                addedListingImgs={addedListingImgs} 
+                                setAddedListingImgs={setAddedListingImgs} 
+                                addedPfp={addedPfp} 
+                                setAddedPfp={setAddedPfp} 
+                                />
 
                 <div className="listing-banner"></div>
         {/*Listing content */}
@@ -586,7 +630,10 @@ const Listing = ({type}) => {
                                         {((currentUser && currentUser.uid == listingInfo.data().userInfo.uid) && (listingInfo && listingInfo.data().visible)) && 
                                             <button onClick={() => setEditListing(prevState => !prevState)} className="main-edit-profile">{editListing ? "Zpět" : "Upravit inzerát"}</button>
                                         }  
-                                            <i className="main-more fas fa-ellipsis-h"></i>
+                                            <i onClick={() => setMoreInfoOpen(prevState => !prevState)} className="main-more fas fa-ellipsis-h"></i>
+                                            <ul className={`main-more-list ${moreInfoOpen && "active"}`}>
+                                                <li onClick={() => setReportDialog(true)}>Nahlásit uživatele</li>
+                                            </ul>
                                             <div className="main-description">
                                                 <p>{listingInfo && listingInfo.data().flatBoxes.location}</p>
                                             </div>
