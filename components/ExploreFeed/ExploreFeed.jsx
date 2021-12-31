@@ -24,7 +24,15 @@ const ExploreFeed = ({variant}) => {
     const {getListings, getListingsFilter} = useDb();
     const router = useRouter();
     const {currentUser} = useAuth();
-    const {flatListingsValue, flatmateListingsValue, flatSnapsValue, flatmateSnapsValue, activeFiltersValue, flatmatePageValue, flatPageValue} = useExplore();
+    const {
+        flatListingsValue,
+        flatmateListingsValue, 
+        flatSnapsValue, flatmateSnapsValue, 
+        activeFiltersValue, 
+        flatmatePageValue, 
+        flatPageValue,
+        currentVariantValue,
+    } = useExplore();
     const [flatListings, setFlatListings] = flatListingsValue;
     const [flatmateListings, setFlatmateListings] = flatmateListingsValue;
     const [flatSnaps, setFlatSnaps] = flatSnapsValue;
@@ -32,6 +40,7 @@ const ExploreFeed = ({variant}) => {
     const [activeFilters, setActiveFilters] = activeFiltersValue;
     const [flatmatePage, setFlatmatePage] = flatmatePageValue;
     const [flatPage, setFlatPage] = flatPageValue;
+    const [currentVariant, setCurrentVariant] = currentVariantValue;
     //State
     const [filterOpen, setFilterOpen] = useState(false);
     const [limitedPaginationDialog, setLimitedPaginationDialog] = useState(false);
@@ -57,8 +66,23 @@ const ExploreFeed = ({variant}) => {
     }, []);
 
     useEffect(() => {
-        setActiveFilters({});
-        applyFilters({});
+        if(!currentVariant){
+            setCurrentVariant(variant);
+        }else if(currentVariant != variant){
+            if(Object.keys(activeFilters).length){
+                setActiveFilters({});
+                if(currentVariant === "flatmate"){
+                    setFlatmateListings(null);
+                }
+                if(currentVariant === "flat"){
+                    setFlatListings(null);
+                }
+            }
+            setCurrentVariant(variant);
+        }else{
+            return;
+        }    
+
     }, [variant])
 
     useEffect(() => {
@@ -229,7 +253,7 @@ const ExploreFeed = ({variant}) => {
         <>
         <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={limitedPaginationDialog}>
             <CustomDialog 
-                image="/img/dialogs/login-dialog.png" 
+                image="/img/dialogs/.png" 
                 heading={"Pro pokračování je nutné se přihlásit."}
                 setOpen={setLimitedPaginationDialog}
                 >
