@@ -2961,6 +2961,12 @@ textarea {
   margin-bottom: 1rem;
   width: 400px;
   background-color: white;
+  -webkit-transition: all 200ms;
+  transition: all 200ms;
+}
+
+.register-box .box-content .content-register input:focus {
+  border-color: #309EAB;
 }
 
 .register-box .box-content .content-register input.error {

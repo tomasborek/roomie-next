@@ -9,6 +9,10 @@
         margin-bottom: 1rem;
         width: 400px;
         background-color: white;
+        transition: all 200ms;
+        &:focus{
+            border-color:$mainColor ;
+        }
 
         &.error{
             border-color: red;
