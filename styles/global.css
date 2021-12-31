@@ -2404,7 +2404,7 @@ textarea {
   .login-box h1 {
     text-align: center;
   }
-  .login-box .input-box input {
+  .login-box .input-box {
     width: 100%;
   }
 }
