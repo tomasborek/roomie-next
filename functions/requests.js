@@ -130,6 +130,7 @@ exports.createFriend = functions.https.onCall((data, context) => {
         age: sender.age,
         type: sender.type,
         gender: sender.gender,
+        originalSender: senderUid,
         listingId: senderListing,
         timeStamp: admin.firestore.FieldValue.serverTimestamp(),
       }).then((response) => {
@@ -139,6 +140,7 @@ exports.createFriend = functions.https.onCall((data, context) => {
           age: reciever.mainInfo.age,
           type: reciever.mainInfo.type,
           gender: reciever.mainInfo.gender,
+          originalSender: senderUid,
           listingId: recieverListing,
           timeStamp: admin.firestore.FieldValue.serverTimestamp(),
         });
@@ -178,6 +180,7 @@ exports.recievedNotification = functions.firestore
 exports.acceptedNotification = functions.firestore
     .document("users/{userId}/friends/{friendId}")
     .onCreate((snap, context) => {
+      if(snap.ref.parent.parent.id != snap.data().originalSender) return Promise.resolve("Not sender");
       const db = admin.firestore();
       return db.collection("users")
           .doc(snap.ref.parent.parent.id)
