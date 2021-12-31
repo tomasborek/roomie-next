@@ -346,7 +346,6 @@ const CrListing = ({type}) => {
                                 <div className="header-info">
                                     <div className="info-main">
                                         <h1 className="main-name">{listingInfo.data().userInfo.username}</h1>
-                                        <i className="main-more fas fa-ellipsis-h"></i>
                                         <div className="main-description">
                                             <p>{listingInfo.data().userInfo.age}, {listingInfo.data().userInfo.gender === "male" ? "muž" : listingInfo.data().userInfo.gender === "female" ? "žena" : "jiné"}</p>
                                         </div>
@@ -526,7 +525,6 @@ const CrListing = ({type}) => {
                                 <div className="header-info">
                                     <div className="info-main">
                                         <h1 className="main-name">Váš byt</h1> 
-                                        <i className="main-more fas fa-ellipsis-h"></i>
                                         <div className="main-description">
                                             <p>{listingInfo.data().flatBoxes.location}</p>
                                         </div>
