@@ -20,7 +20,6 @@ import Tag from '../Tag/Tag';
 import Footer from "../Footer/Footer";
 import Tagger from '../Tagger/Tagger';
 import Boxer from '../Boxer/Boxer';
-import ReqDialog from '../ReqDialog/ReqDialog';
 import ListingInfoImportant from '../../components/Listing/ListingInfoImportant/ListingInfoImportant';
 import ListingContact from '../../components/Listing/ListingContact/ListingContact';
 import ListingAbout from "../../components/Listing/ListingAbout/ListingAbout";
@@ -57,7 +56,6 @@ const CrListing = ({type}) => {
     const [budget, setBudget] = useState(null);
     //Dialogs and overlays
     const [sliderDialog, setSliderDialog] = useState(false);
-    const [reqDialogOpen, setReqDialogOpen] = useState(false);
     const [personTagOverlay, setPersonTagOverlay] = useState(false);
     const [flatTagOverlay, setFlatTagOverlay] = useState(false);
     const [flatBoxerOverlay, setFlatBoxerOverlay] = useState(false);
@@ -79,7 +77,6 @@ const CrListing = ({type}) => {
     const [bio, setBio] = useState(null);
     const [flatBio, setFlatBio] = useState(null);
     const [personBio, setPersonBio] = useState(null);
-    const [requestMessage, setRequestMessage] = useState(null);
 
     //CR---
   
