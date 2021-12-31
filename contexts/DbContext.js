@@ -150,7 +150,7 @@ export function DbProvider(props) {
                         }
                 }
                 if(filter.smoking){
-                    parameters.push(where("personBoxes.smoking", "==", filter.smoking[0]));
+                    parameters.push(where("personBoxes.smoking", "==", filter.smoking));
                 }
                 if(filter.job){
                     let originalItems = ["Zaměstnaný", "Nezaměstnaný", "Student"];
@@ -210,13 +210,13 @@ export function DbProvider(props) {
             }
             if(type === "flat"){
                 if(filter.location){
-                    parameters.push(where("flatBoxes.location", "==", filter.location[0]));
+                    parameters.push(where("flatBoxes.location", "==", filter.location));
                 }
                 if(filter.layout){
-                    parameters.push(where("flatBoxes.layout", "==", filter.layout[0]));
+                    parameters.push(where("flatBoxes.layout", "==", filter.layout));
                 }
                 if(filter.petAllowed){
-                    let petAllowed = filter.petAllowed[0];
+                    let petAllowed = filter.petAllowed;
                     switch(petAllowed){
                         case "Mazlíčci povoleno":
                             petAllowed = "Povoleno";
@@ -231,7 +231,7 @@ export function DbProvider(props) {
                     parameters.push(where("flatBoxes.petAllowed", "==", petAllowed));
                 }
                 if(filter.smokingAllowed){
-                    let smokingAllowed = filter.smokingAllowed[0];
+                    let smokingAllowed = filter.smokingAllowed;
                     switch(smokingAllowed){
                         case "Kouření povoleno":
                             smokingAllowed = "Povoleno";
@@ -245,7 +245,7 @@ export function DbProvider(props) {
                     parameters.push(where("flatBoxes.smokingAllowed", "==", smokingAllowed));
                 }
                 if(filter.internet){
-                    let internet = filter.internet[0];
+                    let internet = filter.internet;
                     switch(internet){
                         case "Internet":
                             internet = "Ano";
@@ -259,7 +259,7 @@ export function DbProvider(props) {
                     parameters.push(where("flatBoxes.internet", "==", internet));
                 }
                 if(filter.elevator){
-                    let elevator = filter.elevator[0];
+                    let elevator = filter.elevator;
                     switch(elevator){
                         case "Výtah":
                             elevator = "Ano";
