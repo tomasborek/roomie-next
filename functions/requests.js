@@ -142,7 +142,7 @@ exports.createFriend = functions.https.onCall((data, context) => {
           type: reciever.mainInfo.type,
           gender: reciever.mainInfo.gender,
           originalSender: senderUid,
-          pfp: reciever.userInfo.pfp,
+          pfp: reciever.mainInfo.pfp,
           listingId: recieverListing,
           timeStamp: admin.firestore.FieldValue.serverTimestamp(),
         });
