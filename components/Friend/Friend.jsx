@@ -7,7 +7,7 @@ const Friend = ({children, info}) => {
     return (
         <div onClick={() => router.push(`/${info.type === "flatmate" ? "flatmate" : "flat"}/${info.listingId}`)} className="friend">
             <div className="friend-pfp-container">
-                <img src={`/img/pfps/${info.gender === "male" ? "radek-pfp.png" : "radka-pfp.png"}`} className="friend-pfp" alt="" />
+                <img src={info.pfp ? info.pfp : `/img/pfps/${info.gender === "male" ? "radek-pfp.png" : "radka-pfp.png"}`} className="friend-pfp" alt="" />
             </div>
             <div className="friend-content">
                 <div className="content-user">
