@@ -3997,6 +3997,8 @@ textarea {
   height: 80px;
   background-color: #B8B8B8;
   border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .friend .friend-content {
