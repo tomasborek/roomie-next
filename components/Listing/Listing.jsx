@@ -258,13 +258,21 @@ const Listing = ({type}) => {
         }).then((response) => {
             setLoading(false);
             setEditListing(false);
+            setListingInfo(null);
+            setListingImgs("", "", "", "", "", "");
+            setPfp(null);
             snackBar("Inzerát byl úspěšně upraven.", "success");
             window.scrollTo({top: 0, behavior: "smooth"});
             return getListing(listingInfo.id);
         }).then((doc) => {
             setListingInfo(doc);
+            setListingImgs(doc.data().userInfo.images.listingImgs);
+            if(doc.data().userInfo.images.pfp){
+                setPfp(doc.data().userInfo.images.pfp);
+            }
         }).catch((error) => {
             setLoading(false);
+            console.log(error);
             snackBar("Něco se pokazilo. Zkuste to prosím později.", "error");
         })
     }
