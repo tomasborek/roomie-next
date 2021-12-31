@@ -28,6 +28,11 @@ const RecievedReqFull = ({reqInfo, id, setOpen, setRequestLoading, setReqResolve
             const resolveRequest = callable("requests-resolveRequest");
             getUser(currentUser.uid)
             .then((user) => {
+                 setReqResolved({
+                    state: true,
+                    type: action,
+                })
+                setRequestLoading(false);
                 reciever = user;
                 const resolvingInfo = {
                     senderUid: id,
@@ -37,21 +42,10 @@ const RecievedReqFull = ({reqInfo, id, setOpen, setRequestLoading, setReqResolve
                 }
                 return resolveRequest(JSON.stringify(resolvingInfo))
             }).then((response) => {
-                setRequestLoading(false);
                 snackBar(`Žádost byla ${action === "accepted" ? "přijata" : "odmítnuta"}.`, "success");
                 if(action === "accepted"){
                     handleFriendship(reciever);
-                    setReqResolved({
-                        state: true,
-                        type: "accepted",
-                    })
-                }else{
-                    setReqResolved({
-                        state: true,
-                        type: "rejected",
-                    })
                 }
-                // router.reload(window.location.pathname);
             })
             // .catch((error) => {
             //     setOpen(true);
