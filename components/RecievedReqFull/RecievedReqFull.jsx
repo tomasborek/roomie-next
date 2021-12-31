@@ -40,18 +40,11 @@ const RecievedReqFull = ({reqInfo, id, setOpen, setRequestLoading, setReqResolve
                     recieverUid: currentUser.uid,
                     recieverListing: reciever.data().listing.id,
                 }
-                return resolveRequest(JSON.stringify(resolvingInfo))
-            }).then((response) => {
-                snackBar(`Žádost byla ${action === "accepted" ? "přijata" : "odmítnuta"}.`, "success");
+                resolveRequest(JSON.stringify(resolvingInfo));
                 if(action === "accepted"){
                     handleFriendship(reciever);
                 }
             })
-            // .catch((error) => {
-            //     setOpen(true);
-            //     setRequestLoading(false);
-            //     snackBar("Něco se nepovedlo. Zkuste to prosím později.", "error");
-            // })
         }
 
         const handleFriendship = (user) => {
@@ -64,7 +57,7 @@ const RecievedReqFull = ({reqInfo, id, setOpen, setRequestLoading, setReqResolve
                 senderUid: id,
                 senderListing: reqInfo.listingId
             }
-            createFriend(JSON.stringify(friendInfo))
+            createFriend(JSON.stringify(friendInfo));
         }
     return (
         <div className="recieved-req-full">
