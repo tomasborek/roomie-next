@@ -12,6 +12,7 @@ export const ExploreProvider = ({children}) => {
     const [activeFilters, setActiveFilters] = useState({});
     const [flatmatePage, setFlatmatePage] = useState(1);
     const [flatPage, setFlatPage] = useState(1);
+    const [currentVariant, setCurrentVariant] = useState(null);
     const value = {
         flatListingsValue: [flatListings, setFlatListings],
         flatmateListingsValue: [flatmateListings, setFlatmateListings],
@@ -20,6 +21,7 @@ export const ExploreProvider = ({children}) => {
         activeFiltersValue: [activeFilters, setActiveFilters],
         flatmatePageValue: [flatmatePage, setFlatmatePage],
         flatPageValue: [flatPage, setFlatPage],
+        currentVariantValue: [currentVariant, setCurrentVariant],
 
     }
     return (
