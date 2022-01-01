@@ -11,7 +11,7 @@ const ExplorePremium = () => {
                 <h3 className='text-name-heading'>Roomie premium</h3>
                 <p className="text-description">Premium účet zajistí efektivnější a rychlejší hledání pomocí řady benefitů.</p>
             </div>
-            <button className="acc-btn">Získat Premium</button>
+            <button onClick={() => router.push("/premium")} className="acc-btn">Získat Premium</button>
 
         </div>
     )
