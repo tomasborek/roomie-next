@@ -15,7 +15,6 @@ import Header from "../components/Header/Header";
 import Switcher from "../components/Switcher/Switcher";
 import Footer from "../components/Footer/Footer"
 //MUI components
-import Skeleton from "@mui/material/Skeleton";
 import  CircularProgress  from '@mui/material/CircularProgress';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
