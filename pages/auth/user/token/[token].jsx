@@ -6,7 +6,7 @@ import Head from 'next/head';
 import { useFunctions } from '../../../../contexts/FunctionsContext';
 //Components
 //MUI
-import { CircularProgress } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const VerifyEmail = () => {
     const {callable} = useFunctions();
