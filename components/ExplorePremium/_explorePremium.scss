@@ -1,0 +1,50 @@
+.explore-premium{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    @include gradientBg;
+    border-radius:5px ;
+    padding: 1rem 1rem;
+    height: 155px;
+    margin-bottom: 2rem;
+    .premium-main-text{
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        padding-right: 1rem;
+        .text-name-paragraph, .text-name-heading{
+            font-size: 24px;
+            text-align: center;
+        }
+        .text-description{
+            font-size: 12px;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+        p{
+            line-height: 1;
+        }
+    }
+    button{
+        font-size: 14px;
+        margin-top: 0.5rem;
+        width: 60%;
+        min-width: 200px;
+    }
+  
+}
+
+@media screen and (max-width: 600px){
+    .explore-premium{
+        height: auto;
+        .premium-main-text{
+            .text-name-paragraph, .text-name-heading{
+                font-size: 18px;
+            }
+            
+        }
+    }
+}

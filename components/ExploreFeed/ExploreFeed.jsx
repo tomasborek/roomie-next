@@ -13,6 +13,7 @@ import ExploreFlat from "../ExploreListings/ExploreFlat/ExploreFlat";
 import Pagination from "../Pagination/Pagination";
 import Filter from '../Filter/Filter';
 import CustomDialog from "../CustomDialog/CustomDialog";
+import ExplorePremium from '../ExplorePremium/ExplorePremium';
 //MUI
 import { CircularProgress } from '@mui/material';
 import { Backdrop } from '@mui/material';
@@ -313,6 +314,7 @@ const ExploreFeed = ({variant}) => {
                     </div>
                 </div>
             </div>
+            <ExplorePremium/>
             {(variant === "flatmate" && !connectionDown) &&
             <>
                 {flatmateListings ? 
