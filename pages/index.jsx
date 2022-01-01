@@ -10,7 +10,11 @@ import HomeHeader from '../components/HomeHeader/HomeHeader';
 import Banner from '../components/Banner/Banner';
 import Footer from '../components/Footer/Footer';
 //MUI
-import {Backdrop, FormControl, Select, MenuItem, InputLabel} from "@mui/material"
+import Backdrop from "@mui/material/Backdrop";
+import FormControl from "@mui/material/FormControl";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
 
 
 export default function Home() {

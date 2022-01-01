@@ -13,7 +13,7 @@ import Footer from "../components/Footer/Footer";
 import Friend from '../components/Friend/Friend';
 import Pagination from "../components/Pagination/Pagination";
 //MUI
-import { CircularProgress } from '@mui/material';
+import  CircularProgress  from '@mui/material/CircularProgress';
 
 const Friends = () => {
     //Variables

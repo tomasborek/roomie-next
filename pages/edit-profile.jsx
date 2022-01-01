@@ -16,15 +16,14 @@ import Switcher from "../components/Switcher/Switcher";
 import Footer from "../components/Footer/Footer"
 //MUI components
 import Skeleton from "@mui/material/Skeleton";
-import { Typography } from '@mui/material';
-import { CircularProgress } from '@mui/material';
+import  CircularProgress  from '@mui/material/CircularProgress';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Button } from '@mui/material';
-import { Alert } from '@mui/material';
+import  Button  from '@mui/material/Button';
+import Alert  from '@mui/material/Alert';
 
 const EditProfile = () => {
     //Variables
