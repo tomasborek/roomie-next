@@ -1,8 +1,4 @@
 import React from 'react'
-//next
-import Head from "next/head";
-//FA
-import FontAwesomeIcon from "@fortawesome/fontawesome-svg-core";
 
 const Tag = ({children, plus,active, variant,icon, ...rootDOMAttributes}) => {
     return (
