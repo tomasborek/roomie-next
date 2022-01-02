@@ -1,11 +1,11 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 //Components
 import Tag from "../../Tag/Tag";
 import ListingTags from '../ListingTags/ListingTags';
 //MUI
 import { Skeleton } from '@mui/material';
 
-const ListingAbout = ({type, listingInfo, editListing, state, refs}) => {
+const ListingAbout = ({type, listingInfo, existingBio, existingPersonBio, existingFlatBio, existingPersonTags, existingFlatTags, editListing, state, refs}) => {
     const {addedFlatTags, addedPersonTags, bio, setBio, personBio, setPersonBio, flatBio, setFlatBio, setPersonTagOverlay, setFlatTagOverlay, setPersonBoxerOverlay, setFlatBoxerOverlay} = state;
     const textAreaChange = (e, type) => {
         let text = e.target.value; 
@@ -14,6 +14,8 @@ const ListingAbout = ({type, listingInfo, editListing, state, refs}) => {
         }
         type === "flatmate" ? setBio(text) : type === "flat" ? setFlatBio(text) : type === "flatPerson" ? setPersonBio(text) : "";
     }
+
+   
     if(type === "flatmate"){
         return (
             <div className="body-about">
@@ -25,7 +27,7 @@ const ListingAbout = ({type, listingInfo, editListing, state, refs}) => {
                     <textarea maxLength={3000} value={bio} onChange={e => textAreaChange(e, "flatmate")} type="text" rows="5" className="bio-content" placeholder="Zadejte něco o sobě..."></textarea>
                     :
                     <div className="bio-content">
-                        {listingInfo ? listingInfo.data().bio === "" ? "Tento uživatel nemá popis..." : listingInfo.data().bio
+                        {existingBio ? existingBio === "" ? "Tento uživatel nemá popis..." : existingBio
                         : 
                         <div className="skeletons">
                             <Skeleton variant="text"/>
@@ -41,12 +43,12 @@ const ListingAbout = ({type, listingInfo, editListing, state, refs}) => {
                         Koho hledám?
                     </div>
                    
-                    <ListingTags type="person" existingTags={listingInfo && listingInfo.data().personTags} addedTags={addedPersonTags} editListing={editListing} setOverlay={setPersonTagOverlay} />
+                    <ListingTags type="person" existingTags={existingPersonTags} addedTags={addedPersonTags} editListing={editListing} setOverlay={setPersonTagOverlay} />
                   
                 </div>
                 <div className="about-preferences">
                     <div className="preferences-header">Jaké bydlení hledám?</div>
-                        <ListingTags type="flat" existingTags={listingInfo && listingInfo.data().flatTags} addedTags={addedFlatTags} editListing={editListing} setOverlay={setFlatTagOverlay}/>
+                        <ListingTags type="flat" existingTags={existingFlatTags} addedTags={addedFlatTags} editListing={editListing} setOverlay={setFlatTagOverlay}/>
                 </div> 
             </div>
         )
@@ -60,8 +62,8 @@ const ListingAbout = ({type, listingInfo, editListing, state, refs}) => {
                         {editListing ?
                         <textarea maxLength={3000} onChange={(e) => textAreaChange(e, "flat")} value={flatBio} type="text" rows="5" className="bio-content" placeholder="Zadejte něco o svém bydlení..."></textarea>
                         :
-                        listingInfo ? 
-                        listingInfo.data().flatBio === "" ? "Toto bydlení nemá popis..." : listingInfo.data().flatBio
+                        (listingInfo || !(existingFlatBio === null)) ? 
+                        !existingFlatBio  ? "Toto bydlení nemá popis..." : existingFlatBio
                         :
                         <div className="skeletons">
                             <Skeleton variant="text" sx={{width: "100%"}}/>
@@ -77,8 +79,8 @@ const ListingAbout = ({type, listingInfo, editListing, state, refs}) => {
                         {editListing ?
                         <textarea maxLength={3000} onChange={(e) => textAreaChange(e, "flatPerson")} value={personBio} type="text" rows="5" className="bio-content" placeholder="Zadejte něco o sobě..."></textarea>
                         :
-                        listingInfo ? 
-                        listingInfo.data().personBio === "" ? "Tento uživatel nemá popis..." : listingInfo.data().personBio
+                        (listingInfo || !(existingPersonBio === null)) ? 
+                        !existingPersonBio ? "Tento uživatel nemá popis..." : existingPersonBio
                         :
                         <div className="skeletons">
                             <Skeleton variant="text" sx={{width: "100%"}}/>
@@ -92,7 +94,7 @@ const ListingAbout = ({type, listingInfo, editListing, state, refs}) => {
                     <div className="preferences-header">
                         Koho hledám?
                     </div>
-                    <ListingTags type="person" existingTags={listingInfo && listingInfo.data().personTags} addedTags={addedPersonTags} editListing={editListing} setOverlay={setPersonTagOverlay} />
+                    <ListingTags type="person" existingTags={existingPersonTags} addedTags={addedPersonTags} editListing={editListing} setOverlay={setPersonTagOverlay} />
                 </div>
         </div>
         )
