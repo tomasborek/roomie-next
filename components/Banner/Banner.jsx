@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 //next
 import Link from "next/link"
 import { useRouter } from 'next/router'
@@ -9,7 +9,16 @@ import { useAuth } from '../../contexts/AuthContext'
 const Banner = () => {
     const {currentUser} = useAuth();
     const [exploreDialog, setExploreDialog] = useExploreDialog();
+    const [windowWidth, setWindowWidth] = useState(null);
     const router = useRouter();
+
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth);
+        setWindowWidth(window.innerWidth);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    })
+
     const handleExploreDialog = () => {
         if(!currentUser){
             setTimeout(() => {
@@ -19,7 +28,7 @@ const Banner = () => {
     }
     return (
         <div className="banner">
-            <img src="/img/banner/banner-bg.png" alt="" className="banner-bg" />
+           {windowWidth && <img src={windowWidth  > 600 ? "/img/banner/banner-bg.png" : "/img/banner/banner-mobile.png"} alt="" className="banner-bg" />}
             <div className="banner-gradient"></div>
             <div className="banner-text mid-container">
                 <h1>Spolubydlící, se kterými si budete rozumět</h1>
