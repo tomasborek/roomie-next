@@ -46,6 +46,7 @@ const CrListing = ({type}) => {
     //States
     //Listing data obj
     const [listingInfo, setListingInfo] = useState(null);
+    const [listingId, setListingId] = useState(null);
     const [listingImgs, setListingImgs] = useState([]);
     const [pfp, setPfp] = useState(null);
     //Edit mode
@@ -96,7 +97,8 @@ const CrListing = ({type}) => {
                 return;
             }
             setWelcomeDialog(true);
-            setListingInfo(doc);
+            setListingInfo(doc.data());
+            setListingId(doc.id);
         }).catch(error => {
             console.log(error);
         })
@@ -106,18 +108,24 @@ const CrListing = ({type}) => {
     useEffect(() => {
         if(listingInfo && editListing === true){
             if(type === "flatmate"){
-                setBio(listingInfo.data().bio)
-                setBudget(listingInfo.data().mainInfo.budget);
+                setBio(listingInfo.bio)
+                setBudget(listingInfo.mainInfo.budget);
+                setAddedPersonBoxes(listingInfo.personBoxes);
+                setAddedPersonTags(listingInfo.personTags);
+                setAddedFlatTags(listingInfo.flatTags);
             }
             if(type === "flat"){
-               setPersonBio(listingInfo.data().personBio);
-               setFlatBio(listingInfo.data().flatBio);
-               setBudget(listingInfo.data().mainInfo.price);
+                setPersonBio(listingInfo.personBio);
+                setFlatBio(listingInfo.flatBio);
+                setBudget(listingInfo.mainInfo.price);
+                setAddedPersonBoxes(listingInfo.úersonBoxes);
+                setAddedFlatBoxes(listingInfo.flatBoxes);
+                setAddedPersonTags(listingInfo.personTags);
             }
 
             
-            setStayTime(listingInfo.data().mainInfo.stayTime);
-            setStartTime(listingInfo.data().mainInfo.startTime);
+            setStayTime(listingInfo.mainInfo.stayTime);
+            setStartTime(listingInfo.mainInfo.startTime);
         }
         
     }, [listingInfo])
@@ -148,7 +156,7 @@ const CrListing = ({type}) => {
             return;
         }
         if(!budget || budget < 1000 || budget > 60000){
-            snackBar(`Prosím zadejte správnou hodnotu do ${listingInfo.data().type === "flatmate" ? "rozpočtu." : "nájemného."}`)
+            snackBar(`Prosím zadejte správnou hodnotu do ${listingInfo.type === "flatmate" ? "rozpočtu." : "nájemného."}`)
             setLoading(false);
             window.scrollTo(0,0);
             return;
@@ -198,7 +206,7 @@ const CrListing = ({type}) => {
             }
         }
         const updateListingInfo = {
-            listingId: listingInfo.id,
+            listingId: listingId,
             params: params,
         }
         updateListing(JSON.stringify(updateListingInfo)).then((response) => {
@@ -218,7 +226,7 @@ const CrListing = ({type}) => {
             setEditListing(false);
             snackBar("Inzerát byl úspěšně upraven.", "success");
             window.scrollTo(0,0);
-            router.push(`/${listingInfo.data().type}/${listingInfo.id}`);
+            router.push(`/${listingInfo.type}/${listingId}`);
         }).catch((error) => {
             setLoading(false);
             snackBar("Něco se pokazilo. Zkuste to prosím později.", "error");
@@ -230,9 +238,9 @@ const CrListing = ({type}) => {
             <div className="Listing FlatMateListing">
             <Header variant="white" />
         
-            <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personTagOverlay}><Tagger variant="person" addedTags={addedPersonTags} existingTags={listingInfo ? listingInfo.data().personTags : null} setTagOverlay={setPersonTagOverlay} setAddedTags={setAddedPersonTags}/></Backdrop>
-            <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={flatTagOverlay}><Tagger variant="flat" addedTags={addedFlatTags} existingTags={listingInfo ? listingInfo.data().flatTags : null} setTagOverlay={setFlatTagOverlay} setAddedTags={setAddedFlatTags}/></Backdrop>
-            <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personBoxerOverlay}><Boxer setBoxerOverlay={setPersonBoxerOverlay} variant="person" existingBoxes={listingInfo && listingInfo.data().personBoxes} setAddedBoxes={setAddedPersonBoxes} addedBoxes={addedPersonBoxes}/></Backdrop>
+            <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personTagOverlay}><Tagger variant="person" addedTags={addedPersonTags} existingTags={listingInfo ? listingInfo.personTags : null} setTagOverlay={setPersonTagOverlay} setAddedTags={setAddedPersonTags}/></Backdrop>
+            <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={flatTagOverlay}><Tagger variant="flat" addedTags={addedFlatTags} existingTags={listingInfo ? listingInfo.flatTags : null} setTagOverlay={setFlatTagOverlay} setAddedTags={setAddedFlatTags}/></Backdrop>
+            <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personBoxerOverlay}><Boxer setBoxerOverlay={setPersonBoxerOverlay} variant="person" existingBoxes={listingInfo && listingInfo.personBoxes} setAddedBoxes={setAddedPersonBoxes} addedBoxes={addedPersonBoxes}/></Backdrop>
            
           
             <Dialog
@@ -319,11 +327,11 @@ const CrListing = ({type}) => {
                                             <img src={URL.createObjectURL(addedPfp)} className='header-pfp'/>
                                             :
                                             <>
-                                                {listingInfo.data().userInfo.images.pfp ?
-                                                    <img className='header-pfp' src={listingInfo.data().userInfo.images.pfp} alt="" />
+                                                {listingInfo.userInfo.images.pfp ?
+                                                    <img className='header-pfp' src={listingInfo.userInfo.images.pfp} alt="" />
                                                 :
                                                     <img 
-                                                    src={listingInfo.data().userInfo.gender === "male" ? "/img/pfps/radek-pfp.png" : "/img/pfps/radka-pfp.png"} 
+                                                    src={listingInfo.userInfo.gender === "male" ? "/img/pfps/radek-pfp.png" : "/img/pfps/radka-pfp.png"} 
                                                     className="header-pfp"></img> 
                                         }
                                             </>
@@ -342,9 +350,9 @@ const CrListing = ({type}) => {
                                 :   
                                 <div className="header-info">
                                     <div className="info-main">
-                                        <h1 className="main-name">{listingInfo.data().userInfo.username}</h1>
+                                        <h1 className="main-name">{listingInfo.userInfo.username}</h1>
                                         <div className="main-description">
-                                            <p>{listingInfo.data().userInfo.age}, {listingInfo.data().userInfo.gender === "male" ? "muž" : listingInfo.data().userInfo.gender === "female" ? "žena" : "jiné"}</p>
+                                            <p>{listingInfo.userInfo.age}, {listingInfo.userInfo.gender === "male" ? "muž" : listingInfo.userInfo.gender === "female" ? "žena" : "jiné"}</p>
                                         </div>
                                     </div>
                                     <ListingInfoImportant type="flatmate" listingInfo={listingInfo} editListing={editListing} state={{budget, startTime, stayTime, setBudget, setStayTime, setStartTime, setSliderDialog}}/>
@@ -374,7 +382,7 @@ const CrListing = ({type}) => {
                     <div className="content-body">
                         <div className="body-info">
                             <div className="container">
-                                <ListingBoxesContainer type="flatmate" addedBoxes={addedPersonBoxes} existingBoxes={listingInfo && listingInfo.data().personBoxes} editListing={editListing} />
+                                <ListingBoxesContainer type="flatmate" addedBoxes={addedPersonBoxes} existingBoxes={listingInfo && listingInfo.personBoxes} editListing={editListing} />
                                 <Collapse in={boxesInfoAlert}>
                                         <Alert sx={{marginTop: "1rem"}} severity="info">Přidejte o sobě info.</Alert>
                                 </Collapse> 
@@ -386,7 +394,15 @@ const CrListing = ({type}) => {
                                 </div>
                             </div>
                         </div> 
-                        <ListingAbout type="flatmate" listingInfo={listingInfo} editListing={editListing} state={{addedFlatTags, addedPersonTags, bio, setBio, personBio, setPersonBio, flatBio, setFlatBio, setPersonTagOverlay, setFlatTagOverlay, setPersonBoxerOverlay, setFlatBoxerOverlay}}/>
+                        <ListingAbout type="flatmate" 
+                                listingInfo={listingInfo} 
+                                existingBio={listingInfo && listingInfo.bio}
+                                existingFlatBio={null}
+                                existingPersonBio={null}
+                                existingFlatTags={listingInfo && listingInfo.flatTags}
+                                existingPersonTags={listingInfo && listingInfo.personTags}
+                                editListing={editListing} 
+                                state={{addedFlatTags, addedPersonTags, bio, setBio, personBio, setPersonBio, flatBio, setFlatBio, setPersonTagOverlay, setFlatTagOverlay, setPersonBoxerOverlay, setFlatBoxerOverlay}}/>
                         <Gallery 
                             type={"flatmate"}
                             listingImgs={listingImgs}
@@ -414,9 +430,9 @@ const CrListing = ({type}) => {
             <Header variant="white" />
    
 
-            <Backdrop  sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personTagOverlay}><Tagger  variant="person" addedTags={addedPersonTags} existingTags={listingInfo ? listingInfo.data().personTags : null} setTagOverlay={setPersonTagOverlay} setAddedTags={setAddedPersonTags}/></Backdrop>
-            <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personBoxerOverlay}><Boxer setBoxerOverlay={setPersonBoxerOverlay} variant="person" existingBoxes={listingInfo && listingInfo.data().personBoxes} setAddedBoxes={setAddedPersonBoxes} addedBoxes={addedPersonBoxes}/></Backdrop>
-            <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={flatBoxerOverlay}><Boxer setBoxerOverlay={setFlatBoxerOverlay} variant="flat" existingBoxes={listingInfo && listingInfo.data().flatBoxes} setAddedBoxes={setAddedFlatBoxes} addedBoxes={addedFlatBoxes}/></Backdrop>
+            <Backdrop  sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personTagOverlay}><Tagger  variant="person" addedTags={addedPersonTags} existingTags={listingInfo ? listingInfo.personTags : null} setTagOverlay={setPersonTagOverlay} setAddedTags={setAddedPersonTags}/></Backdrop>
+            <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personBoxerOverlay}><Boxer setBoxerOverlay={setPersonBoxerOverlay} variant="person" existingBoxes={listingInfo && listingInfo.personBoxes} setAddedBoxes={setAddedPersonBoxes} addedBoxes={addedPersonBoxes}/></Backdrop>
+            <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={flatBoxerOverlay}><Boxer setBoxerOverlay={setFlatBoxerOverlay} variant="flat" existingBoxes={listingInfo && listingInfo.flatBoxes} setAddedBoxes={setAddedFlatBoxes} addedBoxes={addedFlatBoxes}/></Backdrop>
  
             <Dialog
                 open={sliderDialog}
@@ -523,7 +539,7 @@ const CrListing = ({type}) => {
                                     <div className="info-main">
                                         <h1 className="main-name">Váš byt</h1> 
                                         <div className="main-description">
-                                            <p>{listingInfo.data().flatBoxes.location}</p>
+                                            <p>{listingInfo.flatBoxes.location}</p>
                                         </div>
                                     </div>
                                     <ListingInfoImportant type="flat" listingInfo={listingInfo} editListing={editListing} state={{budget, startTime, stayTime, setBudget, setStayTime, setStartTime, setSliderDialog}}/>
@@ -568,7 +584,7 @@ const CrListing = ({type}) => {
                                                         <img src={pfp} className='profile-info-pfp' /> 
                                                         : 
                                                         listingInfo ? 
-                                                        <img src={`/img/pfps/${(listingInfo && listingInfo.data().userInfo.gender === "male") ? "radek" : "radka"}-pfp.png`} className="profile-info-pfp" /> 
+                                                        <img src={`/img/pfps/${(listingInfo && listingInfo.userInfo.gender === "male") ? "radek" : "radka"}-pfp.png`} className="profile-info-pfp" /> 
                                                         : 
                                                         <div className="profile-info-pfp"></div>
                                                     }
@@ -576,8 +592,8 @@ const CrListing = ({type}) => {
                                             }
                                         </div>
                                         <div className="profile-info-text">
-                                           {!listingInfo ? <Skeleton variant="text" sx={{width: 50}}/>: <p className="text-name">{listingInfo.data().userInfo.username}</p> } 
-                                          {!listingInfo ? <Skeleton variant="text" sx={{width: 30}} />:  <p className="text-description">{listingInfo.data().userInfo.gender === "male" ? "Muž" : listingInfo.data().userInfo.gender === "female" ? "Žena" : listingInfo.data().userInfo.gender === "other" ? "Jiné" : ""}, {listingInfo.data().userInfo.age}</p>}
+                                           {!listingInfo ? <Skeleton variant="text" sx={{width: 50}}/>: <p className="text-name">{listingInfo.userInfo.username}</p> } 
+                                          {!listingInfo ? <Skeleton variant="text" sx={{width: 30}} />:  <p className="text-description">{listingInfo.userInfo.gender === "male" ? "Muž" : listingInfo.userInfo.gender === "female" ? "Žena" : listingInfo.userInfo.gender === "other" ? "Jiné" : ""}, {listingInfo.userInfo.age}</p>}
                                         </div>
                                         
                                     </div>
@@ -586,7 +602,7 @@ const CrListing = ({type}) => {
                                     </div>
                                 </div>
 
-                                 <ListingBoxesContainer existingBoxes={listingInfo && listingInfo.data().flatBoxes} addedBoxes={addedFlatBoxes} editListing={editListing} type="flat" /> 
+                                 <ListingBoxesContainer existingBoxes={listingInfo && listingInfo.flatBoxes} addedBoxes={addedFlatBoxes} editListing={editListing} type="flat" /> 
                                  <Collapse in={flatBoxesInfoAlert}>
                                         <Alert sx={{marginTop: "1rem"}} severity="info">Přidejte info o svém bydlení.</Alert>
                                 </Collapse> 
@@ -596,7 +612,7 @@ const CrListing = ({type}) => {
                                         setFlatBoxesInfoAlert(false);
                                     }}> <i className="fas fa-plus"></i> </button>
                                 </div>
-                                <ListingBoxesContainer existingBoxes={listingInfo &&listingInfo.data().personBoxes} addedBoxes={addedPersonBoxes} editListing={editListing} type="flatmate" />
+                                <ListingBoxesContainer existingBoxes={listingInfo &&listingInfo.personBoxes} addedBoxes={addedPersonBoxes} editListing={editListing} type="flatmate" />
                                 <Collapse in={personBoxesInfoAlert}>
                                         <Alert sx={{marginTop: "1rem"}} severity="info">Přidejte info o sobě.</Alert>
                                 </Collapse> 
@@ -611,7 +627,15 @@ const CrListing = ({type}) => {
                             </div>
                             
                         </div> 
-                        <ListingAbout type="flat" listingInfo={listingInfo} editListing={editListing} state={{addedFlatTags, addedPersonTags, bio, setBio, personBio, setPersonBio, flatBio, setFlatBio, setPersonTagOverlay, setFlatTagOverlay, setPersonBoxerOverlay, setFlatBoxerOverlay}}/>
+                        <ListingAbout type="flat" 
+                                listingInfo={listingInfo} 
+                                existingBio={null}
+                                existingFlatBio={listingInfo && listingInfo.flatBio}
+                                existingPersonBio={listingInfo && listingInfo.personBio}
+                                existingFlatTags={null}
+                                existingPersonTags={listingInfo && listingInfo.personTags}
+                                editListing={editListing} 
+                                state={{addedFlatTags, addedPersonTags, bio, setBio, personBio, setPersonBio, flatBio, setFlatBio, setPersonTagOverlay, setFlatTagOverlay, setPersonBoxerOverlay, setFlatBoxerOverlay}}/>
                         <Gallery 
                             type={"flat"}
                             listingImgs={listingImgs}
