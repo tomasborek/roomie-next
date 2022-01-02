@@ -25,11 +25,11 @@ const ListingInfoImportant = ({type, listingInfo, editListing, state}) => {
                                 <i onClick={() => state.setSliderDialog(true)} className="fas fa-gear"></i></div> 
                         : 
                             <div className="header-value">
-                                {listingInfo.data().mainInfo.budget >= 10000 ? 
-                                    (listingInfo.data().mainInfo.budget.toString().substr(0,2) + " " +  listingInfo.data().mainInfo.budget.toString().substr(2,6))
+                                {listingInfo.mainInfo.budget >= 10000 ? 
+                                    (listingInfo.mainInfo.budget.toString().substr(0,2) + " " +  listingInfo.mainInfo.budget.toString().substr(2,6))
                                 :  
-                                    (listingInfo.data().mainInfo.budget.toString().substr(0,1) + " " + listingInfo.data().mainInfo.budget.toString().substr(1,5))}
-                                    {listingInfo.data().mainInfo.budget == 60000 && "+"} Kč
+                                    (listingInfo.mainInfo.budget.toString().substr(0,1) + " " + listingInfo.mainInfo.budget.toString().substr(1,5))}
+                                    {listingInfo.mainInfo.budget == 60000 && "+"} Kč
                             </div>}
                     </div>
                     <div className="item-description">Rozpočet</div>
@@ -40,7 +40,7 @@ const ListingInfoImportant = ({type, listingInfo, editListing, state}) => {
                         {editListing ? 
                         <FormControl className="select" size="small" error={!state.stayTime || state.stayTime == ""}>
                             <InputLabel className="input-label" >Doba bydlení</InputLabel>
-                                <Select onChange={(e) => state.setStayTime(e.target.value)} label="Doba bydlení" defaultValue={listingInfo.data().mainInfo.stayTime}>
+                                <Select onChange={(e) => state.setStayTime(e.target.value)} label="Doba bydlení" defaultValue={listingInfo.mainInfo.stayTime}>
                                     <MenuItem value="Krátkodobá">Krátkodobá</MenuItem>
                                     <MenuItem value="1 rok">1 rok</MenuItem>
                                     <MenuItem value="Dlouhodobá">Dlouhodobá</MenuItem>
@@ -48,7 +48,7 @@ const ListingInfoImportant = ({type, listingInfo, editListing, state}) => {
                                 </Select>
                         </FormControl>
                         :
-                        <div className="header-value">{listingInfo.data().mainInfo.stayTime}</div>}
+                        <div className="header-value">{listingInfo.mainInfo.stayTime}</div>}
                     </div>
                     <div className="item-description">Doba bydlení</div>
                 </div>
@@ -58,7 +58,7 @@ const ListingInfoImportant = ({type, listingInfo, editListing, state}) => {
                             {editListing ? 
                             <FormControl className="select" size="small" error={!state.startTime || state.startTime == ""}>
                                 <InputLabel className="input-label" >Doba nas.</InputLabel>
-                                <Select onChange={(e) => state.setStartTime(e.target.value)} label="Doba bydlení"  defaultValue={listingInfo.data().mainInfo.startTime}>
+                                <Select onChange={(e) => state.setStartTime(e.target.value)} label="Doba bydlení"  defaultValue={listingInfo.mainInfo.startTime}>
                                     <MenuItem value="Okamžitě">Okamžitě</MenuItem>
                                     <MenuItem value="Příští měsíc">Příští měsíc</MenuItem>
                                     <MenuItem value="Příští rok">Příští rok</MenuItem>
@@ -66,7 +66,7 @@ const ListingInfoImportant = ({type, listingInfo, editListing, state}) => {
                                 </Select>
                             </FormControl>
                             :
-                            <div className="header-value">{listingInfo.data().mainInfo.startTime}</div>}
+                            <div className="header-value">{listingInfo.mainInfo.startTime}</div>}
                     </div>
                     <div className="item-description">Doba nastěhování</div>
                  </div>
@@ -93,11 +93,11 @@ const ListingInfoImportant = ({type, listingInfo, editListing, state}) => {
                             </div>  
                         : 
                         <div className="header-value">
-                            {listingInfo.data().mainInfo.price >= 10000 ? 
-                                (listingInfo.data().mainInfo.price.toString().substr(0,2) + " " +  listingInfo.data().mainInfo.price.toString().substr(2,6))
+                            {listingInfo.mainInfo.price >= 10000 ? 
+                                (listingInfo.mainInfo.price.toString().substr(0,2) + " " +  listingInfo.mainInfo.price.toString().substr(2,6))
                             :  
-                                (listingInfo.data().mainInfo.price.toString().substr(0,1) + " " + listingInfo.data().mainInfo.price.toString().substr(1,5))}
-                                 {listingInfo.data().mainInfo.price == 60000 && "+"} Kč 
+                                (listingInfo.mainInfo.price.toString().substr(0,1) + " " + listingInfo.mainInfo.price.toString().substr(1,5))}
+                                 {listingInfo.mainInfo.price == 60000 && "+"} Kč 
                         </div>
                         }
                     </div>
@@ -109,7 +109,7 @@ const ListingInfoImportant = ({type, listingInfo, editListing, state}) => {
                         {editListing ? 
                         <FormControl className="select" size="small" error={!state.stayTime || state.stayTime == ""}>
                             <InputLabel className="input-label" >Doba bydlení</InputLabel>
-                                <Select onChange={(e) => state.setStayTime(e.target.value)} label="Doba bydlení" defaultValue={listingInfo.data().mainInfo.startTime}>
+                                <Select onChange={(e) => state.setStayTime(e.target.value)} label="Doba bydlení" defaultValue={listingInfo.mainInfo.startTime}>
                                     <MenuItem value="Krátkodobá">Krátkodobá</MenuItem>
                                         <MenuItem value="1 rok">1 rok</MenuItem>
                                         <MenuItem value="Dlouhodobá">Dlouhodobá</MenuItem>
@@ -117,7 +117,7 @@ const ListingInfoImportant = ({type, listingInfo, editListing, state}) => {
                                 </Select>
                         </FormControl>
                         :
-                        <div className="header-value">{listingInfo.data().mainInfo.stayTime}</div>
+                        <div className="header-value">{listingInfo.mainInfo.stayTime}</div>
                         }
                     </div>
                     <div className="item-description">Doba bydlení</div>
@@ -128,7 +128,7 @@ const ListingInfoImportant = ({type, listingInfo, editListing, state}) => {
                         {editListing ? 
                         <FormControl className="select" size="small" error={!state.startTime || state.startTime == ""}>
                             <InputLabel className="input-label" >Doba nas.</InputLabel>
-                            <Select onChange={(e) => state.setStartTime(e.target.value)} label="Doba nastěhování" defaultValue={listingInfo.data().mainInfo.stayTime}>
+                            <Select onChange={(e) => state.setStartTime(e.target.value)} label="Doba nastěhování" defaultValue={listingInfo.mainInfo.stayTime}>
                                 <MenuItem value="Okamžitě">Okamžitě</MenuItem>
                                 <MenuItem value="Příští měsíc">Příští měsíc</MenuItem>
                                 <MenuItem value="Příští rok">Příští rok</MenuItem>
@@ -136,7 +136,7 @@ const ListingInfoImportant = ({type, listingInfo, editListing, state}) => {
                             </Select>
                         </FormControl>
                     :
-                    <div className="header-value">{listingInfo.data().mainInfo.startTime}</div>
+                    <div className="header-value">{listingInfo.mainInfo.startTime}</div>
                     } 
                 </div>
                 <div className="item-description">Doba nastěhování</div>
