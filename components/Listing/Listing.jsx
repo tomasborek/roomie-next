@@ -4,6 +4,10 @@ import { useRouter } from 'next/dist/client/router';
 import Head from "next/head";
 import Link from "next/link";
 
+//Firebase
+import { db } from '../../Firebase';
+import { getDoc, doc } from 'firebase/firestore';
+
 
 //Contexts
 import { useDb } from '../../contexts/DbContext';
@@ -40,9 +44,10 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 
 
-const Listing = ({type}) => {
+const Listing = (props) => {
     //Variables---
     //Contexts
+    const type = props.type;
     const router = useRouter();
     const {id} = router.query;
     const {getListing, updateUser, getUser, addNotification, deleteNotification} = useDb();
@@ -53,9 +58,24 @@ const Listing = ({type}) => {
     const {uploadImg} = useStorage();
     //States
     //Listing data obj
+    //Listing info
     const [listingInfo, setListingInfo] = useState(null);
+    //ListingId
+    const [listingId, setListingId] = useState(null);
+    //imgs
     const [listingImgs, setListingImgs] = useState([]);
     const [pfp, setPfp] = useState(null);
+    //
+    const [listingName, setListingName] = useState(props.listingName);
+    const [listingBio, setListingBio] = useState(type === "flatmate" ? props.listingBio : null);
+    const [listingFlatBio, setListingFlatBio] = useState(type === "flat" ? props.listingFlatBio : null);
+    const [listingPersonBio, setListingPersonBio] = useState(type === "flat" ? props.listingPersonBio : null);
+    const [listingPersonBoxes, setListingPersonBoxes] = useState(props.listingPersonBoxes);
+    const [listingPersonTags, setListingPersonTags] = useState(props.listingPersonTags);
+    const [listingFlatBoxes, setListingFlatBoxes] = useState(type === "flat" ? props.listingFlatBoxes : null);
+    const [listingFlatTags, setListingFlatTags] = useState(type === "flatmate" ? props.listingFlatTags : null);
+    const [listingLocation, setListingLocation] = useState(type === "flat" ? props.listingLocation : null);
+    const [listingLayout, setListingLayout] = useState(type === "flat" ? props.listingLayout : null);
     //Edit mode
     const [editListing, setEditListing] = useState(false);
     const [addedListingImgs, setAddedListingImgs] = useState(["", "", "", "", "", ""]);
@@ -92,53 +112,50 @@ const Listing = ({type}) => {
     const [personBio, setPersonBio] = useState(null);
     const [requestMessage, setRequestMessage] = useState(null);
     const [reportMessage, setReportMessage] = useState(null);
-
-    //CR---
-  
-        const [welcomeDialog, setWelcomeDialog] = useState(false);
-        const [personBoxesInfoAlert, setPersonBoxesInfoAlert] = useState(true);
-        const [tagsInfoAlert, setTagsInfoAlert] = useState(true);
-        const [flatBoxesInfoAlert, setFlatBoxesInfoAlert] = useState(true);
-        const [boxesInfoAlert, setBoxesInfoAlert] = useState(true);
-  
-
+        
     
-    
-   
-    
-    //Gets listing based on url id and sets the listingInfo state
     useEffect(() => {
         setListingInfo(null);
         if(!router.isReady) return;
+        if(props.statusCode != 200) return;
         getListing(id)
         .then(doc => {
             if(!checkAccess(doc.data().userInfo.uid, doc.data().visible, doc.data().userInfo.emailVerified)) return;
-            setListingInfo(doc);
+            setListingInfo(doc.data());
+            setListingId(doc.id);
             setListingImgs(doc.data().userInfo.images.listingImgs);
             if(doc.data().userInfo.images.pfp){
                 setPfp(doc.data().userInfo.images.pfp);
             }
         }).catch(error => {
-            console.log(error.code);
+            console.log(error);
         })
     }, [router.isReady, id])
+
+ 
 
     //Fills edit inputs and pictures with default values
     useEffect(() => {
         if(listingInfo && editListing === true){
-            if(type === "flatmate" || type === "flatmate-cr"){
-                setBio(listingInfo.data().bio)
-                setBudget(listingInfo.data().mainInfo.budget);
+            if(type === "flatmate"){
+                setBio(listingBio)
+                setBudget(listingInfo.mainInfo.budget);
+                setAddedPersonBoxes(listingPersonBoxes);
+                setAddedPersonTags(listingPersonTags);
+                setAddedFlatTags(listingFlatTags);
             }
-            if(type === "flat" || type === "flat-cr"){
-               setPersonBio(listingInfo.data().personBio);
-               setFlatBio(listingInfo.data().flatBio);
-               setBudget(listingInfo.data().mainInfo.price);
+            if(type === "flat"){
+               setPersonBio(listingPersonBio);
+               setFlatBio(listingFlatBio);
+               setBudget(listingInfo.mainInfo.price);
+               setAddedPersonBoxes(listingPersonBoxes);
+               setAddedFlatBoxes(listingFlatBoxes);
+               setAddedPersonTags(listingPersonTags);
             }
 
             
-            setStayTime(listingInfo.data().mainInfo.stayTime);
-            setStartTime(listingInfo.data().mainInfo.startTime);
+            setStayTime(listingInfo.mainInfo.stayTime);
+            setStartTime(listingInfo.mainInfo.startTime);
         }
         
     }, [editListing])
@@ -190,7 +207,7 @@ const Listing = ({type}) => {
             return;
         }
         if(!budget || budget < 1000 || budget > 60000){
-            snackBar(`Prosím zadejte správnou hodnotu do ${listingInfo.data().type === "flatmate" ? "rozpočtu." : "nájemného."}`)
+            snackBar(`Prosím zadejte správnou hodnotu do ${listingInfo.type === "flatmate" ? "rozpočtu." : "nájemného."}`)
             setLoading(false);
             window.scrollTo(0,0);
             return;
@@ -240,7 +257,7 @@ const Listing = ({type}) => {
             }
         }
         const updateListingInfo = {
-            listingId: listingInfo.id,
+            listingId: listingId,
             params: params,
         }
         updateListing(JSON.stringify(updateListingInfo)).then((response) => {
@@ -258,18 +275,10 @@ const Listing = ({type}) => {
         }).then((response) => {
             setLoading(false);
             setEditListing(false);
-            setListingInfo(null);
-            setListingImgs("", "", "", "", "", "");
-            setPfp(null);
             snackBar("Inzerát byl úspěšně upraven.", "success");
             window.scrollTo({top: 0, behavior: "smooth"});
-            return getListing(listingInfo.id);
-        }).then((doc) => {
-            setListingInfo(doc);
-            setListingImgs(doc.data().userInfo.images.listingImgs);
-            if(doc.data().userInfo.images.pfp){
-                setPfp(doc.data().userInfo.images.pfp);
-            }
+            console.log(router.asPath);
+            router.push(router.asPath);
         }).catch((error) => {
             setLoading(false);
             console.log(error);
@@ -289,11 +298,11 @@ const Listing = ({type}) => {
         getUser(currentUser.uid)
         .then(user =>{
             const requestInfo = {
-                sender: user.data(),
+                sender: user,
                 senderUid: user.id,
-                reciever: reciever.data().userInfo,
+                reciever: reciever.userInfo,
                 recieverListingId: reciever.id,
-                recieverUid: reciever.data().userInfo.uid,
+                recieverUid: reciever.userInfo.uid,
                 message: requestMessage
             }
             return createRequest(JSON.stringify(requestInfo)); 
@@ -319,14 +328,14 @@ const Listing = ({type}) => {
         return (
             <>
             <Head>
-                <title>{listingInfo ? listingInfo.data().userInfo.username : ""} | Roomie</title>
+                <title>{listingName} | Roomie</title>
             </Head>
             <div className="Listing FlatMateListing">
                 <Header variant="white" />
         {/*Taggers and boxer */}
-                <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personTagOverlay}><Tagger variant="person" addedTags={addedPersonTags} existingTags={listingInfo && listingInfo.data().personTags} setTagOverlay={setPersonTagOverlay} setAddedTags={setAddedPersonTags}/></Backdrop>
-                <Backdrop sx={{zIndex: (theme) => theme.zIndex.drawer + 1 }} open={flatTagOverlay}><Tagger variant="flat" addedTags={addedFlatTags} existingTags={listingInfo && listingInfo.data().flatTags } setTagOverlay={setFlatTagOverlay} setAddedTags={setAddedFlatTags}/></Backdrop>
-                <Backdrop sx={{zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personBoxerOverlay}><Boxer setBoxerOverlay={setPersonBoxerOverlay} variant="person" existingBoxes={listingInfo && listingInfo.data().personBoxes} setAddedBoxes={setAddedPersonBoxes} addedBoxes={addedPersonBoxes}/></Backdrop>
+                <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personTagOverlay}><Tagger variant="person" addedTags={addedPersonTags} existingTags={listingPersonTags} setTagOverlay={setPersonTagOverlay} setAddedTags={setAddedPersonTags}/></Backdrop>
+                <Backdrop sx={{zIndex: (theme) => theme.zIndex.drawer + 1 }} open={flatTagOverlay}><Tagger variant="flat" addedTags={addedFlatTags} existingTags={listingFlatTags} setTagOverlay={setFlatTagOverlay} setAddedTags={setAddedFlatTags}/></Backdrop>
+                <Backdrop sx={{zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personBoxerOverlay}><Boxer setBoxerOverlay={setPersonBoxerOverlay} variant="person" existingBoxes={listingPersonBoxes} setAddedBoxes={setAddedPersonBoxes} addedBoxes={addedPersonBoxes}/></Backdrop>
                 <GalleryInput 
                         object={galleryInput} 
                         setObject={setGalleryInput} 
@@ -380,7 +389,7 @@ const Listing = ({type}) => {
                 </Backdrop>
                 <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={reportDialog}>
                     <InputDialog
-                        heading={`Nahlásit uživatele ${listingInfo && listingInfo.data().userInfo.username}`}
+                        heading={`Nahlásit uživatele ${listingInfo && listingInfo.userInfo.username}`}
                         description="Prosím popište důvody nahlášení."
                         setMessage={setReportMessage} 
                         message={reportMessage} 
@@ -414,11 +423,11 @@ const Listing = ({type}) => {
                                                 <img className='header-pfp' src={URL.createObjectURL(addedPfp)}/>
                                                 :
                                                 <>
-                                                    {listingInfo.data().userInfo.images.pfp ?
-                                                        <img className='header-pfp' src={listingInfo.data().userInfo.images.pfp} alt="" />
+                                                    {listingInfo.userInfo.images.pfp ?
+                                                        <img className='header-pfp' src={listingInfo.userInfo.images.pfp} alt="" />
                                                     :
                                                         <img 
-                                                        src={listingInfo.data().userInfo.gender === "male" ? "/img/pfps/radek-pfp.png" : "/img/pfps/radka-pfp.png"} 
+                                                        src={listingInfo.userInfo.gender === "male" ? "/img/pfps/radek-pfp.png" : "/img/pfps/radka-pfp.png"} 
                                                         className="header-pfp"></img> 
                                             }
                                                 </>
@@ -437,8 +446,8 @@ const Listing = ({type}) => {
                                     :   
                                     <div className="header-info">
                                         <div className="info-main">
-                                            <h1 className="main-name">{listingInfo.data().userInfo.username}</h1>
-                                            {((currentUser && currentUser.uid == listingInfo.data().userInfo.uid) && (listingInfo && listingInfo.data().visible)) && 
+                                            <h1 className="main-name">{listingInfo.userInfo.username}</h1>
+                                            {((currentUser && currentUser.uid == listingInfo.userInfo.uid) && (listingInfo && listingInfo.visible)) && 
                                                 <button onClick={() => setEditListing(prevState => !prevState)}className="main-edit-profile">{editListing ? "Zpět" : "Upravit inzerát"}</button>
                                             }
                                             <i onClick={() => setMoreInfoOpen(prevState => !prevState)} className="main-more fas fa-ellipsis-h"></i>
@@ -446,7 +455,7 @@ const Listing = ({type}) => {
                                                 <li onClick={() => setReportDialog(true)}>Nahlásit uživatele</li>
                                             </ul>
                                             <div className="main-description">
-                                                <p>{listingInfo.data().userInfo.age}, {listingInfo.data().userInfo.gender === "male" ? "muž" : listingInfo.data().userInfo.gender === "female" ? "žena" : "jiné"}</p>
+                                                <p>{listingInfo.userInfo.age}, {listingInfo.userInfo.gender === "male" ? "muž" : listingInfo.userInfo.gender === "female" ? "žena" : "jiné"}</p>
                                             </div>
                                         </div>
                                         <ListingInfoImportant type="flatmate" listingInfo={listingInfo} editListing={editListing} state={{budget, startTime, stayTime, setBudget, setStayTime, setStartTime, setSliderDialog}}/>
@@ -461,16 +470,16 @@ const Listing = ({type}) => {
                     <div className="mid-container">
                         <div className="content-body">
                             <div className="body-messages">
-                                {(listingInfo && !listingInfo.data().visible )&&
+                                {(listingInfo && !listingInfo.visible )&&
                                         <div className="messages-message">
                                             <i className="fas fa-info"></i>
                                             <p>
                                                 Váš inzerát je nedokončený, prosím dokončete jej 
-                                                <Link href={`/cr/${listingInfo.data().type}/${listingInfo.id}`}><a style={{textDecoration: "underline"}}> zde</a></Link>
+                                                <Link href={`/cr/${listingInfo.type}/${listingId}`}><a style={{textDecoration: "underline"}}> zde</a></Link>
                                             </p> 
                                         </div>
                                 }
-                                {(listingInfo && !listingInfo.data().userInfo.emailVerified) &&
+                                {(listingInfo && !listingInfo.userInfo.emailVerified) &&
                                     <div className="messages-message">
                                     <i className="fas fa-info"></i>
                                     <p>
@@ -481,13 +490,21 @@ const Listing = ({type}) => {
                             </div>
                             <div className="body-info">
                                 <div className="container">
-                                    <ListingBoxesContainer type="flatmate" addedBoxes={addedPersonBoxes} existingBoxes={listingInfo ? listingInfo.data().personBoxes : null} editListing={editListing} />
+                                    <ListingBoxesContainer type="flatmate" addedBoxes={addedPersonBoxes} existingBoxes={listingPersonBoxes} editListing={editListing} />
                                     {editListing && <div className="info-edit-boxes">
                                         <button onClick={() => setPersonBoxerOverlay(true)}> <i className="fas fa-plus"></i> </button>
                                     </div>}
                                 </div>
                             </div> 
-                            <ListingAbout type="flatmate" listingInfo={listingInfo} editListing={editListing} state={{addedFlatTags, addedPersonTags, bio, setBio, personBio, setPersonBio, flatBio, setFlatBio, setPersonTagOverlay, setFlatTagOverlay, setPersonBoxerOverlay, setFlatBoxerOverlay}}/>
+                            <ListingAbout type="flatmate" 
+                                listingInfo={listingInfo} 
+                                existingBio={listingBio}
+                                existingFlatBio={listingFlatBio}
+                                existingPersonBio={listingPersonBio}
+                                existingFlatTags={listingFlatTags}
+                                existingPersonTags={listingPersonTags}
+                                editListing={editListing} 
+                                state={{addedFlatTags, addedPersonTags, bio, setBio, personBio, setPersonBio, flatBio, setFlatBio, setPersonTagOverlay, setFlatTagOverlay, setPersonBoxerOverlay, setFlatBoxerOverlay}}/>
                             <Gallery 
                                     type={"flatmate"}
                                     listingImgs={listingImgs} 
@@ -498,7 +515,7 @@ const Listing = ({type}) => {
                                     setPfp={setPfp}
                                     setAddedPfp={setAddedPfp}
                                     addedPfp={addedPfp} 
-                                    state={{setGalleryInput, editListing, listingInfo}} />
+                                    state={{setGalleryInput, editListing, listingInfo, listingId}} />
                         </div>
                     </div>
                     {editListing &&
@@ -516,15 +533,15 @@ const Listing = ({type}) => {
         return (
             <>
                 <Head>
-                    <title>Byt {listingInfo ? listingInfo.data().flatBoxes.layout : ""} {listingInfo ? listingInfo.data().flatBoxes.location : ""} | Roomie</title>
+                    <title>Byt {listingName} | Roomie</title>
                 </Head>
 
                 <div className="Listing FlatListing">
                 <Header variant="white" />
         {/* Boxers and tags */}
-                <Backdrop  sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personTagOverlay}><Tagger variant="person" addedTags={addedPersonTags} existingTags={listingInfo ? listingInfo.data().personTags : null} setTagOverlay={setPersonTagOverlay} setAddedTags={setAddedPersonTags}/></Backdrop>
-                <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personBoxerOverlay}><Boxer setBoxerOverlay={setPersonBoxerOverlay} variant="person" existingBoxes={listingInfo && listingInfo.data().personBoxes} setAddedBoxes={setAddedPersonBoxes} addedBoxes={addedPersonBoxes}/></Backdrop>
-                <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={flatBoxerOverlay}><Boxer setBoxerOverlay={setFlatBoxerOverlay} variant="flat" existingBoxes={listingInfo && listingInfo.data().flatBoxes} setAddedBoxes={setAddedFlatBoxes} addedBoxes={addedFlatBoxes}/></Backdrop>
+                <Backdrop  sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personTagOverlay}><Tagger variant="person" addedTags={addedPersonTags} existingTags={listingInfo ? listingInfo.personTags : null} setTagOverlay={setPersonTagOverlay} setAddedTags={setAddedPersonTags}/></Backdrop>
+                <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={personBoxerOverlay}><Boxer setBoxerOverlay={setPersonBoxerOverlay} variant="person" existingBoxes={listingInfo && listingInfo.personBoxes} setAddedBoxes={setAddedPersonBoxes} addedBoxes={addedPersonBoxes}/></Backdrop>
+                <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={flatBoxerOverlay}><Boxer setBoxerOverlay={setFlatBoxerOverlay} variant="flat" existingBoxes={listingInfo && listingInfo.flatBoxes} setAddedBoxes={setAddedFlatBoxes} addedBoxes={addedFlatBoxes}/></Backdrop>
         {/* Dialogs */}
                 <Dialog
                     open={sliderDialog}
@@ -568,7 +585,7 @@ const Listing = ({type}) => {
 
                     <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={reportDialog}>
                         <InputDialog
-                            heading={`Nahlásit uživatele ${listingInfo && listingInfo.data().userInfo.username}`}
+                            heading={`Nahlásit uživatele ${listingInfo && listingInfo.userInfo.username}`}
                             description="Prosím popište důvody nahlášení."
                             setMessage={setReportMessage} 
                             message={reportMessage} 
@@ -634,8 +651,8 @@ const Listing = ({type}) => {
                                     
                                     <div className="header-info">
                                         <div className="info-main">
-                                            <h1 className="main-name">Byt {listingInfo && listingInfo.data().flatBoxes.layout && listingInfo.data().flatBoxes.layout}</h1>
-                                        {((currentUser && currentUser.uid == listingInfo.data().userInfo.uid) && (listingInfo && listingInfo.data().visible)) && 
+                                            <h1 className="main-name">Byt {listingInfo && listingInfo.flatBoxes.layout && listingInfo.flatBoxes.layout}</h1>
+                                        {((currentUser && currentUser.uid == listingInfo.userInfo.uid) && (listingInfo && listingInfo.visible)) && 
                                             <button onClick={() => setEditListing(prevState => !prevState)} className="main-edit-profile">{editListing ? "Zpět" : "Upravit inzerát"}</button>
                                         }  
                                             <i onClick={() => setMoreInfoOpen(prevState => !prevState)} className="main-more fas fa-ellipsis-h"></i>
@@ -643,7 +660,7 @@ const Listing = ({type}) => {
                                                 <li onClick={() => setReportDialog(true)}>Nahlásit uživatele</li>
                                             </ul>
                                             <div className="main-description">
-                                                <p>{listingInfo && listingInfo.data().flatBoxes.location}</p>
+                                                <p>{listingInfo && listingInfo.flatBoxes.location}</p>
                                             </div>
                                         </div>
                                         
@@ -658,16 +675,16 @@ const Listing = ({type}) => {
                     <div className="mid-container">
                         <div className="content-body">
                             <div className="body-messages">
-                                {(listingInfo && !listingInfo.data().visible )&&
+                                {(listingInfo && !listingInfo.visible )&&
                                         <div className="messages-message">
                                             <i className="fas fa-info"></i>
                                             <p>
                                                 Váš inzerát je nedokončený, prosím dokončete jej  
-                                                <Link href={`/cr/${listingInfo.data().type}/${listingInfo.id}`}><a style={{textDecoration: "underline"}}> zde</a></Link>
+                                                <Link href={`/cr/${listingInfo.type}/${listingId}`}><a style={{textDecoration: "underline"}}> zde</a></Link>
                                             </p> 
                                         </div>
                                 }
-                                {(listingInfo && !listingInfo.data().userInfo.emailVerified) &&
+                                {(listingInfo && !listingInfo.userInfo.emailVerified) &&
                                     <div className="messages-message">
                                         <i className="fas fa-info"></i>
                                         <p>
@@ -697,7 +714,7 @@ const Listing = ({type}) => {
                                                             <img src={pfp} className='profile-info-pfp' /> 
                                                             : 
                                                             listingInfo ? 
-                                                            <img src={`/img/pfps/${(listingInfo && listingInfo.data().userInfo.gender === "male") ? "radek" : "radka"}-pfp.png`} className="profile-info-pfp" /> 
+                                                            <img src={`/img/pfps/${(listingInfo && listingInfo.userInfo.gender === "male") ? "radek" : "radka"}-pfp.png`} className="profile-info-pfp" /> 
                                                             : 
                                                             <div className="profile-info-pfp"></div>
                                                         }
@@ -705,8 +722,8 @@ const Listing = ({type}) => {
                                                 }
                                             </div>
                                             <div className="profile-info-text">
-                                            {!listingInfo ? <Skeleton variant="text" sx={{width: 50}}/>: <p className="text-name">{listingInfo.data().userInfo.username}</p> } 
-                                            {!listingInfo ? <Skeleton variant="text" sx={{width: 30}} />:  <p className="text-description">{listingInfo.data().userInfo.gender === "male" ? "Muž" : listingInfo.data().userInfo.gender === "female" ? "Žena" : listingInfo.data().userInfo.gender === "other" ? "Jiné" : ""}, {listingInfo.data().userInfo.age}</p>}
+                                            {!listingInfo ? <Skeleton variant="text" sx={{width: 50}}/>: <p className="text-name">{listingInfo.userInfo.username}</p> } 
+                                            {!listingInfo ? <Skeleton variant="text" sx={{width: 30}} />:  <p className="text-description">{listingInfo.userInfo.gender === "male" ? "Muž" : listingInfo.userInfo.gender === "female" ? "Žena" : listingInfo.userInfo.gender === "other" ? "Jiné" : ""}, {listingInfo.userInfo.age}</p>}
                                             </div>
                                             
                                         </div>
@@ -714,18 +731,26 @@ const Listing = ({type}) => {
                                             <img src="/img/listing/mapa.png" alt="" className="boxes-map" />
                                         </div>
                                     </div>
-                                    <ListingBoxesContainer existingBoxes={listingInfo && listingInfo.data().flatBoxes} addedBoxes={addedFlatBoxes} editListing={editListing} type="flat" /> 
+                                    <ListingBoxesContainer existingBoxes={listingFlatBoxes} addedBoxes={addedFlatBoxes} editListing={editListing} type="flat" /> 
                                     {editListing && <div className="info-edit-boxes">
                                         <button onClick={() => setFlatBoxerOverlay(true)}> <i className="fas fa-plus"></i> </button>
                                     </div>}
-                                    <ListingBoxesContainer existingBoxes={listingInfo &&listingInfo.data().personBoxes} addedBoxes={addedPersonBoxes} editListing={editListing} type="flatmate" />
+                                    <ListingBoxesContainer existingBoxes={listingPersonBoxes} addedBoxes={addedPersonBoxes} editListing={editListing} type="flatmate" />
                                     {editListing && <div className="info-edit-boxes">
                                         <button onClick={() => setPersonBoxerOverlay(true)}> <i className="fas fa-plus"></i> </button>
                                     </div>}
                                 </div>
                                 
                             </div> 
-                            <ListingAbout type="flat" listingInfo={listingInfo} editListing={editListing} state={{addedFlatTags, addedPersonTags, bio, setBio, personBio, setPersonBio, flatBio, setFlatBio, setPersonTagOverlay, setFlatTagOverlay, setPersonBoxerOverlay, setFlatBoxerOverlay}} />
+                            <ListingAbout type="flat" 
+                                listingInfo={listingInfo} 
+                                existingBio={listingBio}
+                                existingFlatBio={listingFlatBio}
+                                existingPersonBio={listingPersonBio}
+                                existingFlatTags={listingFlatTags}
+                                existingPersonTags={listingPersonTags}
+                                editListing={editListing} 
+                                state={{addedFlatTags, addedPersonTags, bio, setBio, personBio, setPersonBio, flatBio, setFlatBio, setPersonTagOverlay, setFlatTagOverlay, setPersonBoxerOverlay, setFlatBoxerOverlay}}/>
                             <Gallery 
                                 type={"flat"}
                                 listingImgs={listingImgs} 
@@ -736,7 +761,7 @@ const Listing = ({type}) => {
                                 setPfp={setPfp}
                                 addedPfp={addedPfp}
                                 setAddedPfp={setAddedPfp} 
-                                state={{setGalleryInput, editListing, listingInfo}} />
+                                state={{setGalleryInput, editListing, listingInfo, listingId}} />
                             {editListing &&
                                 <div className="content-edit-buttons">
                                     <button onClick={handleSave} className="main-btn">Uložit změny</button>
