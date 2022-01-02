@@ -20,22 +20,22 @@ const ListingContact = ({listingInfo, editListing, state}) => {
 
     useEffect(() => {
         if(listingInfo && currentUser){
-            if(listingInfo.data().userInfo.uid === currentUser.uid){
+            if(listingInfo.userInfo.uid === currentUser.uid){
                 setIsOwner(true);
             }else{
                 setIsOwner(false);
             }
-            if(listingInfo.data().friends.includes(currentUser.uid)){
+            if(listingInfo.friends.includes(currentUser.uid)){
                 setIsFriend(true);
             }else{
                 setIsFriend(false);
             }
-            if(listingInfo.data().requests.includes(currentUser.uid)){
+            if(listingInfo.requests.includes(currentUser.uid)){
                 setIsRequested(true);
             }else{
                 setIsRequested(false);
             }
-            if(listingInfo.data().sentRequests.includes(currentUser.uid)){
+            if(listingInfo.sentRequests.includes(currentUser.uid)){
                 setIsRequesting(true);
             }else{
                 setIsRequesting(false);
@@ -58,23 +58,23 @@ const ListingContact = ({listingInfo, editListing, state}) => {
                                 <div className="items-item">
                                     <i className="fas fa-phone"></i>
                                     <p>{
-                                        [listingInfo.data().userInfo.contact.phone.slice(0, 4), " ", listingInfo.data().userInfo.contact.phone.slice(4, 7), " ", listingInfo.data().userInfo.contact.phone.slice(7,10), " ", listingInfo.data().userInfo.contact.phone.slice(10)].join('')
+                                        [listingInfo.userInfo.contact.phone.slice(0, 4), " ", listingInfo.userInfo.contact.phone.slice(4, 7), " ", listingInfo.userInfo.contact.phone.slice(7,10), " ", listingInfo.userInfo.contact.phone.slice(10)].join('')
                                     }</p>
                                 </div>
                                 <div className="items-item">
                                     <i className="fas fa-envelope"></i>
-                                    <p>{listingInfo.data().userInfo.contact.email}</p>
+                                    <p>{listingInfo.userInfo.contact.email}</p>
                                 </div>
                             </div>
                             <div className="items-socials">
-                                    <i onClick={() => listingInfo.data().userInfo.contact.fb ? window.location.href = listingInfo.data().userInfo.contact.fb : "" } className={`fab fa-facebook-square socials-item ${listingInfo.data().userInfo.contact.fb  && "active" }`}></i>
-                                    <i onClick={() => listingInfo.data().userInfo.contact.ig ? window.location.href =  listingInfo.data().userInfo.contact.ig : ""} className={`fab fa-instagram socials-item ${(listingInfo.data().userInfo.contact.ig  && "active" )}`}></i>
+                                    <i onClick={() => listingInfo.userInfo.contact.fb ? window.location.href = listingInfo.userInfo.contact.fb : "" } className={`fab fa-facebook-square socials-item ${listingInfo.userInfo.contact.fb  && "active" }`}></i>
+                                    <i onClick={() => listingInfo.userInfo.contact.ig ? window.location.href =  listingInfo.userInfo.contact.ig : ""} className={`fab fa-instagram socials-item ${(listingInfo.userInfo.contact.ig  && "active" )}`}></i>
                             </div>
                         </div>
                         {isFriend &&
                             <div className="contact-state">
                                 <i className="state-icon fas fa-users"></i>
-                                <p className="state-description">Vy a {listingInfo.data().userInfo.username} jste ve spojení.</p>
+                                <p className="state-description">Vy a {listingInfo.userInfo.username} jste ve spojení.</p>
                             </div>
                         }
                         {(isOwner && !editListing) &&
