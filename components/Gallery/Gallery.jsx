@@ -47,7 +47,7 @@ const Gallery = ({type, listingImgs, setListingImgs, addedListingImgs, setAddedL
             const imageInfo = {
                 url: image,
                 uid: currentUser.uid,
-                listingId: state.listingInfo.id,
+                listingId: state.listingId,
             }
             deleteImgs(JSON.stringify(imageInfo)).then((response) => {
                 if(type === "normalPfp"){
@@ -101,7 +101,7 @@ const Gallery = ({type, listingImgs, setListingImgs, addedListingImgs, setAddedL
                                 <img src={pfp}/>
                              :
                              <>
-                             {state.listingInfo &&  <img src={state.listingInfo.data().userInfo.gender === "male" ? "/img/pfps/radek-pfp.png" : "/img/pfps/radka-pfp.png"}/>}
+                             {state.listingInfo &&  <img src={state.listingInfo.userInfo.gender === "male" ? "/img/pfps/radek-pfp.png" : "/img/pfps/radka-pfp.png"}/>}
                              </>
                             }
                         </>
