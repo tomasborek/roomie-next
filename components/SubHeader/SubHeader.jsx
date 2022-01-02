@@ -2,9 +2,7 @@ import React, {useState} from 'react'
 //next
 import Link from "next/link";
 import { useRouter } from 'next/dist/client/router';
-//FA
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faSearch, faUsers } from '@fortawesome/free-solid-svg-icons';
+
 
 const SubHeader = () => {
     const router = useRouter();
