@@ -4,10 +4,6 @@ import { useRouter } from 'next/dist/client/router';
 import Head from "next/head";
 import Link from "next/link";
 
-//Firebase
-import { db } from '../../Firebase';
-import { getDoc, doc } from 'firebase/firestore';
-
 
 //Contexts
 import { useDb } from '../../contexts/DbContext';
