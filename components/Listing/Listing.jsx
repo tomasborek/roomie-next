@@ -70,8 +70,6 @@ const Listing = (props) => {
     const [listingPersonTags, setListingPersonTags] = useState(props.listingPersonTags);
     const [listingFlatBoxes, setListingFlatBoxes] = useState(type === "flat" ? props.listingFlatBoxes : null);
     const [listingFlatTags, setListingFlatTags] = useState(type === "flatmate" ? props.listingFlatTags : null);
-    const [listingLocation, setListingLocation] = useState(type === "flat" ? props.listingLocation : null);
-    const [listingLayout, setListingLayout] = useState(type === "flat" ? props.listingLayout : null);
     //Edit mode
     const [editListing, setEditListing] = useState(false);
     const [addedListingImgs, setAddedListingImgs] = useState(["", "", "", "", "", ""]);
@@ -112,6 +110,7 @@ const Listing = (props) => {
     
     useEffect(() => {
         setListingInfo(null);
+        reloadProps();
         if(!router.isReady) return;
         if(props.statusCode != 200) return;
         getListing(id)
@@ -127,6 +126,19 @@ const Listing = (props) => {
             console.log(error);
         })
     }, [router.isReady, id])
+
+    useEffect(() => {
+        if(!(props.personTags === null) && listingPersonTags === null){
+            setListingName(props.listingName);
+            setListingBio(type === "flatmate" ? props.listingBio : null);
+            setListingFlatBio(type === "flat" ? props.listingFlatBio : null);
+            setListingPersonBio(type === "flat" ? props.listingPersonBio : null);
+            setListingPersonBoxes(props.listingPersonBoxes);
+            setListingPersonTags(props.listingPersonTags);
+            setListingFlatBoxes(type === "flat" ? props.listingFlatBoxes : null);
+            setListingFlatTags(type === "flatmate" ? props.listingFlatTags : null);
+        }
+    }, [props])
 
  
 
@@ -175,6 +187,17 @@ const Listing = (props) => {
             setAddedPfp(null);
         }
     }, [editListing])
+
+    const reloadProps = () => {
+        setListingName(props.listingName);
+        setListingBio(type === "flatmate" ? props.listingBio : null);
+        setListingFlatBio(type === "flat" ? props.listingFlatBio : null);
+        setListingPersonBio(type === "flat" ? props.listingPersonBio : null);
+        setListingPersonBoxes(props.listingPersonBoxes);
+        setListingPersonTags(props.listingPersonTags);
+        setListingFlatBoxes(type === "flat" ? props.listingFlatBoxes : null);
+        setListingFlatTags(type === "flatmate" ? props.listingFlatTags : null);
+    }
 
     //Functions
     const checkAccess = (uid, visible, emailVerified) => {
@@ -270,11 +293,21 @@ const Listing = (props) => {
             } 
         }).then((response) => {
             setLoading(false);
+            setListingInfo(null);
+            setListingBio(null);
+            setListingFlatBio(null);
+            setListingPersonBio(null);
+            setListingPersonBoxes(null);
+            setListingPersonTags(null);
+            setListingFlatBoxes(null);
+            setListingFlatTags(null);
             setEditListing(false);
             snackBar("Inzerát byl úspěšně upraven.", "success");
             window.scrollTo({top: 0, behavior: "smooth"});
-            console.log(router.asPath);
             router.push(router.asPath);
+            return getListing(listingId);
+        }).then((doc) => {
+            setListingInfo(doc.data());
         }).catch((error) => {
             setLoading(false);
             console.log(error);
