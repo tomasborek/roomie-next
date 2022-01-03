@@ -7,6 +7,7 @@ import { FormControl, Select, MenuItem, InputLabel } from '@mui/material';
 
 const ListingInfoImportant = ({type, listingInfo, editListing, state}) => {
     const {currentUser} = useAuth();
+    const {budget, startTime, stayTime, setBudget, setStayTime, setStartTime, setSliderDialog} = state;
     if(type === "flatmate"){
         return (
             <div className={`info-important ${editListing ? "edit" : ""}`}>
@@ -16,13 +17,13 @@ const ListingInfoImportant = ({type, listingInfo, editListing, state}) => {
                          {editListing ?  
                             <div className="header-value header-value-edit-slider">
                                 <p>
-                                    {state.budget && (state.budget >= 10000 ? 
-                                        (state.budget.toString().substr(0,2) + " " + state.budget.toString().substr(2,6)) 
+                                    {budget && (budget >= 10000 ? 
+                                        (budget.toString().substr(0,2) + " " + budget.toString().substr(2,6)) 
                                     : 
-                                        (state.budget.toString().substr(0,1) + " " + state.budget.toString().substr(1,5)))} 
-                                     {state.budget == 60000 && "+"} Kč
+                                        (budget.toString().substr(0,1) + " " + budget.toString().substr(1,5)))} 
+                                     {budget == 60000 && "+"} Kč
                                 </p>
-                                <i onClick={() => state.setSliderDialog(true)} className="fas fa-gear"></i></div> 
+                                <i onClick={() => setSliderDialog(true)} className="fas fa-gear"></i></div> 
                         : 
                             <div className="header-value">
                                 {listingInfo.mainInfo.budget >= 10000 ? 
@@ -38,9 +39,9 @@ const ListingInfoImportant = ({type, listingInfo, editListing, state}) => {
                     <div className="item-header">
                         <i className={`header-icon ${editListing && "header-edit-icon"} fas fa-calendar-alt`}></i>
                         {editListing ? 
-                        <FormControl className="select" size="small" error={!state.stayTime || state.stayTime == ""}>
+                        <FormControl className="select" size="small" error={!stayTime || stayTime == ""}>
                             <InputLabel className="input-label" >Doba bydlení</InputLabel>
-                                <Select onChange={(e) => state.setStayTime(e.target.value)} label="Doba bydlení" defaultValue={listingInfo.mainInfo.stayTime}>
+                                <Select onChange={(e) => setStayTime(e.target.value)} label="Doba bydlení" value={stayTime ? stayTime : listingInfo.mainInfo.stayTime ? listingInfo.mainInfo.stayTime : ""}>
                                     <MenuItem value="Krátkodobá">Krátkodobá</MenuItem>
                                     <MenuItem value="1 rok">1 rok</MenuItem>
                                     <MenuItem value="Dlouhodobá">Dlouhodobá</MenuItem>
@@ -56,9 +57,9 @@ const ListingInfoImportant = ({type, listingInfo, editListing, state}) => {
                     <div className="item-header">
                         <i className={`header-icon ${editListing && "header-edit-icon"} fas fa-shuttle-van`}></i>
                             {editListing ? 
-                            <FormControl className="select" size="small" error={!state.startTime || state.startTime == ""}>
+                            <FormControl className="select" size="small" error={!startTime || startTime == ""}>
                                 <InputLabel className="input-label" >Doba nas.</InputLabel>
-                                <Select onChange={(e) => state.setStartTime(e.target.value)} label="Doba bydlení"  defaultValue={listingInfo.mainInfo.startTime}>
+                                <Select onChange={(e) => setStartTime(e.target.value)} label="Doba bydlení" value={startTime ? startTime : listingInfo.mainInfo.startTime ? listingInfo.mainInfo.startTime : ""}>
                                     <MenuItem value="Okamžitě">Okamžitě</MenuItem>
                                     <MenuItem value="Příští měsíc">Příští měsíc</MenuItem>
                                     <MenuItem value="Příští rok">Příští rok</MenuItem>
@@ -83,13 +84,13 @@ const ListingInfoImportant = ({type, listingInfo, editListing, state}) => {
                         {editListing ? 
                             <div className="header-value header-value-edit-slider">
                                 <p>
-                                    {state.budget && (state.budget >= 10000 ? 
-                                        (state.budget.toString().substr(0,2) + " " + state.budget.toString().substr(2,6)) 
+                                    {budget && (budget >= 10000 ? 
+                                        (budget.toString().substr(0,2) + " " + budget.toString().substr(2,6)) 
                                     : 
-                                        (state.budget.toString().substr(0,1) + " " + state.budget.toString().substr(1,5)))} 
-                                        {state.budget == 60000 && "+"} Kč
+                                        (budget.toString().substr(0,1) + " " + budget.toString().substr(1,5)))} 
+                                        {budget == 60000 && "+"} Kč
                                 </p>
-                                <i onClick={() => state.setSliderDialog(true)} className="fas fa-gear"></i>
+                                <i onClick={() => setSliderDialog(true)} className="fas fa-gear"></i>
                             </div>  
                         : 
                         <div className="header-value">
@@ -107,9 +108,9 @@ const ListingInfoImportant = ({type, listingInfo, editListing, state}) => {
                     <div className="item-header">
                         <i className="header-icon fas fa-calendar-alt"></i>
                         {editListing ? 
-                        <FormControl className="select" size="small" error={!state.stayTime || state.stayTime == ""}>
+                        <FormControl className="select" size="small" error={!stayTime || stayTime == ""}>
                             <InputLabel className="input-label" >Doba bydlení</InputLabel>
-                                <Select onChange={(e) => state.setStayTime(e.target.value)} label="Doba bydlení" defaultValue={listingInfo.mainInfo.startTime}>
+                                <Select onChange={(e) => setStayTime(e.target.value)} label="Doba bydlení" value={stayTime ? stayTime : listingInfo.mainInfo.stayTime ? listingInfo.mainInfo.stayTime : ""}>
                                     <MenuItem value="Krátkodobá">Krátkodobá</MenuItem>
                                         <MenuItem value="1 rok">1 rok</MenuItem>
                                         <MenuItem value="Dlouhodobá">Dlouhodobá</MenuItem>
@@ -126,9 +127,9 @@ const ListingInfoImportant = ({type, listingInfo, editListing, state}) => {
                     <div className="item-header">
                         <i className="header-icon fas fa-shuttle-van"></i>
                         {editListing ? 
-                        <FormControl className="select" size="small" error={!state.startTime || state.startTime == ""}>
+                        <FormControl className="select" size="small" error={!startTime || startTime == ""}>
                             <InputLabel className="input-label" >Doba nas.</InputLabel>
-                            <Select onChange={(e) => state.setStartTime(e.target.value)} label="Doba nastěhování" defaultValue={listingInfo.mainInfo.stayTime}>
+                            <Select onChange={(e) => setStartTime(e.target.value)} label="Doba nastěhování" value={startTime ? startTime : listingInfo.mainInfo.startTime ? listingInfo.mainInfo.startTime : ""}>
                                 <MenuItem value="Okamžitě">Okamžitě</MenuItem>
                                 <MenuItem value="Příští měsíc">Příští měsíc</MenuItem>
                                 <MenuItem value="Příští rok">Příští rok</MenuItem>
