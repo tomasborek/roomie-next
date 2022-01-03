@@ -189,6 +189,14 @@ textarea {
   cursor: pointer;
 }
 
+#nprogress .bar {
+  height: 6px;
+}
+
+#nprogress .bar {
+  background: #309EAB;
+}
+
 .Home .home-video {
   width: 100%;
   background-color: #B8B8B8;
