@@ -137,6 +137,7 @@ exports.generateToken = functions.auth.user().onCreate((user) => {
     return db.collection("tokens").doc(token).set({
       uid: user.uid,
       state: "unverified",
+      email: user.email,
     });
 });
   
