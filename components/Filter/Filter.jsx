@@ -31,17 +31,19 @@ const Filter = ({variant, setOpen, activeFilters, setActiveFilters, applyFilters
      //Functions
      const fillExistingFilters = () => {
         if(variant === "flatmate"){
-            activeFilters.gender ? setGenderTag(activeFilters.gender) : "";
-            activeFilters.age ? setAgeTag(activeFilters.age) : "";
-            activeFilters.smoking ? setSmokingTag(activeFilters.smoking) : "";
-            activeFilters.job ? setJobTag(activeFilters.job) : "";  
-            (activeFilters.location && activeFilters.location[0]) ? setLocationTag(activeFilters.location) : "";
+            setGenderTag(activeFilters.gender ? activeFilters.gender  : []);
+            setAgeTag(activeFilters.age ? activeFilters.age  : []);
+            setSmokingTag(activeFilters.smoking ? activeFilters.smoking  : "");
+            setJobTag(activeFilters.job ? activeFilters.job  : []); 
+            setLocationTag(activeFilters.location ? activeFilters.location  : ""); 
          }
          if(variant === "flat"){
-            (activeFilters.location && activeFilters.location[0]) ? setLocationTag(activeFilters.location) : "";
-            activeFilters.layout ? setLayoutTag(activeFilters.layout) : "";
-            activeFilters.petAllowed ? setPetAllowedTag(activeFilters.petAllowed) : "";
-            activeFilters.smokingAllowed ? setSmokingAllowedTag(activeFilters.smokingAllowed) : "";
+            setLocationTag(activeFilters.location ? activeFilters.location  : ""); 
+            setLayoutTag(activeFilters.layout ? activeFilters.layout  : ""); 
+            setInternetTag(activeFilters.internet ? activeFilters.internet  : "");
+            setElevatorTag(activeFilters.elevator ? activeFilters.elevator  : "");
+            setPetAllowedTag(activeFilters.petAllowed ? activeFilters.petAllowed  : ""); 
+            setSmokingAllowedTag(activeFilters.smokingAllowed ? activeFilters.smokingAllowed  : ""); 
          }
      }
 

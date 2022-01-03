@@ -37,20 +37,20 @@ const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) 
     const fillExistingTags = () => {
         if(variant === "person"){
             setAddedTags(existingTags);
-            existingTags.smoking && setSmokingTag(existingTags.smoking);
-            existingTags.job && setJobTag(existingTags.job);
-            existingTags.age && setAgeTag(existingTags.age);
-            existingTags.gender && setGenderTag(existingTags.gender);
-            existingTags.location && setLocationTag(existingTags.location);
+            setGenderTag(existingTags.gender ? existingTags.gender  : []);
+            setAgeTag(existingTags.age ? existingTags.age  : []);
+            setSmokingTag(existingTags.smoking ? existingTags.smoking  : "");
+            setJobTag(existingTags.job ? existingTags.job  : []); 
+            setLocationTag(existingTags.location ? existingTags.location  : ""); 
         }
         if(variant === "flat"){
             setAddedTags(existingTags);
-            existingTags.location && setLocationTag(existingTags.location);
-            existingTags.layout && setLayoutTag(existingTags.layout);
-            existingTags.internet && setInternetTag(existingTags.internet);
-            existingTags.elevator && setElevatorTag(existingTags.elevator);
-            existingTags.petAllowed && setPetAllowedTag(existingTags.petAllowed);
-            existingTags.smokingAllowed && setSmokingAllowedTag(existingTags.smokingAllowed);
+            setLocationTag(existingTags.location ? existingTags.location  : ""); 
+            setLayoutTag(existingTags.layout ? existingTags.layout  : ""); 
+            setInternetTag(existingTags.internet ? existingTags.internet  : "");
+            setElevatorTag(existingTags.elevator ? existingTags.elevator  : "");
+            setPetAllowedTag(existingTags.petAllowed ? existingTags.petAllowed  : ""); 
+            setSmokingAllowedTag(existingTags.smokingAllowed ? existingTags.smokingAllowed  : ""); 
         }
     }
 
