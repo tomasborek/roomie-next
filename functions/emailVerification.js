@@ -39,3 +39,15 @@ exports.verifyToken = functions.https.onCall((data, context) => {
         })
     });
 });
+
+exports.sendVerifyEmail = functions.firestore.document("/tokens/{token}").onCreate((snap, context) => {
+    const email = snap.data().email;
+    const db = admin.firestore();
+    return db.collection("newUserMail").add({
+        to: email,
+        message: {
+            subject: "Ověřte svůj email",
+            text: `Vítejte na Roomie, děkujeme za registraci. Prosím ověřte svůj e-mail kliknutím na odkaz níže.Pokud jste účet nevytvořili vy, můžete tento email ignorovat. localhost:3000/auth/user/token/${snap.id}`,
+        },
+    })
+})
