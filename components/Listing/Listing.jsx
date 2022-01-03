@@ -109,6 +109,7 @@ const Listing = (props) => {
         
     
     useEffect(() => {
+        setLoading(false);
         setListingInfo(null);
         reloadProps();
         if(!router.isReady) return;

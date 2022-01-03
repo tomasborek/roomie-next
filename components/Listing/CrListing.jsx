@@ -222,8 +222,6 @@ const CrListing = ({type}) => {
                 return Promise.resolve("No new imgs");
             } 
         }).then((response) => {
-            setLoading(false);
-            setEditListing(false);
             snackBar("Inzerát byl úspěšně upraven.", "success");
             window.scrollTo(0,0);
             router.push(`/${listingInfo.type}/${listingId}`);
