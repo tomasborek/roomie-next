@@ -86,6 +86,10 @@ const LocationDropdown = ({setLocation, location}) => {
     useEffect(() => {
         if(location){
             inputRef.current.value = location;
+            setSearch(location);
+        }else{
+            inputRef.current.value = "";
+            setSearch("");
         }
     }, [location])
 
