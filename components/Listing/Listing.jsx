@@ -104,8 +104,8 @@ const Listing = (props) => {
     const [bio, setBio] = useState(null);
     const [flatBio, setFlatBio] = useState(null);
     const [personBio, setPersonBio] = useState(null);
-    const [requestMessage, setRequestMessage] = useState(null);
-    const [reportMessage, setReportMessage] = useState(null);
+    const [requestMessage, setRequestMessage] = useState("");
+    const [reportMessage, setReportMessage] = useState("");
         
     
     useEffect(() => {
