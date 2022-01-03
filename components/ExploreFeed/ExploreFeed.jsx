@@ -6,6 +6,7 @@ import { useRouter } from 'next/dist/client/router';
 import {useDb} from "../../contexts/DbContext";
 import { useAuth } from '../../contexts/AuthContext';
 import { useExplore } from '../../contexts/ExploreContext';
+import {useLoading} from "../../contexts/LoadingContext";
 
 //Components
 import ExploreFlatmate from '../ExploreListings/ExploreFlatmate/ExploreFlatmate';
@@ -14,6 +15,7 @@ import Pagination from "../Pagination/Pagination";
 import Filter from '../Filter/Filter';
 import CustomDialog from "../CustomDialog/CustomDialog";
 import ExplorePremium from '../ExplorePremium/ExplorePremium';
+import AdSense from '../AdSense/AdSense';
 //MUI
 import { CircularProgress } from '@mui/material';
 import { Backdrop } from '@mui/material';
@@ -22,9 +24,10 @@ import { Backdrop } from '@mui/material';
 const ExploreFeed = ({variant}) => {
     //Variables
     //Contexts
-    const {getListings, getListingsFilter} = useDb();
+    const {getListings, getListingsFilter, getListing} = useDb();
     const router = useRouter();
-    const {currentUser} = useAuth();
+    const {currentUser, currentUserInfo} = useAuth();
+    const [loading, setLoading] = useLoading();
     const {
         flatListingsValue,
         flatmateListingsValue, 
@@ -48,7 +51,6 @@ const ExploreFeed = ({variant}) => {
     const [premiumPaginationDialog, setPremiumPaginationDialog] = useState(false);
     // const [activeFilters, setActiveFilters] = useState({});
     const [matching, setMatching] = useState(false);
-    const [filtering, setFiltering] = useState(false);
     // Is user connected to internet
     const [connectionDown, setConnectionDown] = useState(false);
     //Pagination disabled?
@@ -85,11 +87,6 @@ const ExploreFeed = ({variant}) => {
         }    
 
     }, [variant])
-
-    useEffect(() => {
-        if(filtering) setMatching(false);
-        if(matching) setFiltering(false);
-    }, [filtering, matching])
 
     const fetchListings = (type, page, listings, filter) => {
         if(type === "flatmate"){
@@ -214,6 +211,44 @@ const ExploreFeed = ({variant}) => {
         }
     }
 
+    const handleMatching = () => {
+        if(matching){
+            setActiveFilters({});
+            applyFilters({});
+            setMatching(prevState => !prevState);
+            return;
+        }
+        setMatching(prevState => !prevState);
+        getListing(currentUserInfo.listing.id).then((doc) => {
+            if(variant === "flatmate"){
+                const filters = {
+                    location: doc.data().flatBoxes.location ? doc.data().flatBoxes.location : null,
+                    gender: doc.data().personTags.gender ? doc.data().personTags.gender : null,
+                    age: doc.data().personTags.age ? doc.data().personTags.age : null,
+                    smoking: doc.data().personTags.smoking ? doc.data().personTags.smoking : null,
+                    job: doc.data().personTags.job ? doc.data().personTags.job : null,
+                }
+                setActiveFilters(filters);
+                applyFilters(filters);
+            }
+            if(variant === "flat"){
+                const filters = {
+                    location: doc.data().flatTags.location ? doc.data().flatTags.location : null,
+                    layout: doc.data().flatTags.layout ? doc.data().flatTags.layout : null,
+                    elevator: doc.data().flatTags.elevator ? doc.data().flatTags.elevator : null,
+                    internet: doc.data().flatTags.internet ? doc.data().flatTags.internet : null,
+                    petAllowed: doc.data().flatTags.petAllowed ? doc.data().flatTags.petAllowed : null,
+                    smokingAllowed: doc.data().flatTags.smokingAllowed ? doc.data().flatTags.smokingAllowed : null,
+                }
+                setActiveFilters(filters);
+                applyFilters(filters);
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+
+    }
+
     const applyFilters = (filter) => {
         if(variant === "flatmate"){
             setFlatmateListings(null);
@@ -300,7 +335,7 @@ const ExploreFeed = ({variant}) => {
                         onClick={() => {
                             if(currentUser){
                                 setFilterOpen(true);
-                                setFiltering(true);
+                                setMatching(false);
                             }else{
                                 setLimitedPaginationDialog(true);
                             }
@@ -308,13 +343,14 @@ const ExploreFeed = ({variant}) => {
                         <p>Filtry</p>
                         <i className="fas fa-chevron-down"></i>
                     </div>
-                    <div className={`filters-match ${matching && "active"}`} onClick={() => setMatching(prevState => !prevState)}>
-                        <p>Match</p>
+                    <div className={`filters-match ${matching && "active"}`} onClick={() => handleMatching()}>
+                        <p>Přímo pro vás</p>
                         <i className="fas fa-puzzle-piece"></i>
                     </div>
                 </div>
             </div>
             <ExplorePremium/>
+            <AdSense></AdSense>
             {(variant === "flatmate" && !connectionDown) &&
             <>
                 {flatmateListings ? 
