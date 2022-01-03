@@ -47,7 +47,11 @@ exports.sendVerifyEmail = functions.firestore.document("/tokens/{token}").onCrea
         to: email,
         message: {
             subject: "Ověřte svůj email",
-            text: `Vítejte na Roomie, děkujeme za registraci. Prosím ověřte svůj e-mail kliknutím na odkaz níže.Pokud jste účet nevytvořili vy, můžete tento email ignorovat. localhost:3000/auth/user/token/${snap.id}`,
+            html: `
+                    <h1>Ověřte svůj email</h1> </br>
+                    <p>Vítejte na Roomie, děkujeme za registraci. Prosím ověřte svůj e-mail kliknutím na odkaz níže.Pokud jste účet nevytvořili vy, můžete tento email ignorovat.
+                    https://roomie-5241.rostiapp.cz/auth/user/token/${snap.id}</p>
+                `,
         },
     })
 })
