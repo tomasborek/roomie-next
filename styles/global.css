@@ -591,10 +591,6 @@ textarea {
 }
 
 .EditProfile .edit-content .content-header .header-pfp {
-  width: 80px;
-  height: 80px;
-  background-color: #B8B8B8;
-  border-radius: 50%;
   -ms-grid-column: 1;
   -ms-grid-column-span: 1;
   grid-column: 1/2;
@@ -603,8 +599,43 @@ textarea {
   grid-row: 1/3;
   -ms-grid-column-align: end;
       justify-self: end;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  background-color: #B8B8B8;
+  border-radius: 50%;
+}
+
+.EditProfile .edit-content .content-header .header-pfp img {
+  width: 80px;
+  height: 80px;
+  background-color: #B8B8B8;
+  border-radius: 50%;
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.EditProfile .edit-content .content-header .header-pfp .header-pfp-delete {
+  top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  z-index: 10;
+}
+
+.EditProfile .edit-content .content-header .header-pfp .header-pfp-delete i {
+  color: red;
 }
 
 .EditProfile .edit-content .content-header .header-name {
@@ -1278,10 +1309,11 @@ textarea {
 }
 
 .Listing .listing-content .content-header .mid-container .header-pfp-container .container-edit-icon {
-  pointer-events: all;
-  cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
+  display: flex;
+  pointer-events: all;
+  cursor: pointer;
   display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -1300,8 +1332,17 @@ textarea {
 }
 
 .Listing .listing-content .content-header .mid-container .header-pfp-container .container-edit-icon i {
+  cursor: pointer;
+  margin: 0 0.5rem;
+  padding: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
   font-size: 24px;
   color: white;
+}
+
+.Listing .listing-content .content-header .mid-container .header-pfp-container .container-edit-icon i.fa-trash {
+  color: red;
 }
 
 .Listing .listing-content .content-header .mid-container .header-pfp-container .header-pfp {
@@ -1529,6 +1570,8 @@ textarea {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-profile-info .profile-info-pfp-container .pfp-container-edit-icon {

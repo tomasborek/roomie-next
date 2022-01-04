@@ -230,6 +230,51 @@ const CrListing = ({type}) => {
             snackBar("Něco se pokazilo. Zkuste to prosím později.", "error");
         })
     }
+
+    const handleImgDelete = (type) => {
+        const deleteImgs = callable("images-deleteImgs");
+        if(type === "pfp"){
+            if(addedPfp){
+                setAddedPfp(null);
+                return;
+            }
+            setLoading(true);
+            const imageInfo = {
+                url: pfp,
+                uid: currentUser.uid,
+                listingId: listingId,
+            }
+            deleteImgs(JSON.stringify(imageInfo)).then((response) => {
+                setPfp(null);
+                setLoading(false);
+            }).catch((error) => {
+                setLoading(false);
+            })
+        }
+        if(type === "main"){
+            if(addedListingImgs[0]){
+                const imgs = [...addedListingImgs];
+                imgs[0] = "";
+                setAddedListingImgs(imgs);
+                return;
+            }
+            setLoading(true);
+            const imageInfo = {
+                url: listingImgs[0],
+                uid: currentUser.uid,
+                listingId: listingId,
+            }
+            deleteImgs(JSON.stringify(imageInfo)).then((response) => {
+                const imgs = [...listingImgs];
+                imgs[0] = "";
+                setListingImgs(imgs);
+                setLoading(false);
+            }).catch((error) => {
+                setLoading(false);
+            })
+
+        }
+    }
   
     if(type === "flatmate"){
         return(
@@ -306,16 +351,17 @@ const CrListing = ({type}) => {
                         <div className="content-header">
                             <div className="mid-container">
                                 <div className="header-pfp-container">
-                                    {(editListing && listingInfo) &&
-                                        <div onClick={() => {
-                                            setGalleryInput({
-                                                open: true,
-                                                index: -1,
-                                            })
-                                        }} className={`container-edit-icon ${editListing && "active"}`}>
-                                            <i className="fas fa-pen"></i>
-                                        </div>
-                                    }
+                                        {editListing &&
+                                            <div  className={`container-edit-icon ${editListing && "active"}`}>
+                                                <i onClick={() => {
+                                                    setGalleryInput({
+                                                        open: true,
+                                                        index: -1,
+                                                    })
+                                                }} className="fas fa-camera"></i>
+                                                {(addedPfp || pfp) && <i onClick={() => handleImgDelete("pfp")} className="fas fa-trash"></i>}
+                                            </div>
+                                        }
                                     
                                     <div className="pfp-container-edit">
                                     </div>
@@ -497,15 +543,16 @@ const CrListing = ({type}) => {
                         <div className="content-header">
                             <div className="mid-container">
                                 <div className="header-pfp-container">
-                                    {(editListing && listingInfo) &&
-                                        <div onClick={() => {
-                                            setGalleryInput({
-                                                open: true,
-                                                index: 0,
-                                            })
-                                        }} className={`container-edit-icon`}>
-                                            <i className="fas fa-pen"></i>
-                                        </div>
+                                    {editListing && 
+                                            <div className={`container-edit-icon`}>
+                                               <i onClick={() => {
+                                                    setGalleryInput({
+                                                        open: true,
+                                                        index: 0,
+                                                    })
+                                                }} className="fas fa-camera"></i>
+                                                 {(addedListingImgs[0] || listingImgs[0]) && <i onClick={() => handleImgDelete("main")} className="fas fa-trash"></i>}
+                                            </div>
                                     }
                                         {listingInfo ?
                                             <>
