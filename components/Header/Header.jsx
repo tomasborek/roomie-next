@@ -70,7 +70,10 @@ const Header = ({variant}) => {
             currentUser ? 
             <div className="navbar navbar-logged">
                 {(notifications && notifications.length) ?
-                     <Badge badgeContent={notifications.length == 9 ? "9+" : notifications.length} color={"secondary"}>
+                     <Badge onClick={() => {
+                        setNotificationDropdown(prevState =>!prevState);
+                        setNavOverlay(false);
+                      }} badgeContent={notifications.length == 9 ? "9+" : notifications.length} color={"secondary"}>
                         <i onClick={() => {
                             setNotificationDropdown(prevState =>!prevState);
                             setNavOverlay(false);
