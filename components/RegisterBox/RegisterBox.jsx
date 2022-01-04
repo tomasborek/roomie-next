@@ -43,14 +43,14 @@ const RegisterBox = () => {
     const [location, setLocation] = useState(null);
     const [price, setPrice] = useState(20000);
     const [listingId, setListingId] = useState("");
+    //Functions
+    const createUser = callable("onCreatedUser-createUser");
+    const createListing = callable("onCreatedUser-createListing");
 
     //Action handle functions
     const registerHandle = () => {
         //Reset error
         setError(null);
-        //Cloud functions
-        const createUser = callable("onCreatedUser-createUser");
-        const createListing = callable("onCreatedUser-createListing");
         //Refs trim
         emailRef.current.value = emailRef.current.value.trim();
         phoneRef.current.value = phoneRef.current.value.trim();
