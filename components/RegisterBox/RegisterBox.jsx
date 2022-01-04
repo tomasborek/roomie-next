@@ -188,6 +188,12 @@ const RegisterBox = () => {
             setError("Pro přihlášení vám musí být alespoň 18 let.");
             return false;
         }
+
+        //State
+        if(!type || !gender || !location){
+            setError("Některá z předchozích otázek není vyplněná.")
+            return false;
+        }
         return true;
     };
 
