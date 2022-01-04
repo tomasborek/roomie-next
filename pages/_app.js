@@ -4,7 +4,7 @@ import Layout from '../components/Layout/Layout'
 import Head from 'next/dist/shared/lib/head';
 //Nprogress
 import NProgress from 'nprogress';
-import "nprogress/nprogress.css";
+// import "nprogress/nprogress.css";
 import Router from 'next/router';
 
 NProgress.configure({
