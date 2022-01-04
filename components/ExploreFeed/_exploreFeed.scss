@@ -88,3 +88,15 @@
         margin-bottom: 1rem;
     }
 }
+
+@media screen and (max-width: 450px){
+    .explore-feed{
+        .feed-header{
+            padding: 1rem 0;
+            flex-direction: column;
+            .header-title{
+                margin-bottom: 1rem;
+            }
+        }
+    }
+}

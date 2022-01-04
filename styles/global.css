@@ -3516,6 +3516,19 @@ textarea {
   margin-bottom: 1rem;
 }
 
+@media screen and (max-width: 450px) {
+  .explore-feed .feed-header {
+    padding: 1rem 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .explore-feed .feed-header .header-title {
+    margin-bottom: 1rem;
+  }
+}
+
 .rec-req {
   padding: 1rem;
   border: 1px solid #B8B8B8;
