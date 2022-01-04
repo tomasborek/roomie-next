@@ -9,7 +9,7 @@ const ListingBoxesContainer = ({type, existingBoxes, addedBoxes, editListing}) =
         <div className="profile-boxes-container">
             <div className="container-heading">Info o inzerantovi</div>
             <div className="container-content">    
-                {existingBoxes && !editListing &&
+                {(existingBoxes && !editListing) &&
                 <>
                     {(existingBoxes.pet && existingBoxes.pet != "") && <ListingBox icon="fa-dog" title="Mazlíček">{existingBoxes.pet}</ListingBox>}
                     {(existingBoxes.smoking && existingBoxes.smoking != "") && <ListingBox icon="fa-smoking" title="Kouření">{existingBoxes.smoking}</ListingBox>}
@@ -25,7 +25,7 @@ const ListingBoxesContainer = ({type, existingBoxes, addedBoxes, editListing}) =
                 <ListingBox title="skeleton"></ListingBox>
                 </>
                 }
-                {addedBoxes && editListing &&
+                {(addedBoxes && editListing) &&
                 <>
                     {(addedBoxes.pet && addedBoxes.pet != "") && <ListingBox icon="fa-dog" title="Mazlíček">{addedBoxes.pet}</ListingBox>}
                     {(addedBoxes.smoking && addedBoxes.smoking != "") && <ListingBox icon="fa-smoking" title="Kouření">{addedBoxes.smoking}</ListingBox>}
@@ -41,7 +41,7 @@ const ListingBoxesContainer = ({type, existingBoxes, addedBoxes, editListing}) =
         <div className="profile-boxes-container">
             <div className="container-heading">Info o bydlení</div>
             <div className="container-content">
-                {existingBoxes && !editListing &&
+                {(existingBoxes && !editListing) &&
                     <>
                     {(existingBoxes.location && existingBoxes.location != "" )&& <ListingBox icon="fa-home" title="Lokace">{existingBoxes.location}</ListingBox>}
                     {(existingBoxes.layout && existingBoxes.layout != "") && <ListingBox icon="fa-door-closed" title="Dispozice">{existingBoxes.layout}</ListingBox>}
@@ -60,9 +60,9 @@ const ListingBoxesContainer = ({type, existingBoxes, addedBoxes, editListing}) =
                 <ListingBox title="skeleton"></ListingBox>
                 </>
                 }
-                {addedBoxes && editListing && 
+                {(addedBoxes && editListing) && 
                 <>
-                {(existingBoxes.location && existingBoxes.location != "") && <ListingBox icon="fa-home" title="Lokace">{existingBoxes.location}</ListingBox>}
+                {(existingBoxes && existingBoxes.location && existingBoxes.location != "") && <ListingBox icon="fa-home" title="Lokace">{existingBoxes.location}</ListingBox>}
                 {(addedBoxes.layout && addedBoxes.layout != "") && <ListingBox icon="fa-door-closed" title="Dispozice">{addedBoxes.layout}</ListingBox>}
                 {(addedBoxes.size && addedBoxes.size != "") && <ListingBox icon="fa-arrows-alt-h" title="Velikost">{addedBoxes.size}m<sup>2</sup></ListingBox>}
                 {(addedBoxes.elevator && addedBoxes.elevator != "") && <ListingBox icon="fa-caret-square-up" title="Výtah">{addedBoxes.elevator}</ListingBox>}
