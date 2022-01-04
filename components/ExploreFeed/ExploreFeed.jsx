@@ -350,7 +350,7 @@ const ExploreFeed = ({variant}) => {
                 </div>
             </div>
             <ExplorePremium/>
-            <AdSense></AdSense>
+            {/* <AdSense></AdSense> */}
             {(variant === "flatmate" && !connectionDown) &&
             <>
                 {flatmateListings ? 
