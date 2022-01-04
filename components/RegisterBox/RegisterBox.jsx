@@ -72,10 +72,8 @@ const RegisterBox = () => {
         const listingIdVar = idGenerator(type);
         setListingId(listingIdVar);
         //Auth register
-        register(email, password)
-        .then(user => {
+        register(email, password).then((user)=> {
             const uid = user.user.uid;
-
             const userInfo = {
                 username: username,
                 age: age,
@@ -114,19 +112,20 @@ const RegisterBox = () => {
                 setStep(6);
             }).catch(error => {
                 setLoading(false);
-                switch(error.code){
-                    case "auth/email-already-in-use":
-                        setError("Tento e-mail je nedostupný.");
-                        break;
-                    case "auth/invalid-email":
-                        setError("Zadejte prosím platný email.");
-                        break;
-                    default:
-                        setError("Registrace selhala. Zkuste to prosím za chvíli.");
-                        break;
-                }
-                console.log(error);
             }) 
+        }).catch((error) => {
+            setLoading(false);
+            switch(error.code){
+                case "auth/email-already-in-use":
+                    setError("Tento e-mail je nedostupný.");
+                    break;
+                case "auth/invalid-email":
+                    setError("Zadejte prosím platný email.");
+                    break;
+                default:
+                    setError("Registrace selhala. Zkuste to prosím za chvíli.");
+                    break;
+            }
         })
     }
 
@@ -170,18 +169,20 @@ const RegisterBox = () => {
             return false;
         }
 
-        if(dayRef.current.value === ""){
-            setError("Prosím vyplňte datum narození,");
-            dayRef.current.classList.add("error");
-            return false;
+        if(dayRef.current.value == 31){
+            const month = monthRef.current.value;
+            if(month == 1 || month == 3 || month == 5 || month == 8 || month == 10){
+                setError("Zadejte prosím reálné datum.");
+                dayRef.current.classList.add("error");
+                return false;
+            }
         }
 
-        
-
-        if(yearRef.current.value === ""){
-            setError("Prosím vyplňte datum narození");
-            yearRef.current.classList.add("error");
-            return false;
+        if(dayRef.current.value > 29){
+            if(monthRef.current.value == 1){
+                setError("Zadejte prosím reálné datum.");
+                return false;
+            }
         }
 
         if(age < 18){
