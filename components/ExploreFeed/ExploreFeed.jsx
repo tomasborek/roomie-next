@@ -212,6 +212,12 @@ const ExploreFeed = ({variant}) => {
     }
 
     const handleMatching = () => {
+        if(currentUserInfo.mainInfo.type === "flatmate" && variant === "flatmate"){
+            return;
+        }
+        if(currentUserInfo.mainInfo.type === "offerer" && variant === "flat"){
+            return;
+        }
         if(matching){
             setActiveFilters({});
             applyFilters({});
