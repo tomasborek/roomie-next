@@ -14,6 +14,7 @@ import { useStorage } from '../contexts/StorageContext';
 import Header from "../components/Header/Header";
 import Switcher from "../components/Switcher/Switcher";
 import Footer from "../components/Footer/Footer"
+import GalleryInput from "../components/GalleryInput/GalleryInput";
 //MUI components
 import  CircularProgress  from '@mui/material/CircularProgress';
 import Dialog from '@mui/material/Dialog';
@@ -39,8 +40,13 @@ const EditProfile = () => {
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
     const [passwordDialogOpen, setPasswordDialogOpen] = useState(false);
     const [error, setError] = useState(null);
-    const [pfpImage, setPfpImage] = useState(null);
+    const [addedPfp, setAddedPfp] = useState(null);
+    const [pfp, setPfp] = useState(null);
     const [uploadPfpDialog, setUploadPfpDialog] = useState(false);
+    const [galleryInput, setGalleryInput] = useState({
+        index: -1,
+        open: false,
+    })
     //refs
     const usernameRef = useRef();   
     const emailRef = useRef();   
@@ -60,6 +66,7 @@ const EditProfile = () => {
             getUser(currentUser.uid)
             .then(user =>{
             setUserData(user);
+            user.data().mainInfo.pfp && setPfp(user.data().mainInfo.pfp)
             })
             .catch(error =>{
             console.log(error.message);
@@ -86,7 +93,7 @@ const EditProfile = () => {
         const username = usernameRef.current.value.trim();
         const email = emailRef.current.value.trim();
         const phone = phoneRef.current.value.trim();
-        const updateProfile = callable("updateProfile");
+        const updateProfile = callable("userUpdates-updateProfile");
         if(username == null || email == null || phone == null){
             snackBar("Některá důležitá pole chybí. Vyplňte je prosím.", "error");
             return;
@@ -134,14 +141,14 @@ const EditProfile = () => {
                     ig: igRef.current.value
                 },
                 "userInfo.uid": currentUser.uid,
-                "userInfo.images.pfp": pfpImage,
+                "userInfo.images.pfp": addedPfp,
 
             }
         }
 
         updateProfile(JSON.stringify(profileInfo)).then((response) => {
-            if(pfpImage){
-                return uploadImg(currentUser.uid, pfpImage, "pfp", userData.data().mainInfo.pfp);
+            if(addedPfp){
+                return uploadImg(currentUser.uid, addedPfp, "pfp");
             }else{
                 return new Promise((resolve, reject) => {
                     resolve("completed");
@@ -152,6 +159,7 @@ const EditProfile = () => {
             router.back();
             snackBar("Úprava proběhla úspěšně.", "success");
         }).catch((error) => {
+            console.log(error);
             setLoading(false);
             snackBar("Něco se nepovedlo. Zkuste to prosím později.", "error");
         })
@@ -231,7 +239,7 @@ const EditProfile = () => {
 
     const handlePfpChange = (e) => {
         if(e.target.files[0]){
-            setPfpImage(e.target.files[0]);
+            setAddedPfp(e.target.files[0]);
         }
     }
 
@@ -259,6 +267,28 @@ const EditProfile = () => {
             setLoading(false);
             console.log(error);
         })
+    }
+
+    const handlePfpDelete = () => {
+        if(addedPfp){
+            setAddedPfp(null);
+            return;
+        }
+        setLoading(true);
+        const deleteImgs = callable("images-deleteImgs");
+        const imageInfo = {
+            url: pfp,
+            uid: currentUser.uid,
+            listingId: userData.data().listing.id,
+        }
+        deleteImgs(JSON.stringify(imageInfo)).then((response) => {
+            setPfp(null);
+            setLoading(false);
+        }).catch((error) => {
+            setLoading(false);
+        })
+
+
     }
           
     return (
@@ -317,31 +347,29 @@ const EditProfile = () => {
                         <Button onClick={() => setPasswordDialogOpen(false)}>Ne</Button>
                     </DialogActions>
                 </Dialog>
-                <Dialog
-                open={uploadPfpDialog}
-                >
-                    <DialogTitle>Nahrát novou profilovou fotku</DialogTitle>
-                    <DialogContent >
-                        <div className="upload-pfp-dialog">
-                            <input accept='.jpg, .png' type="file" onChange={(e) => handlePfpChange(e)} />
-                        </div>
-                    </DialogContent>
-                    <DialogActions>
-                        <button onClick={() => setUploadPfpDialog(false)} className="acc-btn">Zavřít</button>
-                    </DialogActions>
-                </Dialog>
+                <GalleryInput object={galleryInput} setObject={setGalleryInput} addedPfp={addedPfp} setAddedPfp={setAddedPfp} pfp={pfp} />
                 <div className="container">
                     {userData ? 
                         <div className="edit-content">
                             <div className="content-header">
                                 {userData ? 
                                     <>
-                                        {pfpImage ?
-                                            <img className='header-pfp' src={URL.createObjectURL(pfpImage)} alt="" />
+                                        {addedPfp ?
+                                            <div className='header-pfp'>
+                                                <img src={URL.createObjectURL(addedPfp)} alt="" />
+                                                <div className="header-pfp-delete">
+                                                    <i onClick={() => handlePfpDelete()} className="fas fa-trash"></i>
+                                                </div>
+                                            </div>
                                         :
                                         <>
-                                            {(userData.data().mainInfo.pfp != "") ?
-                                                <img className="header-pfp" src={userData.data().mainInfo.pfp} alt="" />
+                                            {pfp ?
+                                                <div className='header-pfp'>
+                                                    <img src={pfp} alt="" />
+                                                    <div className="header-pfp-delete">
+                                                        <i onClick={() => handlePfpDelete()} className="fas fa-trash"></i>
+                                                    </div>
+                                                </div>
                                                 :
                                                 <div className="header-pfp"></div> 
                                             }
@@ -352,12 +380,12 @@ const EditProfile = () => {
                                     <div className="header-pfp"></div> 
                                 }
                                 <h2 className="header-name">{userData.data().mainInfo.username}</h2>
-                                <a onClick={() => setUploadPfpDialog(true)} className="header-link">Změnit profilovou fotku</a>
+                                <a onClick={() => setGalleryInput({open: true, index: -1})} className="header-link">Změnit profilovou fotku</a>
                             </div>
-                            {pfpImage != null &&
+                            {addedPfp != null &&
                                 <div className="edit-file-uploaded">
                                         <i className="fas fa-check"></i>
-                                        <p className="file-uploaded-description">Soubor nahrán! ({pfpImage.name})</p>
+                                        <p className="file-uploaded-description">Soubor nahrán! ({addedPfp.name})</p>
                                 </div> 
                             }
 
