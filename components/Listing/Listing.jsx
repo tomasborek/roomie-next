@@ -328,10 +328,10 @@ const Listing = (props) => {
         getUser(currentUser.uid)
         .then(user =>{
             const requestInfo = {
-                sender: user,
+                sender: user.data(),
                 senderUid: user.id,
                 reciever: reciever.userInfo,
-                recieverListingId: reciever.id,
+                recieverListingId: listingId,
                 recieverUid: reciever.userInfo.uid,
                 message: requestMessage
             }
@@ -339,7 +339,7 @@ const Listing = (props) => {
         }).then(res => {
             return getListing(id);
         }).then(doc => {
-            setListingInfo(doc);
+            setListingInfo(doc.data());
             setContactLoading(false);
             snackBar("Žádost byla odeslána.", "success");
         }).catch(error =>{
