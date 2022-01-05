@@ -19,7 +19,7 @@ const RecievedReq = ({reqInfo, id}) => {
             <>
                 {reqResolved.state ?
                 <div className="rec-req-resolved">
-                    <i className={`fas fa-${reqResolved.type === "accepted" ? "check" : "times"} ${reqResolved.type === "accepted" ? "accepted" : "rejected"}`}></i>
+                    <i className={`fas fa-${reqResolved.type && "check"} ${reqResolved.type === "accepted" ? "accepted" : "rejected"}`}></i>
                 </div>
                 :
                 <div  className="rec-req">
