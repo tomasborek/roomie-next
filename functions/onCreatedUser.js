@@ -58,7 +58,7 @@ exports.createListing = functions.https.onCall((data, context) => {
         },
         personTags: {},
         flatTags: {
-          location: [data.location],
+          location: data.location,
         },
         personBoxes: {},
         queryInfo: {
