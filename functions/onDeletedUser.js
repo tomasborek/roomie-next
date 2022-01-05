@@ -14,14 +14,8 @@ exports.deleteUser = functions.auth.user().onDelete((user) => {
 exports.deleteListing = functions.auth.user().onDelete((user) => {
     const collectionRef = admin.firestore().collection("listings");
     const query = collectionRef.where("userInfo.uid", "==", user.uid);
-    return new Promise((resolve, reject) => {
-      query.get().then((listings) => {
-        return collectionRef.doc(listings.docs[0].id).delete();
-      }).then((response) => {
-        resolve(response);
-      }).catch((error) => {
-        reject(error);
-      });
+    return query.get().then((listings) => {
+      return collectionRef.doc(listings.docs[0].id).delete();
     });
 });
 
