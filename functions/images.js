@@ -22,10 +22,10 @@ exports.addImgs = functions.storage.bucket().object().onFinalize((object) => {
     const uid = filePath.split("/")[1];
     const url = `https://storage.googleapis.com/${object.bucket}/${filePath}`;
     const db = admin.firestore();
+
     if (imageType == "pfps") {
-      return new Promise((resolve, reject) => {
         console.log("Writing the pfp's url into firestore...");
-        db.collection("users").doc(uid).update({
+        return db.collection("users").doc(uid).update({
           "mainInfo.pfp": url,
         }).then((response) => {
           return db.collection("listings").where("userInfo.uid", "==", uid).get();
@@ -33,19 +33,11 @@ exports.addImgs = functions.storage.bucket().object().onFinalize((object) => {
           return db.collection("listings").doc(docs.docs[0].id).update({
             "userInfo.images.pfp": url,
           });
-        }).then((response) => {
-          console.log(`New pfp ${imageName} 
-              has been succesfully written into firestore.`);
-          resolve(response);
-        }).catch((error) => {
-          reject(error);
-        });
-      });
+        })
     } else if (imageType == "listingImgs") {
-      return new Promise((resolve, reject) => {
         console.log("Writing the image's url into firestore...");
         const index = filePath.split("/")[3].split(".")[0].split("_")[0];
-        db.collection("listings").where("userInfo.uid", "==", uid).get()
+        return db.collection("listings").where("userInfo.uid", "==", uid).get()
             .then((docs) => {
               const listingImgs = docs.docs[0].data().userInfo.images.listingImgs;
               for (let i = 0; i <= index; i++) {
@@ -58,14 +50,7 @@ exports.addImgs = functions.storage.bucket().object().onFinalize((object) => {
               return db.collection("listings").doc(docs.docs[0].id).update({
                 "userInfo.images.listingImgs": listingImgs,
               });
-            }).then((response) => {
-              console.log(`New image ${imageName} 
-                  has been succesfully written into firestore.`);
-              resolve(response);
-            }).catch((error) => {
-              reject(error);
-            });
-      });
+            })
     }
 });
 
@@ -79,9 +64,9 @@ exports.deleteImgs = functions.https.onCall((data, context) => {
     const imageName = imageUrl.split("/")[5];
     const db = admin.firestore();
     const storage = admin.storage().bucket();
+    
     if (imageType == "pfps") {
-      return new Promise((resolve, reject) => {
-        db.collection("users").doc(uid).update({
+        return db.collection("users").doc(uid).update({
           "mainInfo.pfp": "",
         }).then((response) => {
           return db.collection("listings").doc(listingId).update({
@@ -91,18 +76,12 @@ exports.deleteImgs = functions.https.onCall((data, context) => {
           storage.deleteFiles(
               {prefix: `users/${uid}/${imageType}/${imageName}`}
           );
-        }).then((response) => {
-          resolve(response);
-        }).catch((error) => {
-          reject(error);
-        });
-      });
+        })
     }
     if (imageType === "listingImgs") {
-      return new Promise((resolve, reject) => {
         // Image name = index_500x500.png
         const imageIndex = imageName.split("_")[0];
-        db.collection("listings").doc(listingId).get().then((listing) => {
+        return db.collection("listings").doc(listingId).get().then((listing) => {
           const listingImgs = listing.data().userInfo.images.listingImgs;
           listingImgs[imageIndex] = "";
           return db.collection("listings").doc(listingId).update({
@@ -112,11 +91,6 @@ exports.deleteImgs = functions.https.onCall((data, context) => {
           return storage.deleteFiles(
               {prefix: `users/${uid}/${imageType}/${imageName}`}
           );
-        }).then((response) => {
-          resolve(response);
-        }).catch((error) => {
-          reject(error);
-        });
-      });
+        })
     }
 });
