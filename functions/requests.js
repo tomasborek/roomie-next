@@ -8,49 +8,59 @@ exports.createRequest = functions.https.onCall((data, context) => {
     data = JSON.parse(data);
     const db = admin.firestore();
     // Two people involved vars
-    // Sender is user.data()
+    // Sender is user.data() in user db
     const sender = data.sender;
     const senderUid = data.senderUid;
+    const senderUsername = sender.mainInfo.username;
+    const senderAge = sender.mainInfo.age;
+    const senderGender = sender.mainInfo.gender;
+    const senderListingId = sender.listing.id;
+    const senderType = sender.mainInfo.type;
+    const senderPfp = sender.mainInfo.pfp;
+    const message = data.message;
+    const senderInfo = {
+      username: senderUsername,
+      age: senderAge,
+      gender: senderGender,
+      listingId: senderListingId,
+      type: senderType,
+      pfp: senderPfp,
+      message: message,
+      timeStamp: admin.firestore.FieldValue.serverTimestamp(),
+    }
     // Reciever is userInfo in listing
     const reciever = data.reciever;
-    const recieverListingId = data.recieverListingId;
     const recieverUid = data.recieverUid;
+    const recieverUsername = reciever.username;
+    const recieverAge = reciever.age;
+    const recieverListingId = data.recieverListingId;
+    const recieverPfp = reciever.images.pfp;
+    const recieverInfo = {
+      username: recieverUsername,
+      age: recieverAge,
+      listingId: recieverListingId,
+      pfp: recieverPfp,
+      timeStamp: admin.firestore.FieldValue.serverTimestamp(),
+    }
     // Doc and collection references
     const users = db.collection("users");
     const listings = db.collection("listings");
-    return new Promise((resolve, reject) => {
-      users.doc(recieverUid).collection("recievedRequests").doc(senderUid).set({
-        username: sender.mainInfo.username,
-        age: sender.mainInfo.age,
-        gender: sender.mainInfo.gender,
-        listingId: sender.listing.id,
-        type: sender.mainInfo.type,
-        pfp: sender.mainInfo.pfp,
-        message: data.message,
-        timeStamp: admin.firestore.FieldValue.serverTimestamp(),
-      }).then((result) => {
-        return users.doc(senderUid).collection("sentRequests").doc(recieverUid)
-            .set({
-              username: reciever.username,
-              age: reciever.age,
-              listingId: recieverListingId,
-              pfp: reciever.images.pfp,
-              timeStamp: admin.firestore.FieldValue.serverTimestamp(),
-            });
-      }).then((response) => {
-        return listings.doc(recieverListingId).update({
-          requests: admin.firestore.FieldValue.arrayUnion(senderUid),
-        });
-      }).then((response) => {
-        return listings.doc(sender.listing.id).update({
-          sentRequests: admin.firestore.FieldValue.arrayUnion(recieverUid),
-        });
-      }).then((response) => {
-        resolve(response);
-      }).catch((error) => {
-        reject(error);
-      });
-    });
+    return users.doc(recieverUid)
+        .collection("recievedRequests")
+        .doc(senderUid).set(senderInfo).then((result) => {
+          return users.doc(senderUid)
+              .collection("sentRequests")
+              .doc(recieverUid)
+              .set(recieverInfo);
+        }).then((response) => {
+          return listings.doc(recieverListingId).update({
+            requests: admin.firestore.FieldValue.arrayUnion(senderUid),
+          });
+        }).then((response) => {
+          return listings.doc(sender.listing.id).update({
+            sentRequests: admin.firestore.FieldValue.arrayUnion(recieverUid),
+          });
+        })
 });
 
 exports.resolveRequest = functions.https.onCall((data, context) => {
@@ -74,10 +84,8 @@ exports.resolveRequest = functions.https.onCall((data, context) => {
     const senderListingDoc = db.collection("listings")
         .doc(senderListing);
   
-    // Returning promise
-    return new Promise((resolve, reject) => {
       // Delete recieved request from reciever's subcollection
-      recieverColRef.doc(senderUid).delete().then((response) => {
+      return recieverColRef.doc(senderUid).delete().then((response) => {
         return senderColRef.doc(recieverUid).delete();
       }).then((response) => {
         // Then, remove request from reciever's listing
@@ -89,11 +97,7 @@ exports.resolveRequest = functions.https.onCall((data, context) => {
         return senderListingDoc.update({
           sentRequests: admin.firestore.FieldValue.arrayRemove(recieverUid),
         });
-      }).then((response) => {
-        // The final then, and resolve whole promise
-        resolve(response);
-      });
-    });
+      })
 });
 
 // Friends
@@ -122,10 +126,8 @@ exports.createFriend = functions.https.onCall((data, context) => {
         .collection("friends");
     const senderListingDoc = db.collection("listings")
         .doc(senderListing);
-    // Returning promise
-    return new Promise((resolve, reject) => {
       // Add friend (sender) to reciever's subcollection
-      recieverFriends.doc(senderUid).set({
+      return recieverFriends.doc(senderUid).set({
         username: sender.username,
         age: sender.age,
         type: sender.type,
@@ -156,12 +158,7 @@ exports.createFriend = functions.https.onCall((data, context) => {
         return senderListingDoc.update({
           friends: admin.firestore.FieldValue.arrayUnion(recieverUid),
         });
-      }).then((response) => {
-        resolve(response);
-      }).catch((error) => {
-        reject(error);
-      });
-    });
+      })
 });
 
 // Notifications
@@ -209,10 +206,9 @@ exports.deleteAcceptedNotifications = functions
       data = JSON.parse(data);
       const db = admin.firestore();
       const uid = data.uid;
-      return new Promise((resolve, reject) => {
-        db.collection("users").doc(uid).collection("notifications")
+      return db.collection("users").doc(uid).collection("notifications")
             .where("type", "==", "acceptedRequest").get().then((docs) => {
-              Promise.all(
+              return Promise.all(
                   docs.docs.map((doc) => {
                     return db.collection("users")
                         .doc(uid)
@@ -220,11 +216,6 @@ exports.deleteAcceptedNotifications = functions
                         .doc(doc.id)
                         .delete();
                   })
-              ).then((response) => {
-                resolve(response);
-              }).catch((error) => {
-                reject(error);
-              });
+              )
             });
-      });
     });
