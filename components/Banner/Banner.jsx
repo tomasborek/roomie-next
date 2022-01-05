@@ -40,7 +40,7 @@ const Banner = () => {
                     handleExploreDialog();
                 }} className="main-btn">Hledám spolubydlícího</button>
                 <button onClick={() => {
-                    router.push("explore/flatmates");
+                    router.push("explore/flats");
                     handleExploreDialog();
                 }} className="acc-btn">Hledám domov</button>
             </div>
