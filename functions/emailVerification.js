@@ -541,8 +541,7 @@ exports.verifyToken = functions.https.onCall((data, context) => {
     const db = admin.firestore();
     let uid;
     let listingId;
-    return new Promise((resolve, reject) => {
-        db.collection("tokens").doc(token).get().then((doc) => {
+    return db.collection("tokens").doc(token).get().then((doc) => {
             if(!doc){
                reject("Něco se nepodařilo");
                return;
@@ -565,12 +564,7 @@ exports.verifyToken = functions.https.onCall((data, context) => {
             })
         }).then((response) => {
             return db.collection("tokens").doc(token).delete();
-        }).then((response) => {
-            resolve(response);
-        }).catch((error) => {
-            reject(error);
         })
-    });
 });
 
 exports.sendVerifyEmail = functions.firestore.document("/tokens/{token}").onCreate((snap, context) => {
