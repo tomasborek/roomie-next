@@ -84,7 +84,7 @@ const Header = ({variant}) => {
                 }
                
                 {currentUserInfo && currentUserInfo.mainInfo.pfp ? <img onClick={handleMyListing} className="navbar-profile" src={currentUserInfo.mainInfo.pfp} alt=""></img> :  <div onClick={handleMyListing} className="navbar-profile"></div>}
-                <p onClick={handleMyListing} className="navbar-name">{currentUserInfo.mainInfo.username}</p>
+                {currentUserInfo && <p onClick={handleMyListing} className="navbar-name">{currentUserInfo.mainInfo.username}</p>}
                
                   <motion.i onClick={() => setIsDropdownActive(prevState =>!prevState)} animate={isDropdownActive ? {rotate: -180}: ""} initial={{rotate:0}} transition={{duration: 0.4}}  tabIndex={0} className="fas fa-chevron-down navbar-dropdown-icon"></motion.i> 
  
