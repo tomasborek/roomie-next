@@ -40,10 +40,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 
 
-const Listing = (props) => {
+const Listing = ({type, ssrProps}) => {
     //Variables---
     //Contexts
-    const type = props.type;
     const router = useRouter();
     const {id} = router.query;
     const {getListing, updateUser, getUser, addNotification, deleteNotification} = useDb();
@@ -62,14 +61,17 @@ const Listing = (props) => {
     const [listingImgs, setListingImgs] = useState([]);
     const [pfp, setPfp] = useState(null);
     //
-    const [listingName, setListingName] = useState(props.listingName);
-    const [listingBio, setListingBio] = useState(type === "flatmate" ? props.listingBio : null);
-    const [listingFlatBio, setListingFlatBio] = useState(type === "flat" ? props.listingFlatBio : null);
-    const [listingPersonBio, setListingPersonBio] = useState(type === "flat" ? props.listingPersonBio : null);
-    const [listingPersonBoxes, setListingPersonBoxes] = useState(props.listingPersonBoxes);
-    const [listingPersonTags, setListingPersonTags] = useState(props.listingPersonTags);
-    const [listingFlatBoxes, setListingFlatBoxes] = useState(type === "flat" ? props.listingFlatBoxes : null);
-    const [listingFlatTags, setListingFlatTags] = useState(type === "flatmate" ? props.listingFlatTags : null);
+    const [listingName, setListingName] = useState(ssrProps.listingName);
+    const [listingUsername, setListingUsername] = useState(ssrProps.listingUsername);
+    const [listingAge, setListingAge] = useState(ssrProps.listingAge);
+    const [listingGender, setListingGender] = useState(ssrProps.listingGender);
+    const [listingBio, setListingBio] = useState(type === "flatmate" ? ssrProps.listingBio : null);
+    const [listingFlatBio, setListingFlatBio] = useState(type === "flat" ? ssrProps.listingFlatBio : null);
+    const [listingPersonBio, setListingPersonBio] = useState(type === "flat" ? ssrProps.listingPersonBio : null);
+    const [listingPersonBoxes, setListingPersonBoxes] = useState(JSON.parse(ssrProps.listingPersonBoxes));
+    const [listingPersonTags, setListingPersonTags] = useState(JSON.parse(ssrProps.listingPersonTags));
+    const [listingFlatBoxes, setListingFlatBoxes] = useState(type === "flat" ? JSON.parse(ssrProps.listingFlatBoxes) : null);
+    const [listingFlatTags, setListingFlatTags] = useState(type === "flatmate" ? JSON.parse(ssrProps.listingFlatTags) : null);
     //Edit mode
     const [editListing, setEditListing] = useState(false);
     const [addedListingImgs, setAddedListingImgs] = useState(["", "", "", "", "", ""]);
@@ -111,12 +113,19 @@ const Listing = (props) => {
     useEffect(() => {
         setLoading(false);
         setListingInfo(null);
+        // SSR props get reloaded when going from listing to listing, but states won't, so we need to reload them
         reloadProps();
         if(!router.isReady) return;
-        if(props.statusCode != 200) return;
+        // If the status is not resolved in any way, there's no reason to continue
+        if(ssrProps.status != "success" && ssrProps.status != "client-side") return;
         getListing(id)
         .then(doc => {
-            if(!checkAccess(doc.data().userInfo.uid, doc.data().visible, doc.data().userInfo.emailVerified)) return;
+            if(ssrProps.status === "client-side"){
+                if(!checkAccess(doc.data().userInfo.uid)){
+                    loadClientSide();
+                };
+                return;
+            };
             setListingInfo(doc.data());
             setListingId(doc.id);
             setListingImgs(doc.data().userInfo.images.listingImgs);
@@ -128,18 +137,19 @@ const Listing = (props) => {
         })
     }, [router.isReady, id])
 
+    // If ssr props aren't null but their coresponding state is, it means it has probably been nulled by the handleSave function, meaning we have to reload them
     useEffect(() => {
-        if(!(props.personTags === null) && listingPersonTags === null){
-            setListingName(props.listingName);
-            setListingBio(type === "flatmate" ? props.listingBio : null);
-            setListingFlatBio(type === "flat" ? props.listingFlatBio : null);
-            setListingPersonBio(type === "flat" ? props.listingPersonBio : null);
-            setListingPersonBoxes(props.listingPersonBoxes);
-            setListingPersonTags(props.listingPersonTags);
-            setListingFlatBoxes(type === "flat" ? props.listingFlatBoxes : null);
-            setListingFlatTags(type === "flatmate" ? props.listingFlatTags : null);
+        if(!(ssrProps.personTags === null) && listingPersonTags === null){
+            setListingName(ssrProps.listingName);
+            setListingBio(type === "flatmate" ? ssrProps.listingBio : null);
+            setListingFlatBio(type === "flat" ? ssrProps.listingFlatBio : null);
+            setListingPersonBio(type === "flat" ? ssrProps.listingPersonBio : null);
+            setListingPersonBoxes(JSON.parse(ssrProps.listingPersonBoxes));
+            setListingPersonTags(JSON.parse(ssrProps.listingPersonTags));
+            setListingFlatBoxes(type === "flat" ? JSON.parse(ssrProps.listingFlatBoxes) : null);
+            setListingFlatTags(type === "flatmate" ? JSON.parse(ssrProps.listingFlatTags): null);
         }
-    }, [props])
+    }, [ssrProps])
 
  
 
@@ -190,22 +200,23 @@ const Listing = (props) => {
     }, [editListing])
 
     const reloadProps = () => {
-        setListingName(props.listingName);
-        setListingBio(type === "flatmate" ? props.listingBio : null);
-        setListingFlatBio(type === "flat" ? props.listingFlatBio : null);
-        setListingPersonBio(type === "flat" ? props.listingPersonBio : null);
-        setListingPersonBoxes(props.listingPersonBoxes);
-        setListingPersonTags(props.listingPersonTags);
-        setListingFlatBoxes(type === "flat" ? props.listingFlatBoxes : null);
-        setListingFlatTags(type === "flatmate" ? props.listingFlatTags : null);
+        setListingName(ssrProps.listingName);
+        setListingUsername(ssrProps.listingUsername);
+        setListingAge(ssrProps.listingAge);
+        setListingGender(ssrProps.listingGender);
+        setListingBio(type === "flatmate" ? ssrProps.listingBio : null);
+        setListingFlatBio(type === "flat" ? ssrProps.listingFlatBio : null);
+        setListingPersonBio(type === "flat" ? ssrProps.listingPersonBio : null);
+        setListingPersonBoxes(JSON.parse(ssrProps.listingPersonBoxes));
+        setListingPersonTags(JSON.parse(ssrProps.listingPersonTags));
+        setListingFlatBoxes(type === "flat" ? JSON.parse(ssrProps.listingFlatBoxes) : null);
+        setListingFlatTags(type === "flatmate" ? JSON.parse(ssrProps.listingFlatTags): null);   
     }
 
     //Functions
-    const checkAccess = (uid, visible, emailVerified) => {
+    const checkAccess = (uid) => {
         if(currentUser && currentUser.uid === uid){
-            return true;
-        }else if(visible && emailVerified){
-            return true;
+            return true
         }else{
             return false;
         }
@@ -399,6 +410,34 @@ const Listing = (props) => {
         }
     }
 
+    const loadClientSide = () => {
+        getListing(id)
+        .then(doc => {
+            const docData = doc.data();
+            setListingInfo(docData);
+            setListingId(doc.id);
+            setListingImgs(docData.userInfo.images.listingImgs);
+            if(docData.userInfo.images.pfp){
+                setPfp(docData.userInfo.images.pfp);
+            }
+
+            //SSR props state
+            setListingName(type === "flatmate" ? docData.userInfo.username : `${docData.flatBoxes.layout}${docData.flatBoxes.layout ? " " : ""}${docData.flatBoxes.location}`);
+            setListingUsername(docData.userInfo.username);
+            setListingAge(docData.userInfo.age);
+            setListingGender(docData.userInfo.gender);
+            setListingBio(type === "flatmate" && docData.bio);
+            setListingFlatBio(type === "flat" && docData.flatBio);
+            setListingPersonBio(type === "flat" && docData.personBio);
+            setListingPersonBoxes(docData.personBoxes);
+            setListingPersonTags(docData.personTags);
+            setListingFlatBoxes(type === "flat" && docData.flatBoxes);
+            setListingFlatTags(type === "flatmate" && docData.flatTags);   
+        }).catch(error => {
+            //
+        })
+    }
+
     if(type === "flatmate"){
         return (
             <>
@@ -514,16 +553,11 @@ const Listing = (props) => {
                                         }   
                                     </div>
     
-                                    {!listingInfo ? 
-    
-                                    <div className="header-info-loading">
-                                        <CircularProgress/>
-                                    </div>
-                                    :   
+                                     
                                     <div className="header-info">
                                         <div className="info-main">
-                                            <h1 className="main-name">{listingInfo.userInfo.username}</h1>
-                                            {((currentUser && currentUser.uid == listingInfo.userInfo.uid) && (listingInfo && listingInfo.visible)) && 
+                                            <h1 className="main-name">{listingUsername}</h1>
+                                            {(currentUser && listingInfo) && ((currentUser.uid == listingInfo.userInfo.uid) && (listingInfo.visible)) && 
                                                 <button onClick={() => setEditListing(prevState => !prevState)}className="main-edit-profile">{editListing ? "Zpět" : "Upravit inzerát"}</button>
                                             }
                                             <i onClick={() => setMoreInfoOpen(prevState => !prevState)} className="main-more fas fa-ellipsis-h"></i>
@@ -531,13 +565,28 @@ const Listing = (props) => {
                                                 <li onClick={() => setReportDialog(true)}>Nahlásit uživatele</li>
                                             </ul>
                                             <div className="main-description">
-                                                <p>{listingInfo.userInfo.age}, {listingInfo.userInfo.gender === "male" ? "muž" : listingInfo.userInfo.gender === "female" ? "žena" : "jiné"}</p>
+                                                <p>{listingAge}, {listingGender === "male" ? "muž" : listingGender === "female" ? "žena" : "jiné"}</p>
                                             </div>
                                         </div>
-                                        <ListingInfoImportant type="flatmate" listingInfo={listingInfo} editListing={editListing} state={{budget, startTime, stayTime, setBudget, setStayTime, setStartTime, setSliderDialog}}/>
-                                        <ListingContact listingInfo={listingInfo} editListing={editListing} state={{setReqDialogOpen, contactLoading}}/>
+                                        {!listingInfo ? 
+    
+                                            <div className="header-info-loading">
+                                                <CircularProgress/>
+                                            </div>
+                                            :  
+                                            <>
+                                                <ListingInfoImportant 
+                                                    type="flatmate" 
+                                                    listingInfo={listingInfo} 
+                                                    editListing={editListing} 
+                                                    state={{budget, startTime, stayTime, setBudget, setStayTime, setStartTime, setSliderDialog}}/>
+                                                <ListingContact 
+                                                    listingInfo={listingInfo} 
+                                                    editListing={editListing} 
+                                                    state={{setReqDialogOpen, contactLoading}}/>
+                                            </> 
+                                        }
                                     </div>
-                                    }
                                 </div>
                             </div>
                         
