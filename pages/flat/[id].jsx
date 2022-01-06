@@ -7,15 +7,7 @@ import { getDoc, doc } from 'firebase/firestore';
 
 const FlatListing = (props) => {
     return (
-        <Listing type="flat"
-            listingName={props.listingName}
-            listingFlatBio={props.listingFlatBio}
-            listingpersonBio={props.listingPersonBio}
-            listingPersonBoxes={JSON.parse(props.listingPersonBoxes)}
-            listingFlatBoxes={JSON.parse(props.listingFlatBoxes)}
-            listingPersonTags={JSON.parse(props.listingPersonTags)}
-            statusCode={props.statusCode}
-        />
+        <Listing type="flat" ssrProps={{...props}}/>
     )
 }
 
@@ -28,40 +20,53 @@ export async function getServerSideProps(context) {
         const listingLayout = docRef.data().flatBoxes.layout;
         const listingLocation = docRef.data().flatBoxes.location;
         const listingName = `${listingLayout}${listingLayout ? " " : ""}${listingLocation}`;
+        const listingUsername = docRef.data().userInfo.username;
+        const listingAge = docRef.data().userInfo.age;
+        const listingGender = docRef.data().userInfo.gender;
         const listingPersonBio = docRef.data().personBio;
         const listingFlatBio = docRef.data().flatBio;
         const listingPersonBoxes = JSON.stringify(docRef.data().personBoxes);
         const listingPersonTags = JSON.stringify(docRef.data().personTags);
         const listingFlatBoxes = JSON.stringify(docRef.data().flatBoxes);
-        const statusCode = 200;
+        if(!docRef.data().visible || !docRef.data().userInfo.emailVerified){
+            throw {message: "client-side"};
+        }
+        const status = "success";
         return {
             props: {
                 listingName,
+                listingUsername,
+                listingAge,
                 listingPersonBio,
                 listingFlatBio,
                 listingPersonBoxes,
                 listingPersonTags,
                 listingFlatBoxes,
-                statusCode,
+                status,
             },
         }
     }catch(error){
         const listingName = null;
+        const listingUsername = null;
+        const listingAge = null;
+        const listingGender = null;
         const listingPersonBio = null;
         const listingFlatBio = null;
         const listingPersonBoxes = null;
         const listingPersonTags = null;
         const listingFlatBoxes = null;
-        const statusCode = 200;
+        const status = error.message;
         return {
             props: {
                 listingName,
+                listingUsername,
+                listingAge,
                 listingPersonBio,
                 listingFlatBio,
                 listingPersonBoxes,
                 listingPersonTags,
                 listingFlatBoxes,
-                statusCode,
+                status,
             },
         }
     }
