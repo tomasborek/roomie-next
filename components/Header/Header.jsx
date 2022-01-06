@@ -36,7 +36,6 @@ const Header = ({variant}) => {
     //Functions
     const handleMyListing = () => {
         router.push(`/${currentUserInfo.mainInfo.type === "offerer" ? "flat" : currentUserInfo.mainInfo.type === "flatmate" ? "flatmate" : ""}/${currentUserInfo.listing.id}`);
-        setLoading(false);
     }
 
     const handleLogOut = () => {
@@ -84,12 +83,11 @@ const Header = ({variant}) => {
                     }} className={`fa${notificationDropdown ? "s" : "r"} fa-bell navbar-notifications`}></i> 
                 }
                
-                {currentUserInfo && currentUserInfo.mainInfo.pfp ? <img className="navbar-profile" src={currentUserInfo.mainInfo.pfp} alt=""></img> :  <div className="navbar-profile"></div>}
+                {currentUserInfo && currentUserInfo.mainInfo.pfp ? <img onClick={handleMyListing} className="navbar-profile" src={currentUserInfo.mainInfo.pfp} alt=""></img> :  <div onClick={handleMyListing} className="navbar-profile"></div>}
+                <p onClick={handleMyListing} className="navbar-name">{currentUserInfo.mainInfo.username}</p>
                
                   <motion.i onClick={() => setIsDropdownActive(prevState =>!prevState)} animate={isDropdownActive ? {rotate: -180}: ""} initial={{rotate:0}} transition={{duration: 0.4}}  tabIndex={0} className="fas fa-chevron-down navbar-dropdown-icon"></motion.i> 
  
-                
-                {/* <motion.i animate={isDropdownActive ? {rotate: -180}: ""} initial={{rotate:0}} transition={{duration: 0.4}} onClick={() => setIsDropdownActive(!isDropdownActive)} className="fas fa-chevron-down navbar-dropdown-icon"></motion.i> */}
                <Dropdown  className="main-header-dropdown" open={isDropdownActive} setOpen={setIsDropdownActive}>
                 <ul className="dropdown-list">
                     <li onClick={() => router.push("/edit-profile")} className="list-item"> <i className="fas fa-pen item-icon"></i> Upravit účet</li>

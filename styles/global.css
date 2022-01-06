@@ -2114,6 +2114,14 @@ textarea {
   margin-left: 2rem;
   -o-object-fit: cover;
      object-fit: cover;
+  cursor: pointer;
+}
+
+.main-header .navbar-logged .navbar-name {
+  margin-left: 0.5rem;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .main-header .navbar-logged .navbar-notifications {
@@ -2143,6 +2151,9 @@ textarea {
     display: block;
   }
   .main-header .navbar .navbar-profile {
+    display: none;
+  }
+  .main-header .navbar .navbar-name {
     display: none;
   }
   .main-header .navbar .navbar-dropdown-icon {

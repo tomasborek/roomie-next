@@ -75,6 +75,13 @@
             border-radius: 50%;
             margin-left: 2rem;
             object-fit: cover;
+            cursor: pointer;
+        }
+        .navbar-name{
+            margin-left: 0.5rem;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
         }
 
         .navbar-notifications{
@@ -122,6 +129,9 @@
         }
         .navbar{
             .navbar-profile{
+                display: none;
+            }
+            .navbar-name{
                 display: none;
             }
             .navbar-dropdown-icon{
