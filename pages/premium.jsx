@@ -59,10 +59,8 @@ const Premium = () => {
                         <ul className="box-list">
                             <li className="list-item"><i className="fas fa-check item-icon"></i> <p className="item-description">Zvýraznění vašeho profilu</p></li>
                             <li className="list-item"><i className="fas fa-check item-icon"></i> <p className="item-description">TOPování vašich inzerátů</p></li>
-                            <li className="list-item"><i className="fas fa-check item-icon"></i> <p className="item-description">Neomezené žádosti</p></li>
                             <li className="list-item"><i className="fas fa-check item-icon"></i> <p className="item-description">Hlídací pes</p></li>
                             <li className="list-item"><i className="fas fa-check item-icon"></i> <p className="item-description">Znak důvěryhodnosti</p></li>
-                            <li className="list-item"><i className="fas fa-check item-icon"></i> <p className="item-description">Žádné reklamy</p></li>
                             <li className="list-item"><i className="fas fa-check item-icon"></i> <p className="item-description">Prioritní podpora</p></li>
                             
                         </ul>
