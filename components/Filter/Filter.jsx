@@ -81,6 +81,7 @@ const Filter = ({variant, setOpen, activeFilters, setActiveFilters, applyFilters
         setPetAllowedTag("");
         setSmokingAllowedTag("");
         applyFilters({});
+        setActiveFilters({});
         setOpen(false);
      }
  
