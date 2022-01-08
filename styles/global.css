@@ -3243,6 +3243,7 @@ textarea {
 
 .boxer {
   padding: 2rem;
+  overflow-y: auto;
   width: 95%;
   position: relative;
   max-width: 900px;
@@ -3328,12 +3329,6 @@ textarea {
       -ms-flex-pack: center;
           justify-content: center;
   margin-top: 1rem;
-}
-
-@media screen and (max-height: 800px) {
-  .boxer {
-    overflow-y: scroll;
-  }
 }
 
 .dropdown {
