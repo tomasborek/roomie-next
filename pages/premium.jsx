@@ -55,7 +55,7 @@ const Premium = () => {
                     </div>
 
                     <div className="boxes-box premium">
-                        <h2 className="box-heading">Roomie family</h2>
+                        <h2 className="box-heading">Roomie Premium</h2>
                         <ul className="box-list">
                             <li className="list-item"><i className="fas fa-check item-icon"></i> <p className="item-description">Zvýraznění vašeho profilu</p></li>
                             <li className="list-item"><i className="fas fa-check item-icon"></i> <p className="item-description">TOPování vašich inzerátů</p></li>
