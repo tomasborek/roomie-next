@@ -50,7 +50,7 @@ const Premium = () => {
                         <h2 className="box-heading">Anonym</h2>
                         <ul className="box-list">
                             <li className="list-item"><i className="fas fa-check item-icon"></i> <p className="item-description">K zobrazení pouze první strana inzerátů</p></li>
-                            <li className="list-item"><i className="fas fa-check item-icon"></i> <p className="item-description">K zobrazení pouze první strana inzerátů</p></li>
+                            <li className="list-item"><i className="fas fa-check item-icon"></i> <p className="item-description">Žádné filtry</p></li>
                         </ul>
                     </div>
 
