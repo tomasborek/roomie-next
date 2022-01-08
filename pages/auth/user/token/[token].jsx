@@ -35,7 +35,7 @@ const VerifyEmail = () => {
             <div className='VerifyEmail'>
                 <img src="/img/logos/logo-small.png"/>
                 <h2>Roomie.cz</h2>
-                {(!isVerified && !failed) ? <> <h3>Prosím vyčkete...</h3> <CircularProgress/> </> : isVerified ? <h3>Váš e-mail byl ověřen</h3> : failed ? <h3>Něco se nepodařilo.</h3> : ""}
+                {(!isVerified && !failed) ? <> <h3>Prosím vyčkejte...</h3> <CircularProgress/> </> : isVerified ? <h3>Váš e-mail byl ověřen</h3> : failed ? <h3>Něco se nepodařilo.</h3> : ""}
             </div>
         </>
     )
