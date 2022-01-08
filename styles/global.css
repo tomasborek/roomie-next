@@ -655,6 +655,7 @@ textarea {
 }
 
 .EditProfile .edit-content .content-header .header-pfp .header-pfp-delete i {
+  cursor: pointer;
   color: red;
 }
 
