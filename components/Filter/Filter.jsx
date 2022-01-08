@@ -103,7 +103,7 @@ const Filter = ({variant, setOpen, activeFilters, setActiveFilters, applyFilters
                 </section>
                 <section className="filter-section">
                     <div className="section-tags">
-                        <Tag>{locationTag ? locationTag : "Vyberte lokaci"}</Tag>
+                        <Tag active={locationTag}>{locationTag ? locationTag : "Vyberte lokaci"}</Tag>
                     </div>
                 </section>
                 <section className="filter-section">
