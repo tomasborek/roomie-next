@@ -5014,6 +5014,14 @@ textarea {
   border-color: #309EAB;
 }
 
+.explore-flatmate.premium, .explore-flat.premium {
+  border-color: #E14949;
+}
+
+.explore-flatmate.premium .listing-content .content-header i, .explore-flat.premium .listing-content .content-header i {
+  color: #309EAB;
+}
+
 .explore-flatmate .listing-content, .explore-flat .listing-content {
   display: -ms-grid;
   display: grid;

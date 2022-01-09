@@ -10,6 +10,12 @@
     &:hover{
         border-color: $mainColor;
     }
+    &.premium{
+        border-color: $accent;
+        .listing-content .content-header i{
+            color: $mainColor;
+        }
+    }
 }
 
 //Content

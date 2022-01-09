@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react'
 //next
 import Link from "next/link";
 
-const ExploreFlatmate= ({name, age, gender, location, money, available, bio, pfp, id}) => {
+const ExploreFlatmate= ({name, age, gender, location, money, available, bio, pfp, premium, id}) => {
 
     return (
         <Link href={`/flatmate/${id}`}>
-        <div className="explore-flatmate">
+        <div className={`explore-flatmate ${premium && "premium"}`}>
         <div className="listing-pfp-container">
             {gender ?
                 <>
@@ -22,7 +22,7 @@ const ExploreFlatmate= ({name, age, gender, location, money, available, bio, pfp
             } 
         </div>
         <div className="listing-content">
-            <div className="content-header"><span>{name}</span>, {age}</div>
+            <div className="content-header"><span>{name}</span>, {age} {premium && <i className='fas fa-check-circle'></i>}</div>
             <div className="content-bio">{bio.substr(0,80)}...</div>
             <div className="content-more"><a href="">Více...</a></div>
             <div className="content-info">

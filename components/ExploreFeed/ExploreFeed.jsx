@@ -374,7 +374,8 @@ const ExploreFeed = ({variant}) => {
                                         money={listing.data().mainInfo.budget} 
                                         available={listing.data().mainInfo.startTime} 
                                         bio={listing.data().bio} id={listing.id} 
-                                        pfp={listing.data().userInfo.images.pfp} 
+                                        pfp={listing.data().userInfo.images.pfp}
+                                        premium={listing.data().userInfo.premium} 
                                         key={id}/>
                             ))}
                             {(flatmateListings.length > 7 || flatmatePage != 1) ?
@@ -410,7 +411,8 @@ const ExploreFeed = ({variant}) => {
                                         name={`Byt ${listing.data().flatBoxes.layout ? listing.data().flatBoxes.layout : ""} ${listing.data().flatBoxes.location}`} 
                                         bio={listing.data().flatBio} price={listing.data().mainInfo.price} startTime={listing.data().mainInfo.startTime} 
                                         stayTime={listing.data().mainInfo.stayTime} 
-                                        mainImg={listing.data().userInfo.images.listingImgs[0]} 
+                                        mainImg={listing.data().userInfo.images.listingImgs[0]}
+                                        premium={listing.data().userInfo.premium}  
                                         id={listing.id} 
                                         key={id} />
                             )) }
