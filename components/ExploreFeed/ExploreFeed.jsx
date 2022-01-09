@@ -349,7 +349,9 @@ const ExploreFeed = ({variant}) => {
                         <p>Filtry</p>
                         <i className="fas fa-chevron-down"></i>
                     </div>
-                    <div className={`filters-match ${matching && "active"}`} onClick={() => handleMatching()}>
+                    <div 
+                        className={`filters-match ${matching && "active"} ${!currentUserInfo ? "disabled" : (variant === "flat" && currentUserInfo.mainInfo.type === "offerer") ? "disabled" : (variant === currentUserInfo.mainInfo.type) ? "disabled" : ""}`} 
+                        onClick={() => handleMatching()}>
                         <p>Přímo pro vás</p>
                         <i className="fas fa-puzzle-piece"></i>
                     </div>

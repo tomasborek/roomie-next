@@ -3482,6 +3482,11 @@ textarea {
   color: white;
 }
 
+.explore-feed .feed-header .header-filters .filters-match.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .explore-feed .loading {
   display: -webkit-box;
   display: -ms-flexbox;
