@@ -16,6 +16,7 @@ exports.createUser = functions.https.onCall((data, context) => {
         location: data.location,
         type: data.type,
         pfp: "",
+        premium: false,
       },
       emailVerified: false,
       contact: {
@@ -50,6 +51,7 @@ exports.createListing = functions.https.onCall((data, context) => {
             pfp: "",
             listingImgs: [],
           },
+          premium: false,
         },
         mainInfo: {
           budget: data.money,
@@ -94,6 +96,7 @@ exports.createListing = functions.https.onCall((data, context) => {
             pfp: "",
             listingImgs: [],
           },
+          premium: false,
         },
         mainInfo: {
           price: data.money,
