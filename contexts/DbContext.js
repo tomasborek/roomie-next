@@ -44,22 +44,15 @@ export function DbProvider(props) {
     //Listings
     const getListings = (type, page, listings, filter) => {
         const colRef = collection(db, "listings");
-        if(!filter || !Object.keys(filter).length){
-            if(page === "first"){
-                const q = query(colRef, where("type", "==", type), where("visible", "==", true), where("userInfo.emailVerified", "==", true), orderBy("timeStamp", "desc"), limit(8));
-                return getDocs(q);
-            }
-            if(page === "next"){
-                const q = query(colRef, where("type", "==", type), where("visible", "==", true), where("userInfo.emailVerified", "==", true), orderBy("timeStamp", "desc"), limit(8), startAfter(listings[listings.length - 1]));
-                return getDocs(q);
-            }
-            if(page === "prev"){
-                const q = query(colRef, where("type", "==", type), where("visible", "==", true), where("userInfo.emailVerified", "==", true), orderBy("timeStamp", "desc"), limitToLast(8), endBefore(listings[0]));
-                return getDocs(q);
-            }
+        let parameters = [where("type", "==", type), where("visible", "==", true), where("userInfo.emailVerified", "==", true)];
+        let premiumUsers;
+        let normalUsers;
+        let q1;
+        let q2;
+        if(!Object.keys(filter).length){
+           //
         }else{
             // Array of parameters that is then gonna get spread to query
-            let parameters = [];
             if(type === "flatmate"){
                 if(filter.location){
                     parameters.push(where("flatTags.location", "==", filter.location));
@@ -194,19 +187,6 @@ export function DbProvider(props) {
                             parameters.push(where(`queryInfo.job.${selectedItem}`, "==", true));
                         }
                 }
-
-                if(page === "first"){
-                    const q = query(colRef, ...parameters, where("type", "==", type), where("visible", "==", true), orderBy("timeStamp", "desc"), limit(10));
-                    return getDocs(q);
-                }
-                if(page === "next"){
-                    const q = query(colRef, ...parameters, where("type", "==", type), where("visible", "==", true),  orderBy("timeStamp", "desc"), limit(10), startAfter(listings[listings.length - 1]));
-                    return getDocs(q);
-                }
-                if(page === "prev"){
-                    const q = query(colRef, ...parameters, where("type", "==", type), where("visible", "==", true), orderBy("timeStamp", "desc"), limitToLast(10), endBefore(listings[0]));
-                    return getDocs(q);
-                }
             }
             if(type === "flat"){
                 if(filter.location){
@@ -272,23 +252,59 @@ export function DbProvider(props) {
                     }
                     parameters.push(where("flatBoxes.elevator", "==", elevator));
                 }
-
-
-
-                if(page === "first"){
-                    const q = query(colRef, ...parameters, where("type", "==", type), where("visible", "==", true), where("userInfo.emailVerified", "==", true), orderBy("timeStamp", "desc"), limit(8));
-                    return getDocs(q);
-                }
-                if(page === "next"){
-                    const q = query(colRef, ...parameters, where("type", "==", type), where("visible", "==", true), where("userInfo.emailVerified", "==", true), orderBy("timeStamp", "desc"), limit(8), startAfter(listings[listings.length - 1]));
-                    return getDocs(q);
-                }
-                if(page === "prev"){
-                    const q = query(colRef, ...parameters, where("type", "==", type), where("visible", "==", true), where("userInfo.emailVerified", "==", true), orderBy("timeStamp", "desc"), limitToLast(8), endBefore(listings[0]));
-                    return getDocs(q);
-                }
             }
         }
+
+        // First - premium
+        if(page === "first"){
+            q1 = query(colRef, ...parameters, where("userInfo.premium", "==", true), orderBy("timeStamp", "desc"), limit(8));
+        }
+        if(page === "next"){
+            q1 = query(colRef, ...parameters, where("userInfo.premium", "==", true), orderBy("timeStamp", "desc"), limit(8), startAfter(listings[listings.length - 1]));
+        }
+        if(page === "prev"){
+            q1 = query(colRef, ...parameters, where("userInfo.premium", "==", true), orderBy("timeStamp", "desc"), limitToLast(8), endBefore(listings[0]));
+        }
+        // Check the amount
+        return new Promise((resolve, reject) => {
+            console.log(q1);
+            console.log(page);
+            getDocs(q1).then((docs) => {
+                premiumUsers = docs.docs;
+                if(premiumUsers.length === 8){
+                    resolve({
+                        premiumUsers: premiumUsers,
+                        normalUsers: [],
+                    });
+                }else{
+                    if(page === "first"){
+                        q2 = query(colRef, ...parameters, where("userInfo.premium", "==", false), orderBy("timeStamp", "desc"), limit(8 - premiumUsers.length));
+                    }
+                    if(page === "next"){
+                        q2 = query(colRef, ...parameters, where("userInfo.premium", "==", false), orderBy("timeStamp", "desc"), limit(8 - premiumUsers.length), startAfter(listings[listings.length - 1]));
+                    }
+                    if(page === "prev"){
+                        q2 = query(colRef, ...parameters, where("userInfo.premium", "==", false), orderBy("timeStamp", "desc"), limitToLast(8 - premiumUsers.length), endBefore(listings[0]));
+                    }
+                    return getDocs(q2);
+                }
+            }).then((docs2) => {
+                normalUsers = docs2.docs;
+                if(premiumUsers.length){
+                    resolve({
+                        premiumUsers: premiumUsers,
+                        normalUsers: normalUsers,
+                    });
+                }else{
+                    resolve({
+                        premiumUsers: [],
+                        normalUsers: normalUsers,
+                    });
+                }
+            }).catch((error) => {
+                reject(error);
+            })
+        })
     }
 
 

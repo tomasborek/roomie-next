@@ -93,15 +93,12 @@ const ExploreFeed = ({variant}) => {
             if(page === "first"){
                 let flatmateListingsArray = [];
                 getListings("flatmate", "first", null, filter).then(docs => {
-                    //Checks if we are connected to internet
-                    if (docs.empty && docs.metadata.fromCache) {
-                        throw new Error('network-failed');
-                     }
-                     //Set snapshots for paginations
-                    setFlatmateSnaps(docs.docs);
-                    docs.forEach(doc => {
+                    const listings = docs.premiumUsers.concat(docs.normalUsers);
+                    setFlatmateSnaps(docs.normalUsers);
+                    setPremiumFlatmateSnaps(docs.premiumUsers);
+                    listings.forEach(listing => {
                         //Insert all the listings into empty array
-                        flatmateListingsArray = [...flatmateListingsArray, doc];
+                        flatmateListingsArray = [...flatmateListingsArray, listing];
                     })
                     // Insert the array into state
                     setFlatmateListings(flatmateListingsArray);
@@ -117,11 +114,13 @@ const ExploreFeed = ({variant}) => {
                 setIsPaginationDisabled(true);
                 getListings("flatmate", "next", listings, filter)
                 .then(docs => {
-                    if(docs.docs.length > 0){
+                    const listings = docs.premiumUsers.concat(docs.normalUsers);
+                    if(listings.length > 0){
                         setFlatmatePage(prevState => prevState + 1);
-                        setFlatmateSnaps(docs.docs);
-                        docs.forEach(req => {
-                            flatmateListingsArray = [...flatmateListingsArray, req];
+                        setFlatmateSnaps(docs.normalUsers);
+                        setPremiumFlatmateSnaps(docs.premiumUsers);
+                        listings.forEach(listing => {
+                            flatmateListingsArray = [...flatmateListingsArray, listing];
                         })
                         setFlatmateListings(flatmateListingsArray);
                         window.scrollTo({
@@ -136,11 +135,13 @@ const ExploreFeed = ({variant}) => {
                 setIsPaginationDisabled(true);
                 getListings("flatmate", "prev", listings, filter)
                 .then(docs => {
-                    if(docs.docs.length > 0){
+                    const listings = docs.premiumUsers.concat(docs.normalUsers);
+                    if(listings.length > 0){
                         setFlatmatePage(prevState => prevState - 1);
-                        setFlatmateSnaps(docs.docs);
-                        docs.forEach(req => {
-                            flatmateListingsArray = [...flatmateListingsArray, req];
+                        setFlatmateSnaps(docs.normalUsers);
+                        setPremiumFlatmateSnaps(docs.premiumUsers);
+                        listings.forEach(listing => {
+                            flatmateListingsArray = [...flatmateListingsArray, listing];
                         })
                         setFlatmateListings(flatmateListingsArray);
                         window.scrollTo({
@@ -157,15 +158,12 @@ const ExploreFeed = ({variant}) => {
                 let flatListingsArray = [];
                 //Check if we already have listings
                 getListings("flat", page, listings, filter).then(docs => {
-                    //Checks if we are connected to internet
-                    if (docs.empty && docs.metadata.fromCache) {
-                        throw new Error('network-failed');
-                    }
-                    //Set snapshots for pagination
-                    setFlatSnaps(docs.docs);
-                    docs.forEach(doc => {
+                    const listings = docs.premiumUsers.concat(docs.normalUsers);
+                    setFlatSnaps(docs.normalUsers);
+                    setPremiumSnaps(docs.premiumUsers);
+                    listings.forEach(listing => {
                         //Insert all the listings into empty array
-                        flatListingsArray = [...flatListingsArray, doc];
+                        flatListingsArray = [...flatListingsArray, listing];
                     })
                     // Insert the array into state
                     setFlatListings(flatListingsArray);
@@ -180,7 +178,8 @@ const ExploreFeed = ({variant}) => {
                 setIsPaginationDisabled(true);
                 getListings("flat", "next", listings, filter)
                 .then(docs => {
-                    if(docs.docs.length > 0){
+                    const listings = docs.premiumUsers.concat(docs.normalUsers);
+                    if(listings.length > 0){
                         setFlatSnaps(docs.docs);
                         setFlatPage(prevState => prevState + 1);
                         setFlatSnaps(docs.docs);
