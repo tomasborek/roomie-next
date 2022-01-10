@@ -844,7 +844,7 @@ const Listing = ({type, ssrProps}) => {
                                                             <img src={pfp} className='profile-info-pfp' /> 
                                                             : 
                                                             listingInfo ? 
-                                                            <img src={`/img/pfps/${(listingInfo && listingInfo.userInfo.gender === "male") ? "radek" : "radka"}-pfp.png`} className="profile-info-pfp" /> 
+                                                            <img src={`/img/pfps/${(listingGender === "male") ? "radek" : "radka"}-pfp.png`} className="profile-info-pfp" /> 
                                                             : 
                                                             <div className="profile-info-pfp"></div>
                                                         }
@@ -852,8 +852,8 @@ const Listing = ({type, ssrProps}) => {
                                                 }
                                             </div>
                                             <div className="profile-info-text">
-                                            {!listingInfo ? <Skeleton variant="text" sx={{width: 50}}/>: <p className="text-name">{listingInfo.userInfo.username}</p> } 
-                                            {!listingInfo ? <Skeleton variant="text" sx={{width: 30}} />:  <p className="text-description">{listingInfo.userInfo.gender === "male" ? "Muž" : listingInfo.userInfo.gender === "female" ? "Žena" : listingInfo.userInfo.gender === "other" ? "Jiné" : ""}, {listingInfo.userInfo.age}</p>}
+                                            {(!listingInfo && !listingUsername) ? <Skeleton variant="text" sx={{width: 50}}/>: <p className="text-name">{listingUsername}</p> } 
+                                            {(!listingInfo && !listingUsername) ? <Skeleton variant="text" sx={{width: 30}} />:  <p className="text-description">{listingGender === "male" ? "Muž" : listingGender === "female" ? "Žena" : listingGender === "other" ? "Jiné" : ""}, {listingAge}</p>}
                                             </div>
                                             
                                         </div>
