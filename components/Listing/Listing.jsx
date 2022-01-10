@@ -858,6 +858,9 @@ const Listing = ({type, ssrProps}) => {
                                             
                                         </div>
                                         <div alt="" className="boxes-map-container" >
+                                            <div className="map-overlay">
+                                                <p>Již brzy <i className="fas fa-lock"></i></p>
+                                            </div>
                                             <img src="/img/listing/mapa.png" alt="" className="boxes-map" />
                                         </div>
                                     </div>
