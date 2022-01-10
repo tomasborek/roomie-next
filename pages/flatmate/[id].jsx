@@ -25,6 +25,7 @@ export async function getServerSideProps(context) {
         const listingPersonBoxes = JSON.stringify(docRef.data().personBoxes);
         const listingFlatTags =  JSON.stringify(docRef.data().flatTags);
         const listingPersonTags = JSON.stringify(docRef.data().personTags);
+        const listingPremium = docRef.data().userInfo.premium;
         if(!docRef.data().visible || !docRef.data().userInfo.emailVerified){
             throw {message: "client-side"};
         }
@@ -39,6 +40,7 @@ export async function getServerSideProps(context) {
                 listingPersonBoxes,
                 listingFlatTags,
                 listingPersonTags,
+                listingPremium,
                 status,
             },
         }
@@ -51,6 +53,7 @@ export async function getServerSideProps(context) {
         const listingPersonBoxes = null;
         const listingFlatTags = null;
         const listingPersonTags = null;
+        const listingPremium = null;
         const status = error.message;
         return {
             props: {
@@ -62,6 +65,7 @@ export async function getServerSideProps(context) {
                 listingPersonBoxes,
                 listingFlatTags,
                 listingPersonTags,
+                listingPremium,
                 status,
             },
         }

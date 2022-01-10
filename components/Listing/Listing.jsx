@@ -72,6 +72,7 @@ const Listing = ({type, ssrProps}) => {
     const [listingPersonTags, setListingPersonTags] = useState(JSON.parse(ssrProps.listingPersonTags));
     const [listingFlatBoxes, setListingFlatBoxes] = useState(type === "flat" ? JSON.parse(ssrProps.listingFlatBoxes) : null);
     const [listingFlatTags, setListingFlatTags] = useState(type === "flatmate" ? JSON.parse(ssrProps.listingFlatTags) : null);
+    const [listingPremium, setListingPremium] = useState(ssrProps.listingPremium);
     //Edit mode
     const [editListing, setEditListing] = useState(false);
     const [addedListingImgs, setAddedListingImgs] = useState(["", "", "", "", "", ""]);
@@ -140,14 +141,7 @@ const Listing = ({type, ssrProps}) => {
     // If ssr props aren't null but their coresponding state is, it means it has probably been nulled by the handleSave function, meaning we have to reload them
     useEffect(() => {
         if(!(ssrProps.personTags === null) && listingPersonTags === null){
-            setListingName(ssrProps.listingName);
-            setListingBio(type === "flatmate" ? ssrProps.listingBio : null);
-            setListingFlatBio(type === "flat" ? ssrProps.listingFlatBio : null);
-            setListingPersonBio(type === "flat" ? ssrProps.listingPersonBio : null);
-            setListingPersonBoxes(JSON.parse(ssrProps.listingPersonBoxes));
-            setListingPersonTags(JSON.parse(ssrProps.listingPersonTags));
-            setListingFlatBoxes(type === "flat" ? JSON.parse(ssrProps.listingFlatBoxes) : null);
-            setListingFlatTags(type === "flatmate" ? JSON.parse(ssrProps.listingFlatTags): null);
+            reloadProps();
         }
     }, [ssrProps])
 
@@ -210,7 +204,8 @@ const Listing = ({type, ssrProps}) => {
         setListingPersonBoxes(JSON.parse(ssrProps.listingPersonBoxes));
         setListingPersonTags(JSON.parse(ssrProps.listingPersonTags));
         setListingFlatBoxes(type === "flat" ? JSON.parse(ssrProps.listingFlatBoxes) : null);
-        setListingFlatTags(type === "flatmate" ? JSON.parse(ssrProps.listingFlatTags): null);   
+        setListingFlatTags(type === "flatmate" ? JSON.parse(ssrProps.listingFlatTags): null);
+        setListingPremium(ssrProps.listingPremium);
     }
 
     //Functions
@@ -432,7 +427,8 @@ const Listing = ({type, ssrProps}) => {
             setListingPersonBoxes(docData.personBoxes);
             setListingPersonTags(docData.personTags);
             setListingFlatBoxes(type === "flat" && docData.flatBoxes);
-            setListingFlatTags(type === "flatmate" && docData.flatTags);   
+            setListingFlatTags(type === "flatmate" && docData.flatTags);  
+            setListingPremium (docData.userInfo.premium);
         }).catch(error => {
             //
         })
@@ -556,7 +552,7 @@ const Listing = ({type, ssrProps}) => {
                                      
                                     <div className="header-info">
                                         <div className="info-main">
-                                            <h1 className="main-name">{listingUsername}</h1>
+                                            <h1 className="main-name">{listingUsername} {listingPremium && <i className='fas fa-circle-check'></i>}</h1>
                                             {(currentUser && listingInfo) && ((currentUser.uid == listingInfo.userInfo.uid) && (listingInfo.visible)) && 
                                                 <button onClick={() => setEditListing(prevState => !prevState)}className="main-edit-profile">{editListing ? "Zpět" : "Upravit inzerát"}</button>
                                             }
@@ -615,6 +611,10 @@ const Listing = ({type, ssrProps}) => {
                             </div>
                             <div className="body-info">
                                 <div className="container">
+                                    <div className="info-premium-box">
+                                        <i className="fas fa-circle-check"></i>
+                                        <h3>Premium uživatel</h3>
+                                    </div>
                                     <ListingBoxesContainer type="flatmate" addedBoxes={addedPersonBoxes} existingBoxes={listingPersonBoxes} editListing={editListing} />
                                     {editListing && <div className="info-edit-boxes">
                                         <button onClick={() => setPersonBoxerOverlay(true)}> <i className="fas fa-plus"></i> </button>
@@ -777,7 +777,7 @@ const Listing = ({type, ssrProps}) => {
                                     
                                     <div className="header-info">
                                         <div className="info-main">
-                                            <h1 className="main-name">Byt {listingInfo && listingInfo.flatBoxes.layout && listingInfo.flatBoxes.layout}</h1>
+                                            <h1 className="main-name">Byt {listingInfo && listingInfo.flatBoxes.layout && listingInfo.flatBoxes.layout} {listingPremium && <i className='fas fa-circle-check'></i>}</h1>
                                         {((currentUser && currentUser.uid == listingInfo.userInfo.uid) && (listingInfo && listingInfo.visible)) && 
                                             <button onClick={() => setEditListing(prevState => !prevState)} className="main-edit-profile">{editListing ? "Zpět" : "Upravit inzerát"}</button>
                                         }  
@@ -821,6 +821,10 @@ const Listing = ({type, ssrProps}) => {
                             </div>
                             <div className="body-info">
                                 <div className="container">
+                                    <div className="info-premium-box">
+                                        <i className="fas fa-circle-check"></i>
+                                        <h3>Premium uživatel</h3>
+                                    </div>
                                     <div className="body-opening-boxes">
                                         <div className="boxes-profile-info">
                                             <div className="profile-info-pfp-container">

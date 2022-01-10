@@ -1396,6 +1396,10 @@ textarea {
   padding-block: 1rem;
 }
 
+.Listing .listing-content .content-header .mid-container .header-info .info-main .main-name i {
+  color: #309EAB;
+}
+
 .Listing .listing-content .content-header .mid-container .header-info .info-main .main-name {
   -ms-grid-column: 1;
   -ms-grid-column-span: 1;
@@ -1538,6 +1542,25 @@ textarea {
 
 .FlatListing .listing-content .content-body .body-info {
   margin-top: 2rem;
+}
+
+.FlatListing .listing-content .content-body .body-info .container .info-premium-box {
+  border: 1px solid #B8B8B8;
+  border-radius: 5px;
+  padding: 1rem;
+  background-color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.FlatListing .listing-content .content-body .body-info .container .info-premium-box i {
+  color: #309EAB;
+  margin-right: 0.5rem;
 }
 
 .FlatListing .listing-content .content-body .body-info .body-opening-boxes {
