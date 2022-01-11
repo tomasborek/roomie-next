@@ -565,7 +565,7 @@ const Listing = ({type, ssrProps}) => {
                                                 <li onClick={() => setReportDialog(true)}>Nahlásit uživatele</li>
                                             </ul>
                                             <div className="main-description">
-                                                <p>{listingAge}, {listingGender === "male" ? "muž" : listingGender === "female" ? "žena" : "jiné"}</p>
+                                                {listingGender && <p>{listingAge}, {listingGender === "male" ? "muž" : listingGender === "female" ? "žena" : "jiné"}</p>}
                                             </div>
                                         </div>
                                         {!listingInfo ? 
