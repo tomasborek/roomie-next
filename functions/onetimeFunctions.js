@@ -117,3 +117,30 @@ exports.addPremiumField = functions.https.onRequest((req, res) => {
     res.status(500).send(error.message);
   })
 })
+
+exports.addHideField = functions.https.onRequest((req, res) => {
+  const db = admin.firestore();
+  return db.collection("users").get().then((docs) => {
+    return Promise.all(
+      docs.docs.map((user) => {
+        return db.collection("users").doc(user.id).update({
+          hiddenListing: false,
+        })
+      })
+    );
+  }).then((response) => {
+    return db.collection("listings").get();
+  }).then((docs) => {
+    return Promise.all(
+      docs.docs.map((listing) => {
+        return db.collection("listings").doc(listing.id).update({
+          hiddenByUser: false,
+        })
+      })
+    );
+  }).then((response) => {
+    res.status(200).send("Success");
+  }).catch((error) => {
+    res.status(500).send(error.message);
+  })
+})
