@@ -41,12 +41,12 @@ const EditProfile = () => {
     const [passwordDialogOpen, setPasswordDialogOpen] = useState(false);
     const [error, setError] = useState(null);
     const [addedPfp, setAddedPfp] = useState(null);
-    const [pfp, setPfp] = useState(null);
-    const [uploadPfpDialog, setUploadPfpDialog] = useState(false);
+    const [pfp, setPfp] = useState("");
     const [galleryInput, setGalleryInput] = useState({
         index: -1,
         open: false,
     })
+    const [listingVisible, setListingVisible] = useState(false);
     //refs
     const usernameRef = useRef();   
     const emailRef = useRef();   
@@ -82,6 +82,7 @@ const EditProfile = () => {
             phoneRef.current.value = userData.data().contact.phone;
             igRef.current.value = userData.data().contact.socials.ig;
             fbRef.current.value = userData.data().contact.socials.fb;
+            setListingVisible(!userData.data().hiddenListing);
         }
         
     }, [userData])
@@ -127,10 +128,10 @@ const EditProfile = () => {
                         ig: igRef.current.value
                     }
                 },
+                hiddenListing: !listingVisible,
                 "mainInfo.username": username
             },
             listingParams: {
-              
                 "userInfo.username": usernameRef.current.value,
                 "userInfo.age": userData.data().mainInfo.age,
                 "userInfo.gender": userData.data().mainInfo.gender,
@@ -141,8 +142,7 @@ const EditProfile = () => {
                     ig: igRef.current.value
                 },
                 "userInfo.uid": currentUser.uid,
-                "userInfo.images.pfp": addedPfp,
-
+                hiddenByUser: !listingVisible,
             }
         }
 
@@ -392,7 +392,7 @@ const EditProfile = () => {
                             <div className="content-form">
                                 <div className="form-item">
                                     <p className="item-description">Viditelnost profilu</p>
-                                <Switcher/>
+                                <Switcher activeRider={listingVisible} setActiveRider={setListingVisible}/>
                                 </div>
                         
                                 <p className="form-section-header">

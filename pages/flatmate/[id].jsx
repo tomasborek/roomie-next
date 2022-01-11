@@ -26,7 +26,7 @@ export async function getServerSideProps(context) {
         const listingFlatTags =  JSON.stringify(docRef.data().flatTags);
         const listingPersonTags = JSON.stringify(docRef.data().personTags);
         const listingPremium = docRef.data().userInfo.premium;
-        if(!docRef.data().visible || !docRef.data().userInfo.emailVerified){
+        if(!docRef.data().visible || !docRef.data().userInfo.emailVerified || docRef.data().hiddenByUser){
             throw {message: "client-side"};
         }
         const status = "success";

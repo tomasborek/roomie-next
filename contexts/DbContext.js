@@ -82,7 +82,7 @@ export function DbProvider(props) {
     //Listings
     const getListings = (type, page, listings, premiumListings, filter) => {
         console.log(premiumListings);
-        let parameters = [where("type", "==", type), where("visible", "==", true), where("userInfo.emailVerified", "==", true)];
+        let parameters = [where("type", "==", type), where("visible", "==", true), where("userInfo.emailVerified", "==", true), where("hiddenByUser", "==", false)];
         let premiumUsers = [];
         let normalUsers = [];
         let q1;
