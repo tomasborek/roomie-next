@@ -112,6 +112,7 @@ const Listing = ({type, ssrProps}) => {
         
     
     useEffect(() => {
+        console.log(ssrProps.status);
         setLoading(false);
         setListingInfo(null);
         // SSR props get reloaded when going from listing to listing, but states won't, so we need to reload them
@@ -119,10 +120,12 @@ const Listing = ({type, ssrProps}) => {
         if(!router.isReady) return;
         // If the status is not resolved in any way, there's no reason to continue
         if(ssrProps.status != "success" && ssrProps.status != "client-side") return;
+        if(ssrProps.status === "client-side" && !currentUser) return;
         getListing(id)
         .then(doc => {
             if(ssrProps.status === "client-side"){
-                if(!checkAccess(doc.data().userInfo.uid)){
+                if(checkAccess(doc.data().userInfo.uid)){
+                    console.log("loadujeme");
                     loadClientSide();
                 };
                 return;
@@ -136,7 +139,7 @@ const Listing = ({type, ssrProps}) => {
         }).catch(error => {
             console.log(error);
         })
-    }, [router.isReady, id])
+    }, [router.isReady, id, currentUser])
 
     // If ssr props aren't null but their coresponding state is, it means it has probably been nulled by the handleSave function, meaning we have to reload them
     useEffect(() => {
@@ -406,6 +409,7 @@ const Listing = ({type, ssrProps}) => {
     }
 
     const loadClientSide = () => {
+        console.log("loadujeme");
         getListing(id)
         .then(doc => {
             const docData = doc.data();
