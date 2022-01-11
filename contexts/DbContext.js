@@ -48,33 +48,25 @@ export function DbProvider(props) {
             if(page === "first"){
                 return query(colRef, ...parameters, where("userInfo.premium", "==", true), orderBy("timeStamp", "desc"), limit(8));
             }else if(page === "next"){
-                if(!premiumListings.length){
-                    return query(colRef, ...parameters, where("userInfo.premium", "==", true), orderBy("timeStamp", "desc"), limit(8));
-                }else{
+                if(!listings.length){
                     return query(colRef, ...parameters, where("userInfo.premium", "==", true), orderBy("timeStamp", "desc"), limit(8), startAfter(premiumListings[premiumListings.length - 1]));
+                }else if(listings.length){
+                    return query(colRef, ...parameters, where("userInfo.premium", "==", false), orderBy("timeStamp", "desc"), limit(8), startAfter(listings[listings.length - 1]));
                 }
             }else if(page === "prev"){
-                if(!listings.length){
-                    return query(colRef, ...parameters, where("userInfo.premium", "==", false), orderBy("timeStamp", "desc"), limitToLast(8));
-                }else{
+                if(!premiumListings.length){
                     return query(colRef, ...parameters, where("userInfo.premium", "==", false), orderBy("timeStamp", "desc"), limitToLast(8), endBefore(listings[0]));
+                }else if(premiumListings.length){
+                    return query(colRef, ...parameters, where("userInfo.premium", "==", true), orderBy("timeStamp", "desc"), limitToLast(8), endBefore(premiumListings[0]));
                 }
             }
         }else if(type === "secondQuery"){
             if(page === "first"){
                 return query(colRef, ...parameters, where("userInfo.premium", "==", false), orderBy("timeStamp", "desc"), limit(8 - premiumUsers.length));
             }else if(page === "next"){
-                if(!listings.length){
-                    return query(colRef, ...parameters, where("userInfo.premium", "==", false), orderBy("timeStamp", "desc"), limit(8 - premiumUsers.length));
-                }else{
-                    return query(colRef, ...parameters, where("userInfo.premium", "==", false), orderBy("timeStamp", "desc"), limit(8 - premiumUsers.length), startAfter(listings[listings.length - 1]));
-                }
+                return query(colRef, ...parameters, where("userInfo.premium", "==", false), orderBy("timeStamp", "desc"), limit(8 - premiumUsers.length));
             }else if(page === "prev"){
-                if(!premiumListings.length || normalUsers.length != 8){
-                    return query(colRef, ...parameters, where("userInfo.premium", "==", true), orderBy("timeStamp", "desc"), limitToLast(8 - normalUsers.length));
-                }else{
-                    return query(colRef, ...parameters, where("userInfo.premium", "==", true), orderBy("timeStamp", "desc"), limitToLast(8 - normalUsers.length), endBefore(premiumListings[0]));
-                }
+                return query(colRef, ...parameters, where("userInfo.premium", "==", true), orderBy("timeStamp", "desc"), limitToLast(8 - normalUsers.length));
             }
         }
     }
@@ -301,18 +293,32 @@ export function DbProvider(props) {
         q1 = createQuery({...queryInfo, type: "firstQuery"});
         return new Promise((resolve, reject) => {
             getDocs(q1).then((docs) => {
-                if(page === "prev"){ 
-                    normalUsers = docs.docs;
-                }else{
+                if(page === "first"){
                     premiumUsers = docs.docs;
+                }else if(page === "next"){
+                    if(listings.length){
+                        normalUsers = docs.docs;
+                    }else{
+                        premiumUsers = docs.docs;
+                    }
+                }else if(page === "prev"){
+                    if(premiumListings.length){
+                        premiumUsers = docs.docs;
+                    }else{
+                        normalUsers = docs.docs;
+                    }
                 }
+                
+           
+            
                 queryInfo.premiumUsers = premiumUsers;
                 queryInfo.normalUsers = normalUsers;
-                if(docs.docs.length === 8){
+                if(docs.docs.length === 8 || (page === "next" && listings.length) ||(page === "prev" && premiumListings.length)){
                     resolve({
                         premiumUsers,
-                        normalUsers
+                        normalUsers,
                     });
+                    return;
                 }
 
                 q2 = createQuery({...queryInfo, type: "secondQuery"});
