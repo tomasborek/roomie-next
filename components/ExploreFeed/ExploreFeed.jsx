@@ -31,7 +31,10 @@ const ExploreFeed = ({variant}) => {
     const {
         flatListingsValue,
         flatmateListingsValue, 
-        flatSnapsValue, flatmateSnapsValue, 
+        flatSnapsValue,
+        flatmateSnapsValue,
+        premiumFlatSnapsValue,
+        premiumFlatmateSnapsValue, 
         activeFiltersValue, 
         flatmatePageValue, 
         flatPageValue,
@@ -41,6 +44,8 @@ const ExploreFeed = ({variant}) => {
     const [flatmateListings, setFlatmateListings] = flatmateListingsValue;
     const [flatSnaps, setFlatSnaps] = flatSnapsValue;
     const [flatmateSnaps, setFlatmateSnaps] = flatmateSnapsValue;
+    const [premiumFlatSnaps, setPremiumFlatSnaps] = premiumFlatSnapsValue;
+    const [premiumFlatmateSnaps, setPremiumFlatmateSnaps] = premiumFlatmateSnapsValue;
     const [activeFilters, setActiveFilters] = activeFiltersValue;
     const [flatmatePage, setFlatmatePage] = flatmatePageValue;
     const [flatPage, setFlatPage] = flatPageValue;
@@ -60,11 +65,11 @@ const ExploreFeed = ({variant}) => {
     useEffect(() => {
         if(variant === "flatmate"){
             if(flatmateListings) return;
-            fetchListings("flatmate", "first", null, activeFilters);
+            fetchListings("flatmate", "first", null, null, activeFilters);
         }
         if(variant === "flat"){
             if(flatListings) return;
-            fetchListings("flat", "first", null, activeFilters);
+            fetchListings("flat", "first", null, null, activeFilters);
         }
     }, []);
 
@@ -88,14 +93,14 @@ const ExploreFeed = ({variant}) => {
 
     }, [variant])
 
-    const fetchListings = (type, page, listings, filter) => {
+    const fetchListings = (type, page, listings, premiumListings, filter) => {
         if(type === "flatmate"){
             if(page === "first"){
                 let flatmateListingsArray = [];
-                getListings("flatmate", "first", null, filter).then(docs => {
+                getListings("flatmate", "first", null, null, filter).then(docs => {
                     const listings = docs.premiumUsers.concat(docs.normalUsers);
                     setFlatmateSnaps(docs.normalUsers);
-                    setPremiumFlatmateSnaps(docs.premiumUsers);
+                    docs.premiumUsers.length && setPremiumFlatmateSnaps(docs.premiumUsers);
                     listings.forEach(listing => {
                         //Insert all the listings into empty array
                         flatmateListingsArray = [...flatmateListingsArray, listing];
@@ -112,13 +117,13 @@ const ExploreFeed = ({variant}) => {
             }else if(page === "next"){
                 let flatmateListingsArray = [];
                 setIsPaginationDisabled(true);
-                getListings("flatmate", "next", listings, filter)
+                getListings("flatmate", "next", listings, premiumListings, filter)
                 .then(docs => {
                     const listings = docs.premiumUsers.concat(docs.normalUsers);
                     if(listings.length > 0){
                         setFlatmatePage(prevState => prevState + 1);
                         setFlatmateSnaps(docs.normalUsers);
-                        setPremiumFlatmateSnaps(docs.premiumUsers);
+                        docs.premiumUsers.length && setPremiumFlatmateSnaps(docs.premiumUsers);
                         listings.forEach(listing => {
                             flatmateListingsArray = [...flatmateListingsArray, listing];
                         })
@@ -133,13 +138,13 @@ const ExploreFeed = ({variant}) => {
             }else if(page === "prev"){
                 let flatmateListingsArray = [];
                 setIsPaginationDisabled(true);
-                getListings("flatmate", "prev", listings, filter)
+                getListings("flatmate", "prev", listings, premiumListings, filter)
                 .then(docs => {
                     const listings = docs.premiumUsers.concat(docs.normalUsers);
                     if(listings.length > 0){
                         setFlatmatePage(prevState => prevState - 1);
                         setFlatmateSnaps(docs.normalUsers);
-                        setPremiumFlatmateSnaps(docs.premiumUsers);
+                        docs.premiumUsers.length && setPremiumFlatmateSnaps(docs.premiumUsers);
                         listings.forEach(listing => {
                             flatmateListingsArray = [...flatmateListingsArray, listing];
                         })
@@ -157,10 +162,10 @@ const ExploreFeed = ({variant}) => {
             if(page === "first"){
                 let flatListingsArray = [];
                 //Check if we already have listings
-                getListings("flat", page, listings, filter).then(docs => {
+                getListings("flat", page, null, null, filter).then(docs => {
                     const listings = docs.premiumUsers.concat(docs.normalUsers);
                     setFlatSnaps(docs.normalUsers);
-                    setPremiumSnaps(docs.premiumUsers);
+                    docs.premiumUsers.length && setPremiumFlatSnaps(docs.premiumUsers);
                     listings.forEach(listing => {
                         //Insert all the listings into empty array
                         flatListingsArray = [...flatListingsArray, listing];
@@ -176,15 +181,15 @@ const ExploreFeed = ({variant}) => {
             }else if(page === "next"){
                 let flatListingsArray = [];
                 setIsPaginationDisabled(true);
-                getListings("flat", "next", listings, filter)
+                getListings("flat", "next", listings, premiumListings, filter)
                 .then(docs => {
                     const listings = docs.premiumUsers.concat(docs.normalUsers);
                     if(listings.length > 0){
-                        setFlatSnaps(docs.docs);
+                        setFlatSnaps(docs.normalUsers);
+                        docs.premiumUsers.length && setPremiumFlatSnaps(docs.premiumUsers);
                         setFlatPage(prevState => prevState + 1);
-                        setFlatSnaps(docs.docs);
-                        docs.forEach(req => {
-                           flatListingsArray =  [...flatListingsArray, req];
+                        listings.forEach(listing => {
+                           flatListingsArray =  [...flatListingsArray, listing];
                         })
                         setFlatListings(flatListingsArray);
                     }
@@ -193,14 +198,15 @@ const ExploreFeed = ({variant}) => {
             }else if(page === "prev"){
                 let flatListingsArray = [];
                 setIsPaginationDisabled(true);
-                getListings("flat", "prev", listings, filter)
+                getListings("flat", "prev", listings, premiumListings, filter)
                 .then(docs => {
-                    if(docs.docs.length > 0){
-                        setFlatSnaps(docs.docs);
+                    const listings = docs.premiumUsers.concat(docs.normalUsers);
+                    if(listings.length > 0){
+                        setFlatSnaps(docs.normalUsers);
+                        docs.premiumUsers.length && setPremiumFlatSnaps(docs.premiumUsers);
                         setFlatPage(prevState => prevState - 1);
-                        setFlatSnaps(docs.docs);
-                        docs.forEach(req => {
-                            flatListingsArray =  [...flatListingsArray, req];
+                        listings.forEach(listing => {
+                            flatListingsArray =  [...flatListingsArray, listing];
                         })
                         setFlatListings(flatListingsArray);
                     }
@@ -258,12 +264,12 @@ const ExploreFeed = ({variant}) => {
         if(variant === "flatmate"){
             setFlatmateListings(null);
             setFlatmatePage(1);
-            fetchListings("flatmate", "first", null, filter);
+            fetchListings("flatmate", "first", null, null, filter);
         }
         if(variant === "flat"){
             setFlatListings(null);
             setFlatPage(1);
-            fetchListings("flat", "first", null, filter);
+            fetchListings("flat", "first", null, null, filter);
         }
     }
 
@@ -279,18 +285,18 @@ const ExploreFeed = ({variant}) => {
         }
         if(variant === "flatmate"){
             if(page === "next"){
-                fetchListings("flatmate", "next", flatmateSnaps, activeFilters); 
+                fetchListings("flatmate", "next", flatmateSnaps, premiumFlatmateSnaps, activeFilters); 
             }
             if(page === "prev"){
-                fetchListings("flatmate", "prev", flatmateSnaps, activeFilters);
+                fetchListings("flatmate", "prev", flatmateSnaps, premiumFlatmateSnaps, activeFilters);
             }
         }
         if(variant === "flat"){
             if(page === "next"){
-                fetchListings("flat", "next", flatSnaps, activeFilters);
+                fetchListings("flat", "next", flatSnaps, premiumFlatSnaps, activeFilters);
             }
             if(page === "prev"){
-                fetchListings("flat", "prev", flatSnaps, activeFilters);
+                fetchListings("flat", "prev", flatSnaps, premiumFlatSnaps, activeFilters);
             }
         }
     }

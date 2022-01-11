@@ -41,18 +41,61 @@ export function DbProvider(props) {
        return getDoc(doc(db, "users", uid));
     }
 
-    //Listings
-    const getListings = (type, page, listings, filter) => {
+
+    const createQuery = ({type, page, parameters, listings, premiumListings, normalUsers, premiumUsers}) => {
         const colRef = collection(db, "listings");
+        if(type === "firstQuery"){
+            if(page === "first"){
+                return query(colRef, ...parameters, where("userInfo.premium", "==", true), orderBy("timeStamp", "desc"), limit(8));
+            }else if(page === "next"){
+                if(!premiumListings.length){
+                    return query(colRef, ...parameters, where("userInfo.premium", "==", true), orderBy("timeStamp", "desc"), limit(8));
+                }else{
+                    return query(colRef, ...parameters, where("userInfo.premium", "==", true), orderBy("timeStamp", "desc"), limit(8), startAfter(premiumListings[premiumListings.length - 1]));
+                }
+            }else if(page === "prev"){
+                if(!listings.length){
+                    return query(colRef, ...parameters, where("userInfo.premium", "==", false), orderBy("timeStamp", "desc"), limitToLast(8));
+                }else{
+                    return query(colRef, ...parameters, where("userInfo.premium", "==", false), orderBy("timeStamp", "desc"), limitToLast(8), endBefore(listings[0]));
+                }
+            }
+        }else if(type === "secondQuery"){
+            if(page === "first"){
+                return query(colRef, ...parameters, where("userInfo.premium", "==", false), orderBy("timeStamp", "desc"), limit(8 - premiumUsers.length));
+            }else if(page === "next"){
+                if(!listings.length){
+                    return query(colRef, ...parameters, where("userInfo.premium", "==", false), orderBy("timeStamp", "desc"), limit(8 - premiumUsers.length));
+                }else{
+                    return query(colRef, ...parameters, where("userInfo.premium", "==", false), orderBy("timeStamp", "desc"), limit(8 - premiumUsers.length), startAfter(listings[listings.length - 1]));
+                }
+            }else if(page === "prev"){
+                if(!premiumListings.length || normalUsers.length != 8){
+                    return query(colRef, ...parameters, where("userInfo.premium", "==", true), orderBy("timeStamp", "desc"), limitToLast(8 - normalUsers.length));
+                }else{
+                    return query(colRef, ...parameters, where("userInfo.premium", "==", true), orderBy("timeStamp", "desc"), limitToLast(8 - normalUsers.length), endBefore(premiumListings[0]));
+                }
+            }
+        }
+    }
+
+    //Listings
+    const getListings = (type, page, listings, premiumListings, filter) => {
+        console.log(premiumListings);
         let parameters = [where("type", "==", type), where("visible", "==", true), where("userInfo.emailVerified", "==", true)];
-        let premiumUsers;
-        let normalUsers;
+        let premiumUsers = [];
+        let normalUsers = [];
         let q1;
         let q2;
-        if(!Object.keys(filter).length){
-           //
-        }else{
-            // Array of parameters that is then gonna get spread to query
+        const queryInfo = {
+            page,
+            parameters,
+            listings,
+            premiumListings,
+            normalUsers,
+            premiumUsers,
+        }
+        if(Object.keys(filter).length){
             if(type === "flatmate"){
                 if(filter.location){
                     parameters.push(where("flatTags.location", "==", filter.location));
@@ -255,52 +298,35 @@ export function DbProvider(props) {
             }
         }
 
-        // First - premium
-        if(page === "first"){
-            q1 = query(colRef, ...parameters, where("userInfo.premium", "==", true), orderBy("timeStamp", "desc"), limit(8));
-        }
-        if(page === "next"){
-            q1 = query(colRef, ...parameters, where("userInfo.premium", "==", true), orderBy("timeStamp", "desc"), limit(8), startAfter(listings[listings.length - 1]));
-        }
-        if(page === "prev"){
-            q1 = query(colRef, ...parameters, where("userInfo.premium", "==", true), orderBy("timeStamp", "desc"), limitToLast(8), endBefore(listings[0]));
-        }
-        // Check the amount
+        q1 = createQuery({...queryInfo, type: "firstQuery"});
         return new Promise((resolve, reject) => {
-            console.log(q1);
-            console.log(page);
             getDocs(q1).then((docs) => {
-                premiumUsers = docs.docs;
-                if(premiumUsers.length === 8){
-                    resolve({
-                        premiumUsers: premiumUsers,
-                        normalUsers: [],
-                    });
+                if(page === "prev"){ 
+                    normalUsers = docs.docs;
                 }else{
-                    if(page === "first"){
-                        q2 = query(colRef, ...parameters, where("userInfo.premium", "==", false), orderBy("timeStamp", "desc"), limit(8 - premiumUsers.length));
-                    }
-                    if(page === "next"){
-                        q2 = query(colRef, ...parameters, where("userInfo.premium", "==", false), orderBy("timeStamp", "desc"), limit(8 - premiumUsers.length), startAfter(listings[listings.length - 1]));
-                    }
-                    if(page === "prev"){
-                        q2 = query(colRef, ...parameters, where("userInfo.premium", "==", false), orderBy("timeStamp", "desc"), limitToLast(8 - premiumUsers.length), endBefore(listings[0]));
-                    }
-                    return getDocs(q2);
+                    premiumUsers = docs.docs;
                 }
+                queryInfo.premiumUsers = premiumUsers;
+                queryInfo.normalUsers = normalUsers;
+                if(docs.docs.length === 8){
+                    resolve({
+                        premiumUsers,
+                        normalUsers
+                    });
+                }
+
+                q2 = createQuery({...queryInfo, type: "secondQuery"});
+                return getDocs(q2);
             }).then((docs2) => {
-                normalUsers = docs2.docs;
-                if(premiumUsers.length){
-                    resolve({
-                        premiumUsers: premiumUsers,
-                        normalUsers: normalUsers,
-                    });
-                }else{
-                    resolve({
-                        premiumUsers: [],
-                        normalUsers: normalUsers,
-                    });
+                if(page === "prev"){
+                    premiumUsers = docs2.docs;
+                }else{ 
+                    normalUsers = docs2.docs;
                 }
+                resolve({
+                    premiumUsers,
+                    normalUsers,
+                });
             }).catch((error) => {
                 reject(error);
             })
