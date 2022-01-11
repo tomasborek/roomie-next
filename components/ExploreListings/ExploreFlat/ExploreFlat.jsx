@@ -3,12 +3,7 @@ import React, {useEffect, useState} from 'react'
 import Link from 'next/link'
 
 const ExploreFlat = ({name, bio, price, startTime,stayTime, mainImg,premium, id}) => {
-    const [shortBio, setShortBio] = useState("");
-    useEffect(() => {
-        if(bio){
-            setShortBio(bio.substr(0,80));
-        }
-    }, [bio])
+    
     return (
     <Link href={`/flat/${id}`}>
         <div className={`explore-flat ${premium && "premium"}`}>
@@ -21,7 +16,7 @@ const ExploreFlat = ({name, bio, price, startTime,stayTime, mainImg,premium, id}
             </div>
            <div className="listing-content">
                <div className="content-header"><span>{name}</span> {premium && <i className='fas fa-check-circle'></i>}</div>
-               <div className="content-bio">{shortBio}...</div>
+               <div className="content-bio">{bio.substr(0,75)}...</div>
                <div className="content-more"><a href="">Více...</a></div>
                <div className="content-info">
                  <div className="info-row">

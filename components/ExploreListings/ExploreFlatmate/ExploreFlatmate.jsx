@@ -23,7 +23,7 @@ const ExploreFlatmate= ({name, age, gender, location, money, available, bio, pfp
         </div>
         <div className="listing-content">
             <div className="content-header"><span>{name}</span>, {age} {premium && <i className='fas fa-check-circle'></i>}</div>
-            <div className="content-bio">{bio.substr(0,80)}...</div>
+            <div className="content-bio"><p>{bio.substr(0,70)}...</p></div>
             <div className="content-more"><a href="">Více...</a></div>
             <div className="content-info">
               <div className="info-row">
