@@ -19,6 +19,7 @@ exports.createUser = functions.https.onCall((data, context) => {
         premium: false,
       },
       emailVerified: false,
+      hiddenListing: false,
       contact: {
         email: data.email,
         phone: data.phone,
@@ -81,6 +82,7 @@ exports.createListing = functions.https.onCall((data, context) => {
         requests: [],
         sentRequests: [],
         visible: false,
+        hiddenByUser: false,
         timeStamp: admin.firestore.FieldValue.serverTimestamp(),
       };
     } else if (data.type == "offerer") {
@@ -127,6 +129,7 @@ exports.createListing = functions.https.onCall((data, context) => {
         requests: [],
         sentRequests: [],
         visible: false,
+        hiddenByUser: false,
         timeStamp: admin.firestore.FieldValue.serverTimestamp(),
       };
     }
