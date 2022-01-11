@@ -100,6 +100,25 @@
         }
 }
 
+.Listing .listing-content .content-body .body-info{
+    margin-top: 2rem;
+    .container{
+        .info-premium-box{
+            border: 1px solid $mainGray;
+            border-radius: 5px;
+            padding: 1rem;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+            i{
+                color: $mainColor;
+                margin-right: 0.5rem;
+            }
+        }
+    }
+}
+
 //Header
 .Listing .listing-content .content-header{
     background-color: white;
@@ -284,25 +303,6 @@
 }
 
 
-
-.FlatListing .listing-content .content-body .body-info{
-    margin-top: 2rem;
-    .container{
-        .info-premium-box{
-            border: 1px solid $mainGray;
-            border-radius: 5px;
-            padding: 1rem;
-            background-color: white;
-            display: flex;
-            justify-content: center;
-            margin-bottom: 1rem;
-            i{
-                color: $mainColor;
-                margin-right: 0.5rem;
-            }
-        }
-    }
-}
 
 .FlatListing .listing-content .content-body .body-info .body-opening-boxes{
     display: flex;

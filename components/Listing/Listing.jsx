@@ -611,10 +611,11 @@ const Listing = ({type, ssrProps}) => {
                             </div>
                             <div className="body-info">
                                 <div className="container">
-                                    <div className="info-premium-box">
-                                        <i className="fas fa-circle-check"></i>
-                                        <h3>Premium uživatel</h3>
-                                    </div>
+                                    {listingPremium && 
+                                        <div className="info-premium-box">
+                                            <i className="fas fa-circle-check"></i>
+                                            <h3>Premium uživatel</h3>
+                                        </div>}
                                     <ListingBoxesContainer type="flatmate" addedBoxes={addedPersonBoxes} existingBoxes={listingPersonBoxes} editListing={editListing} />
                                     {editListing && <div className="info-edit-boxes">
                                         <button onClick={() => setPersonBoxerOverlay(true)}> <i className="fas fa-plus"></i> </button>
@@ -821,10 +822,12 @@ const Listing = ({type, ssrProps}) => {
                             </div>
                             <div className="body-info">
                                 <div className="container">
-                                    <div className="info-premium-box">
-                                        <i className="fas fa-circle-check"></i>
-                                        <h3>Premium uživatel</h3>
-                                    </div>
+                                        {listingPremium && 
+                                            <div className="info-premium-box">
+                                                <i className="fas fa-circle-check"></i>
+                                                <h3>Premium uživatel</h3>
+                                            </div>
+                                        }
                                     <div className="body-opening-boxes">
                                         <div className="boxes-profile-info">
                                             <div className="profile-info-pfp-container">
