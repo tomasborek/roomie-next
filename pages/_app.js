@@ -26,6 +26,8 @@ import FunctionsProvider from '../contexts/FunctionsContext';
 import { StorageProvider } from '../contexts/StorageContext';
 import {ExploreDialogProvider} from '../contexts/ExploreDialogContext';
 import { ExploreProvider } from '../contexts/ExploreContext';
+import { AuthProvider } from '../contexts/AuthContext';
+import { DbProvider } from '../contexts/DbContext';
 //Styles
 import '../styles/global.css'
 
@@ -39,21 +41,26 @@ function MyApp({ Component, pageProps }) {
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9969104196645961"
      crossOrigin="anonymous"></script>
     </Head>
-    <LoadingProvider>
-        <SnackBarProvider>
-                <FunctionsProvider>
-                  <StorageProvider>
-                    <ExploreDialogProvider>
-                      <ExploreProvider>
-                          <Layout>
-                                <Component {...pageProps} />
-                          </Layout>
-                        </ExploreProvider>
-                      </ExploreDialogProvider>
-                    </StorageProvider>
-                </FunctionsProvider>
-          </SnackBarProvider>
-    </LoadingProvider>
+    <DbProvider>
+      <AuthProvider>
+        <LoadingProvider>
+            <SnackBarProvider>
+                    <FunctionsProvider>
+                      <StorageProvider>
+                        <ExploreDialogProvider>
+                          <ExploreProvider>
+                              <Layout>
+                                    <Component {...pageProps} />
+                              </Layout>
+                            </ExploreProvider>
+                          </ExploreDialogProvider>
+                        </StorageProvider>
+                    </FunctionsProvider>
+              </SnackBarProvider>
+        </LoadingProvider>
+      </AuthProvider>
+    </DbProvider>
+
     </>
   )
 }

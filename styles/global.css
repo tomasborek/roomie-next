@@ -4650,6 +4650,77 @@ textarea {
   }
 }
 
+.under-construction {
+  height: 100vh;
+  color: white;
+  background: #309eab;
+  background: -webkit-gradient(linear, left top, right top, from(#309eab), color-stop(87%, #154c70));
+  background: linear-gradient(90deg, #309eab 0%, #154c70 87%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.under-construction h1, .under-construction h2, .under-construction p, .under-construction img {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.under-construction h1 {
+  font-size: 124px;
+}
+
+.under-construction h2 {
+  font-weight: normal;
+}
+
+.under-construction img {
+  width: 95%;
+  max-width: 800px;
+}
+
+.under-construction .wip-socials {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.under-construction .wip-socials .socials-social {
+  cursor: pointer;
+  margin: 0 0.5rem;
+  width: 50px;
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 18px;
+  background-color: white;
+  border-radius: 50%;
+  color: #333;
+}
+
+@media screen and (max-width: 600px) {
+  .under-construction h1 {
+    font-size: 74px;
+  }
+}
+
 .header-info .info-contact {
   display: -webkit-box;
   display: -ms-flexbox;

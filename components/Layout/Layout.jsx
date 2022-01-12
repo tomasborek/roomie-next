@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 //Next
 import { useRouter } from 'next/router';
 import Link from 'next/dist/client/link';
@@ -13,11 +13,13 @@ import { NotificationsProvider } from '../../contexts/NotificationsContext';
 import { useSnackBar } from '../../contexts/SnackBarContext';
 import { useLoading } from '../../contexts/LoadingContext';
 import { useExploreDialog } from '../../contexts/ExploreDialogContext';
+import {useAuth} from "../../contexts/AuthContext";
 
 //Components
 import NavOverlay from '../NavOverlay/NavOverlay';
 import LoadingOverlay from "../LoadingOverlay/LoadingOverlay";
 import CustomDialog from '../CustomDialog/CustomDialog';
+import UnderConstruction from "../UnderConstruction/UnderConstruction";
 //MUI
 import { Backdrop } from '@mui/material';
 import {Snackbar, Alert} from "@mui/material"
@@ -27,14 +29,20 @@ import {Snackbar, Alert} from "@mui/material"
 
 const Layout = ({children}) => {
     const router = useRouter();
+    const {currentUser} = useAuth() 
+    const [underCon, setUnderCon] = useState(true);
     const {isSnackBarOpen, snackBarSeverity, snackBarMsg} = useSnackBar();
     const [loading, setLoading] = useLoading();
     const [exploreDialog, setExploreDialog] = useExploreDialog();
+    useEffect(() => {
+        if(currentUser || router.asPath === "/login/"){
+            setUnderCon(false);
+        }
+    }, [currentUser])
     return (
         <>
+        {!underCon ?
         <LoadingProvider>
-            <DbProvider>
-                <AuthProvider>
                     <NotificationsProvider>
                         <NavOverlayProvider>
                             <RegisterProvider>
@@ -63,10 +71,11 @@ const Layout = ({children}) => {
                                 {children}
                             </RegisterProvider>
                         </NavOverlayProvider>
-                    </NotificationsProvider>
-                </AuthProvider>
-            </DbProvider>   
-        </LoadingProvider>         
+                    </NotificationsProvider> 
+        </LoadingProvider> 
+        :
+        <UnderConstruction/>
+        }        
         </>
     )
 }
