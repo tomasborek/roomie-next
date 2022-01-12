@@ -604,7 +604,7 @@ const Listing = ({type, ssrProps}) => {
                                             <i className="fas fa-info"></i>
                                             <p>
                                                 Váš inzerát je nedokončený, prosím dokončete jej 
-                                                <Link href={`/cr/${listingInfo.type}/${listingId}`}><a style={{textDecoration: "underline"}}> zde</a></Link>
+                                                <Link href={`/cr/${listingInfo.type}/${listingId}`}> zde</Link>
                                             </p> 
                                         </div>
                                 }
@@ -613,6 +613,14 @@ const Listing = ({type, ssrProps}) => {
                                     <i className="fas fa-info"></i>
                                     <p>
                                         Váš účet není ověřený - pro používání Roomie si jej prosím ověřte pomocí odkazu zaslaného na váš e-mail.
+                                    </p> 
+                                </div>
+                                }
+                                {(listingInfo && listingInfo.hiddenByUser) &&
+                                <div className="messages-message">
+                                    <i className="fas fa-info"></i>
+                                    <p>
+                                        Váš účet je skrytý - aby ho mohli uživatelé vidět, zapněte jeho viditelnost v <Link href="/edit-profile">nastavení profilu</Link>.
                                     </p> 
                                 </div>
                                 }
@@ -815,7 +823,7 @@ const Listing = ({type, ssrProps}) => {
                                             <i className="fas fa-info"></i>
                                             <p>
                                                 Váš inzerát je nedokončený, prosím dokončete jej  
-                                                <Link href={`/cr/${listingInfo.type}/${listingId}`}><a style={{textDecoration: "underline"}}> zde</a></Link>
+                                                <Link href={`/cr/${listingInfo.type}/${listingId}`}> zde</Link>
                                             </p> 
                                         </div>
                                 }
@@ -826,6 +834,14 @@ const Listing = ({type, ssrProps}) => {
                                             Váš účet není ověřený - pro používání Roomie si jej prosím ověřte pomocí odkazu zaslaného na váš e-mail.
                                         </p> 
                                     </div>
+                                }
+                                 {(listingInfo && listingInfo.hiddenByUser) &&
+                                <div className="messages-message">
+                                    <i className="fas fa-info"></i>
+                                    <p>
+                                        Váš účet je skrytý - aby ho mohli uživatelé vidět, zapněte jeho viditelnost v <Link href="/edit-profile">nastavení profilu</Link>.
+                                    </p> 
+                                </div>
                                 }
                             </div>
                             <div className="body-info">

@@ -1222,6 +1222,7 @@ textarea {
 
 .Listing .listing-content .content-body .body-messages .messages-message a {
   color: white;
+  text-decoration: underline;
 }
 
 .Listing .listing-content .content-body .body-info .info-edit-boxes {
