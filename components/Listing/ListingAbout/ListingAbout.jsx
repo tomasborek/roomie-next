@@ -27,7 +27,7 @@ const ListingAbout = ({type, listingInfo, existingBio, existingPersonBio, existi
                     <textarea maxLength={3000} value={bio} onChange={e => textAreaChange(e, "flatmate")} type="text" rows="5" className="bio-content" placeholder="Zadejte něco o sobě..."></textarea>
                     :
                     <div className="bio-content">
-                        {existingBio ? existingBio === "" ? "Tento uživatel nemá popis..." : existingBio
+                        {existingBio != null ? existingBio === "" ? "Tento uživatel nemá popis..." : existingBio
                         : 
                         <div className="skeletons">
                             <Skeleton variant="text"/>

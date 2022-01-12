@@ -144,7 +144,11 @@ const Listing = ({type, ssrProps}) => {
     // If ssr props aren't null but their coresponding state is, it means it has probably been nulled by the handleSave function, meaning we have to reload them
     useEffect(() => {
         if(!(ssrProps.personTags === null) && listingPersonTags === null){
-            reloadProps();
+            if(ssrProps.status === "success"){
+                reloadProps();
+            }else if(ssrProps.status === "client-side"){
+                loadClientSide();
+            }
         }
     }, [ssrProps])
 
