@@ -99,9 +99,9 @@ const ExploreFeed = ({variant}) => {
             if(page === "first"){
                 let flatmateListingsArray = [];
                 getListings("flatmate", "first", null, null, filter).then(docs => {
-                    const listings = docs.premiumUsers.concat(docs.normalUsers);
-                    setFlatmateSnaps(docs.normalUsers);
-                    setPremiumFlatmateSnaps(docs.premiumUsers);
+                    const listings = docs.newPremiumListings.concat(docs.newListings);
+                    setFlatmateSnaps(docs.newListings);
+                    setPremiumFlatmateSnaps(docs.newPremiumListings);
                     listings.forEach(listing => {
                         //Insert all the listings into empty array
                         flatmateListingsArray = [...flatmateListingsArray, listing];
@@ -120,11 +120,11 @@ const ExploreFeed = ({variant}) => {
                 setIsPaginationDisabled(true);
                 getListings("flatmate", "next", listings, premiumListings, filter)
                 .then(docs => {
-                    const listings = docs.premiumUsers.concat(docs.normalUsers);
+                    const listings = docs.newPremiumListings.concat(docs.newListings);
                     if(listings.length > 0){
                         setFlatmatePage(prevState => prevState + 1);
-                        setFlatmateSnaps(docs.normalUsers);
-                        setPremiumFlatmateSnaps(docs.premiumUsers);
+                        setFlatmateSnaps(docs.newListings);
+                        setPremiumFlatmateSnaps(docs.newPremiumListings);
                         listings.forEach(listing => {
                             flatmateListingsArray = [...flatmateListingsArray, listing];
                         })
@@ -141,11 +141,11 @@ const ExploreFeed = ({variant}) => {
                 setIsPaginationDisabled(true);
                 getListings("flatmate", "prev", listings, premiumListings, filter)
                 .then(docs => {
-                    const listings = docs.premiumUsers.concat(docs.normalUsers);
+                    const listings = docs.newPremiumListings.concat(docs.newListings);
                     if(listings.length > 0){
                         setFlatmatePage(prevState => prevState - 1);
-                        setFlatmateSnaps(docs.normalUsers);
-                        setPremiumFlatmateSnaps(docs.premiumUsers);
+                        setFlatmateSnaps(docs.newListings);
+                        setPremiumFlatmateSnaps(docs.newPremiumListings);
                         listings.forEach(listing => {
                             flatmateListingsArray = [...flatmateListingsArray, listing];
                         })
@@ -164,9 +164,9 @@ const ExploreFeed = ({variant}) => {
                 let flatListingsArray = [];
                 //Check if we already have listings
                 getListings("flat", page, null, null, filter).then(docs => {
-                    const listings = docs.premiumUsers.concat(docs.normalUsers);
-                    setFlatSnaps(docs.normalUsers);
-                    setPremiumFlatSnaps(docs.premiumUsers);
+                    const listings = docs.newPremiumListings.concat(docs.newListings);
+                    setFlatSnaps(docs.newListings);
+                    setPremiumFlatSnaps(docs.newPremiumListings);
                     listings.forEach(listing => {
                         //Insert all the listings into empty array
                         flatListingsArray = [...flatListingsArray, listing];
@@ -184,10 +184,10 @@ const ExploreFeed = ({variant}) => {
                 setIsPaginationDisabled(true);
                 getListings("flat", "next", listings, premiumListings, filter)
                 .then(docs => {
-                    const listings = docs.premiumUsers.concat(docs.normalUsers);
+                    const listings = docs.newPremiumListings.concat(docs.newListings);
                     if(listings.length > 0){
-                        setFlatSnaps(docs.normalUsers);
-                        setPremiumFlatSnaps(docs.premiumUsers);
+                        setFlatSnaps(docs.newListings);
+                        setPremiumFlatSnaps(docs.newPremiumListings);
                         setFlatPage(prevState => prevState + 1);
                         listings.forEach(listing => {
                            flatListingsArray =  [...flatListingsArray, listing];
@@ -201,10 +201,10 @@ const ExploreFeed = ({variant}) => {
                 setIsPaginationDisabled(true);
                 getListings("flat", "prev", listings, premiumListings, filter)
                 .then(docs => {
-                    const listings = docs.premiumUsers.concat(docs.normalUsers);
+                    const listings = docs.newPremiumListings.concat(docs.newListings);
                     if(listings.length > 0){
-                        setFlatSnaps(docs.normalUsers);
-                        setPremiumFlatSnaps(docs.premiumUsers);
+                        setFlatSnaps(docs.newListings);
+                        setPremiumFlatSnaps(docs.newPremiumListings);
                         setFlatPage(prevState => prevState - 1);
                         listings.forEach(listing => {
                             flatListingsArray =  [...flatListingsArray, listing];

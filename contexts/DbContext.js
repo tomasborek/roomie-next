@@ -42,7 +42,7 @@ export function DbProvider(props) {
     }
 
 
-    const createQuery = ({type, page, parameters, listings, premiumListings, normalUsers, premiumUsers}) => {
+    const createListingQuery = ({type, page, parameters, listings, premiumListings, newListings, newPremiumListings}) => {
         const colRef = collection(db, "listings");
         if(type === "firstQuery"){
             if(page === "first"){
@@ -62,21 +62,52 @@ export function DbProvider(props) {
             }
         }else if(type === "secondQuery"){
             if(page === "first"){
-                return query(colRef, ...parameters, where("userInfo.premium", "==", false), orderBy("timeStamp", "desc"), limit(8 - premiumUsers.length));
+                return query(colRef, ...parameters, where("userInfo.premium", "==", false), orderBy("timeStamp", "desc"), limit(8 - newPremiumListings.length));
             }else if(page === "next"){
-                return query(colRef, ...parameters, where("userInfo.premium", "==", false), orderBy("timeStamp", "desc"), limit(8 - premiumUsers.length));
+                return query(colRef, ...parameters, where("userInfo.premium", "==", false), orderBy("timeStamp", "desc"), limit(8 - newPremiumListings.length));
             }else if(page === "prev"){
-                return query(colRef, ...parameters, where("userInfo.premium", "==", true), orderBy("timeStamp", "desc"), limitToLast(8 - normalUsers.length));
+                return query(colRef, ...parameters, where("userInfo.premium", "==", true), orderBy("timeStamp", "desc"), limitToLast(8 - newListings.length));
+            }
+        }
+    }
+
+    const createRequestQuery = ({type,requestType, page, uid, requests, premiumRequests, newRequests, newPremiumRequests}) => {
+        const colRef = collection(db, "users", uid, requestType);
+        if(requestType === "sentRequests"){
+            return query(colRef, orderBy("timeStamp", "desc", limit(10)));
+        }
+        if(type === "firstQuery"){
+            if(page === "first"){
+                return query(colRef, where("premium", "==", true), orderBy("timeStamp", "desc"), limit(10));
+            }else if(page === "next"){
+                if(!listings.length){
+                    return query(colRef, where("premium", "==", true), orderBy("timeStamp", "desc"), limit(10), startAfter(premiumRequests[premiumRequests.length - 1]));
+                }else if(listings.length){
+                    return query(colRef, where("premium", "==", false), orderBy("timeStamp", "desc"), limit(10), startAfter(requests[requests.length - 1]));
+                }
+            }else if(page === "prev"){
+                if(!premiumListings.length){
+                    return query(colRef, where("premium", "==", false), orderBy("timeStamp", "desc"), limitToLast(10), endBefore(requests[0]));
+                }else if(premiumListings.length){
+                    return query(colRef, where("premium", "==", true), orderBy("timeStamp", "desc"), limitToLast(10), endBefore(premiumRequests[0]));
+                }
+            }
+        }else if(type === "secondQuery"){
+            if(page === "first"){
+                return query(colRef, where("premium", "==", false), orderBy("timeStamp", "desc"), limit(10 - newPremiumRequests.length));
+            }else if(page === "next"){
+                return query(colRef, where("premium", "==", false), orderBy("timeStamp", "desc"), limit(10 - newPremiumRequests.length));
+            }else if(page === "prev"){
+                return query(colRef, where("premium", "==", true), orderBy("timeStamp", "desc"), limitToLast(10 - newRequests.length));
             }
         }
     }
 
     //Listings
     const getListings = (type, page, listings, premiumListings, filter) => {
-        console.log(premiumListings);
         let parameters = [where("type", "==", type), where("visible", "==", true), where("userInfo.emailVerified", "==", true), where("hiddenByUser", "==", false)];
-        let premiumUsers = [];
-        let normalUsers = [];
+        let newPremiumListings = [];
+        let newListings = [];
         let q1;
         let q2;
         const queryInfo = {
@@ -84,8 +115,8 @@ export function DbProvider(props) {
             parameters,
             listings,
             premiumListings,
-            normalUsers,
-            premiumUsers,
+            newListings,
+            newPremiumListings,
         }
         if(Object.keys(filter).length){
             if(type === "flatmate"){
@@ -290,48 +321,47 @@ export function DbProvider(props) {
             }
         }
 
-        q1 = createQuery({...queryInfo, type: "firstQuery"});
+        q1 = createListingQuery({...queryInfo, type: "firstQuery"});
+
         return new Promise((resolve, reject) => {
             getDocs(q1).then((docs) => {
                 if(page === "first"){
-                    premiumUsers = docs.docs;
+                    newPremiumListings = docs.docs;
                 }else if(page === "next"){
                     if(listings.length){
-                        normalUsers = docs.docs;
+                        newListings = docs.docs;
                     }else{
-                        premiumUsers = docs.docs;
+                        newPremiumListings = docs.docs;
                     }
                 }else if(page === "prev"){
                     if(premiumListings.length){
-                        premiumUsers = docs.docs;
+                        newPremiumListings = docs.docs;
                     }else{
-                        normalUsers = docs.docs;
+                        newListings = docs.docs;
                     }
                 }
                 
-           
-            
-                queryInfo.premiumUsers = premiumUsers;
-                queryInfo.normalUsers = normalUsers;
+                queryInfo.newPremiumListings = newPremiumListings;
+                queryInfo.newListings = newListings;
                 if(docs.docs.length === 8 || (page === "next" && listings.length) ||(page === "prev" && premiumListings.length)){
                     resolve({
-                        premiumUsers,
-                        normalUsers,
+                        newPremiumListings,
+                        newListings,
                     });
                     return;
                 }
 
-                q2 = createQuery({...queryInfo, type: "secondQuery"});
+                q2 = createListingQuery({...queryInfo, type: "secondQuery"});
                 return getDocs(q2);
             }).then((docs2) => {
                 if(page === "prev"){
-                    premiumUsers = docs2.docs;
+                    newPremiumListings = docs2.docs;
                 }else{ 
-                    normalUsers = docs2.docs;
+                    newListings = docs2.docs;
                 }
                 resolve({
-                    premiumUsers,
-                    normalUsers,
+                    newPremiumListings,
+                    newListings,
                 });
             }).catch((error) => {
                 reject(error);
@@ -351,20 +381,73 @@ export function DbProvider(props) {
 
     //Requests and friends
 
-    const getRequests = (type, uid, page, requests) => {
-        const colRef = collection(db, "users", uid, type);
-        if(page === "first"){
-            const q = query(colRef, orderBy("timeStamp", "desc"), limit(5));
-            return getDocs(q);
+    const getRequests = (type, uid, page, requests, premiumRequests) => {
+        let newPremiumRequests = [];
+        let newRequests = [];
+        let q1;
+        let q2;
+        const queryInfo = {
+            page,
+            requestType: type,
+            uid,
+            requests,
+            premiumRequests,
+            newRequests,
+            newPremiumRequests,
         }
-        if(page === "next"){
-            const q = query(colRef, orderBy("timeStamp", "desc"), limit(5), startAfter(requests[requests.length - 1]));
-            return getDocs(q);
-        }
-        if(page === "prev"){
-            const q = query(colRef, orderBy("timeStamp", "desc"), endBefore(requests[0]), limitToLast(5))
-            return getDocs(q);
-        }
+
+        q1 = createRequestQuery({...queryInfo, type: "firstQuery"});
+
+        return new Promise((resolve, reject) => {
+            getDocs(q1).then((docs) => {
+                if(type === "sentRequests"){
+                    newRequests = docs.docs;
+                }else{
+                    if(page === "first"){
+                        newPremiumRequests = docs.docs;
+                    }else if(page === "next"){
+                        if(requests.length){
+                            newRequests = docs.docs;
+                        }else{
+                            newPremiumRequests = docs.docs;
+                        }
+                    }else if(page === "prev"){
+                        if(premiumRequests.length){
+                            newPremiumRequests = docs.docs;
+                        }else{
+                            newRequests = docs.docs;
+                        }
+                    }
+
+                }
+                
+                queryInfo.newPremiumRequests = newPremiumRequests;
+                queryInfo.newRequests = newRequests;
+                if(docs.docs.length === 10 || (page === "next" && listings.length) ||(page === "prev" && premiumRequests.length) || type === "sentRequests"){
+                    resolve({
+                        newPremiumRequests,
+                        newRequests,
+                    });
+                    return;
+                }
+
+                q2 = createRequestQuery({...queryInfo, type: "secondQuery"});
+                return getDocs(q2);
+            }).then((docs2) => {
+                if(page === "prev"){
+                    newPremiumRequests = docs2.docs;
+                }else{ 
+                    newRequests = docs2.docs;
+                }
+                console.log("did both")
+                resolve({
+                    newPremiumRequests,
+                    newRequests,
+                });
+            }).catch((error) => {
+                reject(error);
+            })
+        })
     }
 
     //Notifications
