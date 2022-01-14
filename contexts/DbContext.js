@@ -454,7 +454,7 @@ export function DbProvider(props) {
 
     const getNotifications = (uid) => {
         const colRef = collection(db, "users", uid, "notifications");
-        const q = query(colRef, orderBy("timeStamp"), limit(9));
+        const q = query(colRef, orderBy("timeStamp", "desc"), limit(9));
         return getDocs(q);
     }
 
