@@ -17,6 +17,7 @@ exports.createRequest = functions.https.onCall((data, context) => {
     const senderListingId = sender.listing.id;
     const senderType = sender.mainInfo.type;
     const senderPfp = sender.mainInfo.pfp;
+    const senderPremium = sender.mainInfo.premium;
     const message = data.message;
     const senderInfo = {
       username: senderUsername,
@@ -25,6 +26,7 @@ exports.createRequest = functions.https.onCall((data, context) => {
       listingId: senderListingId,
       type: senderType,
       pfp: senderPfp,
+      premium: senderPremium,
       message: message,
       timeStamp: admin.firestore.FieldValue.serverTimestamp(),
     }
@@ -34,11 +36,13 @@ exports.createRequest = functions.https.onCall((data, context) => {
     const recieverUsername = reciever.username;
     const recieverAge = reciever.age;
     const recieverListingId = data.recieverListingId;
+    const recieverPremium = reciever.premium;
     const recieverPfp = reciever.images.pfp;
     const recieverInfo = {
       username: recieverUsername,
       age: recieverAge,
       listingId: recieverListingId,
+      premium: recieverPremium,
       pfp: recieverPfp,
       timeStamp: admin.firestore.FieldValue.serverTimestamp(),
     }
