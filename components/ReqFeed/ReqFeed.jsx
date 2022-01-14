@@ -19,10 +19,12 @@ const ReqFeed = ({type}) => {
     const [recievedRequests, setRecievedRequests] = useState(null);
     //Recieved requests snapshots (for pagination)
     const [recievedSnaps, setRecievedSnaps] = useState(null);
+    const [premiumRecievedSnaps, setPremiumRecievedSnaps] = useState(null);
     //Sent requests
     const [sentRequests, setSentRequests] = useState(null);
     //Sent requests snapshots (for pagination)
     const [sentSnaps, setSentSnaps] = useState(null);
+    const [premiumSentSnaps, setPremiumSentSnaps] = useState(null);
     //Page of pagination
     const [page, setPage] = useState(1);
     //Pagination loading???
@@ -30,61 +32,78 @@ const ReqFeed = ({type}) => {
 
     //Getting reqs initial
     useEffect(() => {
-        console.log("use");
         if(currentUser && type === "recieved"){
-            let recievedRequestsObject = {};
-            getRequests("recievedRequests", currentUser.uid, "first")
-            .then(docs =>{
-                console.log(docs.docs);
-                setRecievedSnaps(docs.docs);
-                docs.docs.forEach(req => {
-                    recievedRequestsObject = {...recievedRequestsObject, [req.id]: req.data()}
-                })
-                setRecievedRequests(recievedRequestsObject);
-            })
+           fetchRequests("recievedRequests", currentUser.uid, "first", null, null);
         }
-        if(currentUser && type === "sent" && !sentRequests){
-            let sentRequestsObject = {};
-            getRequests("sentRequests", currentUser.uid, "first")
-            .then(docs =>{
-                setSentSnaps(docs.docs);
-                docs.docs.forEach(req => {
-                    sentRequestsObject = {...sentRequestsObject, [req.id]: req.data()}
-                })
-                setSentRequests(sentRequestsObject);
-            })
-          
-            }
+        if(currentUser && type === "sent"){
+            fetchRequests("sentRequests", currentUser.uid, "first", null, null);
+        }
     }, [currentUser])
 
     //Get reqs on page
     const handlePagination = (page) => {
         if(type === "recieved"){
             if(page === "next"){
-                let recievedRequestsObject = {};
-                setPaginationDisabled(true);
-                getRequests("recievedRequests", currentUser.uid, "next", recievedSnaps)
+              fetchRequests("recievedRequests", currentUser.uid, page, recievedSnaps, premiumRecievedSnaps);
+            }
+            if(page === "prev"){
+                fetchRequests("recievedRequests", currentUser.uid, page, recievedSnaps, premiumRecievedSnaps);
+            }
+        }
+        if(type === "sent"){
+            if(page === "next"){
+              fetchRequests("sentRequests", currentUser.uid, page, sentSnaps, premiumSentSnaps);
+            }
+            if(page === "prev"){
+                fetchRequests("sentRequests", currentUser.uid, page, sentSnaps, premiumSentSnaps);
+            }
+        }
+        
+    }
+
+    const fetchRequests = (type, uid, page, snaps, premiumSnaps) => {
+       if(type === "recievedRequests"){
+           let recievedRequestsObject = {};
+           if(page === "first"){
+                getRequests(type, uid, page, null, null)
                 .then(docs => {
-                    if(docs.docs.length > 0){
+                    const requests = docs.newPremiumRequests.concat(docs.newRequests);
+                    setRecievedSnaps(docs.newRequests);
+                    setPremiumRecievedSnaps(docs.newPremiumRequests);
+                    //
+                    requests.forEach(req => {
+                        recievedRequestsObject = {...recievedRequestsObject, [req.id]: req.data()}
+                    })
+                    setRecievedRequests(recievedRequestsObject);
+                })
+           }
+           if(page === "next"){
+                setPaginationDisabled(true);
+                getRequests(type, uid, page, snaps, premiumSnaps)
+                .then(docs => {
+                    const requests = docs.newPremiumRequests.concat(docs.newRequests);
+                    if(listings.length > 0){
                         setPage(prevState => prevState + 1);
-                        setRecievedSnaps(docs.docs);
-                        docs.forEach(req => {
+                        setRecievedSnaps(docs.newRequests);
+                        setPremiumRecievedSnaps(docs.newPremiumRequests);
+                        requests.forEach(req => {
                             recievedRequestsObject = {...recievedRequestsObject, [req.id]: req.data()}
                         })
                         setRecievedRequests(recievedRequestsObject);
                     }
                     setPaginationDisabled(false);
                 })
-            }
-            if(page === "prev"){
-                let recievedRequestsObject = {};
+           }
+           if(page === "prev"){
                 setPaginationDisabled(true);
-                getRequests("recievedRequests", currentUser.uid, "prev", recievedSnaps)
+                getRequests(type, uid, page, snaps, premiumSnaps)
                 .then(docs => {
-                    if(docs.docs.length > 0){
+                    const requests = docs.newPremiumRequests.concat(docs.newRequests);
+                    if(requests.length > 0){
                         setPage(prevState => prevState - 1);
-                        setRecievedSnaps(docs.docs);
-                        docs.forEach(req => {
+                        setRecievedSnaps(docs.newRequests);
+                        setPremiumRecievedSnaps(docs.newPremiumRequests);
+                        requests.forEach(req => {
                             recievedRequestsObject = {...recievedRequestsObject, [req.id]: req.data()}
                         })
                         setRecievedRequests(recievedRequestsObject);
@@ -94,45 +113,60 @@ const ReqFeed = ({type}) => {
                     }
 
                 })
-            }
-        }
-        if(type === "sent"){
-            if(page === "next"){
+           }
+       }
+       if(type === "sentRequests") {
+           let sentRequestsObject = {};
+           if(page === "first"){
+                getRequests(type, uid, currentUser.uid, "first", null, null).then(docs =>{
+                    const requests = docs.newPremiumRequests.concat(docs.newRequests);
+                    setSentSnaps(docs.newRequests);
+                    setPremiumSentSnaps(docs.newPremiumRequests);
+                    requests.forEach(req => {
+                        sentRequestsObject = {...sentRequestsObject, [req.id]: req.data()}
+                    })
+                    setSentRequests(sentRequestsObject);
+                })
+           }
+           if(page === "next"){
                 setPaginationDisabled(true);
-                let sentRequestsObject = {};
-                getRequests("sentRequests", currentUser.uid, "next", sentSnaps)
+                getRequests(type, uid, page, snaps, premiumSnaps)
                 .then(docs => {
-                    if(docs.docs.length > 0){
-                        setPaginationDisabled(false);
+                    const requests = docs.newPremiumRequests.concat(docs.newRequests);
+                    if(requests.length > 0){
                         setPage(prevState => prevState + 1);
-                        setSentSnaps(docs.docs);
-                        docs.forEach(req => {
+                        setSentSnaps(docs.newRequests);
+                        setPremiumSentSnaps(docs.newPremiumRequests);
+                        requests.forEach(req => {
                             sentRequestsObject = {...sentRequestsObject, [req.id]: req.data()}
                         })
-                        setSentRequests(sentRequestsObject);
-                    }
-                    setPaginationDisabled(false);
-                })
-            }
-            if(page === "prev"){
-                setPaginationDisabled(true);
-                let sentRequestsObject = {};
-                getRequests("sentRequests", currentUser.uid, "prev", sentSnaps)
-                .then(docs => {
-                    if(docs.docs.length > 0){
+                        setSentRequests(recievedRequestsObject);
                         setPaginationDisabled(false);
+                    }else{
+                        setPaginationDisabled(false);
+                    }
+                })
+           }
+           if(page === "prev"){
+                setPaginationDisabled(true);
+                getRequests(type, uid, page, snaps, premiumSnaps)
+                .then(docs => {
+                    const requests = docs.newPremiumRequests.concat(docs.newRequests);
+                    if(requests.length > 0){
                         setPage(prevState => prevState - 1);
-                        setSentSnaps(docs.docs);
-                        docs.forEach(req => {
+                        setSentSnaps(docs.newRequests);
+                        setPremiumSentSnaps(docs.newPremiumRequests);
+                        requests.forEach(req => {
                             sentRequestsObject = {...sentRequestsObject, [req.id]: req.data()}
                         })
-                        setSentRequests(sentRequestsObject);
+                        setSentRequests(recievedRequestsObject);
+                        setPaginationDisabled(false);
+                    }else{
+                        setPaginationDisabled(false);
                     }
-                    setPaginationDisabled(false);
                 })
-            }
-        }
-        
+           }
+       }
     }
 
 
@@ -149,7 +183,7 @@ const ReqFeed = ({type}) => {
                         {Object.keys(recievedRequests).map((req, id) => (
                             <RecievedReq reqInfo={recievedRequests[req]} id={req} key={id}/>
                         ))}
-                        {(Object.keys(recievedRequests).length > 4 || page != 1) ?
+                        {(Object.keys(recievedRequests).length > 9 || page != 1) ?
                         <Pagination setPage={setPage} page={page} handlePagination={handlePagination} isDisabled={paginationDisabled}/>
                         :
                         ""
@@ -180,7 +214,7 @@ const ReqFeed = ({type}) => {
                                 <SentReq name={sentRequests[req].username} age={sentRequests[req].age} pfp={sentRequests[req].pfp} id={req} key={id} />
                             ))
                             }
-                            {(Object.keys(sentRequests).length > 4 || page != 1) ?
+                            {(Object.keys(sentRequests).length > 9 || page != 1) ?
                             <Pagination setPage={setPage} page={page} handlePagination={handlePagination} isDisabled={paginationDisabled}/>
                             :
                             ""
