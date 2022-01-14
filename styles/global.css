@@ -4000,6 +4000,10 @@ textarea {
   border-color: #309EAB;
 }
 
+.sent-req.premium {
+  border-color: #E14949;
+}
+
 .sent-req .req-pfp-container {
   padding-right: 1rem;
 }
@@ -4019,6 +4023,10 @@ textarea {
 
 .sent-req .req-content .content-user {
   font-weight: bold;
+}
+
+.sent-req .req-content .content-user i {
+  color: #309EAB;
 }
 
 .sent-req .req-content .content-status {
