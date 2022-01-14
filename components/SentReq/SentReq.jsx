@@ -5,7 +5,7 @@ import {useRouter} from "next/router";
 import {useDb} from "../../contexts/DbContext";
 import {useLoading} from "../../contexts/LoadingContext";
 
-const SentReq = ({name, age, pfp, id}) => {
+const SentReq = ({name, age, pfp, premium, id}) => {
     const router = useRouter();
     const {getUser} = useDb();
     const [loading, setLoading] = useLoading();
@@ -19,7 +19,7 @@ const SentReq = ({name, age, pfp, id}) => {
         })
     }
     return (
-        <div onClick={handleShowListing} className="sent-req">
+        <div onClick={handleShowListing} className={`sent-req ${premium && "premium"}`}>
             <div className="req-pfp-container">
                 {pfp ?
                     <img src={pfp} className='container-pfp' />
@@ -28,7 +28,7 @@ const SentReq = ({name, age, pfp, id}) => {
                 }
             </div>
             <div className="req-content">
-                <div className="content-user">{name}, {age}</div>
+                <div className="content-user">{name}, {age} {premium && <i className="fas fa-circle-check"></i>}</div>
                 <div className="content-status">Žádost čeká na vyřízení.</div>
             </div>
             <div className="req-status">

@@ -10,6 +10,9 @@
     &:hover{
         border-color: $mainColor;
     }
+    &.premium{
+        border-color: $accent;
+    }
     .req-pfp-container{
         padding-right: 1rem;
         .container-pfp{
@@ -23,6 +26,9 @@
         flex: 1;
         .content-user{
             font-weight: bold;
+            i{
+                color: $mainColor;
+            }
         }
         .content-status{
             font-size: 14px;
