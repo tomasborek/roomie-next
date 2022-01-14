@@ -22,7 +22,7 @@ const RecievedReq = ({reqInfo, id}) => {
                     <i className={`fas fa-${reqResolved.type && "check"} ${reqResolved.type === "accepted" ? "accepted" : "rejected"}`}></i>
                 </div>
                 :
-                <div  className="rec-req">
+                <div  className={`rec-req ${reqInfo.premium && "premium"}`}>
                     <div onClick={() => setFullReq(true)} className="req-pfp-container">
                         {reqInfo.pfp ?
                         <img src={reqInfo.pfp} className='container-pfp' />
@@ -31,7 +31,7 @@ const RecievedReq = ({reqInfo, id}) => {
                         }
                     </div>
                     <div onClick={() =>setFullReq(true)} className="req-content">
-                        <div className="content-name">{reqInfo.username}, {reqInfo.age}</div>
+                        <div className="content-name">{reqInfo.username}, {reqInfo.age} {reqInfo.premium && <i className="fas fa-circle-check"></i>}</div>
                         <div className="content-msg">Vás žádá o kontaktní údaje.</div>
                     </div>
                     <div className="req-status">

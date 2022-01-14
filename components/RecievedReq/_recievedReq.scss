@@ -11,6 +11,9 @@
     &:hover{
         border-color: $mainColor;
     }
+    &.premium{
+        border-color: $accent;
+    }
     .req-pfp-container{
         padding-right: 1rem;
         height: 80px;
@@ -26,6 +29,9 @@
         flex: 1;
         .content-name{
             font-weight: bold;
+            i{
+                color: $mainColor;
+            }
         }
         .content-msg{
             font-size: 14px;

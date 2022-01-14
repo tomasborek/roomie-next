@@ -60,7 +60,7 @@ const RecievedReqFull = ({reqInfo, id, setOpen, setRequestLoading, setReqResolve
             createFriend(JSON.stringify(friendInfo));
         }
     return (
-        <div className="recieved-req-full">
+        <div className={`recieved-req-full ${reqInfo.premium && "premium"}`}>
             <i onClick={() => setOpen(false)} className="fas fa-times full-close-icon"></i>
             <div className="full-pfp-container">
                 {reqInfo.pfp ?
@@ -69,7 +69,7 @@ const RecievedReqFull = ({reqInfo, id, setOpen, setRequestLoading, setReqResolve
                  <img src="/img/pfps/radek-pfp.png" className="container-pfp"></img>
                 }
             </div>
-            <div className="full-name">{reqInfo.username}</div>
+            <div className="full-name">{reqInfo.username} {reqInfo.premium && <i className="fas fa-circle-check"></i>}</div>
             <div className="full-description">{reqInfo.gender === "male" ? "Muž" : reqInfo.gender === "female" ? "Žena" : reqInfo.gender === "other" ? "Jiné" : ""}, {reqInfo.age}</div>
             <div className="full-message">{reqInfo.message}</div>
             <div className="full-actions">
