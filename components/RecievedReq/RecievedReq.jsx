@@ -22,8 +22,8 @@ const RecievedReq = ({reqInfo, id}) => {
                     <i className={`fas fa-${reqResolved.type && "check"} ${reqResolved.type === "accepted" ? "accepted" : "rejected"}`}></i>
                 </div>
                 :
-                <div  className={`rec-req ${reqInfo.premium && "premium"}`}>
-                    <div onClick={() => setFullReq(true)} className="req-pfp-container">
+                <div onClick={() => setFullReq(true)}  className={`rec-req ${reqInfo.premium && "premium"}`}>
+                    <div  className="req-pfp-container">
                         {reqInfo.pfp ?
                         <img src={reqInfo.pfp} className='container-pfp' />
                         :
