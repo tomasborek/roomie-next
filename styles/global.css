@@ -1592,6 +1592,10 @@ textarea {
   border: 1px solid #B8B8B8;
 }
 
+.FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-profile-info.premium {
+  border-color: #E14949;
+}
+
 .FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-profile-info .profile-info-pfp-container {
   position: relative;
   width: 75px;

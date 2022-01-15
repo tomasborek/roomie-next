@@ -850,7 +850,7 @@ const Listing = ({type, ssrProps}) => {
                                             </div>
                                         }
                                     <div className="body-opening-boxes">
-                                        <div className="boxes-profile-info">
+                                        <div className={`boxes-profile-info ${listingPremium && "premium"}`}>
                                             <div className="profile-info-pfp-container">
                                                 {editListing && 
                                                     <div onClick={() => setGalleryInput({

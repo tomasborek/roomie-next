@@ -322,6 +322,10 @@
         padding: 0.5rem 2em;
         border: 1px solid $mainGray;
 
+        &.premium{
+            border-color: $accent;
+        }
+
         .profile-info-pfp-container{
             position: relative;
                 width: 75px;
