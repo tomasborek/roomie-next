@@ -36,6 +36,16 @@ exports.addImgs = functions.storage.bucket().object().onFinalize((object) => {
             "userInfo.images.pfp": url,
           });
         }).then((response) => {
+          return usersRef.doc(uid).collection("friends").get();
+        }).then((friends) => {
+          return Promise.all(
+            friends.docs.map((friend) => {
+              return usersRef.doc(friend.id).collection("friends").doc(uid).update({
+                pfp: url,
+              })
+            })
+          );
+        }).then((response) => {
           return usersRef.doc(uid).collection("recievedRequests").get();
         }).then((recievedRequests) => {
           return Promise.all(
@@ -121,6 +131,8 @@ exports.cleanImgs = functions.storage.bucket().object().onDelete((object) => {
   const db = admin.firestore();
   // File path is users/{uid}/{imageType}/{imageName}.png
   const filePath = object.name;
+  const imageType = filePath.split("/")[2];
+  if(imageType != "pfps") return;
   /* We check x because if the
     image is resized it includes {size}x{size} in it's name*/
     if (!filePath.includes("500x500")) {
@@ -130,8 +142,19 @@ exports.cleanImgs = functions.storage.bucket().object().onDelete((object) => {
   const usersRef = db.collection("users");
   const recievedSnaps = usersRef.doc(uid).collection("recievedRequests");
   const sentSnaps = usersRef.doc(uid).collection("sentRequests");
+  const friendsSnaps = usersRef.doc(uid).collection("friends");
 
-  return recievedSnaps.get().then((recievedRequests) => {
+  return friendsSnaps.get().then((friends) => {
+      return Promise.all(
+        friends.docs.map((friend) => {
+          return usersRef.doc(friend.id).collection("friends").doc(uid).update({
+            pfp: "",
+          })
+        })
+      );
+    }).then((response) => {
+      return recievedSnaps.get()
+    }).then((recievedRequests) => {
     return Promise.all(
       recievedRequests.docs.map((request) => {
         return usersRef.doc(request.id).collection("sentRequests").doc(uid).update({
