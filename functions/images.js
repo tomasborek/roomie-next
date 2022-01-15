@@ -22,17 +22,39 @@ exports.addImgs = functions.storage.bucket().object().onFinalize((object) => {
     const uid = filePath.split("/")[1];
     const url = `https://storage.googleapis.com/${object.bucket}/${filePath}`;
     const db = admin.firestore();
+    const usersRef = db.collection("users");
+    const listingsRef = db.collection("listings");
 
     if (imageType == "pfps") {
         console.log("Writing the pfp's url into firestore...");
-        return db.collection("users").doc(uid).update({
+        return usersRef.doc(uid).update({
           "mainInfo.pfp": url,
         }).then((response) => {
-          return db.collection("listings").where("userInfo.uid", "==", uid).get();
+          return listingsRef.where("userInfo.uid", "==", uid).get();
         }).then((docs) => {
-          return db.collection("listings").doc(docs.docs[0].id).update({
+          return listingsRef.doc(docs.docs[0].id).update({
             "userInfo.images.pfp": url,
           });
+        }).then((response) => {
+          return usersRef.doc(uid).collection("recievedRequests").get();
+        }).then((recievedRequests) => {
+          return Promise.all(
+            recievedRequests.docs.map((request) => {
+              return usersRef.doc(request.id).collection("sentRequests").doc(uid).update({
+                pfp: url,
+              })
+            })
+          );
+        }).then((response) => {
+          return usersRef.doc(uid).collection("sentRequests").get();
+        }).then((sentRequests) => {
+          return Promise.all(
+            sentRequests.docs.map((request) => {
+              return usersRef.doc(request.id).collection("recievedRequests").doc(uid).update({
+                pfp: url,
+              })
+            })
+          );
         })
     } else if (imageType == "listingImgs") {
         console.log("Writing the image's url into firestore...");
@@ -94,3 +116,38 @@ exports.deleteImgs = functions.https.onCall((data, context) => {
         })
     }
 });
+
+exports.cleanImgs = functions.storage.bucket().object().onDelete((object) => {
+  const db = admin.firestore();
+  // File path is users/{uid}/{imageType}/{imageName}.png
+  const filePath = object.name;
+  /* We check x because if the
+    image is resized it includes {size}x{size} in it's name*/
+    if (!filePath.includes("500x500")) {
+      return console.log("The image is not resized, ignoring.");
+    }
+  const uid = filePath.split("/")[1];
+  const usersRef = db.collection("users");
+  const recievedSnaps = usersRef.doc(uid).collection("recievedRequests");
+  const sentSnaps = usersRef.doc(uid).collection("sentRequests");
+
+  return recievedSnaps.get().then((recievedRequests) => {
+    return Promise.all(
+      recievedRequests.docs.map((request) => {
+        return usersRef.doc(request.id).collection("sentRequests").doc(uid).update({
+          pfp: "",
+        });
+      })
+    );
+  }).then((response) => {
+    return sentSnaps.get();
+  }).then((sentRequests) => {
+    return Promise.all(
+        sentRequests.docs.map((request) => {
+          return usersRef.doc(request.id).collection("recievedRequests").doc(uid).update({
+            pfp: "",
+          })
+        })
+      );
+  })
+})
