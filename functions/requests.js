@@ -138,6 +138,7 @@ exports.createFriend = functions.https.onCall((data, context) => {
         gender: sender.gender,
         originalSender: senderUid,
         pfp: sender.pfp,
+        premium: sender.premium,
         listingId: senderListing,
         timeStamp: admin.firestore.FieldValue.serverTimestamp(),
       }).then((response) => {
@@ -149,6 +150,7 @@ exports.createFriend = functions.https.onCall((data, context) => {
           gender: reciever.mainInfo.gender,
           originalSender: senderUid,
           pfp: reciever.mainInfo.pfp,
+          premium: reciever.mainInfo.premium,
           listingId: recieverListing,
           timeStamp: admin.firestore.FieldValue.serverTimestamp(),
         });

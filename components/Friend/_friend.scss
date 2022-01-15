@@ -9,6 +9,9 @@
     &:hover{
         border-color: $mainColor;
     }
+    &.premium{
+        border-color: $accent;
+    }
     .friend-pfp-container{
         display: flex;
         justify-content: center;
@@ -33,6 +36,9 @@
             justify-content: center;
             .user-name{
                 font-weight: bold;
+                i{
+                    color: $mainColor;
+                }
             }
             .user-description{
                 font-size: 12px;

@@ -4147,6 +4147,10 @@ textarea {
   border-color: #309EAB;
 }
 
+.friend.premium {
+  border-color: #E14949;
+}
+
 .friend .friend-pfp-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4199,6 +4203,10 @@ textarea {
 
 .friend .friend-content .content-user .user-name {
   font-weight: bold;
+}
+
+.friend .friend-content .content-user .user-name i {
+  color: #309EAB;
 }
 
 .friend .friend-content .content-user .user-description {

@@ -93,7 +93,7 @@ const Friends = () => {
                             {Object.keys(friends).length > 0 ?
                                 <div className="content-list">
                                 {Object.keys(friends).map((friend, id) => (
-                                    <Friend key={id} info={friends[friend]}>{friends[friend].username}</Friend>
+                                    <Friend key={id} info={friends[friend]}>{friends[friend].username} {friends[friend].premium && <i className="fas fa-circle-check"></i>}</Friend>
                                 ))}
                                 </div>
                             :
