@@ -73,6 +73,8 @@ const Listing = ({type, ssrProps}) => {
     const [listingFlatBoxes, setListingFlatBoxes] = useState(type === "flat" ? JSON.parse(ssrProps.listingFlatBoxes) : null);
     const [listingFlatTags, setListingFlatTags] = useState(type === "flatmate" ? JSON.parse(ssrProps.listingFlatTags) : null);
     const [listingPremium, setListingPremium] = useState(ssrProps.listingPremium);
+    const [listingFans, setListingFans] = useState(ssrProps.listingFans ? ssrProps.listingFans : []);
+    const [listingLiked, setListingLiked] = useState(false);
     //Edit mode
     const [editListing, setEditListing] = useState(false);
     const [addedListingImgs, setAddedListingImgs] = useState(["", "", "", "", "", ""]);
@@ -109,6 +111,12 @@ const Listing = ({type, ssrProps}) => {
     const [personBio, setPersonBio] = useState(null);
     const [requestMessage, setRequestMessage] = useState("");
     const [reportMessage, setReportMessage] = useState("");
+    //Callable functions 
+    const updateListing = callable("userUpdates-updateListing");
+    const createRequest = callable("requests-createRequest");
+    const deleteImgs = callable("images-deleteImgs");
+    const likeListing = callable("userUpdates-likeListing");
+const unlikeListing = callable("userUpdates-unlikeListing");
         
     
     useEffect(() => {
@@ -198,6 +206,14 @@ const Listing = ({type, ssrProps}) => {
         }
     }, [editListing])
 
+    useEffect(() => {
+        if(currentUser && listingFans.includes(currentUser.uid)){
+            setListingLiked(true);
+        }else{
+            setListingLiked(false);
+        }
+    }, [listingFans, currentUser])
+
     const reloadProps = () => {
         setListingName(ssrProps.listingName);
         setListingUsername(ssrProps.listingUsername);
@@ -211,6 +227,7 @@ const Listing = ({type, ssrProps}) => {
         setListingFlatBoxes(type === "flat" ? JSON.parse(ssrProps.listingFlatBoxes) : null);
         setListingFlatTags(type === "flatmate" ? JSON.parse(ssrProps.listingFlatTags): null);
         setListingPremium(ssrProps.listingPremium);
+        setListingFans(ssrProps.listingFans);
     }
 
     //Functions
@@ -224,7 +241,6 @@ const Listing = ({type, ssrProps}) => {
     //Handles save in the edit
     const handleSave = () => {
         setLoading(true);
-        const updateListing = callable("userUpdates-updateListing");
         if(!stayTime || stayTime == ""){
             snackBar("Prosíme vyplňte všechny důležité údaje.", "error");
             setLoading(false);
@@ -335,7 +351,6 @@ const Listing = ({type, ssrProps}) => {
         let reciever = listingInfo;
         let sender;
         //Callable functions
-        const createRequest = callable("requests-createRequest");
         getUser(currentUser.uid)
         .then(user =>{
             const requestInfo = {
@@ -366,7 +381,6 @@ const Listing = ({type, ssrProps}) => {
     }
 
     const handleImgDelete = (type) => {
-        const deleteImgs = callable("images-deleteImgs");
         if(type === "pfp"){
             if(addedPfp){
                 setAddedPfp(null);
@@ -437,6 +451,27 @@ const Listing = ({type, ssrProps}) => {
         }).catch(error => {
             //
         })
+    }
+
+    const handleLike = () => {
+        if(!currentUser){
+            snackBar("Pro přidání inzerátů do oblíbených se nejdříve přihlašte.", "error");
+            return;
+        }
+        if(listingLiked){
+            setListingLiked(false);
+            unlikeListing(JSON.stringify({
+                fanUid: currentUser.uid,
+                listingId,
+            }));
+        }else{
+            setListingLiked(true);
+            likeListing(JSON.stringify({
+                fanUid: currentUser.uid,
+                userInfo: listingInfo.userInfo,
+                listingId,
+            }))
+        }
     }
 
     if(type === "flatmate"){
@@ -561,7 +596,10 @@ const Listing = ({type, ssrProps}) => {
                                             {(currentUser && listingInfo) && ((currentUser.uid == listingInfo.userInfo.uid) && (listingInfo.visible)) && 
                                                 <button onClick={() => setEditListing(prevState => !prevState)}className="main-edit-profile">{editListing ? "Zpět" : "Upravit inzerát"}</button>
                                             }
-                                            <i onClick={() => setMoreInfoOpen(prevState => !prevState)} className="main-more fas fa-ellipsis-h"></i>
+                                            <div className="main-actions">
+                                                <i onClick={() => handleLike()} className={`fa${listingLiked ? "s" : "r"} fa-heart main-like`}></i>
+                                                <i onClick={() => setMoreInfoOpen(prevState => !prevState)} className="main-more fas fa-ellipsis-h"></i>
+                                            </div>
                                             <ul className={`main-more-list ${moreInfoOpen && "active"}`}>
                                                 <li onClick={() => setReportDialog(true)}>Nahlásit uživatele</li>
                                             </ul>
@@ -795,7 +833,10 @@ const Listing = ({type, ssrProps}) => {
                                         {((currentUser && currentUser.uid == listingInfo.userInfo.uid) && (listingInfo && listingInfo.visible)) && 
                                             <button onClick={() => setEditListing(prevState => !prevState)} className="main-edit-profile">{editListing ? "Zpět" : "Upravit inzerát"}</button>
                                         }  
-                                            <i onClick={() => setMoreInfoOpen(prevState => !prevState)} className="main-more fas fa-ellipsis-h"></i>
+                                             <div className="main-actions">
+                                                <i onClick={() => handleLike()} className={`fa${listingLiked ? "s" : "r"} fa-heart main-like`}></i>
+                                                <i onClick={() => setMoreInfoOpen(prevState => !prevState)} className="main-more fas fa-ellipsis-h"></i>
+                                            </div>
                                             <ul className={`main-more-list ${moreInfoOpen && "active"}`}>
                                                 <li onClick={() => setReportDialog(true)}>Nahlásit uživatele</li>
                                             </ul>

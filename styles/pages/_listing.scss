@@ -204,13 +204,16 @@
                 font-size: 12px;
                 padding: 0.25rem 0.5rem;
             }
-    
-            .main-more{
+
+            .main-actions{
                 grid-column: 3/4;
                 grid-row: 1/2;
                 justify-self: flex-end;
                 align-self: center;
+                display: flex;
+                align-items: center;
             }
+    
     
             .main-description{
                 grid-column: 1/4;
@@ -230,8 +233,14 @@
 }
 
 .Listing .listing-content .content-header .header-info .info-main{
-    .main-more{
-        cursor: pointer;
+    .main-actions{
+        i{
+            cursor: pointer;
+            &.fa-heart{
+                margin-right: 1rem;
+                font-size: 24px;
+            }
+        }
     }
     .main-more-list{
         height: 0;
