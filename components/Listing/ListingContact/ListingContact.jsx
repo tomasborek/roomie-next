@@ -3,14 +3,16 @@ import React, {useEffect, useState} from 'react'
 import {useRouter} from "next/router";
 //Contexts
 import { useAuth } from '../../../contexts/AuthContext'
+import { useSnackBar } from '../../../contexts/SnackBarContext';
 
 //COmponents
 //MUI
 import { CircularProgress } from '@mui/material';
 
 const ListingContact = ({listingInfo, editListing, state}) => {
-    const {currentUser} = useAuth();
+    const {currentUser, currentUserInfo} = useAuth();
     const {setReqDialogOpen, contactLoading} = state;
+    const {snackBar} = useSnackBar();
     const router = useRouter();
     //State
     const [isFriend, setIsFriend] = useState(false);
@@ -46,6 +48,16 @@ const ListingContact = ({listingInfo, editListing, state}) => {
     useEffect(() => {
         console.log(contactLoading);
     }, [])
+
+    const handleRequestClick = () => {
+        if(currentUserInfo){
+            if(currentUserInfo.emailVerified){
+                setReqDialogOpen(true);
+            }else{
+                snackBar("Prosím, ověřte svůj e-mail.", "error");
+            }
+        }
+    }
     return (
     <>
         {!contactLoading ?
@@ -105,7 +117,7 @@ const ListingContact = ({listingInfo, editListing, state}) => {
                             <>
                                 {!currentUser ? <button className="main-btn contact-button" onClick={() => router.push("/login")}>Poslat žádost</button> :
                                 (isRequesting) ? <button className="contact-button main-btn" onClick={() => router.push("/requests/recieved")}>Zobrazit žádosti</button> :
-                                (currentUser) ? <button className="main-btn contact-button" onClick={() => setReqDialogOpen(true)}>Poslat žádost</button> :
+                                (currentUser) ? <button className="main-btn contact-button" onClick={handleRequestClick}>Poslat žádost</button> :
                                 ""
                                 }
                             </>
