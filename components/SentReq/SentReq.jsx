@@ -5,18 +5,13 @@ import {useRouter} from "next/router";
 import {useDb} from "../../contexts/DbContext";
 import {useLoading} from "../../contexts/LoadingContext";
 
-const SentReq = ({name, age, pfp, premium, id}) => {
+const SentReq = ({name, age, pfp, premium, listingId, type, id}) => {
     const router = useRouter();
     const {getUser} = useDb();
     const [loading, setLoading] = useLoading();
     //Functions
     const handleShowListing = () => {
-        setLoading(true)
-        getUser(id)
-        .then(user => {
-            router.push(`/${user.data().mainInfo.type === "flatmate" ? "flatmate" : "flat"}/${user.data().listing.id}`);
-            setLoading(false);
-        })
+        router.push(`/${type}/${listingId}`);
     }
     return (
         <div onClick={handleShowListing} className={`sent-req ${premium && "premium"}`}>

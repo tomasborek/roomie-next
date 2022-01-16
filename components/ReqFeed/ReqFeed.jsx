@@ -211,7 +211,14 @@ const ReqFeed = ({type}) => {
                          <div className="reqs-feed-sent">
                             <h3 className="sent-heading">Odeslané žádosti</h3>
                             {Object.keys(sentRequests).map((req, id) => (
-                                <SentReq name={sentRequests[req].username} age={sentRequests[req].age} pfp={sentRequests[req].pfp} premium={sentRequests[req].premium} id={req} key={id} />
+                                <SentReq 
+                                    name={sentRequests[req].username} 
+                                    age={sentRequests[req].age} 
+                                    pfp={sentRequests[req].pfp} 
+                                    premium={sentRequests[req].premium} 
+                                    listingId={sentRequests[req].listingId} 
+                                    type={sentRequests[req].type}
+                                    id={req} key={id} />
                             ))
                             }
                             {(Object.keys(sentRequests).length > 9 || page != 1) ?
