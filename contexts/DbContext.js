@@ -476,6 +476,22 @@ export function DbProvider(props) {
         }
     }
 
+    const getLiked = (uid, page, liked) => {
+        const colRef = collection(db, "users", uid, "likedListings");
+        if(page === "first"){
+            const q = query(colRef, orderBy("timeStamp", "desc"), limit(10));
+            return getDocs(q);
+        }
+        if(page === "next"){
+            const q = query(colRef, orderBy("timeStamp", "desc"), limit(10), startAfter(liked[liked.length - 1]));
+            return getDocs(q);
+        }
+        if(page === "prev"){
+            const q = query(colRef, orderBy("timeStamp", "desc"), endBefore(liked[0]), limitToLast(10));
+            return getDocs(q);
+        }
+    }
+
    
     
 
@@ -488,7 +504,8 @@ export function DbProvider(props) {
         getListingByUser,
         getRequests,
         getNotifications,
-        getFriends
+        getFriends,
+        getLiked
     }
     return (
         <DbContext.Provider value={value}>
