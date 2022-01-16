@@ -1,0 +1,59 @@
+.page-feed-layout{
+    .layout-banner{
+        @include gradientBg;
+        height: 200px;
+        width: 100%;
+    }
+
+    .layout-content{
+        border-radius:5px ;
+        padding: 2rem 1rem;
+        position: relative;
+        bottom: 115px;
+        background-color: white;
+        min-height: calc(100vh - 236px - 72px - 100px);
+
+        .content-heading{
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .content-nav{
+            display: flex;
+            width: 100%;
+            margin-bottom: 3rem;
+            .nav-link{
+                cursor: pointer;
+                flex: 1;
+                text-align: center;
+                padding: 0.5rem 0;
+                border-bottom: 2px $darkWhite solid;
+                &.active{
+                    border-bottom: 2px $mainColor solid;
+                }
+            }
+        }
+
+        .content-feed{
+            .feed-empty{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                img{
+                    width: 184px;
+                    height: 208px;
+                }
+                .empty-description{
+                    margin-top: 1rem;
+                    color: $mainGray;
+                    font-size: 14px;
+                }
+            }
+
+            .feed-loading{
+                display: flex;
+                justify-content: center;
+            }
+        }
+    }
+}
