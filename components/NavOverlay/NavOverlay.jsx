@@ -13,20 +13,13 @@ import { useLoading } from '../../contexts/LoadingContext';
 const NavOverlay = () => {
     //Variable
     const  router = useRouter();
-    const {currentUser, logOut} = useAuth();
+    const {currentUser, currentUserInfo, logOut} = useAuth();
     const [navOverlay, setNavOverlay] = useNavOverlay();
     const {getUser} = useDb();
     const [loading, setLoading] = useLoading();
     //Functions
     const handleMyListing = () => {
-        setLoading(true);
-        getUser(currentUser.uid)
-        .then(doc =>{
-            router.push(`/${doc.data().mainInfo.type === "offerer" ? "flat" : doc.data().mainInfo.type === "flatmate" ? "flatmate" : ""}/${doc.data().listing.id}`);
-            setLoading(false);
-        }).catch(error => {
-            setLoading(false);
-        })
+        router.push(`/${currentUserInfo.mainInfo.type === "offerer" ? "flat" : currentUserInfo.mainInfo.type === "flatmate" ? "flatmate" : ""}/${currentUserInfo.listing.id}`);
     }
 
     const handleLogOut = () => {
@@ -103,7 +96,10 @@ const NavOverlay = () => {
                         setNavOverlay(false);
                         router.push("/requests/recieved");  
                     }}  className="nav-logged-item"><i className="fas fa-envelope item-icon"></i> Žádosti</li>
-                    <li className="nav-logged-item"><i className="fas fa-heart"></i> Oblíbené</li>
+                    <li onClick={() => {
+                        setNavOverlay(false);
+                        router.push("/liked");
+                    }} className="nav-logged-item"><i className="fas fa-heart"></i> Oblíbené</li>
                     <li onClick={() => {
                        handleLogOut();
                     }} className="nav-logged-item"><i className="item-icon fas fa-sign-out-alt"></i>Odhlásit</li>
