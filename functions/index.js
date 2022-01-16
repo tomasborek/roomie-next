@@ -4,7 +4,7 @@ admin.initializeApp();
 
 exports.onCreatedUser = require("./onCreatedUser");
 exports.onDeletedUser = require("./onDeletedUser");
-exports.userUpdates = require("./userUpdate");
+exports.userUpdates = require("./userUpdates");
 exports.requests = require("./requests");
 exports.images = require("./images");
 exports.emailVerification = require("./emailVerification");

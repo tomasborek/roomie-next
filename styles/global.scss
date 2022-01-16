@@ -12,7 +12,6 @@
 @import "./pages/register";
 @import "./pages/login";
 @import "./pages/editProfile";
-@import "./pages/requests";
 @import "./pages/premium";
 @import "./pages/listing";
 @import "./pages/friends";
@@ -60,6 +59,8 @@
 @import "../components/CustomDialog/customDialog";
 @import "../components/ExplorePremium/explorePremium";
 @import "../components/UnderConstruction/underConstruction";
+@import "../components/PageFeedLayout/pageFeedLayout";
+@import "../components/LikedListing/likedListing";
 
 //Listing
 @import "../components/Listing/ListingContact/listingContact";

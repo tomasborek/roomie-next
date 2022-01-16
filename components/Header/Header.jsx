@@ -94,7 +94,7 @@ const Header = ({variant}) => {
                     <li onClick={handleMyListing}  className="list-item"><i className="fas fa-home item-icon"></i> Můj inzerát</li>
                     <li onClick={() => router.push("/friends")}  className="list-item"><i className="fas fa-users item-icon"></i> Přátelé</li>
                     <li onClick={() => router.push("/requests/recieved")}  className="list-item"><i className="fas fa-envelope item-icon"></i> Žádosti</li>
-                    <li> <i className="fas fa-heart"></i> Oblíbené</li>
+                    <li onClick={() => router.push("/liked")}><i className="fas fa-heart"></i> Oblíbené</li>
                     <li onClick={() => handleLogOut()} className="list-item" style={{color: "red"}}><i className="fas fa-sign-out-alt item-icon"></i> Odhlásit</li>
                 </ul>
                </Dropdown>

@@ -7,6 +7,9 @@ import { useAuth } from '../contexts/AuthContext';
 import { useDb } from '../contexts/DbContext';
 import {useFunctions} from "../contexts/FunctionsContext";
 
+//Layout
+import PageFeedLayout from '../components/PageFeedLayout/PageFeedLayout';
+
 //Components
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
@@ -82,40 +85,35 @@ const Friends = () => {
             <Head>
                 <title>Přítelé | Roomie</title>
             </Head>
-            <div className="Friends">
-                <Header variant="white"/>
-                <div className="friends-banner"></div>
-                <div className="container">
-                    <div className="friends-content">
-                        <h2 className="content-heading">Přátelé</h2>
-                        {friends ?
+           
+               <PageFeedLayout heading={"Přátelé"}>
+                   <div className="content-feed">
+                   {friends ?
                         <>
                             {Object.keys(friends).length > 0 ?
-                                <div className="content-list">
+                                <>
                                 {Object.keys(friends).map((friend, id) => (
                                     <Friend key={id} info={friends[friend]}>{friends[friend].username} {friends[friend].premium && <i className="fas fa-circle-check"></i>}</Friend>
                                 ))}
+                                </>
+                                :
+                                <div className="feed-empty">
+                                    <img src="/img/bad-results/notfound.png" />
+                                    <p className="empty-description">Dosud nemáte žádné přátele.</p>
                                 </div>
-                            :
-                            <div className="content-empty">
-                                <img src="/img/bad-results/notfound.png" />
-                                <p className="empty-description">Dosud nemáte žádné přátele.</p>
-                            </div>
-                            
                             }
                             {(friends > 9 || page != 1) && <Pagination handlePagination={handlePagination} isDisabled={isPaginationDisabled} page={page} setPage={setPage}/>}
                         </>
                         
                     :
-                    <div className="content-loading">
+                    <div className="feed-loading">
                         <CircularProgress/>
                     </div>
                         }
-                        
-                    </div>
-                </div>
-                <Footer />
-            </div>
+                   </div>
+               </PageFeedLayout>
+            <Footer />
+        
         </>
     )
 }
