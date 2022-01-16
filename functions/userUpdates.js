@@ -31,11 +31,12 @@ exports.likeListing = functions.https.onCall((data, context) => {
   const db = admin.firestore();
   const fanUid = data.fanUid;
   const listingId = data.listingId;
-  const userInfo = data.userInfo;
+  const listingInfo = data.listingInfo;
+  listingInfo.timeStamp = admin.firestore.FieldValue.serverTimestamp();
   return db.collection("listings").doc(listingId).update({
     likedBy: admin.firestore.FieldValue.arrayUnion(fanUid),
   }).then((response) => {
-    return db.collection("users").doc(fanUid).collection("likedListings").doc(listingId).set(userInfo);
+    return db.collection("users").doc(fanUid).collection("likedListings").doc(listingId).set(listingInfo);
   })
 })
 

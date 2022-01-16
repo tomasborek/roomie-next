@@ -207,7 +207,7 @@ const unlikeListing = callable("userUpdates-unlikeListing");
     }, [editListing])
 
     useEffect(() => {
-        if(currentUser && listingFans.includes(currentUser.uid)){
+        if(currentUser && listingFans && listingFans.includes(currentUser.uid)){
             setListingLiked(true);
         }else{
             setListingLiked(false);
@@ -468,7 +468,7 @@ const unlikeListing = callable("userUpdates-unlikeListing");
             setListingLiked(true);
             likeListing(JSON.stringify({
                 fanUid: currentUser.uid,
-                userInfo: listingInfo.userInfo,
+                listingInfo,
                 listingId,
             }))
         }
