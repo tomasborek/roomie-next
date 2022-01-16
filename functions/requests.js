@@ -38,11 +38,13 @@ exports.createRequest = functions.https.onCall((data, context) => {
     const recieverListingId = data.recieverListingId;
     const recieverPremium = reciever.premium;
     const recieverPfp = reciever.images.pfp;
+    const recieverType = data.recieverType;
     const recieverInfo = {
       username: recieverUsername,
       age: recieverAge,
       listingId: recieverListingId,
       premium: recieverPremium,
+      type: recieverType,
       pfp: recieverPfp,
       timeStamp: admin.firestore.FieldValue.serverTimestamp(),
     }

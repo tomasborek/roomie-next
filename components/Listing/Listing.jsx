@@ -359,6 +359,7 @@ const unlikeListing = callable("userUpdates-unlikeListing");
                 reciever: reciever.userInfo,
                 recieverListingId: listingId,
                 recieverUid: reciever.userInfo.uid,
+                recieverType: reciever.type,
                 message: requestMessage
             }
             return createRequest(JSON.stringify(requestInfo)); 
