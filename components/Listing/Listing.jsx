@@ -598,7 +598,7 @@ const unlikeListing = callable("userUpdates-unlikeListing");
                                                 <button onClick={() => setEditListing(prevState => !prevState)}className="main-edit-profile">{editListing ? "Zpět" : "Upravit inzerát"}</button>
                                             }
                                             <div className="main-actions">
-                                                <i onClick={() => handleLike()} className={`fa${listingLiked ? "s" : "r"} fa-heart main-like`}></i>
+                                               {listingFans && <i onClick={() => handleLike()} className={`fa${listingLiked ? "s" : "r"} fa-heart main-like`}></i>}
                                                 <i onClick={() => setMoreInfoOpen(prevState => !prevState)} className="main-more fas fa-ellipsis-h"></i>
                                             </div>
                                             <ul className={`main-more-list ${moreInfoOpen && "active"}`}>
@@ -835,7 +835,7 @@ const unlikeListing = callable("userUpdates-unlikeListing");
                                             <button onClick={() => setEditListing(prevState => !prevState)} className="main-edit-profile">{editListing ? "Zpět" : "Upravit inzerát"}</button>
                                         }  
                                              <div className="main-actions">
-                                                <i onClick={() => handleLike()} className={`fa${listingLiked ? "s" : "r"} fa-heart main-like`}></i>
+                                                {listingFans && <i onClick={() => handleLike()} className={`fa${listingLiked ? "s" : "r"} fa-heart main-like`}></i> }
                                                 <i onClick={() => setMoreInfoOpen(prevState => !prevState)} className="main-more fas fa-ellipsis-h"></i>
                                             </div>
                                             <ul className={`main-more-list ${moreInfoOpen && "active"}`}>
