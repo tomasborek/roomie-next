@@ -90,8 +90,8 @@ const Liked = () => {
                 <div className="content-feed">
                     {(likedListings != null && likedListings.length) ?
                         <>
-                            {likedListings.map((listing) => (
-                                <LikedListing info={listing}/>
+                            {likedListings.map((listing, id) => (
+                                <LikedListing info={listing} key={id}/>
                             ))}
                         </>
                         :
