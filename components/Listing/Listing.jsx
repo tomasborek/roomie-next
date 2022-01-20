@@ -143,13 +143,13 @@ const unlikeListing = callable("userUpdates-unlikeListing");
                 setPfp(doc.data().userInfo.images.pfp);
             }
         }).catch(error => {
-            console.log(error);
+            //
         })
     }, [router.isReady, id, currentUser])
 
     // If ssr props aren't null but their coresponding state is, it means it has probably been nulled by the handleSave function, meaning we have to reload them
     useEffect(() => {
-        if(ssrProps.personTags != null && listingPersonTags === null){
+        if(ssrProps.listingPersonTags != null && listingPersonTags === null){
             if(ssrProps.status === "success"){
                 reloadProps();
             }else if(ssrProps.status === "client-side"){
@@ -338,7 +338,6 @@ const unlikeListing = callable("userUpdates-unlikeListing");
             setListingInfo(doc.data());
         }).catch((error) => {
             setLoading(false);
-            console.log(error);
             snackBar("Něco se pokazilo. Zkuste to prosím později.", "error");
         })
     }
