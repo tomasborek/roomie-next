@@ -19,6 +19,15 @@ exports.deleteListing = functions.auth.user().onDelete((user) => {
     });
 });
 
+exports.deleteFriends = functions.firestore.document("users/{userId}/friends/{friendId}").onDelete((snap, context) => {
+    const db = admin.firestore();
+    const usersCollection = db.collection("users");
+    const friendId = snap.id;
+    const uid = snap.ref.parent.parent.id;
+    return usersCollection.doc(friendId).collection("friends").doc(uid).delete();
+
+})
+
 // Delete storage record of a user
 exports.deleteStorage = functions.auth.user().onDelete((user) => {
     const storage = admin.storage().bucket();
