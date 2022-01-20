@@ -10,7 +10,7 @@ import { CircularProgress } from '@mui/material'
 import { useDb } from '../contexts/DbContext'
 import { useAuth } from '../contexts/AuthContext'
 
-const liked = () => {
+const Liked = () => {
     const {currentUser} = useAuth();
     const {getLiked} = useDb();
 
@@ -118,4 +118,4 @@ const liked = () => {
     )
 }
 
-export default liked
+export default Liked
