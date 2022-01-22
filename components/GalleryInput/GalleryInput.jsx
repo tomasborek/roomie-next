@@ -1,10 +1,14 @@
 import React, {useState, useEffect, useRef} from 'react'
 
+//contexts
+import { useListing } from '../../contexts/ListingContext';
+
 //MUI
 import { Backdrop } from '@mui/material'
 
-const GalleryInput = ({object, setObject, listingImgs, addedListingImgs, setAddedListingImgs, addedPfp, setAddedPfp, pfp}) => {
+const GalleryInput = () => {
     const [image, setImage] = useState(null);
+    const {galleryInput: object, setGalleryInput: setObject, listingImgs, addedListingImgs, setAddedListingImgs, addedPfp, setAddedPfp, pfp} = useListing();
     const inputFileRef = useRef(null);
     const handleImgUpload = (e) => {
         setImage(e.target.files[0]);
