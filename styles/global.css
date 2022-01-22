@@ -1298,151 +1298,6 @@ textarea {
   border-radius: 5px !important;
 }
 
-.FlatListing .listing-content .content-body .body-info .body-opening-boxes {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-profile-info {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  background-color: white;
-  width: 49%;
-  min-height: 100px;
-  border-radius: 5px;
-  padding: 0.5rem 2em;
-  border: 1px solid #B8B8B8;
-}
-
-.FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-profile-info.premium {
-  border-color: #E14949;
-}
-
-.FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-profile-info .profile-info-pfp-container {
-  position: relative;
-  width: 75px;
-  height: 75px;
-  margin-right: 1rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-profile-info .profile-info-pfp-container .profile-info-pfp {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-profile-info .profile-info-pfp-container .pfp-container-edit-icon {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  pointer-events: all;
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.3);
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  z-index: 10;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-profile-info .profile-info-pfp-container .pfp-container-edit-icon i {
-  color: white;
-  font-size: 18px;
-}
-
-.FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-profile-info .profile-info-text {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-profile-info .profile-info-text .text-description {
-  color: #B8B8B8;
-  font-size: 12px;
-  -ms-flex-item-align: start;
-      align-self: flex-start;
-}
-
-.FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-map-container {
-  position: relative;
-  width: 49%;
-  height: 100px;
-  border-radius: 5px;
-  border: 1px solid #B8B8B8;
-}
-
-.FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-map-container .boxes-map {
-  position: absolute;
-  z-index: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  max-height: 100%;
-  min-width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  border-radius: 5px;
-}
-
-.FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-map-container .map-overlay {
-  color: white;
-  z-index: 1;
-  position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.438);
-}
-
 @media screen and (max-width: 500px) {
   .FlatListing .listing-content .content-body .body-info .body-opening-boxes {
     -webkit-box-align: stretch;
@@ -5240,6 +5095,151 @@ textarea {
   .Listing .content-body .body-about .about-preferences .preferences-header {
     font-size: 12px;
   }
+}
+
+.FlatListing .listing-content .content-body .body-info .body-opening-boxes {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-profile-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: white;
+  width: 49%;
+  min-height: 100px;
+  border-radius: 5px;
+  padding: 0.5rem 2em;
+  border: 1px solid #B8B8B8;
+}
+
+.FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-profile-info.premium {
+  border-color: #E14949;
+}
+
+.FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-profile-info .profile-info-pfp-container {
+  position: relative;
+  width: 75px;
+  height: 75px;
+  margin-right: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-profile-info .profile-info-pfp-container .profile-info-pfp {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-profile-info .profile-info-pfp-container .pfp-container-edit-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  pointer-events: all;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.3);
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-profile-info .profile-info-pfp-container .pfp-container-edit-icon i {
+  color: white;
+  font-size: 18px;
+}
+
+.FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-profile-info .profile-info-text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-profile-info .profile-info-text .text-description {
+  color: #B8B8B8;
+  font-size: 12px;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+}
+
+.FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-map-container {
+  position: relative;
+  width: 49%;
+  height: 100px;
+  border-radius: 5px;
+  border: 1px solid #B8B8B8;
+}
+
+.FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-map-container .boxes-map {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  max-height: 100%;
+  min-width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 5px;
+}
+
+.FlatListing .listing-content .content-body .body-info .body-opening-boxes .boxes-map-container .map-overlay {
+  color: white;
+  z-index: 1;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.438);
 }
 
 .explore-flatmate, .explore-flat {
