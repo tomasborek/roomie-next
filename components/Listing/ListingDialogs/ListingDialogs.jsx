@@ -50,6 +50,14 @@ const ListingDialogs = () => {
         listingFlatTags,
         listingPersonBoxes,
         listingFlatBoxes,
+        galleryInput,
+        setGalleryInput,
+        listingImgs,
+        addedListingImgs,
+        setAddedListingImgs,
+        pfp,
+        addedPfp,
+        setAddedPfp,
     } = useListing();
   return (
       <>
@@ -106,7 +114,15 @@ const ListingDialogs = () => {
                     </DialogActions>
                 </Dialog>
             
-                <GalleryInput />
+                <GalleryInput 
+                    object={galleryInput}
+                    setObject={setGalleryInput}
+                    listingImgs={listingImgs}
+                    addedListingImgs={addedListingImgs}
+                    pfp={pfp}
+                    addedPfp={addedPfp}
+                    setAddedPfp={setAddedPfp}
+                />
 
             {type === "flatmate" && 
             <>
