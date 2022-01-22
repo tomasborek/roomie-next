@@ -8,7 +8,7 @@ import LocationDropdown from "../LocationDropdown/LocationDropdown";
 import { FormControl, Select, InputLabel, MenuItem } from '@mui/material';
 
 
-const Tagger = ({addedTags,setAddedTags, setTagOverlay, existingTags, variant}) => {
+const Tagger = ({variant, addedTags, setAddedTags, setTagOverlay, existingTags}) => {
     //Person state tags
     const [genderTag, setGenderTag] = useState([]);
     const [ageTag, setAgeTag] = useState([]);
