@@ -2,18 +2,27 @@ import React, {useEffect, useState} from 'react'
 //next
 import {useRouter} from "next/router";
 //Contexts
-import { useAuth } from '../../../contexts/AuthContext'
-import { useSnackBar } from '../../../contexts/SnackBarContext';
+import { useAuth } from '../../../../contexts/AuthContext'
+import { useSnackBar } from '../../../../contexts/SnackBarContext';
+import { useListing } from '../../../../contexts/ListingContext';
+import { useFunctions } from '../../../../contexts/FunctionsContext';
 
 //COmponents
+import InputDialog from '../../../InputDialog/InputDialog';
 //MUI
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, Backdrop } from '@mui/material';
 
-const ListingContact = ({listingInfo, editListing, state}) => {
+const ListingContact = () => {
     const {currentUser, currentUserInfo} = useAuth();
-    const {setReqDialogOpen, contactLoading} = state;
     const {snackBar} = useSnackBar();
     const router = useRouter();
+    const {callable} = useFunctions();
+    const {
+        listingInfo, 
+        editListing, 
+        setReqDialogOpen,
+        contactLoading,
+    } = useListing();
     //State
     const [isFriend, setIsFriend] = useState(false);
     const [isRequested, setIsRequested] = useState(false);
@@ -44,10 +53,6 @@ const ListingContact = ({listingInfo, editListing, state}) => {
             }
         }
     }, [listingInfo, currentUser]);
-
-    useEffect(() => {
-        console.log(contactLoading);
-    }, [])
 
     const handleRequestClick = () => {
         if(currentUserInfo){

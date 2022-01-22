@@ -1,6 +1,6 @@
 import React from 'react'
 //Components
-import Tag from "../../Tag/Tag";
+import Tag from "../../../Tag/Tag";
 
 const ListingTags = ({type, existingTags, editListing, addedTags, setOverlay}) => {
     if(type === "person"){
