@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 //next
 import Head from "next/head";
 import Link from "next/link";
@@ -14,7 +14,7 @@ import ListingAbout from "../../components/Listing/ListingAbout/ListingAbout";
 import Gallery from "../../components/Gallery/Gallery";
 import ListingDialogs from './ListingDialogs/ListingDialogs';
 //Mui components
-import {Skeleton, Backdrop} from '@mui/material';
+import {Skeleton, Collapse, Alert} from '@mui/material';
 import ListingHeader from './ListingHeader/ListingHeader';
 
 
@@ -25,25 +25,19 @@ import ListingHeader from './ListingHeader/ListingHeader';
 const Listing = () => {
     const {
         type,
+        cr,
         listingInfo,
         editListing,
         listingId,
-        pfp,
         listingName,
-        listingUsername,
-        listingAge,
-        listingGender,
         listingPersonBoxes,
-        listingFlatBoxes,
         listingPremium,
-        addedPfp,
-        setFlatBoxerOverlay,
         setPersonBoxerOverlay,
-        setGalleryInput,
         addedPersonBoxes,
-        addedFlatBoxes,
         handleSave,
     } = useListing();
+    const [flatBoxesInfoAlert, setFlatBoxesInfoAlert] = useState(true);
+    const [personBoxesInfoAlert, setPersonBoxesInfoAlert] = useState(true);
     if(type === "flatmate"){
         return (
             <>
@@ -60,34 +54,35 @@ const Listing = () => {
                     <ListingHeader/>
                     <div className="mid-container">
                         <div className="content-body">
-                            <div className="body-messages">
-                                {(listingInfo && !listingInfo.visible )&&
+                            {!cr && 
+                                <div className="body-messages">
+                                    {(listingInfo && !listingInfo.visible )&&
+                                        <div className="messages-message">
+                                            <i className="fas fa-info"></i>
+                                            <p>
+                                                Váš inzerát je nedokončený, prosím dokončete jej 
+                                                <Link href={`/cr/${listingInfo.type}/${listingId}`}> zde</Link>
+                                            </p> 
+                                        </div>
+                                    }
+                                    {(listingInfo && !listingInfo.userInfo.emailVerified) &&
+                                        <div className="messages-message">
+                                            <i className="fas fa-info"></i>
+                                            <p>
+                                                Váš účet není ověřený - pro používání Roomie si jej prosím ověřte pomocí odkazu zaslaného na váš e-mail.
+                                            </p> 
+                                        </div>
+                                    }
+                                    {(listingInfo && listingInfo.hiddenByUser) &&
                                     <div className="messages-message">
                                         <i className="fas fa-info"></i>
                                         <p>
-                                            Váš inzerát je nedokončený, prosím dokončete jej 
-                                            <Link href={`/cr/${listingInfo.type}/${listingId}`}> zde</Link>
+                                            Váš účet je skrytý - aby ho mohli uživatelé vidět, zapněte jeho viditelnost v <Link href="/edit-profile">nastavení profilu</Link>.
                                         </p> 
                                     </div>
-                                }
-                                {(listingInfo && !listingInfo.userInfo.emailVerified) &&
-                                    <div className="messages-message">
-                                        <i className="fas fa-info"></i>
-                                        <p>
-                                            Váš účet není ověřený - pro používání Roomie si jej prosím ověřte pomocí odkazu zaslaného na váš e-mail.
-                                        </p> 
-                                    </div>
-                                }
-                                {(listingInfo && listingInfo.hiddenByUser) &&
-                                <div className="messages-message">
-                                    <i className="fas fa-info"></i>
-                                    <p>
-                                        Váš účet je skrytý - aby ho mohli uživatelé vidět, zapněte jeho viditelnost v <Link href="/edit-profile">nastavení profilu</Link>.
-                                    </p> 
+                                    }
                                 </div>
-                                }
-                            </div>
-
+                            }
                             <div className="body-info">
                                 <div className="container">
                                     {listingPremium && 
@@ -100,9 +95,18 @@ const Listing = () => {
 
                                     <ListingBoxesContainer type="flatmate" addedBoxes={addedPersonBoxes} existingBoxes={listingPersonBoxes} editListing={editListing} />
 
+                                    {cr &&
+                                        <Collapse in={personBoxesInfoAlert}>
+                                            <Alert sx={{marginTop: "1rem"}} severity="info">Přidejte o sobě info.</Alert>
+                                        </Collapse> 
+                                    }
+
                                     {editListing && 
                                         <div className="info-edit-boxes">
-                                            <button onClick={() => setPersonBoxerOverlay(true)}> <i className="fas fa-plus"></i> </button>
+                                            <button onClick={() => {
+                                                setPersonBoxerOverlay(true)
+                                                setPersonBoxesInfoAlert(false);
+                                    }}> <i className="fas fa-plus"></i> </button>
                                         </div>
                                     }
                                 </div>
@@ -231,15 +235,37 @@ const Listing = () => {
                                             </div>
 
                                             <ListingBoxesContainer type="flat" addedBoxes={addedFlatBoxes} existingBoxes={listingFlatBoxes} editListing={editListing}/> 
+
+                                            {cr &&
+                                                <Collapse in={flatBoxesInfoAlert}>
+                                                    <Alert sx={{marginTop: "1rem"}} severity="info">Přidejte info o svém bydlení.</Alert>
+                                                </Collapse> 
+                                            }
+
                                             {editListing && 
                                                 <div className="info-edit-boxes">
-                                                    <button onClick={() => setFlatBoxerOverlay(true)}> <i className="fas fa-plus"></i> </button>
+                                                    <button onClick={() => {
+                                                        setFlatBoxerOverlay(true);
+                                                        setFlatBoxesInfoAlert(false);
+                                                    }}> <i className="fas fa-plus"></i> </button>
                                                 </div>
                                             }
+
                                             <ListingBoxesContainer  type="flatmate" addedBoxes={addedPersonBoxes} existingBoxes={listingPersonBoxes} editListing={editListing}/>
+                                            
+                                            {cr &&
+                                                <Collapse in={personBoxesInfoAlert}>
+                                                    <Alert sx={{marginTop: "1rem"}} severity="info">Přidejte info o sobě.</Alert>
+                                                </Collapse> 
+                                            }
+
+
                                             {editListing && 
                                                 <div className="info-edit-boxes">
-                                                    <button onClick={() => setPersonBoxerOverlay(true)}> <i className="fas fa-plus"></i> </button>
+                                                    <button onClick={() => {
+                                                        setPersonBoxerOverlay(true);
+                                                        setPersonBoxesInfoAlert(false);
+                                                    }}> <i className="fas fa-plus"></i> </button>
                                                 </div>
                                             }
                                         </div>

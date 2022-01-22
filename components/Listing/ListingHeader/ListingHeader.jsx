@@ -20,6 +20,7 @@ const ListingHeader = () => {
     //State
     const {
         type,
+        cr,
         listingInfo,
         editListing,
         setEditListing,
@@ -65,7 +66,7 @@ const ListingHeader = () => {
                     <div className="header-info">
                         <div className="info-main">
                             <h1 className="main-name">{listingUsername} {listingPremium && <i className='fas fa-circle-check'></i>}</h1>
-                            {(currentUser && listingInfo) && ((currentUser.uid == listingInfo.userInfo.uid) && (listingInfo.visible)) && 
+                            {(currentUser && listingInfo) && ((currentUser.uid == listingInfo.userInfo.uid) && (listingInfo.visible) && (!cr)) && 
                                 <button onClick={() => setEditListing(prevState => !prevState)}className="main-edit-profile">{editListing ? "Zpět" : "Upravit inzerát"}</button>
                             }
                             <div className="main-actions">
@@ -87,7 +88,22 @@ const ListingHeader = () => {
                             :  
                             <>
                                 <ListingInfoImportant />
-                                <ListingContact />
+                                {!cr ?
+                                    <ListingContact />
+                                    :
+                                    <div className="info-contact">
+                                        <div className="contact-icons">
+                                            <i className="icons-icon fas fa-envelope"></i>
+                                            <i className="icons-icon fas fa-phone"></i>
+                                            <i className="icons-icon fab fa-instagram"></i>
+                                            <i className="icons-icon fab fa-facebook"></i>
+                                        </div>
+                                        <div className="contact-state">
+                                            <i className="state-icon fas fa-lock"></i>
+                                            <p className="state-description">Vaše kontaktní údaje jsou uzamčené.</p>
+                                        </div>                                            
+                                    </div>
+                                }
                             </> 
                         }
                     </div>
@@ -128,7 +144,22 @@ const ListingHeader = () => {
                         </div>
                         
                         <ListingInfoImportant/>
-                        <ListingContact/>
+                        {!cr ?
+                            <ListingContact/>
+                            :
+                            <div className="info-contact">
+                                <div className="contact-icons">
+                                    <i className="icons-icon fas fa-envelope"></i>
+                                    <i className="icons-icon fas fa-phone"></i>
+                                    <i className="icons-icon fab fa-instagram"></i>
+                                    <i className="icons-icon fab fa-facebook"></i>
+                                </div>
+                                <div className="contact-state">
+                                    <i className="state-icon fas fa-lock"></i>
+                                    <p className="state-description">Vaše kontaktní údaje jsou uzamčené.</p>
+                                </div>                                            
+                            </div>
+                        }
                 </div>
             }
         </div>

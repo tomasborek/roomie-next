@@ -6,6 +6,7 @@ import InputDialog from '../../InputDialog/InputDialog';
 import GalleryInput from '../../GalleryInput/GalleryInput';
 import Tagger from '../../Tagger/Tagger';
 import Boxer from '../../Boxer/Boxer';
+import CustomDialog from '../../CustomDialog/CustomDialog';
 //Mui
 import { Backdrop, Dialog, DialogTitle, DialogContent, DialogActions, Button, Slider } from '@mui/material';
 
@@ -15,6 +16,7 @@ const ListingDialogs = () => {
     }
     const {
         type,
+        cr,
         listingInfo,
         reportDialog,
         setReportDialog,
@@ -58,6 +60,8 @@ const ListingDialogs = () => {
         pfp,
         addedPfp,
         setAddedPfp,
+        welcomeDialog,
+        setWelcomeDialog
     } = useListing();
   return (
       <>
@@ -119,6 +123,7 @@ const ListingDialogs = () => {
                     setObject={setGalleryInput}
                     listingImgs={listingImgs}
                     addedListingImgs={addedListingImgs}
+                    setAddedListingImgs={setAddedListingImgs}
                     pfp={pfp}
                     addedPfp={addedPfp}
                     setAddedPfp={setAddedPfp}
@@ -191,6 +196,26 @@ const ListingDialogs = () => {
                     </Backdrop>
 
                 </>
+            }
+
+            {cr &&
+                 <Backdrop sx={{zIndex: (theme) => theme.zIndex.drawer + 1 }} open={welcomeDialog}>
+                    <CustomDialog 
+                        image={"/img/listing/welcome-dialog.png"}
+                        heading={"Váš inzerát"}
+                        setOpen={setWelcomeDialog}
+                        >
+                        <div className="dialog-body">
+                        Gratulujeme k založení osobního profilu Roomie. Nyní vám nic nebrání k vytvoření vašeho inzerátu.
+                        Tvorba je jednoduchá a intuitivní. Červeně svítící informace jsou povinné, ostatní dle vašeho uvážení.
+                        Nezapomeňte - čím více informací uvedete, tím více podpoříte vaší šanci k oslovení potenciálních uživatelů. 
+                        Váš inzerát je vaší veřejnou prezentací na portále Roomie. Hodně štěstí!
+                        </div>  
+                        <div className="dialog-action">
+                            <button onClick={() => setWelcomeDialog(false)} className="main-btn">Rozumím</button>
+                        </div>
+                    </CustomDialog>
+             </Backdrop>
             }
       </>
   );
