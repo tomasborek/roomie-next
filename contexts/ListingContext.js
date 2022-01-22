@@ -1,0 +1,532 @@
+import React, {useContext, createContext, useEffect, useState} from 'react';
+//next
+import { useRouter } from 'next/dist/client/router';
+
+
+//Contexts
+import { useDb } from './DbContext';
+import { useAuth } from './AuthContext';
+import { useLoading } from './LoadingContext';
+import { useSnackBar } from './SnackBarContext';
+import { useFunctions } from "./FunctionsContext";
+import { useStorage } from './StorageContext';
+
+
+const ListingContext = createContext();
+export const useListing = () => {
+    return useContext(ListingContext);
+}
+export const ListingProvider = ({type, ssrProps, children}) => {
+    //Variables---
+    //Contexts
+    const router = useRouter();
+    const {id} = router.query;
+    const {getListing, getUser} = useDb();
+    const {currentUser} = useAuth();
+    const [loading, setLoading] = useLoading();
+    const {snackBar} = useSnackBar();
+    const {callable} = useFunctions();
+    const {uploadImg} = useStorage();
+    //States
+    //Listing data obj
+    //Listing info
+    const [listingInfo, setListingInfo] = useState(null);
+    //Edit mode
+    const [editListing, setEditListing] = useState(false);
+    //ListingId
+    const [listingId, setListingId] = useState(null);
+    //imgs
+    const [listingImgs, setListingImgs] = useState([]);
+    const [pfp, setPfp] = useState(null);
+    //Listing info states
+    const [listingName, setListingName] = useState(ssrProps.listingName);
+    const [listingUsername, setListingUsername] = useState(ssrProps.listingUsername);
+    const [listingAge, setListingAge] = useState(ssrProps.listingAge);
+    const [listingGender, setListingGender] = useState(ssrProps.listingGender);
+    const [listingBio, setListingBio] = useState(type === "flatmate" ? ssrProps.listingBio : null);
+    const [listingFlatBio, setListingFlatBio] = useState(type === "flat" ? ssrProps.listingFlatBio : null);
+    const [listingPersonBio, setListingPersonBio] = useState(type === "flat" ? ssrProps.listingPersonBio : null);
+    const [listingPersonBoxes, setListingPersonBoxes] = useState(JSON.parse(ssrProps.listingPersonBoxes));
+    const [listingPersonTags, setListingPersonTags] = useState(JSON.parse(ssrProps.listingPersonTags));
+    const [listingFlatBoxes, setListingFlatBoxes] = useState(type === "flat" ? JSON.parse(ssrProps.listingFlatBoxes) : null);
+    const [listingFlatTags, setListingFlatTags] = useState(type === "flatmate" ? JSON.parse(ssrProps.listingFlatTags) : null);
+    const [listingPremium, setListingPremium] = useState(ssrProps.listingPremium);
+    const [listingFans, setListingFans] = useState(ssrProps.listingFans ? ssrProps.listingFans : []);
+    const [listingLiked, setListingLiked] = useState(false);
+    //Edit mode info storage
+    const [stayTime, setStayTime] = useState(null);
+    const [startTime, setStartTime] = useState(null);
+    const [budget, setBudget] = useState(null);
+    //Dialogs and overlays
+    const [personTagOverlay, setPersonTagOverlay] = useState(false);
+    const [flatTagOverlay, setFlatTagOverlay] = useState(false);
+    const [flatBoxerOverlay, setFlatBoxerOverlay] = useState(false);
+    const [personBoxerOverlay, setPersonBoxerOverlay] = useState(false);
+    const [reqDialogOpen, setReqDialogOpen] = useState(false);
+    const [reportDialog, setReportDialog] = useState(false);
+    const [sliderDialog, setSliderDialog] = useState(false);
+    const [requestMessage, setRequestMessage] = useState("");
+    const [contactLoading, setContactLoading] = useState(false);
+    const [galleryInput, setGalleryInput] = useState({
+        open: false,
+        type: "none",
+        img: null,
+        index: 0
+    });
+    //Added values
+    const [addedListingImgs, setAddedListingImgs] = useState(["", "", "", "", "", ""]);
+    const [addedPfp, setAddedPfp] = useState(null);
+    const [addedPersonTags, setAddedPersonTags] = useState(null);
+    const [addedFlatTags, setAddedFlatTags] = useState(null);
+    const [addedPersonBoxes, setAddedPersonBoxes] = useState(null);
+    const [addedFlatBoxes, setAddedFlatBoxes] = useState(null);
+    //Added bios
+    const [bio, setBio] = useState(null);
+    const [flatBio, setFlatBio] = useState(null);
+    const [personBio, setPersonBio] = useState(null);
+    //Callable functions 
+    const updateListing = callable("userUpdates-updateListing");
+    const createRequest = callable("requests-createRequest");
+    const deleteImgs = callable("images-deleteImgs");
+    const likeListing = callable("userUpdates-likeListing");
+    const unlikeListing = callable("userUpdates-unlikeListing");
+
+    
+        
+    
+    useEffect(() => {
+        setLoading(false);
+        setListingInfo(null);
+        if(!router.isReady) return;
+        // If the status is not resolved in any way, there's no reason to continue
+        if(ssrProps.status != "success" && ssrProps.status != "client-side") return;
+        if(ssrProps.status === "client-side" && !currentUser) return;
+        // SSR props get reloaded when going from listing to listing, but states won't, so we need to reload them
+        reloadProps();
+        getListing(id)
+        .then(doc => {
+            if(ssrProps.status === "client-side"){
+                if(checkAccess(doc.data().userInfo.uid)){
+                    loadClientSide();
+                };
+                return;
+            };
+            setListingInfo(doc.data());
+            setListingId(doc.id);
+            setListingImgs(doc.data().userInfo.images.listingImgs);
+            if(doc.data().userInfo.images.pfp){
+                setPfp(doc.data().userInfo.images.pfp);
+            }
+        }).catch(error => {
+            //
+        })
+    }, [router.isReady, id, currentUser])
+
+    // If ssr props aren't null but their coresponding state is, it means it has probably been nulled by the handleSave function, meaning we have to reload them
+    useEffect(() => {
+        if(ssrProps.listingPersonTags != null && listingPersonTags === null){
+            if(ssrProps.status === "success"){
+                reloadProps();
+            }else if(ssrProps.status === "client-side"){
+                loadClientSide();
+            }
+        }
+    }, [ssrProps])
+
+ 
+
+    //Fills edit inputs and pictures with default values
+    useEffect(() => {
+        if(listingInfo && editListing === true){
+            if(type === "flatmate"){
+                setBio(listingBio)
+                setBudget(listingInfo.mainInfo.budget);
+                setAddedPersonBoxes(listingPersonBoxes);
+                setAddedPersonTags(listingPersonTags);
+                setAddedFlatTags(listingFlatTags);
+            }
+            if(type === "flat"){
+               setPersonBio(listingPersonBio);
+               setFlatBio(listingFlatBio);
+               setBudget(listingInfo.mainInfo.price);
+               setAddedPersonBoxes(listingPersonBoxes);
+               setAddedFlatBoxes(listingFlatBoxes);
+               setAddedPersonTags(listingPersonTags);
+            }
+
+            
+            setStayTime(listingInfo.mainInfo.stayTime);
+            setStartTime(listingInfo.mainInfo.startTime);
+        }
+        
+    }, [editListing])
+
+    // Handle if user sign outs while editing
+    useEffect(() =>{
+        if(!currentUser){
+            setEditListing(false);
+        }
+    }, [currentUser])
+
+
+    //Resets changes if user goes back from editing
+    useEffect(() => {
+        if(!editListing){
+            setAddedPersonTags(null);
+            setAddedFlatTags(null);
+            setAddedPersonBoxes(null);
+            setAddedFlatBoxes(null);
+            setAddedListingImgs(["", "", "", "", "", ""]);
+            setAddedPfp(null);
+        }
+    }, [editListing])
+
+    useEffect(() => {
+        if(currentUser && listingFans && listingFans.includes(currentUser.uid)){
+            setListingLiked(true);
+        }else{
+            setListingLiked(false);
+        }
+    }, [listingFans, currentUser])
+
+    const reloadProps = () => {
+        setListingName(ssrProps.listingName);
+        setListingUsername(ssrProps.listingUsername);
+        setListingAge(ssrProps.listingAge);
+        setListingGender(ssrProps.listingGender);
+        setListingBio(type === "flatmate" ? ssrProps.listingBio : null);
+        setListingFlatBio(type === "flat" ? ssrProps.listingFlatBio : null);
+        setListingPersonBio(type === "flat" ? ssrProps.listingPersonBio : null);
+        setListingPersonBoxes(JSON.parse(ssrProps.listingPersonBoxes));
+        setListingPersonTags(JSON.parse(ssrProps.listingPersonTags));
+        setListingFlatBoxes(type === "flat" ? JSON.parse(ssrProps.listingFlatBoxes) : null);
+        setListingFlatTags(type === "flatmate" ? JSON.parse(ssrProps.listingFlatTags): null);
+        setListingPremium(ssrProps.listingPremium);
+        setListingFans(ssrProps.listingFans);
+    }
+
+    //Functions
+    const checkAccess = (uid) => {
+        if(currentUser && currentUser.uid === uid){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    //Handles save in the edit
+    const handleSave = () => {
+        setLoading(true);
+        if(!stayTime || stayTime == ""){
+            snackBar("Prosíme vyplňte všechny důležité údaje.", "error");
+            setLoading(false);
+            window.scrollTo(0,0);
+            return;
+        }
+        if(!startTime || startTime == ""){
+            snackBar("Prosíme vyplňte všechny důležité údaje.", "error");
+            setLoading(false);
+            window.scrollTo(0,0);
+            return;
+        }
+        if(!budget || budget < 1000 || budget > 60000){
+            snackBar(`Prosím zadejte správnou hodnotu do ${listingInfo.type === "flatmate" ? "rozpočtu." : "nájemného."}`)
+            setLoading(false);
+            window.scrollTo(0,0);
+            return;
+        }
+        let params;
+        if(type === "flatmate" || type === "flatmate-cr"){
+            params = {
+                mainInfo: {
+                    budget: budget,
+                    startTime: startTime,
+                    stayTime: stayTime
+                },
+                personBoxes: addedPersonBoxes,
+                personTags: addedPersonTags,
+                flatTags: addedFlatTags,
+                bio: bio ? bio.trim() : "",
+                visible: true,
+            }
+            if(addedPersonBoxes.job){
+                params = {...params, "queryInfo.job": {
+                    employed: addedPersonBoxes.job === "Zaměstnaný",
+                    unemployed: addedPersonBoxes.job === "Nezaměstnaný",
+                    student: addedPersonBoxes.job === "Student",
+                }}
+            }
+        }
+        if(type === "flat" || type === "flat-cr"){
+            params = {
+                mainInfo: {
+                    price: budget,
+                    startTime: startTime,
+                    stayTime: stayTime
+                },
+                personTags: addedPersonTags,
+                personBoxes: addedPersonBoxes,
+                flatBoxes: addedFlatBoxes,
+                flatBio: flatBio ? flatBio.trim() : "",
+                personBio: personBio ? personBio.trim() : "",
+                visible: true,
+            }
+            if(addedPersonBoxes.job){
+                params = {...params, "queryInfo.job": {
+                    employed: addedPersonBoxes.job === "Zaměstnaný",
+                    unemployed: addedPersonBoxes.job === "Nezaměstnaný",
+                    student: addedPersonBoxes.job === "Student",
+                }}
+            }
+        }
+        const updateListingInfo = {
+            listingId: listingId,
+            params: params,
+        }
+        updateListing(JSON.stringify(updateListingInfo)).then((response) => {
+            if(addedPfp){
+               return uploadImg(currentUser.uid, addedPfp, "pfp");
+            }else{
+                return Promise.resolve("No new pfp");
+            }
+        }).then((response) => {
+            if(addedListingImgs.length){
+                return uploadImg(currentUser.uid, addedListingImgs, "listingImgs");
+            }else{
+                return Promise.resolve("No new imgs");
+            } 
+        }).then((response) => {
+            setLoading(false);
+            setListingInfo(null);
+            setListingBio(null);
+            setListingFlatBio(null);
+            setListingPersonBio(null);
+            setListingPersonBoxes(null);
+            setListingPersonTags(null);
+            setListingFlatBoxes(null);
+            setListingFlatTags(null);
+            setEditListing(false);
+            snackBar("Inzerát byl úspěšně upraven.", "success");
+            window.scrollTo({top: 0, behavior: "smooth"});
+            router.push(router.asPath);
+            return getListing(listingId);
+        }).then((doc) => {
+            setListingInfo(doc.data());
+        }).catch((error) => {
+            setLoading(false);
+            snackBar("Něco se pokazilo. Zkuste to prosím později.", "error");
+        })
+    }
+
+    const handleRequest = () => {
+        //Loading...
+        setContactLoading(true);
+        setReqDialogOpen(false);
+        //Two people involved
+        let reciever = listingInfo;
+        let sender;
+        //Callable functions
+        getUser(currentUser.uid)
+        .then(user =>{
+            const requestInfo = {
+                sender: user.data(),
+                senderUid: user.id,
+                reciever: reciever.userInfo,
+                recieverListingId: listingId,
+                recieverUid: reciever.userInfo.uid,
+                recieverType: reciever.type,
+                message: requestMessage
+            }
+            return createRequest(JSON.stringify(requestInfo)); 
+        }).then(res => {
+            return getListing(id);
+        }).then(doc => {
+            setListingInfo(doc.data());
+            setContactLoading(false);
+            snackBar("Žádost byla odeslána.", "success");
+        }).catch(error =>{
+            setLoading(false);
+            setReqDialogOpen(true);
+            snackBar("Něco se nepovedlo. Zkuste to prosím později.", "error");
+        })
+    }
+
+    const handleImgDelete = (type) => {
+        if(type === "pfp"){
+            if(addedPfp){
+                setAddedPfp(null);
+                return;
+            }
+            setLoading(true);
+            const imageInfo = {
+                url: pfp,
+                uid: currentUser.uid,
+                listingId: listingId,
+            }
+            deleteImgs(JSON.stringify(imageInfo)).then((response) => {
+                setPfp(null);
+                setLoading(false);
+            }).catch((error) => {
+                setLoading(false);
+            })
+        }
+        if(type === "main"){
+            if(addedListingImgs[0]){
+                const imgs = [...addedListingImgs];
+                imgs[0] = "";
+                setAddedListingImgs(imgs);
+                return;
+            }
+            setLoading(true);
+            const imageInfo = {
+                url: listingImgs[0],
+                uid: currentUser.uid,
+                listingId: listingId,
+            }
+            deleteImgs(JSON.stringify(imageInfo)).then((response) => {
+                const imgs = [...listingImgs];
+                imgs[0] = "";
+                setListingImgs(imgs);
+                setLoading(false);
+            }).catch((error) => {
+                setLoading(false);
+            })
+
+        }
+    }
+
+    const loadClientSide = () => {
+        getListing(id)
+        .then(doc => {
+            const docData = doc.data();
+            setListingInfo(docData);
+            setListingId(doc.id);
+            setListingImgs(docData.userInfo.images.listingImgs);
+            if(docData.userInfo.images.pfp){
+                setPfp(docData.userInfo.images.pfp);
+            }
+
+            //SSR props state
+            setListingName(type === "flatmate" ? docData.userInfo.username : `${docData.flatBoxes.layout}${docData.flatBoxes.layout ? " " : ""}${docData.flatBoxes.location}`);
+            setListingUsername(docData.userInfo.username);
+            setListingAge(docData.userInfo.age);
+            setListingGender(docData.userInfo.gender);
+            setListingBio(type === "flatmate" && docData.bio);
+            setListingFlatBio(type === "flat" && docData.flatBio);
+            setListingPersonBio(type === "flat" && docData.personBio);
+            setListingPersonBoxes(docData.personBoxes);
+            setListingPersonTags(docData.personTags);
+            setListingFlatBoxes(type === "flat" && docData.flatBoxes);
+            setListingFlatTags(type === "flatmate" && docData.flatTags);  
+            setListingPremium (docData.userInfo.premium);
+        }).catch(error => {
+            //
+        })
+    }
+
+
+    
+
+    const value={
+        type,
+        listingInfo, 
+        setListingInfo,
+        //Edit mode
+        editListing, 
+        setEditListing,
+        //ListingId
+        listingId, 
+        setListingId,
+        //imgs
+        listingImgs, 
+        setListingImgs,
+        pfp, 
+        setPfp,
+        //Listing info states
+        listingName, 
+        setListingName,
+        listingUsername, 
+        setListingUsername,
+        listingAge, 
+        setListingAge,
+        listingGender, 
+        setListingGender,
+        listingBio, 
+        setListingBio,
+        listingFlatBio, 
+        setListingFlatBio,
+        listingPersonBio, 
+        setListingPersonBio,
+        listingPersonBoxes, 
+        setListingPersonBoxes,
+        listingPersonTags, 
+        setListingPersonTags,
+        listingFlatBoxes, 
+        setListingFlatBoxes,
+        listingFlatTags, 
+        setListingFlatTags,
+        listingPremium, 
+        setListingPremium,
+        listingFans, 
+        setListingFans,
+        listingLiked, 
+        setListingLiked,
+        //Edit mode info storage
+        stayTime, 
+        setStayTime,
+        startTime, 
+        setStartTime,
+        budget,
+        setBudget,
+        //Dialogs and overlays
+        personTagOverlay, 
+        setPersonTagOverlay,
+        flatTagOverlay, 
+        setFlatTagOverlay,
+        flatBoxerOverlay, 
+        setFlatBoxerOverlay,
+        personBoxerOverlay, 
+        setPersonBoxerOverlay,
+        reqDialogOpen, 
+        setReqDialogOpen,
+        reportDialog,
+        setReportDialog,
+        sliderDialog,
+        setSliderDialog,
+        requestMessage,
+        setRequestMessage,
+        contactLoading,
+        setContactLoading,
+        galleryInput, 
+        setGalleryInput,
+        //Added values
+        addedListingImgs, 
+        setAddedListingImgs,
+        addedPfp, 
+        setAddedPfp,
+        addedPersonTags, 
+        setAddedPersonTags,
+        addedFlatTags, 
+        setAddedFlatTags,
+        addedPersonBoxes, 
+        setAddedPersonBoxes,
+        addedFlatBoxes, 
+        setAddedFlatBoxes,
+        //Added bios
+        bio, 
+        setBio,
+        flatBio, 
+        setFlatBio,
+        personBio, 
+        setPersonBio,
+        //Functions
+        reloadProps,
+        handleSave,
+        handleRequest,
+        handleImgDelete,
+        loadClientSide,
+        handleRequest,
+    }
+  return <ListingContext.Provider value={value}>
+      {children}
+  </ListingContext.Provider>;
+};
