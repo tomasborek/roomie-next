@@ -1,13 +1,17 @@
 import React from 'react'
 //COmponents
 import Listing from '../../components/Listing/Listing'
+//Context
+import {ListingProvider} from "../../contexts/ListingContext";
 //Firebase
 import { db } from '../../Firebase';
 import { getDoc, doc } from 'firebase/firestore';
 
 const FlatListing = (props) => {
     return (
-        <Listing type="flat" ssrProps={{...props}}/>
+        <ListingProvider type="flat" ssrProps={{...props}}>
+            <Listing/>
+        </ListingProvider>
     )
 }
 

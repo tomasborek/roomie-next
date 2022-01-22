@@ -4,14 +4,18 @@ import Listing from '../../components/Listing/Listing'
 import { db } from '../../Firebase';
 import { getDoc, doc } from 'firebase/firestore';
 import { auth } from '../../Firebase';
+//Contexts
+import {ListingProvider} from "../../contexts/ListingContext";
 
-const FlatListing = (props) => {
+const FlatmateListing = (props) => {
     return (
-        <Listing type="flatmate" ssrProps={{...props}}/>  
+        <ListingProvider type="flatmate" ssrProps={{...props}}>
+            <Listing type="flatmate"/>  
+        </ListingProvider>
     )
 }
 
-export default FlatListing
+export default FlatmateListing
 
 export async function getServerSideProps(context) {
     const {id} = context.params;
