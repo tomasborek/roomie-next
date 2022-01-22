@@ -1,100 +1,92 @@
 .FlatListing .listing-content .content-body .body-info .body-opening-boxes{
     display: flex;
-    width: 100%;
-    justify-content: space-between;
     align-items: center;
-
-
+    justify-content: center;
+    column-gap: 1rem;
     .boxes-profile-info{
+        height: 100px;
+        flex: 1;
+        background-color: white;
+        border: 1px solid $mainGray;
+        border-radius: 5px;
+        padding: 0.5rem 1rem;
         display: flex;
         align-items: center;
-        background-color: white;
-        width: 49%;
-        min-height: 100px;
-        border-radius: 5px;
-        padding: 0.5rem 2em;
-        border: 1px solid $mainGray;
-
         &.premium{
             border-color: $accent;
         }
-
         .profile-info-pfp-container{
-            position: relative;
-                width: 75px;
-                height: 75px;
-                margin-right: 1rem;
-                display: flex;
-                justify-content: center;
-                align-items: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             .profile-info-pfp{
-                width: 100%;
-                height: 100%;
-                border-radius: 50%;
-                align-self: center;
+                width: 80px;
+                height: 80px;
                 object-fit: cover;
+                border-radius: 50%;
             }
-            .pfp-container-edit-icon{
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    pointer-events: all;
-                    position: absolute;
-                    background-color: rgba(0, 0, 0, 0.3);
-                    top: 0;
-                    bottom: 0;
-                    width: 100%;
-                    z-index: 10;
-                    border-radius: 50%;
-                    cursor: pointer;
-                    i{
-                        color: white;
-                        font-size: 18px;
-                    }
-            }
-
         }
 
         .profile-info-text{
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            padding: 0 1rem;
+            .text-name{
+                font-weight: bold;
+            }
             .text-description{
+                font-size: 14px;
                 color: $mainGray;
-                font-size: 12px;
-                align-self: flex-start;
             }
         }
     }
-
     .boxes-map-container{
+        flex: 1;
         position: relative;
-        width: 49%;
-        height: 100px;
         border-radius: 5px;
-        border: 1px solid $mainGray;
-        .boxes-map{
+        height: 100px;
+        .map-overlay{
+            border-radius:5px ;
             position: absolute;
-            z-index: 0;
             top: 0;
             bottom: 0;
             right: 0;
             left: 0;
-            max-height: 100%;
-            min-width: 100%;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-        .map-overlay{
-            color: white;
-            z-index: 1;
-            position: relative;
+            background-color: rgba(0, 0, 0, 0.493);
             display: flex;
             justify-content: center;
             align-items: center;
+            color: white;
+        }
+        .boxes-map{
+            object-fit: cover;
             width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.438);
+            height: 100px;
+        }
+    }
+}
+
+@media screen and (max-width: 500px){
+    .FlatListing .listing-content .content-body .body-info .body-opening-boxes{
+        align-items: stretch;
+        .boxes-profile-info{
+            height: auto;
+            flex-direction: column;
+            align-items: center;
+            .profile-info-pfp-container{
+                margin: 0;
+            }
+            .profile-info-text{
+                .text-name{
+                    text-align: center;
+                }
+                .text-description{
+                    text-align: center;
+                }
+            }
+        }
+        .boxes-map-container{
+            display: none;
         }
         
     }

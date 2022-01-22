@@ -138,30 +138,6 @@
 
 
 
-@media screen and (max-width: 500px){
-    .FlatListing .listing-content .content-body .body-info .body-opening-boxes{
-        align-items: stretch;
-        .boxes-profile-info{
-            flex-direction: column;
-            align-items: center;
-            .profile-info-pfp-container{
-                margin: 0;
-            }
-            .profile-info-text{
-                .text-name{
-                    text-align: center;
-                }
-                .text-description{
-                    text-align: center;
-                }
-            }
-        }
-        .boxes-map-container{
-            height: auto;
-            max-height: 300px;
-        }
-        
-    }
-}
+
 
 //Media
