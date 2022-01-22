@@ -16,7 +16,7 @@ const ListingContext = createContext();
 export const useListing = () => {
     return useContext(ListingContext);
 }
-export const ListingProvider = ({type, ssrProps, children}) => {
+export const ListingProvider = ({type, ssrProps, cr, children}) => {
     //Variables---
     //Contexts
     const router = useRouter();
@@ -32,7 +32,7 @@ export const ListingProvider = ({type, ssrProps, children}) => {
     //Listing info
     const [listingInfo, setListingInfo] = useState(null);
     //Edit mode
-    const [editListing, setEditListing] = useState(false);
+    const [editListing, setEditListing] = useState(cr);
     //ListingId
     const [listingId, setListingId] = useState(null);
     //imgs
@@ -65,6 +65,7 @@ export const ListingProvider = ({type, ssrProps, children}) => {
     const [reqDialogOpen, setReqDialogOpen] = useState(false);
     const [reportDialog, setReportDialog] = useState(false);
     const [sliderDialog, setSliderDialog] = useState(false);
+    const [welcomeDialog, setWelcomeDialog] = useState(false);
     const [requestMessage, setRequestMessage] = useState("");
     const [contactLoading, setContactLoading] = useState(false);
     const [galleryInput, setGalleryInput] = useState({
@@ -105,9 +106,10 @@ export const ListingProvider = ({type, ssrProps, children}) => {
         reloadProps();
         getListing(id)
         .then(doc => {
+            if(cr) setWelcomeDialog(true);
             if(ssrProps.status === "client-side"){
                 if(checkAccess(doc.data().userInfo.uid)){
-                    loadClientSide();
+                    loadClientSide(doc);
                 };
                 return;
             };
@@ -137,7 +139,7 @@ export const ListingProvider = ({type, ssrProps, children}) => {
 
     //Fills edit inputs and pictures with default values
     useEffect(() => {
-        if(listingInfo && editListing === true){
+        if(listingInfo && editListing){
             if(type === "flatmate"){
                 setBio(listingBio)
                 setBudget(listingInfo.mainInfo.budget);
@@ -159,7 +161,7 @@ export const ListingProvider = ({type, ssrProps, children}) => {
             setStartTime(listingInfo.mainInfo.startTime);
         }
         
-    }, [editListing])
+    }, [editListing, listingInfo])
 
     // Handle if user sign outs while editing
     useEffect(() =>{
@@ -295,22 +297,30 @@ export const ListingProvider = ({type, ssrProps, children}) => {
                 return Promise.resolve("No new imgs");
             } 
         }).then((response) => {
-            setLoading(false);
-            setListingInfo(null);
-            setListingBio(null);
-            setListingFlatBio(null);
-            setListingPersonBio(null);
-            setListingPersonBoxes(null);
-            setListingPersonTags(null);
-            setListingFlatBoxes(null);
-            setListingFlatTags(null);
-            setEditListing(false);
-            snackBar("Inzerát byl úspěšně upraven.", "success");
             window.scrollTo({top: 0, behavior: "smooth"});
-            router.push(router.asPath);
-            return getListing(listingId);
+            if(!cr){
+                setLoading(false);
+                setListingInfo(null);
+                setListingBio(null);
+                setListingFlatBio(null);
+                setListingPersonBio(null);
+                setListingPersonBoxes(null);
+                setListingPersonTags(null);
+                setListingFlatBoxes(null);
+                setListingFlatTags(null);
+                setEditListing(false);
+                snackBar("Inzerát byl úspěšně upraven.", "success");
+                router.push(router.asPath);
+                return getListing(listingId);
+            }else{
+                snackBar("Inzerát byl úspěšně vytvořen.", "success");
+                router.push(`/${listingInfo.type}/${listingId}`);
+                return Promise.resolve("response");
+            }
         }).then((doc) => {
-            setListingInfo(doc.data());
+            if(!cr){
+                setListingInfo(doc.data());
+            }
         }).catch((error) => {
             setLoading(false);
             snackBar("Něco se pokazilo. Zkuste to prosím později.", "error");
@@ -394,9 +404,7 @@ export const ListingProvider = ({type, ssrProps, children}) => {
         }
     }
 
-    const loadClientSide = () => {
-        getListing(id)
-        .then(doc => {
+    const loadClientSide = (doc) => {
             const docData = doc.data();
             setListingInfo(docData);
             setListingId(doc.id);
@@ -418,16 +426,14 @@ export const ListingProvider = ({type, ssrProps, children}) => {
             setListingFlatBoxes(type === "flat" && docData.flatBoxes);
             setListingFlatTags(type === "flatmate" && docData.flatTags);  
             setListingPremium (docData.userInfo.premium);
-        }).catch(error => {
-            //
-        })
-    }
+        }
 
 
     
 
     const value={
         type,
+        cr,
         listingInfo, 
         setListingInfo,
         //Edit mode
@@ -496,6 +502,8 @@ export const ListingProvider = ({type, ssrProps, children}) => {
         setRequestMessage,
         contactLoading,
         setContactLoading,
+        welcomeDialog,
+        setWelcomeDialog,
         galleryInput, 
         setGalleryInput,
         //Added values
