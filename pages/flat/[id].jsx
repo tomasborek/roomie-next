@@ -9,7 +9,7 @@ import { getDoc, doc } from 'firebase/firestore';
 
 const FlatListing = (props) => {
     return (
-        <ListingProvider type="flat" ssrProps={{...props}}>
+        <ListingProvider cr={false} type="flat" ssrProps={{...props}}>
             <Listing/>
         </ListingProvider>
     )

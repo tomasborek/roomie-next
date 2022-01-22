@@ -6,11 +6,12 @@ import { getDoc, doc } from 'firebase/firestore';
 import { auth } from '../../Firebase';
 //Contexts
 import {ListingProvider} from "../../contexts/ListingContext";
+//Componetns
 
 const FlatmateListing = (props) => {
     return (
-        <ListingProvider type="flatmate" ssrProps={{...props}}>
-            <Listing type="flatmate"/>  
+        <ListingProvider cr={false} type="flatmate" ssrProps={{...props}}>
+            <Listing/>  
         </ListingProvider>
     )
 }
