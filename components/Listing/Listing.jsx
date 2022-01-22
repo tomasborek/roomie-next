@@ -46,7 +46,11 @@ const Listing = () => {
         return (
             <>
             <Head>
+                {cr ?
+                <title>Vytvořte si vlastní inzerát | Roomie</title>
+                :
                 <title>{listingName} | Roomie</title>
+                } 
             </Head>
 
             <div className="Listing FlatMateListing">
@@ -138,7 +142,11 @@ const Listing = () => {
         return (
             <>
                 <Head>
-                    <title>Byt {listingName} | Roomie</title>
+                    {cr ?
+                        <title>Vytvořte si vlastní inzerát | Roomie</title>
+                    :
+                        <title>Byt {listingName} | Roomie</title>
+                    } 
                 </Head>
 
                 <div className="Listing FlatListing">
