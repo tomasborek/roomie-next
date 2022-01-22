@@ -70,8 +70,8 @@ const ListingHeader = () => {
                                 <button onClick={() => setEditListing(prevState => !prevState)}className="main-edit-profile">{editListing ? "Zpět" : "Upravit inzerát"}</button>
                             }
                             <div className="main-actions">
-                            {(listingFans && ((currentUser && listingInfo) && (currentUser.uid != listingInfo.userInfo.uid))) && <i onClick={() => handleLike()} className={`fa${listingLiked ? "s" : "r"} fa-heart main-like`}></i>}
-                                <i onClick={() => setMoreInfoOpen(prevState => !prevState)} className="main-more fas fa-ellipsis-h"></i>
+                                {(listingFans && ((currentUser && listingInfo) && (currentUser.uid != listingInfo.userInfo.uid))) && <i onClick={() => handleLike()} className={`fa${listingLiked ? "s" : "r"} fa-heart main-like`}></i>}
+                                {((listingInfo && currentUser) && (listingInfo.userInfo.uid != currentUser.uid)) && <i onClick={() => setMoreInfoOpen(prevState => !prevState)} className="main-more fas fa-ellipsis-h"></i>}
                             </div>
                             <ul className={`main-more-list ${moreInfoOpen && "active"}`}>
                                 <li onClick={() => setReportDialog(true)}>Nahlásit uživatele</li>
@@ -133,7 +133,7 @@ const ListingHeader = () => {
                         }  
                             <div className="main-actions">
                                 {(listingFans && ((currentUser && listingInfo) && (currentUser.uid != listingInfo.userInfo.uid))) && <i onClick={() => handleLike()} className={`fa${listingLiked ? "s" : "r"} fa-heart main-like`}></i> }
-                                <i onClick={() => setMoreInfoOpen(prevState => !prevState)} className="main-more fas fa-ellipsis-h"></i>
+                                {((listingInfo && currentUser) && (listingInfo.userInfo.uid != currentUser.uid)) && <i onClick={() => setMoreInfoOpen(prevState => !prevState)} className="main-more fas fa-ellipsis-h"></i>}
                             </div>
                             <ul className={`main-more-list ${moreInfoOpen && "active"}`}>
                                 <li onClick={() => setReportDialog(true)}>Nahlásit uživatele</li>
