@@ -1,6 +1,8 @@
 import React from 'react';
 //Contexts
 import { useListing } from '../../../contexts/ListingContext';
+//MUI
+import { Skeleton } from '@mui/material';
 
 const ListingOpeningBoxes = () => {
     const {listingInfo, editListing, listingUsername, listingGender, listingAge, pfp, addedPfp, setGalleryInput, listingPremium} = useListing();
