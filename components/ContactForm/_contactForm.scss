@@ -1,0 +1,47 @@
+.home-contact-form{
+    width: 95%;
+    max-width: 700px;
+    background-color: white;
+    border-radius: 5px;
+    .form-header{
+        @include gradientBg;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem;
+        border-radius: 5px 5px 0 0;
+        i{
+            cursor: pointer;
+            font-size: 18px;
+        }
+    }
+    .form-content{
+        padding: 1rem;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .content-heading{
+            margin-bottom: 2rem;
+        }
+    }
+
+    .form-content .content-form{
+        width: 100%;
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        .form-item{
+            margin-bottom: 1rem;
+            width: 100%;
+            resize: none;
+            border-radius: 5px;
+        }
+       
+        .form-textarea{
+            height: 150px
+        }
+    }
+}
