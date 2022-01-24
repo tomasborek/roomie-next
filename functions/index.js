@@ -10,6 +10,7 @@ exports.images = require("./images");
 exports.emailVerification = require("./emailVerification");
 exports.onetimeFunctions = require("./onetimeFunctions");
 exports.scheduled = require("./scheduled");
+exports.feedback = require("./feedback");
 
 
 
