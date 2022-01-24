@@ -10,11 +10,7 @@ import HomeHeader from '../components/HomeHeader/HomeHeader';
 import Banner from '../components/Banner/Banner';
 import Footer from '../components/Footer/Footer';
 //MUI
-import Backdrop from "@mui/material/Backdrop";
-import FormControl from "@mui/material/FormControl";
-import MenuItem from "@mui/material/MenuItem";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
+import ContactForm from "../components/ContactForm/ContactForm";
 
 
 export default function Home() {
@@ -23,9 +19,11 @@ export default function Home() {
     const {currentUser} = useAuth();
     //State
     const [contactForm, setContactForm] = useState(false);
-    const [contactFormSubject, setContactFormSubject] = useState("");
     //Refs
     const videoRef = useRef();
+    
+
+    
    
   return (
     <>
@@ -36,34 +34,7 @@ export default function Home() {
     <div className="Home">
             <HomeHeader />
             <Banner />
-
-            <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open={contactForm}>
-
-                <div className="home-contact-form">
-                    <div className="form-header">
-                        <div className="void-fill"></div>
-                        <i onClick={() => setContactForm(false)} className="fas fa-times"></i>
-                    </div>
-                    <div className="form-content">
-                        <h2 className="content-heading">Kontaktujte nás</h2>
-                        <div className="content-form">
-                            <input maxLength={30} placeholder="Vaše jméno..." className="form-item" type="text" />
-                            <input maxLength={60} placeholder="Váš e-mail..." className="form-item" type="text" />
-                            <FormControl className="form-select form-item" size="small">
-                                <InputLabel>Typ zprávy</InputLabel>
-                                <Select defaultValue="" value={contactFormSubject ? contactFormSubject : ""} onChange={(e) => setContactFormSubject(e.target.value)} label="Typ zprávy">
-                                    <MenuItem value="Technický problém">Technický problém</MenuItem>
-                                    <MenuItem value="Stížnost">Stížnost</MenuItem>
-                                    <MenuItem value="Dotaz">Dotaz</MenuItem>
-                                </Select>
-                            </FormControl>
-                            <textarea maxLength={2000} placeholder="Obsah zprávy..." className="form-item form-textarea"></textarea>
-                            <button className="acc-btn form-button">Odeslat</button>
-                        </div>
-                        
-                    </div>
-                </div>
-            </Backdrop>
+            <ContactForm open={contactForm} setOpen={setContactForm}/>
            
            <div className="mid-container">
                 <section className="home-section section-left">
