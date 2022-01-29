@@ -14,7 +14,10 @@ const InputDialog = ({heading, description, setMessage, message, setOpen, handle
             <div className="dialog-heading">{heading}</div>
             <div className="dialog-description">{description}</div>
             <textarea maxLength={250} onChange={(e) => textAreaChange(e)} value={message} className="dialog-input" placeholder="Sem zadejte svou zprávu..."></textarea>
-            <button onClick={handleSend} className="main-btn">Poslat <i className="fas fa-envelope"></i></button>
+            <button onClick={() => {
+                handleSend();
+                setOpen(false);
+            }} className="main-btn">Poslat <i className="fas fa-envelope"></i></button>
             
         </div>
     )
