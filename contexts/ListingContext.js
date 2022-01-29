@@ -22,7 +22,7 @@ export const ListingProvider = ({type, ssrProps, cr, children}) => {
     const router = useRouter();
     const {id} = router.query;
     const {getListing, getUser} = useDb();
-    const {currentUser} = useAuth();
+    const {currentUser, currentUserInfo} = useAuth();
     const [loading, setLoading] = useLoading();
     const {snackBar} = useSnackBar();
     const {callable} = useFunctions();
@@ -67,6 +67,7 @@ export const ListingProvider = ({type, ssrProps, cr, children}) => {
     const [sliderDialog, setSliderDialog] = useState(false);
     const [welcomeDialog, setWelcomeDialog] = useState(false);
     const [requestMessage, setRequestMessage] = useState("");
+    const [reportMessage, setReportMessage] = useState("");
     const [contactLoading, setContactLoading] = useState(false);
     const [galleryInput, setGalleryInput] = useState({
         open: false,
@@ -91,6 +92,7 @@ export const ListingProvider = ({type, ssrProps, cr, children}) => {
     const deleteImgs = callable("images-deleteImgs");
     const likeListing = callable("userUpdates-likeListing");
     const unlikeListing = callable("userUpdates-unlikeListing");
+    const reportUser = callable("feedback-reportUser");
 
     
         
@@ -360,6 +362,26 @@ export const ListingProvider = ({type, ssrProps, cr, children}) => {
         })
     }
 
+    const handleReport = () => {
+        const uid = listingInfo.userInfo.uid;
+        const username = listingUsername;
+        const message = reportMessage;
+        const senderUid = currentUser.uid;
+        let senderUsername = null;
+        if(currentUserInfo){
+            senderUsername = currentUserInfo.mainInfo.username;
+        }
+        const reportInfo = {
+            uid,
+            username,
+            message,
+            listingId,
+            senderUid,
+            senderUsername
+        }
+        reportUser(JSON.stringify(reportInfo));
+    }
+
     const handleImgDelete = (type) => {
         if(type === "pfp"){
             if(addedPfp){
@@ -500,6 +522,8 @@ export const ListingProvider = ({type, ssrProps, cr, children}) => {
         setSliderDialog,
         requestMessage,
         setRequestMessage,
+        reportMessage,
+        setReportMessage,
         contactLoading,
         setContactLoading,
         welcomeDialog,
@@ -530,6 +554,7 @@ export const ListingProvider = ({type, ssrProps, cr, children}) => {
         reloadProps,
         handleSave,
         handleRequest,
+        handleReport,
         handleImgDelete,
         loadClientSide,
         handleRequest,
