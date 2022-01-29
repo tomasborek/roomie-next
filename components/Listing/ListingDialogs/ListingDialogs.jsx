@@ -1,6 +1,7 @@
 import React from 'react';
 //COntexts
 import {useListing} from "../../../contexts/ListingContext";
+import { useSnackBar } from '../../../contexts/SnackBarContext';
 //Components
 import InputDialog from '../../InputDialog/InputDialog';
 import GalleryInput from '../../GalleryInput/GalleryInput';
@@ -11,6 +12,7 @@ import CustomDialog from '../../CustomDialog/CustomDialog';
 import { Backdrop, Dialog, DialogTitle, DialogContent, DialogActions, Button, Slider } from '@mui/material';
 
 const ListingDialogs = () => {
+    const {snackBar} = useSnackBar();
     const bdSx = {
         zIndex: (theme) => theme.zIndex.drawer + 1 
     }
@@ -73,7 +75,11 @@ const ListingDialogs = () => {
                     setMessage={setReportMessage} 
                     message={reportMessage} 
                     setOpen={setReportDialog} 
-                    handleSend={handleReport}/>
+                    handleSend={() => {
+                        handleReport();
+                        snackBar("Nahlášení bude zkontrolováno.", "success");
+                        setReportMessage("");
+                    }}/>
             </Backdrop>
 
             {/*Request*/}
