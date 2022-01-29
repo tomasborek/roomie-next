@@ -74,7 +74,10 @@ const ListingHeader = () => {
                                 {((listingInfo && currentUser) && (listingInfo.userInfo.uid != currentUser.uid)) && <i onClick={() => setMoreInfoOpen(prevState => !prevState)} className="main-more fas fa-ellipsis-h"></i>}
                             </div>
                             <ul className={`main-more-list ${moreInfoOpen && "active"}`}>
-                                <li onClick={() => setReportDialog(true)}>Nahlásit uživatele</li>
+                                <li onClick={() => {
+                                    setReportDialog(true);
+                                    setMoreInfoOpen(false);
+                                }}>Nahlásit uživatele</li>
                             </ul>
                             <div className="main-description">
                                 {listingGender && <p>{listingAge}, {listingGender === "male" ? "muž" : listingGender === "female" ? "žena" : "jiné"}</p>}
@@ -136,7 +139,10 @@ const ListingHeader = () => {
                                 {((listingInfo && currentUser) && (listingInfo.userInfo.uid != currentUser.uid)) && <i onClick={() => setMoreInfoOpen(prevState => !prevState)} className="main-more fas fa-ellipsis-h"></i>}
                             </div>
                             <ul className={`main-more-list ${moreInfoOpen && "active"}`}>
-                                <li onClick={() => setReportDialog(true)}>Nahlásit uživatele</li>
+                                <li onClick={() => {
+                                    setReportDialog(true);
+                                    setMoreInfoOpen(false);
+                                }}>Nahlásit uživatele</li>
                             </ul>
                             <div className="main-description">
                                 <p>{listingInfo && listingInfo.flatBoxes.location}</p>
