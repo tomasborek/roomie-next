@@ -23,11 +23,13 @@ import UnderConstruction from "../UnderConstruction/UnderConstruction";
 //MUI
 import { Backdrop } from '@mui/material';
 import {Snackbar, Alert} from "@mui/material"
+import CookieDialog from '../CookieDialog/CookieDialog';
 
 
 
 
 const Layout = ({children}) => {
+    const [cookieDialogOpen, setCookieDialogOpen] = useState(false);
     const router = useRouter();
     const {currentUser} = useAuth() 
     const [underCon, setUnderCon] = useState(false);
@@ -39,6 +41,9 @@ const Layout = ({children}) => {
             setUnderCon(false);
         }
     }, [currentUser])
+    useEffect(() => {
+        setCookieDialogOpen(!localStorage.getItem("cookies-accepted"));
+    }, [])
     return (
         <>
         {!underCon ?
@@ -68,6 +73,7 @@ const Layout = ({children}) => {
                                         </div>
                                     </CustomDialog>
                                 </Backdrop>
+                                {cookieDialogOpen && <CookieDialog setOpen={setCookieDialogOpen}/>}
                                 {children}
                             </RegisterProvider>
                         </NavOverlayProvider>

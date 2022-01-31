@@ -4440,6 +4440,75 @@ textarea {
   height: 150px;
 }
 
+.cookie-dialog {
+  width: 95%;
+  max-width: 400px;
+  position: fixed;
+  z-index: 1000;
+  bottom: 1rem;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+  left: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  background-color: white;
+  -webkit-box-shadow: 0 0 1rem rgba(0, 0, 0, 0.39);
+          box-shadow: 0 0 1rem rgba(0, 0, 0, 0.39);
+}
+
+.cookie-dialog .dialog-left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.cookie-dialog .dialog-left .left-heading {
+  font-size: 14px;
+}
+
+.cookie-dialog .dialog-left .left-description {
+  font-size: 12px;
+  color: #B8B8B8;
+}
+
+.cookie-dialog button {
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  margin-left: 1rem;
+  background-color: black;
+  color: white;
+}
+
+@media screen and (max-width: 400px) {
+  .cookie-dialog {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .cookie-dialog .dialog-left .left-heading,
+  .cookie-dialog .dialog-left .left-description {
+    text-align: center;
+  }
+  .cookie-dialog button {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+}
+
 .header-info .info-contact {
   display: -webkit-box;
   display: -ms-flexbox;

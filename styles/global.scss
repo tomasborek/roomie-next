@@ -5,8 +5,6 @@
 @import "./partials/reusables";
 @import "./partials/mixins";
 
-
-
 //Pages
 @import "./pages/home";
 @import "./pages/register";
@@ -62,6 +60,7 @@
 @import "../components/PageFeedLayout/pageFeedLayout";
 @import "../components/LikedListing/likedListing";
 @import "../components/ContactForm/contactForm";
+@import "../components/CookieDialog/cookieDialog";
 //Listing
 @import "../components/Listing//ListingHeader/ListingContact/listingContact";
 @import "../components/Listing/ListingHeader/listingHeader";
