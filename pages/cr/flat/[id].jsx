@@ -1,19 +1,19 @@
-import React,{useEffect, useRef, useState} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
+import Listing from '../../../components/Listing/Listing';
 //next
 import Head from "next/head"
-// Components
-import Listing from "../../../components/Listing/Listing";
 //Contexts
-import ListingProvider from "../../../contexts/ListingContext";
+import {ListingProvider} from "../../../contexts/ListingContext";
 
 const CreateFlatListing = () => {
     const listingName = null;
     const listingUsername = null;
     const listingAge = null;
     const listingGender = null;
-    const listingBio = null;
     const listingPersonBoxes = null;
-    const listingFlatTags = null;
+    const listingFlatBoxes = null;
+    const listingPersonBio = null;
+    const listingFlatBio = null;
     const listingPersonTags = null;
     const listingPremium = null;
     const listingFans = null;
@@ -23,10 +23,11 @@ const CreateFlatListing = () => {
             listingUsername,
             listingAge,
             listingGender,
-            listingBio,
+            listingPersonBio,
+            listingFlatBio,
             listingPersonBoxes,
-            listingFlatTags,
             listingPersonTags,
+            listingFlatBoxes,
             listingPremium,
             listingFans,
             status,
