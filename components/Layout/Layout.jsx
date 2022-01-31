@@ -30,7 +30,7 @@ import {Snackbar, Alert} from "@mui/material"
 const Layout = ({children}) => {
     const router = useRouter();
     const {currentUser} = useAuth() 
-    const [underCon, setUnderCon] = useState(true);
+    const [underCon, setUnderCon] = useState(false);
     const {isSnackBarOpen, snackBarSeverity, snackBarMsg} = useSnackBar();
     const [loading, setLoading] = useLoading();
     const [exploreDialog, setExploreDialog] = useExploreDialog();
