@@ -1,69 +1,81 @@
-.login-box{
-    background-color: #EFEFEF;
-    padding: 2rem 1rem;
-    border-radius: 5px;
-    border: white 5px solid;
-    width: 95%;
-    max-width: 1000px;
-    margin: auto;
-    @include centerHor;
-    justify-content: space-between;
+.login-box {
+  background-color: #efefef;
+  padding: 2rem 1rem;
+  border-radius: 5px;
+  border: white 5px solid;
+  width: 95%;
+  max-width: 1000px;
+  margin: auto;
+  @include centerHor;
+  justify-content: space-between;
 
-    h1{
-        margin-bottom: 1rem;
+  h1 {
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-weight: normal;
+    margin-bottom: 2rem;
+  }
+
+  .input-box {
+    position: relative;
+    margin-bottom: 1rem;
+    width: 300px;
+    i {
+      position: absolute;
+      transform: translate(0, -50%);
+      font-size: 1rem;
+      left: 0.5rem;
+      top: 50%;
     }
-
-    h2{
-        font-weight: normal;
-        margin-bottom: 2rem;
+    input {
+      padding: 0.5rem 0;
+      padding-left: 2rem;
+      width: 100%;
     }
+  }
 
-    .input-box{
-        position: relative;
-        margin-bottom: 1rem;
-        width: 300px;
-        i{
-            position: absolute;
-            transform: translate(0, -50%);
-            font-size: 1rem;
-            left: 0.5rem;
-            top: 50%;
-        }
-        input{
-            padding: 0.5rem 0;
-            padding-left: 2rem;
-            width: 100%;
-        }
+  .box-forgot-password-link {
+    font-size: 14px;
+    color: $mainColor;
+    cursor: pointer;
+  }
+
+  .box-register-link {
+    margin-top: 1rem;
+    font-size: 14px;
+    color: $darkerGray;
+    a {
+      color: $mainColor;
     }
-
-    .box-forgot-password-link{
-        font-size: 14px;
-        color: $mainColor;
-    }
-
-    
-
-    .box-register-link{
-        margin-top: 1rem;
-        font-size: 14px;
-        color: $darkerGray;
-        a{
-            color: $mainColor;
-        }
-    }
+  }
 }
 
+.dialog-reset-password {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  .dialog-input {
+    margin: 1rem 0;
+    border-radius: 5px;
+  }
+  button {
+    background-color: black;
+    color: white;
+  }
+}
 //media
 
-
-@media screen and (max-width: 430px){
-    .login-box{
-        h1{
-            text-align: center;
-        }
-
-        .input-box{
-            width: 100%;
-        }
+@media screen and (max-width: 430px) {
+  .login-box {
+    h1 {
+      text-align: center;
     }
+
+    .input-box {
+      width: 100%;
+    }
+  }
 }
