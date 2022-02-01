@@ -51,3 +51,44 @@ exports.unlikeListing = functions.https.onCall((data, context) => {
     return db.collection("users").doc(fanUid).collection("likedListings").doc(listingId).delete();
   })
 })
+
+exports.resetPasswordEmail = functions.https.onCall((data, context) => {
+  data = JSON.parse(data);
+  const db = admin.firestore();
+  const emailCol = db.collection("newUserMail");
+  const email = data.email;
+  const token = Math.random().toString(20).substring(2, 20);
+  let uid;
+
+  return db.collection("users").where("contact.email", "==", email).get().then((user) => {
+    uid = user.docs[0].id;
+    return emailCol.add({
+      to: email,
+      message: {
+          subject: "Obnovení hesla",
+          text: `Pro změnu svého hesla prosím navštivte https://roomie.cz/reset-password/${token}`,
+      },
+    })
+  }).then((response) => {
+    return db.collection("passwordTokens").doc(token).set({
+      uid,
+      email
+    })
+  })
+})
+
+exports.resetPassword = functions.https.onCall((data,context) => {
+  data = JSON.parse(data);
+  const db = admin.firestore();
+  const id = data.id;
+  const password = data.password;
+  let uid;
+  return db.collection("passwordTokens").doc(id).get().then((userToken) => {
+      uid = userToken.data().uid;
+      return admin.auth().updateUser(uid, {
+        password,
+      })
+  }).then((response) => {
+    return db.collection("passwordTokens").doc(id).delete();
+  })
+})
