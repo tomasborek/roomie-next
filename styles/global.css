@@ -1315,6 +1315,62 @@ textarea {
   margin-bottom: 1rem;
 }
 
+.reset-password {
+  padding-top: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+.reset-password .reset-password-error {
+  color: #E14949;
+}
+
+.reset-password form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.reset-password form div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0.5rem 0;
+}
+
+.reset-password form div p {
+  margin-bottom: 0.25rem;
+}
+
+.reset-password form button {
+  margin-top: 1rem;
+  background-color: black;
+  color: white;
+}
+
 .home-header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1952,7 +2008,7 @@ textarea {
 }
 
 .login-box {
-  background-color: #EFEFEF;
+  background-color: #efefef;
   padding: 2rem 1rem;
   border-radius: 5px;
   border: white 5px solid;
@@ -2010,6 +2066,7 @@ textarea {
 .login-box .box-forgot-password-link {
   font-size: 14px;
   color: #309EAB;
+  cursor: pointer;
 }
 
 .login-box .box-register-link {
@@ -2020,6 +2077,30 @@ textarea {
 
 .login-box .box-register-link a {
   color: #309EAB;
+}
+
+.dialog-reset-password {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1rem;
+}
+
+.dialog-reset-password .dialog-input {
+  margin: 1rem 0;
+  border-radius: 5px;
+}
+
+.dialog-reset-password button {
+  background-color: black;
+  color: white;
 }
 
 @media screen and (max-width: 430px) {
