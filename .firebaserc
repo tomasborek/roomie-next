@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "roomie-dev-41f4d"
+    "default": "roomie-dev-41f4d",
+    "prod": "roomie-prod-24d36"
   }
 }
