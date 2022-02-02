@@ -79,7 +79,7 @@ const EditProfile = () => {
         if(userData){
             usernameRef.current.value = userData.data().mainInfo.username;
             emailRef.current.value = userData.data().contact.email;
-            phoneRef.current.value = userData.data().contact.phone;
+            phoneRef.current.value = userData.data().contact.phone.substr(4);
             igRef.current.value = userData.data().contact.socials.ig;
             fbRef.current.value = userData.data().contact.socials.fb;
             setListingVisible(!userData.data().hiddenListing);
@@ -103,6 +103,10 @@ const EditProfile = () => {
             snackBar("Prosím, zadejte své opravdové jméno.", "error");
             return;
         };
+        if(phone.includes("+")){
+            snackBar("Prosím zadejte číslo bez předvolby");
+            return;
+        }
         if(phone.length < 9){
             snackBar("Prosím, zadejte své opravdové telefonní číslo.", "error");
             return;
@@ -115,14 +119,15 @@ const EditProfile = () => {
             snackBar("Prosím, zadejte opravdové odkazy na sociální sitě.", "error");
             return;
         };
+        phone = userData.data().contact.phone.substr(0,4) + phone;
         setLoading(true);
         const profileInfo = {
             uid: currentUser.uid,
             listingId: userData.data().listing.id,
             userParams: {
                 contact: {
-                    email: email,
-                    phone: phone,
+                    email,
+                    phone,
                     socials: {
                         fb: fbRef.current.value,
                         ig: igRef.current.value
@@ -136,8 +141,8 @@ const EditProfile = () => {
                 "userInfo.age": userData.data().mainInfo.age,
                 "userInfo.gender": userData.data().mainInfo.gender,
                 "userInfo.contact": {
-                    email: emailRef.current.value,
-                    phone: phoneRef.current.value,
+                    email,
+                    phone,
                     fb: fbRef.current.value,
                     ig: igRef.current.value
                 },
@@ -404,7 +409,7 @@ const EditProfile = () => {
                                 </div>
                                 <div className="form-item">
                                     <p className="item-description">E-mail</p>
-                                    <input maxLength={30} ref={emailRef} type="text" className="item-input" />
+                                    <input disabled maxLength={30} ref={emailRef} type="text" className="item-input" />
                                 </div>
                                 <div className="form-item">
                                     <p className="item-description"> Tel. číslo</p>
@@ -437,7 +442,7 @@ const EditProfile = () => {
                             
                             <div className="content-btns">
                                 <button onClick={() => passwordRef.current.value ? setPasswordDialogOpen(true) : handleSave()} className="main-btn">Uložit změny</button>
-                                <button onClick={() => setDDialogOpen(true)} className="acc-btn">Zahodit změny</button>
+                                {/* <button onClick={() => setDDialogOpen(true)} className="acc-btn">Zahodit změny</button> */}
                             </div>
                         
                     </div>
