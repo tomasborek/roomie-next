@@ -5,8 +5,7 @@ import {getFunctions} from "firebase/functions";
 import {getStorage} from "firebase/storage";
 import {getAnalytics} from "firebase/analytics";
 
-
-// Your web app's Firebase configuration
+//Dev
 // const firebaseConfig = {
 //   apiKey: "AIzaSyApkkvvAikniIoAl9BixkWqPcdSi97RFKg",
 //   authDomain: "roomie-dev-41f4d.firebaseapp.com",
@@ -33,4 +32,4 @@ export const auth = getAuth();
 export const db = getFirestore();
 export const functions = getFunctions();
 export const storage = getStorage();
-export const analytics = getAnalytics(app);
+const analytics = getAnalytics();
