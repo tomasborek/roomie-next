@@ -28,9 +28,9 @@ const Footer = () => {
                     <p className="section-header">Spojte se s námi:</p>
                     <div className="section-description">
                         <div className="description-icons">
-                            <i className="fab fa-instagram icons-icon"></i>
-                            <i className="fab fa-facebook icons-icon"></i>
-                            <i className="fas fa-envelope icons-icon"></i>
+                            <i onClick={() => window.location.href = "https://instagram.com/roomiecz"} className="fab fa-instagram icons-icon"></i>
+                            <i onClick={() => window.location.href = "https://facebook.com/roomiecz"} className="fab fa-facebook icons-icon"></i>
+                            <a href='mailto:roomieback@gmail.com'><i className="fas fa-envelope icons-icon"></i></a>
                         </div>
                         <Link href="/">Kontaktujte nás...</Link>
                     </div>
