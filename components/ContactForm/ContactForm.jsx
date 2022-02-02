@@ -56,7 +56,7 @@ const ContactForm = ({open, setOpen}) => {
         <div className="home-contact-form">
             <div className="form-header">
                 <div className="void-fill"></div>
-                <i onClick={() => setContactForm(false)} className="fas fa-times"></i>
+                <i onClick={() => setOpen(false)} className="fas fa-times"></i>
             </div>
             <div className="form-content">
                 <h2 className="content-heading">Kontaktujte nás</h2>

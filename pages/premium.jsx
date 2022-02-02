@@ -1,12 +1,14 @@
 import React from 'react';
 //next
 import Head from 'next/dist/shared/lib/head';
+import { useRouter } from 'next/router';
 
 //Components
 import Header from "../components/Header/Header";
 import Footer from '../components/Footer/Footer';
 
 const Premium = () => {
+    const router = useRouter();
     return (
         <>
         <Head>
@@ -64,8 +66,8 @@ const Premium = () => {
                             <li className="list-item"><i className="fas fa-check item-icon"></i> <p className="item-description">Prioritní podpora</p></li>
                             
                         </ul>
-                        <h2 className="box-price">199 Kč</h2>
-                        <button className="acc-btn box-btn">Zakoupit</button>
+                        <h2 className="box-price">Již brzy</h2>
+                        {/* <button className="acc-btn box-btn">Zakoupit</button> */}
                     </div>
 
                     <div className="boxes-box user">
@@ -78,7 +80,7 @@ const Premium = () => {
                             <li className="list-item"><i className="fas fa-check item-icon"></i> <p className="item-description">70 inzerátů denně</p></li>
                         </ul>
                         <h2 className="box-price">ZDARMA</h2>
-                        <button className="main-btn box-btn">Přihlásit se</button>
+                        <button onClick={() => router.push("/login")} className="main-btn box-btn">Přihlásit se</button>
                     </div>
                 </div>
 

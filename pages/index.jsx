@@ -54,12 +54,12 @@ export default function Home() {
             <div className="home-premium-banner">
                 <div className="mid-container">
                     <div className="banner-text">
-                        <h1>Premium profil přináší spoustu výhod!</h1>
-                        <h2>Pomocí premium profilu všichni poznají legitimitu vašeho profilu. Bude se zobrazovat na prvních příčkách, a to zároveň s odznakem důvěryhodnosti, který výrazně ušetří váš čas.</h2>
+                        <h1>Jaké by to bylo povýšit váš Roomie profil?</h1>
+                        <h2>Usilovně pracujeme na tom, abychom Roomie vylepšili pro maximální spokojenost všech jeho uživatelů. Jedna z budoucích funkcí je Premium profil, který Vám spolubydlení najde ještě rychleji!</h2>
                         <button onClick={() =>{ 
                             router.push("/premium");
                             window.scrollTo(0,0);
-                        }} className="acc-btn">Přidat se do rodiny Roomie</button>
+                        }} className="acc-btn">Zjistit více</button>
                     </div>
                     <div className="banner-imgs">
                         <div className="banner-guy-container">
