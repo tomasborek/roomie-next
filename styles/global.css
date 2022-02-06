@@ -1551,8 +1551,10 @@ textarea {
 }
 
 .banner .banner-buttons button {
+  padding: 1rem 0.5rem;
+  font-size: 16px;
   margin-inline: 0.5rem;
-  width: 250px;
+  width: 215px;
   font-weight: 600;
   -webkit-transition: all 200ms;
   transition: all 200ms;
