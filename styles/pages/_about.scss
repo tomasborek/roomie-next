@@ -1,0 +1,43 @@
+.about {
+  .about-banner {
+    height: 200px;
+    @include gradientBg;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+  .about-content {
+    .about-help-section {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      .section-image {
+        position: relative;
+        min-width: 454px;
+        min-height: 400px;
+      }
+      .section-content {
+        margin-left: 3rem;
+        .content-text {
+          display: flex;
+          flex-direction: column;
+          h1 {
+            color: $accent;
+            margin-bottom: 1rem;
+            font-size: 36px;
+          }
+          h2 {
+            font-size: 24px;
+            font-weight: normal;
+            color: $darkerGray;
+            margin-bottom: 1rem;
+          }
+        }
+        button {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}

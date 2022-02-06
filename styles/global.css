@@ -1367,6 +1367,70 @@ textarea {
   color: white;
 }
 
+.about .about-banner {
+  height: 200px;
+  background: #309eab;
+  background: -webkit-gradient(linear, left top, right top, from(#309eab), color-stop(87%, #154c70));
+  background: linear-gradient(90deg, #309eab 0%, #154c70 87%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: white;
+}
+
+.about .about-content .about-help-section {
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.about .about-content .about-help-section .section-image {
+  position: relative;
+  min-width: 454px;
+  min-height: 400px;
+}
+
+.about .about-content .about-help-section .section-content {
+  margin-left: 3rem;
+}
+
+.about .about-content .about-help-section .section-content .content-text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.about .about-content .about-help-section .section-content .content-text h1 {
+  color: #E14949;
+  margin-bottom: 1rem;
+  font-size: 36px;
+}
+
+.about .about-content .about-help-section .section-content .content-text h2 {
+  font-size: 24px;
+  font-weight: normal;
+  color: #6b717f;
+  margin-bottom: 1rem;
+}
+
+.about .about-content .about-help-section .section-content button {
+  font-size: 14px;
+}
+
 .home-header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4586,6 +4650,66 @@ textarea {
     margin-left: 0;
     margin-top: 1rem;
   }
+}
+
+.about .about-content .about-section {
+  margin: 3rem 0;
+}
+
+.about .about-content .about-section .section-heading {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.about .about-content .about-section .section-heading .heading-line {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  background-color: #309EAB;
+}
+
+.about .about-content .about-section .section-heading h2 {
+  color: #309EAB;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  min-width: 300px;
+  padding: 0 2rem;
+  background-color: white;
+}
+
+.about .about-content .about-section .section-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.about .about-content .about-section .section-content.left {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+
+.about .about-content .about-section .section-content .content-text {
+  max-width: 70fr;
+  padding: 0 2rem;
+}
+
+.about .about-content .about-section .section-content .content-image {
+  position: relative;
+  min-width: 506px;
+  min-height: 182px;
 }
 
 .header-info .info-contact {

@@ -1,0 +1,45 @@
+.about {
+  .about-content {
+    .about-section {
+      margin: 3rem 0;
+      .section-heading {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        margin-bottom: 2rem;
+        .heading-line {
+          position: absolute;
+          top: 50%;
+          width: 100%;
+          height: 1px;
+          background-color: $mainColor;
+        }
+        h2 {
+          color: $mainColor;
+          text-align: center;
+          position: relative;
+          z-index: 10;
+          min-width: 300px;
+          padding: 0 2rem;
+          background-color: white;
+        }
+      }
+      .section-content {
+        display: flex;
+        align-items: center;
+        &.left {
+          flex-direction: row-reverse;
+        }
+        .content-text {
+          max-width: 70fr;
+          padding: 0 2rem;
+        }
+        .content-image {
+          position: relative;
+          min-width: 506px;
+          min-height: 182px;
+        }
+      }
+    }
+  }
+}
