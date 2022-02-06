@@ -17,24 +17,24 @@ const about = () => {
         </div>
         <div className="about-content">
             <AboutSection heading={"Začátek projektu"} image={"/img/about/puzzle.png"} x={506} y={182}>
-                Krize bydlení, byty a jejich přemrštěné ceny. Nespočet inzerátů na Facebooku a dva studenti, 
+                <b>Krize bydlení</b>, byty a jejich přemrštěné ceny. Nespočet inzerátů na Facebooku a dva studenti, 
                     kteří tuto situaci vnímají za kritickou. Tak se seznámil Pavel a Tomáš.
-                    Během pár dlouhých dnů jsme v Covidem omezených kavárnách probrali naše vzájemné zkušenosti s hledáním dostupného bydlení, kdy studenti prochází množstvím nabídek, 
-                    ze kterých vyselektují minimum, které si však ani ve finále nemohou dovolit. Tímto procesem však ani zdaleka neprocházejí jen studenti, ale i pracující, 
-                    kteří svou kariéru teprv započali a nemají v kasičce tolik peněz na pronájem samostatného bydlení. Rozhodli jsme se tak vytvořit moderní platformu, 
-                    na které se budou setkávat lidi hledající či nabízející spolubydlení.
+                    Během pár dlouhých dnů jsme v Covidem omezených kavárnách probrali naše vzájemné zkušenosti s <b>hledáním dostupného bydlení</b>, kdy studenti prochází množstvím nabídek, 
+                    ze kterých vyselektují minimum, které si však ani ve finále <b>nemohou dovolit</b>. Tímto procesem však ani zdaleka neprocházejí jen studenti, ale i pracující, 
+                    kteří svou kariéru teprv započali a nemají v kasičce tolik peněz na <b>pronájem samostatného bydlení</b>. Rozhodli jsme se tak vytvořit moderní platformu, 
+                    na které se budou setkávat lidi <b>hledající či nabízející spolubydlení</b>.
                 </AboutSection>
             <AboutSection heading={"Co si od Roomie slibujeme?"} image={"/img/about/guy.png"} left x={407} y={360}>
-                    Naší vizí je vytvořit moderní platformu, která bude intuitivní pro všechny věkové kategorie a pomůže lidem vyhledat vysněné a ideální
-                    spolubydlení. Věříme v to, že máte stoprocentní nárok na to, vybrat si s kým budete bydlet. Sdílení domácnosti tak nemusí být jen nutnost, ale i 
-                    zábava a potkávání nových zajímavých lidí. Vyhledejte ideální byt, nebo ideálního spolubydlícího a kontakujte ho jednoduše pomocí uvedených kontaktních metod. 
+                    Naší vizí je vytvořit <b>moderní platformu</b>, která bude intuitivní pro všechny věkové kategorie a pomůže lidem <b>vyhledat vysněné a ideální
+                    spolubydlení</b>. Věříme v to, že máte stoprocentní nárok na to, vybrat si s kým budete bydlet. Sdílení domácnosti tak nemusí být jen nutnost, ale i 
+                    zábava a potkávání nových zajímavých lidí. Vyhledejte ideální byt, nebo <b>ideálního spolubydlícího</b> a kontakujte ho jednoduše pomocí uvedených kontaktních metod. 
                     Do budoucna plánujeme spoustu užitečných aktualizací, které používání Roomie vylepší, a vy tak ideálního spolubydlícího najdete ještě dříve a efektivněji. 
             </AboutSection>
             <AboutSection heading={"Spolubydlení jako cesta z krize?"} image={"/img/about/house.png"} x={555} y={300}>
-            Krize bydlení je stále větší a koleje stále více zaplněné.  Spoustu lidí tak hledá řešení ve spolubydlení. Jako jediný moderní český portál pro
-            obyvatele vyhledávající spolubydlení věříme, že dokážeme lidem pomoci hledat efektivně. Nedostatek dostupných bytů pro mladé, pracujicí i studující,
-            se výrazně zvyšuje. Pro rok 2022 se odhaduje průměrný růst nájmů až o 20 %. V ostatních velkých městech až o 10 %. Prozatimním řešením tedy může být spolubydlení,
-            zejména pro studenty. Roomie usnadňuje hledání spolubydlení a propojuje uživatele podle jejich preferencí. Každý má právo si vybrat. 
+            <b>Krize bydlení</b> je stále větší a koleje stále více zaplněné.  Spoustu lidí tak hledá <b>řešení ve spolubydlení</b>. Jako jediný moderní český portál pro
+            obyvatele vyhledávající spolubydlení věříme, že dokážeme lidem pomoci hledat <b>efektivně</b>. Nedostatek dostupných bytů pro mladé, pracujicí i studující,
+            se <b>výrazně zvyšuje</b>. Pro rok 2022 se odhaduje průměrný růst nájmů až o 20 %. V ostatních velkých městech až o 10 %. Prozatimním řešením tedy může být <b>spolubydlení,
+            zejména pro studenty</b>. Roomie usnadňuje <b>hledání spolubydlení</b> a propojuje uživatele podle jejich preferencí. Každý má právo si vybrat. 
             </AboutSection>
             <div className="mid-container">
                 <section className="about-help-section">
