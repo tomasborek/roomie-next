@@ -1785,7 +1785,7 @@ textarea {
   position: relative;
   color: white;
   padding: 1rem 2rem;
-  z-index: 2;
+  z-index: 4;
 }
 
 .main-header.white {
@@ -1858,7 +1858,8 @@ textarea {
           align-items: center;
 }
 
-.main-header .navbar .navbar-login, .main-header .navbar .navbar-register {
+.main-header .navbar .navbar-login,
+.main-header .navbar .navbar-register {
   margin-left: 1rem;
 }
 
@@ -2282,7 +2283,7 @@ textarea {
   bottom: 0;
   right: 0;
   left: 0;
-  z-index: 2;
+  z-index: 3;
   height: 100vh;
   color: white;
   display: -webkit-box;
@@ -4780,7 +4781,7 @@ textarea {
   color: #309EAB;
   text-align: center;
   position: relative;
-  z-index: 10;
+  z-index: 2;
   min-width: 300px;
   padding: 0 2rem;
   background-color: white;
