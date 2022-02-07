@@ -16,34 +16,41 @@
       color: white;
       display: flex;
       align-items: center;
-      padding: 3rem 1rem;
+      padding: 2rem 1rem;
     }
 
     .banner-text {
       width: 70%;
-      h1 {
+      .text-main {
         margin-bottom: 1rem;
+        font-size: 24px;
       }
 
-      h2 {
+      .text-description {
         font-weight: normal;
         margin-bottom: 1.5rem;
+        font-size: 20px;
       }
 
       button {
         font-weight: bold;
         box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+        font-size: 14px;
       }
     }
 
     .banner-img {
+      width: 200px;
+      height: 100%;
       position: absolute;
       bottom: 0;
       right: 1rem;
+      display: flex;
+      align-items: flex-end;
       .img-img {
         position: relative;
-        width: 275px;
-        height: 416px;
+        bottom: 0;
+        width: 100%;
       }
     }
   }
@@ -73,7 +80,7 @@
 
   .section-image {
     position: relative;
-    flex: 1;
+    width: 40%;
     height: 100%;
     padding-right: 1rem;
   }
@@ -94,20 +101,21 @@
     color: #333;
     flex: 1.25;
     .content-text {
-      h1 {
+      .text-main {
         color: $accent;
         margin-bottom: 1rem;
-        font-size: 32px;
-      }
-      h2 {
-        color: $darkerGray;
         font-size: 24px;
+      }
+      .text-description {
+        color: $darkerGray;
+        font-size: 20px;
         font-weight: normal;
         margin-bottom: 1rem;
       }
     }
     button {
       font-weight: bold;
+      font-size: 14px;
     }
   }
 }
@@ -140,11 +148,11 @@
     display: flex;
     flex-direction: column;
     align-items: justify;
-    h1 {
+    .text-main {
       text-align: center;
       font-size: 24px;
     }
-    h2 {
+    .text-description {
       text-align: justify;
       font-size: 18px;
     }
@@ -161,11 +169,11 @@
       width: 100%;
       text-align: center;
       .content-text {
-        h1 {
+        .text-main {
           font-size: 24px;
           text-align: center;
         }
-        h2 {
+        .text-description {
           font-size: 18px;
           text-align: justify;
         }

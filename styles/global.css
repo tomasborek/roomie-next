@@ -241,38 +241,49 @@ textarea {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 3rem 1rem;
+  padding: 2rem 1rem;
 }
 
 .Home .home-about-banner .banner-text {
   width: 70%;
 }
 
-.Home .home-about-banner .banner-text h1 {
+.Home .home-about-banner .banner-text .text-main {
   margin-bottom: 1rem;
+  font-size: 24px;
 }
 
-.Home .home-about-banner .banner-text h2 {
+.Home .home-about-banner .banner-text .text-description {
   font-weight: normal;
   margin-bottom: 1.5rem;
+  font-size: 20px;
 }
 
 .Home .home-about-banner .banner-text button {
   font-weight: bold;
   -webkit-box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
           box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  font-size: 14px;
 }
 
 .Home .home-about-banner .banner-img {
+  width: 200px;
+  height: 100%;
   position: absolute;
   bottom: 0;
   right: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 
 .Home .home-about-banner .banner-img .img-img {
   position: relative;
-  width: 275px;
-  height: 416px;
+  bottom: 0;
+  width: 100%;
 }
 
 .Home .home-donate {
@@ -316,9 +327,7 @@ textarea {
 
 .Home .home-section .section-image {
   position: relative;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  width: 40%;
   height: 100%;
   padding-right: 1rem;
 }
@@ -342,21 +351,22 @@ textarea {
           flex: 1.25;
 }
 
-.Home .home-section .section-content .content-text h1 {
+.Home .home-section .section-content .content-text .text-main {
   color: #E14949;
   margin-bottom: 1rem;
-  font-size: 32px;
+  font-size: 24px;
 }
 
-.Home .home-section .section-content .content-text h2 {
+.Home .home-section .section-content .content-text .text-description {
   color: #6b717f;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: normal;
   margin-bottom: 1rem;
 }
 
 .Home .home-section .section-content button {
   font-weight: bold;
+  font-size: 14px;
 }
 
 @media screen and (max-width: 1200px) {
@@ -400,11 +410,11 @@ textarea {
         -ms-flex-align: justify;
             align-items: justify;
   }
-  .Home .home-about-banner .banner-text h1 {
+  .Home .home-about-banner .banner-text .text-main {
     text-align: center;
     font-size: 24px;
   }
-  .Home .home-about-banner .banner-text h2 {
+  .Home .home-about-banner .banner-text .text-description {
     text-align: justify;
     font-size: 18px;
   }
@@ -424,11 +434,11 @@ textarea {
     width: 100%;
     text-align: center;
   }
-  .Home .home-section .section-content .content-text h1 {
+  .Home .home-section .section-content .content-text .text-main {
     font-size: 24px;
     text-align: center;
   }
-  .Home .home-section .section-content .content-text h2 {
+  .Home .home-section .section-content .content-text .text-description {
     font-size: 18px;
     text-align: justify;
   }
