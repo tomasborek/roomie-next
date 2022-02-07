@@ -1,3 +1,4 @@
+import React, {useEffect} from "react";
 //Layouts
 import Layout from '../components/Layout/Layout'
 //next
@@ -6,6 +7,8 @@ import Head from 'next/dist/shared/lib/head';
 import NProgress from 'nprogress';
 // import "nprogress/nprogress.css";
 import Router from 'next/router';
+
+import {analytics} from "../Firebase";
 
 NProgress.configure({
   minimum: 0.3,
@@ -32,7 +35,11 @@ import { DbProvider } from '../contexts/DbContext';
 import '../styles/global.css'
 
 function MyApp({ Component, pageProps }) {
-
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'production') {
+      analytics();
+    }
+  }, [])
   return (
     <>
     <Head>

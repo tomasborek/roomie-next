@@ -45,8 +45,8 @@ export default function Home() {
                     
                     <div className="section-content">
                         <div className="content-text">
-                            <h1>Hledáte spolubydlící?</h1>
-                            <h2>Váš čas je drahocenný, hledejte proto spolubydlení s námi. Stačí si založit profil a my se postaráme, abyste našli nejen skvělé spolubydlící, ale i někoho, s kým si zkrátka budete rozumět.</h2>
+                            <h2 className="text-main">Hledáte spolubydlící?</h2>
+                            <h3 className="text-description">Váš čas je drahocenný, hledejte proto spolubydlení s námi. Stačí si založit profil a my se postaráme, abyste našli nejen skvělé spolubydlící, ale i někoho, s kým si zkrátka budete rozumět.</h3>
                         </div>
                         <button onClick={() => videoRef.current.scrollIntoView()} className="section-btn main-btn">Jak funguje Roomie?</button>
                     </div>
@@ -55,16 +55,16 @@ export default function Home() {
             <div className="home-about-banner">
                 <div className="mid-container">
                     <div className="banner-text">
-                        <h1>Co je Roomie a kdo za projektem stojí?</h1>
-                        <h2>Chcete se ještě před puštěním do akce dozvědět více o Roomie a jak tento projekt vznikl? Přečtěte si něco o naší motivaci a co je naším cílem.</h2>
+                        <h2 className="text-main">Co je Roomie a kdo za projektem stojí?</h2>
+                        <h3 className="text-description">Chcete se ještě před puštěním do akce dozvědět více o Roomie a jak tento projekt vznikl? Přečtěte si něco o naší motivaci a co je naším cílem.</h3>
                         <button onClick={() =>{ 
                             router.push("/about");
-                            window.scrollTo(0,0);
+                            window.scrollTo(0,0, {behavior: "smooth"});
                         }} className="acc-btn">Více o Roomie!</button>
                     </div>
                     <div className="banner-img">
                         <div className="img-img">
-                            <Image src={"/img/home/zarovka.png"} layout="fill" objectFit="scale-down"></Image>
+                            <Image src={"/img/home/zarovka.png"} layout="responsive" width={275} height={416}></Image>
                         </div>
                     </div>
                 </div>    

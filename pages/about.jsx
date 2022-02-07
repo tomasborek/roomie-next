@@ -39,7 +39,7 @@ const about = () => {
             <div className="mid-container">
                 <section className="about-help-section">
                     <div className="section-image">
-                        <Image src="/img/home/mailbox.png" layout='fill' objectFit='cover' />
+                        <Image src="/img/home/mailbox.png" layout='responsive' width={454} height={400} />
                     </div>
                     <div className="section-content">
                         <div className="content-text">
