@@ -40,7 +40,7 @@ export default function Home() {
            <div className="mid-container">
                 <section className="home-section section-left">
                     <div className="section-image">
-                        <img src="/img/home/home-panels.png" alt="" />
+                        <Image src="/img/home/home-panels.png" layout="responsive" width={513} height={415} priority/>
                     </div>
                     
                     <div className="section-content">
@@ -63,9 +63,7 @@ export default function Home() {
                         }} className="acc-btn">Více o Roomie!</button>
                     </div>
                     <div className="banner-img">
-                        <div className="img-container">
-                            <Image src={"/img/home/zarovka.png"} layout="fill" objectFit="cover"></Image>
-                        </div>
+                        <Image src={"/img/home/zarovka.png"} layout="fill" objectFit="scale-down"></Image>
                     </div>
                 </div>    
             </div>

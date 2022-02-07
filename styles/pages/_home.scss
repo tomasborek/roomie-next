@@ -41,10 +41,6 @@
       position: absolute;
       bottom: 0;
       right: 1rem;
-      .img-container {
-        width: 235px;
-        height: 355px;
-      }
     }
   }
   .home-donate {
@@ -116,6 +112,7 @@
 
 @media screen and (max-width: 1200px) {
   .Home .home-about-banner {
+    position: relative;
     .banner-text {
       width: 100%;
       display: flex;
@@ -127,15 +124,13 @@
       }
     }
     .banner-img {
-      .img-container {
-        display: none;
-      }
+      display: none;
     }
   }
 }
 
 @media screen and (max-width: 750px) {
-  .Home .home-premium-banner .banner-text {
+  .Home .home-about-banner .banner-text {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -146,7 +141,7 @@
       text-align: center;
     }
   }
-  .Home .home-premium-banner .banner-imgs .banner-medal {
+  .Home .home-about-banner .banner-img {
     display: none;
   }
 }

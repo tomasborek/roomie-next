@@ -57,3 +57,16 @@
     }
   }
 }
+
+@media screen and (max-width: 900px) {
+  .about {
+    .about-help-section {
+      flex-direction: column-reverse;
+      .section-content {
+        margin: 0;
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+    }
+  }
+}

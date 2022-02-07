@@ -43,3 +43,17 @@
     }
   }
 }
+
+@media screen and (max-width: 900px) {
+  .about .about-content .about-section {
+    .section-content {
+      flex-direction: column;
+      &.left {
+        flex-direction: column;
+      }
+      .content-text {
+        max-width: auto;
+      }
+    }
+  }
+}

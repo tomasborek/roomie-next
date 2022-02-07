@@ -269,11 +269,6 @@ textarea {
   right: 1rem;
 }
 
-.Home .home-about-banner .banner-img .img-container {
-  width: 235px;
-  height: 355px;
-}
-
 .Home .home-donate {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -359,6 +354,9 @@ textarea {
 }
 
 @media screen and (max-width: 1200px) {
+  .Home .home-about-banner {
+    position: relative;
+  }
   .Home .home-about-banner .banner-text {
     width: 100%;
     display: -webkit-box;
@@ -376,13 +374,13 @@ textarea {
   .Home .home-about-banner .banner-text h2 {
     text-align: center;
   }
-  .Home .home-about-banner .banner-img .img-container {
+  .Home .home-about-banner .banner-img {
     display: none;
   }
 }
 
 @media screen and (max-width: 750px) {
-  .Home .home-premium-banner .banner-text {
+  .Home .home-about-banner .banner-text {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -394,13 +392,13 @@ textarea {
         -ms-flex-align: center;
             align-items: center;
   }
-  .Home .home-premium-banner .banner-text h1 {
+  .Home .home-about-banner .banner-text h1 {
     text-align: center;
   }
-  .Home .home-premium-banner .banner-text h2 {
+  .Home .home-about-banner .banner-text h2 {
     text-align: center;
   }
-  .Home .home-premium-banner .banner-imgs .banner-medal {
+  .Home .home-about-banner .banner-img {
     display: none;
   }
 }
@@ -1481,6 +1479,20 @@ textarea {
   color: #6b717f;
   text-align: center;
   margin-bottom: 2rem;
+}
+
+@media screen and (max-width: 900px) {
+  .about .about-help-section {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+  }
+  .about .about-help-section .section-content {
+    margin: 0;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
 }
 
 .home-header {
@@ -4762,6 +4774,24 @@ textarea {
   position: relative;
   min-width: 506px;
   min-height: 182px;
+}
+
+@media screen and (max-width: 900px) {
+  .about .about-content .about-section .section-content {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .about .about-content .about-section .section-content.left {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .about .about-content .about-section .section-content .content-text {
+    max-width: auto;
+  }
 }
 
 .header-info .info-contact {
