@@ -15,6 +15,7 @@
 @import "./pages/friends";
 @import "./pages/verifyEmail";
 @import "./pages/resetPassword";
+@import "./pages/about";
 
 //Components
 @import "../components/HomeHeader/homeHeader";
@@ -62,6 +63,7 @@
 @import "../components/LikedListing/likedListing";
 @import "../components/ContactForm/contactForm";
 @import "../components/CookieDialog/cookieDialog";
+@import "../components/AboutSection/aboutSection";
 //Listing
 @import "../components/Listing//ListingHeader/ListingContact/listingContact";
 @import "../components/Listing/ListingHeader/listingHeader";

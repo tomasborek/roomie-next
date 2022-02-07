@@ -1,180 +1,195 @@
-.Home{
-    .home-video{
+.Home {
+  .home-video {
+    width: 100%;
+    background-color: $mainGray;
+    margin-bottom: 5rem;
+    cursor: pointer;
+  }
+
+  .home-about-banner {
+    @include gradientBg;
+    margin: 3rem 0;
+    position: relative;
+
+    .mid-container {
+      position: relative;
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+
+    .banner-text {
+      width: 70%;
+      .text-main {
+        margin-bottom: 1rem;
+        font-size: 24px;
+      }
+
+      .text-description {
+        font-weight: normal;
+        margin-bottom: 1.5rem;
+        font-size: 20px;
+      }
+
+      button {
+        font-weight: bold;
+        box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+        font-size: 14px;
+      }
+    }
+
+    .banner-img {
+      width: 200px;
+      height: 100%;
+      position: absolute;
+      bottom: 0;
+      right: 1rem;
+      display: flex;
+      align-items: flex-end;
+      .img-img {
+        position: relative;
+        bottom: 0;
         width: 100%;
-        background-color: $mainGray;
-        margin-bottom: 5rem;
-        cursor: pointer;
+      }
     }
-
-    .home-premium-banner{
-        @include gradientBg;
-        margin: 3rem 0 ;
-       
-
-        .mid-container{
-            position: relative;
-            color: white;
-            padding: 2rem 1rem;
-           
-            display: flex;
-            align-items: center;
-        }
-        
-
-        .banner-text{
-            flex: 1;
-
-            h1{
-                margin-bottom: 1rem;
-            }
-
-            h2{
-                font-weight: normal;
-                margin-bottom: 1.5rem;
-            }
-
-            button{
-                font-weight: bold;
-                box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
-            }
-        }
-
-        .banner-imgs{
-            display: flex;
-            .banner-guy-container{
-                width: 280px;
-                height: 100%;
-                .banner-guy{
-                    position: absolute;
-                    bottom: 0;
-
-                }
-            }
-
-            .banner-medal{
-                padding-left: 1rem;
-            }
-        }
-
-        
+  }
+  .home-donate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+    h1 {
+      margin-bottom: 1rem;
+      color: $accent;
+      text-align: center;
     }
+    p {
+      color: $darkerGray;
+      text-align: justify;
+      margin-bottom: 2rem;
+    }
+  }
 }
 
-.Home .home-section{
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.Home .home-section {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-    .section-image{
-        position: relative;
-        flex: 1;
-        height: 100% ;
-        padding-right: 1rem;
+  .section-image {
+    position: relative;
+    width: 40%;
+    height: 100%;
+    padding-right: 1rem;
+  }
+
+  &.section-right {
+    .section-image {
+      order: 3;
     }
 
-    &.section-right{
-        .section-image{
-            order: 3;
-        }
+    &.section-left {
+      .section-image {
+        order: -1;
+      }
+    }
+  }
 
-    &.section-left{
-        .section-image{
-            order: -1;
-        }
+  .section-content {
+    color: #333;
+    flex: 1.25;
+    .content-text {
+      .text-main {
+        color: $accent;
+        margin-bottom: 1rem;
+        font-size: 24px;
+      }
+      .text-description {
+        color: $darkerGray;
+        font-size: 20px;
+        font-weight: normal;
+        margin-bottom: 1rem;
+      }
     }
+    button {
+      font-weight: bold;
+      font-size: 14px;
     }
-
-    .section-content{
-        color: #333;
-        flex: 1.25;
-        .content-text{
-            h1{
-                color: $accent;
-                margin-bottom: 1rem;
-                font-size: 32px;
-            }
-            h2{
-                color: $darkerGray;
-                font-size: 24px;
-                font-weight: normal;
-                margin-bottom: 1rem;
-            }
-        }
-        button{
-            font-weight: bold;
-        }
-    }
+  }
 }
 
 //Media
 
-@media screen and (max-width: 1200px){
-    .Home .home-premium-banner{
-
-        .banner-text{
-            flex: 1;
-        }
-        .banner-imgs{
-            .banner-guy-container{
-                display: none;
-                .banner-guy{
-                    display: none;
-                }
-            }
-        }
+@media screen and (max-width: 1200px) {
+  .Home .home-about-banner {
+    position: relative;
+    .banner-text {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      h1 {
+        text-align: center;
+      }
+      h2 {
+        text-align: justify;
+      }
     }
+    .banner-img {
+      display: none;
+    }
+  }
 }
 
-
-@media screen and (max-width: 750px){
-    .Home .home-premium-banner .banner-text{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        h1{
-            text-align: center;
-        }
-        h2{
-            text-align: center;
-        }
+@media screen and (max-width: 750px) {
+  .Home .home-about-banner .banner-text {
+    display: flex;
+    flex-direction: column;
+    align-items: justify;
+    .text-main {
+      text-align: center;
+      font-size: 24px;
     }
-    .Home .home-premium-banner .banner-imgs .banner-medal{
-        display: none;
+    .text-description {
+      text-align: justify;
+      font-size: 18px;
     }
+  }
+  .Home .home-about-banner .banner-img {
+    display: none;
+  }
 }
 
-@media screen and (max-width: 850px){
-    .Home .home-section{
-        flex-direction: column-reverse;
-        img{
-            width: 100%;
+@media screen and (max-width: 850px) {
+  .Home .home-section {
+    flex-direction: column-reverse;
+    .section-content {
+      width: 100%;
+      text-align: center;
+      .content-text {
+        .text-main {
+          font-size: 24px;
+          text-align: center;
         }
-
-        &.section-left{
-            img{
-                order: -1;
-            }
+        .text-description {
+          font-size: 18px;
+          text-align: justify;
         }
-
-        &.section-right{
-            img{
-                order: -1;
-            }
-            
-        }
-
-        .section-content{
-            width: 100%;
-            text-align: center;
-            .content-text{
-                h1{
-                    font-size: 24px;
-                }
-                h2{
-                    font-size: 18px;
-                }
-            }
-        }
+      }
     }
+    .section-image {
+      padding: 0;
+      padding-top: 1rem;
+      width: 80%;
+      height: 100%;
+    }
+  }
+
+  .Home .home-donate {
+    h1 {
+      font-size: 24px;
+    }
+  }
 }

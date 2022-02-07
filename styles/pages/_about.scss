@@ -1,0 +1,96 @@
+.about {
+  .about-banner {
+    height: 200px;
+    @include gradientBg;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+  .about-content {
+    .about-help-section {
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      .section-image {
+        position: relative;
+        margin-right: 2rem;
+        width: 70%;
+        height: 100%;
+      }
+      .section-content {
+        .content-text {
+          display: flex;
+          flex-direction: column;
+          h1 {
+            color: $accent;
+            margin-bottom: 1rem;
+            font-size: 36px;
+          }
+          h2 {
+            font-size: 24px;
+            font-weight: normal;
+            color: $darkerGray;
+            margin-bottom: 1rem;
+          }
+        }
+        button {
+          font-size: 14px;
+        }
+      }
+    }
+    .about-donate {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2rem;
+      h1 {
+        margin-bottom: 1rem;
+        color: $accent;
+        text-align: center;
+      }
+      p {
+        color: $darkerGray;
+        margin-bottom: 2rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .about {
+    .about-help-section {
+      flex-direction: column-reverse;
+      .section-content {
+        margin: 0;
+        margin-left: 0;
+        text-align: center;
+        .content-text {
+          padding: 0;
+          margin: 0;
+          h1 {
+            font-size: 24px !important;
+          }
+          h2 {
+            text-align: justify;
+            font-size: 18px !important;
+          }
+        }
+      }
+      .section-image {
+        margin-right: 0 !important;
+        width: 75% !important;
+        margin-top: 1rem;
+      }
+    }
+
+    .about-donate {
+      h1 {
+        font-size: 24px;
+      }
+      p {
+        text-align: justify;
+      }
+    }
+  }
+}

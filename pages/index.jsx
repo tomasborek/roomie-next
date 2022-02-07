@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 //next
 import Head from 'next/head'
 import { useRouter } from 'next/dist/client/router';
+import Image from "next/image";
 //COntexts
 import { useAuth } from '../contexts/AuthContext';
 
@@ -39,54 +40,46 @@ export default function Home() {
            <div className="mid-container">
                 <section className="home-section section-left">
                     <div className="section-image">
-                        <img src="/img/home/home-panels.png" alt="" />
+                        <Image src="/img/home/home-panels.png" layout="responsive" width={513} height={415} priority/>
                     </div>
                     
                     <div className="section-content">
                         <div className="content-text">
-                            <h1>Hledáte spolubydlící?</h1>
-                            <h2>Váš čas je drahocenný, hledejte proto spolubydlení s námi. Stačí si založit profil a my se postaráme, abyste našli nejen skvělé spolubydlící, ale i někoho, s kým si zkrátka budete rozumět.</h2>
+                            <h2 className="text-main">Hledáte spolubydlící?</h2>
+                            <h3 className="text-description">Váš čas je drahocenný, hledejte proto spolubydlení s námi. Stačí si založit profil a my se postaráme, abyste našli nejen skvělé spolubydlící, ale i někoho, s kým si zkrátka budete rozumět.</h3>
                         </div>
                         <button onClick={() => videoRef.current.scrollIntoView()} className="section-btn main-btn">Jak funguje Roomie?</button>
                     </div>
                 </section>
             </div>
-            <div className="home-premium-banner">
+            <div className="home-about-banner">
                 <div className="mid-container">
                     <div className="banner-text">
-                        <h1>Jaké by to bylo povýšit váš Roomie profil?</h1>
-                        <h2>Usilovně pracujeme na tom, abychom Roomie vylepšili pro maximální spokojenost všech jeho uživatelů. Jedna z budoucích funkcí je Premium profil, který Vám spolubydlení najde ještě rychleji!</h2>
+                        <h2 className="text-main">Co je Roomie a kdo za projektem stojí?</h2>
+                        <h3 className="text-description">Chcete se ještě před puštěním do akce dozvědět více o Roomie a jak tento projekt vznikl? Přečtěte si něco o naší motivaci a co je naším cílem.</h3>
                         <button onClick={() =>{ 
-                            router.push("/premium");
-                            window.scrollTo(0,0);
-                        }} className="acc-btn">Zjistit více</button>
+                            router.push("/about");
+                            window.scrollTo(0,0, {behavior: "smooth"});
+                        }} className="acc-btn">Více o Roomie!</button>
                     </div>
-                    <div className="banner-imgs">
-                        <div className="banner-guy-container">
-                            <img className="banner-guy" src="/img/home/premium-banner-guy.png" />
+                    <div className="banner-img">
+                        <div className="img-img">
+                            <Image src={"/img/home/zarovka.png"} layout="responsive" width={275} height={416}></Image>
                         </div>
-                        <img className="banner-medal" src="/img/home/premium-medal.png" alt="" />
                     </div>
                 </div>    
             </div>
             
             <div className="mid-container">           
-                <section className="home-section section-left">
-                    <div className="section-image">
-                        <img src="/img/home/mailbox.png" alt="" />
-                    </div>
-                    
-                    <div className="section-content">
-                        <div className="content-text">
-                            <h1>Potřebujete poradit?</h1>
-                            <h2>Máte potíže s Roomie, nebo nám chcete jen dát tip na případná vylepšení? Neváhejte nás kontaktovat tlačítkem níže.</h2>
-                        </div>
-                        <button onClick={() => setContactForm(true)} className="section-btn main-btn">Kontaktovat Roomie!</button>
-                    </div>
-                </section>
                 <video ref={videoRef} className="home-video" poster="/video/thumbnail.png" controls>
                     <source  src="/video/Sequence 01_1 (1).mp4"/>
                 </video>
+                <div className="home-donate">
+                    <h1>Líbí se vám projekt Roomie?</h1>
+                    <p>Do Roomie vkládáme maximální úsilí a budeme moc rádi, pokud svým příspěvkem projekt podpoříte. Díky vám tak budeme moci pracovat na nových aktualizacích a Roomie vylepšovat.
+                    Velmi nás to potěší.</p>
+                    <iframe id='kofiframe' src='https://ko-fi.com/roomiecz/?hidefeed=true&widget=true&embed=true&preview=true' style={{border:"none", margin:"0 auto", width:"75%",padding:"32px 0 0 0",background:"#f9f9f9"}} height='712' title='roomiecz'></iframe>
+                </div>
             </div>
                
            <Footer />
