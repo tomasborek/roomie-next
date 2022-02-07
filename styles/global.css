@@ -235,13 +235,13 @@ textarea {
 .Home .home-about-banner .mid-container {
   position: relative;
   color: white;
-  padding: 3.5rem 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  padding: 3rem 1rem;
 }
 
 .Home .home-about-banner .banner-text {
@@ -269,6 +269,12 @@ textarea {
   right: 1rem;
 }
 
+.Home .home-about-banner .banner-img .img-img {
+  position: relative;
+  width: 275px;
+  height: 416px;
+}
+
 .Home .home-donate {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -291,7 +297,7 @@ textarea {
 
 .Home .home-donate p {
   color: #6b717f;
-  text-align: center;
+  text-align: justify;
   margin-bottom: 2rem;
 }
 
@@ -370,9 +376,11 @@ textarea {
         -ms-flex-align: center;
             align-items: center;
   }
-  .Home .home-about-banner .banner-text h1,
-  .Home .home-about-banner .banner-text h2 {
+  .Home .home-about-banner .banner-text h1 {
     text-align: center;
+  }
+  .Home .home-about-banner .banner-text h2 {
+    text-align: justify;
   }
   .Home .home-about-banner .banner-img {
     display: none;
@@ -388,15 +396,17 @@ textarea {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -webkit-box-align: justify;
+        -ms-flex-align: justify;
+            align-items: justify;
   }
   .Home .home-about-banner .banner-text h1 {
     text-align: center;
+    font-size: 24px;
   }
   .Home .home-about-banner .banner-text h2 {
-    text-align: center;
+    text-align: justify;
+    font-size: 18px;
   }
   .Home .home-about-banner .banner-img {
     display: none;
@@ -410,28 +420,26 @@ textarea {
         -ms-flex-direction: column-reverse;
             flex-direction: column-reverse;
   }
-  .Home .home-section img {
-    width: 100%;
-  }
-  .Home .home-section.section-left img {
-    -webkit-box-ordinal-group: 0;
-        -ms-flex-order: -1;
-            order: -1;
-  }
-  .Home .home-section.section-right img {
-    -webkit-box-ordinal-group: 0;
-        -ms-flex-order: -1;
-            order: -1;
-  }
   .Home .home-section .section-content {
     width: 100%;
     text-align: center;
   }
   .Home .home-section .section-content .content-text h1 {
     font-size: 24px;
+    text-align: center;
   }
   .Home .home-section .section-content .content-text h2 {
     font-size: 18px;
+    text-align: justify;
+  }
+  .Home .home-section .section-image {
+    padding: 0;
+    padding-top: 1rem;
+    width: 80%;
+    height: 100%;
+  }
+  .Home .home-donate h1 {
+    font-size: 24px;
   }
 }
 

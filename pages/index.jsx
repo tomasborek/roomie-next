@@ -63,7 +63,9 @@ export default function Home() {
                         }} className="acc-btn">Více o Roomie!</button>
                     </div>
                     <div className="banner-img">
-                        <Image src={"/img/home/zarovka.png"} layout="fill" objectFit="scale-down"></Image>
+                        <div className="img-img">
+                            <Image src={"/img/home/zarovka.png"} layout="fill" objectFit="scale-down"></Image>
+                        </div>
                     </div>
                 </div>    
             </div>
