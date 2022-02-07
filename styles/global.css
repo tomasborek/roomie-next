@@ -4778,12 +4778,13 @@ textarea {
 }
 
 .about .about-content .about-section .section-heading h2 {
+  font-size: 24px;
   color: #309EAB;
   text-align: center;
   position: relative;
   z-index: 2;
-  min-width: 300px;
-  padding: 0 2rem;
+  min-width: 250px;
+  padding: 0 1rem;
   background-color: white;
 }
 
@@ -4834,6 +4835,12 @@ textarea {
     padding: 0;
     width: 75%;
     margin-top: 1rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .about .about-content .about-section .section-heading h2 {
+    font-size: 20px;
   }
 }
 
