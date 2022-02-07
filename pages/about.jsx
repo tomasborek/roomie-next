@@ -43,8 +43,8 @@ const About = () => {
                     </div>
                     <div className="section-content">
                         <div className="content-text">
-                            <h1>Potřebujete poradit?</h1>
-                            <h2>Máte potíže s Roomie, nebo nám chcete jen dát tip na případná vylepšení? Neváhejte nás kontaktovat tlačítkem níže.</h2>
+                            <h2 className="text-main">Potřebujete poradit?</h2>
+                            <h3 className="text-description">Máte potíže s Roomie, nebo nám chcete jen dát tip na případná vylepšení? Neváhejte nás kontaktovat tlačítkem níže.</h3>
                         </div>
                         <button onClick={() => setContactForm(true)} className="section-btn main-btn">Kontaktovat Roomie!</button>
                     </div>
