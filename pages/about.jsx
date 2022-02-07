@@ -6,7 +6,7 @@ import Footer from '../components/Footer/Footer';
 import AboutSection from '../components/AboutSection/AboutSection';
 import ContactForm from "../components/ContactForm/ContactForm";
 
-const about = () => {
+const About = () => {
     const [contactForm, setContactForm] = useState(false);
   return (
     <div className='about'>
@@ -62,4 +62,4 @@ const about = () => {
   );
 };
 
-export default about;
+export default About;
