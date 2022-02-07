@@ -26,15 +26,9 @@ const firebaseConfig = {
   measurementId: "G-S8Q9W3DW20"
 };
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 export const auth = getAuth();
 export const db = getFirestore();
 export const functions = getFunctions();
 export const storage = getStorage();
-export const analytics = () => {
-  if (typeof window !== "undefined") {
-    return getAnalytics();
-  } else {
-    return null
-  }
-}
+export const analytics = getAnalytics;
