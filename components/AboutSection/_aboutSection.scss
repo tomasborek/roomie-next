@@ -31,13 +31,12 @@
           flex-direction: row-reverse;
         }
         .content-text {
-          max-width: 70fr;
           padding: 0 2rem;
         }
         .content-image {
           position: relative;
-          min-width: 506px;
-          min-height: 182px;
+          min-width: 30%;
+          height: 100%;
         }
       }
     }
@@ -53,6 +52,12 @@
       }
       .content-text {
         max-width: auto;
+      }
+      .content-image {
+        margin: 0;
+        padding: 0;
+        width: 75%;
+        margin-top: 1rem;
       }
     }
   }

@@ -12,8 +12,8 @@ const AboutSection = ({heading, image, left, x, y, children}) => {
             <p className='content-text'>   
                 {children}
             </p>
-            <div style={{minWidth: x, minHeight: y}} className='content-image'>
-                <Image src={image} layout='fill' objectFit='cover'/>
+            <div className='content-image'>
+                <Image src={image} layout='responsive' width={x} height={y}/>
             </div>
         </div>
     </section>

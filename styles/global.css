@@ -1428,12 +1428,9 @@ textarea {
 
 .about .about-content .about-help-section .section-image {
   position: relative;
-  min-width: 454px;
-  min-height: 400px;
-}
-
-.about .about-content .about-help-section .section-content {
-  margin-left: 3rem;
+  margin-right: 2rem;
+  width: 70%;
+  height: 100%;
 }
 
 .about .about-content .about-help-section .section-content .content-text {
@@ -1485,7 +1482,6 @@ textarea {
 
 .about .about-content .about-donate p {
   color: #6b717f;
-  text-align: center;
   margin-bottom: 2rem;
 }
 
@@ -1498,8 +1494,30 @@ textarea {
   }
   .about .about-help-section .section-content {
     margin: 0;
+    margin-left: 0;
     text-align: center;
-    margin-bottom: 2rem;
+  }
+  .about .about-help-section .section-content .content-text {
+    padding: 0;
+    margin: 0;
+  }
+  .about .about-help-section .section-content .content-text h1 {
+    font-size: 24px !important;
+  }
+  .about .about-help-section .section-content .content-text h2 {
+    text-align: justify;
+    font-size: 18px !important;
+  }
+  .about .about-help-section .section-image {
+    margin-right: 0 !important;
+    width: 75% !important;
+    margin-top: 1rem;
+  }
+  .about .about-donate h1 {
+    font-size: 24px;
+  }
+  .about .about-donate p {
+    text-align: justify;
   }
 }
 
@@ -4774,14 +4792,13 @@ textarea {
 }
 
 .about .about-content .about-section .section-content .content-text {
-  max-width: 70fr;
   padding: 0 2rem;
 }
 
 .about .about-content .about-section .section-content .content-image {
   position: relative;
-  min-width: 506px;
-  min-height: 182px;
+  min-width: 30%;
+  height: 100%;
 }
 
 @media screen and (max-width: 900px) {
@@ -4799,6 +4816,12 @@ textarea {
   }
   .about .about-content .about-section .section-content .content-text {
     max-width: auto;
+  }
+  .about .about-content .about-section .section-content .content-image {
+    margin: 0;
+    padding: 0;
+    width: 75%;
+    margin-top: 1rem;
   }
 }
 

@@ -14,11 +14,11 @@
       align-items: center;
       .section-image {
         position: relative;
-        min-width: 454px;
-        min-height: 400px;
+        margin-right: 2rem;
+        width: 70%;
+        height: 100%;
       }
       .section-content {
-        margin-left: 3rem;
         .content-text {
           display: flex;
           flex-direction: column;
@@ -51,7 +51,6 @@
       }
       p {
         color: $darkerGray;
-        text-align: center;
         margin-bottom: 2rem;
       }
     }
@@ -64,8 +63,33 @@
       flex-direction: column-reverse;
       .section-content {
         margin: 0;
+        margin-left: 0;
         text-align: center;
-        margin-bottom: 2rem;
+        .content-text {
+          padding: 0;
+          margin: 0;
+          h1 {
+            font-size: 24px !important;
+          }
+          h2 {
+            text-align: justify;
+            font-size: 18px !important;
+          }
+        }
+      }
+      .section-image {
+        margin-right: 0 !important;
+        width: 75% !important;
+        margin-top: 1rem;
+      }
+    }
+
+    .about-donate {
+      h1 {
+        font-size: 24px;
+      }
+      p {
+        text-align: justify;
       }
     }
   }
