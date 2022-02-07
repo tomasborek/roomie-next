@@ -1524,6 +1524,9 @@ textarea {
     width: 75% !important;
     margin-top: 1rem;
   }
+  .about .about-donate {
+    width: 100%;
+  }
   .about .about-donate h1 {
     font-size: 24px;
   }
