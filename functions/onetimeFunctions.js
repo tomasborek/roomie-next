@@ -74,73 +74,20 @@ exports.dateIntoTimeStamp = functions.https.onRequest((req, res) => {
 })
 
 
-exports.resetFriends = functions.https.onRequest((req, res) => {
+exports.deleteContact = functions.https.onRequest((req, res) => {
   const db = admin.firestore();
-  db.collection("listings").get().then((docs) => {
+  const ls = db.collection("listings");
+  ls.get().then((listings) => {
     return Promise.all(
-      docs.docs.map((listing) => {
-        return db.collection("listings").doc(listing.id).update({
-          friends: [],
-        })
+      listings.docs.map((listing) => {
+       ls.doc(listing.id).update({
+         "userInfo.contact": {}
+       })
       })
     )
   }).then((response) => {
-    res.status(200).send("Success");
+    res.status(200).send("Success")
   }).catch((error) => {
     res.status(500).send(error);
   })
-})
-
-exports.addPremiumField = functions.https.onRequest((req, res) => {
-  const db = admin.firestore();
-  return db.collection("users").get().then((docs) => {
-    return Promise.all(
-      docs.docs.map((user) => {
-        return db.collection("users").doc(user.id).update({
-          "mainInfo.premium": false,
-        })
-      })
-    );
-  }).then((response) => {
-    return db.collection("listings").get();
-  }).then((docs) => {
-    return Promise.all(
-      docs.docs.map((listing) => {
-        return db.collection("listings").doc(listing.id).update({
-          "userInfo.premium": false,
-        })
-      })
-    );
-  }).then((response) => {
-    res.status(200).send("Success");
-  }).catch((error) => {
-    res.status(500).send(error.message);
-  })
-})
-
-exports.addHideField = functions.https.onRequest((req, res) => {
-  const db = admin.firestore();
-  return db.collection("users").get().then((docs) => {
-    return Promise.all(
-      docs.docs.map((user) => {
-        return db.collection("users").doc(user.id).update({
-          hiddenListing: false,
-        })
-      })
-    );
-  }).then((response) => {
-    return db.collection("listings").get();
-  }).then((docs) => {
-    return Promise.all(
-      docs.docs.map((listing) => {
-        return db.collection("listings").doc(listing.id).update({
-          hiddenByUser: false,
-        })
-      })
-    );
-  }).then((response) => {
-    res.status(200).send("Success");
-  }).catch((error) => {
-    res.status(500).send(error.message);
-  })
-})
+});
