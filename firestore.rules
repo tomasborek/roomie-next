@@ -14,6 +14,10 @@ service cloud.firestore {
    match /listings/{listingId}{
      allow read: if true;
    }
+
+   match /listings/{listingId}/contact/{contactId}{
+     allow read: if true;
+   }
    
    match /users/{userId}/recievedRequests/{requestId}{
     allow read: if isOwner(userId);
@@ -26,6 +30,7 @@ service cloud.firestore {
    match /users/{userId}/likedListings/{listing}{
    allow read: if isOwner(userId);
    }
+
    
    //Functions//
    function isSigned(){
