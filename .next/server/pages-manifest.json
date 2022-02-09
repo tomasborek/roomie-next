@@ -13,11 +13,13 @@
   "/": "pages/index.html",
   "/liked": "pages/liked.html",
   "/login": "pages/login.html",
+  "/obchodni-podminky": "pages/obchodni-podminky.html",
   "/premium": "pages/premium.html",
   "/register": "pages/register.html",
   "/requests/recieved": "pages/requests/recieved.html",
   "/requests/sent": "pages/requests/sent.html",
   "/reset-password/[id]": "pages/reset-password/[id].html",
+  "/zasady-o-soukromi": "pages/zasady-o-soukromi.html",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/404": "pages/404.html"
