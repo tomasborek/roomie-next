@@ -11,8 +11,19 @@ exports.updateProfile = functions.https.onCall((data, context) => {
     const listingId = data.listingId;
     const userParams = data.userParams;
     const listingParams = data.listingParams;
-      db.collection("users").doc(uid).update(userParams).then((response) => {
-        return db.collection("listings").doc(listingId).update(listingParams);
+    return db.collection("users").doc(uid).update(userParams).then((response) => {
+        return db.collection("listings").doc(listingId).collection("contact").get();
+      }).then((doc) => {
+        return db.collection("listings").doc(listingId).collection("contact").doc(doc.docs[0].id).update({
+          email: listingParams.email,
+          phone: listingParams.phone,
+          fb: listingParams.fb,
+          ig: listingParams.ig,
+        })
+      }).then((response) => {
+        return db.collection("listings").doc(listingId).update({
+          hiddenByUser: listingParams.hiddenByUser,
+        });
       })
 });
 
