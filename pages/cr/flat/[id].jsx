@@ -10,27 +10,37 @@ const CreateFlatListing = () => {
     const listingUsername = null;
     const listingAge = null;
     const listingGender = null;
-    const listingPersonBoxes = null;
-    const listingFlatBoxes = null;
+    const listingPfp = null;
+    const listingImgs = [];
     const listingPersonBio = null;
     const listingFlatBio = null;
+    const listingPersonBoxes = null;
     const listingPersonTags = null;
+    const listingFlatBoxes = null;
     const listingPremium = null;
     const listingFans = null;
+    const listingFriends = null;
+    const listingInfo = null;
+    const uid = null;
     const status = "client-side";
     const ssrProps = {
-            listingName,
-            listingUsername,
-            listingAge,
-            listingGender,
-            listingPersonBio,
-            listingFlatBio,
-            listingPersonBoxes,
-            listingPersonTags,
-            listingFlatBoxes,
-            listingPremium,
-            listingFans,
-            status,
+        listingName,
+        listingUsername,
+        listingAge,
+        listingGender,
+        listingPfp,
+        listingImgs,
+        listingPersonBio,
+        listingFlatBio,
+        listingPersonBoxes,
+        listingPersonTags,
+        listingFlatBoxes,
+        listingPremium,
+        listingFans,
+        listingFriends,
+        listingInfo,
+        uid,
+        status,
         }
     return (
         <>
