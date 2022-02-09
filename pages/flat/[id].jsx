@@ -53,7 +53,7 @@ export async function getServerSideProps(context) {
         const listingInfo = JSON.stringify(docRef.data());
 
         if(!docRef.data().visible || !docRef.data().userInfo.emailVerified || docRef.data().hiddenByUser){
-            throw {message: "client-side", uid};
+            throw {message: "client-side"};
         }
         const status = "success";
         return {
@@ -93,7 +93,7 @@ export async function getServerSideProps(context) {
         const listingFans = null;
         const listingFriends = null;
         const listingInfo = null;
-        const uid = error.uid;
+        const uid = null;
         const status = error.message;
         return {
             props: {

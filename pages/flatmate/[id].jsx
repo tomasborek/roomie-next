@@ -95,7 +95,7 @@ export async function getServerSideProps(context) {
         const listingFans = null;
         const listingFriends = null;
         const listingInfo = null;
-        const uid = error.uid;
+        const uid = null;
         const status = error.message;
         return {
             props: {
