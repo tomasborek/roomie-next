@@ -133,7 +133,6 @@ const Header = ({ variant  })=>{
             router.push("/");
             setLoading(false);
         }).catch((error)=>{
-            console.log(error);
             setLoading(false);
         });
     };
