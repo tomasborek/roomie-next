@@ -45,7 +45,6 @@ exports.createListing = functions.https.onCall((data, context) => {
           username: data.username,
           gender: data.gender,
           age: data.age,
-          contact: data.contact,
           uid: data.uid,
           emailVerified: false,
           images: {
@@ -81,6 +80,7 @@ exports.createListing = functions.https.onCall((data, context) => {
         friends: [],
         requests: [],
         sentRequests: [],
+        likedBy: [],
         visible: false,
         hiddenByUser: false,
         timeStamp: admin.firestore.FieldValue.serverTimestamp(),
@@ -128,13 +128,16 @@ exports.createListing = functions.https.onCall((data, context) => {
         friends: [],
         requests: [],
         sentRequests: [],
+        likedBy: [],
         visible: false,
         hiddenByUser: false,
         timeStamp: admin.firestore.FieldValue.serverTimestamp(),
       };
     }
     const doc = admin.firestore().collection("listings").doc(data.listingId);
-    return doc.set(listingInfo);
+    return doc.set(listingInfo).then((response) => {
+      return doc.collection("contact").add(data.contact);
+    });
 });
 
 exports.generateToken = functions.auth.user().onCreate((user) => {

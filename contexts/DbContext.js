@@ -374,6 +374,10 @@ export function DbProvider(props) {
         return getDoc(doc(db, "listings", id));
     }
 
+    const getListingContact = (id) => {
+        return getDocs(collection(db, "listings", id, "contact"));
+    }
+
     const getListingByUser = (uid) => {
         const q = query(collection(db, "listings"), where("userInfo.uid", "==", uid));
         return getDocs(q);
@@ -501,6 +505,7 @@ export function DbProvider(props) {
         updateUser,
         getListings,
         getListing,
+        getListingContact,
         getListingByUser,
         getRequests,
         getNotifications,

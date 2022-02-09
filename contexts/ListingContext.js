@@ -21,8 +21,8 @@ export const ListingProvider = ({type, ssrProps, cr, children}) => {
     //Contexts
     const router = useRouter();
     const {id} = router.query;
-    const {getListing, getUser} = useDb();
-    const {currentUser, currentUserInfo} = useAuth();
+    const {getListing, getUser, getListingContact} = useDb();
+    const {currentUser, currentUserInfo, userLoaded} = useAuth();
     const [loading, setLoading] = useLoading();
     const {snackBar} = useSnackBar();
     const {callable} = useFunctions();
@@ -34,10 +34,10 @@ export const ListingProvider = ({type, ssrProps, cr, children}) => {
     //Edit mode
     const [editListing, setEditListing] = useState(cr);
     //ListingId
-    const [listingId, setListingId] = useState(null);
+    const [listingId, setListingId] = useState(id);
     //imgs
-    const [listingImgs, setListingImgs] = useState([]);
-    const [pfp, setPfp] = useState(null);
+    const [listingImgs, setListingImgs] = useState(ssrProps.listingImgs);
+    const [pfp, setPfp] = useState(ssrProps.listingPfp);
     //Listing info states
     const [listingName, setListingName] = useState(ssrProps.listingName);
     const [listingUsername, setListingUsername] = useState(ssrProps.listingUsername);
@@ -53,6 +53,7 @@ export const ListingProvider = ({type, ssrProps, cr, children}) => {
     const [listingPremium, setListingPremium] = useState(ssrProps.listingPremium);
     const [listingFans, setListingFans] = useState(ssrProps.listingFans ? ssrProps.listingFans : []);
     const [listingLiked, setListingLiked] = useState(false);
+    const [listingContact, setListingContact] = useState(null);
     //Edit mode info storage
     const [stayTime, setStayTime] = useState(null);
     const [startTime, setStartTime] = useState(null);
@@ -68,7 +69,7 @@ export const ListingProvider = ({type, ssrProps, cr, children}) => {
     const [welcomeDialog, setWelcomeDialog] = useState(false);
     const [requestMessage, setRequestMessage] = useState("");
     const [reportMessage, setReportMessage] = useState("");
-    const [contactLoading, setContactLoading] = useState(false);
+    const [contactLoading, setContactLoading] = useState(true);
     const [galleryInput, setGalleryInput] = useState({
         open: false,
         type: "none",
@@ -98,33 +99,10 @@ export const ListingProvider = ({type, ssrProps, cr, children}) => {
         
     
     useEffect(() => {
-        setLoading(false);
-        setListingInfo(null);
         if(!router.isReady) return;
-        // If the status is not resolved in any way, there's no reason to continue
-        if(ssrProps.status != "success" && ssrProps.status != "client-side") return;
-        if(ssrProps.status === "client-side" && !currentUser) return;
-        // SSR props get reloaded when going from listing to listing, but states won't, so we need to reload them
-        reloadProps();
-        getListing(id)
-        .then(doc => {
-            if(cr) setWelcomeDialog(true);
-            if(ssrProps.status === "client-side"){
-                if(checkAccess(doc.data().userInfo.uid)){
-                    loadClientSide(doc);
-                };
-                return;
-            };
-            setListingInfo(doc.data());
-            setListingId(doc.id);
-            setListingImgs(doc.data().userInfo.images.listingImgs);
-            if(doc.data().userInfo.images.pfp){
-                setPfp(doc.data().userInfo.images.pfp);
-            }
-        }).catch(error => {
-            //
-        })
-    }, [router.isReady, id, currentUser])
+        if(!userLoaded) return;
+        listingLoad();
+    }, [router.isReady, id, currentUser, userLoaded])
 
     // If ssr props aren't null but their coresponding state is, it means it has probably been nulled by the handleSave function, meaning we have to reload them
     useEffect(() => {
@@ -185,6 +163,7 @@ export const ListingProvider = ({type, ssrProps, cr, children}) => {
         }
     }, [editListing])
 
+    //Sets listing liked
     useEffect(() => {
         if(currentUser && listingFans && listingFans.includes(currentUser.uid)){
             setListingLiked(true);
@@ -198,6 +177,8 @@ export const ListingProvider = ({type, ssrProps, cr, children}) => {
         setListingUsername(ssrProps.listingUsername);
         setListingAge(ssrProps.listingAge);
         setListingGender(ssrProps.listingGender);
+        setPfp(ssrProps.listingPfp);
+        setListingImgs(ssrProps.listingImgs);
         setListingBio(type === "flatmate" ? ssrProps.listingBio : null);
         setListingFlatBio(type === "flat" ? ssrProps.listingFlatBio : null);
         setListingPersonBio(type === "flat" ? ssrProps.listingPersonBio : null);
@@ -210,6 +191,32 @@ export const ListingProvider = ({type, ssrProps, cr, children}) => {
     }
 
     //Functions
+    const listingLoad = () => {
+        setLoading(false);
+        setListingInfo(null);
+        // If the status is not resolved in any way, there's no reason to continue
+        if(ssrProps.status != "success" && ssrProps.status != "client-side") return;
+        if(ssrProps.status === "client-side" && !currentUser) return;
+        // SSR props get reloaded when going from listing to listing, but states won't, so we need to reload them
+        reloadProps();
+        if(cr) setWelcomeDialog(true);
+        if(ssrProps.status === "client-side"){
+            loadClientSide();
+            return;
+        };    
+        setListingInfo(JSON.parse(ssrProps.listingInfo));
+        setListingId(id);
+        if(currentUser && (ssrProps.listingFriends.includes(currentUser.uid) || currentUser.uid === ssrProps.uid)){
+            getListingContact(id).then((docs) => {
+                setListingContact(docs.docs[0].data());
+                setContactLoading(false);
+            }).catch((error) => {
+                setContactLoading(false);
+            })
+        }else if(userLoaded){
+            setContactLoading(false);
+        }
+    }
     const checkAccess = (uid) => {
         if(currentUser && currentUser.uid === uid){
             return true;
@@ -426,28 +433,57 @@ export const ListingProvider = ({type, ssrProps, cr, children}) => {
         }
     }
 
-    const loadClientSide = (doc) => {
-            const docData = doc.data();
-            setListingInfo(docData);
-            setListingId(doc.id);
-            setListingImgs(docData.userInfo.images.listingImgs);
-            if(docData.userInfo.images.pfp){
-                setPfp(docData.userInfo.images.pfp);
-            }
+    const loadClientSide = () => {
+            getListing(id).then((doc) => {
+                const docData = doc.data();
+                if(!(checkAccess(docData.userInfo.uid))){
+                    return;
+                }
+                setListingInfo(docData);
+                setListingId(doc.id);
+                setListingImgs(docData.userInfo.images.listingImgs);
+                if(docData.userInfo.images.pfp){
+                    setPfp(docData.userInfo.images.pfp);
+                }
 
-            //SSR props state
-            setListingName(type === "flatmate" ? docData.userInfo.username : `${docData.flatBoxes.layout}${docData.flatBoxes.layout ? " " : ""}${docData.flatBoxes.location}`);
-            setListingUsername(docData.userInfo.username);
-            setListingAge(docData.userInfo.age);
-            setListingGender(docData.userInfo.gender);
-            setListingBio(type === "flatmate" && docData.bio);
-            setListingFlatBio(type === "flat" && docData.flatBio);
-            setListingPersonBio(type === "flat" && docData.personBio);
-            setListingPersonBoxes(docData.personBoxes);
-            setListingPersonTags(docData.personTags);
-            setListingFlatBoxes(type === "flat" && docData.flatBoxes);
+                //SSR props state
+                setListingName(type === "flatmate" ? docData.userInfo.username : `${docData.flatBoxes.layout}${docData.flatBoxes.layout ? " " : ""}${docData.flatBoxes.location}`);
+                setListingUsername(docData.userInfo.username);
+                setListingAge(docData.userInfo.age);
+                setListingGender(docData.userInfo.gender);
+                setListingBio(type === "flatmate" && docData.bio);
+                setListingFlatBio(type === "flat" && docData.flatBio);
+                setListingPersonBio(type === "flat" && docData.personBio);
+                setListingPersonBoxes(docData.personBoxes);
+                setListingPersonTags(docData.personTags);
+                setListingFlatBoxes(type === "flat" && docData.flatBoxes);
+                setListingFlatTags(type === "flatmate" && docData.flatTags);  
             setListingFlatTags(type === "flatmate" && docData.flatTags);  
-            setListingPremium (docData.userInfo.premium);
+                setListingFlatTags(type === "flatmate" && docData.flatTags);  
+            setListingFlatTags(type === "flatmate" && docData.flatTags);  
+                setListingFlatTags(type === "flatmate" && docData.flatTags);  
+            setListingFlatTags(type === "flatmate" && docData.flatTags);  
+                setListingFlatTags(type === "flatmate" && docData.flatTags);  
+            setListingFlatTags(type === "flatmate" && docData.flatTags);  
+                setListingFlatTags(type === "flatmate" && docData.flatTags);  
+            setListingFlatTags(type === "flatmate" && docData.flatTags);  
+                setListingFlatTags(type === "flatmate" && docData.flatTags);  
+            setListingFlatTags(type === "flatmate" && docData.flatTags);  
+                setListingFlatTags(type === "flatmate" && docData.flatTags);  
+            setListingFlatTags(type === "flatmate" && docData.flatTags);  
+                setListingFlatTags(type === "flatmate" && docData.flatTags);  
+                setListingPremium (docData.userInfo.premium);
+
+                return getListingContact(id)
+            }).then((docs) => {
+                setListingContact(docs.docs[0].data());
+                setContactLoading(false);
+            })
+            
+            .catch((error) => {
+                //
+            })
+            
         }
 
 
@@ -558,6 +594,7 @@ export const ListingProvider = ({type, ssrProps, cr, children}) => {
         handleImgDelete,
         loadClientSide,
         handleRequest,
+        listingContact
     }
   return <ListingContext.Provider value={value}>
       {children}

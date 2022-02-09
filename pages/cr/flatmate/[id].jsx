@@ -10,25 +10,35 @@ const CreateFlatmateListing = () => {
         const listingUsername = null;
         const listingAge = null;
         const listingGender = null;
+        const listingPfp = null;
+        const listingImgs = [];
         const listingBio = null;
         const listingPersonBoxes = null;
         const listingFlatTags = null;
         const listingPersonTags = null;
         const listingPremium = null;
         const listingFans = null;
+        const listingFriends = null;
+        const listingInfo = null;
+        const uid = null;
         const status = "client-side";
         const ssrProps = {
-                listingName,
-                listingUsername,
-                listingAge,
-                listingGender,
-                listingBio,
-                listingPersonBoxes,
-                listingFlatTags,
-                listingPersonTags,
-                listingPremium,
-                listingFans,
-                status,
+            listingName,
+            listingUsername,
+            listingAge,
+            listingGender,
+            listingBio,
+            listingPfp,
+            listingImgs,
+            listingPersonBoxes,
+            listingFlatTags,
+            listingPersonTags,
+            listingPremium,
+            listingFans,
+            listingFriends,
+            listingInfo,
+            uid,
+            status,
             }
     return (
         <>

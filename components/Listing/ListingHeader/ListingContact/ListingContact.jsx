@@ -19,6 +19,7 @@ const ListingContact = () => {
     const {callable} = useFunctions();
     const {
         listingInfo, 
+        listingContact,
         editListing, 
         setReqDialogOpen,
         contactLoading,
@@ -75,17 +76,17 @@ const ListingContact = () => {
                                 <div className="items-item">
                                     <i className="fas fa-phone"></i>
                                     <p>{
-                                        [listingInfo.userInfo.contact.phone.slice(0, 4), " ", listingInfo.userInfo.contact.phone.slice(4, 7), " ", listingInfo.userInfo.contact.phone.slice(7,10), " ", listingInfo.userInfo.contact.phone.slice(10)].join('')
+                                        [listingContact.phone.slice(0, 4), " ", listingContact.phone.slice(4, 7), " ", listingContact.phone.slice(7,10), " ", listingContact.phone.slice(10)].join('')
                                     }</p>
                                 </div>
                                 <div className="items-item">
                                     <i className="fas fa-envelope"></i>
-                                    <p>{listingInfo.userInfo.contact.email}</p>
+                                    <p>{listingContact.email}</p>
                                 </div>
                             </div>
                             <div className="items-socials">
-                                    <i onClick={() => listingInfo.userInfo.contact.fb ? window.location.href = listingInfo.userInfo.contact.fb : "" } className={`fab fa-facebook-square socials-item ${listingInfo.userInfo.contact.fb  && "active" }`}></i>
-                                    <i onClick={() => listingInfo.userInfo.contact.ig ? window.location.href =  listingInfo.userInfo.contact.ig : ""} className={`fab fa-instagram socials-item ${(listingInfo.userInfo.contact.ig  && "active" )}`}></i>
+                                    <i onClick={() => listingContact.fb ? window.location.href = listingContact.fb : "" } className={`fab fa-facebook-square socials-item ${listingContact.fb  && "active" }`}></i>
+                                    <i onClick={() => listingContact.ig ? window.location.href =  listingContact.ig : ""} className={`fab fa-instagram socials-item ${(listingContact.ig  && "active" )}`}></i>
                             </div>
                         </div>
                         {isFriend &&

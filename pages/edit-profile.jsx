@@ -137,16 +137,10 @@ const EditProfile = () => {
                 "mainInfo.username": username
             },
             listingParams: {
-                "userInfo.username": usernameRef.current.value,
-                "userInfo.age": userData.data().mainInfo.age,
-                "userInfo.gender": userData.data().mainInfo.gender,
-                "userInfo.contact": {
-                    email,
-                    phone,
-                    fb: fbRef.current.value,
-                    ig: igRef.current.value
-                },
-                "userInfo.uid": currentUser.uid,
+                email,
+                phone,
+                fb: fbRef.current.value,
+                ig: igRef.current.value,
                 hiddenByUser: !listingVisible,
             }
         }

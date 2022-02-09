@@ -1524,11 +1524,14 @@ textarea {
     width: 75% !important;
     margin-top: 1rem;
   }
+  .about .about-donate {
+    width: 100%;
+  }
   .about .about-donate h1 {
     font-size: 24px;
   }
   .about .about-donate p {
-    text-align: justify;
+    text-align: left;
   }
 }
 
@@ -1785,7 +1788,7 @@ textarea {
   position: relative;
   color: white;
   padding: 1rem 2rem;
-  z-index: 2;
+  z-index: 4;
 }
 
 .main-header.white {
@@ -1858,7 +1861,8 @@ textarea {
           align-items: center;
 }
 
-.main-header .navbar .navbar-login, .main-header .navbar .navbar-register {
+.main-header .navbar .navbar-login,
+.main-header .navbar .navbar-register {
   margin-left: 1rem;
 }
 
@@ -2282,7 +2286,7 @@ textarea {
   bottom: 0;
   right: 0;
   left: 0;
-  z-index: 2;
+  z-index: 3;
   height: 100vh;
   color: white;
   display: -webkit-box;
@@ -4684,75 +4688,6 @@ textarea {
   height: 150px;
 }
 
-.cookie-dialog {
-  width: 95%;
-  max-width: 400px;
-  position: fixed;
-  z-index: 1000;
-  bottom: 1rem;
-  -webkit-transform: translate(-50%, 0);
-          transform: translate(-50%, 0);
-  left: 50%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  padding: 1rem 2rem;
-  border-radius: 5px;
-  background-color: white;
-  -webkit-box-shadow: 0 0 1rem rgba(0, 0, 0, 0.39);
-          box-shadow: 0 0 1rem rgba(0, 0, 0, 0.39);
-}
-
-.cookie-dialog .dialog-left {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.cookie-dialog .dialog-left .left-heading {
-  font-size: 14px;
-}
-
-.cookie-dialog .dialog-left .left-description {
-  font-size: 12px;
-  color: #B8B8B8;
-}
-
-.cookie-dialog button {
-  padding: 0.5rem 1rem;
-  border-radius: 15px;
-  margin-left: 1rem;
-  background-color: black;
-  color: white;
-}
-
-@media screen and (max-width: 400px) {
-  .cookie-dialog {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-  }
-  .cookie-dialog .dialog-left .left-heading,
-  .cookie-dialog .dialog-left .left-description {
-    text-align: center;
-  }
-  .cookie-dialog button {
-    margin-left: 0;
-    margin-top: 1rem;
-  }
-}
-
 .about .about-content .about-section {
   margin: 3rem 0;
 }
@@ -4777,12 +4712,13 @@ textarea {
 }
 
 .about .about-content .about-section .section-heading h2 {
+  font-size: 24px;
   color: #309EAB;
   text-align: center;
   position: relative;
-  z-index: 10;
-  min-width: 300px;
-  padding: 0 2rem;
+  z-index: 2;
+  min-width: 250px;
+  padding: 0 1rem;
   background-color: white;
 }
 
@@ -4833,6 +4769,12 @@ textarea {
     padding: 0;
     width: 75%;
     margin-top: 1rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .about .about-content .about-section .section-heading h2 {
+    font-size: 20px;
   }
 }
 

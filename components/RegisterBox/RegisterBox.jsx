@@ -75,34 +75,32 @@ const RegisterBox = () => {
         register(email, password).then((user)=> {
             const uid = user.user.uid;
             const userInfo = {
-                username: username,
-                age: age,
-                gender: gender,
-                birthday: birthday,
-                location: location,
-                type: type,
-                email: email,
-                phone: phone,
+                username,
+                age,
+                gender,
+                birthday,
+                location,
+                type,
+                email,
+                phone,
                 listingId: listingIdVar,
-                uid: uid,
+                uid,
             }
             const listingInfo = {
-                username: username,
-                age: age,
-                gender: gender,
-                type: type,
+                username,
+                age,
+                gender,
+                type,
                 listingId: listingIdVar,
                 contact: {
                     email: email,
                     phone: phone,
-                    socials: {
-                        ig: "",
-                        fb: "",
-                    },
+                    ig: "",
+                    fb: "",
                 },
-                uid: uid,
+                uid,
                 money: price,
-                location: location,
+                location,
             }
             createUser(userInfo)
             .then(response => {

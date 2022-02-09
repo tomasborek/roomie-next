@@ -78,7 +78,7 @@ export default function Home() {
                     <h1>Líbí se vám projekt Roomie?</h1>
                     <p>Do Roomie vkládáme maximální úsilí a budeme moc rádi, pokud svým příspěvkem projekt podpoříte. Díky vám tak budeme moci pracovat na nových aktualizacích a Roomie vylepšovat.
                     Velmi nás to potěší.</p>
-                    <iframe id='kofiframe' src='https://ko-fi.com/roomiecz/?hidefeed=true&widget=true&embed=true&preview=true' style={{border:"none", margin:"0 auto", width:"75%",padding:"32px 0 0 0",background:"#f9f9f9"}} height='712' title='roomiecz'></iframe>
+                    <iframe id='kofiframe' src='https://ko-fi.com/roomiecz/?hidefeed=true&widget=true&embed=true&preview=true' style={{border:"none", margin:"0 auto", width:"100%",padding:"32px 0 0 0",background:"#f9f9f9"}} height='712' title='roomiecz'></iframe>
                 </div>
             </div>
                
