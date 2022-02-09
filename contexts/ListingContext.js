@@ -22,7 +22,7 @@ export const ListingProvider = ({type, ssrProps, cr, children}) => {
     const router = useRouter();
     const {id} = router.query;
     const {getListing, getUser, getListingContact} = useDb();
-    const {currentUser, currentUserInfo} = useAuth();
+    const {currentUser, currentUserInfo, userLoaded} = useAuth();
     const [loading, setLoading] = useLoading();
     const {snackBar} = useSnackBar();
     const {callable} = useFunctions();
@@ -99,35 +99,10 @@ export const ListingProvider = ({type, ssrProps, cr, children}) => {
         
     
     useEffect(() => {
-        setLoading(false);
-        setListingInfo(null);
         if(!router.isReady) return;
-        // If the status is not resolved in any way, there's no reason to continue
-        if(ssrProps.status != "success" && ssrProps.status != "client-side") return;
-        if(ssrProps.status === "client-side" && !currentUser) return;
-        // SSR props get reloaded when going from listing to listing, but states won't, so we need to reload them
-        reloadProps();
-        if(cr) setWelcomeDialog(true);
-        if(ssrProps.status === "client-side"){
-            if(checkAccess(ssrProps.uid)){
-                loadClientSide();
-            };
-            return;
-        };    
-        setListingInfo(JSON.parse(ssrProps.listingInfo));
-        setListingId(id);
-        if(currentUser && (ssrProps.listingFriends.includes(currentUser.uid) || currentUser.uid === ssrProps.uid)){
-            getListingContact(id).then((docs) => {
-                setListingContact(docs.docs[0].data());
-                setContactLoading(false);
-            }).catch((error) => {
-                console.log(error);
-                setContactLoading(false);
-            })
-        }else if(currentUser){
-            setContactLoading(false);
-        }
-    }, [router.isReady, id, currentUser])
+        if(!userLoaded) return;
+        listingLoad();
+    }, [router.isReady, id, currentUser, userLoaded])
 
     // If ssr props aren't null but their coresponding state is, it means it has probably been nulled by the handleSave function, meaning we have to reload them
     useEffect(() => {
@@ -202,6 +177,8 @@ export const ListingProvider = ({type, ssrProps, cr, children}) => {
         setListingUsername(ssrProps.listingUsername);
         setListingAge(ssrProps.listingAge);
         setListingGender(ssrProps.listingGender);
+        setPfp(ssrProps.listingPfp);
+        setListingImgs(ssrProps.listingImgs);
         setListingBio(type === "flatmate" ? ssrProps.listingBio : null);
         setListingFlatBio(type === "flat" ? ssrProps.listingFlatBio : null);
         setListingPersonBio(type === "flat" ? ssrProps.listingPersonBio : null);
@@ -214,6 +191,32 @@ export const ListingProvider = ({type, ssrProps, cr, children}) => {
     }
 
     //Functions
+    const listingLoad = () => {
+        setLoading(false);
+        setListingInfo(null);
+        // If the status is not resolved in any way, there's no reason to continue
+        if(ssrProps.status != "success" && ssrProps.status != "client-side") return;
+        if(ssrProps.status === "client-side" && !currentUser) return;
+        // SSR props get reloaded when going from listing to listing, but states won't, so we need to reload them
+        reloadProps();
+        if(cr) setWelcomeDialog(true);
+        if(ssrProps.status === "client-side"){
+            loadClientSide();
+            return;
+        };    
+        setListingInfo(JSON.parse(ssrProps.listingInfo));
+        setListingId(id);
+        if(currentUser && (ssrProps.listingFriends.includes(currentUser.uid) || currentUser.uid === ssrProps.uid)){
+            getListingContact(id).then((docs) => {
+                setListingContact(docs.docs[0].data());
+                setContactLoading(false);
+            }).catch((error) => {
+                setContactLoading(false);
+            })
+        }else if(userLoaded){
+            setContactLoading(false);
+        }
+    }
     const checkAccess = (uid) => {
         if(currentUser && currentUser.uid === uid){
             return true;
@@ -433,6 +436,9 @@ export const ListingProvider = ({type, ssrProps, cr, children}) => {
     const loadClientSide = () => {
             getListing(id).then((doc) => {
                 const docData = doc.data();
+                if(!(checkAccess(docData.userInfo.uid))){
+                    return;
+                }
                 setListingInfo(docData);
                 setListingId(doc.id);
                 setListingImgs(docData.userInfo.images.listingImgs);
@@ -467,7 +473,14 @@ export const ListingProvider = ({type, ssrProps, cr, children}) => {
             setListingFlatTags(type === "flatmate" && docData.flatTags);  
                 setListingFlatTags(type === "flatmate" && docData.flatTags);  
                 setListingPremium (docData.userInfo.premium);
-            }).catch((error) => {
+
+                return getListingContact(id)
+            }).then((docs) => {
+                setListingContact(docs.docs[0].data());
+                setContactLoading(false);
+            })
+            
+            .catch((error) => {
                 //
             })
             
