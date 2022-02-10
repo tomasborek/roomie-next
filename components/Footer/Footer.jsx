@@ -19,7 +19,7 @@ const Footer = () => {
                             <li><Link href="/about">O nás</Link></li>
                             <li><Link href="/register">Registrovat</Link></li>
                             <li><Link href="/zasady-o-soukromi">Poučení o soukromí</Link></li>
-                            <li><Link href="/obchodni-podminky">Smluvní podmínky</Link></li>
+                            <li><Link href="/obchodni-podminky">Obchodní podmínky</Link></li>
                         </ul>
                     </div>
                 </div>
