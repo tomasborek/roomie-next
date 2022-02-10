@@ -89,11 +89,11 @@ const Header = ({variant}) => {
  
                <Dropdown  className="main-header-dropdown" open={isDropdownActive} setOpen={setIsDropdownActive}>
                 <ul className="dropdown-list">
-                    <li onClick={() => router.push("/edit-profile")} className="list-item"> <i className="fas fa-pen item-icon"></i> Upravit účet</li>
                     <li onClick={handleMyListing}  className="list-item"><i className="fas fa-home item-icon"></i> Můj inzerát</li>
                     <li onClick={() => router.push("/friends")}  className="list-item"><i className="fas fa-users item-icon"></i> Přátelé</li>
                     <li onClick={() => router.push("/requests/recieved")}  className="list-item"><i className="fas fa-envelope item-icon"></i> Žádosti</li>
                     <li onClick={() => router.push("/liked")}><i className="fas fa-heart"></i> Oblíbené</li>
+                    <li onClick={() => router.push("/edit-profile")} className="list-item"> <i className="fas fa-pen item-icon"></i> Účet a soukromí</li>
                     <li onClick={() => handleLogOut()} className="list-item" style={{color: "red"}}><i className="fas fa-sign-out-alt item-icon"></i> Odhlásit</li>
                 </ul>
                </Dropdown>

@@ -80,10 +80,6 @@ const NavOverlay = () => {
                 </ul>
                 :
                 <ul className="overlay-nav-logged">
-                     <li className="nav-logged-item" onClick={() =>{
-                         router.push("/edit-profile");
-                         setNavOverlay(false);
-                     }}> <i className="item-icon fas fa-pen"></i> Upravit účet</li>
                     <li onClick={() => {
                         handleMyListing();
                         setNavOverlay(false);
@@ -100,6 +96,10 @@ const NavOverlay = () => {
                         setNavOverlay(false);
                         router.push("/liked");
                     }} className="nav-logged-item"><i className="fas fa-heart"></i> Oblíbené</li>
+                     <li className="nav-logged-item" onClick={() =>{
+                         router.push("/edit-profile");
+                         setNavOverlay(false);
+                     }}> <i className="item-icon fas fa-pen"></i> Účet a soukromí</li>
                     <li onClick={() => {
                        handleLogOut();
                     }} className="nav-logged-item"><i className="item-icon fas fa-sign-out-alt"></i>Odhlásit</li>
