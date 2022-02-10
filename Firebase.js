@@ -4,7 +4,7 @@ import {getFirestore} from "firebase/firestore";
 import {getFunctions} from "firebase/functions";
 import {getStorage} from "firebase/storage";
 import {getAnalytics} from "firebase/analytics";
-import {initializeAppCheck} from "firebase/app-check";
+import {initializeAppCheck, ReCaptchaV3Provider} from "firebase/app-check";
 
 //Dev
 // const firebaseConfig = {
@@ -26,10 +26,22 @@ const firebaseConfig = {
   appId: "1:901977154768:web:deafa61833a6055f27ead5",
   measurementId: "G-S8Q9W3DW20"
 };
+
+
+
 // Initialize Firebase
-initializeApp(firebaseConfig);
-export const auth = getAuth();
-export const db = getFirestore();
-export const functions = getFunctions();
-export const storage = getStorage();
+const app = initializeApp(firebaseConfig);
+
+export const auth = getAuth(app);
+export const db = getFirestore(app);
+export const functions = getFunctions(app);
+export const storage = getStorage(app);
 export const analytics = getAnalytics;
+
+const appCheck = initializeAppCheck(app, {
+  provider: new ReCaptchaV3Provider('6LcEZG4eAAAAAGVZpuut_SvxobsCEos9tjjJMePD'),
+
+  // Optional argument. If true, the SDK automatically refreshes App Check
+  // tokens as needed.
+  isTokenAutoRefreshEnabled: true
+});
