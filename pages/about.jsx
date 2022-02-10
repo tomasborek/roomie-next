@@ -36,7 +36,7 @@ const About = () => {
             se <b>výrazně zvyšuje</b>. Pro rok 2022 se odhaduje průměrný růst nájmů až o 20 %. V ostatních velkých městech až o 10 %. Prozatimním řešením tedy může být <b>spolubydlení,
             zejména pro studenty</b>. Roomie usnadňuje <b>hledání spolubydlení</b> a propojuje uživatele podle jejich preferencí. Každý má právo si vybrat. 
             </AboutSection>
-            <div className="mid-container">
+            <div className="mid-container" id='contact'>
                 <section className="about-help-section">
                     <div className="section-image">
                         <Image src="/img/home/mailbox.png" layout='responsive' width={454} height={400} />

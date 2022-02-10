@@ -32,7 +32,7 @@ const Footer = () => {
                             <i onClick={() => window.location.href = "https://facebook.com/roomiecz"} className="fab fa-facebook icons-icon"></i>
                             <a href='mailto:roomieback@gmail.com'><i className="fas fa-envelope icons-icon"></i></a>
                         </div>
-                        <Link href="/">Kontaktujte nás...</Link>
+                        <Link href="/about#contact">Kontaktujte nás...</Link>
                     </div>
                 </div>
             </div>
