@@ -367,8 +367,7 @@ const emailHtml = (token) => {
 
                               <div style="color: #003399; line-height: 160%; text-align: center; word-wrap: break-word;">
                                 <p style="font-size: 14px; line-height: 160%;"><span style="font-size: 20px; line-height: 32px;"><strong>Kontaktujte n&aacute;s</strong></span></p>
-                                <p style="font-size: 14px; line-height: 160%;"><span style="font-size: 16px; line-height: 25.6px; color: #000000;">+420 731 011 045</span></p>
-                                <p style="font-size: 14px; line-height: 160%;"><span style="font-size: 16px; line-height: 25.6px; color: #000000;">Info@YourCompany.com</span></p>
+                                <p style="font-size: 14px; line-height: 160%;"><span style="font-size: 16px; line-height: 25.6px; color: #000000;">roomiepodpora@roomie.cz</span></p>
                               </div>
 
                             </td>
