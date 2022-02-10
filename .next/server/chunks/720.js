@@ -1117,283 +1117,6 @@ const InputDialog = ({ heading , description , setMessage , message , setOpen , 
 
 /***/ }),
 
-/***/ 8331:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  "Z": () => (/* binding */ ListingBoxesContainer_ListingBoxesContainer)
-});
-
-// EXTERNAL MODULE: external "react/jsx-runtime"
-var jsx_runtime_ = __webpack_require__(997);
-// EXTERNAL MODULE: external "react"
-var external_react_ = __webpack_require__(6689);
-// EXTERNAL MODULE: external "@mui/material"
-var material_ = __webpack_require__(5692);
-;// CONCATENATED MODULE: ./components/ListingBox/ListingBox.jsx
-
-
-
-const ProfileBox = ({ icon , title , children  })=>{
-    return(/*#__PURE__*/ jsx_runtime_.jsx(jsx_runtime_.Fragment, {
-        children: title != "skeleton" ? /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-            className: "profile-box",
-            children: [
-                /*#__PURE__*/ jsx_runtime_.jsx("i", {
-                    className: `fas ${icon}`
-                }),
-                /*#__PURE__*/ jsx_runtime_.jsx("p", {
-                    className: "result",
-                    children: children
-                }),
-                /*#__PURE__*/ jsx_runtime_.jsx("p", {
-                    className: "title",
-                    children: title
-                })
-            ]
-        }) : /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-            className: "profile-box",
-            children: [
-                /*#__PURE__*/ jsx_runtime_.jsx(material_.Skeleton, {
-                    variant: "text",
-                    sx: {
-                        width: "50%",
-                        marginTop: 5
-                    },
-                    className: "result"
-                }),
-                /*#__PURE__*/ jsx_runtime_.jsx(material_.Skeleton, {
-                    variant: "text",
-                    sx: {
-                        width: "20%"
-                    },
-                    className: "title"
-                })
-            ]
-        })
-    }));
-};
-/* harmony default export */ const ListingBox = (ProfileBox);
-
-;// CONCATENATED MODULE: ./components/ListingBoxesContainer/ListingBoxesContainer.jsx
-
-
-//Components
-
-const ListingBoxesContainer = ({ type , existingBoxes , addedBoxes , editListing  })=>{
-    if (type === "flatmate") {
-        return(/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-            className: "profile-boxes-container",
-            children: [
-                /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                    className: "container-heading",
-                    children: "Info o inzerantovi"
-                }),
-                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                    className: "container-content",
-                    children: [
-                        existingBoxes && !editListing && /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
-                            children: [
-                                existingBoxes.pet && existingBoxes.pet != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    icon: "fa-dog",
-                                    title: "Mazl\xedček",
-                                    children: existingBoxes.pet
-                                }),
-                                existingBoxes.smoking && existingBoxes.smoking != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    icon: "fa-smoking",
-                                    title: "Kouřen\xed",
-                                    children: existingBoxes.smoking
-                                }),
-                                existingBoxes.job && existingBoxes.job != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    icon: "fa-graduation-cap",
-                                    title: "Zaměstn\xe1n\xed",
-                                    children: existingBoxes.job
-                                }),
-                                existingBoxes.children && existingBoxes.children != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    icon: "fa-baby-carriage",
-                                    title: "Děti",
-                                    children: existingBoxes.children
-                                })
-                            ]
-                        }),
-                        !existingBoxes && /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
-                            children: [
-                                /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    title: "skeleton"
-                                }),
-                                /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    title: "skeleton"
-                                }),
-                                /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    title: "skeleton"
-                                })
-                            ]
-                        }),
-                        addedBoxes && editListing && /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
-                            children: [
-                                addedBoxes.pet && addedBoxes.pet != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    icon: "fa-dog",
-                                    title: "Mazl\xedček",
-                                    children: addedBoxes.pet
-                                }),
-                                addedBoxes.smoking && addedBoxes.smoking != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    icon: "fa-smoking",
-                                    title: "Kouřen\xed",
-                                    children: addedBoxes.smoking
-                                }),
-                                addedBoxes.job && addedBoxes.job != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    icon: "fa-graduation-cap",
-                                    title: "Vzděl\xe1n\xed",
-                                    children: addedBoxes.job
-                                }),
-                                addedBoxes.children && addedBoxes.children != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    icon: "fa-baby-carriage",
-                                    title: "Děti",
-                                    children: addedBoxes.children
-                                })
-                            ]
-                        })
-                    ]
-                })
-            ]
-        }));
-    } else if (type === "flat") {
-        return(/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-            className: "profile-boxes-container",
-            children: [
-                /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                    className: "container-heading",
-                    children: "Info o bydlen\xed"
-                }),
-                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                    className: "container-content",
-                    children: [
-                        existingBoxes && !editListing && /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
-                            children: [
-                                existingBoxes.location && existingBoxes.location != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    icon: "fa-home",
-                                    title: "Lokace",
-                                    children: existingBoxes.location
-                                }),
-                                existingBoxes.layout && existingBoxes.layout != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    icon: "fa-door-closed",
-                                    title: "Dispozice",
-                                    children: existingBoxes.layout
-                                }),
-                                existingBoxes.size && existingBoxes.size != "" && /*#__PURE__*/ (0,jsx_runtime_.jsxs)(ListingBox, {
-                                    icon: "fa-arrows-alt-h",
-                                    title: "Velikost",
-                                    children: [
-                                        existingBoxes.size,
-                                        "m",
-                                        /*#__PURE__*/ jsx_runtime_.jsx("sup", {
-                                            children: "2"
-                                        })
-                                    ]
-                                }),
-                                existingBoxes.elevator && existingBoxes.elevator != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    icon: "fa-caret-square-up",
-                                    title: "V\xfdtah",
-                                    children: existingBoxes.elevator
-                                }),
-                                existingBoxes.internet && existingBoxes.internet != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    icon: "fa-wifi",
-                                    title: "Internet",
-                                    children: existingBoxes.internet
-                                }),
-                                existingBoxes.level && existingBoxes.level != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    icon: "fa-door-closed",
-                                    title: "Podlaž\xed",
-                                    children: existingBoxes.level
-                                }),
-                                existingBoxes.petAllowed && existingBoxes.petAllowed != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    icon: "fa-dog",
-                                    title: "Mazl\xedčci",
-                                    children: existingBoxes.petAllowed
-                                }),
-                                existingBoxes.smokingAllowed && existingBoxes.smokingAllowed != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    icon: "fa-smoking",
-                                    title: "Kouřen\xed",
-                                    children: existingBoxes.smokingAllowed
-                                })
-                            ]
-                        }),
-                        !existingBoxes && /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
-                            children: [
-                                /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    title: "skeleton"
-                                }),
-                                /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    title: "skeleton"
-                                }),
-                                /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    title: "skeleton"
-                                })
-                            ]
-                        }),
-                        addedBoxes && editListing && /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
-                            children: [
-                                existingBoxes && existingBoxes.location && existingBoxes.location != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    icon: "fa-home",
-                                    title: "Lokace",
-                                    children: existingBoxes.location
-                                }),
-                                addedBoxes.layout && addedBoxes.layout != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    icon: "fa-door-closed",
-                                    title: "Dispozice",
-                                    children: addedBoxes.layout
-                                }),
-                                addedBoxes.size && addedBoxes.size != "" && /*#__PURE__*/ (0,jsx_runtime_.jsxs)(ListingBox, {
-                                    icon: "fa-arrows-alt-h",
-                                    title: "Velikost",
-                                    children: [
-                                        addedBoxes.size,
-                                        "m",
-                                        /*#__PURE__*/ jsx_runtime_.jsx("sup", {
-                                            children: "2"
-                                        })
-                                    ]
-                                }),
-                                addedBoxes.elevator && addedBoxes.elevator != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    icon: "fa-caret-square-up",
-                                    title: "V\xfdtah",
-                                    children: addedBoxes.elevator
-                                }),
-                                addedBoxes.internet && addedBoxes.internet != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    icon: "fa-wifi",
-                                    title: "Internet",
-                                    children: addedBoxes.internet
-                                }),
-                                addedBoxes.level && addedBoxes.level != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    icon: "fa-door-closed",
-                                    title: "Podlaž\xed",
-                                    children: addedBoxes.level
-                                }),
-                                addedBoxes.petAllowed && addedBoxes.petAllowed != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    icon: "fa-dog",
-                                    title: "Mazl\xedčci",
-                                    children: addedBoxes.petAllowed
-                                }),
-                                addedBoxes.smokingAllowed && addedBoxes.smokingAllowed != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
-                                    icon: "fa-smoking",
-                                    title: "Kouřen\xed",
-                                    children: addedBoxes.smokingAllowed
-                                })
-                            ]
-                        })
-                    ]
-                })
-            ]
-        }));
-    }
-};
-/* harmony default export */ const ListingBoxesContainer_ListingBoxesContainer = (ListingBoxesContainer);
-
-
-/***/ }),
-
 /***/ 1720:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -3528,6 +3251,283 @@ const ListingOpeningBoxes = ()=>{
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ListingOpeningBoxes);
 
 });
+
+/***/ }),
+
+/***/ 8331:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "Z": () => (/* binding */ ListingBoxesContainer_ListingBoxesContainer)
+});
+
+// EXTERNAL MODULE: external "react/jsx-runtime"
+var jsx_runtime_ = __webpack_require__(997);
+// EXTERNAL MODULE: external "react"
+var external_react_ = __webpack_require__(6689);
+// EXTERNAL MODULE: external "@mui/material"
+var material_ = __webpack_require__(5692);
+;// CONCATENATED MODULE: ./components/ListingBox/ListingBox.jsx
+
+
+
+const ProfileBox = ({ icon , title , children  })=>{
+    return(/*#__PURE__*/ jsx_runtime_.jsx(jsx_runtime_.Fragment, {
+        children: title != "skeleton" ? /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+            className: "profile-box",
+            children: [
+                /*#__PURE__*/ jsx_runtime_.jsx("i", {
+                    className: `fas ${icon}`
+                }),
+                /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                    className: "result",
+                    children: children
+                }),
+                /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                    className: "title",
+                    children: title
+                })
+            ]
+        }) : /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+            className: "profile-box",
+            children: [
+                /*#__PURE__*/ jsx_runtime_.jsx(material_.Skeleton, {
+                    variant: "text",
+                    sx: {
+                        width: "50%",
+                        marginTop: 5
+                    },
+                    className: "result"
+                }),
+                /*#__PURE__*/ jsx_runtime_.jsx(material_.Skeleton, {
+                    variant: "text",
+                    sx: {
+                        width: "20%"
+                    },
+                    className: "title"
+                })
+            ]
+        })
+    }));
+};
+/* harmony default export */ const ListingBox = (ProfileBox);
+
+;// CONCATENATED MODULE: ./components/ListingBoxesContainer/ListingBoxesContainer.jsx
+
+
+//Components
+
+const ListingBoxesContainer = ({ type , existingBoxes , addedBoxes , editListing  })=>{
+    if (type === "flatmate") {
+        return(/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+            className: "profile-boxes-container",
+            children: [
+                /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                    className: "container-heading",
+                    children: "Info o inzerantovi"
+                }),
+                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                    className: "container-content",
+                    children: [
+                        existingBoxes && !editListing && /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
+                            children: [
+                                existingBoxes.pet && existingBoxes.pet != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    icon: "fa-dog",
+                                    title: "Mazl\xedček",
+                                    children: existingBoxes.pet
+                                }),
+                                existingBoxes.smoking && existingBoxes.smoking != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    icon: "fa-smoking",
+                                    title: "Kouřen\xed",
+                                    children: existingBoxes.smoking
+                                }),
+                                existingBoxes.job && existingBoxes.job != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    icon: "fa-graduation-cap",
+                                    title: "Zaměstn\xe1n\xed",
+                                    children: existingBoxes.job
+                                }),
+                                existingBoxes.children && existingBoxes.children != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    icon: "fa-baby-carriage",
+                                    title: "Děti",
+                                    children: existingBoxes.children
+                                })
+                            ]
+                        }),
+                        !existingBoxes && /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
+                            children: [
+                                /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    title: "skeleton"
+                                }),
+                                /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    title: "skeleton"
+                                }),
+                                /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    title: "skeleton"
+                                })
+                            ]
+                        }),
+                        addedBoxes && editListing && /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
+                            children: [
+                                addedBoxes.pet && addedBoxes.pet != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    icon: "fa-dog",
+                                    title: "Mazl\xedček",
+                                    children: addedBoxes.pet
+                                }),
+                                addedBoxes.smoking && addedBoxes.smoking != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    icon: "fa-smoking",
+                                    title: "Kouřen\xed",
+                                    children: addedBoxes.smoking
+                                }),
+                                addedBoxes.job && addedBoxes.job != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    icon: "fa-graduation-cap",
+                                    title: "Vzděl\xe1n\xed",
+                                    children: addedBoxes.job
+                                }),
+                                addedBoxes.children && addedBoxes.children != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    icon: "fa-baby-carriage",
+                                    title: "Děti",
+                                    children: addedBoxes.children
+                                })
+                            ]
+                        })
+                    ]
+                })
+            ]
+        }));
+    } else if (type === "flat") {
+        return(/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+            className: "profile-boxes-container",
+            children: [
+                /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                    className: "container-heading",
+                    children: "Info o bydlen\xed"
+                }),
+                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                    className: "container-content",
+                    children: [
+                        existingBoxes && !editListing && /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
+                            children: [
+                                existingBoxes.location && existingBoxes.location != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    icon: "fa-home",
+                                    title: "Lokace",
+                                    children: existingBoxes.location
+                                }),
+                                existingBoxes.layout && existingBoxes.layout != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    icon: "fa-door-closed",
+                                    title: "Dispozice",
+                                    children: existingBoxes.layout
+                                }),
+                                existingBoxes.size && existingBoxes.size != "" && /*#__PURE__*/ (0,jsx_runtime_.jsxs)(ListingBox, {
+                                    icon: "fa-arrows-alt-h",
+                                    title: "Velikost",
+                                    children: [
+                                        existingBoxes.size,
+                                        "m",
+                                        /*#__PURE__*/ jsx_runtime_.jsx("sup", {
+                                            children: "2"
+                                        })
+                                    ]
+                                }),
+                                existingBoxes.elevator && existingBoxes.elevator != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    icon: "fa-caret-square-up",
+                                    title: "V\xfdtah",
+                                    children: existingBoxes.elevator
+                                }),
+                                existingBoxes.internet && existingBoxes.internet != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    icon: "fa-wifi",
+                                    title: "Internet",
+                                    children: existingBoxes.internet
+                                }),
+                                existingBoxes.level && existingBoxes.level != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    icon: "fa-door-closed",
+                                    title: "Podlaž\xed",
+                                    children: existingBoxes.level
+                                }),
+                                existingBoxes.petAllowed && existingBoxes.petAllowed != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    icon: "fa-dog",
+                                    title: "Mazl\xedčci",
+                                    children: existingBoxes.petAllowed
+                                }),
+                                existingBoxes.smokingAllowed && existingBoxes.smokingAllowed != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    icon: "fa-smoking",
+                                    title: "Kouřen\xed",
+                                    children: existingBoxes.smokingAllowed
+                                })
+                            ]
+                        }),
+                        !existingBoxes && /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
+                            children: [
+                                /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    title: "skeleton"
+                                }),
+                                /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    title: "skeleton"
+                                }),
+                                /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    title: "skeleton"
+                                })
+                            ]
+                        }),
+                        addedBoxes && editListing && /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
+                            children: [
+                                existingBoxes && existingBoxes.location && existingBoxes.location != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    icon: "fa-home",
+                                    title: "Lokace",
+                                    children: existingBoxes.location
+                                }),
+                                addedBoxes.layout && addedBoxes.layout != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    icon: "fa-door-closed",
+                                    title: "Dispozice",
+                                    children: addedBoxes.layout
+                                }),
+                                addedBoxes.size && addedBoxes.size != "" && /*#__PURE__*/ (0,jsx_runtime_.jsxs)(ListingBox, {
+                                    icon: "fa-arrows-alt-h",
+                                    title: "Velikost",
+                                    children: [
+                                        addedBoxes.size,
+                                        "m",
+                                        /*#__PURE__*/ jsx_runtime_.jsx("sup", {
+                                            children: "2"
+                                        })
+                                    ]
+                                }),
+                                addedBoxes.elevator && addedBoxes.elevator != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    icon: "fa-caret-square-up",
+                                    title: "V\xfdtah",
+                                    children: addedBoxes.elevator
+                                }),
+                                addedBoxes.internet && addedBoxes.internet != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    icon: "fa-wifi",
+                                    title: "Internet",
+                                    children: addedBoxes.internet
+                                }),
+                                addedBoxes.level && addedBoxes.level != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    icon: "fa-door-closed",
+                                    title: "Podlaž\xed",
+                                    children: addedBoxes.level
+                                }),
+                                addedBoxes.petAllowed && addedBoxes.petAllowed != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    icon: "fa-dog",
+                                    title: "Mazl\xedčci",
+                                    children: addedBoxes.petAllowed
+                                }),
+                                addedBoxes.smokingAllowed && addedBoxes.smokingAllowed != "" && /*#__PURE__*/ jsx_runtime_.jsx(ListingBox, {
+                                    icon: "fa-smoking",
+                                    title: "Kouřen\xed",
+                                    children: addedBoxes.smokingAllowed
+                                })
+                            ]
+                        })
+                    ]
+                })
+            ]
+        }));
+    }
+};
+/* harmony default export */ const ListingBoxesContainer_ListingBoxesContainer = (ListingBoxesContainer);
+
 
 /***/ }),
 

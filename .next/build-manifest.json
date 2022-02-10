@@ -5,9 +5,9 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/CIgry1OBREjJuoqx06q4E/_buildManifest.js",
-    "static/CIgry1OBREjJuoqx06q4E/_ssgManifest.js",
-    "static/CIgry1OBREjJuoqx06q4E/_middlewareManifest.js"
+    "static/3qaJ8bYf0m-V3Yn-_y6fe/_buildManifest.js",
+    "static/3qaJ8bYf0m-V3Yn-_y6fe/_ssgManifest.js",
+    "static/3qaJ8bYf0m-V3Yn-_y6fe/_middlewareManifest.js"
   ],
   "pages": {
     "/": [
@@ -54,13 +54,13 @@
       "static/chunks/main-b80e690cd11edb6a.js",
       "static/chunks/24-0f0deeb8a64b5709.js",
       "static/chunks/485-a13a19b8dfc762ac.js",
-      "static/chunks/855-9dc777bea406631d.js",
+      "static/chunks/946-9e63f55469abce7c.js",
       "static/chunks/184-3bddda5605fec6cb.js",
       "static/chunks/3-1c6af1a48fdc4078.js",
       "static/chunks/942-643d5e4634874b84.js",
       "static/chunks/378-d9b728bf589da5cb.js",
       "static/chunks/223-e9f7dee5656e84a5.js",
-      "static/chunks/pages/cr/flat/[id]-a5cb95f0ed5de845.js"
+      "static/chunks/pages/cr/flat/[id]-9c48cc40a022332a.js"
     ],
     "/cr/flatmate/[id]": [
       "static/chunks/webpack-5752944655d749a0.js",
@@ -68,23 +68,23 @@
       "static/chunks/main-b80e690cd11edb6a.js",
       "static/chunks/24-0f0deeb8a64b5709.js",
       "static/chunks/485-a13a19b8dfc762ac.js",
-      "static/chunks/855-9dc777bea406631d.js",
+      "static/chunks/946-9e63f55469abce7c.js",
       "static/chunks/184-3bddda5605fec6cb.js",
       "static/chunks/3-1c6af1a48fdc4078.js",
       "static/chunks/942-643d5e4634874b84.js",
       "static/chunks/378-d9b728bf589da5cb.js",
       "static/chunks/223-e9f7dee5656e84a5.js",
-      "static/chunks/pages/cr/flatmate/[id]-ac0fafd76d5b4232.js"
+      "static/chunks/pages/cr/flatmate/[id]-11913d74b8108c32.js"
     ],
     "/edit-profile": [
       "static/chunks/webpack-5752944655d749a0.js",
       "static/chunks/framework-91d7f78b5b4003c8.js",
       "static/chunks/main-b80e690cd11edb6a.js",
       "static/chunks/24-0f0deeb8a64b5709.js",
-      "static/chunks/855-9dc777bea406631d.js",
+      "static/chunks/946-9e63f55469abce7c.js",
       "static/chunks/942-643d5e4634874b84.js",
       "static/chunks/378-d9b728bf589da5cb.js",
-      "static/chunks/pages/edit-profile-8231b1a1b0144229.js"
+      "static/chunks/pages/edit-profile-1bb2673f9f1ea132.js"
     ],
     "/explore/flatmates": [
       "static/chunks/webpack-5752944655d749a0.js",
@@ -94,8 +94,8 @@
       "static/chunks/485-a13a19b8dfc762ac.js",
       "static/chunks/942-643d5e4634874b84.js",
       "static/chunks/736-3c10e9773fd4976a.js",
-      "static/chunks/818-0d4925f3ab294613.js",
-      "static/chunks/pages/explore/flatmates-7eeb2887dab55eff.js"
+      "static/chunks/151-6992508c4bfcdfbe.js",
+      "static/chunks/pages/explore/flatmates-05aacbccda23c73f.js"
     ],
     "/explore/flats": [
       "static/chunks/webpack-5752944655d749a0.js",
@@ -105,8 +105,8 @@
       "static/chunks/485-a13a19b8dfc762ac.js",
       "static/chunks/942-643d5e4634874b84.js",
       "static/chunks/736-3c10e9773fd4976a.js",
-      "static/chunks/818-0d4925f3ab294613.js",
-      "static/chunks/pages/explore/flats-bd2f5b7e1e5c7f76.js"
+      "static/chunks/151-6992508c4bfcdfbe.js",
+      "static/chunks/pages/explore/flats-5b8c2c51baf7f792.js"
     ],
     "/flat/[id]": [
       "static/chunks/webpack-5752944655d749a0.js",
@@ -114,13 +114,13 @@
       "static/chunks/main-b80e690cd11edb6a.js",
       "static/chunks/24-0f0deeb8a64b5709.js",
       "static/chunks/485-a13a19b8dfc762ac.js",
-      "static/chunks/855-9dc777bea406631d.js",
+      "static/chunks/946-9e63f55469abce7c.js",
       "static/chunks/184-3bddda5605fec6cb.js",
       "static/chunks/3-1c6af1a48fdc4078.js",
       "static/chunks/942-643d5e4634874b84.js",
       "static/chunks/378-d9b728bf589da5cb.js",
       "static/chunks/223-e9f7dee5656e84a5.js",
-      "static/chunks/pages/flat/[id]-c841112c49602498.js"
+      "static/chunks/pages/flat/[id]-79a7b2e09d2e4318.js"
     ],
     "/flatmate/[id]": [
       "static/chunks/webpack-5752944655d749a0.js",
@@ -128,13 +128,13 @@
       "static/chunks/main-b80e690cd11edb6a.js",
       "static/chunks/24-0f0deeb8a64b5709.js",
       "static/chunks/485-a13a19b8dfc762ac.js",
-      "static/chunks/855-9dc777bea406631d.js",
+      "static/chunks/946-9e63f55469abce7c.js",
       "static/chunks/184-3bddda5605fec6cb.js",
       "static/chunks/3-1c6af1a48fdc4078.js",
       "static/chunks/942-643d5e4634874b84.js",
       "static/chunks/378-d9b728bf589da5cb.js",
       "static/chunks/223-e9f7dee5656e84a5.js",
-      "static/chunks/pages/flatmate/[id]-2186977ba0b31a17.js"
+      "static/chunks/pages/flatmate/[id]-0abf7ac10e77f380.js"
     ],
     "/friends": [
       "static/chunks/webpack-5752944655d749a0.js",
@@ -157,7 +157,7 @@
       "static/chunks/framework-91d7f78b5b4003c8.js",
       "static/chunks/main-b80e690cd11edb6a.js",
       "static/chunks/24-0f0deeb8a64b5709.js",
-      "static/chunks/pages/login-e666f8b78eba2cd6.js"
+      "static/chunks/pages/login-30ad081bfcae4282.js"
     ],
     "/obchodni-podminky": [
       "static/chunks/webpack-5752944655d749a0.js",
