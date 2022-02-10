@@ -16,10 +16,10 @@ const Footer = () => {
                     <p className="section-header">Důležité odkazy</p>
                     <div className="section-description">
                         <ul>
+                            <li><Link href="/about">O nás</Link></li>
                             <li><Link href="/register">Registrovat</Link></li>
                             <li><Link href="/zasady-o-soukromi">Poučení o soukromí</Link></li>
                             <li><Link href="/obchodni-podminky">Smluvní podmínky</Link></li>
-                            <li><Link href="/premium">Premium</Link></li>
                         </ul>
                     </div>
                 </div>
