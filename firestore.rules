@@ -16,7 +16,7 @@ service cloud.firestore {
    }
 
    match /listings/{listingId}/contact/{contactId}{
-     allow read: if true;
+     allow read: if isFriend(listingId) || isListingOwner(listingId);
    }
    
    match /users/{userId}/recievedRequests/{requestId}{
@@ -36,7 +36,20 @@ service cloud.firestore {
    function isSigned(){
    	return request.auth != null;
    }
+
+   function isFriend(listingId){
+    let friends = get(/databases/$(database)/documents/listings/$(listingId)).data.friends;
+    let isInFriends = request.auth.uid in friends;
+    return isInFriends != false;
+  }
+
+  function isListingOwner(listingId){
+    let ownerUid = get(/databases/$(database)/documents/listings/$(listingId)).data.userInfo.uid;
+    let isUidEqual = request.auth.uid == ownerUid;
+    return isUidEqual != false;
+  }
    
+
    function isOwner(userId){
    return (request.auth != null && request.auth.uid == userId);
    }
