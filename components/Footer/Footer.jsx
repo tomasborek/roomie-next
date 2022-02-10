@@ -36,6 +36,9 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
+            <div className="credits">
+                <p>Images attributed to Freepik</p>
+            </div>
             <div className="copyright">
                 &copy; Roomie 2022
             </div>

@@ -61,6 +61,17 @@
     }
   }
 
+  .credits {
+    width: 100%;
+    font-size: 9px;
+    display: flex;
+    color: $mainGray;
+
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+  }
+
   .copyright {
     width: 100%;
     font-size: 12px;
