@@ -1,11 +1,15 @@
 import React from 'react';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
+import Head from 'next/head';
 
 
 const TermsAndConditions = () => {
   return (
     <>
+    <Head>
+      <title>Obchodní podmínky | Roomie</title>
+    </Head>
     <Header variant={"white"}/>
     <div className="terms-banner" style={{background:"rgb(48, 158, 171)",
     background: "linear-gradient(90deg, rgba(48, 158, 171, 1) 0%, rgba(21, 76, 112, 1) 87%)", height: "200px"}}></div>

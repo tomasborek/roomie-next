@@ -5,10 +5,16 @@ import Header from "../components/Header/Header";
 import Footer from '../components/Footer/Footer';
 import AboutSection from '../components/AboutSection/AboutSection';
 import ContactForm from "../components/ContactForm/ContactForm";
+import Head from 'next/head';
 
 const About = () => {
     const [contactForm, setContactForm] = useState(false);
   return (
+      <>
+      <Head>
+          <title>O nás | Roomie</title>
+          <meta name="description" content="Krize bydlení je stále větší a koleje stále více zaplněné. Spoustu lidí tak hledá řešení ve spolubydlení. Jako jediný moderní český portál pro obyvatele vyhledávající spolubydlení věříme, že dokážeme lidem pomoci hledat efektivně. Nedostatek dostupných bytů pro mladé, pracujicí i studující, se výrazně zvyšuje. Pro rok 2022 se odhaduje průměrný růst nájmů až o 20 %. V ostatních velkých městech až o 10 %. Prozatimním řešením tedy může být spolubydlení, zejména pro studenty. Roomie usnadňuje hledání spolubydlení a propojuje uživatele podle jejich preferencí. Každý má právo si vybrat."></meta>
+      </Head>
     <div className='about'>
         <ContactForm open={contactForm} setOpen={setContactForm}/>
         <Header variant={"white"}/>
@@ -59,6 +65,7 @@ const About = () => {
         </div>
         <Footer/>
     </div>
+    </>
   );
 };
 
