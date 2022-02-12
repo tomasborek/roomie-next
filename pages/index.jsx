@@ -40,7 +40,7 @@ export default function Home() {
            <div className="mid-container">
                 <section className="home-section section-left">
                     <div className="section-image">
-                        <Image src="/img/home/home-panels.png" layout="responsive" width={513} height={415} priority/>
+                        <Image alt="Hledáta spolubydlící?" src="/img/home/home-panels.png" layout="responsive" width={513} height={415} priority/>
                     </div>
                     
                     <div className="section-content">
@@ -64,7 +64,7 @@ export default function Home() {
                     </div>
                     <div className="banner-img">
                         <div className="img-img">
-                            <Image src={"/img/home/zarovka.png"} layout="responsive" width={275} height={416}></Image>
+                            <Image alt="Co je Roomie?" src={"/img/home/zarovka.png"} layout="responsive" width={275} height={416}></Image>
                         </div>
                     </div>
                 </div>    
