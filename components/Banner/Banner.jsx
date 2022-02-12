@@ -28,7 +28,7 @@ const Banner = () => {
     }
     return (
         <div className="banner">
-           {windowWidth && <img src={windowWidth  > 600 ? "/img/poster/poster-bg.png" : "/img/poster/poster-mobile.png"} alt="" className="banner-bg" />}
+           {windowWidth && <img alt="poster" src={windowWidth  > 600 ? "/img/poster/poster-bg.png" : "/img/poster/poster-mobile.png"} alt="" className="banner-bg" />}
             <div className="banner-gradient"></div>
             <div className="banner-text mid-container">
                 <h1>Spolubydlící, se kterými si budete rozumět</h1>
