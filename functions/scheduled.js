@@ -6,7 +6,7 @@ exports.birthday = functions.pubsub.schedule("0 1 * * *")
     .timeZone("Europe/Prague")
     .onRun((context) => {
         const now = admin.firestore.Timestamp.now();
-        db.collection("users").where("birthday", "<=", now).get().then((users) => {
+        return db.collection("users").where("birthday", "<=", now).get().then((users) => {
             return Promise.all(
                 users.docs.map((user) => {
                     const currentAge = user.data().mainInfo.age;
@@ -27,9 +27,5 @@ exports.birthday = functions.pubsub.schedule("0 1 * * *")
                     })
                 })
             )
-        }).then((response) => {
-            return response;
-        }).catch((error) => {
-            return error;
         })
     })
