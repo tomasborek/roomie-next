@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link';
 
 //Contexts
 import { useRegister } from '../../../contexts/RegisterContext';
@@ -7,7 +8,7 @@ const RegistrationFinal = () => {
     //Variables
 
     //Refs
-    const {emailRef, phoneRef, phoneCodeRef, passwordRef, passwordCheckRef, dayRef, monthRef, yearRef} = useRegister();
+    const {emailRef, phoneRef, phoneCodeRef, passwordRef, passwordCheckRef, dayRef, monthRef, yearRef, termsAgreementRef, emailMarketingRef} = useRegister();
     return (
         <div className="content-register">
             {/* <input ref={usernameRef} maxLength={15} className="register-input-username" type="text" placeholder="Křestní jméno..." /> */}
@@ -197,13 +198,13 @@ const RegistrationFinal = () => {
             <input ref={passwordRef} maxLength={30} type="password" placeholder="Heslo pro přihlášení..." />
             <input ref={passwordCheckRef} maxLength={30} type="password" placeholder="Ověřte své heslo..." />
             <div className="register-checkbox">
-                <input className="checkbox" type="checkbox" />
+                <input ref={termsAgreementRef} className="checkbox" type="checkbox" />
                 <p>Potvrzuji, že jsem si přečetl a akceptuji
-                podmínky, zásady ochrany soukromí a zásady souborů cookie.
+                <a href="/obchodni-podminky" target={"_blank"}> podmínky, zásady ochrany soukromí a zásady souborů cookie.</a> 
                 </p>
             </div>
             <div className="register-checkbox">
-                <input className="checkbox" type="checkbox" />
+                <input ref={emailMarketingRef} className="checkbox" type="checkbox" />
                 <p>Nechci, aby mi přicházely na e-mail nabídky a užitečné informace.</p>
             </div>
     </div>

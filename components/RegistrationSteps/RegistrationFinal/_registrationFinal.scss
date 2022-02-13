@@ -1,125 +1,120 @@
-.register-box .box-content .content-register{
-    @include centerHor;
+.register-box .box-content .content-register {
+  @include centerHor;
+  width: 400px;
+
+  input {
+    border-radius: 5px;
+    border: 1px solid $mainGray;
+    margin-bottom: 1rem;
     width: 400px;
-   
-
-    input{
-        border-radius: 5px;
-        border: 1px solid $mainGray;
-        margin-bottom: 1rem;
-        width: 400px;
-        background-color: white;
-        transition: all 200ms;
-        &:focus{
-            border-color:$mainColor ;
-        }
-
-        &.error{
-            border-color: red;
-        }
+    background-color: white;
+    transition: all 200ms;
+    &:focus {
+      border-color: $mainColor;
     }
 
-    .register-input-username{
-        margin-bottom: 0.5rem;
+    &.error {
+      border-color: red;
+    }
+  }
+
+  .register-input-username {
+    margin-bottom: 0.5rem;
+  }
+
+  .register-birthday-label {
+    font-size: 12px;
+    color: $mainGray;
+    width: 100%;
+    text-align: start;
+    padding-bottom: 0.5rem;
+  }
+
+  .register-birthday {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    select {
+      width: 30%;
+      height: 40px;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+      border-radius: 5px;
+      border: 1px solid $mainGray;
+      padding: 0.5rem;
+      background-color: white;
+      option {
+        text-indent: 5px;
+      }
+    }
+  }
+  .register-phone {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    select {
+      padding: 0.5rem;
+      width: 30%;
+      height: 40px;
+      border-radius: 5px;
+      border-radius: 5px;
+      border: 1px solid $mainGray;
+      padding: 0.5rem;
+      background-color: white;
+      margin-bottom: 1rem;
+      option {
+        text-indent: 5px;
+      }
     }
 
-    .register-birthday-label{
-        font-size: 12px;
-        color: $mainGray;
-        width: 100%;
-        text-align: start;
-        padding-bottom:0.5rem;
+    input {
+      width: 66%;
+      height: 40px;
     }
+  }
 
-    .register-birthday{
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        select{
-            width: 30%;
-            height: 40px;
-            margin-bottom: 1rem;
-            border-radius: 5px;
-            border-radius: 5px;
-            border: 1px solid $mainGray;
-            padding: 0.5rem;
-            background-color: white;
-            option{
-                text-indent: 5px;
-            }
-
-            
-        }
-        
+  .register-checkbox {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    .checkbox {
+      width: auto;
+      margin: 0;
+      margin-right: 1rem;
     }
-    .register-phone{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        select{
-            padding: 0.5rem;
-            width: 30%;
-            height: 40px;
-            border-radius: 5px;
-            border-radius: 5px;
-            border: 1px solid $mainGray;
-            padding: 0.5rem;
-            background-color: white;
-            margin-bottom: 1rem;
-            option{
-                text-indent: 5px;
-            }
-        }
-
-        input{
-            width: 66%;
-            height: 40px;
-        }
+    p {
+      font-size: 10px;
+      color: $darkerGray;
+      a {
+        text-decoration: underline;
+      }
     }
-
-    .register-checkbox{
-        display: flex;
-        align-items: center;
-        width: 100%;
-        margin-bottom: 0.5rem;
-        .checkbox{
-            width: auto;
-            margin: 0;
-            margin-right: 1rem;
-        }
-        p{
-            font-size: 9px;
-            color: $darkerGray;
-        }
-    }
-
-    
-
+  }
 }
 //Media
 
-@media screen and (max-width: 500px){
-   
-    .register-box .box-content .content-register{
-        width: 100%;
-        input{
-            width: 100%;
-            margin-bottom: 0.5rem;
-        }
-        .register-birthday{
-            select{
-                margin-bottom: 0.5rem;
-            }
-        }
-        .register-phone{
-            width: 100%;
-           select{
-               width: 30%;
-               margin-bottom: 0.5rem;
-           }
-        }
+@media screen and (max-width: 500px) {
+  .register-box .box-content .content-register {
+    width: 100%;
+    input {
+      width: 100%;
+      margin-bottom: 0.5rem;
     }
+    .register-birthday {
+      select {
+        margin-bottom: 0.5rem;
+      }
+    }
+    .register-phone {
+      width: 100%;
+      select {
+        width: 30%;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
 }
