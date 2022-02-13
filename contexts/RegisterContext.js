@@ -17,16 +17,20 @@ export  function RegisterProvider(props) {
     const monthRef = useRef();
     const dayRef = useRef();
     const yearRef = useRef();
+    const termsAgreementRef = useRef();
+    const emailMarketingRef = useRef();
     const value = {
         usernameState: {username, setUsername},
-        emailRef: emailRef,
-        phoneRef: phoneRef,
-        phoneCodeRef: phoneCodeRef,
-        passwordRef: passwordRef,
-        passwordCheckRef: passwordCheckRef,
-        dayRef: dayRef,
-        monthRef: monthRef,
-        yearRef: yearRef
+        emailRef,
+        phoneRef,
+        phoneCodeRef,
+        passwordRef,
+        passwordCheckRef,
+        dayRef,
+        monthRef,
+        yearRef,
+        termsAgreementRef,
+        emailMarketingRef
     }
     return (
         <RegisterContext.Provider value={value}>
