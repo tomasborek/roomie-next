@@ -47,9 +47,6 @@ function MyApp({ Component, pageProps }) {
     setCookie(true);
   }, []);
 
-  useEffect(() => {
-    console.log("hi");
-  })
   return (
     <>
     <Head>
