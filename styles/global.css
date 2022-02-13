@@ -689,7 +689,6 @@ textarea {
 .EditProfile .edit-content .content-form .form-item .item-input {
   border-radius: 5px;
   border: 1px solid #B8B8B8;
-  width: 225px;
 }
 
 .EditProfile .edit-content .content-account-links {
@@ -2951,8 +2950,12 @@ textarea {
 }
 
 .register-box .box-content .content-register .register-checkbox p {
-  font-size: 9px;
+  font-size: 10px;
   color: #6b717f;
+}
+
+.register-box .box-content .content-register .register-checkbox p a {
+  text-decoration: underline;
 }
 
 @media screen and (max-width: 500px) {
