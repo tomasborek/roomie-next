@@ -31,7 +31,7 @@ const RegisterBox = () => {
     let router = useRouter();
     const {register, currentUser, deleteU} = useAuth();
     const [loading, setLoading] = useLoading();
-    const {usernameState, emailRef, phoneRef, phoneCodeRef, passwordRef, passwordCheckRef, dayRef, monthRef, yearRef} = useRegister();
+    const {usernameState, emailRef, phoneRef, phoneCodeRef, passwordRef, passwordCheckRef, dayRef, monthRef, yearRef, termsAgreementRef, emailMarketingRef} = useRegister();
     const {callable} = useFunctions();
     let uid;
     let listingIdVar;
@@ -134,6 +134,11 @@ const RegisterBox = () => {
         passwordCheckRef.current.classList.remove("error");
         dayRef.current.classList.remove("error");
         yearRef.current.classList.remove("error");
+
+        if(!termsAgreementRef.current.checked){
+            setError("Pro pokračování prosím zaškrtněte souhlas s obchodními podmínkami.");
+            return false;
+        }
 
 
         if(emailRef.current.value == null || emailRef.current.value.length < 4){
