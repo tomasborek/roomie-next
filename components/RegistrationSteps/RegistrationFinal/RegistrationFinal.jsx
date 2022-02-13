@@ -200,7 +200,7 @@ const RegistrationFinal = () => {
             <div className="register-checkbox">
                 <input ref={termsAgreementRef} className="checkbox" type="checkbox" />
                 <p>Potvrzuji, že jsem si přečetl a akceptuji
-                <a href="/obchodni-podminky" target={"_blank"}> podmínky, zásady ochrany soukromí a zásady souborů cookie.</a> 
+                <Link href="/obchodni-podminky" passHref><a target="_blank"> podmínky, zásady ochrany soukromí a zásady souborů cookie.</a></Link>
                 </p>
             </div>
             <div className="register-checkbox">
