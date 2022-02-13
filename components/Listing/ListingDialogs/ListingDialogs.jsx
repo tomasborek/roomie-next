@@ -85,8 +85,8 @@ const ListingDialogs = () => {
             {/*Request*/}
             <Backdrop sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} open={reqDialogOpen}>
                 <InputDialog
-                    heading="Odelsat žádost o kontakt"
-                    description="Inzerant uvidí vaší žádost s vaší zprávou a může se rozhodnout zda vaší žádost přijme a poskytne vám své kontaktní údaje."
+                    heading="Odeslat žádost o kontakt"
+                    description=" Uživatel uvidí žádost s vaší zprávou a může se na jejím základě rozhodnout, zda ji přijme a poskytne vám tak své kontaktní údaje."
                     setMessage={setRequestMessage} 
                     message={requestMessage} 
                     setOpen={setReqDialogOpen} 
