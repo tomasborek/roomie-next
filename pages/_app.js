@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 //Layouts
 import Layout from '../components/Layout/Layout'
 //next
@@ -7,6 +7,7 @@ import Head from 'next/dist/shared/lib/head';
 import NProgress from 'nprogress';
 // import "nprogress/nprogress.css";
 import Router from 'next/router';
+import CookieBot from 'react-cookiebot';
 
 import {analytics} from "../Firebase";
 
@@ -35,11 +36,20 @@ import { DbProvider } from '../contexts/DbContext';
 import '../styles/global.css'
 
 function MyApp({ Component, pageProps }) {
+  const [cookie, setCookie] = useState(false);
   useEffect(() => {
     if (process.env.NODE_ENV === 'production') {
       analytics();
     }
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    setCookie(true);
+  }, []);
+
+  useEffect(() => {
+    console.log("hi");
+  })
   return (
     <>
     <Head>
@@ -49,6 +59,7 @@ function MyApp({ Component, pageProps }) {
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9969104196645961"
      crossOrigin="anonymous"></script>
     </Head>
+    {cookie && <CookieBot domainGroupId={"3d818e39-653d-4a0d-b674-7e1099e97f24"}/>}
     <DbProvider>
       <AuthProvider>
         <LoadingProvider>
