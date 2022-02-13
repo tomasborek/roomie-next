@@ -20,7 +20,6 @@ import NavOverlay from '../NavOverlay/NavOverlay';
 import LoadingOverlay from "../LoadingOverlay/LoadingOverlay";
 import CustomDialog from '../CustomDialog/CustomDialog';
 import UnderConstruction from "../UnderConstruction/UnderConstruction";
-import CookieBot from 'react-cookiebot';
 //MUI
 import { Backdrop } from '@mui/material';
 import {Snackbar, Alert} from "@mui/material"
@@ -32,7 +31,6 @@ const Layout = ({children}) => {
     const router = useRouter();
     const {currentUser} = useAuth() 
     const [underCon, setUnderCon] = useState(false);
-    const [cookie, setCookie] = useState(false);
     const {isSnackBarOpen, snackBarSeverity, snackBarMsg} = useSnackBar();
     const [loading, setLoading] = useLoading();
     const [exploreDialog, setExploreDialog] = useExploreDialog();
@@ -42,12 +40,8 @@ const Layout = ({children}) => {
         }
     }, [currentUser])
 
-    useEffect(() => {
-        setCookie(true);
-    }, [])
     return (
         <>
-        {cookie && <CookieBot domainGroupId={"3d818e39-653d-4a0d-b674-7e1099e97f24"}/>}
         {!underCon ?
         
         <LoadingProvider>
