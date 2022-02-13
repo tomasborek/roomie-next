@@ -689,6 +689,7 @@ textarea {
 .EditProfile .edit-content .content-form .form-item .item-input {
   border-radius: 5px;
   border: 1px solid #B8B8B8;
+  width: 225px;
 }
 
 .EditProfile .edit-content .content-account-links {
