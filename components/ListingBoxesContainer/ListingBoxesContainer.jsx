@@ -7,7 +7,7 @@ const ListingBoxesContainer = ({type, existingBoxes, addedBoxes, editListing}) =
     if(type === "flatmate"){
         return  (
         <div className="profile-boxes-container">
-            <div className="container-heading">Info o inzerantovi</div>
+            <div className="container-heading">Info o uživateli</div>
             <div className="container-content">    
                 {(existingBoxes && !editListing) &&
                 <>
