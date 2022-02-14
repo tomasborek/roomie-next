@@ -23,6 +23,7 @@ exports.createUser = functions.https.onCall((data, context) => {
       contact: {
         email: data.email,
         phone: data.phone,
+        hidden: "",
         socials: {
           ig: "",
           fb: "",
@@ -136,7 +137,9 @@ exports.createListing = functions.https.onCall((data, context) => {
     }
     const doc = admin.firestore().collection("listings").doc(data.listingId);
     return doc.set(listingInfo).then((response) => {
-      return doc.collection("contact").add(data.contact);
+      const contact = data.contact;
+      contact.hidden = "";
+      return doc.collection("contact").add(contact);
     });
 });
 
