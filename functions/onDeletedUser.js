@@ -1,6 +1,5 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
-const { db } = require("../Firebase");
 // Every function that happens on deleted user, either called or triggered by auth
 
 //Triggered
