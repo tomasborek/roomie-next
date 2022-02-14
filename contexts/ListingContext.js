@@ -211,7 +211,7 @@ export const ListingProvider = ({type, ssrProps, cr, children}) => {
                 setListingContact(docs.docs[0].data());
                 setContactLoading(false);
             }).catch((error) => {
-                setContactLoading(false);
+                // setContactLoading(false);
             })
         }else if(userLoaded){
             setContactLoading(false);
