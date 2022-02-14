@@ -71,6 +71,7 @@
       margin-left: 7.5rem;
     }
     .form-item {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -83,6 +84,12 @@
       .item-input {
         border-radius: 5px;
         border: 1px solid $mainGray;
+      }
+
+      .fa-eye {
+        position: absolute;
+        right: 0.5rem;
+        font-size: 12px;
       }
     }
   }
