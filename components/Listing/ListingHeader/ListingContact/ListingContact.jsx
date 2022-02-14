@@ -74,14 +74,14 @@ const ListingContact = () => {
                         <div className="contact-items">
                             <div className="items-main">
                                 <div className="items-item">
-                                    <i className="fas fa-phone"></i>
+                                    {listingContact.hidden != "phone" && <i className="fas fa-phone"></i>}
                                     <p>{
-                                        [listingContact.phone.slice(0, 4), " ", listingContact.phone.slice(4, 7), " ", listingContact.phone.slice(7,10), " ", listingContact.phone.slice(10)].join('')
+                                        listingContact.hidden != "phone" && [listingContact.phone.slice(0, 4), " ", listingContact.phone.slice(4, 7), " ", listingContact.phone.slice(7,10), " ", listingContact.phone.slice(10)].join('')
                                     }</p>
                                 </div>
                                 <div className="items-item">
-                                    <i className="fas fa-envelope"></i>
-                                    <p>{listingContact.email}</p>
+                                    {listingContact.hidden != "email" && <i className="fas fa-envelope"></i>}
+                                    <p>{listingContact.hidden != "email" && listingContact.email}</p>
                                 </div>
                             </div>
                             <div className="items-socials">
