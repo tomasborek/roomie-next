@@ -19,6 +19,7 @@ exports.updateProfile = functions.https.onCall((data, context) => {
           phone: listingParams.phone,
           fb: listingParams.fb,
           ig: listingParams.ig,
+          hidden: listingParams.hiddenContact,
         })
       }).then((response) => {
         return db.collection("listings").doc(listingId).update({
