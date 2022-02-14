@@ -47,6 +47,8 @@ const EditProfile = () => {
         open: false,
     })
     const [listingVisible, setListingVisible] = useState(false);
+    const [emailVisible, setEmailVisible] = useState(true);
+    const [phoneVisible, setPhoneVisible] = useState(true);
     //refs
     const usernameRef = useRef();   
     const emailRef = useRef();   
@@ -83,9 +85,12 @@ const EditProfile = () => {
             igRef.current.value = userData.data().contact.socials.ig;
             fbRef.current.value = userData.data().contact.socials.fb;
             setListingVisible(!userData.data().hiddenListing);
+            setPhoneVisible(userData.data().contact.hidden != "phone");
+            setEmailVisible(userData.data().contact.hidden != "email");
         }
         
     }, [userData])
+
 
 
     //Functions
@@ -95,6 +100,7 @@ const EditProfile = () => {
         const email = emailRef.current.value.trim();
         const phone = phoneRef.current.value.trim();
         const updateProfile = callable("userUpdates-updateProfile");
+        const hiddenContact = !phoneVisible ? "phone" : !emailVisible ? "email" : (phoneVisible && emailVisible) ? "" : "";
         if(username == null || email == null || phone == null){
             snackBar("Některá důležitá pole chybí. Vyplňte je prosím.", "error");
             return;
@@ -128,13 +134,14 @@ const EditProfile = () => {
                 contact: {
                     email,
                     phone,
+                    hidden: hiddenContact,
                     socials: {
                         fb: fbRef.current.value,
                         ig: igRef.current.value
                     }
                 },
                 hiddenListing: !listingVisible,
-                "mainInfo.username": username
+                "mainInfo.username": username,
             },
             listingParams: {
                 email,
@@ -142,6 +149,7 @@ const EditProfile = () => {
                 fb: fbRef.current.value,
                 ig: igRef.current.value,
                 hiddenByUser: !listingVisible,
+                hiddenContact
             }
         }
 
@@ -404,10 +412,26 @@ const EditProfile = () => {
                                 <div className="form-item">
                                     <p className="item-description">E-mail</p>
                                     <input disabled maxLength={30} ref={emailRef} type="text" className="item-input" />
+                                    <i onClick={() => {
+                                        if(emailVisible && !phoneVisible){
+                                            setEmailVisible(false);
+                                            setPhoneVisible(true);
+                                        }else{
+                                            setEmailVisible(prevState => !prevState)
+                                        }
+                                    }} style={{opacity: emailVisible ? 1 : 0.5}} className="fas fa-eye"></i>
                                 </div>
                                 <div className="form-item">
                                     <p className="item-description"> Tel. číslo</p>
                                     <input maxLength={9} ref={phoneRef} type="text" className="item-input" />
+                                    <i onClick={() => {
+                                        if(phoneVisible && !emailVisible){
+                                            setPhoneVisible(false);
+                                            setEmailVisible(true);
+                                        }else{
+                                            setPhoneVisible(prevState => !prevState);
+                                        }
+                                    }} style={{opacity: phoneVisible ? 1 : 0.5}} className="fas fa-eye"></i>
                                 </div>
                                 <p className="form-section-header">
                                     Sociální sítě
