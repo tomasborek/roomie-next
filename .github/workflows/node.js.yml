@@ -31,4 +31,4 @@ jobs:
           git config --global user.email 'tomasborek3@gmail.com'
           git add .next -f
           git commit -m "Automated report"
-          git push
+          git push build
