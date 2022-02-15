@@ -5,7 +5,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ dev ]
 
 jobs:
   build:
@@ -25,10 +25,8 @@ jobs:
         run: |
           git config --global user.name 'tomasborek'
           git config --global user.email 'tomasborek3@gmail.com'
+          git add .
           git add .next --force
-          git add package.json
-          git add package-lock.json
-          git add public/
           git commit -m "Automated report"
-          git push --set-upstream https://github.com/tomasborek/roomie-next.git build -f
+          git push https://github.com/tomasborek/roomie-next.git main -f
 
