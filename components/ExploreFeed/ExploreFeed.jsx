@@ -279,10 +279,10 @@ const ExploreFeed = ({variant}) => {
             setLimitedPaginationDialog(true);
             return;
         }
-        if(currentUser && (flatmatePage == 3 || flatPage == 3) && page === "next"){
-            setPremiumPaginationDialog(true);
-            return;
-        }
+        // if(currentUser && (flatmatePage == 3 || flatPage == 3) && page === "next"){
+        //     setPremiumPaginationDialog(true);
+        //     return;
+        // }
         if(variant === "flatmate"){
             if(page === "next"){
                 fetchListings("flatmate", "next", flatmateSnaps, premiumFlatmateSnaps, activeFilters); 
