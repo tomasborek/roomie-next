@@ -37,6 +37,7 @@ const Listing = () => {
         addedFlatBoxes,
         listingPremium,
         setPersonBoxerOverlay,
+        setFlatBoxerOverlay,
         handleSave,
     } = useListing();
 
@@ -160,6 +161,7 @@ const Listing = () => {
                             <ListingHeader/>
                             <div className="mid-container">
                                 <div className="content-body">
+                                    {!cr && 
                                     <div className="body-messages">
                                         {(listingInfo && !listingInfo.visible )&&
                                             <div className="messages-message">
@@ -187,6 +189,7 @@ const Listing = () => {
                                             </div>
                                         }
                                     </div>
+    }
 
                                     <div className="body-info">
                                         <div className="container">
