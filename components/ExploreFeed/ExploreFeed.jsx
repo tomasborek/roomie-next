@@ -15,7 +15,6 @@ import Pagination from "../Pagination/Pagination";
 import Filter from '../Filter/Filter';
 import CustomDialog from "../CustomDialog/CustomDialog";
 import ExplorePremium from '../ExplorePremium/ExplorePremium';
-import AdSense from '../AdSense/AdSense';
 //MUI
 import { CircularProgress } from '@mui/material';
 import { Backdrop } from '@mui/material';
@@ -364,7 +363,6 @@ const ExploreFeed = ({variant}) => {
                 </div>
             </div>
             {/* <ExplorePremium/> */}
-            {/* <AdSense></AdSense> */}
             {(variant === "flatmate" && !connectionDown) &&
             <>
                 {flatmateListings ? 
