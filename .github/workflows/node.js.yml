@@ -28,7 +28,7 @@ jobs:
           git add .next --force
           git add package.json
           git add package-lock.json
-          git public/
+          git add public/
           git commit -m "Automated report"
           git push build
 
