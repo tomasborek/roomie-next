@@ -20,6 +20,7 @@ exports.createUser = functions.https.onCall((data, context) => {
       },
       emailVerified: false,
       hiddenListing: false,
+      sendEmails: data.sendEmails,
       contact: {
         email: data.email,
         phone: data.phone,

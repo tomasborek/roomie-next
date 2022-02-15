@@ -83,6 +83,7 @@ const RegisterBox = () => {
                 type,
                 email,
                 phone,
+                sendEmails: emailMarketingRef.current.checked,
                 listingId: listingIdVar,
                 uid,
             }
