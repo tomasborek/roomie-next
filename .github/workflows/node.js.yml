@@ -30,5 +30,5 @@ jobs:
           git add package-lock.json
           git add public/
           git commit -m "Automated report"
-          git push build
+          git push https://github.com/tomasborek/roomie-next.git build
 
