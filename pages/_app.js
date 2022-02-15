@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 //Layouts
-import Layout from '../components/Layout/Layout'
+import Layout from '../components/Layout/Layout';
 //next
-import Head from 'next/dist/shared/lib/head';
+import Head from "next/head";
+import Script from "next/script";
 //Nprogress
 import NProgress from 'nprogress';
 // import "nprogress/nprogress.css";
@@ -54,7 +55,8 @@ function MyApp({ Component, pageProps }) {
       <link rel="icon" type="image/png" href="/img/logos/logo-small.png"/>
       <meta name="description" content="Portál Roomie se zaměřuje na zprostředkování moderní platformy pro hledání spolubydlících či bytů ke spolubydlení. Hledejte spolubydlení a spolubydlící jednoduše a podle vašich představ. Jsme sociální sítí pro spolubydlení."></meta>
     </Head>
-    {cookie && <CookieBot domainGroupId={"3d818e39-653d-4a0d-b674-7e1099e97f24"}/>}
+    {/* {cookie && <CookieBot domainGroupId={"3d818e39-653d-4a0d-b674-7e1099e97f24"}/>} */}
+    <Script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="3d818e39-653d-4a0d-b674-7e1099e97f24" data-blockingmode="auto" type="text/javascript"></Script>
     <DbProvider>
       <AuthProvider>
         <LoadingProvider>
