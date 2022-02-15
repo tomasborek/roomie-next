@@ -30,5 +30,5 @@ jobs:
           git add package-lock.json
           git add public/
           git commit -m "Automated report"
-          git push -f https://github.com/tomasborek/roomie-next.git build
+          git push --set-upstream https://github.com/tomasborek/roomie-next.git build -f
 
