@@ -643,8 +643,52 @@ function MyApp({ Component , pageProps  }) {
                         href: "/img/logos/logo-small.png"
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                        property: "og:site_name",
+                        content: "Roomie"
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                        property: "og:image",
+                        content: "/img/poster/poster-mobile.png"
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                        property: "twitter:image",
+                        content: "/img/poster/poster-mobile.png"
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
                         name: "description",
                         content: "Port\xe1l Roomie se zaměřuje na zprostředkov\xe1n\xed modern\xed platformy pro hled\xe1n\xed spolubydl\xedc\xedch či bytů ke spolubydlen\xed. Hledejte spolubydlen\xed a spolubydl\xedc\xed jednoduše a podle vašich představ. Jsme soci\xe1ln\xed s\xedt\xed pro spolubydlen\xed."
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                        property: "og:type",
+                        content: "website"
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                        property: "og:url",
+                        content: "https://roomie.cz/"
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                        property: "og:description",
+                        content: "Port\xe1l Roomie se zaměřuje na zprostředkov\xe1n\xed modern\xed platformy pro hled\xe1n\xed spolubydl\xedc\xedch či bytů ke spolubydlen\xed. Hledejte spolubydlen\xed a spolubydl\xedc\xed jednoduše a podle vašich představ. Jsme soci\xe1ln\xed s\xedt\xed pro spolubydlen\xed."
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                        property: "og:image",
+                        content: "https://roomie.cz/img/poster/poster-mobile.png"
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                        property: "twitter:card",
+                        content: "summary_large_image"
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                        property: "twitter:url",
+                        content: "https://roomie.cz/"
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                        property: "twitter:description",
+                        content: "Port\xe1l Roomie se zaměřuje na zprostředkov\xe1n\xed modern\xed platformy pro hled\xe1n\xed spolubydl\xedc\xedch či bytů ke spolubydlen\xed. Hledejte spolubydlen\xed a spolubydl\xedc\xed jednoduše a podle vašich představ. Jsme soci\xe1ln\xed s\xedt\xed pro spolubydlen\xed."
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                        property: "twitter:image",
+                        content: "https://roomie.cz/img/poster/poster-mobile.png"
                     })
                 ]
             }),

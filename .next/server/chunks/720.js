@@ -1163,21 +1163,67 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_com
 
 
 const Listing = ()=>{
-    const { type , cr , listingInfo , editListing , listingId , listingName , listingPersonBoxes , addedPersonBoxes , listingFlatBoxes , addedFlatBoxes , listingPremium , setPersonBoxerOverlay , setFlatBoxerOverlay , handleSave ,  } = (0,_contexts_ListingContext__WEBPACK_IMPORTED_MODULE_4__/* .useListing */ .u)();
+    const { type , cr , listingInfo , editListing , listingId , listingName , listingPfp , listingImgs , listingBio , listingFlatBio , listingPersonBoxes , addedPersonBoxes , listingFlatBoxes , addedFlatBoxes , listingPremium , setPersonBoxerOverlay , setFlatBoxerOverlay , handleSave ,  } = (0,_contexts_ListingContext__WEBPACK_IMPORTED_MODULE_4__/* .useListing */ .u)();
     const { 0: flatBoxesInfoAlert , 1: setFlatBoxesInfoAlert  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true);
     const { 0: personBoxesInfoAlert , 1: setPersonBoxesInfoAlert  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true);
     if (type === "flatmate") {
         return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
             children: [
-                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_head__WEBPACK_IMPORTED_MODULE_2___default()), {
-                    children: cr ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("title", {
-                        children: "Vytvořte si vlastn\xed inzer\xe1t | Roomie"
-                    }) : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("title", {
-                        children: [
-                            listingName,
-                            " | Roomie"
-                        ]
-                    })
+                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)((next_head__WEBPACK_IMPORTED_MODULE_2___default()), {
+                    children: [
+                        cr ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("title", {
+                            children: "Vytvořte si vlastn\xed inzer\xe1t | Roomie"
+                        }) : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+                            children: [
+                                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("title", {
+                                    children: [
+                                        listingName,
+                                        " | Roomie"
+                                    ]
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                                    name: "title",
+                                    content: `${listingName} | Roomie`
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                                    property: "og:title",
+                                    content: `${listingName} | Roomie`
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                                    property: "twitter:title",
+                                    content: `${listingName} | Roomie`
+                                })
+                            ]
+                        }),
+                        listingBio ? /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+                            children: [
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                                    name: "description",
+                                    content: listingBio
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                                    property: "og:description",
+                                    content: listingBio
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                                    property: "twitter:description",
+                                    content: listingBio
+                                })
+                            ]
+                        }) : "",
+                        listingPfp ? /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+                            children: [
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                                    property: "og:image",
+                                    content: listingPfp
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                                    property: "twitter:image",
+                                    content: listingPfp
+                                })
+                            ]
+                        }) : ""
+                    ]
                 }),
                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                     className: "Listing FlatMateListing",
@@ -1325,16 +1371,62 @@ const Listing = ()=>{
     if (type === "flat") {
         return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
             children: [
-                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_head__WEBPACK_IMPORTED_MODULE_2___default()), {
-                    children: cr ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("title", {
-                        children: "Vytvořte si vlastn\xed inzer\xe1t | Roomie"
-                    }) : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("title", {
-                        children: [
-                            "Byt ",
-                            listingName,
-                            " | Roomie"
-                        ]
-                    })
+                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)((next_head__WEBPACK_IMPORTED_MODULE_2___default()), {
+                    children: [
+                        cr ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("title", {
+                            children: "Vytvořte si vlastn\xed inzer\xe1t | Roomie"
+                        }) : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+                            children: [
+                                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("title", {
+                                    children: [
+                                        "Byt ",
+                                        listingName,
+                                        " | Roomie"
+                                    ]
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                                    name: "title",
+                                    content: `Byt ${listingName} | Roomie`
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                                    property: "og:title",
+                                    content: `Byt ${listingName} | Roomie`
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                                    property: "twitter:title",
+                                    content: `Byt ${listingName} | Roomie`
+                                })
+                            ]
+                        }),
+                        listingFlatBio ? /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+                            children: [
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                                    name: "description",
+                                    content: listingFlatBio
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                                    property: "og:description",
+                                    content: listingFlatBio
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                                    property: "twitter:description",
+                                    content: listingFlatBio
+                                })
+                            ]
+                        }) : "",
+                        listingImgs.length && listingImgs[0] ? /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+                            children: [
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                                    property: "og:image",
+                                    content: listingImgs[0]
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                                    property: "twitter:image",
+                                    content: listingImgs[0]
+                                })
+                            ]
+                        }) : ""
+                    ]
                 }),
                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                     className: "Listing FlatListing",
