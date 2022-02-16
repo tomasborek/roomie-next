@@ -31,6 +31,10 @@ const Listing = () => {
         editListing,
         listingId,
         listingName,
+        listingPfp,
+        listingImgs,
+        listingBio,
+        listingFlatBio,
         listingPersonBoxes,
         addedPersonBoxes,
         listingFlatBoxes,
@@ -50,8 +54,29 @@ const Listing = () => {
                 {cr ?
                 <title>Vytvořte si vlastní inzerát | Roomie</title>
                 :
-                <title>{listingName} | Roomie</title>
+                <>
+                    <title>{listingName} | Roomie</title>
+                    <meta name="title" content={`${listingName} | Roomie`} />
+                    <meta property="og:title" content={`${listingName} | Roomie`} />
+                    <meta property="twitter:title" content={`${listingName} | Roomie`}  />
+                </>
                 } 
+                {listingBio ? 
+                <>
+                    <meta name='description' content={listingBio}/> 
+                    <meta property="og:description" content={listingBio}></meta>
+                    <meta property="twitter:description" content={listingBio}></meta>
+                </>
+                : 
+                ""}
+                {listingPfp ?
+                <>
+                    <meta property="og:image" content={listingPfp}/>
+                    <meta property="twitter:image" content={listingPfp}/>
+                </>
+                :
+                ""
+                }
             </Head>
 
             <div className="Listing FlatMateListing">
@@ -144,10 +169,31 @@ const Listing = () => {
             <>
                 <Head>
                     {cr ?
-                        <title>Vytvořte si vlastní inzerát | Roomie</title>
+                    <title>Vytvořte si vlastní inzerát | Roomie</title>
                     :
+                    <>
                         <title>Byt {listingName} | Roomie</title>
+                        <meta name="title" content={`Byt ${listingName} | Roomie`} />
+                        <meta property="og:title" content={`Byt ${listingName} | Roomie`} />
+                        <meta property="twitter:title" content={`Byt ${listingName} | Roomie`}  />
+                    </>
                     } 
+                    {listingFlatBio ? 
+                    <>
+                        <meta name='description' content={listingFlatBio}/> 
+                        <meta property="og:description" content={listingFlatBio}></meta>
+                        <meta property="twitter:description" content={listingFlatBio}></meta>
+                    </>
+                    : 
+                    ""}
+                    {(listingImgs.length && listingImgs[0]) ?
+                    <>
+                        <meta property="og:image" content={listingImgs[0]}/>
+                        <meta property="twitter:image" content={listingImgs[0]}/>
+                    </>
+                    :
+                    ""
+                    }
                 </Head>
 
                 <div className="Listing FlatListing">

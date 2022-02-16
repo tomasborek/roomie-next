@@ -53,7 +53,24 @@ function MyApp({ Component, pageProps }) {
     <Head>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossOrigin="anonymous" referrerPolicy="no-referrer" />
       <link rel="icon" type="image/png" href="/img/logos/logo-small.png"/>
-      <meta name="description" content="Portál Roomie se zaměřuje na zprostředkování moderní platformy pro hledání spolubydlících či bytů ke spolubydlení. Hledejte spolubydlení a spolubydlící jednoduše a podle vašich představ. Jsme sociální sítí pro spolubydlení."></meta>
+      <meta property="og:site_name" content="Roomie"></meta>
+      <meta property="og:image" content="/img/poster/poster-mobile.png"/>
+      <meta property="twitter:image" content="/img/poster/poster-mobile.png"/>
+
+     {/* Primary meta tags */}
+     <meta name="description" content="Portál Roomie se zaměřuje na zprostředkování moderní platformy pro hledání spolubydlících či bytů ke spolubydlení. Hledejte spolubydlení a spolubydlící jednoduše a podle vašich představ. Jsme sociální sítí pro spolubydlení."></meta>
+
+      {/* <!-- Open Graph / Facebook --> */}
+      <meta property="og:type" content="website"/>
+      <meta property="og:url" content="https://roomie.cz/"/>
+      <meta property="og:description" content="Portál Roomie se zaměřuje na zprostředkování moderní platformy pro hledání spolubydlících či bytů ke spolubydlení. Hledejte spolubydlení a spolubydlící jednoduše a podle vašich představ. Jsme sociální sítí pro spolubydlení."/>
+      <meta property="og:image" content="https://roomie.cz/img/poster/poster-mobile.png"/>
+
+      {/* <!-- Twitter --> */}
+      <meta property="twitter:card" content="summary_large_image"/>
+      <meta property="twitter:url" content="https://roomie.cz/"/>
+      <meta property="twitter:description" content="Portál Roomie se zaměřuje na zprostředkování moderní platformy pro hledání spolubydlících či bytů ke spolubydlení. Hledejte spolubydlení a spolubydlící jednoduše a podle vašich představ. Jsme sociální sítí pro spolubydlení."/>
+      <meta property="twitter:image" content="https://roomie.cz/img/poster/poster-mobile.png"></meta>
     </Head>
     {/* {cookie && <CookieBot domainGroupId={"3d818e39-653d-4a0d-b674-7e1099e97f24"}/>} */}
     <Script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="3d818e39-653d-4a0d-b674-7e1099e97f24" data-blockingmode="auto" type="text/javascript"></Script>
