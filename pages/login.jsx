@@ -22,7 +22,16 @@ const Login = () => {
     return (
         <>
         <Head>
+            {/* Primary meta tags */}
             <title>Přihlásit se | Roomie</title>
+            <meta name="title" content="Přihlásit se | Roomie" />
+            {/* <!-- Open Graph / Facebook --> */}
+            <meta property="og:title" content="Přihlásit se | Roomie" />
+            <meta property="og:url" content="https://roomie.cz/login"></meta>
+
+            {/* <!-- Twitter --> */}
+            <meta property="twitter:title" content="Přihlásit se | Roomie" />
+            <meta property="twitter:url" content="https://roomie.cz/login"></meta>
         </Head>
         <div className="Login">
             <Link href="/"><i className="step-back fas fa-chevron-left"></i></Link>

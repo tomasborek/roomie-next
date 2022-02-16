@@ -29,7 +29,14 @@ export default function Home() {
   return (
     <>
     <Head>
+       {/* Primary meta tags */}
       <title>Roomie - portál pro hledání spolubydlení</title>
+    <meta name="title" content="Roomie - portál pro hledání spolubydlících" />
+        {/* <!-- Open Graph / Facebook --> */}
+        <meta property="og:title" content="Roomie - portál pro hledání spolubydlících" />
+
+        {/* <!-- Twitter --> */}
+        <meta property="twitter:title" content="Roomie - portál pro hledání spolubydlících" />
     </Head>
 
     <div className="Home">

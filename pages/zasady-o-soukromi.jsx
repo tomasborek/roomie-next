@@ -7,7 +7,16 @@ const Privacy = () => {
   return (
       <>
       <Head>
+      {/* Primary meta tags */}
       <title>Zásady o soukromí | Roomie</title>
+      <meta name="title" content="Zásady o soukromí | Roomie" />
+      {/* <!-- Open Graph / Facebook --> */}
+      <meta property="og:title" content="Zásady o soukromí | Roomie" />
+      <meta property="og:url" content="https://roomie.cz/zasady-o-soukromi"></meta>
+
+      {/* <!-- Twitter --> */}
+      <meta property="twitter:title" content="Zásady o soukromí | Roomie" />
+      <meta property="twitter:url" content="https://roomie.cz/zasady-o-soukromi"></meta>
     </Head>
       <Header variant="white"/>
       <div className="terms-banner" style={{background:"rgb(48, 158, 171)",

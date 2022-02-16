@@ -8,7 +8,16 @@ const TermsAndConditions = () => {
   return (
     <>
     <Head>
+      {/* Primary meta tags */}
       <title>Obchodní podmínky | Roomie</title>
+      <meta name="title" content="Obchodní podmínky | Roomie" />
+      {/* <!-- Open Graph / Facebook --> */}
+      <meta property="og:title" content="Obchodní podmínky | Roomie" />
+      <meta property="og:url" content="https://roomie.cz/obchodni-podminky"></meta>
+
+      {/* <!-- Twitter --> */}
+      <meta property="twitter:title" content="Obchodní podmínky | Roomie" />
+      <meta property="twitter:url" content="https://roomie.cz/obchodni-podminky"></meta>
     </Head>
     <Header variant={"white"}/>
     <div className="terms-banner" style={{background:"rgb(48, 158, 171)",
