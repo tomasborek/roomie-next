@@ -51,7 +51,7 @@ async function getServerSideProps(context) {
         const listingLayout = docRef.data().flatBoxes.layout;
         const listingLocation = docRef.data().flatBoxes.location;
         //Name
-        const listingName = `${listingLayout}${listingLayout ? " " : ""}${listingLocation}`;
+        const listingName = `${listingLayout ? listingLayout : ""}${listingLayout ? " " : ""}${listingLocation}`;
         //Basic user info
         const listingUsername = docRef.data().userInfo.username;
         const listingAge = docRef.data().userInfo.age;
