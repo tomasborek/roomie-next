@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 //next
 import Link from 'next/link'
 
-const ExploreFlat = ({name, bio, price, startTime,stayTime, mainImg,premium, id}) => {
+const ExploreFlat = ({name, bio, price, size, startTime,stayTime, mainImg,premium, id}) => {
     
     return (
     <Link href={`/flat/${id}`}>
@@ -26,7 +26,7 @@ const ExploreFlat = ({name, bio, price, startTime,stayTime, mainImg,premium, id}
                         <div className="info-locations row-col"><span>Smlouva:</span> {stayTime}</div>
                  </div>
                     <div className="info-row">
-                        <div className="info-gender row-col"><span>Plocha:</span> 71m<sup>2</sup></div>
+                        <div className="info-gender row-col"><span>Plocha:</span> {size ? size : ""}m<sup>2</sup></div>
                         <div className="info-available row-col"><span>Dostupnost:</span> {startTime.substr(0,5)}.</div>
                     </div>
                 

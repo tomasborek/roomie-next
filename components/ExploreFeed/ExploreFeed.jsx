@@ -417,6 +417,7 @@ const ExploreFeed = ({variant}) => {
                                         stayTime={listing.data().mainInfo.stayTime} 
                                         mainImg={listing.data().userInfo.images.listingImgs[0]}
                                         premium={listing.data().userInfo.premium}  
+                                        size={listing.data().flatBoxes.size}
                                         id={listing.id} 
                                         key={id} />
                             )) }
