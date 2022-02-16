@@ -559,6 +559,7 @@ const ExploreFeed = ({ variant  })=>{
                                             stayTime: listing.data().mainInfo.stayTime,
                                             mainImg: listing.data().userInfo.images.listingImgs[0],
                                             premium: listing.data().userInfo.premium,
+                                            size: listing.data().flatBoxes.size,
                                             id: listing.id
                                         }, id)
                                     ),
@@ -629,7 +630,7 @@ const ExploreFeed = ({ variant  })=>{
 
 //next
 
-const ExploreFlat = ({ name , bio , price , startTime , stayTime , mainImg , premium , id  })=>{
+const ExploreFlat = ({ name , bio , price , size , startTime , stayTime , mainImg , premium , id  })=>{
     return(/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(next_link__WEBPACK_IMPORTED_MODULE_2__["default"], {
         href: `/flat/${id}`,
         children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
@@ -711,7 +712,9 @@ const ExploreFlat = ({ name , bio , price , startTime , stayTime , mainImg , pre
                                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
                                                     children: "Plocha:"
                                                 }),
-                                                " 71m",
+                                                " ",
+                                                size ? size : "",
+                                                "m",
                                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("sup", {
                                                     children: "2"
                                                 })
