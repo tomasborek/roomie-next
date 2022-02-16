@@ -31,6 +31,8 @@ const Listing = () => {
         editListing,
         listingId,
         listingName,
+        listingBio,
+        listingFlatBio,
         listingPersonBoxes,
         addedPersonBoxes,
         listingFlatBoxes,
@@ -52,6 +54,7 @@ const Listing = () => {
                 :
                 <title>{listingName} | Roomie</title>
                 } 
+                {listingBio ? <meta name='description' content={listingBio}/> : ""}
             </Head>
 
             <div className="Listing FlatMateListing">
@@ -148,6 +151,7 @@ const Listing = () => {
                     :
                         <title>Byt {listingName} | Roomie</title>
                     } 
+                    {listingFlatBio ? <meta name="description" content={listingFlatBio}/> : ""}
                 </Head>
 
                 <div className="Listing FlatListing">
