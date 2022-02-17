@@ -661,12 +661,14 @@ const ExploreFlat = ({ name , bio , price , size , startTime , stayTime , mainIm
                                 })
                             ]
                         }),
-                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                             className: "content-bio",
-                            children: [
-                                bio.substr(0, 75),
-                                "..."
-                            ]
+                            children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+                                children: [
+                                    bio.substr(0, 75),
+                                    "..."
+                                ]
+                            })
                         }),
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                             className: "content-more",

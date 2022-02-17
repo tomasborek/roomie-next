@@ -300,7 +300,7 @@ const ListingProvider = ({ type: type1 , ssrProps , cr , children  })=>{
     ]);
     // Handle if user sign outs while editing
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
-        if (!currentUser) {
+        if (userLoaded && !currentUser) {
             setEditListing(false);
         }
     }, [

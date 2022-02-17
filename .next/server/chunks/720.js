@@ -1251,7 +1251,7 @@ const Listing = ()=>{
                                                         className: "messages-message",
                                                         children: [
                                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                                                                className: "fas fa-info"
+                                                                className: "fas fa-info-circle"
                                                             }),
                                                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
                                                                 children: [
@@ -1268,7 +1268,7 @@ const Listing = ()=>{
                                                         className: "messages-message",
                                                         children: [
                                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                                                                className: "fas fa-info"
+                                                                className: "fas fa-info-circle"
                                                             }),
                                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                                                                 children: "V\xe1š \xfačet nen\xed ověřen\xfd - pro použ\xedv\xe1n\xed Roomie si jej pros\xedm ověřte pomoc\xed odkazu zaslan\xe9ho na v\xe1š e-mail."
@@ -1279,7 +1279,7 @@ const Listing = ()=>{
                                                         className: "messages-message",
                                                         children: [
                                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                                                                className: "fas fa-info"
+                                                                className: "fas fa-info-circle"
                                                             }),
                                                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
                                                                 children: [
@@ -1351,14 +1351,24 @@ const Listing = ()=>{
                                         ]
                                     })
                                 }),
-                                editListing && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                editListing && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                     className: "content-edit-buttons",
-                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                                        onClick: ()=>handleSave()
-                                        ,
-                                        className: "main-btn",
-                                        children: "Uložit změny"
-                                    })
+                                    children: [
+                                        cr && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+                                            children: [
+                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                                                    className: "fas fa-info-circle"
+                                                }),
+                                                " Nezapomeňte na ověřen\xed sv\xe9ho e-mailu"
+                                            ]
+                                        }),
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
+                                            onClick: ()=>handleSave()
+                                            ,
+                                            className: "main-btn",
+                                            children: "Uložit změny"
+                                        })
+                                    ]
                                 })
                             ]
                         }),
@@ -1454,7 +1464,7 @@ const Listing = ()=>{
                                                         className: "messages-message",
                                                         children: [
                                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                                                                className: "fas fa-info"
+                                                                className: "fas fa-info-circle"
                                                             }),
                                                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
                                                                 children: [
@@ -1471,7 +1481,7 @@ const Listing = ()=>{
                                                         className: "messages-message",
                                                         children: [
                                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                                                                className: "fas fa-info"
+                                                                className: "fas fa--circle"
                                                             }),
                                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                                                                 children: "V\xe1š \xfačet nen\xed ověřen\xfd - pro použ\xedv\xe1n\xed Roomie si jej pros\xedm ověřte pomoc\xed odkazu zaslan\xe9ho na v\xe1š e-mail."
@@ -1482,7 +1492,7 @@ const Listing = ()=>{
                                                         className: "messages-message",
                                                         children: [
                                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                                                                className: "fas fa-info"
+                                                                className: "fas fa-info-circle"
                                                             }),
                                                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
                                                                 children: [
@@ -1584,13 +1594,23 @@ const Listing = ()=>{
                                             }),
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Listing_ListingAbout_ListingAbout__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z, {}),
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Gallery_Gallery__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z, {}),
-                                            editListing && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                            editListing && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                                 className: "content-edit-buttons",
-                                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                                                    onClick: handleSave,
-                                                    className: "main-btn",
-                                                    children: "Uložit změny"
-                                                })
+                                                children: [
+                                                    cr && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+                                                        children: [
+                                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                                                                className: "fas fa-info-circle"
+                                                            }),
+                                                            " Nezapomeňte na ověřen\xed sv\xe9ho e-mailu"
+                                                        ]
+                                                    }),
+                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
+                                                        onClick: handleSave,
+                                                        className: "main-btn",
+                                                        children: "Uložit změny"
+                                                    })
+                                                ]
                                             })
                                         ]
                                     })
