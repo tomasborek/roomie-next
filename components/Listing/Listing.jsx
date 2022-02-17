@@ -92,7 +92,7 @@ const Listing = () => {
                                 <div className="body-messages">
                                     {(listingInfo && !listingInfo.visible )&&
                                         <div className="messages-message">
-                                            <i className="fas fa-info"></i>
+                                            <i className="fas fa-info-circle"></i>
                                             <p>
                                                 Váš inzerát je nedokončený, prosím dokončete jej 
                                                 <Link href={`/cr/${listingInfo.type}/${listingId}`}> zde</Link>
@@ -101,7 +101,7 @@ const Listing = () => {
                                     }
                                     {(listingInfo && !listingInfo.userInfo.emailVerified) &&
                                         <div className="messages-message">
-                                            <i className="fas fa-info"></i>
+                                            <i className="fas fa-info-circle"></i>
                                             <p>
                                                 Váš účet není ověřený - pro používání Roomie si jej prosím ověřte pomocí odkazu zaslaného na váš e-mail.
                                             </p> 
@@ -109,7 +109,7 @@ const Listing = () => {
                                     }
                                     {(listingInfo && listingInfo.hiddenByUser) &&
                                     <div className="messages-message">
-                                        <i className="fas fa-info"></i>
+                                        <i className="fas fa-info-circle"></i>
                                         <p>
                                             Váš účet je skrytý - aby ho mohli uživatelé vidět, zapněte jeho viditelnost v <Link href="/edit-profile">nastavení profilu</Link>.
                                         </p> 
@@ -155,6 +155,7 @@ const Listing = () => {
 
                     {editListing &&
                         <div className="content-edit-buttons">
+                            {cr && <p><i className="fas fa-info-circle"></i> Nezapomeňte na ověření svého e-mailu</p>}
                             <button onClick={() => handleSave()} className="main-btn">Uložit změny</button>
                         </div>
                     }
@@ -211,7 +212,7 @@ const Listing = () => {
                                     <div className="body-messages">
                                         {(listingInfo && !listingInfo.visible )&&
                                             <div className="messages-message">
-                                                <i className="fas fa-info"></i>
+                                                <i className="fas fa-info-circle"></i>
                                                 <p>
                                                     Váš inzerát je nedokončený, prosím dokončete jej  
                                                     <Link href={`/cr/${listingInfo.type}/${listingId}`}> zde</Link>
@@ -220,7 +221,7 @@ const Listing = () => {
                                         }
                                         {(listingInfo && !listingInfo.userInfo.emailVerified) &&
                                             <div className="messages-message">
-                                                <i className="fas fa-info"></i>
+                                                <i className="fas fa--circle"></i>
                                                 <p>
                                                     Váš účet není ověřený - pro používání Roomie si jej prosím ověřte pomocí odkazu zaslaného na váš e-mail.
                                                 </p> 
@@ -228,7 +229,7 @@ const Listing = () => {
                                         }
                                         {(listingInfo && listingInfo.hiddenByUser) &&
                                             <div className="messages-message">
-                                                <i className="fas fa-info"></i>
+                                                <i className="fas fa-info-circle"></i>
                                                 <p>
                                                     Váš účet je skrytý - aby ho mohli uživatelé vidět, zapněte jeho viditelnost v <Link href="/edit-profile">nastavení profilu</Link>.
                                                 </p> 
@@ -291,6 +292,7 @@ const Listing = () => {
 
                                     {editListing &&
                                         <div className="content-edit-buttons">
+                                            {cr && <p><i className="fas fa-info-circle"></i> Nezapomeňte na ověření svého e-mailu</p>}
                                             <button onClick={handleSave} className="main-btn">Uložit změny</button>
                                         </div>
                                     }

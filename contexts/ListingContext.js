@@ -145,7 +145,7 @@ export const ListingProvider = ({type, ssrProps, cr, children}) => {
 
     // Handle if user sign outs while editing
     useEffect(() =>{
-        if(!currentUser){
+        if(userLoaded && !currentUser){
             setEditListing(false);
         }
     }, [currentUser])

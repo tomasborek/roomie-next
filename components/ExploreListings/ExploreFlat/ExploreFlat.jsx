@@ -16,7 +16,7 @@ const ExploreFlat = ({name, bio, price, size, startTime,stayTime, mainImg,premiu
             </div>
            <div className="listing-content">
                <div className="content-header"><span>{name}</span> {premium && <i className='fas fa-check-circle'></i>}</div>
-               <div className="content-bio">{bio.substr(0,75)}...</div>
+               <div className="content-bio"><p>{bio.substr(0,75)}...</p></div>
                <div className="content-more"><a href="">Více...</a></div>
                <div className="content-info">
                  <div className="info-row">
