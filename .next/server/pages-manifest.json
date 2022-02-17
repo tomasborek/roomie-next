@@ -7,6 +7,7 @@
   "/cs/404": "pages/cs/404.html",
   "/cs/500": "pages/cs/500.html",
   "/cs/auth/user/token/[token]": "pages/cs/auth/user/token/[token].html",
+  "/cs/googlea6239ac067cea948": "pages/cs/googlea6239ac067cea948.html",
   "/cs/reset-password/[id]": "pages/cs/reset-password/[id].html",
   "/cs/login": "pages/cs/login.html",
   "/cs": "pages/cs.html",
