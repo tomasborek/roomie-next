@@ -1,143 +1,148 @@
 //Listing
-.Listing{
-    background-color: #FAFAFA;
-    min-height: 100vh;
-    .listing-banner{
-        @include gradientBg;
-        width: 100%;
-        height: 150px;
-    }
-}
-
-.Listing .listing-content{
+.Listing {
+  background-color: #fafafa;
+  min-height: 100vh;
+  .listing-banner {
+    @include gradientBg;
     width: 100%;
-    .content-error{
-        padding-top: 1rem;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
+    height: 150px;
+  }
 }
 
-.Listing .listing-content .content-body .body-messages{
-    .messages-message{
-        padding: 0.5rem 1rem;
-        display: flex;
-        align-items: center;
-        background-color: $mainColor;
-        margin-top: 0.5rem;
-        border-radius: 5px;
-        color: white;
-        i{
-            margin-right: 1rem;
-        }
-        a{
-            color: white;
-            text-decoration: underline;
-        }
-    }
-}
-
-.Listing .listing-content .content-body .body-info .info-edit-boxes{
+.Listing .listing-content {
+  width: 100%;
+  .content-error {
+    padding-top: 1rem;
+    width: 100%;
     display: flex;
-    justify-content: flex-end;
-    button{
-        border: 1px solid $mainGray;
-        border-radius: 5px;
-        font-size: 14px;
-        background: none;
-        font-weight: bold;
-        margin-top: 1rem;
-        width: 100%;
+    justify-content: center;
+  }
+}
+
+.Listing .listing-content .content-body .body-messages {
+  .messages-message {
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    background-color: $mainColor;
+    margin-top: 0.5rem;
+    border-radius: 5px;
+    color: white;
+    i {
+      margin-right: 1rem;
+    }
+    a {
+      color: white;
+      text-decoration: underline;
+    }
+  }
+}
+
+.Listing .listing-content .content-body .body-info .info-edit-boxes {
+  display: flex;
+  justify-content: flex-end;
+  button {
+    border: 1px solid $mainGray;
+    border-radius: 5px;
+    font-size: 14px;
+    background: none;
+    font-weight: bold;
+    margin-top: 1rem;
+    width: 100%;
+    color: $mainColor;
+    background: white;
+  }
+}
+.Listing .listing-content .content-edit-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+  p {
+    display: flex;
+    align-items: center;
+    color: $mainGray;
+    margin-bottom: 0.5rem;
+    font-size: 14px;
+    i {
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+.Listing .listing-welcome-dialog {
+  overflow-y: scroll;
+  max-width: 550px;
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+  max-height: 80vh;
+  padding: 1rem;
+  margin: 0 1rem;
+  color: #333;
+  .welcome-dialog-image {
+    position: relative;
+    width: 100%;
+    border-radius: 5px;
+    background-color: rgb(233, 233, 233);
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 0 1rem;
+    padding-top: 2rem;
+    img {
+      margin: 0 auto;
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+  .welcome-dialog-heading {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  .welcome-dialog-body {
+    margin-bottom: 2rem;
+  }
+  .welcome-dialog-action {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.Listing .listing-content .content-body .body-info {
+  margin-top: 2rem;
+  .container {
+    .info-premium-box {
+      border: 1px solid $mainGray;
+      border-radius: 5px;
+      padding: 1rem;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+      i {
         color: $mainColor;
-        background: white;
+        margin-right: 0.5rem;
+      }
     }
-}
-.Listing .listing-content .content-edit-buttons{
-        display: flex;
-        justify-content: center;
-        margin-bottom: 2rem
-    }
-
-.Listing .listing-welcome-dialog{
-        overflow-y: scroll;
-        max-width: 550px;
-        width: 100%;
-        background-color: white;
-        border-radius: 5px;
-        max-height:80vh;
-        padding: 1rem;
-        margin: 0 1rem;
-        color: #333;
-        .welcome-dialog-image{
-            position: relative;
-            width: 100%;
-            border-radius: 5px;
-            background-color: rgb(233, 233, 233);
-            margin-bottom: 1rem;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            padding: 0 1rem;
-            padding-top: 2rem;
-            img{
-                margin: 0 auto;
-                max-width: 100%;
-                max-height: 100%;
-                
-            }
-        }
-        .welcome-dialog-heading{
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-        .welcome-dialog-body{
-            margin-bottom: 2rem;
-        }
-        .welcome-dialog-action{
-            display: flex;
-            justify-content: center ;
-        
-        }
-}
-
-.Listing .listing-content .content-body .body-info{
-    margin-top: 2rem;
-    .container{
-        .info-premium-box{
-            border: 1px solid $mainGray;
-            border-radius: 5px;
-            padding: 1rem;
-            background-color: white;
-            display: flex;
-            justify-content: center;
-            margin-bottom: 1rem;
-            i{
-                color: $mainColor;
-                margin-right: 0.5rem;
-            }
-        }
-    }
+  }
 }
 
 //Header
 
-
-
 //Flat listing
-.FlatListing .listing-content .content-header .mid-container .header-pfp-container{
-    .container-edit-icon{
-        border-radius: 5px !important;
-    }
-    .header-pfp{
-        border-radius: 5px !important;
-    }
+.FlatListing
+  .listing-content
+  .content-header
+  .mid-container
+  .header-pfp-container {
+  .container-edit-icon {
+    border-radius: 5px !important;
+  }
+  .header-pfp {
+    border-radius: 5px !important;
+  }
 }
-
-
-
-
-
-
 
 //Media
