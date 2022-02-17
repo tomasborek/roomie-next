@@ -5,9 +5,9 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/OgN5lX7gnE9Nns-mET9KW/_buildManifest.js",
-    "static/OgN5lX7gnE9Nns-mET9KW/_ssgManifest.js",
-    "static/OgN5lX7gnE9Nns-mET9KW/_middlewareManifest.js"
+    "static/znhTTdMFJbD8lbx9vyOaL/_buildManifest.js",
+    "static/znhTTdMFJbD8lbx9vyOaL/_ssgManifest.js",
+    "static/znhTTdMFJbD8lbx9vyOaL/_middlewareManifest.js"
   ],
   "pages": {
     "/": [
@@ -24,7 +24,7 @@
       "static/chunks/framework-91d7f78b5b4003c8.js",
       "static/chunks/main-962c131a58194c7e.js",
       "static/css/c7d3e3381fafa78c.css",
-      "static/chunks/pages/_app-850ab6cd2387e193.js"
+      "static/chunks/pages/_app-1c283b482acdabd0.js"
     ],
     "/_error": [
       "static/chunks/webpack-5752944655d749a0.js",
@@ -143,12 +143,6 @@
       "static/chunks/942-1747e4f5ae7f149d.js",
       "static/chunks/736-3c10e9773fd4976a.js",
       "static/chunks/pages/friends-5e0a45a23c5ac420.js"
-    ],
-    "/googlea6239ac067cea948": [
-      "static/chunks/webpack-5752944655d749a0.js",
-      "static/chunks/framework-91d7f78b5b4003c8.js",
-      "static/chunks/main-962c131a58194c7e.js",
-      "static/chunks/pages/googlea6239ac067cea948-0e70cffa022b3c0c.js"
     ],
     "/liked": [
       "static/chunks/webpack-5752944655d749a0.js",

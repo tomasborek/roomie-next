@@ -606,15 +606,15 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_com
 
 nprogress__WEBPACK_IMPORTED_MODULE_5___default().configure({
     minimum: 0.3,
-    easing: 'ease',
+    easing: "ease",
     speed: 800,
     showSpinner: false
 });
-next_router__WEBPACK_IMPORTED_MODULE_6___default().events.on('routeChangeStart', ()=>nprogress__WEBPACK_IMPORTED_MODULE_5___default().start()
+next_router__WEBPACK_IMPORTED_MODULE_6___default().events.on("routeChangeStart", ()=>nprogress__WEBPACK_IMPORTED_MODULE_5___default().start()
 );
-next_router__WEBPACK_IMPORTED_MODULE_6___default().events.on('routeChangeComplete', ()=>nprogress__WEBPACK_IMPORTED_MODULE_5___default().done()
+next_router__WEBPACK_IMPORTED_MODULE_6___default().events.on("routeChangeComplete", ()=>nprogress__WEBPACK_IMPORTED_MODULE_5___default().done()
 );
-next_router__WEBPACK_IMPORTED_MODULE_6___default().events.on('routeChangeError', ()=>nprogress__WEBPACK_IMPORTED_MODULE_5___default().done()
+next_router__WEBPACK_IMPORTED_MODULE_6___default().events.on("routeChangeError", ()=>nprogress__WEBPACK_IMPORTED_MODULE_5___default().done()
 );
 function MyApp({ Component , pageProps  }) {
     const { 0: cookie , 1: setCookie  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
@@ -630,6 +630,10 @@ function MyApp({ Component , pageProps  }) {
         children: [
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)((next_head__WEBPACK_IMPORTED_MODULE_3___default()), {
                 children: [
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
+                        name: "google-site-verification",
+                        content: "3KNnGjbrFKY2McWJDSNTsaSfH5hTx6wJfTjhxCWs8og"
+                    }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("link", {
                         rel: "stylesheet",
                         href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css",
