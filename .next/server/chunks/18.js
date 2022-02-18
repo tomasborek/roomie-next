@@ -142,7 +142,7 @@ function DbProvider(props) {
     const getUser = (uid)=>{
         return (0,_firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.getDoc)((0,_firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.doc)(_Firebase__WEBPACK_IMPORTED_MODULE_2__.db, "users", uid));
     };
-    const createListingQuery = ({ type , page , parameters , listings , premiumListings , newListings , newPremiumListings  })=>{
+    const createListingQuery = ({ type , page , parameters , listings , premiumListings , newListings , newPremiumListings ,  })=>{
         const colRef = (0,_firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.collection)(_Firebase__WEBPACK_IMPORTED_MODULE_2__.db, "listings");
         if (type === "firstQuery") {
             if (page === "first") {
@@ -170,7 +170,7 @@ function DbProvider(props) {
             }
         }
     };
-    const createRequestQuery = ({ type , requestType , page , uid , requests , premiumRequests , newRequests , newPremiumRequests  })=>{
+    const createRequestQuery = ({ type , requestType , page , uid , requests , premiumRequests , newRequests , newPremiumRequests ,  })=>{
         const colRef = (0,_firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.collection)(_Firebase__WEBPACK_IMPORTED_MODULE_2__.db, "users", uid, requestType);
         if (requestType === "sentRequests") {
             return (0,_firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.query)(colRef, (0,_firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.orderBy)("timeStamp", "desc", (0,_firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.limit)(10)));
@@ -207,7 +207,7 @@ function DbProvider(props) {
             (0,_firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.where)("type", "==", type),
             (0,_firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.where)("visible", "==", true),
             (0,_firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.where)("userInfo.emailVerified", "==", true),
-            (0,_firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.where)("hiddenByUser", "==", false)
+            (0,_firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.where)("hiddenByUser", "==", false), 
         ];
         let newPremiumListings = [];
         let newListings = [];
@@ -224,7 +224,11 @@ function DbProvider(props) {
         if (Object.keys(filter).length) {
             if (type === "flatmate") {
                 if (filter.location) {
-                    parameters.push((0,_firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.where)("flatTags.location", "==", filter.location));
+                    if (filter.location === "Praha") {
+                        parameters.push((0,_firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.where)("queryInfo.prague", "==", true));
+                    } else {
+                        parameters.push((0,_firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.where)("flatTags.location", "==", filter.location));
+                    }
                 }
                 if (filter.gender) {
                     let originalItems = [
@@ -371,7 +375,11 @@ function DbProvider(props) {
             }
             if (type === "flat") {
                 if (filter.location) {
-                    parameters.push((0,_firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.where)("flatBoxes.location", "==", filter.location));
+                    if (filter.location === "Praha") {
+                        parameters.push((0,_firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.where)("queryInfo.prague", "==", true));
+                    } else {
+                        parameters.push((0,_firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.where)("flatBoxes.location", "==", filter.location));
+                    }
                 }
                 if (filter.layout) {
                     parameters.push((0,_firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.where)("flatBoxes.layout", "==", filter.layout));
