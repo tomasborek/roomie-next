@@ -617,14 +617,10 @@ next_router__WEBPACK_IMPORTED_MODULE_6___default().events.on("routeChangeComplet
 next_router__WEBPACK_IMPORTED_MODULE_6___default().events.on("routeChangeError", ()=>nprogress__WEBPACK_IMPORTED_MODULE_5___default().done()
 );
 function MyApp({ Component , pageProps  }) {
-    const { 0: cookie , 1: setCookie  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
         if (true) {
             (0,_Firebase__WEBPACK_IMPORTED_MODULE_8__/* .analytics */ .co)();
         }
-    }, []);
-    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
-        setCookie(true);
     }, []);
     return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         children: [
