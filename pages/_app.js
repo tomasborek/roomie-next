@@ -37,15 +37,10 @@ import { DbProvider } from "../contexts/DbContext";
 import "../styles/global.css";
 
 function MyApp({ Component, pageProps }) {
-  const [cookie, setCookie] = useState(false);
   useEffect(() => {
     if (process.env.NODE_ENV === "production") {
       analytics();
     }
-  }, []);
-
-  useEffect(() => {
-    setCookie(true);
   }, []);
 
   return (
@@ -100,7 +95,6 @@ function MyApp({ Component, pageProps }) {
           content="https://roomie.cz/img/poster/poster-mobile.png"
         ></meta>
       </Head>
-      {/* {cookie && <CookieBot domainGroupId={"3d818e39-653d-4a0d-b674-7e1099e97f24"}/>} */}
       <Script
         id="Cookiebot"
         src="https://consent.cookiebot.com/uc.js"
