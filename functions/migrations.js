@@ -23,3 +23,31 @@ exports.createMigration = functions.https.onCall((data, context) => {
     );
   });
 });
+
+exports.pragueMigration = functions.https.onRequest((req, res) => {
+  const db = admin.firestore();
+  db.collection("listings")
+    .get()
+    .then((allListings) => {
+      return Promise.all(
+        allListings.docs.map((listing) => {
+          let location;
+          if (listing.data().type === "flatmate") {
+            location = listing.data().flatTags.location;
+          } else {
+            location = listing.data().flatBoxes.location;
+          }
+          const isPrague = location.includes("Praha");
+          return db.collection("listings").doc(listing.id).update({
+            "queryInfo.prague": isPrague,
+          });
+        })
+      );
+    })
+    .then((response) => {
+      res.status(200).send("Success");
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
