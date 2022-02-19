@@ -36,24 +36,14 @@ const useAuth = ()=>{
 };
 function AuthProvider(props) {
     //Auth states
-    const { 0: currentUser , 1: setCurrentUser  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
+    const { 0: currentUser1 , 1: setCurrentUser  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
     const { 0: userLoaded , 1: setUserLoaded  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     const { 0: currentUserInfo , 1: setCurrentUserInfo  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
     const { getUser  } = (0,_DbContext__WEBPACK_IMPORTED_MODULE_3__/* .useDb */ .s)();
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
-        if (currentUser) {
-            if (!currentUserInfo) {
-                getUser(currentUser.uid).then((doc)=>{
-                    setCurrentUserInfo(doc.data());
-                }).catch(()=>{
-                //
-                });
-            }
-        } else {
-            setCurrentUserInfo(null);
-        }
+        updateCurrentUserData(currentUser1);
     }, [
-        currentUser
+        currentUser1
     ]);
     //Auth function
     //Create new user
@@ -71,6 +61,25 @@ function AuthProvider(props) {
     };
     const delUser = (user)=>{
         return (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_4__.deleteUser)(user);
+    };
+    const updateCurrentUserData = (currentUser)=>{
+        return new Promise((resolve, reject)=>{
+            if (currentUser) {
+                if (!currentUserInfo) {
+                    return getUser(currentUser.uid).then((doc)=>{
+                        setCurrentUserInfo(doc.data());
+                        resolve("Success");
+                    }).catch(()=>{
+                        reject(error);
+                    });
+                } else {
+                    reject("Current user info is already set.");
+                }
+            } else {
+                resolve("There is no current user.");
+                setCurrentUserInfo(null);
+            }
+        });
     };
     const changePassword = (user, newPassword)=>{
         return (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_4__.updatePassword)(user, newPassword);
@@ -93,10 +102,11 @@ function AuthProvider(props) {
         logIn,
         delUser,
         changePassword,
-        currentUser,
+        currentUser: currentUser1,
         currentUserInfo,
         userLoaded,
-        reAuth
+        reAuth,
+        updateCurrentUserData
     };
     return(/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(AuthContext.Provider, {
         value: value,

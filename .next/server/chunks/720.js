@@ -1256,9 +1256,10 @@ const Listing = ()=>{
                                                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
                                                                 children: [
                                                                     "V\xe1š inzer\xe1t je nedokončen\xfd, pros\xedm dokončete jej",
+                                                                    " ",
                                                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(next_link__WEBPACK_IMPORTED_MODULE_3__["default"], {
                                                                         href: `/cr/${listingInfo.type}/${listingId}`,
-                                                                        children: " zde"
+                                                                        children: "zde"
                                                                     })
                                                                 ]
                                                             })
@@ -1270,8 +1271,18 @@ const Listing = ()=>{
                                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
                                                                 className: "fas fa-info-circle"
                                                             }),
-                                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                                                children: "V\xe1š \xfačet nen\xed ověřen\xfd - pro použ\xedv\xe1n\xed Roomie si jej pros\xedm ověřte pomoc\xed odkazu zaslan\xe9ho na v\xe1š e-mail."
+                                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                                                className: "message-text",
+                                                                children: [
+                                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                                                        className: "text-main",
+                                                                        children: "V\xe1š \xfačet nen\xed ověřen\xfd - pro použ\xedv\xe1n\xed Roomie si jej pros\xedm ověřte pomoc\xed odkazu zaslan\xe9ho na v\xe1š e-mail."
+                                                                    }),
+                                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                                                        className: "text-description",
+                                                                        children: "Pokud e-mail nevid\xedte, zkuste se pod\xedvat do šložky spam."
+                                                                    })
+                                                                ]
                                                             })
                                                         ]
                                                     }),
@@ -1283,7 +1294,8 @@ const Listing = ()=>{
                                                             }),
                                                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
                                                                 children: [
-                                                                    "V\xe1š \xfačet je skryt\xfd - aby ho mohli uživatel\xe9 vidět, zapněte jeho viditelnost v ",
+                                                                    "V\xe1š \xfačet je skryt\xfd - aby ho mohli uživatel\xe9 vidět, zapněte jeho viditelnost v",
+                                                                    " ",
                                                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(next_link__WEBPACK_IMPORTED_MODULE_3__["default"], {
                                                                         href: "/edit-profile",
                                                                         children: "nastaven\xed profilu"
@@ -1466,14 +1478,19 @@ const Listing = ()=>{
                                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
                                                                 className: "fas fa-info-circle"
                                                             }),
-                                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
-                                                                children: [
-                                                                    "V\xe1š inzer\xe1t je nedokončen\xfd, pros\xedm dokončete jej",
-                                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(next_link__WEBPACK_IMPORTED_MODULE_3__["default"], {
-                                                                        href: `/cr/${listingInfo.type}/${listingId}`,
-                                                                        children: " zde"
-                                                                    })
-                                                                ]
+                                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                                                className: "message-text",
+                                                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+                                                                    className: "text-main",
+                                                                    children: [
+                                                                        "V\xe1š inzer\xe1t je nedokončen\xfd, pros\xedm dokončete jej",
+                                                                        " ",
+                                                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(next_link__WEBPACK_IMPORTED_MODULE_3__["default"], {
+                                                                            href: `/cr/${listingInfo.type}/${listingId}`,
+                                                                            children: "zde"
+                                                                        })
+                                                                    ]
+                                                                })
                                                             })
                                                         ]
                                                     }),
@@ -1483,8 +1500,18 @@ const Listing = ()=>{
                                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
                                                                 className: "fas fa--circle"
                                                             }),
-                                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                                                children: "V\xe1š \xfačet nen\xed ověřen\xfd - pro použ\xedv\xe1n\xed Roomie si jej pros\xedm ověřte pomoc\xed odkazu zaslan\xe9ho na v\xe1š e-mail."
+                                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                                                className: "message-text",
+                                                                children: [
+                                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                                                        className: "text-main",
+                                                                        children: "V\xe1š \xfačet nen\xed ověřen\xfd - pro použ\xedv\xe1n\xed Roomie si jej pros\xedm ověřte pomoc\xed odkazu zaslan\xe9ho na v\xe1š e-mail."
+                                                                    }),
+                                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                                                        className: "text-description",
+                                                                        children: "Pokud e-mail nevid\xedte, zkuste se pod\xedvat do šložky spam."
+                                                                    })
+                                                                ]
                                                             })
                                                         ]
                                                     }),
@@ -1496,7 +1523,8 @@ const Listing = ()=>{
                                                             }),
                                                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
                                                                 children: [
-                                                                    "V\xe1š \xfačet je skryt\xfd - aby ho mohli uživatel\xe9 vidět, zapněte jeho viditelnost v ",
+                                                                    "V\xe1š \xfačet je skryt\xfd - aby ho mohli uživatel\xe9 vidět, zapněte jeho viditelnost v",
+                                                                    " ",
                                                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(next_link__WEBPACK_IMPORTED_MODULE_3__["default"], {
                                                                         href: "/edit-profile",
                                                                         children: "nastaven\xed profilu"
@@ -3639,6 +3667,38 @@ const ListingBoxesContainer = ({ type , existingBoxes , addedBoxes , editListing
     }
 };
 /* harmony default export */ const ListingBoxesContainer_ListingBoxesContainer = (ListingBoxesContainer);
+
+
+/***/ }),
+
+/***/ 9918:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(997);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6689);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+
+
+const Tag = ({ children , plus , active , variant , icon , ...rootDOMAttributes })=>{
+    return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+        ...rootDOMAttributes,
+        className: `tag ${active && "active"}`,
+        children: [
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                className: `tag-icon ${variant === "box" && "box-tag-icon"} fas fa-${variant === "box" ? icon : plus ? "plus" : "check"}`
+            }),
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                className: "tag-description",
+                children: children
+            })
+        ]
+    }));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Tag);
 
 
 /***/ }),

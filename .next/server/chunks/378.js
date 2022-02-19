@@ -233,7 +233,7 @@ const ListingProvider = ({ type: type1 , ssrProps , cr , children  })=>{
         "",
         "",
         "",
-        ""
+        "", 
     ]);
     const { 0: addedPfp , 1: setAddedPfp  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
     const { 0: addedPersonTags , 1: setAddedPersonTags  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
@@ -244,7 +244,7 @@ const ListingProvider = ({ type: type1 , ssrProps , cr , children  })=>{
     const { 0: bio , 1: setBio  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
     const { 0: flatBio , 1: setFlatBio  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
     const { 0: personBio , 1: setPersonBio  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
-    //Callable functions 
+    //Callable functions
     const updateListing = callable("userUpdates-updateListing");
     const createRequest = callable("requests-createRequest");
     const deleteImgs = callable("images-deleteImgs");
@@ -359,8 +359,14 @@ const ListingProvider = ({ type: type1 , ssrProps , cr , children  })=>{
         setLoading(false);
         setListingInfo(null);
         // If the status is not resolved in any way, there's no reason to continue
-        if (ssrProps.status != "success" && ssrProps.status != "client-side") return;
-        if (ssrProps.status === "client-side" && !currentUser) return;
+        if (ssrProps.status != "success" && ssrProps.status != "client-side") {
+            snackBar("Uživatel neexistuje, nebo je jeho inzer\xe1t nedokončen\xfd.", "error");
+            return;
+        }
+        if (ssrProps.status === "client-side" && !currentUser) {
+            snackBar("Uživatel neexistuje, nebo je jeho inzer\xe1t nedokončen\xfd.", "error");
+            return;
+        }
         // SSR props get reloaded when going from listing to listing, but states won't, so we need to reload them
         reloadProps();
         if (cr) setWelcomeDialog(true);
@@ -368,7 +374,6 @@ const ListingProvider = ({ type: type1 , ssrProps , cr , children  })=>{
             loadClientSide();
             return;
         }
-        ;
         setListingInfo(JSON.parse(ssrProps.listingInfo));
         setListingId(id);
         if (currentUser && (ssrProps.listingFriends.includes(currentUser.uid) || currentUser.uid === ssrProps.uid)) {
@@ -609,6 +614,7 @@ const ListingProvider = ({ type: type1 , ssrProps , cr , children  })=>{
         getListing(id).then((doc)=>{
             const docData = doc.data();
             if (!checkAccess(docData.userInfo.uid)) {
+                snackBar("Uživatel neexistuje, nebo je jeho inzer\xe1t nedokončen\xfd.", "error");
                 return;
             }
             setListingInfo(docData);

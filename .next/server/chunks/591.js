@@ -151,10 +151,10 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_con
 
 
 
-const RecievedReqFull = ({ reqInfo , id , setOpen , setRequestLoading , setReqResolved  })=>{
+const RecievedReqFull = ({ reqInfo , id , setOpen , setRequestLoading , setReqResolved ,  })=>{
     //Variables---
     //Contexts
-    const { updateUser , getUser , updateListing , addNotification , deleteNotification  } = (0,_contexts_DbContext__WEBPACK_IMPORTED_MODULE_4__/* .useDb */ .s)();
+    const { updateUser , getUser , updateListing , addNotification , deleteNotification ,  } = (0,_contexts_DbContext__WEBPACK_IMPORTED_MODULE_4__/* .useDb */ .s)();
     const [loading, setLoading] = (0,_contexts_LoadingContext__WEBPACK_IMPORTED_MODULE_5__/* .useLoading */ .r)();
     const { currentUser  } = (0,_contexts_AuthContext__WEBPACK_IMPORTED_MODULE_6__/* .useAuth */ .a)();
     const { callable  } = (0,_contexts_FunctionsContext__WEBPACK_IMPORTED_MODULE_8__/* .useFunctions */ .d)();
@@ -211,7 +211,7 @@ const RecievedReqFull = ({ reqInfo , id , setOpen , setRequestLoading , setReqRe
                     src: reqInfo.pfp,
                     className: "container-pfp"
                 }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
-                    src: "/img/pfps/radek-pfp.png",
+                    src: `img/pfps/${reqInfo.gender === "male" ? "radek-pfp.png" : "radka-pfp.png"}`,
                     className: "container-pfp"
                 })
             }),
