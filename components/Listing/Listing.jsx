@@ -93,9 +93,8 @@ const Listing = () => {
                       <div className="messages-message">
                         <i className="fas fa-info-circle"></i>
                         <p>
-                          Váš inzerát je nedokončený, prosím dokončete jej
+                          Váš inzerát je nedokončený, prosím dokončete jej{" "}
                           <Link href={`/cr/${listingInfo.type}/${listingId}`}>
-                            {" "}
                             zde
                           </Link>
                         </p>
@@ -252,9 +251,8 @@ const Listing = () => {
                         <i className="fas fa-info-circle"></i>
                         <div className="message-text">
                           <p className="text-main">
-                            Váš inzerát je nedokončený, prosím dokončete jej
+                            Váš inzerát je nedokončený, prosím dokončete jej{" "}
                             <Link href={`/cr/${listingInfo.type}/${listingId}`}>
-                              {" "}
                               zde
                             </Link>
                           </p>
