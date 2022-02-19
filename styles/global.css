@@ -1150,6 +1150,11 @@ textarea {
   margin-right: 1rem;
 }
 
+.Listing .listing-content .content-body .body-messages .messages-message .message-text .text-description {
+  font-size: 14px;
+  margin-top: 0.5rem;
+}
+
 .Listing .listing-content .content-body .body-messages .messages-message a {
   color: white;
   text-decoration: underline;
