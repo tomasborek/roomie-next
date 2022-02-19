@@ -232,6 +232,30 @@ exports.deleteRecievedNotification = functions.firestore
       .delete();
   });
 
+exports.deleteRecievedNotifications = functions.https.onCall(
+  (data, context) => {
+    const db = admin.firestore();
+    return db
+      .collection("users")
+      .doc(data.uid)
+      .collection("notifications")
+      .where("type", "==", "recievedRequest")
+      .get()
+      .then((recievedNotifications) => {
+        return Promise.all(
+          recievedNotifications.docs.map((oneNotification) => {
+            return db
+              .collection("users")
+              .doc(data.uid)
+              .collection("notifications")
+              .doc(oneNotification.id)
+              .delete();
+          })
+        );
+      });
+  }
+);
+
 exports.deleteAcceptedNotifications = functions.https.onCall(
   (data, context) => {
     data = JSON.parse(data);
