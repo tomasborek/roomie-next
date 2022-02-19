@@ -110,7 +110,7 @@ const Listing = () => {
                           </p>
                           <p className="text-description">
                             Pokud e-mail nevidíte, zkuste se podívat do šložky
-                            "spam"
+                            spam.
                           </p>
                         </div>
                       </div>
@@ -269,7 +269,7 @@ const Listing = () => {
                           </p>
                           <p className="text-description">
                             Pokud e-mail nevidíte, zkuste se podívat do šložky
-                            "spam"
+                            spam.
                           </p>
                         </div>
                       </div>
