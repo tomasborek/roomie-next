@@ -356,6 +356,7 @@ const ListingProvider = ({ type: type1 , ssrProps , cr , children  })=>{
     };
     //Functions
     const listingLoad = ()=>{
+        setContactLoading(true);
         setLoading(false);
         setListingInfo(null);
         // If the status is not resolved in any way, there's no reason to continue

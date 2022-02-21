@@ -5,9 +5,9 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/rITj-GiBZy7l4ux-8OPh8/_buildManifest.js",
-    "static/rITj-GiBZy7l4ux-8OPh8/_ssgManifest.js",
-    "static/rITj-GiBZy7l4ux-8OPh8/_middlewareManifest.js"
+    "static/aKzFBsvWcV9HILigFl6qq/_buildManifest.js",
+    "static/aKzFBsvWcV9HILigFl6qq/_ssgManifest.js",
+    "static/aKzFBsvWcV9HILigFl6qq/_middlewareManifest.js"
   ],
   "pages": {
     "/": [
@@ -58,7 +58,7 @@
       "static/chunks/184-3bddda5605fec6cb.js",
       "static/chunks/3-1c6af1a48fdc4078.js",
       "static/chunks/942-1747e4f5ae7f149d.js",
-      "static/chunks/378-1f57db5fe94d6eb3.js",
+      "static/chunks/378-74d7a9bf37d65924.js",
       "static/chunks/223-fd43a06b08f0151e.js",
       "static/chunks/pages/cr/flat/[id]-9c48cc40a022332a.js"
     ],
@@ -72,7 +72,7 @@
       "static/chunks/184-3bddda5605fec6cb.js",
       "static/chunks/3-1c6af1a48fdc4078.js",
       "static/chunks/942-1747e4f5ae7f149d.js",
-      "static/chunks/378-1f57db5fe94d6eb3.js",
+      "static/chunks/378-74d7a9bf37d65924.js",
       "static/chunks/223-fd43a06b08f0151e.js",
       "static/chunks/pages/cr/flatmate/[id]-11913d74b8108c32.js"
     ],
@@ -83,7 +83,7 @@
       "static/chunks/24-0f0deeb8a64b5709.js",
       "static/chunks/946-9e63f55469abce7c.js",
       "static/chunks/942-1747e4f5ae7f149d.js",
-      "static/chunks/378-1f57db5fe94d6eb3.js",
+      "static/chunks/378-74d7a9bf37d65924.js",
       "static/chunks/pages/edit-profile-63b7767ba6376e91.js"
     ],
     "/explore/flatmates": [
@@ -118,7 +118,7 @@
       "static/chunks/184-3bddda5605fec6cb.js",
       "static/chunks/3-1c6af1a48fdc4078.js",
       "static/chunks/942-1747e4f5ae7f149d.js",
-      "static/chunks/378-1f57db5fe94d6eb3.js",
+      "static/chunks/378-74d7a9bf37d65924.js",
       "static/chunks/223-fd43a06b08f0151e.js",
       "static/chunks/pages/flat/[id]-79a7b2e09d2e4318.js"
     ],
@@ -132,7 +132,7 @@
       "static/chunks/184-3bddda5605fec6cb.js",
       "static/chunks/3-1c6af1a48fdc4078.js",
       "static/chunks/942-1747e4f5ae7f149d.js",
-      "static/chunks/378-1f57db5fe94d6eb3.js",
+      "static/chunks/378-74d7a9bf37d65924.js",
       "static/chunks/223-fd43a06b08f0151e.js",
       "static/chunks/pages/flatmate/[id]-0abf7ac10e77f380.js"
     ],
