@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useFunctions } from "../../../contexts/FunctionsContext";
 import { useListing } from "../../../contexts/ListingContext";
 import { useAuth } from "../../../contexts/AuthContext";
+import { useRouter } from "next/router";
 //components
 import InputDialog from "../../InputDialog/InputDialog";
 import ListingInfoImportant from "./ListingInfoImportant/ListingInfoImportant";
@@ -21,6 +22,7 @@ import {
 } from "@mui/material";
 
 const ListingHeader = () => {
+  const router = useRouter();
   const { callable } = useFunctions();
   const { currentUser } = useAuth();
   const [moreInfoOpen, setMoreInfoOpen] = useState(false);
@@ -98,6 +100,10 @@ const ListingHeader = () => {
                     </button>
                   )}
                 <div className="main-actions">
+                  <i
+                    onClick={() => router.push("/faq")}
+                    className="fas fa-question-circle main-faq"
+                  ></i>
                   {listingFans &&
                     currentUser &&
                     listingInfo &&
@@ -220,6 +226,10 @@ const ListingHeader = () => {
                       </button>
                     )}
                   <div className="main-actions">
+                    <i
+                      onClick={() => router.push("/faq")}
+                      className="fas fa-question-circle main-faq"
+                    ></i>
                     {listingFans &&
                       currentUser &&
                       listingInfo &&

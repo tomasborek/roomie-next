@@ -5285,6 +5285,10 @@ textarea {
   font-size: 24px;
 }
 
+.Listing .listing-content .content-header .header-info .info-main .main-actions i.fa-question-circle {
+  margin-right: 1rem;
+}
+
 .Listing .listing-content .content-header .header-info .info-main .main-more-list {
   height: 0;
   position: absolute;
@@ -5322,15 +5326,27 @@ textarea {
 }
 
 @media screen and (max-width: 600px) {
-  .Listing .listing-content .content-header .mid-container .header-pfp-container {
+  .Listing
+.listing-content
+.content-header
+.mid-container
+.header-pfp-container {
     height: 120px;
     width: 200px;
   }
-  .Listing .listing-content .content-header .mid-container .header-pfp-container .header-pfp {
+  .Listing
+.listing-content
+.content-header
+.mid-container
+.header-pfp-container .header-pfp {
     width: 200px;
     height: 200px;
   }
-  .Listing .listing-content .content-header .mid-container .header-pfp-container .container-edit-icon {
+  .Listing
+.listing-content
+.content-header
+.mid-container
+.header-pfp-container .container-edit-icon {
     width: 200px;
   }
 }
