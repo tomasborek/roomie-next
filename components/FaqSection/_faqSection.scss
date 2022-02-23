@@ -1,0 +1,29 @@
+.faq-section {
+  margin-bottom: 2rem;
+  width: 100%;
+  .section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid $mainColor;
+    cursor: pointer;
+    color: $mainColor;
+    i {
+      transition: all 200ms;
+      &.open {
+        transform: rotate(180deg);
+      }
+    }
+  }
+  .section-content {
+    transition: all 200ms;
+    max-height: 0;
+    overflow: hidden;
+    color: $darkerGray;
+    &.active {
+      padding: 1rem 0;
+      max-height: 200px;
+    }
+  }
+}

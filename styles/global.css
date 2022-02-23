@@ -244,7 +244,7 @@ textarea {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 2rem 1rem;
+  padding: 3.5rem 1rem;
 }
 
 .Home .home-about-banner .banner-text {
@@ -1573,6 +1573,28 @@ textarea {
   .about .about-donate p {
     text-align: left;
   }
+}
+
+.faq .faq-banner {
+  width: 100%;
+  height: 200px;
+  background: #309eab;
+  background: -webkit-gradient(linear, left top, right top, from(#309eab), color-stop(87%, #154c70));
+  background: linear-gradient(90deg, #309eab 0%, #154c70 87%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: white;
+}
+
+.faq .container {
+  margin-top: 2rem;
 }
 
 .home-header {
@@ -4837,6 +4859,50 @@ textarea {
   }
 }
 
+.faq-section {
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.faq-section .section-heading {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #309EAB;
+  cursor: pointer;
+  color: #309EAB;
+}
+
+.faq-section .section-heading i {
+  -webkit-transition: all 200ms;
+  transition: all 200ms;
+}
+
+.faq-section .section-heading i.open {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.faq-section .section-content {
+  -webkit-transition: all 200ms;
+  transition: all 200ms;
+  max-height: 0;
+  overflow: hidden;
+  color: #6b717f;
+}
+
+.faq-section .section-content.active {
+  padding: 1rem 0;
+  max-height: 200px;
+}
+
 .header-info .info-contact {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4968,6 +5034,30 @@ textarea {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.listing-contact-notice {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1rem 0;
+}
+
+.listing-contact-notice p {
+  color: #B8B8B8;
+  font-size: 14px;
+  text-align: center;
+}
+
+.listing-contact-notice p i {
+  margin-right: 0.5rem;
 }
 
 @media screen and (max-width: 700px) {
@@ -5195,6 +5285,10 @@ textarea {
   font-size: 24px;
 }
 
+.Listing .listing-content .content-header .header-info .info-main .main-actions i.fa-question-circle {
+  margin-right: 1rem;
+}
+
 .Listing .listing-content .content-header .header-info .info-main .main-more-list {
   height: 0;
   position: absolute;
@@ -5232,15 +5326,27 @@ textarea {
 }
 
 @media screen and (max-width: 600px) {
-  .Listing .listing-content .content-header .mid-container .header-pfp-container {
+  .Listing
+.listing-content
+.content-header
+.mid-container
+.header-pfp-container {
     height: 120px;
     width: 200px;
   }
-  .Listing .listing-content .content-header .mid-container .header-pfp-container .header-pfp {
+  .Listing
+.listing-content
+.content-header
+.mid-container
+.header-pfp-container .header-pfp {
     width: 200px;
     height: 200px;
   }
-  .Listing .listing-content .content-header .mid-container .header-pfp-container .container-edit-icon {
+  .Listing
+.listing-content
+.content-header
+.mid-container
+.header-pfp-container .container-edit-icon {
     width: 200px;
   }
 }
