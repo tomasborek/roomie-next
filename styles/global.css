@@ -4900,7 +4900,7 @@ textarea {
 
 .faq-section .section-content.active {
   padding: 1rem 0;
-  max-height: 200px;
+  max-height: 1000px;
 }
 
 .header-info .info-contact {
