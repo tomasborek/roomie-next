@@ -2355,148 +2355,161 @@ const ListingContact = ()=>{
             }
         }
     };
-    return(/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-        children: !contactLoading ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-            children: isFriend || isOwner ? /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                className: "info-contact unlocked",
-                children: [
-                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                        className: "contact-items",
-                        children: [
-                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                className: "items-main",
-                                children: [
-                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                        className: "items-item",
-                                        children: [
-                                            listingContact.hidden != "phone" && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                                                className: "fas fa-phone"
-                                            }),
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                                children: listingContact.hidden != "phone" && [
-                                                    listingContact.phone.slice(0, 4),
-                                                    " ",
-                                                    listingContact.phone.slice(4, 7),
-                                                    " ",
-                                                    listingContact.phone.slice(7, 10),
-                                                    " ",
-                                                    listingContact.phone.slice(10)
-                                                ].join('')
-                                            })
-                                        ]
-                                    }),
-                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                        className: "items-item",
-                                        children: [
-                                            listingContact.hidden != "email" && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                                                className: "fas fa-envelope"
-                                            }),
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                                children: listingContact.hidden != "email" && listingContact.email
-                                            })
-                                        ]
-                                    })
-                                ]
-                            }),
-                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                className: "items-socials",
-                                children: [
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                                        onClick: ()=>listingContact.fb ? window.location.href = listingContact.fb : ""
-                                        ,
-                                        className: `fab fa-facebook-square socials-item ${listingContact.fb && "active"}`
-                                    }),
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                                        onClick: ()=>listingContact.ig ? window.location.href = listingContact.ig : ""
-                                        ,
-                                        className: `fab fa-instagram socials-item ${listingContact.ig && "active"}`
-                                    })
-                                ]
-                            })
-                        ]
-                    }),
-                    isFriend && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                        className: "contact-state",
-                        children: [
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                                className: "state-icon fas fa-users"
-                            }),
-                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
-                                className: "state-description",
-                                children: [
-                                    "Vy a ",
-                                    listingInfo.userInfo.username,
-                                    " jste ve spojen\xed."
-                                ]
-                            })
-                        ]
-                    }),
-                    isOwner && !editListing && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                        onClick: ()=>router.push("/requests/recieved")
-                        ,
-                        className: "main-btn contact-button",
-                        children: "Zobrazit ž\xe1dosti"
-                    })
-                ]
-            }) : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                className: "info-contact",
-                children: [
-                    (!currentUser || !isRequested) && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                        className: "contact-icons",
-                        children: [
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                                className: "fas fa-phone"
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                                className: "fas fa-envelope"
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                                className: "fab fa-facebook-square"
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                                className: "fab fa-instagram"
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                        className: "contact-state",
-                        children: [
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                                className: `state-icon fas fa-${isRequested ? "hourglass-half" : "lock"}`
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                className: "state-description",
-                                children: !currentUser ? "Pošlete uživateli ž\xe1dost o př\xedstup ke kontaktn\xedm \xfadajům." : isRequested ? "Ž\xe1dost ček\xe1 na vyř\xedzen\xed." : isRequesting ? "Uživatel v\xe1m zaslal ž\xe1dost." : currentUser ? "Pošlete uživateli ž\xe1dost o př\xedstup ke kontaktn\xedm \xfadajům." : ""
-                            })
-                        ]
-                    }),
-                    (!currentUser || !isRequested) && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-                        children: !currentUser ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                            className: "main-btn contact-button",
-                            onClick: ()=>router.push("/login")
-                            ,
-                            children: "Poslat ž\xe1dost"
-                        }) : isRequesting ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                            className: "contact-button main-btn",
+    return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+        children: [
+            !contactLoading ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+                children: isFriend || isOwner ? /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                    className: "info-contact unlocked",
+                    children: [
+                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                            className: "contact-items",
+                            children: [
+                                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                    className: "items-main",
+                                    children: [
+                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                            className: "items-item",
+                                            children: [
+                                                listingContact.hidden != "phone" && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                                                    className: "fas fa-phone"
+                                                }),
+                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                                    children: listingContact.hidden != "phone" && [
+                                                        listingContact.phone.slice(0, 4),
+                                                        " ",
+                                                        listingContact.phone.slice(4, 7),
+                                                        " ",
+                                                        listingContact.phone.slice(7, 10),
+                                                        " ",
+                                                        listingContact.phone.slice(10), 
+                                                    ].join("")
+                                                })
+                                            ]
+                                        }),
+                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                            className: "items-item",
+                                            children: [
+                                                listingContact.hidden != "email" && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                                                    className: "fas fa-envelope"
+                                                }),
+                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                                    children: listingContact.hidden != "email" && listingContact.email
+                                                })
+                                            ]
+                                        })
+                                    ]
+                                }),
+                                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                    className: "items-socials",
+                                    children: [
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                                            onClick: ()=>listingContact.fb ? window.location.href = listingContact.fb : ""
+                                            ,
+                                            className: `fab fa-facebook-square socials-item ${listingContact.fb && "active"}`
+                                        }),
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                                            onClick: ()=>listingContact.ig ? window.location.href = listingContact.ig : ""
+                                            ,
+                                            className: `fab fa-instagram socials-item ${listingContact.ig && "active"}`
+                                        })
+                                    ]
+                                })
+                            ]
+                        }),
+                        isFriend && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                            className: "contact-state",
+                            children: [
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                                    className: "state-icon fas fa-users"
+                                }),
+                                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+                                    className: "state-description",
+                                    children: [
+                                        "Vy a ",
+                                        listingInfo.userInfo.username,
+                                        " jste ve spojen\xed."
+                                    ]
+                                })
+                            ]
+                        }),
+                        isOwner && !editListing && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
                             onClick: ()=>router.push("/requests/recieved")
                             ,
-                            children: "Zobrazit ž\xe1dosti"
-                        }) : currentUser ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
                             className: "main-btn contact-button",
-                            onClick: handleRequestClick,
-                            children: "Poslat ž\xe1dost"
-                        }) : ""
-                    })
-                ]
+                            children: "Zobrazit ž\xe1dosti"
+                        })
+                    ]
+                }) : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                    className: "info-contact",
+                    children: [
+                        (!currentUser || !isRequested) && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                            className: "contact-icons",
+                            children: [
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                                    className: "fas fa-phone"
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                                    className: "fas fa-envelope"
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                                    className: "fab fa-facebook-square"
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                                    className: "fab fa-instagram"
+                                })
+                            ]
+                        }),
+                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                            className: "contact-state",
+                            children: [
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                                    className: `state-icon fas fa-${isRequested ? "hourglass-half" : "lock"}`
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                    className: "state-description",
+                                    children: !currentUser ? "Pošlete uživateli ž\xe1dost o př\xedstup ke kontaktn\xedm \xfadajům." : isRequested ? "Ž\xe1dost ček\xe1 na vyř\xedzen\xed." : isRequesting ? "Uživatel v\xe1m zaslal ž\xe1dost." : currentUser ? "Pošlete uživateli ž\xe1dost o př\xedstup ke kontaktn\xedm \xfadajům." : ""
+                                })
+                            ]
+                        }),
+                        (!currentUser || !isRequested) && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+                            children: !currentUser ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
+                                className: "main-btn contact-button",
+                                onClick: ()=>router.push("/login")
+                                ,
+                                children: "Poslat ž\xe1dost"
+                            }) : isRequesting ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
+                                className: "contact-button main-btn",
+                                onClick: ()=>router.push("/requests/recieved")
+                                ,
+                                children: "Zobrazit ž\xe1dosti"
+                            }) : currentUser ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
+                                className: "main-btn contact-button",
+                                onClick: handleRequestClick,
+                                children: "Poslat ž\xe1dost"
+                            }) : ""
+                        })
+                    ]
+                })
+            }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                className: "listing-contact-loading",
+                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_8__.CircularProgress, {
+                    sx: {
+                        padding: "10px"
+                    }
+                })
+            }),
+            editListing && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                className: "listing-contact-notice",
+                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+                    children: [
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                            className: "fas fa-info-circle"
+                        }),
+                        " Pro \xfapravu kontaktn\xedch \xfadajů navštivte sekci \xdačet a soukrom\xed."
+                    ]
+                })
             })
-        }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-            className: "listing-contact-loading",
-            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_8__.CircularProgress, {
-                sx: {
-                    padding: "10px"
-                }
-            })
-        })
+        ]
     }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ListingContact);
@@ -2519,17 +2532,20 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__) => {
 /* harmony import */ var _contexts_FunctionsContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1614);
 /* harmony import */ var _contexts_ListingContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(2882);
 /* harmony import */ var _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1018);
-/* harmony import */ var _InputDialog_InputDialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(3081);
-/* harmony import */ var _ListingInfoImportant_ListingInfoImportant__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(4618);
-/* harmony import */ var _ListingContact_ListingContact__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(1430);
-/* harmony import */ var _ListingPfp_ListingPfp__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(4609);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(5692);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_mui_material__WEBPACK_IMPORTED_MODULE_9__);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_ListingContact_ListingContact__WEBPACK_IMPORTED_MODULE_7__, _ListingInfoImportant_ListingInfoImportant__WEBPACK_IMPORTED_MODULE_6__, _ListingPfp_ListingPfp__WEBPACK_IMPORTED_MODULE_8__, _contexts_ListingContext__WEBPACK_IMPORTED_MODULE_3__, _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_4__, _contexts_FunctionsContext__WEBPACK_IMPORTED_MODULE_2__]);
-([_ListingContact_ListingContact__WEBPACK_IMPORTED_MODULE_7__, _ListingInfoImportant_ListingInfoImportant__WEBPACK_IMPORTED_MODULE_6__, _ListingPfp_ListingPfp__WEBPACK_IMPORTED_MODULE_8__, _contexts_ListingContext__WEBPACK_IMPORTED_MODULE_3__, _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_4__, _contexts_FunctionsContext__WEBPACK_IMPORTED_MODULE_2__] = __webpack_async_dependencies__.then ? await __webpack_async_dependencies__ : __webpack_async_dependencies__);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(1853);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _InputDialog_InputDialog__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(3081);
+/* harmony import */ var _ListingInfoImportant_ListingInfoImportant__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(4618);
+/* harmony import */ var _ListingContact_ListingContact__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(1430);
+/* harmony import */ var _ListingPfp_ListingPfp__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(4609);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(5692);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_mui_material__WEBPACK_IMPORTED_MODULE_10__);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_ListingContact_ListingContact__WEBPACK_IMPORTED_MODULE_8__, _ListingInfoImportant_ListingInfoImportant__WEBPACK_IMPORTED_MODULE_7__, _ListingPfp_ListingPfp__WEBPACK_IMPORTED_MODULE_9__, _contexts_ListingContext__WEBPACK_IMPORTED_MODULE_3__, _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_4__, _contexts_FunctionsContext__WEBPACK_IMPORTED_MODULE_2__]);
+([_ListingContact_ListingContact__WEBPACK_IMPORTED_MODULE_8__, _ListingInfoImportant_ListingInfoImportant__WEBPACK_IMPORTED_MODULE_7__, _ListingPfp_ListingPfp__WEBPACK_IMPORTED_MODULE_9__, _contexts_ListingContext__WEBPACK_IMPORTED_MODULE_3__, _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_4__, _contexts_FunctionsContext__WEBPACK_IMPORTED_MODULE_2__] = __webpack_async_dependencies__.then ? await __webpack_async_dependencies__ : __webpack_async_dependencies__);
 
 
 //Contexts
+
 
 
 
@@ -2541,13 +2557,14 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_Lis
 //Mui
 
 const ListingHeader = ()=>{
+    const router = (0,next_router__WEBPACK_IMPORTED_MODULE_5__.useRouter)();
     const { callable  } = (0,_contexts_FunctionsContext__WEBPACK_IMPORTED_MODULE_2__/* .useFunctions */ .d)();
     const { currentUser  } = (0,_contexts_AuthContext__WEBPACK_IMPORTED_MODULE_4__/* .useAuth */ .a)();
     const { 0: moreInfoOpen , 1: setMoreInfoOpen  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     const likeListing = callable("userUpdates-likeListing");
     const unlikeListing = callable("userUpdates-unlikeListing");
     //State
-    const { type , cr , listingInfo , editListing , setEditListing , listingId , listingUsername , listingAge , listingGender , listingPremium , listingFans , listingLiked , setListingLiked , setReportDialog  } = (0,_contexts_ListingContext__WEBPACK_IMPORTED_MODULE_3__/* .useListing */ .u)();
+    const { type , cr , listingInfo , editListing , setEditListing , listingId , listingUsername , listingAge , listingGender , listingPremium , listingFans , listingLiked , setListingLiked , setReportDialog ,  } = (0,_contexts_ListingContext__WEBPACK_IMPORTED_MODULE_3__/* .useListing */ .u)();
     const handleLike = ()=>{
         if (!currentUser) {
             snackBar("Pro přid\xe1n\xed inzer\xe1tů do obl\xedben\xfdch se nejdř\xedve přihlašte.", "error");
@@ -2575,7 +2592,7 @@ const ListingHeader = ()=>{
                 children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                     className: "mid-container",
                     children: [
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_ListingPfp_ListingPfp__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z, {}),
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_ListingPfp_ListingPfp__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z, {}),
                         /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                             className: "header-info",
                             children: [
@@ -2602,6 +2619,11 @@ const ListingHeader = ()=>{
                                         /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                             className: "main-actions",
                                             children: [
+                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                                                    onClick: ()=>router.push("/faq")
+                                                    ,
+                                                    className: "fas fa-question-circle main-faq"
+                                                }),
                                                 listingFans && currentUser && listingInfo && currentUser.uid != listingInfo.userInfo.uid && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
                                                     onClick: ()=>handleLike()
                                                     ,
@@ -2630,7 +2652,8 @@ const ListingHeader = ()=>{
                                             children: listingGender && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
                                                 children: [
                                                     listingAge,
-                                                    ", ",
+                                                    ",",
+                                                    " ",
                                                     listingGender === "male" ? "muž" : listingGender === "female" ? "žena" : "jin\xe9"
                                                 ]
                                             })
@@ -2639,11 +2662,147 @@ const ListingHeader = ()=>{
                                 }),
                                 !listingInfo ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                     className: "header-info-loading",
-                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_9__.CircularProgress, {})
+                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_10__.CircularProgress, {})
                                 }) : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
                                     children: [
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_ListingInfoImportant_ListingInfoImportant__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z, {}),
-                                        !cr ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_ListingContact_ListingContact__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z, {}) : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_ListingInfoImportant_ListingInfoImportant__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z, {}),
+                                        !cr ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_ListingContact_ListingContact__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z, {}) : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+                                            children: [
+                                                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                                    className: "info-contact",
+                                                    children: [
+                                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                                            className: "contact-icons",
+                                                            children: [
+                                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                                                                    className: "icons-icon fas fa-envelope"
+                                                                }),
+                                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                                                                    className: "icons-icon fas fa-phone"
+                                                                }),
+                                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                                                                    className: "icons-icon fab fa-instagram"
+                                                                }),
+                                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                                                                    className: "icons-icon fab fa-facebook"
+                                                                })
+                                                            ]
+                                                        }),
+                                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                                            className: "contact-state",
+                                                            children: [
+                                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                                                                    className: "state-icon fas fa-lock"
+                                                                }),
+                                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                                                    className: "state-description",
+                                                                    children: "Vaše kontaktn\xed \xfadaje jsou uzamčen\xe9."
+                                                                })
+                                                            ]
+                                                        })
+                                                    ]
+                                                }),
+                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                                    className: "listing-contact-notice",
+                                                    children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+                                                        children: [
+                                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                                                                className: "fas fa-info-circle"
+                                                            }),
+                                                            " Pro \xfapravu kontaktn\xedch \xfadajů navštivte po dokončen\xed sekci \xdačet a soukrom\xed."
+                                                        ]
+                                                    })
+                                                })
+                                            ]
+                                        })
+                                    ]
+                                })
+                            ]
+                        })
+                    ]
+                })
+            })
+        }));
+    }
+    if (type === "flat") {
+        return(/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                className: "content-header",
+                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                    className: "mid-container",
+                    children: [
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_ListingPfp_ListingPfp__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z, {}),
+                        !listingInfo ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                            className: "header-info-loading",
+                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_10__.CircularProgress, {})
+                        }) : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                            className: "header-info",
+                            children: [
+                                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                    className: "info-main",
+                                    children: [
+                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("h1", {
+                                            className: "main-name",
+                                            children: [
+                                                "Byt",
+                                                " ",
+                                                listingInfo && listingInfo.flatBoxes.layout && listingInfo.flatBoxes.layout,
+                                                " ",
+                                                listingPremium && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                                                    className: "fas fa-circle-check"
+                                                })
+                                            ]
+                                        }),
+                                        currentUser && currentUser.uid == listingInfo.userInfo.uid && listingInfo && listingInfo.visible && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
+                                            onClick: ()=>setEditListing((prevState)=>!prevState
+                                                )
+                                            ,
+                                            className: "main-edit-profile",
+                                            children: editListing ? "Zpět" : "Upravit inzer\xe1t"
+                                        }),
+                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                            className: "main-actions",
+                                            children: [
+                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                                                    onClick: ()=>router.push("/faq")
+                                                    ,
+                                                    className: "fas fa-question-circle main-faq"
+                                                }),
+                                                listingFans && currentUser && listingInfo && currentUser.uid != listingInfo.userInfo.uid && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                                                    onClick: ()=>handleLike()
+                                                    ,
+                                                    className: `fa${listingLiked ? "s" : "r"} fa-heart main-like`
+                                                }),
+                                                listingInfo && currentUser && listingInfo.userInfo.uid != currentUser.uid && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                                                    onClick: ()=>setMoreInfoOpen((prevState)=>!prevState
+                                                        )
+                                                    ,
+                                                    className: "main-more fas fa-ellipsis-h"
+                                                })
+                                            ]
+                                        }),
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("ul", {
+                                            className: `main-more-list ${moreInfoOpen && "active"}`,
+                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
+                                                onClick: ()=>{
+                                                    setReportDialog(true);
+                                                    setMoreInfoOpen(false);
+                                                },
+                                                children: "Nahl\xe1sit uživatele"
+                                            })
+                                        }),
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                            className: "main-description",
+                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                                children: listingInfo && listingInfo.flatBoxes.location
+                                            })
+                                        })
+                                    ]
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_ListingInfoImportant_ListingInfoImportant__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z, {}),
+                                !cr ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_ListingContact_ListingContact__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z, {}) : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+                                    children: [
+                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                             className: "info-contact",
                                             children: [
                                                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
@@ -2676,117 +2835,17 @@ const ListingHeader = ()=>{
                                                     ]
                                                 })
                                             ]
-                                        })
-                                    ]
-                                })
-                            ]
-                        })
-                    ]
-                })
-            })
-        }));
-    }
-    if (type === "flat") {
-        return(/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                className: "content-header",
-                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                    className: "mid-container",
-                    children: [
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_ListingPfp_ListingPfp__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z, {}),
-                        !listingInfo ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                            className: "header-info-loading",
-                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_9__.CircularProgress, {})
-                        }) : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                            className: "header-info",
-                            children: [
-                                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                    className: "info-main",
-                                    children: [
-                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("h1", {
-                                            className: "main-name",
-                                            children: [
-                                                "Byt ",
-                                                listingInfo && listingInfo.flatBoxes.layout && listingInfo.flatBoxes.layout,
-                                                " ",
-                                                listingPremium && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                                                    className: "fas fa-circle-check"
-                                                })
-                                            ]
-                                        }),
-                                        currentUser && currentUser.uid == listingInfo.userInfo.uid && listingInfo && listingInfo.visible && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                                            onClick: ()=>setEditListing((prevState)=>!prevState
-                                                )
-                                            ,
-                                            className: "main-edit-profile",
-                                            children: editListing ? "Zpět" : "Upravit inzer\xe1t"
-                                        }),
-                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                            className: "main-actions",
-                                            children: [
-                                                listingFans && currentUser && listingInfo && currentUser.uid != listingInfo.userInfo.uid && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                                                    onClick: ()=>handleLike()
-                                                    ,
-                                                    className: `fa${listingLiked ? "s" : "r"} fa-heart main-like`
-                                                }),
-                                                listingInfo && currentUser && listingInfo.userInfo.uid != currentUser.uid && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                                                    onClick: ()=>setMoreInfoOpen((prevState)=>!prevState
-                                                        )
-                                                    ,
-                                                    className: "main-more fas fa-ellipsis-h"
-                                                })
-                                            ]
-                                        }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("ul", {
-                                            className: `main-more-list ${moreInfoOpen && "active"}`,
-                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("li", {
-                                                onClick: ()=>{
-                                                    setReportDialog(true);
-                                                    setMoreInfoOpen(false);
-                                                },
-                                                children: "Nahl\xe1sit uživatele"
-                                            })
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                            className: "main-description",
-                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                                children: listingInfo && listingInfo.flatBoxes.location
+                                            className: "listing-contact-notice",
+                                            children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+                                                children: [
+                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                                                        className: "fas fa-info-circle"
+                                                    }),
+                                                    " Pro \xfapravu kontaktn\xedch \xfadajů navštivte po dokončen\xed sekci \xdačet a soukrom\xed."
+                                                ]
                                             })
-                                        })
-                                    ]
-                                }),
-                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_ListingInfoImportant_ListingInfoImportant__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z, {}),
-                                !cr ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_ListingContact_ListingContact__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z, {}) : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                    className: "info-contact",
-                                    children: [
-                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                            className: "contact-icons",
-                                            children: [
-                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                                                    className: "icons-icon fas fa-envelope"
-                                                }),
-                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                                                    className: "icons-icon fas fa-phone"
-                                                }),
-                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                                                    className: "icons-icon fab fa-instagram"
-                                                }),
-                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                                                    className: "icons-icon fab fa-facebook"
-                                                })
-                                            ]
-                                        }),
-                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                            className: "contact-state",
-                                            children: [
-                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                                                    className: "state-icon fas fa-lock"
-                                                }),
-                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                                    className: "state-description",
-                                                    children: "Vaše kontaktn\xed \xfadaje jsou uzamčen\xe9."
-                                                })
-                                            ]
                                         })
                                     ]
                                 })
