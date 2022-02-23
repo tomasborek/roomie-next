@@ -20,4 +20,8 @@
     <loc>https://roomie.cz/about/</loc>
     <changefreq>daily</changefreq>
   </url>
+  <url>
+    <loc>https://roomie.cz/faq/</loc>
+    <changefreq>daily</changefreq>
+  </url>
 </urlset>
