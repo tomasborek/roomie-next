@@ -31,6 +31,27 @@ const faq = () => {
             ostatní uživatele.
           </FaqSection>
 
+          <FaqSection name={"Jak funguje Roomie?"}>
+            Roomie není klasickou sociální sítí, nemůžete si tedy s uživateli
+            psát pomocí našeho webového rozhraní. Potvrzením žádosti však
+            získáte přístup k základním kontaktním údajům (e-mail, telefon)
+            jiného uživatele. Pokud vám nevyhovuje kontakt skrze telefon či
+            e-mailovou adresu, můžete si do profilu přidat sociální sítě jako
+            Instagram a Facebook. Poté stačí jen kliknout na ikonu v poli
+            kontaktních údajů jiného uživatele, který vaši žádost přijal, nebo
+            jemuž jste žádost potvrdili a sdílíte tak vzájemně své kontaktní
+            údaje.
+          </FaqSection>
+
+          <FaqSection
+            name={"Poslal/a jsem uživateli žádost, ale nevidím jeho údaje. "}
+          >
+            Pokud jste zaslal/a jinému uživateli žádost a stále nevidíte jeho
+            kontaktní údaje, pravděpodobně vám ji nepřijal. Je možné, že váš
+            inzerát není to pravé, co hledá - nebo ještě vaši žádost nestihl
+            schválit.
+          </FaqSection>
+
           <FaqSection
             name={"Jak si přidám do kontaktních údajů sociální sítě?"}
           >
@@ -71,6 +92,22 @@ const faq = () => {
             soukromí. U kolonek E-mail a Tel. číslo se nachází symbol oka,
             kterým můžete daný kontaktní údaj deaktivovat. (je-li zašedlý, je
             deaktivován).
+          </FaqSection>
+
+          <FaqSection name={"Jak si mohu smazat účet na Roomie?"}>
+            Účet na Roomie si můžete smazat nebo deaktivovat. Pokud jste již pro
+            své účely Roomie využili, můžete v Nastavení Účtu a soukromí profil
+            smazat či deaktivovat. Při dočasném deaktivování vaše údaje uchováme
+            po 12 měsíců, pokud se rozhodnete účet smazat, přijdete o celkový
+            přístup a žádná data nebudou uchována. Pokud byste tedy chtěli
+            Roomie v budoucnu využít, bude nutná nová registrace.
+          </FaqSection>
+
+          <FaqSection name={"Zapomněl/a jsem heslo, jak si ho mohu obnovit?"}>
+            Obnova hesla je jednoduchá. Stačí při přihlašování kliknout na
+            Zapomenuté heslo a vyplnit e-mailovou adresu, kterou jste použili
+            při registraci. Poté se řiďte instrukcemi zaslanými na vaši
+            e-mailovou adresu.
           </FaqSection>
         </div>
         <Footer />
