@@ -108,6 +108,12 @@ button.acc-btn:hover {
   background-color: #972d2d;
 }
 
+button.neutral-btn {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+}
+
 button.general-btn {
   font-weight: bold;
   background: #eeeeee;
@@ -215,7 +221,7 @@ textarea {
   height: 100%;
   -webkit-box-shadow: 0 0 10px #29d, 0 0 5px #29d;
           box-shadow: 0 0 10px #29d, 0 0 5px #29d;
-  opacity: 1.0;
+  opacity: 1;
   -webkit-transform: rotate(3deg) translate(0px, -4px);
   transform: rotate(3deg) translate(0px, -4px);
 }
@@ -3240,6 +3246,10 @@ textarea {
   margin-right: 0.5rem;
 }
 
+.dropdown ul li span {
+  margin-right: 0.5rem !important;
+}
+
 .dropdown ul li:hover {
   background-color: #f1f1f1;
 }
@@ -3759,10 +3769,46 @@ textarea {
 }
 
 .req-dialog .dialog-heading {
+  width: 100%;
+  position: relative;
+  margin-bottom: 2rem;
+  padding: 0 35px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.req-dialog .dialog-heading h2 {
   font-size: 24px;
-  margin-bottom: 0.5rem;
   font-weight: bold;
   text-align: center;
+}
+
+.req-dialog .dialog-heading i {
+  font-size: 18px;
+  position: absolute;
+  right: 0;
+  background-color: #e4e4e4;
+  color: #6b717f;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
 }
 
 .req-dialog .dialog-description {
@@ -4344,6 +4390,7 @@ textarea {
   border-radius: 5px;
   max-height: 90vh;
   padding: 0rem 1rem;
+  padding-top: 1rem;
   padding-bottom: 1rem;
   margin: 0 1rem;
   color: #333;
@@ -4373,30 +4420,44 @@ textarea {
   max-width: 100%;
 }
 
-.custom-dialog .dialog-close {
-  width: 100%;
+.custom-dialog .dialog-heading {
+  position: relative;
+  margin-bottom: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding-bottom: 0.25rem;
-  padding-top: 0.5rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 0.25rem 35px;
 }
 
-.custom-dialog .dialog-close i {
-  font-size: 14px;
-  color: #B8B8B8;
-  cursor: pointer;
-}
-
-.custom-dialog .dialog-heading {
-  margin-bottom: 1rem;
+.custom-dialog .dialog-heading h2 {
   text-align: center;
+}
+
+.custom-dialog .dialog-heading i {
+  font-size: 18px;
+  position: absolute;
+  right: 0;
+  background-color: #e4e4e4;
+  color: #6b717f;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
 }
 
 .custom-dialog .dialog-body {
@@ -4901,6 +4962,40 @@ textarea {
 .faq-section .section-content.active {
   padding: 1rem 0;
   max-height: 1000px;
+}
+
+.no-results {
+  padding: 2rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.no-results img {
+  margin-bottom: 1rem;
+}
+
+.no-results p {
+  font-size: 14px;
+  color: #B8B8B8;
+}
+
+.loading-spinner {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 2rem 0;
 }
 
 .header-info .info-contact {

@@ -1,158 +1,161 @@
-.container{
-    width: 900px;
-    margin: auto;
-    padding:0 1rem;
+.container {
+  width: 900px;
+  margin: auto;
+  padding: 0 1rem;
 
-    @media screen and (max-width: 900px){
-        max-width: 900px;
-        width: 100%;
-    }
+  @media screen and (max-width: 900px) {
+    max-width: 900px;
+    width: 100%;
+  }
 }
 
-.mid-container{
-    width: 1200px;
-    margin-inline: auto;
-    padding-inline:1rem ;
+.mid-container {
+  width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1rem;
 
-    @media screen and (max-width: 1200px){
-        max-width: 1200px;
-        width: 100%;
-    }
+  @media screen and (max-width: 1200px) {
+    max-width: 1200px;
+    width: 100%;
+  }
 }
 
-.lock-scroll{
-    overflow-y: hidden;
+.lock-scroll {
+  overflow-y: hidden;
 }
 
-button{
-    padding: 1em 2em;
-    outline: none;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 200ms;
-    text-align: center;
-    user-select: none;
+button {
+  padding: 1em 2em;
+  outline: none;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 200ms;
+  text-align: center;
+  user-select: none;
 
-    &.disabled{
-        opacity: 0.5;
-        pointer-events: none;
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &.main-btn {
+    background-color: $mainColor;
+    color: white;
+    font-weight: bold;
+
+    &:hover {
+      background-color: $mainColorHover;
     }
+  }
 
-    &.main-btn{
-        background-color: $mainColor;
-        color: white;
-        font-weight: bold;
+  &.acc-btn {
+    background-color: $accent;
+    color: white;
+    font-weight: bold;
 
-        &:hover{
-            background-color: $mainColorHover;
-        }
+    &:hover {
+      background-color: $accentHover;
     }
-
-    &.acc-btn{
-        background-color: $accent;
-        color: white;
-        font-weight: bold;
-
-        &:hover{
-            background-color: $accentHover;
-        }
-    }
-
-    &.general-btn{
-        font-weight: bold;
-        background: rgb(238, 238, 238);
-        color: #333;
-        border: 1px solid $mainGray;
-    }
-}
-
-input{
-    padding: 0.5em 1em;
-    font-size: 1rem;
-    outline: none;
-    border: 1px solid $mainGray;
-}
-
-textarea{
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    outline: none;
-    font-family: "Roboto";
-}
-
-.explore-dialog{
-    position: relative;
-    background-color: white;
+  }
+  &.neutral-btn {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+  }
+  &.general-btn {
+    font-weight: bold;
+    background: rgb(238, 238, 238);
     color: #333;
-    width: 95%;
-    max-width: 625px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    border: 1px solid $mainGray;
+  }
+}
+
+input {
+  padding: 0.5em 1em;
+  font-size: 1rem;
+  outline: none;
+  border: 1px solid $mainGray;
+}
+
+textarea {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  outline: none;
+  font-family: "Roboto";
+}
+
+.explore-dialog {
+  position: relative;
+  background-color: white;
+  color: #333;
+  width: 95%;
+  max-width: 625px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+  padding: 0 1rem;
+  padding-bottom: 1rem;
+  .dialog-image-container {
+    width: 100%;
+    height: 200px;
+    background-color: $mainGray;
     border-radius: 5px;
-    padding: 0 1rem;
-    padding-bottom: 1rem;
-    .dialog-image-container{
-        width: 100%;
-        height: 200px;
-        background-color: $mainGray;
-        border-radius: 5px;
-        margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .dialog-heading {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  .dialog-content {
+    color: $darkerGray;
+    margin-bottom: 1rem;
+  }
+  .dialog-buttons {
+    button {
+      margin: 0 0.5rem;
     }
-    .dialog-heading{
-        font-weight: bold;
-        font-size: 18px;
+  }
+  .dialog-close {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0.5rem 0;
+    i {
+      font-size: 14px;
+      color: $mainGray;
+      cursor: pointer;
     }
-    .dialog-content{
-        color: $darkerGray;
-        margin-bottom: 1rem;
-    }
-    .dialog-buttons{
-        button{
-            margin: 0 0.5rem;
-        }
-    }
-    .dialog-close{
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        padding: 0.5rem 0;
-        i{
-            font-size: 14px;
-            color: $mainGray;
-            cursor: pointer;
-        }
-    }
+  }
 }
 
 #nprogress {
-    pointer-events: none;
-  }
-  
-  #nprogress .bar {
-    background: $mainColor;
-    position: fixed;
-    z-index: 1031;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 6px;
-  }
-  
-  /* Fancy blur effect */
-  #nprogress .peg {
-    display: block;
-    position: absolute;
-    right: 0px;
-    width: 100px;
-    height: 100%;
-    box-shadow: 0 0 10px #29d, 0 0 5px #29d;
-    opacity: 1.0;
-    -webkit-transform: rotate(3deg) translate(0px, -4px);
-        -ms-transform: rotate(3deg) translate(0px, -4px);
-            transform: rotate(3deg) translate(0px, -4px);
-  }
-  
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: $mainColor;
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+}
+
+/* Fancy blur effect */
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px #29d, 0 0 5px #29d;
+  opacity: 1;
+  -webkit-transform: rotate(3deg) translate(0px, -4px);
+  -ms-transform: rotate(3deg) translate(0px, -4px);
+  transform: rotate(3deg) translate(0px, -4px);
+}

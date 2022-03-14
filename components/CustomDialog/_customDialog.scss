@@ -1,72 +1,81 @@
-.custom-dialog{
+.custom-dialog {
+  position: relative;
+  overflow-y: auto;
+  max-width: 550px;
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+  max-height: 90vh;
+  padding: 0rem 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin: 0 1rem;
+  color: #333;
+  .dialog-image {
     position: relative;
-    overflow-y: auto;
-    max-width: 550px;
     width: 100%;
-    background-color: white;
     border-radius: 5px;
-    max-height:90vh;
-    padding: 0rem 1rem;
-    padding-bottom: 1rem;
-    margin: 0 1rem;
-    color: #333;
-    .dialog-image{
-        position: relative;
-        width: 100%;
-        border-radius: 5px;
-        background-color: rgb(233, 233, 233);
-        margin-bottom: 1rem;
-        display: flex;
-        justify-content: center;
-        align-items: flex-end;
-        padding: 0 1rem;
-        padding-top: 2rem;
-        img{
-            margin: 0 auto;
-            max-width: 100%;
-        }
+    background-color: rgb(233, 233, 233);
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 0 1rem;
+    padding-top: 2rem;
+    img {
+      margin: 0 auto;
+      max-width: 100%;
     }
-    .dialog-close{
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        padding-bottom: 0.25rem;
-        padding-top: 0.5rem;
-        i{
-            font-size: 14px;
-            color: $mainGray;
-            cursor: pointer;
-        }
-}
-    .dialog-heading{
-        margin-bottom: 1rem;
-        text-align: center;
+  }
+
+  .dialog-heading {
+    position: relative;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem 35px;
+    h2 {
+      text-align: center;
     }
-    .dialog-body{
-        margin-bottom: 1.5rem;
-        color: $darkerGray;
-        text-align: center;
-        a{
-            color: $mainColor;
-        }
+    i {
+      font-size: 18px;
+      position: absolute;
+      right: 0;
+      background-color: $darkWhite;
+      color: $darkerGray;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
     }
-    .dialog-action{
-        display: flex;
-        justify-content: center ;
-        button{
-            margin: 0 0.5rem;
-            font-size: 14px;
-        }
-    
+  }
+  .dialog-body {
+    margin-bottom: 1.5rem;
+    color: $darkerGray;
+    text-align: center;
+    a {
+      color: $mainColor;
     }
+  }
+  .dialog-action {
+    display: flex;
+    justify-content: center;
+    button {
+      margin: 0 0.5rem;
+      font-size: 14px;
+    }
+  }
 }
 
-@media screen and (max-width: 430px){
-    .custom-dialog .dialog-action{
-        flex-direction: column;
-        button{
-            margin: 0.5rem 0;
-        }
+@media screen and (max-width: 430px) {
+  .custom-dialog .dialog-action {
+    flex-direction: column;
+    button {
+      margin: 0.5rem 0;
     }
+  }
 }
