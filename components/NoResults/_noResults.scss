@@ -1,0 +1,13 @@
+.no-results {
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  img {
+    margin-bottom: 1rem;
+  }
+  p {
+    font-size: 14px;
+    color: $mainGray;
+  }
+}

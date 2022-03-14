@@ -54,41 +54,37 @@ const Layout = ({ children }) => {
                     {snackBarMsg}
                   </Alert>
                 </Snackbar>
-                <Backdrop
-                  onClick={(e) => setExploreDialog(false)}
-                  sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+
+                <CustomDialog
+                  image={"/img/dialogs/welcome-dialog.png"}
+                  heading={"Co vám roomie může nabídnout?"}
                   open={exploreDialog}
+                  setOpen={setExploreDialog}
                 >
-                  <CustomDialog
-                    image={"/img/dialogs/welcome-dialog.png"}
-                    heading={"Co vám roomie může nabídnout?"}
-                    setOpen={setExploreDialog}
-                  >
-                    <div className="dialog-body">
-                      Zde si můžete prohlédnout existující inzeráty, pokud však
-                      chcete uživatele kontaktovat a založit si vlastní inzerát,
-                      je nutné se <Link href="/register">zaregistrovat</Link>{" "}
-                      nebo <Link href="/login">přihlásit.</Link>
-                    </div>
-                    <div className="dialog-action">
-                      <button
-                        onClick={() => setExploreDialog(false)}
-                        className="main-btn"
-                      >
-                        Jen se dívám
-                      </button>
-                      <button
-                        onClick={() => {
-                          setExploreDialog(false);
-                          router.push("/register");
-                        }}
-                        className="acc-btn"
-                      >
-                        Registrovat
-                      </button>
-                    </div>
-                  </CustomDialog>
-                </Backdrop>
+                  <div className="dialog-body">
+                    Zde si můžete prohlédnout existující inzeráty, pokud však
+                    chcete uživatele kontaktovat a založit si vlastní inzerát,
+                    je nutné se <Link href="/register">zaregistrovat</Link> nebo{" "}
+                    <Link href="/login">přihlásit.</Link>
+                  </div>
+                  <div className="dialog-action">
+                    <button
+                      onClick={() => setExploreDialog(false)}
+                      className="main-btn"
+                    >
+                      Jen se dívám
+                    </button>
+                    <button
+                      onClick={() => {
+                        setExploreDialog(false);
+                        router.push("/register");
+                      }}
+                      className="acc-btn"
+                    >
+                      Registrovat
+                    </button>
+                  </div>
+                </CustomDialog>
                 {children}
               </RegisterProvider>
             </NavOverlayProvider>
