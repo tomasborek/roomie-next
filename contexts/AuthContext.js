@@ -65,7 +65,7 @@ export function AuthProvider(props) {
               setCurrentUserInfo(doc.data());
               resolve("Success");
             })
-            .catch(() => {
+            .catch((error) => {
               reject(error);
             });
         } else {
