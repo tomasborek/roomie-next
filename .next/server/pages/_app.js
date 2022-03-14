@@ -92,55 +92,48 @@ const Layout = ({ children  })=>{
                                     children: snackBarMsg
                                 })
                             }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_16__.Backdrop, {
-                                onClick: (e)=>setExploreDialog(false)
-                                ,
-                                sx: {
-                                    zIndex: (theme)=>theme.zIndex.drawer + 1
-                                },
+                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_CustomDialog_CustomDialog__WEBPACK_IMPORTED_MODULE_14__/* ["default"] */ .Z, {
+                                image: "/img/dialogs/welcome-dialog.png",
+                                heading: "Co v\xe1m roomie může nab\xeddnout?",
                                 open: exploreDialog,
-                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_CustomDialog_CustomDialog__WEBPACK_IMPORTED_MODULE_14__/* ["default"] */ .Z, {
-                                    image: "/img/dialogs/welcome-dialog.png",
-                                    heading: "Co v\xe1m roomie může nab\xeddnout?",
-                                    setOpen: setExploreDialog,
-                                    children: [
-                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                            className: "dialog-body",
-                                            children: [
-                                                "Zde si můžete prohl\xe9dnout existuj\xedc\xed inzer\xe1ty, pokud však chcete uživatele kontaktovat a založit si vlastn\xed inzer\xe1t, je nutn\xe9 se ",
-                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(next_dist_client_link__WEBPACK_IMPORTED_MODULE_3__["default"], {
-                                                    href: "/register",
-                                                    children: "zaregistrovat"
-                                                }),
-                                                " ",
-                                                "nebo ",
-                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(next_dist_client_link__WEBPACK_IMPORTED_MODULE_3__["default"], {
-                                                    href: "/login",
-                                                    children: "přihl\xe1sit."
-                                                })
-                                            ]
-                                        }),
-                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                            className: "dialog-action",
-                                            children: [
-                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                                                    onClick: ()=>setExploreDialog(false)
-                                                    ,
-                                                    className: "main-btn",
-                                                    children: "Jen se d\xedv\xe1m"
-                                                }),
-                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                                                    onClick: ()=>{
-                                                        setExploreDialog(false);
-                                                        router.push("/register");
-                                                    },
-                                                    className: "acc-btn",
-                                                    children: "Registrovat"
-                                                })
-                                            ]
-                                        })
-                                    ]
-                                })
+                                setOpen: setExploreDialog,
+                                children: [
+                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                        className: "dialog-body",
+                                        children: [
+                                            "Zde si můžete prohl\xe9dnout existuj\xedc\xed inzer\xe1ty, pokud však chcete uživatele kontaktovat a založit si vlastn\xed inzer\xe1t, je nutn\xe9 se ",
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(next_dist_client_link__WEBPACK_IMPORTED_MODULE_3__["default"], {
+                                                href: "/register",
+                                                children: "zaregistrovat"
+                                            }),
+                                            " nebo",
+                                            " ",
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(next_dist_client_link__WEBPACK_IMPORTED_MODULE_3__["default"], {
+                                                href: "/login",
+                                                children: "přihl\xe1sit."
+                                            })
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                        className: "dialog-action",
+                                        children: [
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
+                                                onClick: ()=>setExploreDialog(false)
+                                                ,
+                                                className: "main-btn",
+                                                children: "Jen se d\xedv\xe1m"
+                                            }),
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
+                                                onClick: ()=>{
+                                                    setExploreDialog(false);
+                                                    router.push("/register");
+                                                },
+                                                className: "acc-btn",
+                                                children: "Registrovat"
+                                            })
+                                        ]
+                                    })
+                                ]
                             }),
                             children
                         ]

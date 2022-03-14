@@ -69,7 +69,7 @@ function AuthProvider(props) {
                     return getUser(currentUser.uid).then((doc)=>{
                         setCurrentUserInfo(doc.data());
                         resolve("Success");
-                    }).catch(()=>{
+                    }).catch((error)=>{
                         reject(error);
                     });
                 } else {

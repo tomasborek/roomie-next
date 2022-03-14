@@ -382,65 +382,55 @@ const ExploreFeed = ({ variant  })=>{
     };
     return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         children: [
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_14__.Backdrop, {
-                sx: {
-                    zIndex: (theme)=>theme.zIndex.drawer + 1
-                },
+            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_CustomDialog_CustomDialog__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z, {
+                image: "/img/dialogs/login-dialog.png",
+                heading: "Pro pokračov\xe1n\xed je nutn\xe9 se přihl\xe1sit.",
                 open: limitedPaginationDialog,
-                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_CustomDialog_CustomDialog__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z, {
-                    image: "/img/dialogs/login-dialog.png",
-                    heading: "Pro pokračov\xe1n\xed je nutn\xe9 se přihl\xe1sit.",
-                    setOpen: setLimitedPaginationDialog,
-                    children: [
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                            className: "dialog-body",
-                            children: "Pro pokračov\xe1n\xed a zobrazen\xed dalš\xedch inzer\xe1tů je nutn\xe9 se zaregistrovat nebo přihl\xe1sit do \xfačtu Roomie."
-                        }),
-                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                            className: "dialog-action",
-                            children: [
-                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                                    onClick: ()=>router.push("/register")
-                                    ,
-                                    className: "acc-btn",
-                                    children: "Registrovat"
-                                }),
-                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                                    onClick: ()=>router.push("/login")
-                                    ,
-                                    className: "main-btn",
-                                    children: "Přihl\xe1sit"
-                                })
-                            ]
-                        })
-                    ]
-                })
-            }),
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_14__.Backdrop, {
-                sx: {
-                    zIndex: (theme)=>theme.zIndex.drawer + 1
-                },
-                open: premiumPaginationDialog,
-                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_CustomDialog_CustomDialog__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z, {
-                    image: "/img/dialogs/login-dialog.png",
-                    heading: "Pro pokračov\xe1n\xed je nutn\xe9 m\xedt premium",
-                    setOpen: setPremiumPaginationDialog,
-                    children: [
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                            className: "dialog-body",
-                            children: "Pro pokračov\xe1n\xed a zobrazen\xed dalš\xedch inzer\xe1tů je nutn\xe9 m\xed premium \xfačet Roomie."
-                        }),
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                            className: "dialog-action",
-                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                                onClick: ()=>router.push("/premium")
+                setOpen: setLimitedPaginationDialog,
+                children: [
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                        className: "dialog-body",
+                        children: "Pro pokračov\xe1n\xed a zobrazen\xed dalš\xedch inzer\xe1tů je nutn\xe9 se zaregistrovat nebo přihl\xe1sit do \xfačtu Roomie."
+                    }),
+                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                        className: "dialog-action",
+                        children: [
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
+                                onClick: ()=>router.push("/register")
+                                ,
+                                className: "acc-btn",
+                                children: "Registrovat"
+                            }),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
+                                onClick: ()=>router.push("/login")
                                 ,
                                 className: "main-btn",
-                                children: "Z\xedskat premium"
+                                children: "Přihl\xe1sit"
                             })
+                        ]
+                    })
+                ]
+            }),
+            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_CustomDialog_CustomDialog__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z, {
+                image: "/img/dialogs/login-dialog.png",
+                heading: "Pro pokračov\xe1n\xed je nutn\xe9 m\xedt premium",
+                open: premiumPaginationDialog,
+                setOpen: setPremiumPaginationDialog,
+                children: [
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                        className: "dialog-body",
+                        children: "Pro pokračov\xe1n\xed a zobrazen\xed dalš\xedch inzer\xe1tů je nutn\xe9 m\xed premium \xfačet Roomie."
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                        className: "dialog-action",
+                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
+                            onClick: ()=>router.push("/premium")
+                            ,
+                            className: "main-btn",
+                            children: "Z\xedskat premium"
                         })
-                    ]
-                })
+                    })
+                ]
             }),
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                 className: "explore-feed",
@@ -958,7 +948,7 @@ _LocationDropdown_LocationDropdown__WEBPACK_IMPORTED_MODULE_3__ = (__webpack_asy
 
 //Mui components
 
-const Filter = ({ variant , setOpen , activeFilters , setActiveFilters , applyFilters  })=>{
+const Filter = ({ variant , setOpen , activeFilters , setActiveFilters , applyFilters ,  })=>{
     //Person state tags
     const { 0: genderTag , 1: setGenderTag  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
     const { 0: ageTag , 1: setAgeTag  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
@@ -1031,6 +1021,8 @@ const Filter = ({ variant , setOpen , activeFilters , setActiveFilters , applyFi
         setOpen(false);
     };
     return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+        onClick: (e)=>e.stopPropagation()
+        ,
         className: "filter",
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
@@ -1047,7 +1039,8 @@ const Filter = ({ variant , setOpen , activeFilters , setActiveFilters , applyFi
                 children: [
                     "Zde můžete zadat vaše preference",
                     variant === "flatmate" ? " ide\xe1ln\xedho spolubydl\xedc\xedho." : " ide\xe1ln\xedho bydlen\xed.",
-                    " Zaklikejte hodnoty, podle kter\xfdch chcete filtrovat, ostatn\xed můžete nechat pr\xe1zdn\xe9."
+                    " ",
+                    "Zaklikejte hodnoty, podle kter\xfdch chcete filtrovat, ostatn\xed můžete nechat pr\xe1zdn\xe9."
                 ]
             }),
             variant === "flatmate" && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {

@@ -578,6 +578,7 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__) => {
 /* harmony import */ var _contexts_ListingContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(2882);
 /* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(5692);
 /* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_mui_material__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _BackdropTimes_BackdropTimes__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(3706);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_contexts_AuthContext__WEBPACK_IMPORTED_MODULE_3__, _contexts_FunctionsContext__WEBPACK_IMPORTED_MODULE_2__, _contexts_ListingContext__WEBPACK_IMPORTED_MODULE_5__]);
 ([_contexts_AuthContext__WEBPACK_IMPORTED_MODULE_3__, _contexts_FunctionsContext__WEBPACK_IMPORTED_MODULE_2__, _contexts_ListingContext__WEBPACK_IMPORTED_MODULE_5__] = __webpack_async_dependencies__.then ? await __webpack_async_dependencies__ : __webpack_async_dependencies__);
 
@@ -589,8 +590,9 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_con
 
 //MUI
 
+
 const Gallery = ()=>{
-    const { type: type1 , listingImgs , setListingImgs , addedListingImgs , setAddedListingImgs , pfp , setPfp , addedPfp , setAddedPfp , setGalleryInput , listingInfo , listingId , editListing  } = (0,_contexts_ListingContext__WEBPACK_IMPORTED_MODULE_5__/* .useListing */ .u)();
+    const { type: type1 , listingImgs , setListingImgs , addedListingImgs , setAddedListingImgs , pfp , setPfp , addedPfp , setAddedPfp , setGalleryInput , listingInfo , listingId , editListing ,  } = (0,_contexts_ListingContext__WEBPACK_IMPORTED_MODULE_5__/* .useListing */ .u)();
     const { 0: viewOpen , 1: setViewOpen  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     const { 0: currentImg , 1: setCurrentImg  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
     const { 0: galleryImgs , 1: setGalleryImgs  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
@@ -665,9 +667,8 @@ const Gallery = ()=>{
                     },
                     open: viewOpen,
                     children: [
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                            className: "gallery-close fas fa-times",
-                            onClick: ()=>setViewOpen(false)
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_BackdropTimes_BackdropTimes__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z, {
+                            onClose: ()=>setViewOpen(false)
                         }),
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
                             className: "gallery-current-img",
@@ -799,14 +800,13 @@ const Gallery = ()=>{
             children: [
                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_6__.Backdrop, {
                     sx: {
-                        color: '#fff',
+                        color: "#fff",
                         zIndex: (theme)=>theme.zIndex.drawer + 1
                     },
                     open: viewOpen,
                     children: [
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                            className: "gallery-close fas fa-times",
-                            onClick: ()=>setViewOpen(false)
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_BackdropTimes_BackdropTimes__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z, {
+                            onClose: ()=>setViewOpen(false)
                         }),
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
                             className: "gallery-current-img",
@@ -1062,9 +1062,14 @@ const Gallery = ()=>{
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6689);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5692);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_mui_material__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _BackdropTimes_BackdropTimes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3706);
 
 
-const InputDialog = ({ heading , description , setMessage , message , setOpen , handleSend  })=>{
+
+
+const InputDialog = ({ heading , description , setMessage , message , open , setOpen , handleSend ,  })=>{
     const textAreaChange = (e)=>{
         let text = e.target.value;
         while(text.includes("\n\n\n")){
@@ -1072,44 +1077,58 @@ const InputDialog = ({ heading , description , setMessage , message , setOpen , 
         }
         setMessage(text);
     };
-    return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-        className: "req-dialog",
-        children: [
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                onClick: ()=>setOpen(false)
-                ,
-                className: "dialog-close fas fa-times"
-            }),
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                className: "dialog-heading",
-                children: heading
-            }),
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                className: "dialog-description",
-                children: description
-            }),
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("textarea", {
-                maxLength: 250,
-                onChange: (e)=>textAreaChange(e)
-                ,
-                value: message,
-                className: "dialog-input",
-                placeholder: "Sem zadejte svou zpr\xe1vu..."
-            }),
-            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("button", {
-                onClick: ()=>{
-                    handleSend();
-                    setOpen(false);
-                },
-                className: "main-btn",
-                children: [
-                    "Poslat ",
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
-                        className: "fas fa-envelope"
-                    })
-                ]
-            })
-        ]
+    return(/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_2__.Backdrop, {
+        onClick: ()=>setOpen(false)
+        ,
+        sx: {
+            zIndex: (theme)=>theme.zIndex.drawer + 1
+        },
+        open: open,
+        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+            onClick: (e)=>e.stopPropagation()
+            ,
+            className: "req-dialog",
+            children: [
+                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                    className: "dialog-heading",
+                    children: [
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h2", {
+                            children: heading
+                        }),
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                            onClick: ()=>setOpen(false)
+                            ,
+                            className: "fas fa-times"
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                    className: "dialog-description",
+                    children: description
+                }),
+                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("textarea", {
+                    maxLength: 250,
+                    onChange: (e)=>textAreaChange(e)
+                    ,
+                    value: message,
+                    className: "dialog-input",
+                    placeholder: "Sem zadejte svou zpr\xe1vu..."
+                }),
+                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("button", {
+                    onClick: ()=>{
+                        handleSend();
+                        setOpen(false);
+                    },
+                    className: "main-btn",
+                    children: [
+                        "Poslat ",
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                            className: "fas fa-envelope"
+                        })
+                    ]
+                })
+            ]
+        })
     }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (InputDialog);
@@ -2045,40 +2064,30 @@ const ListingDialogs = ()=>{
     const bdSx = {
         zIndex: (theme)=>theme.zIndex.drawer + 1
     };
-    const { type , cr , listingInfo , reportDialog , setReportDialog , reqDialogOpen , setReqDialogOpen , sliderDialog , setSliderDialog , personTagOverlay , setPersonTagOverlay , flatTagOverlay , setFlatTagOverlay , personBoxerOverlay , setPersonBoxerOverlay , flatBoxerOverlay , setFlatBoxerOverlay , reportMessage , setReportMessage , handleReport , requestMessage , setRequestMessage , handleRequest , budget , setBudget , addedPersonTags , setAddedPersonTags , addedFlatTags , setAddedFlatTags , addedPersonBoxes , setAddedPersonBoxes , addedFlatBoxes , setAddedFlatBoxes , listingPersonTags , listingFlatTags , listingPersonBoxes , listingFlatBoxes , galleryInput , setGalleryInput , listingImgs , addedListingImgs , setAddedListingImgs , pfp , addedPfp , setAddedPfp , welcomeDialog , setWelcomeDialog  } = (0,_contexts_ListingContext__WEBPACK_IMPORTED_MODULE_2__/* .useListing */ .u)();
+    const { type , cr , listingInfo , reportDialog , setReportDialog , reqDialogOpen , setReqDialogOpen , sliderDialog , setSliderDialog , personTagOverlay , setPersonTagOverlay , flatTagOverlay , setFlatTagOverlay , personBoxerOverlay , setPersonBoxerOverlay , flatBoxerOverlay , setFlatBoxerOverlay , reportMessage , setReportMessage , handleReport , requestMessage , setRequestMessage , handleRequest , budget , setBudget , addedPersonTags , setAddedPersonTags , addedFlatTags , setAddedFlatTags , addedPersonBoxes , setAddedPersonBoxes , addedFlatBoxes , setAddedFlatBoxes , listingPersonTags , listingFlatTags , listingPersonBoxes , listingFlatBoxes , galleryInput , setGalleryInput , listingImgs , addedListingImgs , setAddedListingImgs , pfp , addedPfp , setAddedPfp , welcomeDialog , setWelcomeDialog ,  } = (0,_contexts_ListingContext__WEBPACK_IMPORTED_MODULE_2__/* .useListing */ .u)();
     return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         children: [
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_9__.Backdrop, {
-                sx: {
-                    zIndex: (theme)=>theme.zIndex.drawer + 1
-                },
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_InputDialog_InputDialog__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z, {
+                heading: `Nahlásit uživatele ${listingInfo && listingInfo.userInfo.username}`,
+                description: "Pros\xedm popište důvody nahl\xe1šen\xed.",
+                setMessage: setReportMessage,
+                message: reportMessage,
                 open: reportDialog,
-                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_InputDialog_InputDialog__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z, {
-                    heading: `Nahlásit uživatele ${listingInfo && listingInfo.userInfo.username}`,
-                    description: "Pros\xedm popište důvody nahl\xe1šen\xed.",
-                    setMessage: setReportMessage,
-                    message: reportMessage,
-                    setOpen: setReportDialog,
-                    handleSend: ()=>{
-                        handleReport();
-                        snackBar("Nahl\xe1šen\xed bude zkontrolov\xe1no.", "success");
-                        setReportMessage("");
-                    }
-                })
+                setOpen: setReportDialog,
+                handleSend: ()=>{
+                    handleReport();
+                    snackBar("Nahl\xe1šen\xed bude zkontrolov\xe1no.", "success");
+                    setReportMessage("");
+                }
             }),
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_9__.Backdrop, {
-                sx: {
-                    zIndex: (theme)=>theme.zIndex.drawer + 1
-                },
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_InputDialog_InputDialog__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z, {
+                heading: "Odeslat ž\xe1dost o kontakt",
+                description: " Uživatel uvid\xed ž\xe1dost s vaš\xed zpr\xe1vou a může se na jej\xedm z\xe1kladě rozhodnout, zda ji přijme a poskytne v\xe1m tak sv\xe9 kontaktn\xed \xfadaje.",
+                setMessage: setRequestMessage,
+                message: requestMessage,
                 open: reqDialogOpen,
-                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_InputDialog_InputDialog__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z, {
-                    heading: "Odeslat ž\xe1dost o kontakt",
-                    description: " Uživatel uvid\xed ž\xe1dost s vaš\xed zpr\xe1vou a může se na jej\xedm z\xe1kladě rozhodnout, zda ji přijme a poskytne v\xe1m tak sv\xe9 kontaktn\xed \xfadaje.",
-                    setMessage: setRequestMessage,
-                    message: requestMessage,
-                    setOpen: setReqDialogOpen,
-                    handleSend: handleRequest
-                })
+                setOpen: setReqDialogOpen,
+                handleSend: handleRequest
             }),
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_9__.Dialog, {
                 open: sliderDialog,
@@ -2238,31 +2247,26 @@ const ListingDialogs = ()=>{
                     })
                 ]
             }),
-            cr && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_9__.Backdrop, {
-                sx: {
-                    zIndex: (theme)=>theme.zIndex.drawer + 1
-                },
+            cr && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_CustomDialog_CustomDialog__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z, {
+                image: "/img/listing/welcome-dialog.png",
+                heading: "V\xe1š inzer\xe1t",
                 open: welcomeDialog,
-                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_CustomDialog_CustomDialog__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z, {
-                    image: "/img/listing/welcome-dialog.png",
-                    heading: "V\xe1š inzer\xe1t",
-                    setOpen: setWelcomeDialog,
-                    children: [
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                            className: "dialog-body",
-                            children: "Gratulujeme k založen\xed osobn\xedho profilu Roomie. Nyn\xed v\xe1m nic nebr\xe1n\xed k vytvořen\xed vašeho inzer\xe1tu. Tvorba je jednoduch\xe1 a intuitivn\xed. Červeně sv\xedt\xedc\xed informace jsou povinn\xe9, ostatn\xed dle vašeho uv\xe1žen\xed. Nezapomeňte - č\xedm v\xedce informac\xed uvedete, t\xedm v\xedce podpoř\xedte vaš\xed šanci k osloven\xed potenci\xe1ln\xedch uživatelů. V\xe1š inzer\xe1t je vaš\xed veřejnou prezentac\xed na port\xe1le Roomie. Hodně štěst\xed!"
-                        }),
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                            className: "dialog-action",
-                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                                onClick: ()=>setWelcomeDialog(false)
-                                ,
-                                className: "main-btn",
-                                children: "Rozum\xedm"
-                            })
+                setOpen: setWelcomeDialog,
+                children: [
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                        className: "dialog-body",
+                        children: "Gratulujeme k založen\xed osobn\xedho profilu Roomie. Nyn\xed v\xe1m nic nebr\xe1n\xed k vytvořen\xed vašeho inzer\xe1tu. Tvorba je jednoduch\xe1 a intuitivn\xed. Červeně sv\xedt\xedc\xed informace jsou povinn\xe9, ostatn\xed dle vašeho uv\xe1žen\xed. Nezapomeňte - č\xedm v\xedce informac\xed uvedete, t\xedm v\xedce podpoř\xedte vaš\xed šanci k osloven\xed potenci\xe1ln\xedch uživatelů. V\xe1š inzer\xe1t je vaš\xed veřejnou prezentac\xed na port\xe1le Roomie. Hodně štěst\xed!"
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                        className: "dialog-action",
+                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
+                            onClick: ()=>setWelcomeDialog(false)
+                            ,
+                            className: "main-btn",
+                            children: "Rozum\xedm"
                         })
-                    ]
-                })
+                    })
+                ]
             })
         ]
     }));
