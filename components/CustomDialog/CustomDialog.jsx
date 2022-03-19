@@ -14,9 +14,11 @@ const CustomDialog = ({ image, heading, open, setOpen, children }) => {
           <h2>{heading}</h2>
           <i onClick={() => setOpen(false)} className="fas fa-times"></i>
         </div>
-        <div className="dialog-image">
-          <img src={image} alt="" />
-        </div>
+        {image && (
+          <div className="dialog-image">
+            <img src={image} alt="" />
+          </div>
+        )}
         {children}
       </div>
     </Backdrop>
