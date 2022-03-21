@@ -38,12 +38,16 @@ const Footer = () => {
           <p className="section-header">Spojte se s námi:</p>
           <div className="section-description">
             <div className="description-icons">
-              <a target={"_blank"} href={"https://instagram.com/roomiecz"}>
-                <i className="fab fa-instagram icons-icon"></i>
-              </a>
-              <a target={"_blank"} href={"https://facebook.com/roomiecz"}>
-                <i className="fab fa-facebook icons-icon"></i>
-              </a>
+              <Link passHref href={"https://instagram.com/roomiecz"}>
+                <a target={"_blank"}>
+                  <i className="fab fa-instagram icons-icon"></i>
+                </a>
+              </Link>
+              <Link passHref href={"https://facebook.com/roomiecz"}>
+                <a target={"_blank"}>
+                  <i className="fab fa-facebook icons-icon"></i>
+                </a>
+              </Link>
               <a href="mailto:roomieback@gmail.com">
                 <i className="fas fa-envelope icons-icon"></i>
               </a>
