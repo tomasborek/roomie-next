@@ -518,19 +518,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var nprogress__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(nprogress__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(1853);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var react_cookiebot__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(675);
-/* harmony import */ var react_cookiebot__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_cookiebot__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _Firebase__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(5451);
-/* harmony import */ var _contexts_SnackBarContext__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(7503);
-/* harmony import */ var _contexts_LoadingContext__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(5182);
-/* harmony import */ var _contexts_FunctionsContext__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(1614);
-/* harmony import */ var _contexts_StorageContext__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(742);
-/* harmony import */ var _contexts_ExploreDialogContext__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(2690);
-/* harmony import */ var _contexts_ExploreContext__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(6155);
-/* harmony import */ var _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(1018);
-/* harmony import */ var _contexts_DbContext__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(6934);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_Layout_Layout__WEBPACK_IMPORTED_MODULE_2__, _contexts_StorageContext__WEBPACK_IMPORTED_MODULE_12__, _contexts_FunctionsContext__WEBPACK_IMPORTED_MODULE_11__, _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_15__, _contexts_DbContext__WEBPACK_IMPORTED_MODULE_16__, _Firebase__WEBPACK_IMPORTED_MODULE_8__]);
-([_components_Layout_Layout__WEBPACK_IMPORTED_MODULE_2__, _contexts_StorageContext__WEBPACK_IMPORTED_MODULE_12__, _contexts_FunctionsContext__WEBPACK_IMPORTED_MODULE_11__, _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_15__, _contexts_DbContext__WEBPACK_IMPORTED_MODULE_16__, _Firebase__WEBPACK_IMPORTED_MODULE_8__] = __webpack_async_dependencies__.then ? await __webpack_async_dependencies__ : __webpack_async_dependencies__);
+/* harmony import */ var _Firebase__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(5451);
+/* harmony import */ var _contexts_SnackBarContext__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(7503);
+/* harmony import */ var _contexts_LoadingContext__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(5182);
+/* harmony import */ var _contexts_FunctionsContext__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(1614);
+/* harmony import */ var _contexts_StorageContext__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(742);
+/* harmony import */ var _contexts_ExploreDialogContext__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(2690);
+/* harmony import */ var _contexts_ExploreContext__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(6155);
+/* harmony import */ var _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(1018);
+/* harmony import */ var _contexts_DbContext__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(6934);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_Layout_Layout__WEBPACK_IMPORTED_MODULE_2__, _contexts_StorageContext__WEBPACK_IMPORTED_MODULE_11__, _contexts_FunctionsContext__WEBPACK_IMPORTED_MODULE_10__, _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_14__, _contexts_DbContext__WEBPACK_IMPORTED_MODULE_15__, _Firebase__WEBPACK_IMPORTED_MODULE_7__]);
+([_components_Layout_Layout__WEBPACK_IMPORTED_MODULE_2__, _contexts_StorageContext__WEBPACK_IMPORTED_MODULE_11__, _contexts_FunctionsContext__WEBPACK_IMPORTED_MODULE_10__, _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_14__, _contexts_DbContext__WEBPACK_IMPORTED_MODULE_15__, _Firebase__WEBPACK_IMPORTED_MODULE_7__] = __webpack_async_dependencies__.then ? await __webpack_async_dependencies__ : __webpack_async_dependencies__);
 
 
 //Layouts
@@ -542,7 +540,7 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_com
 
 // import "nprogress/nprogress.css";
 
-
+// import CookieBot from "react-cookiebot";
 
 //Componentns
 //Context
@@ -571,7 +569,7 @@ next_router__WEBPACK_IMPORTED_MODULE_6___default().events.on("routeChangeError",
 function MyApp({ Component , pageProps  }) {
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
         if (true) {
-            (0,_Firebase__WEBPACK_IMPORTED_MODULE_8__/* .analytics */ .co)();
+            (0,_Firebase__WEBPACK_IMPORTED_MODULE_7__/* .analytics */ .co)();
         }
     }, []);
     return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
@@ -651,14 +649,14 @@ function MyApp({ Component , pageProps  }) {
                 "data-blockingmode": "auto",
                 type: "text/javascript"
             }),
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_DbContext__WEBPACK_IMPORTED_MODULE_16__/* .DbProvider */ .W, {
-                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_AuthContext__WEBPACK_IMPORTED_MODULE_15__/* .AuthProvider */ .H, {
-                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_LoadingContext__WEBPACK_IMPORTED_MODULE_10__/* .LoadingProvider */ .P, {
-                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_SnackBarContext__WEBPACK_IMPORTED_MODULE_9__/* .SnackBarProvider */ .J, {
-                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_FunctionsContext__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z, {
-                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_StorageContext__WEBPACK_IMPORTED_MODULE_12__/* .StorageProvider */ .X, {
-                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_ExploreDialogContext__WEBPACK_IMPORTED_MODULE_13__/* .ExploreDialogProvider */ .I, {
-                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_ExploreContext__WEBPACK_IMPORTED_MODULE_14__/* .ExploreProvider */ .Q, {
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_DbContext__WEBPACK_IMPORTED_MODULE_15__/* .DbProvider */ .W, {
+                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_AuthContext__WEBPACK_IMPORTED_MODULE_14__/* .AuthProvider */ .H, {
+                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_LoadingContext__WEBPACK_IMPORTED_MODULE_9__/* .LoadingProvider */ .P, {
+                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_SnackBarContext__WEBPACK_IMPORTED_MODULE_8__/* .SnackBarProvider */ .J, {
+                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_FunctionsContext__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z, {
+                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_StorageContext__WEBPACK_IMPORTED_MODULE_11__/* .StorageProvider */ .X, {
+                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_ExploreDialogContext__WEBPACK_IMPORTED_MODULE_12__/* .ExploreDialogProvider */ .I, {
+                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_ExploreContext__WEBPACK_IMPORTED_MODULE_13__/* .ExploreProvider */ .Q, {
                                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_Layout_Layout__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z, {
                                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(Component, {
                                                     ...pageProps
@@ -832,13 +830,6 @@ module.exports = require("nprogress");
 /***/ ((module) => {
 
 module.exports = require("react");
-
-/***/ }),
-
-/***/ 675:
-/***/ ((module) => {
-
-module.exports = require("react-cookiebot");
 
 /***/ }),
 
