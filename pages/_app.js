@@ -8,7 +8,7 @@ import Script from "next/script";
 import NProgress from "nprogress";
 // import "nprogress/nprogress.css";
 import Router from "next/router";
-import CookieBot from "react-cookiebot";
+// import CookieBot from "react-cookiebot";
 
 import { analytics } from "../Firebase";
 
