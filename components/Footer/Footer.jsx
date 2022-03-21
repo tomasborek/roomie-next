@@ -38,18 +38,12 @@ const Footer = () => {
           <p className="section-header">Spojte se s námi:</p>
           <div className="section-description">
             <div className="description-icons">
-              <i
-                onClick={() =>
-                  (window.location.href = "https://instagram.com/roomiecz")
-                }
-                className="fab fa-instagram icons-icon"
-              ></i>
-              <i
-                onClick={() =>
-                  (window.location.href = "https://facebook.com/roomiecz")
-                }
-                className="fab fa-facebook icons-icon"
-              ></i>
+              <a target={"_blank"} href={"https://instagram.com/roomiecz"}>
+                <i className="fab fa-instagram icons-icon"></i>
+              </a>
+              <a target={"_blank"} href={"https://facebook.com/roomiecz"}>
+                <i className="fab fa-facebook icons-icon"></i>
+              </a>
               <a href="mailto:roomieback@gmail.com">
                 <i className="fas fa-envelope icons-icon"></i>
               </a>
