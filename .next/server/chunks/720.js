@@ -3241,7 +3241,47 @@ _contexts_ListingContext__WEBPACK_IMPORTED_MODULE_2__ = (__webpack_async_depende
 //COntexts
 
 const ListingPfp = ()=>{
-    const { type , listingInfo , editListing , setGalleryInput , addedPfp , pfp , listingImgs , addedListingImgs , handleImgDelete  } = (0,_contexts_ListingContext__WEBPACK_IMPORTED_MODULE_2__/* .useListing */ .u)();
+    const { type , listingInfo , editListing , setGalleryInput , addedPfp , pfp , listingImgs , addedListingImgs , handleImgDelete ,  } = (0,_contexts_ListingContext__WEBPACK_IMPORTED_MODULE_2__/* .useListing */ .u)();
+    const { 0: lastActive , 1: setLastActive  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
+    const { 0: lastActiveSeverity , 1: setLastActiveSeverity  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("gray");
+    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
+        if (listingInfo) {
+            const t = new Date(listingInfo.userInfo.lastActive?.seconds * 1000);
+            setLastActive(timePassed1(t));
+            //Check if t is less than a week ago
+            if (t.getTime() > Date.now() - 604800000) {
+                setLastActiveSeverity("green");
+            } else if (t.getTime() > Date.now() - 1209600000) {
+                //Check if t is less than a two months ago
+                setLastActiveSeverity("orange");
+            } else if (t.getTime() < Date.now() - 1209600000) {
+                //Check if t is more than a month ago
+                setLastActiveSeverity("red");
+            }
+        }
+    }, [
+        listingInfo
+    ]);
+    const timePassed1 = (date)=>{
+        if (!date || !date.getTime()) {
+            return "Neurčito";
+        }
+        const currentDate = new Date();
+        const timePassed = currentDate - date;
+        const days = Math.floor(timePassed / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(timePassed % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
+        const minutes = Math.floor(timePassed % (1000 * 60 * 60) / (1000 * 60));
+        const seconds = Math.floor(timePassed % (1000 * 60) / 1000);
+        if (days > 0) {
+            return `${days} ${days === 1 ? "den" : days > 1 && days < 5 ? "dny" : "dn\xed"}`;
+        } else if (hours > 0) {
+            return `${hours} ${hours === 1 ? "hodina" : hours > 1 && hours < 5 ? "hodiny" : "hodin"}`;
+        } else if (minutes > 0) {
+            return `${minutes} ${minutes === 1 ? "minuta" : minutes > 1 && minutes < 5 ? "minuty" : "minut"}`;
+        } else {
+            return `${seconds} ${seconds === 1 ? "sekunda" : seconds > 1 && seconds < 5 ? "sekundy" : "sekund"}`;
+        }
+    };
     if (type === "flatmate") {
         return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
             className: "header-pfp-container",
@@ -3284,6 +3324,10 @@ const ListingPfp = ()=>{
                     })
                 }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                     className: "header-pfp"
+                }),
+                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                    className: `container-activity-status ${lastActiveSeverity}`,
+                    children: lastActive ? lastActive : "..."
                 })
             ]
         }));
@@ -3327,6 +3371,10 @@ const ListingPfp = ()=>{
                     })
                 }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                     className: "header-pfp"
+                }),
+                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                    className: `container-activity-status ${lastActiveSeverity}`,
+                    children: listingInfo ? lastActive : "..."
                 })
             ]
         }));

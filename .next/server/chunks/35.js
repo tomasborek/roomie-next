@@ -508,7 +508,8 @@ const ExploreFeed = ({ variant  })=>{
                                             bio: listing.data().bio,
                                             id: listing.id,
                                             pfp: listing.data().userInfo.images.pfp,
-                                            premium: listing.data().userInfo.premium
+                                            premium: listing.data().userInfo.premium,
+                                            lastActive: listing.data().userInfo.lastActive
                                         }, id)
                                     ),
                                     flatmateListings.length > 7 || flatmatePage != 1 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_Pagination_Pagination__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z, {
@@ -550,6 +551,7 @@ const ExploreFeed = ({ variant  })=>{
                                             mainImg: listing.data().userInfo.images.listingImgs[0],
                                             premium: listing.data().userInfo.premium,
                                             size: listing.data().flatBoxes.size,
+                                            lastActive: listing.data().userInfo.lastActive,
                                             id: listing.id
                                         }, id)
                                     ),
@@ -620,7 +622,27 @@ const ExploreFeed = ({ variant  })=>{
 
 //next
 
-const ExploreFlat = ({ name , bio , price , size , startTime , stayTime , mainImg , premium , id  })=>{
+const ExploreFlat = ({ name , bio , price , size , startTime , stayTime , mainImg , premium , lastActive , id ,  })=>{
+    const timePassed1 = (date)=>{
+        if (!date) {
+            return "Neurčito";
+        }
+        const currentDate = new Date();
+        const timePassed = currentDate - date;
+        const days = Math.floor(timePassed / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(timePassed % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
+        const minutes = Math.floor(timePassed % (1000 * 60 * 60) / (1000 * 60));
+        const seconds = Math.floor(timePassed % (1000 * 60) / 1000);
+        if (days > 0) {
+            return `${days} ${days === 1 ? "den" : days > 1 && days < 5 ? "dny" : "dn\xed"}`;
+        } else if (hours > 0) {
+            return `${hours} ${hours === 1 ? "hodina" : hours > 1 && hours < 5 ? "hodiny" : "hodin"}`;
+        } else if (minutes > 0) {
+            return `${minutes} ${minutes === 1 ? "minuta" : minutes > 1 && minutes < 5 ? "minuty" : "minut"}`;
+        } else {
+            return `${seconds} ${seconds === 1 ? "sekunda" : seconds > 1 && seconds < 5 ? "sekundy" : "sekund"}`;
+        }
+    };
     return(/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(next_link__WEBPACK_IMPORTED_MODULE_2__["default"], {
         href: `/flat/${id}`,
         children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
@@ -639,6 +661,13 @@ const ExploreFlat = ({ name , bio , price , size , startTime , stayTime , mainIm
                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                     className: "listing-content",
                     children: [
+                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                            className: "content-last-active content-last-active-m",
+                            children: [
+                                "Naposledy aktivn\xed: ",
+                                timePassed1(lastActive?.toDate())
+                            ]
+                        }),
                         /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                             className: "content-header",
                             children: [
@@ -660,12 +689,12 @@ const ExploreFlat = ({ name , bio , price , size , startTime , stayTime , mainIm
                                 ]
                             })
                         }),
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                            className: "content-more",
-                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                href: "",
-                                children: "V\xedce..."
-                            })
+                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                            className: "content-last-active",
+                            children: [
+                                "Naposledy aktivn\xed: ",
+                                timePassed1(lastActive?.toDate())
+                            ]
                         }),
                         /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                             className: "content-info",
@@ -753,7 +782,27 @@ const ExploreFlat = ({ name , bio , price , size , startTime , stayTime , mainIm
 
 //next
 
-const ExploreFlatmate = ({ name , age , gender , location , money , available , bio , pfp , premium , id  })=>{
+const ExploreFlatmate = ({ name , age , gender , location , money , available , bio , pfp , premium , lastActive , id ,  })=>{
+    const timePassed1 = (date)=>{
+        if (!date) {
+            return "Neurčito";
+        }
+        const currentDate = new Date();
+        const timePassed = currentDate - date;
+        const days = Math.floor(timePassed / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(timePassed % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
+        const minutes = Math.floor(timePassed % (1000 * 60 * 60) / (1000 * 60));
+        const seconds = Math.floor(timePassed % (1000 * 60) / 1000);
+        if (days > 0) {
+            return `${days} ${days === 1 ? "den" : days > 1 && days < 5 ? "dny" : "dn\xed"}`;
+        } else if (hours > 0) {
+            return `${hours} ${hours === 1 ? "hodina" : hours > 1 && hours < 5 ? "hodiny" : "hodin"}`;
+        } else if (minutes > 0) {
+            return `${minutes} ${minutes === 1 ? "minuta" : minutes > 1 && minutes < 5 ? "minuty" : "minut"}`;
+        } else {
+            return `${seconds} ${seconds === 1 ? "sekunda" : seconds > 1 && seconds < 5 ? "sekundy" : "sekund"}`;
+        }
+    };
     return(/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(next_link__WEBPACK_IMPORTED_MODULE_2__["default"], {
         href: `/flatmate/${id}`,
         children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
@@ -779,6 +828,13 @@ const ExploreFlatmate = ({ name , age , gender , location , money , available , 
                     className: "listing-content",
                     children: [
                         /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                            className: "content-last-active content-last-active-m",
+                            children: [
+                                "Naposledy aktivn\xed: ",
+                                timePassed1(lastActive?.toDate())
+                            ]
+                        }),
+                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                             className: "content-header",
                             children: [
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
@@ -801,12 +857,12 @@ const ExploreFlatmate = ({ name , age , gender , location , money , available , 
                                 ]
                             })
                         }),
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                            className: "content-more",
-                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
-                                href: "",
-                                children: "V\xedce..."
-                            })
+                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                            className: "content-last-active",
+                            children: [
+                                "Naposledy aktivn\xed: ",
+                                timePassed1(lastActive?.toDate())
+                            ]
                         }),
                         /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                             className: "content-info",

@@ -17,15 +17,17 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__) => {
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Firebase__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5451);
 /* harmony import */ var _DbContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6934);
-/* harmony import */ var _firebase_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(61);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_Firebase__WEBPACK_IMPORTED_MODULE_2__, _firebase_auth__WEBPACK_IMPORTED_MODULE_4__, _DbContext__WEBPACK_IMPORTED_MODULE_3__]);
-([_Firebase__WEBPACK_IMPORTED_MODULE_2__, _firebase_auth__WEBPACK_IMPORTED_MODULE_4__, _DbContext__WEBPACK_IMPORTED_MODULE_3__] = __webpack_async_dependencies__.then ? await __webpack_async_dependencies__ : __webpack_async_dependencies__);
+/* harmony import */ var _FunctionsContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1614);
+/* harmony import */ var _firebase_auth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(61);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_Firebase__WEBPACK_IMPORTED_MODULE_2__, _firebase_auth__WEBPACK_IMPORTED_MODULE_5__, _FunctionsContext__WEBPACK_IMPORTED_MODULE_4__, _DbContext__WEBPACK_IMPORTED_MODULE_3__]);
+([_Firebase__WEBPACK_IMPORTED_MODULE_2__, _firebase_auth__WEBPACK_IMPORTED_MODULE_5__, _FunctionsContext__WEBPACK_IMPORTED_MODULE_4__, _DbContext__WEBPACK_IMPORTED_MODULE_3__] = __webpack_async_dependencies__.then ? await __webpack_async_dependencies__ : __webpack_async_dependencies__);
 
 
 //Firebase
 
 
 //Context
+
 
 //Auth imports
 
@@ -40,6 +42,8 @@ function AuthProvider(props) {
     const { 0: userLoaded , 1: setUserLoaded  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     const { 0: currentUserInfo , 1: setCurrentUserInfo  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
     const { getUser  } = (0,_DbContext__WEBPACK_IMPORTED_MODULE_3__/* .useDb */ .s)();
+    const { callable  } = (0,_FunctionsContext__WEBPACK_IMPORTED_MODULE_4__/* .useFunctions */ .d)();
+    const updateActivity = callable("userUpdates-updateActivity");
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
         updateCurrentUserData(currentUser1);
     }, [
@@ -48,19 +52,19 @@ function AuthProvider(props) {
     //Auth function
     //Create new user
     const register = (email, password)=>{
-        return (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_4__.createUserWithEmailAndPassword)(_Firebase__WEBPACK_IMPORTED_MODULE_2__/* .auth */ .I8, email, password);
+        return (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_5__.createUserWithEmailAndPassword)(_Firebase__WEBPACK_IMPORTED_MODULE_2__/* .auth */ .I8, email, password);
     };
     const signIn = (email, password)=>{
-        return (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_4__.signInWithEmailAndPassword)(_Firebase__WEBPACK_IMPORTED_MODULE_2__/* .auth */ .I8, email, password);
+        return (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_5__.signInWithEmailAndPassword)(_Firebase__WEBPACK_IMPORTED_MODULE_2__/* .auth */ .I8, email, password);
     };
     const logIn = (email, password)=>{
-        return (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_4__.signInWithEmailAndPassword)(_Firebase__WEBPACK_IMPORTED_MODULE_2__/* .auth */ .I8, email, password);
+        return (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_5__.signInWithEmailAndPassword)(_Firebase__WEBPACK_IMPORTED_MODULE_2__/* .auth */ .I8, email, password);
     };
     const logOut = ()=>{
-        return (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_4__.signOut)(_Firebase__WEBPACK_IMPORTED_MODULE_2__/* .auth */ .I8);
+        return (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_5__.signOut)(_Firebase__WEBPACK_IMPORTED_MODULE_2__/* .auth */ .I8);
     };
     const delUser = (user)=>{
-        return (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_4__.deleteUser)(user);
+        return (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_5__.deleteUser)(user);
     };
     const updateCurrentUserData = (currentUser)=>{
         return new Promise((resolve, reject)=>{
@@ -68,6 +72,10 @@ function AuthProvider(props) {
                 if (!currentUserInfo) {
                     return getUser(currentUser.uid).then((doc)=>{
                         setCurrentUserInfo(doc.data());
+                        updateActivity(JSON.stringify({
+                            listingId: doc.data().listing.id,
+                            string: "Hi"
+                        }));
                         resolve("Success");
                     }).catch((error)=>{
                         reject(error);
@@ -82,15 +90,15 @@ function AuthProvider(props) {
         });
     };
     const changePassword = (user, newPassword)=>{
-        return (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_4__.updatePassword)(user, newPassword);
+        return (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_5__.updatePassword)(user, newPassword);
     };
     const reAuth = (user, password)=>{
-        const credentials = _firebase_auth__WEBPACK_IMPORTED_MODULE_4__.EmailAuthProvider.credential(user.email, password);
-        return (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_4__.reauthenticateWithCredential)(user, credentials);
+        const credentials = _firebase_auth__WEBPACK_IMPORTED_MODULE_5__.EmailAuthProvider.credential(user.email, password);
+        return (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_5__.reauthenticateWithCredential)(user, credentials);
     };
     //Use Effect
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
-        (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_4__.onAuthStateChanged)(_Firebase__WEBPACK_IMPORTED_MODULE_2__/* .auth */ .I8, (user)=>{
+        (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_5__.onAuthStateChanged)(_Firebase__WEBPACK_IMPORTED_MODULE_2__/* .auth */ .I8, (user)=>{
             setCurrentUser(user);
             setUserLoaded(true);
         });

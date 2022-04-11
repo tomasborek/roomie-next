@@ -161,7 +161,7 @@ const Header = ({ variant  })=>{
             userLoaded ? currentUser ? /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                 className: "navbar navbar-logged",
                 children: [
-                    notifications && notifications.length ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_11__.Badge, {
+                    notifications?.length ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_11__.Badge, {
                         badgeContent: notifications.length == 9 ? "9+" : notifications.length,
                         color: "secondary",
                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
@@ -172,7 +172,7 @@ const Header = ({ variant  })=>{
                             },
                             className: `fa${notificationDropdown ? "s" : "r"} fa-bell navbar-notifications`
                         })
-                    }) : (!notifications || !notifications.length) && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
+                    }) : !notifications?.length && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("i", {
                         onClick: ()=>{
                             setNotificationDropdown((prevState)=>!prevState
                             );
@@ -180,7 +180,7 @@ const Header = ({ variant  })=>{
                         },
                         className: `fa${notificationDropdown ? "s" : "r"} fa-bell navbar-notifications`
                     }),
-                    currentUserInfo && currentUserInfo.mainInfo.pfp ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
+                    currentUserInfo?.mainInfo.pfp ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
                         onClick: handleMyListing,
                         className: "navbar-profile",
                         src: currentUserInfo.mainInfo.pfp,

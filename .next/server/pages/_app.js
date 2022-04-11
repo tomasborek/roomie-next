@@ -527,8 +527,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _contexts_ExploreContext__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(6155);
 /* harmony import */ var _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(1018);
 /* harmony import */ var _contexts_DbContext__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(6934);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_Layout_Layout__WEBPACK_IMPORTED_MODULE_2__, _contexts_StorageContext__WEBPACK_IMPORTED_MODULE_11__, _contexts_FunctionsContext__WEBPACK_IMPORTED_MODULE_10__, _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_14__, _contexts_DbContext__WEBPACK_IMPORTED_MODULE_15__, _Firebase__WEBPACK_IMPORTED_MODULE_7__]);
-([_components_Layout_Layout__WEBPACK_IMPORTED_MODULE_2__, _contexts_StorageContext__WEBPACK_IMPORTED_MODULE_11__, _contexts_FunctionsContext__WEBPACK_IMPORTED_MODULE_10__, _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_14__, _contexts_DbContext__WEBPACK_IMPORTED_MODULE_15__, _Firebase__WEBPACK_IMPORTED_MODULE_7__] = __webpack_async_dependencies__.then ? await __webpack_async_dependencies__ : __webpack_async_dependencies__);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_components_Layout_Layout__WEBPACK_IMPORTED_MODULE_2__, _contexts_StorageContext__WEBPACK_IMPORTED_MODULE_11__, _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_14__, _contexts_FunctionsContext__WEBPACK_IMPORTED_MODULE_10__, _contexts_DbContext__WEBPACK_IMPORTED_MODULE_15__, _Firebase__WEBPACK_IMPORTED_MODULE_7__]);
+([_components_Layout_Layout__WEBPACK_IMPORTED_MODULE_2__, _contexts_StorageContext__WEBPACK_IMPORTED_MODULE_11__, _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_14__, _contexts_FunctionsContext__WEBPACK_IMPORTED_MODULE_10__, _contexts_DbContext__WEBPACK_IMPORTED_MODULE_15__, _Firebase__WEBPACK_IMPORTED_MODULE_7__] = __webpack_async_dependencies__.then ? await __webpack_async_dependencies__ : __webpack_async_dependencies__);
 
 
 //Layouts
@@ -650,10 +650,10 @@ function MyApp({ Component , pageProps  }) {
                 type: "text/javascript"
             }),
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_DbContext__WEBPACK_IMPORTED_MODULE_15__/* .DbProvider */ .W, {
-                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_AuthContext__WEBPACK_IMPORTED_MODULE_14__/* .AuthProvider */ .H, {
-                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_LoadingContext__WEBPACK_IMPORTED_MODULE_9__/* .LoadingProvider */ .P, {
-                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_SnackBarContext__WEBPACK_IMPORTED_MODULE_8__/* .SnackBarProvider */ .J, {
-                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_FunctionsContext__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z, {
+                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_FunctionsContext__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z, {
+                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_AuthContext__WEBPACK_IMPORTED_MODULE_14__/* .AuthProvider */ .H, {
+                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_LoadingContext__WEBPACK_IMPORTED_MODULE_9__/* .LoadingProvider */ .P, {
+                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_SnackBarContext__WEBPACK_IMPORTED_MODULE_8__/* .SnackBarProvider */ .J, {
                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_StorageContext__WEBPACK_IMPORTED_MODULE_11__/* .StorageProvider */ .X, {
                                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_ExploreDialogContext__WEBPACK_IMPORTED_MODULE_12__/* .ExploreDialogProvider */ .I, {
                                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_contexts_ExploreContext__WEBPACK_IMPORTED_MODULE_13__/* .ExploreProvider */ .Q, {
@@ -917,7 +917,7 @@ module.exports = import("framer-motion");;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [730,664,451,18,457,475,29,742,155,691], () => (__webpack_exec__(8510)));
+var __webpack_exports__ = __webpack_require__.X(0, [730,664,614,18,457,29,523,155,691], () => (__webpack_exec__(8510)));
 module.exports = __webpack_exports__;
 
 })();
