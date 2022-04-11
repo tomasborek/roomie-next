@@ -1,0 +1,34 @@
+.header-pfp-container {
+  position: relative;
+  .container-activity-status {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    color: white;
+    border-radius: 20px;
+    padding: 0.25rem 0.5rem;
+    font-size: 14px;
+    border: 3px solid white;
+    &.green {
+      background-color: green;
+    }
+    &.orange {
+      background-color: orange;
+    }
+    &.red {
+      background-color: red;
+    }
+    &.gray {
+      background-color: gray;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .header-pfp-container {
+    .container-activity-status {
+      left: 1rem;
+      right: auto;
+    }
+  }
+}

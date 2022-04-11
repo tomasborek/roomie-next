@@ -469,6 +469,7 @@ const ExploreFeed = ({ variant }) => {
                         id={listing.id}
                         pfp={listing.data().userInfo.images.pfp}
                         premium={listing.data().userInfo.premium}
+                        lastActive={listing.data().userInfo.lastActive}
                         key={id}
                       />
                     ))}
@@ -524,6 +525,7 @@ const ExploreFeed = ({ variant }) => {
                         mainImg={listing.data().userInfo.images.listingImgs[0]}
                         premium={listing.data().userInfo.premium}
                         size={listing.data().flatBoxes.size}
+                        lastActive={listing.data().userInfo.lastActive}
                         id={listing.id}
                         key={id}
                       />

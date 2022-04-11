@@ -103,10 +103,10 @@ function MyApp({ Component, pageProps }) {
         type="text/javascript"
       ></Script>
       <DbProvider>
-        <AuthProvider>
-          <LoadingProvider>
-            <SnackBarProvider>
-              <FunctionsProvider>
+        <FunctionsProvider>
+          <AuthProvider>
+            <LoadingProvider>
+              <SnackBarProvider>
                 <StorageProvider>
                   <ExploreDialogProvider>
                     <ExploreProvider>
@@ -116,10 +116,10 @@ function MyApp({ Component, pageProps }) {
                     </ExploreProvider>
                   </ExploreDialogProvider>
                 </StorageProvider>
-              </FunctionsProvider>
-            </SnackBarProvider>
-          </LoadingProvider>
-        </AuthProvider>
+              </SnackBarProvider>
+            </LoadingProvider>
+          </AuthProvider>
+        </FunctionsProvider>
       </DbProvider>
     </>
   );

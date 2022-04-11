@@ -4,6 +4,7 @@ import { auth } from "../Firebase";
 import { db } from "../Firebase";
 //Context
 import { useDb } from "./DbContext";
+import { useFunctions } from "./FunctionsContext";
 //Auth imports
 import {
   createUserWithEmailAndPassword,
@@ -29,6 +30,8 @@ export function AuthProvider(props) {
   const [userLoaded, setUserLoaded] = useState(false);
   const [currentUserInfo, setCurrentUserInfo] = useState(null);
   const { getUser } = useDb();
+  const { callable } = useFunctions();
+  const updateActivity = callable("userUpdates-updateActivity");
 
   useEffect(() => {
     updateCurrentUserData(currentUser);
@@ -63,6 +66,12 @@ export function AuthProvider(props) {
           return getUser(currentUser.uid)
             .then((doc) => {
               setCurrentUserInfo(doc.data());
+              updateActivity(
+                JSON.stringify({
+                  listingId: doc.data().listing.id,
+                  string: "Hi",
+                })
+              );
               resolve("Success");
             })
             .catch((error) => {
