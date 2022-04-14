@@ -3234,14 +3234,17 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__) => {
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6689);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _contexts_ListingContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2882);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_contexts_ListingContext__WEBPACK_IMPORTED_MODULE_2__]);
-_contexts_ListingContext__WEBPACK_IMPORTED_MODULE_2__ = (__webpack_async_dependencies__.then ? await __webpack_async_dependencies__ : __webpack_async_dependencies__)[0];
+/* harmony import */ var _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1018);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_contexts_AuthContext__WEBPACK_IMPORTED_MODULE_3__, _contexts_ListingContext__WEBPACK_IMPORTED_MODULE_2__]);
+([_contexts_AuthContext__WEBPACK_IMPORTED_MODULE_3__, _contexts_ListingContext__WEBPACK_IMPORTED_MODULE_2__] = __webpack_async_dependencies__.then ? await __webpack_async_dependencies__ : __webpack_async_dependencies__);
 
 
 //COntexts
 
+
 const ListingPfp = ()=>{
     const { type , listingInfo , editListing , setGalleryInput , addedPfp , pfp , listingImgs , addedListingImgs , handleImgDelete ,  } = (0,_contexts_ListingContext__WEBPACK_IMPORTED_MODULE_2__/* .useListing */ .u)();
+    const { currentUser , userLoaded  } = (0,_contexts_AuthContext__WEBPACK_IMPORTED_MODULE_3__/* .useAuth */ .a)();
     const { 0: lastActive , 1: setLastActive  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
     const { 0: lastActiveSeverity , 1: setLastActiveSeverity  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("gray");
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
@@ -3325,7 +3328,7 @@ const ListingPfp = ()=>{
                 }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                     className: "header-pfp"
                 }),
-                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                currentUser && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                     className: `container-activity-status ${lastActiveSeverity}`,
                     children: lastActive ? lastActive : "..."
                 })
@@ -3372,7 +3375,7 @@ const ListingPfp = ()=>{
                 }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                     className: "header-pfp"
                 }),
-                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                currentUser && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                     className: `container-activity-status ${lastActiveSeverity}`,
                     children: listingInfo ? lastActive : "..."
                 })

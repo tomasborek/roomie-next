@@ -5,9 +5,9 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/ST5zwheOCRMAyWafQblrG/_buildManifest.js",
-    "static/ST5zwheOCRMAyWafQblrG/_ssgManifest.js",
-    "static/ST5zwheOCRMAyWafQblrG/_middlewareManifest.js"
+    "static/E0hNQ2ynaiLePefX6_hCH/_buildManifest.js",
+    "static/E0hNQ2ynaiLePefX6_hCH/_ssgManifest.js",
+    "static/E0hNQ2ynaiLePefX6_hCH/_middlewareManifest.js"
   ],
   "pages": {
     "/": [
@@ -23,7 +23,7 @@
       "static/chunks/webpack-5752944655d749a0.js",
       "static/chunks/framework-91d7f78b5b4003c8.js",
       "static/chunks/main-962c131a58194c7e.js",
-      "static/css/62ffea97b29205b7.css",
+      "static/css/0e1b4eace89d8848.css",
       "static/chunks/pages/_app-f4e077988fe3135d.js"
     ],
     "/_error": [
@@ -59,7 +59,7 @@
       "static/chunks/3-1c6af1a48fdc4078.js",
       "static/chunks/942-1a74377cc64bad27.js",
       "static/chunks/378-74d7a9bf37d65924.js",
-      "static/chunks/223-a820f05326d0939f.js",
+      "static/chunks/223-1fa2c9dba07aee4e.js",
       "static/chunks/pages/cr/flat/[id]-9c48cc40a022332a.js"
     ],
     "/cr/flatmate/[id]": [
@@ -73,7 +73,7 @@
       "static/chunks/3-1c6af1a48fdc4078.js",
       "static/chunks/942-1a74377cc64bad27.js",
       "static/chunks/378-74d7a9bf37d65924.js",
-      "static/chunks/223-a820f05326d0939f.js",
+      "static/chunks/223-1fa2c9dba07aee4e.js",
       "static/chunks/pages/cr/flatmate/[id]-11913d74b8108c32.js"
     ],
     "/edit-profile": [
@@ -94,7 +94,7 @@
       "static/chunks/485-a13a19b8dfc762ac.js",
       "static/chunks/942-1a74377cc64bad27.js",
       "static/chunks/736-3c10e9773fd4976a.js",
-      "static/chunks/219-f35906019607bf71.js",
+      "static/chunks/219-302d0b38d138272b.js",
       "static/chunks/pages/explore/flatmates-43399f90753f183c.js"
     ],
     "/explore/flats": [
@@ -105,7 +105,7 @@
       "static/chunks/485-a13a19b8dfc762ac.js",
       "static/chunks/942-1a74377cc64bad27.js",
       "static/chunks/736-3c10e9773fd4976a.js",
-      "static/chunks/219-f35906019607bf71.js",
+      "static/chunks/219-302d0b38d138272b.js",
       "static/chunks/pages/explore/flats-086d252ab7d58bd5.js"
     ],
     "/faq": [
@@ -126,7 +126,7 @@
       "static/chunks/3-1c6af1a48fdc4078.js",
       "static/chunks/942-1a74377cc64bad27.js",
       "static/chunks/378-74d7a9bf37d65924.js",
-      "static/chunks/223-a820f05326d0939f.js",
+      "static/chunks/223-1fa2c9dba07aee4e.js",
       "static/chunks/pages/flat/[id]-79a7b2e09d2e4318.js"
     ],
     "/flatmate/[id]": [
@@ -140,7 +140,7 @@
       "static/chunks/3-1c6af1a48fdc4078.js",
       "static/chunks/942-1a74377cc64bad27.js",
       "static/chunks/378-74d7a9bf37d65924.js",
-      "static/chunks/223-a820f05326d0939f.js",
+      "static/chunks/223-1fa2c9dba07aee4e.js",
       "static/chunks/pages/flatmate/[id]-0abf7ac10e77f380.js"
     ],
     "/friends": [

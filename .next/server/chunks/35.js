@@ -73,8 +73,8 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__) => {
 /* harmony import */ var _ExplorePremium_ExplorePremium__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(9298);
 /* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(5692);
 /* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_mui_material__WEBPACK_IMPORTED_MODULE_14__);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_Filter_Filter__WEBPACK_IMPORTED_MODULE_11__, _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_5__, _contexts_DbContext__WEBPACK_IMPORTED_MODULE_4__]);
-([_Filter_Filter__WEBPACK_IMPORTED_MODULE_11__, _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_5__, _contexts_DbContext__WEBPACK_IMPORTED_MODULE_4__] = __webpack_async_dependencies__.then ? await __webpack_async_dependencies__ : __webpack_async_dependencies__);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_ExploreListings_ExploreFlat_ExploreFlat__WEBPACK_IMPORTED_MODULE_9__, _ExploreListings_ExploreFlatmate_ExploreFlatmate__WEBPACK_IMPORTED_MODULE_8__, _Filter_Filter__WEBPACK_IMPORTED_MODULE_11__, _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_5__, _contexts_DbContext__WEBPACK_IMPORTED_MODULE_4__]);
+([_ExploreListings_ExploreFlat_ExploreFlat__WEBPACK_IMPORTED_MODULE_9__, _ExploreListings_ExploreFlatmate_ExploreFlatmate__WEBPACK_IMPORTED_MODULE_8__, _Filter_Filter__WEBPACK_IMPORTED_MODULE_11__, _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_5__, _contexts_DbContext__WEBPACK_IMPORTED_MODULE_4__] = __webpack_async_dependencies__.then ? await __webpack_async_dependencies__ : __webpack_async_dependencies__);
 
 
 //Next
@@ -608,8 +608,9 @@ const ExploreFeed = ({ variant  })=>{
 /***/ }),
 
 /***/ 6822:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
 
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__) => {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
@@ -618,11 +619,17 @@ const ExploreFeed = ({ variant  })=>{
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6689);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1664);
+/* harmony import */ var _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1018);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_contexts_AuthContext__WEBPACK_IMPORTED_MODULE_3__]);
+_contexts_AuthContext__WEBPACK_IMPORTED_MODULE_3__ = (__webpack_async_dependencies__.then ? await __webpack_async_dependencies__ : __webpack_async_dependencies__)[0];
 
 
 //next
 
+//Contexts
+
 const ExploreFlat = ({ name , bio , price , size , startTime , stayTime , mainImg , premium , lastActive , id ,  })=>{
+    const { currentUser , userLoaded  } = (0,_contexts_AuthContext__WEBPACK_IMPORTED_MODULE_3__/* .useAuth */ .a)();
     const timePassed1 = (date)=>{
         if (!date) {
             return "Neurčito";
@@ -661,7 +668,7 @@ const ExploreFlat = ({ name , bio , price , size , startTime , stayTime , mainIm
                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                     className: "listing-content",
                     children: [
-                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                        currentUser && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                             className: "content-last-active content-last-active-m",
                             children: [
                                 "Naposledy aktivn\xed: ",
@@ -689,12 +696,16 @@ const ExploreFlat = ({ name , bio , price , size , startTime , stayTime , mainIm
                                 ]
                             })
                         }),
-                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                        currentUser && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                             className: "content-last-active",
                             children: [
                                 "Naposledy aktivn\xed: ",
                                 timePassed1(lastActive?.toDate())
                             ]
+                        }),
+                        !currentUser && userLoaded && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                            className: "content-more",
+                            children: "Zobrazit v\xedce..."
                         }),
                         /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                             className: "content-info",
@@ -764,12 +775,14 @@ const ExploreFlat = ({ name , bio , price , size , startTime , stayTime , mainIm
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ExploreFlat);
 
+});
 
 /***/ }),
 
 /***/ 1573:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
 
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__) => {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
@@ -778,12 +791,19 @@ const ExploreFlat = ({ name , bio , price , size , startTime , stayTime , mainIm
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6689);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1664);
+/* harmony import */ var _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(1018);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_contexts_AuthContext__WEBPACK_IMPORTED_MODULE_3__]);
+_contexts_AuthContext__WEBPACK_IMPORTED_MODULE_3__ = (__webpack_async_dependencies__.then ? await __webpack_async_dependencies__ : __webpack_async_dependencies__)[0];
 
 
 //next
 
+//Contexts
+
 const ExploreFlatmate = ({ name , age , gender , location , money , available , bio , pfp , premium , lastActive , id ,  })=>{
+    const { currentUser , userLoaded  } = (0,_contexts_AuthContext__WEBPACK_IMPORTED_MODULE_3__/* .useAuth */ .a)();
     const timePassed1 = (date)=>{
+        console.log(lastActive);
         if (!date) {
             return "Neurčito";
         }
@@ -827,7 +847,7 @@ const ExploreFlatmate = ({ name , age , gender , location , money , available , 
                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                     className: "listing-content",
                     children: [
-                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                        currentUser && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                             className: "content-last-active content-last-active-m",
                             children: [
                                 "Naposledy aktivn\xed: ",
@@ -853,16 +873,20 @@ const ExploreFlatmate = ({ name , age , gender , location , money , available , 
                             children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
                                 children: [
                                     bio.substr(0, 70),
-                                    "..."
+                                    bio.length > 70 && "..."
                                 ]
                             })
                         }),
-                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                        currentUser && /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                             className: "content-last-active",
                             children: [
                                 "Naposledy aktivn\xed: ",
                                 timePassed1(lastActive?.toDate())
                             ]
+                        }),
+                        !currentUser && userLoaded && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                            className: "content-more",
+                            children: "Zobrazit v\xedce..."
                         }),
                         /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                             className: "content-info",
@@ -928,6 +952,7 @@ const ExploreFlatmate = ({ name , age , gender , location , money , available , 
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ExploreFlatmate);
 
+});
 
 /***/ }),
 
