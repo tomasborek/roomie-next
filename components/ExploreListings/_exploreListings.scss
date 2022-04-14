@@ -68,6 +68,12 @@
       }
     }
 
+    .content-more {
+      color: $mainGray;
+      font-size: 14px;
+      text-decoration: underline;
+    }
+
     .content-last-active {
       color: $mainGray;
       font-size: 14px;
@@ -139,6 +145,9 @@
     .listing-content {
       display: flex;
       flex-direction: column;
+      .content-more {
+        display: none;
+      }
       .content-last-active {
         display: none;
       }

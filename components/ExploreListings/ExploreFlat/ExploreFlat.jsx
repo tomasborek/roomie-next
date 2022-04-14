@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 //next
 import Link from "next/link";
+//Contexts
+import { useAuth } from "../../../contexts/AuthContext";
 
 const ExploreFlat = ({
   name,
@@ -14,6 +16,7 @@ const ExploreFlat = ({
   lastActive,
   id,
 }) => {
+  const { currentUser, userLoaded } = useAuth();
   const timePassed = (date) => {
     if (!date) {
       return "Neurčito";
@@ -63,9 +66,11 @@ const ExploreFlat = ({
           )}
         </div>
         <div className="listing-content">
-          <div className="content-last-active content-last-active-m">
-            Naposledy aktivní: {timePassed(lastActive?.toDate())}
-          </div>
+          {currentUser && (
+            <div className="content-last-active content-last-active-m">
+              Naposledy aktivní: {timePassed(lastActive?.toDate())}
+            </div>
+          )}
           <div className="content-header">
             <span>{name}</span>{" "}
             {premium && <i className="fas fa-check-circle"></i>}
@@ -73,9 +78,14 @@ const ExploreFlat = ({
           <div className="content-bio">
             <p>{bio.substr(0, 75)}...</p>
           </div>
-          <div className="content-last-active">
-            Naposledy aktivní: {timePassed(lastActive?.toDate())}
-          </div>
+          {currentUser && (
+            <div className="content-last-active">
+              Naposledy aktivní: {timePassed(lastActive?.toDate())}
+            </div>
+          )}
+          {!currentUser && userLoaded && (
+            <div className="content-more">Zobrazit více...</div>
+          )}
           <div className="content-info">
             <div className="info-row">
               <div className="info-budget row-col">

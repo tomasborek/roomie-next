@@ -5976,6 +5976,13 @@ textarea {
   word-wrap: break-word;
 }
 
+.explore-flatmate .listing-content .content-more,
+.explore-flat .listing-content .content-more {
+  color: #B8B8B8;
+  font-size: 14px;
+  text-decoration: underline;
+}
+
 .explore-flatmate .listing-content .content-last-active,
 .explore-flat .listing-content .content-last-active {
   color: #B8B8B8;
@@ -6058,6 +6065,10 @@ textarea {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
+  }
+  .explore-flatmate .listing-content .content-more,
+  .explore-flat .listing-content .content-more {
+    display: none;
   }
   .explore-flatmate .listing-content .content-last-active,
   .explore-flat .listing-content .content-last-active {
