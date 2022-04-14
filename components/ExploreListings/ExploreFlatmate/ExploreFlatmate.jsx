@@ -101,7 +101,7 @@ const ExploreFlatmate = ({
 
           {currentUser && (
             <div className="content-last-active">
-              Naposledy aktivní: ${timePassed(lastActive?.toDate())}
+              Naposledy aktivní: {timePassed(lastActive?.toDate())}
             </div>
           )}
           {!currentUser && userLoaded && (
