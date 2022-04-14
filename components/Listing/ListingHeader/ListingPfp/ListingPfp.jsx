@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 //COntexts
 import { useListing } from "../../../../contexts/ListingContext";
+import { useAuth } from "../../../../contexts/AuthContext";
 
 const ListingPfp = () => {
   const {
@@ -15,6 +16,7 @@ const ListingPfp = () => {
     addedListingImgs,
     handleImgDelete,
   } = useListing();
+  const { currentUser, userLoaded } = useAuth();
   const [lastActive, setLastActive] = useState(null);
   const [lastActiveSeverity, setLastActiveSeverity] = useState("gray");
 
@@ -122,9 +124,11 @@ const ListingPfp = () => {
         ) : (
           <div className="header-pfp"></div>
         )}
-        <div className={`container-activity-status ${lastActiveSeverity}`}>
-          {lastActive ? lastActive : "..."}
-        </div>
+        {currentUser && (
+          <div className={`container-activity-status ${lastActiveSeverity}`}>
+            {lastActive ? lastActive : "..."}
+          </div>
+        )}
       </div>
     );
   }
@@ -174,9 +178,11 @@ const ListingPfp = () => {
         ) : (
           <div className="header-pfp"></div>
         )}
-        <div className={`container-activity-status ${lastActiveSeverity}`}>
-          {listingInfo ? lastActive : "..."}
-        </div>
+        {currentUser && (
+          <div className={`container-activity-status ${lastActiveSeverity}`}>
+            {listingInfo ? lastActive : "..."}
+          </div>
+        )}
       </div>
     );
   }
