@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 //next
 import Link from "next/link";
+//Contexts
+import { useAuth } from "../../../contexts/AuthContext";
 
 const ExploreFlatmate = ({
   name,
@@ -15,7 +17,9 @@ const ExploreFlatmate = ({
   lastActive,
   id,
 }) => {
+  const { currentUser, userLoaded } = useAuth();
   const timePassed = (date) => {
+    console.log(lastActive);
     if (!date) {
       return "Neurčito";
     }
@@ -79,19 +83,31 @@ const ExploreFlatmate = ({
           )}
         </div>
         <div className="listing-content">
-          <div className="content-last-active content-last-active-m">
-            Naposledy aktivní: {timePassed(lastActive?.toDate())}
-          </div>
+          {currentUser && (
+            <div className="content-last-active content-last-active-m">
+              Naposledy aktivní: {timePassed(lastActive?.toDate())}
+            </div>
+          )}
           <div className="content-header">
             <span>{name}</span>, {age}{" "}
             {premium && <i className="fas fa-check-circle"></i>}
           </div>
           <div className="content-bio">
-            <p>{bio.substr(0, 70)}...</p>
+            <p>
+              {bio.substr(0, 70)}
+              {bio.length > 70 && "..."}
+            </p>
           </div>
-          <div className="content-last-active">
-            Naposledy aktivní: {timePassed(lastActive?.toDate())}
-          </div>
+
+          {currentUser && (
+            <div className="content-last-active">
+              Naposledy aktivní: {timePassed(lastActive?.toDate())}
+            </div>
+          )}
+          {!currentUser && userLoaded && (
+            <div className="content-more">Zobrazit více...</div>
+          )}
+
           <div className="content-info">
             <div className="info-row">
               <div className="info-budget row-col">
