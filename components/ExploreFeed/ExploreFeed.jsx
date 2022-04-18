@@ -93,10 +93,6 @@ const ExploreFeed = ({ variant }) => {
   }, [variant]);
 
   const fetchListings = (type, page, listings, premiumListings, filter) => {
-    console.log(
-      premiumFlatmateSnaps &&
-        premiumFlatmateSnaps.map((snap) => snap.data().userInfo.username)
-    );
     if (type === "flatmate") {
       if (page === "first") {
         let flatmateListingsArray = [];
@@ -117,7 +113,6 @@ const ExploreFeed = ({ variant }) => {
             if (error.message === "network-failed") {
               setConnectionDown(true);
             }
-            console.log(error);
           });
       } else if (page === "next") {
         let flatmateListingsArray = [];
@@ -289,7 +284,7 @@ const ExploreFeed = ({ variant }) => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        //
       });
   };
 

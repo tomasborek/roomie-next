@@ -19,7 +19,6 @@ const ExploreFlatmate = ({
 }) => {
   const { currentUser, userLoaded } = useAuth();
   const timePassed = (date) => {
-    console.log(lastActive);
     if (!date) {
       return "Neurčito";
     }
