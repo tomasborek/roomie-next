@@ -156,8 +156,6 @@ const ExploreFeed = ({ variant  })=>{
         variant
     ]);
     const fetchListings = (type, page, listings1, premiumListings, filter)=>{
-        console.log(premiumFlatmateSnaps && premiumFlatmateSnaps.map((snap)=>snap.data().userInfo.username
-        ));
         if (type === "flatmate") {
             if (page === "first") {
                 let flatmateListingsArray = [];
@@ -179,7 +177,6 @@ const ExploreFeed = ({ variant  })=>{
                     if (error.message === "network-failed") {
                         setConnectionDown(true);
                     }
-                    console.log(error);
                 });
             } else if (page === "next") {
                 let flatmateListingsArray = [];
@@ -338,7 +335,7 @@ const ExploreFeed = ({ variant  })=>{
                 applyFilters(filters);
             }
         }).catch((error)=>{
-            console.log(error);
+        //
         });
     };
     const applyFilters = (filter)=>{
@@ -803,7 +800,6 @@ _contexts_AuthContext__WEBPACK_IMPORTED_MODULE_3__ = (__webpack_async_dependenci
 const ExploreFlatmate = ({ name , age , gender , location , money , available , bio , pfp , premium , lastActive , id ,  })=>{
     const { currentUser , userLoaded  } = (0,_contexts_AuthContext__WEBPACK_IMPORTED_MODULE_3__/* .useAuth */ .a)();
     const timePassed1 = (date)=>{
-        console.log(lastActive);
         if (!date) {
             return "Neurčito";
         }

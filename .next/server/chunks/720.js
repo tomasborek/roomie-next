@@ -3243,7 +3243,7 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_con
 
 
 const ListingPfp = ()=>{
-    const { type , listingInfo , editListing , setGalleryInput , addedPfp , pfp , listingImgs , addedListingImgs , handleImgDelete ,  } = (0,_contexts_ListingContext__WEBPACK_IMPORTED_MODULE_2__/* .useListing */ .u)();
+    const { type , listingInfo , cr , editListing , setGalleryInput , addedPfp , pfp , listingImgs , addedListingImgs , handleImgDelete ,  } = (0,_contexts_ListingContext__WEBPACK_IMPORTED_MODULE_2__/* .useListing */ .u)();
     const { currentUser , userLoaded  } = (0,_contexts_AuthContext__WEBPACK_IMPORTED_MODULE_3__/* .useAuth */ .a)();
     const { 0: lastActive , 1: setLastActive  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
     const { 0: lastActiveSeverity , 1: setLastActiveSeverity  } = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("gray");
@@ -3328,7 +3328,7 @@ const ListingPfp = ()=>{
                 }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                     className: "header-pfp"
                 }),
-                currentUser && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                currentUser && !cr && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                     className: `container-activity-status ${lastActiveSeverity}`,
                     children: lastActive ? lastActive : "..."
                 })
@@ -3375,7 +3375,7 @@ const ListingPfp = ()=>{
                 }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                     className: "header-pfp"
                 }),
-                currentUser && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                currentUser && !cr && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                     className: `container-activity-status ${lastActiveSeverity}`,
                     children: listingInfo ? lastActive : "..."
                 })

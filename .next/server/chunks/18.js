@@ -45,7 +45,9 @@ function AuthProvider(props) {
     const { callable  } = (0,_FunctionsContext__WEBPACK_IMPORTED_MODULE_4__/* .useFunctions */ .d)();
     const updateActivity = callable("userUpdates-updateActivity");
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
-        updateCurrentUserData(currentUser1);
+        if (currentUser1 && !currentUserInfo) {
+            updateCurrentUserData(currentUser1);
+        }
     }, [
         currentUser1
     ]);
@@ -67,26 +69,17 @@ function AuthProvider(props) {
         return (0,_firebase_auth__WEBPACK_IMPORTED_MODULE_5__.deleteUser)(user);
     };
     const updateCurrentUserData = (currentUser)=>{
-        return new Promise((resolve, reject)=>{
-            if (currentUser) {
-                if (!currentUserInfo) {
-                    return getUser(currentUser.uid).then((doc)=>{
-                        setCurrentUserInfo(doc.data());
-                        updateActivity(JSON.stringify({
-                            listingId: doc.data().listing.id,
-                            string: "Hi"
-                        }));
-                        resolve("Success");
-                    }).catch((error)=>{
-                        reject(error);
-                    });
-                } else {
-                    reject("Current user info is already set.");
-                }
-            } else {
-                resolve("There is no current user.");
-                setCurrentUserInfo(null);
-            }
+        getUser(currentUser.uid).then((doc)=>{
+            setCurrentUserInfo(doc.data());
+            console.log(doc.data().listing.id);
+            return updateActivity(JSON.stringify({
+                listingId: doc.data().listing.id,
+                string: "Hi"
+            }));
+        }).then((res)=>{
+        //Succesfully updated activity
+        }).catch((error)=>{
+        //Error updating activity
         });
     };
     const changePassword = (user, newPassword)=>{
