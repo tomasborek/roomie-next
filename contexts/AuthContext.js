@@ -34,7 +34,9 @@ export function AuthProvider(props) {
   const updateActivity = callable("userUpdates-updateActivity");
 
   useEffect(() => {
-    updateCurrentUserData(currentUser);
+    if (currentUser && !currentUserInfo) {
+      updateCurrentUserData(currentUser);
+    }
   }, [currentUser]);
 
   //Auth function
@@ -60,31 +62,23 @@ export function AuthProvider(props) {
   };
 
   const updateCurrentUserData = (currentUser) => {
-    return new Promise((resolve, reject) => {
-      if (currentUser) {
-        if (!currentUserInfo) {
-          return getUser(currentUser.uid)
-            .then((doc) => {
-              setCurrentUserInfo(doc.data());
-              updateActivity(
-                JSON.stringify({
-                  listingId: doc.data().listing.id,
-                  string: "Hi",
-                })
-              );
-              resolve("Success");
-            })
-            .catch((error) => {
-              reject(error);
-            });
-        } else {
-          reject("Current user info is already set.");
-        }
-      } else {
-        resolve("There is no current user.");
-        setCurrentUserInfo(null);
-      }
-    });
+    getUser(currentUser.uid)
+      .then((doc) => {
+        setCurrentUserInfo(doc.data());
+        console.log(doc.data().listing.id);
+        return updateActivity(
+          JSON.stringify({
+            listingId: doc.data().listing.id,
+            string: "Hi",
+          })
+        );
+      })
+      .then((res) => {
+        //Succesfully updated activity
+      })
+      .catch((error) => {
+        //Error updating activity
+      });
   };
 
   const changePassword = (user, newPassword) => {
