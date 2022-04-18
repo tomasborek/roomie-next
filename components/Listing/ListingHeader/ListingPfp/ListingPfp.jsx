@@ -8,6 +8,7 @@ const ListingPfp = () => {
   const {
     type,
     listingInfo,
+    cr,
     editListing,
     setGalleryInput,
     addedPfp,
@@ -124,7 +125,7 @@ const ListingPfp = () => {
         ) : (
           <div className="header-pfp"></div>
         )}
-        {currentUser && (
+        {currentUser && !cr && (
           <div className={`container-activity-status ${lastActiveSeverity}`}>
             {lastActive ? lastActive : "..."}
           </div>
@@ -178,7 +179,7 @@ const ListingPfp = () => {
         ) : (
           <div className="header-pfp"></div>
         )}
-        {currentUser && (
+        {currentUser && !cr && (
           <div className={`container-activity-status ${lastActiveSeverity}`}>
             {listingInfo ? lastActive : "..."}
           </div>
